@@ -1,16 +1,9 @@
 {
 	"auth": {
-		"tracker0bae62cb": {
+		"tracker55154f11": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
-			"dependsOn": [],
-			"customAuth": false
-		}
-	},
-	"storage": {
-		"dynamod271a057": {
-			"service": "DynamoDB",
-			"providerPlugin": "awscloudformation"
+			"dependsOn": []
 		}
 	}
 }
