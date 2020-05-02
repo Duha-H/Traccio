@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injector } from '@angular/core';
 
 @Component({
   selector: 'app-journeys',
@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JourneysComponent implements OnInit {
 
-  constructor() { }
+  constructor(injector: Injector) { }
 
   ngOnInit() {
   }

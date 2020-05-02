@@ -1,0 +1,23 @@
+:root {
+  --rowNum: 4;
+  --colNum: 5;
+  --gridHeight: 120px;
+  --wrapperH: 40px;
+}
+
+.journey-container {
+	text-align: center;
+}
+
+.journey-grid {
+	display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+	justify-items: center;
+	
+}
+
+.journey-item {
+	grid-column-start: auto;
+  grid-row-start: auto;
+  margin: 25px;
+}

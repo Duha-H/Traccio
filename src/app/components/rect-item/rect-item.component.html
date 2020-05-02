@@ -1,0 +1,11 @@
+<div class="container" id="journey-container">
+	<div class="journey-content" *ngIf="type === 'item'">
+		<h2>Journey Name</h2>
+		<p>Date Started: 01/01/2020</p>
+		<p>Status: Active</p>
+	</div>
+	<div class="journey-content" *ngIf="type === 'add'" (click)="addJourney()">
+		<!-- <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon> -->
+		<mat-icon [inline]="true" aria-hidden="false" aria-label="Add journey icon">add</mat-icon>
+	</div>
+</div>
