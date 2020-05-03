@@ -1,4 +1,11 @@
-<div class="container" id="journey-container">
+<div 
+	id="journey-container"
+	[style.width.px]="width"
+	[style.height.px]="height"
+	[className]="(type === 'item')
+		? 'container'
+		: 'container add'"
+>
 	<div class="journey-content" *ngIf="type === 'item'">
 		<h2>Journey Name</h2>
 		<p>Date Started: 01/01/2020</p>

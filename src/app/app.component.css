@@ -62,6 +62,12 @@ ul.sidenav {
 	text-align: center;
 }
 
+.sidenav li {
+  font-size: 25pt;
+  font-weight: 150;
+  line-height: 35pt;
+}
+
 mat-sidenav-container {
 	margin: 0;
 	/* margin-top: 8px; */

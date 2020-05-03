@@ -6,8 +6,7 @@ import { AppComponent } from './app.component';
 
 import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
 import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
-import Amplify from 'aws-amplify';
-import awsconfig from '../aws-exports';
+
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { JourneysComponent } from './views/journeys/journeys.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -20,7 +19,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { SettingsComponent } from './views/settings/settings.component';
 import { RectItemComponent } from './components/rect-item/rect-item.component';
 
-Amplify.configure(awsconfig);
 
 @NgModule({
   declarations: [

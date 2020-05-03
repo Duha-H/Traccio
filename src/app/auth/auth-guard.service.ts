@@ -7,7 +7,9 @@ import { AmplifyService } from "aws-amplify-angular";
 })
 export class AuthGuardService implements CanActivate {
 
-  constructor(public amplifyService: AmplifyService, public router: Router) {
+  constructor(
+    public amplifyService: AmplifyService,
+    public router: Router) {
     this.amplifyService = amplifyService;
   }
 

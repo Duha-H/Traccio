@@ -9,9 +9,15 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav *ngIf="signedIn" mode="side" role="navigation" opened>
     <ul class="sidenav">
-      <li><a href="#" routerLink="/">Dashboard</a></li>
-      <li><a href="#" routerLink="/journeys">Journeys</a></li>
-      <li><a href="#" routerLink="/settings">Settings</a></li>
+      <li><a href="#" routerLink="/">
+        <mat-icon [inline]="true" aria-hidden="false" aria-label="Dashboard icon">home</mat-icon>
+      </a></li>
+      <li><a href="#" routerLink="/journeys">
+        <mat-icon [inline]="true" aria-hidden="false" aria-label="Journeys icon">list</mat-icon>
+      </a></li>
+      <li><a href="#" routerLink="/settings">
+        <mat-icon [inline]="true" aria-hidden="false" aria-label="Search icon">search</mat-icon>
+      </a></li>
     </ul>
   </mat-sidenav>
   <mat-sidenav-content role="main">
@@ -36,6 +42,9 @@
         transform="translate(142.69 -634.312)"
         fill="#eee"
       />
+      <!-- <path class="cls-1" d="M100.27,198.16v93.51a20.06,20.06,0,0,1-20,20H76.5a20.06,20.06,0,0,1-20-20v-149a20.06,20.06,0,0,1,20-20h3.77a20.06,20.06,0,0,1,20,20v55.48"/>
+      <path class="cls-2" d="M100.27,198.16v93.51a20.06,20.06,0,0,1-20,20H76.5a20.06,20.06,0,0,1-20-20v-149a20.06,20.06,0,0,1,20-20h3.77a20.06,20.06,0,0,1,20,20v55.48"/>
+      <path class="cls-3" d="M108.06,4.51V87.87H48.71V4.5a73.89,73.89,0,1,0,59.35,0Z"/> -->
       </svg>
     </div>
   </mat-sidenav-content>
