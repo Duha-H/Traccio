@@ -1,0 +1,39 @@
+{
+    "paths": [
+        {
+            "name": "/journeys",
+            "lambdaFunction": "trackerc4ca4424",
+            "privacy": {
+                "private": true,
+                "auth": [
+                    "/GET",
+                    "/PUT",
+                    "/PATCH"
+                ]
+            }
+        }
+    ],
+    "resourceName": "apicef3c0a9",
+    "apiName": "apicef3c0a9",
+    "functionArns": [
+        {
+            "lambdaFunction": "trackerc4ca4424"
+        }
+    ],
+    "privacy": {
+        "auth": 1,
+        "unauth": 0,
+        "authRoleName": "amplify-tracker-trackerenv-40730-authRole",
+        "unAuthRoleName": "amplify-tracker-trackerenv-40730-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "trackerc4ca4424",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,5 @@
+{
+    "tableName": "tracker-users",
+    "partitionKeyName": "id",
+    "partitionKeyType": "S"
+}
