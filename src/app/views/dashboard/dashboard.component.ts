@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserStoreService } from 'src/app/models/user-store.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  name = '';
+
+  constructor(public userStore: UserStoreService) { }
 
   ngOnInit() {
+    try {
+      this.name = `${this.userStore.user.firstName} ${this.userStore.user.lastName}`;
+    } catch (error) {
+      console.log("User not defined yet");
+    }
   }
 
 }

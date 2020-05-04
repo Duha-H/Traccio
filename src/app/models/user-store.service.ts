@@ -8,7 +8,8 @@ import { Journey } from './journey';
 export class UserStoreService {
 
   user: User;
-  journeys: Journey[];
+  journeys: Journey[] = [];
+  dataUpdated = false;
 
   constructor() { }
 
@@ -30,8 +31,22 @@ export class UserStoreService {
     console.log("fetching data");
   }
 
+  updateData() {
+    this.dataUpdated = true;
+  }
+
   clearData() {
     this.user = null;
     this.journeys = null;
+  }
+
+  addNewJourney(journeyData: { [key: string]: any }) {
+    const journeyID = this.journeys.length;
+    journeyData.id = journeyID;
+    const newJourney = new Journey(journeyData);
+    console.log(newJourney);
+    // update current state
+    this.journeys.unshift(newJourney);
+    this.dataUpdated = true;
   }
 }

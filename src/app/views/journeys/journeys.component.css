@@ -2,18 +2,33 @@
   --rowNum: 4;
   --colNum: 5;
   --gridHeight: 120px;
-  --wrapperH: 40px;
+	--wrapperH: 40px;
+}
+
+mat-drawer-container {
+	background: none;
+	min-height: 94vh;
+}
+
+mat-drawer {
+	min-width: 400px;
+}
+
+.mat-drawer-inner-container {
+	position: relative;
 }
 
 .journey-container {
 	text-align: center;
+	/* height: 100%; */
 }
 
 .journey-grid {
 	display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
 	justify-items: center;
-	
+	margin: 25px 25px;
+	/* height: 80%; */
 }
 
 .journey-item {

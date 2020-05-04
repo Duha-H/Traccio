@@ -1,12 +1,28 @@
 <div class="view-container journey-container">
-  <div class="journey-grid">
-    <app-rect-item [type]="'add'" class="journey-item"></app-rect-item>
-    <app-rect-item class="journey-item"></app-rect-item>
-    <app-rect-item class="journey-item"></app-rect-item>
-    <app-rect-item class="journey-item"></app-rect-item>
-    <app-rect-item class="journey-item"></app-rect-item>
-    <app-rect-item class="journey-item"></app-rect-item>
-  </div>
+	<mat-drawer-container>
+		<div class="journey-grid">
+			<app-rect-item 
+				[type]="'add'"
+				class="journey-item"
+				(click)="displayJourneyDrawer()">
+			</app-rect-item>
+			<app-rect-item 
+				class="journey-item"
+				*ngFor="
+					let journey of this.userStore.journeys;
+					let i = index;
+				"
+				[linkedJourney]="journey"
+			>
+			</app-rect-item>
+		</div>
 
-  <p>journeys works??!</p>
+		<mat-drawer
+			position="end"
+			[(opened)]="displayDrawer"
+			[fixedInViewport]="true"
+		>
+			<journey-input (dataLogged)="onDataLogged($event)"></journey-input>
+		</mat-drawer>
+	</mat-drawer-container>
 </div>

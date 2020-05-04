@@ -41,6 +41,9 @@ export class Journey {
 	get applications() { return this._applications; }
 	set applications(apps: Application[]) { this._applications = apps; }
 
+	get active() { return this._active; }
+	set active(active: boolean) { this._active = active; }
+
 	toggleActive(active: boolean) {
 		this._active = active;
 		if (!this._active) {
