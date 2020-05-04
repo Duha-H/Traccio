@@ -1,50 +1,57 @@
+import { Application } from './application';
 // Object representation of a Journey
 export class Journey {
 
-	title = '';
-	id = '';
-	startDate = new Date();
-	endDate: Date = null;
-	active = true;
-	applications = [];
+	private _title = '';
+	private _id = '';
+	private _startDate: number[] = [];
+	private _endDate: number[] = [];
+	private _active = true;
+	private _applications: Application[] = [];
 
 	constructor(data?: { [key: string]: any }) {
 		// construct object from provided journey JSON
 		if (data) {
 			const x = 1;
-			this.title = data.title;
-			this.id = data.id;
-			this.startDate = new Date(Date.parse(data.startDate)); // parse date string, ISO_8601 format -> milliseconds -> Date
-			this.endDate = data.endDate
-				? new Date(Date.parse(data.startDate))
+			this._title = data.title;
+			this._id = data.id;
+			this._startDate = data.startDate; // parse date string, ISO_8601 format -> milliseconds -> Date
+			this._endDate = data.endDate
+				? data.endDate
 				: null; // parse date string, ISO_8601 format -> milliseconds -> Date
-			this.active = data.active;
-			this.applications = data.apps
-				? data.apps
+			this._active = data.active;
+			this._applications = data.apps
+				? data.apps // TODO: fix this
 				: [];
 		}
 	}
 
-	setTitle(title: string) { this.title = title; }
+	get title() { return this._title; }
+	set title(title: string) { this._title = title; }
 
-	setID(id: string) { this.id = id; }
+	get id() { return this._id; }
+	set id(id: string) { this._id = id; }
 
-	setStartDate(date: string) { this.startDate = new Date(Date.parse(date)); }
+	get startDate() { return this._startDate; }
+	set startDate(date: number[]) { this._startDate = date; }
 
-	setEndDate(date: string) { this.endDate = new Date(Date.parse(date)); }
+	get endDate() { return this._endDate; }
+	set endDate(date: number[]) { this._endDate = date; }
 
-	setApplications(apps: []) { this.applications = apps; }
+	get applications() { return this._applications; }
+	set applications(apps: Application[]) { this._applications = apps; }
 
 	toggleActive(active: boolean) {
-		this.active = active;
-		if (!this.active) {
-			this.endDate = new Date(); // now
+		this._active = active;
+		if (!this._active) {
+			const today = new Date();
+			this._endDate = [today.getDate(), today.getMonth(), today.getFullYear()]; // now
 			// update database
 		}
 	}
 
-	addApplication(newApp: {}) {
-		this.applications.push(newApp);
+	addApplication(newApp: Application) {
+		this._applications.push(newApp);
 		// update database
 	}
 
