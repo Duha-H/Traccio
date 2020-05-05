@@ -1,12 +1,39 @@
+
 h2 {
 	margin: 0 15px;
 	display: flex;
 }
 
+mat-drawer-container {
+  background: none;
+	min-height: 94vh;
+	text-align: center;
+	width: 100%;
+}
+
+mat-drawer-content {
+	text-align: center;
+	width: 100%;
+}
+
+mat-drawer {
+  min-width: 400px;
+}
+
+.mat-drawer-inner-container {
+  position: relative;
+}
+
+.mat-drawer-backdrop.mat-drawer-shown {
+	background: none;
+}
+
 .view-container {
-	margin: 5px 15px;
-	width: 98%;
+	/* margin: 5px 15px; */
+	/* width: 98%; */
 	height: 100%;
+	display: flex;
+	text-align: center;
 }
 
 /* .sub-navbar {
@@ -48,6 +75,7 @@ h2 {
 	max-width: 800px;
 	margin: 0 auto;
 	margin-top: 25px;
+	padding: 0 auto;
 }
 
 /* .title {

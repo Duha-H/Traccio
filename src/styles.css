@@ -1,5 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~aws-amplify-angular/theme.css';
+
+/* @include mat-core();
+
+$app-primary: mat-palette($mat-white);
+$app-accent:  mat-palette($mat-pink);
+$app-theme: mat-light-theme($app-primary, $app-accent);
+@include angular-material-theme($app-theme); */
+
 :root {
     --amazonOrange: --squidInk;
 }
@@ -34,4 +42,12 @@ div.view-container {
 
 .mat-drawer-backdrop.mat-drawer-shown {
 	background-color: rgba(0, 0, 0, 0.3);
+}
+
+app-journeys {
+    width: 100%;
+}
+
+app-journey-view {
+	width: 94vw;
 }

@@ -25,7 +25,6 @@ export class RectItemComponent implements OnChanges {
   get linkedJourney() { return this._linkedJourney; }
 
   ngOnChanges() {
-    console.log('new journey', this.linkedJourney);
     if (this.linkedJourney) {
       this.displayName = this._linkedJourney.title;
       this.displayDate += `${this._linkedJourney.startDate[0]}/${this._linkedJourney.startDate[1]}/${this._linkedJourney.startDate[2]}`;

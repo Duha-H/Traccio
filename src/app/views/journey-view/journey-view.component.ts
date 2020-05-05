@@ -19,6 +19,7 @@ export class JourneyViewComponent implements OnInit {
   startDate: string;
   endDate: string;
   iconClass: string;
+  displayDrawer = false;
 
   constructor(private route: ActivatedRoute, private userStore: UserStoreService) { }
 
@@ -60,6 +61,6 @@ export class JourneyViewComponent implements OnInit {
   }
 
   addApplication() {
-    console.log("adding app!");
+    this.displayDrawer = true;
   }
 }

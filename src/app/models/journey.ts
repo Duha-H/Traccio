@@ -3,7 +3,7 @@ import { Application } from './application';
 export class Journey {
 
 	private _title = '';
-	private _id = '';
+	private _id = 0;
 	private _startDate: number[] = [];
 	private _endDate: number[] = [];
 	private _active = true;
@@ -18,7 +18,7 @@ export class Journey {
 			this._startDate = data.startDate; // parse date string, ISO_8601 format -> milliseconds -> Date
 			this._endDate = data.endDate
 				? data.endDate
-				: null; // parse date string, ISO_8601 format -> milliseconds -> Date
+				: []; // parse date string, ISO_8601 format -> milliseconds -> Date
 			this._active = data.active;
 			this._applications = data.apps
 				? data.apps // TODO: fix this
@@ -30,7 +30,7 @@ export class Journey {
 	set title(title: string) { this._title = title; }
 
 	get id() { return this._id; }
-	set id(id: string) { this._id = id; }
+	set id(id: number) { this._id = id; }
 
 	get startDate() { return this._startDate; }
 	set startDate(date: number[]) { this._startDate = date; }

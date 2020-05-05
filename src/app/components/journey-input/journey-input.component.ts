@@ -15,6 +15,7 @@ export class JourneyInputComponent implements OnInit {
   day = this.today.getDate();
   month = this.today.getMonth() + 1;
   year = this.today.getFullYear();
+  active = true;
   @Output() dataLogged = new EventEmitter<object>();
 
   constructor() {
@@ -38,7 +39,7 @@ export class JourneyInputComponent implements OnInit {
           this.month,
           this.year],
         endDate: null,
-        active: true,
+        active: this.active,
       };
       this.dataLogged.emit(newJourney);
       this.resetData();

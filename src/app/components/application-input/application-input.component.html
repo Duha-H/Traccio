@@ -1,0 +1,15 @@
+<div class="component-container">
+  <label>Journey Title:</label>
+  <input type="text" [(ngModel)]="title" placeholder="Journey 01" />
+  <label>Start Date:</label>
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" (dateChange)="dateChange($event)"
+      placeholder="" />
+    <mat-datepicker-toggle matSuffix [for]="picker">
+      <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+    </mat-datepicker-toggle>
+    <mat-datepicker color="primary" [startAt]="startDate" #picker></mat-datepicker>
+  </mat-form-field>
+  <mat-checkbox [(ngModel)]="active" color="primary">Active</mat-checkbox>
+  <button (click)="createJourney()">Submit</button>
+</div>

@@ -22,5 +22,6 @@
 			[startAt]="startDate"
 		#picker></mat-datepicker>
 	</mat-form-field>
+	<mat-checkbox [(ngModel)]="active" color="primary">Active</mat-checkbox>
 	<button (click)="createJourney()">Submit</button>
 </div>
