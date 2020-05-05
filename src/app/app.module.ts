@@ -13,6 +13,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatListModule } from '@angular/material/list';
 
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { JourneysComponent } from './views/journeys/journeys.component';
@@ -22,6 +24,10 @@ import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { SettingsComponent } from './views/settings/settings.component';
 import { RectItemComponent } from './components/rect-item/rect-item.component';
 import { JourneyInputComponent } from './components/journey-input/journey-input.component';
+import { JourneyViewComponent } from './views/journey-view/journey-view.component';
+import { UserStoreService } from './models/user-store.service';
+import { JourneyListComponent } from './views/journey-list/journey-list.component';
+import { ApplicationInputComponent } from './components/application-input/application-input.component';
 
 
 @NgModule({
@@ -34,7 +40,10 @@ import { JourneyInputComponent } from './components/journey-input/journey-input.
     SignUpComponent,
     SettingsComponent,
     RectItemComponent,
-    JourneyInputComponent
+    JourneyInputComponent,
+    JourneyViewComponent,
+    JourneyListComponent,
+    ApplicationInputComponent
   ],
   imports: [
     BrowserModule,
@@ -48,9 +57,12 @@ import { JourneyInputComponent } from './components/journey-input/journey-input.
     FormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatCheckboxModule,
+    MatListModule,
   ],
   providers: [
     AmplifyService,
+    UserStoreService,
   ],
   bootstrap: [AppComponent],
   entryComponents: [

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
 import { AmplifyService } from "aws-amplify-angular";
+import { UserStoreService } from '../models/user-store.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,8 @@ export class AuthGuardService implements CanActivate {
 
   constructor(
     public amplifyService: AmplifyService,
-    public router: Router) {
+    public router: Router,
+    public userStore: UserStoreService) {
     this.amplifyService = amplifyService;
   }
 
@@ -20,6 +22,10 @@ export class AuthGuardService implements CanActivate {
         return false;
       }
     });
+    if (this.userStore.user === undefined) {
+        this.router.navigate(['']);
+        return false;
+    }
     console.log("authed!");
     return true;
   }

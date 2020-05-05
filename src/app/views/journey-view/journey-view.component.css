@@ -1,0 +1,122 @@
+h2 {
+	margin: 0 15px;
+	display: flex;
+}
+
+.view-container {
+	margin: 5px 15px;
+	width: 98%;
+	height: 100%;
+}
+
+/* .sub-navbar {
+  display: flex;
+  align-items: center;
+} */
+
+.active-icon {
+	color: rgb(34, 161, 83);
+	border: 1px solid black;
+}
+
+.inactive-icon {
+	color: rgb(93, 94, 93);
+	border: 1px solid black;
+}
+
+.spacer {
+	flex: content;
+}
+
+.fixed-span {
+	width: 600px;
+}
+
+.spanning-content {
+	display: flex;
+	flex-direction: row;
+	vertical-align: middle;
+	align-items: center;
+}
+
+.mat-line {
+	flex-direction: row;
+}
+
+.details {
+	text-align: left;
+	max-width: 800px;
+	margin: 0 auto;
+	margin-top: 25px;
+}
+
+/* .title {
+	display: flex;
+	vertical-align: middle;
+} */
+
+.title * {
+	margin-top: auto;
+	margin-bottom: auto;
+	line-height: 16pt;
+	height: 30px;
+	font-size: 20pt;
+}
+
+button {
+	cursor: pointer;
+	border: none;
+	background: none;
+}
+
+.dates {
+	display: flex;
+	align-items: center;
+	vertical-align: middle;
+	padding: 15px;
+}
+
+.dates * {
+	font-size: 12pt;
+	height: 30px;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.dates h4 {
+	margin-left: 10px;
+}
+
+.apps {
+	margin: 20px;
+	margin-top: 25px;
+}
+
+.apps h3, h4 {
+	margin: 5px 0;
+}
+
+mat-list-item {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.bottom-border {
+	padding-bottom: 10px;
+	border-bottom: 1px solid rgba(105, 104, 104, 0.637);
+	margin: 0;
+}
+
+.bottom-border h2 {
+	margin-left: 5px;
+	font-weight: 600;
+}
+
+.clickable-item {
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.clickable-item:hover {
+	background-color: rgba(0, 0, 0, 0.05);
+}

@@ -10,13 +10,14 @@ export class DashboardComponent implements OnInit {
 
   name = '';
 
-  constructor(public userStore: UserStoreService) { }
+  constructor(private userStore: UserStoreService) { }
 
   ngOnInit() {
     try {
       this.name = `${this.userStore.user.firstName} ${this.userStore.user.lastName}`;
     } catch (error) {
       console.log("User not defined yet");
+      console.log(error);
     }
   }
 

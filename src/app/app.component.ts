@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Router } from '@angular/router';
 import { AmplifyService } from "aws-amplify-angular";
 import { Auth } from 'aws-amplify';
@@ -16,8 +16,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     public amplifyService: AmplifyService,
-    public injector: Injector,
-    public userStore: UserStoreService,
+    private userStore: UserStoreService,
     public router: Router) {
     this.router = router;
     this.amplifyService = amplifyService;

@@ -1,0 +1,50 @@
+<div class="view-container">
+	<!-- <div class="sub-navbar spanning-content">
+		<a href="#" routerLink="/journeys">Back</a>
+		<div class="spacer"></div>
+		<button>Add Application</button>
+	</div> -->
+
+	<div class="details">
+		<div class="title spanning-content">
+			<!-- <mat-icon className="iconClass">radio_button_checked</mat-icon> -->
+			<h2>{{journey.title}} Details</h2>
+			<div class="spacer"></div>
+			<button><mat-icon>edit</mat-icon></button>
+		</div>
+		<div class="dates">
+			<h3>Start Date: </h3><h4>{{startDate}}</h4>
+			<div class="spacer"></div>
+			<h3>End Date: </h3><h4>{{endDate}}</h4>
+			<h3></h3>
+		</div>
+		<div class="apps">
+			<div class="spanning-content bottom-border">
+				<h2>Applications</h2>
+				<div class="spacer"></div>
+				<button (click)="addApplication()"><mat-icon>add_box</mat-icon></button>
+			</div>
+			
+			<mat-list>
+				<mat-list-item (click)="viewApplication(app)" class="clickable-item" *ngFor="let app of applications;">
+					<button matListIcon><mat-icon>folder</mat-icon></button>
+					<div matLine>
+						<div class="spanning-content">
+							<h3 style="width: 100px">{{app.positionTitle}}</h3>
+							<div class="spacer"></div>
+							<h4>Status: {{app.status}}</h4>
+						</div>
+						
+					</div>
+					<div matLine>
+						<div class="spanning-content">
+							<span class="fixed-span">Company: {{app.companyName}}</span>
+							<span class="fixed-span" style="text-align: center;">Application Date: {{app.appDate[0]}}/{{app.appDate[1]}}/{{app.appDate[2]}}</span>
+							<span class="fixed-span" style="text-align: right;">Applied via: {{app.source}}</span>
+						</div>
+					</div>
+				</mat-list-item>
+			</mat-list>
+		</div>
+	</div>
+</div>
