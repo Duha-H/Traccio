@@ -12,7 +12,7 @@ import { Application } from 'src/app/models/application';
 })
 export class JourneyViewComponent implements OnInit {
 
-  @ViewChild('sidenav', {static: false}) sidenav: MatSidenav;
+  @ViewChild('sidenav') sidenav: MatSidenav;
   journey: Journey;
   applications: Application[];
   startDate: string;
