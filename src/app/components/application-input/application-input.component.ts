@@ -72,7 +72,7 @@ export class ApplicationInputComponent implements OnChanges {
     }
     this.startDate = this.appDetails.date.length === 0
       ? new Date()
-      : new Date(`${this.appDetails.date[1]} + 1/${this.appDetails.date[0]}/${this.appDetails.date[2]}`);
+      : new Date(`${this.appDetails.date[1]}/${this.appDetails.date[0]}/${this.appDetails.date[2]}`);
   }
 
   onDateChange(event: MatDatepickerInputEvent<Date>) {
@@ -96,6 +96,11 @@ export class ApplicationInputComponent implements OnChanges {
     }
     // TODO: check if everything is fine here
     this.sidenav.close();
+    this.startDate = new Date();
+  }
+
+  openDatePicker() {
+    
   }
 
 }

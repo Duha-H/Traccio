@@ -7,7 +7,7 @@
 
   <mat-form-field>
     <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" [(ngModel)]="startDate"
-    (dateChange)="onDateChange($event)" placeholder="Date Applied" style="width: 250px;" />
+    (dateChange)="onDateChange($event)" placeholder="Date Applied" style="width: 250px;" (focus)="picker.open()" />
       <!-- placeholder="{{startDate.getMonth() + 1}}/{{startDate.getDate()}}/{{startDate.getFullYear()}}" style="width: 250px;" -->
     <mat-datepicker-toggle matSuffix [for]="picker">
       <mat-icon matDatepickerToggleIcon>arrow_drop_down</mat-icon>

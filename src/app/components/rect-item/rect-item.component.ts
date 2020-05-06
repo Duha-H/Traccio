@@ -9,8 +9,8 @@ import { Journey } from 'src/app/models/journey';
 export class RectItemComponent implements OnChanges {
 
   @Input() type = 'item'; // type can either be 'add' or 'item'
-  @Input() width = 280;
-  @Input() height = 400;
+  @Input() width = 250;
+  @Input() height = 370;
   private _linkedJourney: Journey = new Journey();
   // @Input() linkedJourney: Journey = null;
 

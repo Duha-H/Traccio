@@ -8,6 +8,7 @@ import { SignInComponent } from "./auth/sign-in/sign-in.component";
 import { SignUpComponent } from "./auth/sign-up/sign-up.component";
 import { JourneysComponent } from "./views/journeys/journeys.component";
 import { SettingsComponent } from "./views/settings/settings.component";
+import { SearchComponent } from "./views/search/search.component";
 import { JourneyViewComponent } from "./views/journey-view/journey-view.component";
 import { JourneyListComponent } from "./views/journey-list/journey-list.component";
 
@@ -25,8 +26,8 @@ const routes: Routes = [
     ],
   },
   // { path: 'applications', component: JourneyViewComponent },
+  { path: "search", component: SearchComponent },
   { path: "settings", component: SettingsComponent },
-  // { path: 'journeyview', component: JourneyViewComponent },
 ];
 
 @NgModule({

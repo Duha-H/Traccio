@@ -54,7 +54,7 @@ export class UserStoreService {
 
   clearData() {
     this.user = undefined;
-    this.journeys = [];
+    this.journeys = [this.testJourney1, this.testJourney2]; // TODO: temporary, remove later
   }
 
   getJourney(id: number): Journey {
@@ -69,7 +69,7 @@ export class UserStoreService {
 
   addNewJourney(journeyData: { [key: string]: any }) {
     console.log("journeys:", this.journeys);
-    const journeyID = this.journeys.length;
+    const journeyID = this._getNewJourneyID();
     journeyData.id = journeyID;
     const newJourney = new Journey(journeyData);
     console.log(newJourney);
@@ -80,7 +80,7 @@ export class UserStoreService {
 
   addNewApplication(journeyId: number, appData: { [key: string]: any }) {
     const journey = this.getJourney(journeyId);
-    const appID = journey.applications.length;
+    const appID = this._getNewAppID(journeyId);
     appData.id = appID;
     const newApplication = new Application(appData);
     journey.applications.push(newApplication); // wooowiiieee
@@ -94,5 +94,22 @@ export class UserStoreService {
     let existingApplication = this.getApplication(journeyId, appID);
     existingApplication = updatedApplication;
     console.log("application updated: ", existingApplication);
+  }
+
+  private _getNewJourneyID(): number {
+    let maxID = this.journeys.length;
+    this.journeys.forEach((element) => {
+      if (element.id >= maxID) { maxID = element.id + 1; }
+    });
+    return maxID;
+  }
+
+  private _getNewAppID(journeyId: number): number {
+    const apps = this.getJourney(journeyId).applications;
+    let maxID = apps.length;
+    apps.forEach((element) => {
+      if (element.id >= maxID) { maxID = element.id + 1; }
+    });
+    return maxID;
   }
 }

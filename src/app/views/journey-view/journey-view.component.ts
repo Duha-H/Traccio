@@ -3,8 +3,6 @@ import { Journey } from 'src/app/models/journey';
 import { MatSidenav } from '@angular/material/sidenav';
 import { UserStoreService } from 'src/app/models/user-store.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 import { Application } from 'src/app/models/application';
 
 @Component({
@@ -15,7 +13,6 @@ import { Application } from 'src/app/models/application';
 export class JourneyViewComponent implements OnInit {
 
   @ViewChild('sidenav', {static: false}) sidenav: MatSidenav;
-  // journey: Observable<Journey>;
   journey: Journey;
   applications: Application[];
   startDate: string;
@@ -29,12 +26,6 @@ export class JourneyViewComponent implements OnInit {
 
   ngOnInit() {
     console.log("view initialized");
-    // this.route.paramMap.pipe(
-    //   switchMap((params: ParamMap) => {
-    //     this.userStore.getJourney(+params.get('id')).subscribe((value) => { this.journey = value; } );
-    //     return this.userStore.getJourney(+params.get('id'));
-    //   })
-    // );
     let id;
     this.route.params.subscribe(params => {
       id = params["id"];
