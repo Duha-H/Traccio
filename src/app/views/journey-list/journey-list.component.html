@@ -14,10 +14,12 @@
 				"
 				[linkedJourney]="journey"
 				(click)="loadJourney(journey.id)"
+				(editButtonPressed)="onEditButtonPressed($event)"
 			>
 			</app-rect-item>
 		</div>
 
+		SOMETHING ELSE IDK
 		<mat-drawer
 			position="end"
 			[(opened)]="displayDrawer"

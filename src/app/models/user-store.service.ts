@@ -68,14 +68,13 @@ export class UserStoreService {
   }
 
   addNewJourney(journeyData: { [key: string]: any }) {
-    console.log("journeys:", this.journeys);
     const journeyID = this._getNewJourneyID();
     journeyData.id = journeyID;
     const newJourney = new Journey(journeyData);
-    console.log(newJourney);
     // update current state
     this.journeys.push(newJourney);
     this.dataUpdated = true;
+    console.log("journey added:", newJourney);
   }
 
   addNewApplication(journeyId: number, appData: { [key: string]: any }) {
@@ -86,6 +85,13 @@ export class UserStoreService {
     journey.applications.push(newApplication); // wooowiiieee
     this.dataUpdated = true;
     console.log("application added: ", newApplication);
+  }
+
+  updateExistingJourney(udpatedJourney: Journey) {
+    const journeyID = udpatedJourney.id;
+    let existingJourney = this.getJourney(journeyID);
+    existingJourney = udpatedJourney;
+    console.log("journey updated:", existingJourney);
   }
 
   updateExistingApplication(journeyId: number, updatedApplication: Application) {

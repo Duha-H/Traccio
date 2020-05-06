@@ -1,5 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { Journey } from 'src/app/models/journey';
 
 @Component({
   selector: 'journey-input',
@@ -7,6 +8,9 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
   styleUrls: ['./journey-input.component.css']
 })
 export class JourneyInputComponent implements OnInit {
+
+  @Input() journey: Journey;
+  @Output() dataLogged = new EventEmitter<object>();
 
   minDate: Date;
   maxDate: Date;
@@ -16,7 +20,6 @@ export class JourneyInputComponent implements OnInit {
   month = this.today.getMonth() + 1;
   year = this.today.getFullYear();
   active = true;
-  @Output() dataLogged = new EventEmitter<object>();
 
   constructor() {
     const thisYear = new Date().getFullYear();
@@ -27,7 +30,7 @@ export class JourneyInputComponent implements OnInit {
   ngOnInit() {
   }
 
-  createJourney() {
+  onDataLogged() {
     // console.log(this.title, this.day, this.month, this.year);
     if (this.title === "") {
       console.log("error: no title specifed");
@@ -41,7 +44,7 @@ export class JourneyInputComponent implements OnInit {
         endDate: null,
         active: this.active,
       };
-      this.dataLogged.emit(newJourney);
+      this.dataLogged.emit(newJourney); // HERE
       this.resetData();
     }
   }

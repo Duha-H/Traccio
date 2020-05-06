@@ -4,7 +4,14 @@
   [style.height.px]="height"
   [className]="type === 'item' ? 'container' : 'container add'"
 >
+  <div class="edit-button" (click)="onEditButtonPressed()">
+    <button  *ngIf="type === 'item'" >
+      <mat-icon>edit</mat-icon>
+    </button>
+  </div>
+  
   <div class="journey-content" *ngIf="type === 'item'">
+    
     <h2>{{ displayName }}</h2>
     <p>{{ displayDate }}</p>
     <p>{{ displayStatus }}</p>
