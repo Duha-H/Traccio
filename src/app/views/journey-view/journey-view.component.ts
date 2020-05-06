@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Journey } from 'src/app/models/journey';
+import { MatSidenav } from '@angular/material/sidenav';
 import { UserStoreService } from 'src/app/models/user-store.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
@@ -13,13 +14,16 @@ import { Application } from 'src/app/models/application';
 })
 export class JourneyViewComponent implements OnInit {
 
+  @ViewChild('sidenav', {static: false}) sidenav: MatSidenav;
   // journey: Observable<Journey>;
   journey: Journey;
   applications: Application[];
   startDate: string;
   endDate: string;
   iconClass: string;
-  displayDrawer = false;
+  displayDrawer = true;
+  drawerMode = 'add';
+  selectedApp = null;
 
   constructor(private route: ActivatedRoute, private userStore: UserStoreService) { }
 
@@ -39,7 +43,6 @@ export class JourneyViewComponent implements OnInit {
     // const id = this.route.snapshot.paramMap.get('id');
     this.journey = this.userStore.getJourney(+id);
     this.setJourneyDetails();
-    this.applications = this.journey.applications;
     console.log('loaded journey', this.journey);
   }
 
@@ -57,10 +60,27 @@ export class JourneyViewComponent implements OnInit {
   }
 
   viewApplication(application: Application) {
-    console.log("viewing!", application);
+    this.displayDrawer = true;
+    this.drawerMode = 'edit';
+    this.selectedApp = application;
+    console.log("selected", application);
   }
 
   addApplication() {
     this.displayDrawer = true;
+    this.drawerMode = 'add';
+  }
+
+  openDrawer(mode: string, application: Application) {
+    this.drawerMode = mode;
+    this.selectedApp = application;
+    this.sidenav.open();
+  }
+
+  closeDrawer() {
+    if (this.displayDrawer) {
+      this.displayDrawer = false;
+      this.sidenav.close();
+    }
   }
 }

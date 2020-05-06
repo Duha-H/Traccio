@@ -2,6 +2,7 @@ import { STATUS, APP_SOURCE } from './constants';
 
 export class Application {
 
+	private _id = 0;
 	private _companyName = '';
 	private _positionTitle = '';
 	private _appDate: number[] = [];
@@ -11,6 +12,7 @@ export class Application {
 
 	constructor(data?: { [key: string]: any }) {
 		if (data) {
+			this._id = data.id;
 			this._companyName = data.company;
 			this._positionTitle = data.title;
 			this._appDate = data.date;
@@ -19,6 +21,9 @@ export class Application {
 			this._notes = data.notes;
 		}
 	}
+
+	get id() { return this._id; }
+	set id(id: number) { this._id = id; }
 
 	get companyName() { return this._companyName; }
 	set companyName(name: string) { this._companyName = name; }

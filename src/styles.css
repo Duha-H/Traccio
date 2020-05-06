@@ -41,7 +41,7 @@ div.view-container {
 }
 
 .mat-drawer-backdrop.mat-drawer-shown {
-	background-color: rgba(0, 0, 0, 0.3);
+	background-color: rgba(0, 0, 0, 0.05);
 }
 
 app-journeys {

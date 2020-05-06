@@ -1,61 +1,67 @@
 <div class="view-container">
-	<mat-drawer-container>
-	<!-- <div class="sub-navbar spanning-content">
-		<a href="#" routerLink="/journeys">Back</a>
-		<div class="spacer"></div>
-		<button>Add Application</button>
-	</div> -->
-
-	<div class="details">
-		<div class="title spanning-content">
-			<!-- <mat-icon className="iconClass">radio_button_checked</mat-icon> -->
-			<h2>{{journey.title}} Details</h2>
+  <mat-drawer-container hasBackdrop="unset" >
+    <!-- <div class="sub-navbar spanning-content">
+			<a href="#" routerLink="/journeys">Back</a>
 			<div class="spacer"></div>
-			<button><mat-icon>edit</mat-icon></button>
-		</div>
-		<div class="dates">
-			<h3>Start Date: </h3><h4>{{startDate}}</h4>
-			<div class="spacer"></div>
-			<h3>End Date: </h3><h4>{{endDate}}</h4>
-			<h3></h3>
-		</div>
-		<div class="apps">
-			<div class="spanning-content bottom-border">
-				<h2>Applications</h2>
-				<div class="spacer"></div>
-				<button (click)="addApplication()"><mat-icon>add_box</mat-icon></button>
-			</div>
-			
-			<mat-list>
-				<mat-list-item (click)="viewApplication(app)" class="clickable-item" *ngFor="let app of applications;">
-					<button matListIcon><mat-icon>folder</mat-icon></button>
-					<div matLine>
-						<div class="spanning-content">
-							<h3 style="width: 100px">{{app.positionTitle}}</h3>
-							<div class="spacer"></div>
-							<h4>Status: {{app.status}}</h4>
-						</div>
-						
-					</div>
-					<div matLine>
-						<div class="spanning-content">
-							<span class="fixed-span" style="text-align: left;">Company: {{app.companyName}}</span>
-							<span class="fixed-span" style="text-align: center;">Application Date: {{app.appDate[0]}}/{{app.appDate[1]}}/{{app.appDate[2]}}</span>
-							<span class="fixed-span" style="text-align: right;">Applied via: {{app.source}}</span>
-						</div>
-					</div>
-				</mat-list-item>
-			</mat-list>
-		</div>
-	</div>
+			<button>Add Application</button>
+		</div> -->
 
-	<mat-drawer
-		position="end"
-		[(opened)]="displayDrawer"
-		[fixedInViewport]="true"
-		mode="side"
-	>
-		<application-input (dataLogged)="onDataLogged($event)"></application-input>
-	</mat-drawer>
-</mat-drawer-container>
+    <div class="details">
+      <div class="title spanning-content">
+        <!-- <mat-icon className="iconClass">radio_button_checked</mat-icon> -->
+        <h2>{{journey.title}} Details</h2>
+        <button>
+          <mat-icon>edit</mat-icon>
+        </button>
+        <div class="spacer"></div>
+      </div>
+      <div class="dates">
+        <h3>Start Date: </h3>
+        <h4>{{startDate}}</h4>
+        <div class="spacer"></div>
+        <h3>End Date: </h3>
+        <h4>{{endDate}}</h4>
+        <h3></h3>
+      </div>
+      <div class="apps">
+        <div class="spanning-content bottom-border">
+          <h2>Applications</h2>
+          <div class="spacer"></div>
+          <button (click)="openDrawer('add', null)">
+            <mat-icon>add_box</mat-icon>
+          </button>
+        </div>
+        <div *ngIf="applications.length == 0" class="placeholder-text">
+          <h4>No applications added.</h4>
+          <h4>Add applications to track them here.</h4>
+        </div>
+        <mat-list *ngIf="applications.length > 0">
+          <mat-list-item (click)="openDrawer('edit', app)" class="clickable-item" *ngFor="let app of applications;">
+            <mat-icon matListIcon>folder</mat-icon>
+            <div matLine>
+              <div class="spanning-content">
+                <h3 style="width: 100px">{{app.positionTitle}}</h3>
+                <div class="spacer"></div>
+                <h4>Status: {{app.status}}</h4>
+              </div>
+
+            </div>
+            <div matLine>
+              <div class="spanning-content">
+                <span class="fixed-span" style="text-align: left;">Company: {{app.companyName}}</span>
+                <span class="fixed-span" style="text-align: center;">Application Date:
+                  {{app.appDate[0]}}/{{app.appDate[1]}}/{{app.appDate[2]}}</span>
+                <span class="fixed-span" style="text-align: right;">Applied via: {{app.source}}</span>
+              </div>
+            </div>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </div>
+
+    <mat-drawer position="end" [fixedInViewport]="true" mode="side" #sidenav>
+      <application-input (dataLogged)="onDataLogged($event)" [sidenav]="sidenav" [app]="selectedApp" [journeyId]="journey.id">
+      </application-input>
+    </mat-drawer>
+  </mat-drawer-container>
 </div>

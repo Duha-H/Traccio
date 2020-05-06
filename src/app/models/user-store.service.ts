@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from './user';
 import { Journey } from './journey';
 import * as mApps from './mock-applications';
+import { Application } from './application';
 
 @Injectable({
   providedIn: 'root'
@@ -61,6 +62,11 @@ export class UserStoreService {
     return this.journeys.find(element => element.id === id);
   }
 
+  getApplication(journeyId: number, appId: number): Application {
+    // tslint:disable-next-line: radix
+    return this.getJourney(journeyId).applications.find(element => element.id === appId);
+  }
+
   addNewJourney(journeyData: { [key: string]: any }) {
     console.log("journeys:", this.journeys);
     const journeyID = this.journeys.length;
@@ -70,5 +76,23 @@ export class UserStoreService {
     // update current state
     this.journeys.push(newJourney);
     this.dataUpdated = true;
+  }
+
+  addNewApplication(journeyId: number, appData: { [key: string]: any }) {
+    const journey = this.getJourney(journeyId);
+    const appID = journey.applications.length;
+    appData.id = appID;
+    const newApplication = new Application(appData);
+    journey.applications.push(newApplication); // wooowiiieee
+    this.dataUpdated = true;
+    console.log("application added: ", newApplication);
+  }
+
+  updateExistingApplication(journeyId: number, updatedApplication: Application) {
+    // const updatedApplication = new Application(appData);
+    const appID = updatedApplication.id;
+    let existingApplication = this.getApplication(journeyId, appID);
+    existingApplication = updatedApplication;
+    console.log("application updated: ", existingApplication);
   }
 }

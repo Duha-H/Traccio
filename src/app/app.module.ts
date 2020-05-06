@@ -12,9 +12,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_FORMATS } from '@angular/material/core';
+import { MatInputModule } from '@angular/material';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
 
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { JourneysComponent } from './views/journeys/journeys.component';
@@ -59,6 +62,9 @@ import { ApplicationInputComponent } from './components/application-input/applic
     MatNativeDateModule,
     MatCheckboxModule,
     MatListModule,
+    MatMenuModule,
+    MatSelectModule,
+    MatInputModule,
   ],
   providers: [
     AmplifyService,
