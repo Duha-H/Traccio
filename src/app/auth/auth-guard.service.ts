@@ -18,14 +18,14 @@ export class AuthGuardService implements CanActivate {
   canActivate(): boolean {
     this.amplifyService.authStateChange$.subscribe((authState) => {
       if (authState.state !== "signedIn") {
-        this.router.navigate(['login']);
+        this.router.navigate(['signin']);
         return false;
       }
     });
-    if (this.userStore.user === undefined) {
-        this.router.navigate(['']);
-        return false;
-    }
+    // if (this.userStore.user === undefined) {
+    //     this.router.navigate(['']);
+    //     return false;
+    // }
     console.log("authed!");
     return true;
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Journey } from 'src/app/models/journey';
 import { MatSidenav } from '@angular/material/sidenav';
 import { UserStoreService } from 'src/app/models/user-store.service';
@@ -12,7 +12,8 @@ import { Application } from 'src/app/models/application';
 })
 export class JourneyViewComponent implements OnInit {
 
-  @ViewChild('sidenav') sidenav: MatSidenav;
+  @ViewChild('sidenav', {static: false}) sidenav: MatSidenav;
+
   journey: Journey;
   applications: Application[];
   startDate: string;
@@ -73,5 +74,12 @@ export class JourneyViewComponent implements OnInit {
       this.displayDrawer = false;
       this.sidenav.close();
     }
+  }
+
+  onDataLogged(applicationData: { [key: string]: any }) {
+    // console.log(journeyData);
+    // this.userStore.addNewJourney(journeyData);
+    // this.displayDrawer = false;
+    console.log("i don't know");
   }
 }

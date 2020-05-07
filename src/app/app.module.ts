@@ -31,6 +31,7 @@ import { UserStoreService } from './models/user-store.service';
 import { JourneyListComponent } from './views/journey-list/journey-list.component';
 import { ApplicationInputComponent } from './components/application-input/application-input.component';
 import { SearchComponent } from './views/search/search.component';
+import { ConfirmSignupComponent } from './auth/confirm-signup/confirm-signup.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { SearchComponent } from './views/search/search.component';
     JourneyViewComponent,
     JourneyListComponent,
     ApplicationInputComponent,
-    SearchComponent
+    SearchComponent,
+    ConfirmSignupComponent
   ],
   imports: [
     BrowserModule,

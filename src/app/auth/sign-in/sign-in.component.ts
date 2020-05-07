@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Auth } from 'aws-amplify';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignInComponent implements OnInit {
 
-  constructor() { }
+  email = '';
+  password = '';
+
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+
+  async signIn() {
+    try {
+      const user = await Auth.signIn(this.email, this.password);
+      console.log('signed in');
+      console.log(user);
+      this.router.navigate(['']);
+    } catch (error) {
+      console.log('error signing in', error);
+    }
   }
 
 }

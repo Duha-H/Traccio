@@ -55,7 +55,7 @@ export class AppComponent implements OnInit {
         await Auth.signOut();
         this.signedIn = false;
         this.userStore.clearData();
-        this.router.navigate(['login']);
+        this.router.navigate(['signin']);
     } catch (error) {
         console.log('error signing out: ', error);
     }

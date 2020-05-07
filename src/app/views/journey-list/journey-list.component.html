@@ -9,7 +9,7 @@
 			<app-rect-item 
 				class="journey-item"
 				*ngFor="
-					let journey of this.userStore.journeys.reverse();
+					let journey of userStore.journeys.reverse();
 					let i = index;
 				"
 				[linkedJourney]="journey"
@@ -19,7 +19,6 @@
 			</app-rect-item>
 		</div>
 
-		SOMETHING ELSE IDK
 		<mat-drawer
 			position="end"
 			[(opened)]="displayDrawer"

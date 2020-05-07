@@ -44,7 +44,7 @@ mat-drawer {
 }
 
 .spacer {
-  flex: content;
+  flex: auto;
 }
 
 .fixed-span {

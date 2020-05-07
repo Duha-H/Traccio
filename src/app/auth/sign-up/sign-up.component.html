@@ -2,3 +2,10 @@
   [signUpConfig]="signUpConfig"
   [usernameAttributes]="usernameAttributes"
 ></amplify-auth-sign-up> -->
+
+<input type="text" [(ngModel)]="firstName" placeholder="Jean">
+<input type="text" [(ngModel)]="lastName" placeholder="Ralphio">
+<input type="text" [(ngModel)]="email" placeholder="j.ralphio@email.com">
+<input type="text" [(ngModel)]="password" placeholder="password">
+<input type="text" [(ngModel)]="confirmPassword" placeholder="password">
+<button (click)="signUp()">Submit</button>

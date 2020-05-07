@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { STATUS, APP_SOURCE } from 'src/app/models/constants';
 import { Application } from 'src/app/models/application';
 import { UserStoreService } from 'src/app/models/user-store.service';
@@ -16,12 +16,13 @@ export class ApplicationInputComponent implements OnChanges {
   @Input() sidenav: MatSidenav;
   @Input() app: Application;
   @Input() journeyId: number;
+  @Output() dataLogged = new EventEmitter<object>();
 
   STATUSES = Object.values(STATUS);
   SOURCES = Object.values(APP_SOURCE);
 
   appDetails = {
-    company : 'Company Name',
+    company : 'Company Nameeee',
     title : 'Position Title',
     date : [],
     status : STATUS.IN_REVIEW.toString(),

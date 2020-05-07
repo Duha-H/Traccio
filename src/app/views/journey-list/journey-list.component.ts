@@ -17,7 +17,7 @@ export class JourneyListComponent implements OnInit, OnChanges {
   currJourney: Journey = null;
   id = 0;
 
-  constructor(private userStore: UserStoreService, private router: Router, private route: ActivatedRoute) { }
+  constructor(public userStore: UserStoreService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     console.log("initializing list");
