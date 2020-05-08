@@ -1,0 +1,15 @@
+.view-container {
+  max-height: 250px;
+}
+
+.calendar-container {
+	max-height: 250px;
+	width: 97vw;
+	height: 100%;
+	text-align: center;
+	align-content: center;
+}
+
+/* .calendar {
+  max-height: 100%;
+} */

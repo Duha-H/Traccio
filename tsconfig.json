@@ -1,6 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "jsx": "react",
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
@@ -17,7 +18,7 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

@@ -32,7 +32,7 @@ import { JourneyListComponent } from './views/journey-list/journey-list.componen
 import { ApplicationInputComponent } from './components/application-input/application-input.component';
 import { SearchComponent } from './views/search/search.component';
 import { ConfirmSignupComponent } from './auth/confirm-signup/confirm-signup.component';
-
+import { CalendarWrapperComponent } from './views/dashboard/CalendarWrapper.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +49,8 @@ import { ConfirmSignupComponent } from './auth/confirm-signup/confirm-signup.com
     JourneyListComponent,
     ApplicationInputComponent,
     SearchComponent,
-    ConfirmSignupComponent
+    ConfirmSignupComponent,
+    CalendarWrapperComponent
   ],
   imports: [
     BrowserModule,

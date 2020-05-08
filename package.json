@@ -23,8 +23,11 @@
     "@angular/platform-browser-dynamic": "~9.1.4",
     "@angular/router": "~9.1.4",
     "@aws-amplify/ui-angular": "^0.2.4",
+    "@nivo/calendar": "^0.61.1",
     "aws-amplify": "^3.0.10",
     "aws-amplify-angular": "^5.0.10",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "rxjs": "~6.5.5",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
@@ -48,6 +51,8 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
-    "typescript": "~3.8.3"
+    "typescript": "~3.8.3",
+    "@types/react": "^16.9.17",
+    "@types/react-dom": "^16.9.4"
   }
 }
