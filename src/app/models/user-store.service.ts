@@ -92,6 +92,7 @@ export class UserStoreService {
     let existingJourney = this.getJourney(journeyID);
     existingJourney = udpatedJourney;
     console.log("journey updated:", existingJourney);
+    console.log(this.journeys);
   }
 
   updateExistingApplication(journeyId: number, updatedApplication: Application) {
@@ -100,6 +101,7 @@ export class UserStoreService {
     let existingApplication = this.getApplication(journeyId, appID);
     existingApplication = updatedApplication;
     console.log("application updated: ", existingApplication);
+    console.log(this.journeys);
   }
 
   private _getNewJourneyID(): number {

@@ -12,7 +12,7 @@ export class RectItemComponent implements OnChanges {
   @Input() width = 250;
   @Input() height = 370;
   @Output() editButtonPressed = new EventEmitter<object>();
-  private _linkedJourney: Journey = new Journey();
+  private _linkedJourney: Journey;
   // @Input() linkedJourney: Journey = null;
 
   displayName = 'Title';
@@ -26,7 +26,8 @@ export class RectItemComponent implements OnChanges {
   get linkedJourney() { return this._linkedJourney; }
 
   ngOnChanges() {
-    if (this.linkedJourney) {
+    if (this._linkedJourney) {
+      console.log("UPdatED");
       this.displayName = this._linkedJourney.title;
       this.displayDate += `${this._linkedJourney.startDate[0]}/${this._linkedJourney.startDate[1]}/${this._linkedJourney.startDate[2]}`;
       this.displayStatus += this.linkedJourney.active ? 'Active' : 'Inactive';

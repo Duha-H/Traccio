@@ -1,5 +1,5 @@
 <div class="view-container journey-container">
-	<mat-drawer-container>
+	<mat-drawer-container hasBackdrop="unset" >
 		<div class="journey-grid">
 			<app-rect-item 
 				[type]="'add'"
@@ -8,10 +8,7 @@
 			</app-rect-item>
 			<app-rect-item 
 				class="journey-item"
-				*ngFor="
-					let journey of userStore.journeys.reverse();
-					let i = index;
-				"
+				*ngFor="let journey of userStore.journeys.reverse();"
 				[linkedJourney]="journey"
 				(click)="loadJourney(journey.id)"
 				(editButtonPressed)="onEditButtonPressed($event)"
@@ -23,8 +20,9 @@
 			position="end"
 			[(opened)]="displayDrawer"
 			[fixedInViewport]="true"
+			mode="side"
 		>
-			<journey-input (dataLogged)="onDataLogged($event)"></journey-input>
+			<journey-input (newDataLogged)="onNewDataLogged($event)" (updateDataLogged)="onUpdateDataLogged($event)" [journey]="currJourney"></journey-input>
 		</mat-drawer>
 	</mat-drawer-container>
 </div>

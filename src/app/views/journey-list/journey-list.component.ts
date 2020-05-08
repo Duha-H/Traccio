@@ -15,16 +15,21 @@ export class JourneyListComponent implements OnInit, OnChanges {
   currDate: number[] = [];
   currStatus = false;
   currJourney: Journey = null;
-  id = 0;
+  // id = 0;
+  journeys: Journey[];
+  editButton = false;
+  date = new Date();
 
   constructor(public userStore: UserStoreService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     console.log("initializing list");
+    this.journeys = this.userStore.journeys;
   }
 
   ngOnChanges() {
     console.log("back to list");
+    this.journeys = this.userStore.journeys;
   }
 
   displayJourneyDrawer() {
@@ -33,17 +38,38 @@ export class JourneyListComponent implements OnInit, OnChanges {
 
   onEditButtonPressed(selectedJourney: Journey) {
     this.displayDrawer = true;
-    console.log(selectedJourney);
+    this.editButton = true;
+    this.currJourney = selectedJourney;
+    // this.currTitle = selectedJourney.title;
+    // this.currStatus = selectedJourney.active;
+    // this.date.setDate(selectedJourney.startDate[0]);
+    // this.date.setMonth(selectedJourney.startDate[1]);
+    // this.date.setFullYear(selectedJourney.startDate[2]);
   }
 
-  onDataLogged(journeyData: { [key: string]: any }) {
+  onNewDataLogged(journeyData: { [key: string]: any }) {
     // console.log(journeyData);
-    this.userStore.addNewJourney(journeyData);
+    // this.userStore.addNewJourney(journeyData);
     this.displayDrawer = false;
+    this.journeys = this.userStore.journeys;
+  }
+
+  onUpdateDataLogged(updatedJourney: Journey) {
+    // this.userStore.updateExistingJourney(updatedJourney);
+    // this.journeys = this.userStore.journeys;
+    this.displayDrawer = false;
+    console.log(this.journeys);
+    this.journeys = this.userStore.journeys;
   }
 
   loadJourney(id: number) {
-    this.router.navigate(['/journeys', id]);
+    if (!this.editButton) {
+      this.router.navigate(['/journeys', id]);
+    } else {
+      console.log('edit button was pressed');
+      this.editButton = false;
+      this.userStore.updateExistingJourney(this.currJourney);
+    }
   }
 
 }
