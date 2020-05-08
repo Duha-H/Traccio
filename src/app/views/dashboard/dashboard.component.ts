@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserStoreService } from 'src/app/models/user-store.service';
-import { ResponsiveCalendar } from '@nivo/calendar';
-import { data } from './data';
-import * as React from 'react';
+import { data } from '../../models/data';
 
 
 @Component({
