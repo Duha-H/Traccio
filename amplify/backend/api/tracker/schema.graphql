@@ -1,0 +1,27 @@
+type UserEntry @model {
+  id: ID!
+  firstName: String
+  lastName: String
+  journeys: [Journey] @connection(name: "UserJourneys")
+}
+
+type Journey @model {
+  id: ID!
+  title: String!
+  startDate: String!
+  endDate: String
+  active: Boolean!
+  userid: UserEntry @connection(name: "UserJourneys")
+  applications: [Application] @connection(name: "JourneyApps")
+}
+
+type Application @model {
+  id: ID!
+  company: String!
+  title: String!
+  date: String!
+  status: String
+  source: String
+  notes: String
+  journeyid: Journey @connection(name: "JourneyApps")
+}

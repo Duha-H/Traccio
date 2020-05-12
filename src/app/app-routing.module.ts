@@ -14,7 +14,9 @@ import { JourneyViewComponent } from "./views/journey-view/journey-view.componen
 import { JourneyListComponent } from "./views/journey-list/journey-list.component";
 
 const routes: Routes = [
-  { path: "", component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: "", redirectTo: "/home", pathMatch: "full" },
+  { path: "home", component: DashboardComponent, canActivate: [AuthGuard] },
+  // { path: "", component: SearchComponent },
   { path: "signin", component: SignInComponent },
   { path: "signup", component: SignUpComponent },
   { path: "confirmsignup", component: ConfirmSignupComponent },
@@ -26,10 +28,11 @@ const routes: Routes = [
       { path: "", component: JourneyListComponent },
       { path: ":id", component: JourneyViewComponent },
     ],
+    canActivate: [AuthGuard]
   },
   // { path: 'applications', component: JourneyViewComponent },
-  { path: "search", component: SearchComponent },
-  { path: "settings", component: SettingsComponent },
+  { path: "search", component: SearchComponent, canActivate: [AuthGuard] },
+  { path: "settings", component: SettingsComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

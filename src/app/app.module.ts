@@ -3,6 +3,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CommonModule } from '@angular/common';
 
 import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
 
@@ -17,6 +18,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { JourneysComponent } from './views/journeys/journeys.component';
@@ -54,6 +56,7 @@ import { ResponsiveCalendarComponent } from './components/responsive-calendar/re
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     // AmplifyUIAngularModule,
     AmplifyAngularModule,
@@ -69,6 +72,7 @@ import { ResponsiveCalendarComponent } from './components/responsive-calendar/re
     MatMenuModule,
     MatSelectModule,
     MatInputModule,
+    MatTabsModule,
   ],
   providers: [
     AmplifyService,

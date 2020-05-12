@@ -1,0 +1,244 @@
+# this is an auto generated file. This will be overwritten
+mutation CreateUserEntry(
+  $input: CreateUserEntryInput!
+  $condition: ModelUserEntryConditionInput
+) {
+  createUserEntry(input: $input, condition: $condition) {
+    id
+    firstName
+    lastName
+    journeys {
+      items {
+        id
+        title
+        startDate
+        endDate
+        active
+      }
+      nextToken
+    }
+  }
+}
+mutation UpdateUserEntry(
+  $input: UpdateUserEntryInput!
+  $condition: ModelUserEntryConditionInput
+) {
+  updateUserEntry(input: $input, condition: $condition) {
+    id
+    firstName
+    lastName
+    journeys {
+      items {
+        id
+        title
+        startDate
+        endDate
+        active
+      }
+      nextToken
+    }
+  }
+}
+mutation DeleteUserEntry(
+  $input: DeleteUserEntryInput!
+  $condition: ModelUserEntryConditionInput
+) {
+  deleteUserEntry(input: $input, condition: $condition) {
+    id
+    firstName
+    lastName
+    journeys {
+      items {
+        id
+        title
+        startDate
+        endDate
+        active
+      }
+      nextToken
+    }
+  }
+}
+mutation CreateJourney(
+  $input: CreateJourneyInput!
+  $condition: ModelJourneyConditionInput
+) {
+  createJourney(input: $input, condition: $condition) {
+    id
+    title
+    startDate
+    endDate
+    active
+    userid {
+      id
+      firstName
+      lastName
+      journeys {
+        nextToken
+      }
+    }
+    applications {
+      items {
+        id
+        company
+        title
+        date
+        status
+        source
+        notes
+      }
+      nextToken
+    }
+  }
+}
+mutation UpdateJourney(
+  $input: UpdateJourneyInput!
+  $condition: ModelJourneyConditionInput
+) {
+  updateJourney(input: $input, condition: $condition) {
+    id
+    title
+    startDate
+    endDate
+    active
+    userid {
+      id
+      firstName
+      lastName
+      journeys {
+        nextToken
+      }
+    }
+    applications {
+      items {
+        id
+        company
+        title
+        date
+        status
+        source
+        notes
+      }
+      nextToken
+    }
+  }
+}
+mutation DeleteJourney(
+  $input: DeleteJourneyInput!
+  $condition: ModelJourneyConditionInput
+) {
+  deleteJourney(input: $input, condition: $condition) {
+    id
+    title
+    startDate
+    endDate
+    active
+    userid {
+      id
+      firstName
+      lastName
+      journeys {
+        nextToken
+      }
+    }
+    applications {
+      items {
+        id
+        company
+        title
+        date
+        status
+        source
+        notes
+      }
+      nextToken
+    }
+  }
+}
+mutation CreateApplication(
+  $input: CreateApplicationInput!
+  $condition: ModelApplicationConditionInput
+) {
+  createApplication(input: $input, condition: $condition) {
+    id
+    company
+    title
+    date
+    status
+    source
+    notes
+    journeyid {
+      id
+      title
+      startDate
+      endDate
+      active
+      userid {
+        id
+        firstName
+        lastName
+      }
+      applications {
+        nextToken
+      }
+    }
+  }
+}
+mutation UpdateApplication(
+  $input: UpdateApplicationInput!
+  $condition: ModelApplicationConditionInput
+) {
+  updateApplication(input: $input, condition: $condition) {
+    id
+    company
+    title
+    date
+    status
+    source
+    notes
+    journeyid {
+      id
+      title
+      startDate
+      endDate
+      active
+      userid {
+        id
+        firstName
+        lastName
+      }
+      applications {
+        nextToken
+      }
+    }
+  }
+}
+mutation DeleteApplication(
+  $input: DeleteApplicationInput!
+  $condition: ModelApplicationConditionInput
+) {
+  deleteApplication(input: $input, condition: $condition) {
+    id
+    company
+    title
+    date
+    status
+    source
+    notes
+    journeyid {
+      id
+      title
+      startDate
+      endDate
+      active
+      userid {
+        id
+        firstName
+        lastName
+      }
+      applications {
+        nextToken
+      }
+    }
+  }
+}

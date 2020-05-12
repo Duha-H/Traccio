@@ -25,7 +25,10 @@ export class UserStoreService {
     id: 1,
     apps: mApps.MOCK_APPS_1,
   });
-  journeys: Journey[] = [this.testJourney1, this.testJourney2];
+  journeys: {[key: number]: Journey} = {
+    0: this.testJourney1,
+    1: this.testJourney2,
+  };
   dataUpdated = false;
 
   constructor() { }
@@ -39,6 +42,18 @@ export class UserStoreService {
     this.user.firstName = firstName;
     this.user.lastName = lastName;
     this.user.userid = id;
+  }
+
+  getUserEntryInput() {
+    // use only when a user is first initialized
+    const input = this.user.getGraphQLInput();
+    const journeys = Object.values(this.journeys);
+    if (journeys.length !== 0) {
+      input['journeys'] = journeys.map(journey => journey.getGraphQLInput());
+      console.log(input.journeys);
+    }
+    console.log(input);
+    return input;
   }
 
   fetchData() {
@@ -59,7 +74,8 @@ export class UserStoreService {
 
   getJourney(id: number): Journey {
     // tslint:disable-next-line: radix
-    return this.journeys.find(element => element.id === id);
+    // return this.journeys.find(element => element.id === id);
+    return this.journeys[id];
   }
 
   getApplication(journeyId: number, appId: number): Application {
@@ -72,7 +88,8 @@ export class UserStoreService {
     journeyData.id = journeyID;
     const newJourney = new Journey(journeyData);
     // update current state
-    this.journeys.push(newJourney);
+    // this.journeys.push(newJourney);
+    this.journeys[journeyID] = newJourney;
     this.dataUpdated = true;
     console.log("journey added:", newJourney);
   }
@@ -105,9 +122,9 @@ export class UserStoreService {
   }
 
   private _getNewJourneyID(): number {
-    let maxID = this.journeys.length;
-    this.journeys.forEach((element) => {
-      if (element.id >= maxID) { maxID = element.id + 1; }
+    let maxID = 0;
+    Object.keys(this.journeys).forEach((id) => {
+      if (parseInt(id) >= maxID) { maxID = parseInt(id) + 1; }
     });
     return maxID;
   }

@@ -8,7 +8,7 @@
 			</app-rect-item>
 			<app-rect-item 
 				class="journey-item"
-				*ngFor="let journey of userStore.journeys.reverse();"
+				*ngFor="let journey of journeys.reverse();"
 				[linkedJourney]="journey"
 				(click)="loadJourney(journey.id)"
 				(editButtonPressed)="onEditButtonPressed($event)"

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
 import { AmplifyService } from "aws-amplify-angular";
 import { UserStoreService } from '../models/user-store.service';
+import { Auth } from '@aws-amplify/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -15,18 +16,18 @@ export class AuthGuardService implements CanActivate {
     this.amplifyService = amplifyService;
   }
 
-  canActivate(): boolean {
-    this.amplifyService.authStateChange$.subscribe((authState) => {
-      if (authState.state !== "signedIn") {
+  canActivate(): Promise<boolean> {
+    return new Promise((res) => {
+      Auth.currentAuthenticatedUser()
+      .then((user) => {
+        // this.router.navigate(['']);
+        return res(true);
+      })
+      .catch((error) => {
+        console.log("Error:", error);
         this.router.navigate(['signin']);
-        return false;
-      }
+        return res(false);
+      });
     });
-    // if (this.userStore.user === undefined) {
-    //     this.router.navigate(['']);
-    //     return false;
-    // }
-    console.log("authed!");
-    return true;
   }
 }

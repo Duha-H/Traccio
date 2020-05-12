@@ -20,4 +20,13 @@ export class User {
 
 	get userid() { return this._userid; }
 	set userid(id: string) { this._userid = id; }
+
+	getGraphQLInput(): { [key: string]: any } {
+		const input = {
+			id: this._userid,
+			firstName: this._firstName,
+			lastName: this._lastName
+		}
+		return input;
+	}
 }

@@ -19,15 +19,14 @@ export class AppComponent implements OnInit {
     private userStore: UserStoreService,
     public router: Router) {
     this.router = router;
-    this.amplifyService = amplifyService;
     this.amplifyService.authStateChange$.subscribe((authState) => {
       this.signedIn = authState.state === "signedIn";
       console.log("state changed");
       if (!this.signedIn) {
         this.user = null;
+        console.log("here");
       } else {
         this.user = authState.user;
-        this.userStore = userStore;
         // set user attributes and navigate to dashboard
         this.userStore.setUser(
           this.user.attributes.given_name,
@@ -35,6 +34,7 @@ export class AppComponent implements OnInit {
           this.user.attributes.sub
         );
         // this.router.navigate(['']);
+        console.log("or here");
       }
     });
 

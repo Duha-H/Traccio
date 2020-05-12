@@ -10,10 +10,10 @@ import { ReactWrapper } from '../react-wrapper.component';
 
 interface CalendarProps {
   data: any;
-  from: string;
-  to: string;
+  from: string | Date;
+  to: string | Date;
   emptyColor: string;
-  colors: any;
+  colors: string[];
   margin: any;
   yearSpacing: any;
   monthBorderColor: string;
@@ -32,7 +32,7 @@ export class ResponsiveCalendarComponent extends ReactWrapper {
   @Input() from: string;
   @Input() to: string;
   @Input() emptyColor: string;
-  @Input() colors: any;
+  @Input() colors: string[];
   @Input() margin: any;
   @Input() yearSpacing: any;
   @Input() monthBorderColor: string;

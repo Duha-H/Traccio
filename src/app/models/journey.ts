@@ -58,5 +58,23 @@ export class Journey {
 		// update database
 	}
 
+	getGraphQLInput() {
+		// format null-able values
+		const endDateFormatted = this._endDate.length === 0
+			? ""
+			: `${this._endDate[2]}-${this._endDate[1]}-${this._endDate[0]}`;
+		const applicationsFormatted = this._applications.map(app => app.getGraphQLInput());
+
+		const input = {
+			id: this._id,
+			title: this._title,
+			startDate: `${this._startDate[2]}-${this._startDate[1]}-${this._startDate[0]}`, // "YYYY-MM-DD"
+			endDate: endDateFormatted,
+			active: this._active,
+			applications: applicationsFormatted
+		};
+		return input;
+	}
+
 
 }

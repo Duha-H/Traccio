@@ -5,12 +5,22 @@ import { Injectable } from '@angular/core';
 })
 export class AuthStoreService {
 
-  userEmail = '';
+  email = '';
+  id = '';
+  firstName = '';
+  lastName = '';
 
   constructor() { }
 
   setEmail(email: string) {
-    this.userEmail = email;
-    console.log(this.userEmail);
+    this.email = email;
+    console.log(this.email);
+  }
+
+  setUserDetails(firstName: string, lastName: string, email: string, id: string) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
+    this.id = id;
   }
 }

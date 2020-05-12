@@ -1,0 +1,217 @@
+# this is an auto generated file. This will be overwritten
+subscription OnCreateUserEntry {
+  onCreateUserEntry {
+    id
+    firstName
+    lastName
+    journeys {
+      items {
+        id
+        title
+        startDate
+        endDate
+        active
+      }
+      nextToken
+    }
+  }
+}
+subscription OnUpdateUserEntry {
+  onUpdateUserEntry {
+    id
+    firstName
+    lastName
+    journeys {
+      items {
+        id
+        title
+        startDate
+        endDate
+        active
+      }
+      nextToken
+    }
+  }
+}
+subscription OnDeleteUserEntry {
+  onDeleteUserEntry {
+    id
+    firstName
+    lastName
+    journeys {
+      items {
+        id
+        title
+        startDate
+        endDate
+        active
+      }
+      nextToken
+    }
+  }
+}
+subscription OnCreateJourney {
+  onCreateJourney {
+    id
+    title
+    startDate
+    endDate
+    active
+    userid {
+      id
+      firstName
+      lastName
+      journeys {
+        nextToken
+      }
+    }
+    applications {
+      items {
+        id
+        company
+        title
+        date
+        status
+        source
+        notes
+      }
+      nextToken
+    }
+  }
+}
+subscription OnUpdateJourney {
+  onUpdateJourney {
+    id
+    title
+    startDate
+    endDate
+    active
+    userid {
+      id
+      firstName
+      lastName
+      journeys {
+        nextToken
+      }
+    }
+    applications {
+      items {
+        id
+        company
+        title
+        date
+        status
+        source
+        notes
+      }
+      nextToken
+    }
+  }
+}
+subscription OnDeleteJourney {
+  onDeleteJourney {
+    id
+    title
+    startDate
+    endDate
+    active
+    userid {
+      id
+      firstName
+      lastName
+      journeys {
+        nextToken
+      }
+    }
+    applications {
+      items {
+        id
+        company
+        title
+        date
+        status
+        source
+        notes
+      }
+      nextToken
+    }
+  }
+}
+subscription OnCreateApplication {
+  onCreateApplication {
+    id
+    company
+    title
+    date
+    status
+    source
+    notes
+    journeyid {
+      id
+      title
+      startDate
+      endDate
+      active
+      userid {
+        id
+        firstName
+        lastName
+      }
+      applications {
+        nextToken
+      }
+    }
+  }
+}
+subscription OnUpdateApplication {
+  onUpdateApplication {
+    id
+    company
+    title
+    date
+    status
+    source
+    notes
+    journeyid {
+      id
+      title
+      startDate
+      endDate
+      active
+      userid {
+        id
+        firstName
+        lastName
+      }
+      applications {
+        nextToken
+      }
+    }
+  }
+}
+subscription OnDeleteApplication {
+  onDeleteApplication {
+    id
+    company
+    title
+    date
+    status
+    source
+    notes
+    journeyid {
+      id
+      title
+      startDate
+      endDate
+      active
+      userid {
+        id
+        firstName
+        lastName
+      }
+      applications {
+        nextToken
+      }
+    }
+  }
+}

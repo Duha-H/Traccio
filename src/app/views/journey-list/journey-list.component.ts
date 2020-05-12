@@ -24,12 +24,13 @@ export class JourneyListComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     console.log("initializing list");
-    this.journeys = this.userStore.journeys;
+    this.journeys = Object.values(this.userStore.journeys);
+    console.log("journeys:", this.journeys);
   }
 
   ngOnChanges() {
     console.log("back to list");
-    this.journeys = this.userStore.journeys;
+    this.journeys = Object.values(this.userStore.journeys);
   }
 
   displayJourneyDrawer() {
@@ -51,7 +52,7 @@ export class JourneyListComponent implements OnInit, OnChanges {
     // console.log(journeyData);
     // this.userStore.addNewJourney(journeyData);
     this.displayDrawer = false;
-    this.journeys = this.userStore.journeys;
+    this.journeys = Object.values(this.userStore.journeys);
   }
 
   onUpdateDataLogged(updatedJourney: Journey) {
@@ -59,7 +60,7 @@ export class JourneyListComponent implements OnInit, OnChanges {
     // this.journeys = this.userStore.journeys;
     this.displayDrawer = false;
     console.log(this.journeys);
-    this.journeys = this.userStore.journeys;
+    this.journeys = Object.values(this.userStore.journeys);
   }
 
   loadJourney(id: number) {

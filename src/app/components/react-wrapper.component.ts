@@ -27,6 +27,7 @@ export class ReactWrapper implements OnInit, OnDestroy, OnChanges, AfterViewInit
   }
 
   ngAfterViewInit() {
+    // this.rootDomID = uuid.v1();
     this.render();
   }
 

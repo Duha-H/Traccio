@@ -44,8 +44,12 @@ div.view-container {
 	background-color: rgba(0, 0, 0, 0.05);
 }
 
-app-journeys {
+app-journeys, app-dashboard {
     width: 100%;
+}
+
+app-dashboard {
+    text-align: center;
 }
 
 app-journey-view {

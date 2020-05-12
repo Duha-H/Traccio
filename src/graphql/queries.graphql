@@ -1,0 +1,139 @@
+# this is an auto generated file. This will be overwritten
+query GetUserEntry($id: ID!) {
+  getUserEntry(id: $id) {
+    id
+    firstName
+    lastName
+    journeys {
+      items {
+        id
+        title
+        startDate
+        endDate
+        active
+      }
+      nextToken
+    }
+  }
+}
+query ListUserEntrys(
+  $filter: ModelUserEntryFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listUserEntrys(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      firstName
+      lastName
+      journeys {
+        nextToken
+      }
+    }
+    nextToken
+  }
+}
+query GetJourney($id: ID!) {
+  getJourney(id: $id) {
+    id
+    title
+    startDate
+    endDate
+    active
+    userid {
+      id
+      firstName
+      lastName
+      journeys {
+        nextToken
+      }
+    }
+    applications {
+      items {
+        id
+        company
+        title
+        date
+        status
+        source
+        notes
+      }
+      nextToken
+    }
+  }
+}
+query ListJourneys(
+  $filter: ModelJourneyFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listJourneys(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      title
+      startDate
+      endDate
+      active
+      userid {
+        id
+        firstName
+        lastName
+      }
+      applications {
+        nextToken
+      }
+    }
+    nextToken
+  }
+}
+query GetApplication($id: ID!) {
+  getApplication(id: $id) {
+    id
+    company
+    title
+    date
+    status
+    source
+    notes
+    journeyid {
+      id
+      title
+      startDate
+      endDate
+      active
+      userid {
+        id
+        firstName
+        lastName
+      }
+      applications {
+        nextToken
+      }
+    }
+  }
+}
+query ListApplications(
+  $filter: ModelApplicationFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listApplications(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      company
+      title
+      date
+      status
+      source
+      notes
+      journeyid {
+        id
+        title
+        startDate
+        endDate
+        active
+      }
+    }
+    nextToken
+  }
+}

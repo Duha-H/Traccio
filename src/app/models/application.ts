@@ -43,4 +43,16 @@ export class Application {
 	get notes() { return this._notes; }
 	set notes(notes: string) { this._notes = notes; }
 
+	getGraphQLInput() {
+		const input = {
+			id: this._id,
+			company: this._companyName,
+			title: this._positionTitle,
+			date: `${this._appDate[2]}-${this._appDate[1]}-${this._appDate[0]}`, // "YYYY-MM-DD"
+			status: this._status,
+			source: this._source,
+			notes: this._notes
+		}
+		return input;
+	}
 }
