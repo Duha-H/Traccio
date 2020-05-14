@@ -14,7 +14,7 @@ export class JourneyViewComponent implements OnInit {
 
   @ViewChild('sidenav', {static: false}) sidenav: MatSidenav;
 
-  journey: Journey;
+  journey: Journey = new Journey();
   applications: Application[];
   startDate: string;
   endDate: string;
@@ -29,13 +29,17 @@ export class JourneyViewComponent implements OnInit {
     console.log("view initialized");
     let id;
     this.route.params.subscribe(params => {
-      id = params["id"];
-      return params["id"];
+      id = params.id;
+      return params.id;
     });
     // const id = this.route.snapshot.paramMap.get('id');
-    this.journey = this.userStore.getJourney(+id);
+    try {
+      this.journey = this.userStore.getJourney(id);
+      console.log('loaded journey', this.journey);
+    } catch (error) {
+      console.log('No journey loaded.');
+    }
     this.setJourneyDetails();
-    console.log('loaded journey', this.journey);
   }
 
   setJourneyDetails() {

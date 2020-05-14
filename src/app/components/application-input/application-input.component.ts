@@ -15,7 +15,7 @@ export class ApplicationInputComponent implements OnChanges {
   // @Input() mode = 'add'; // modes can be either 'add' or 'edit'
   @Input() sidenav: MatSidenav;
   @Input() app: Application;
-  @Input() journeyId: number;
+  @Input() journeyId: string;
   @Output() dataLogged = new EventEmitter<object>();
 
   STATUSES = Object.values(STATUS);

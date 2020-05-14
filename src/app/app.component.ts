@@ -24,24 +24,28 @@ export class AppComponent implements OnInit {
       console.log("state changed");
       if (!this.signedIn) {
         this.user = null;
-        console.log("here");
       } else {
         this.user = authState.user;
+        // this.router.navigate(['']);
         // set user attributes and navigate to dashboard
         this.userStore.setUser(
           this.user.attributes.given_name,
           this.user.attributes.family_name,
           this.user.attributes.sub
         );
-        // this.router.navigate(['']);
-        console.log("or here");
+        this.userStore.fetchData();
+        console.log("App init: user authenticated and data fetched");
       }
     });
 
   }
 
-  ngOnInit() {
-    console.log("app init!");
+  async ngOnInit() {
+    try {
+      
+    } catch (error) {
+      console.log("App init: user not initialized:", error);
+    }
   }
 
   ngDoBootstrap() { }

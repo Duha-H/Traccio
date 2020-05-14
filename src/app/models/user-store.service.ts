@@ -3,6 +3,7 @@ import { User } from './user';
 import { Journey } from './journey';
 import * as mApps from './mock-applications';
 import { Application } from './application';
+import { UserStoreControllerService } from '../controllers/user-store-controller.service';
 
 @Injectable({
   providedIn: 'root'
@@ -25,13 +26,13 @@ export class UserStoreService {
     id: 1,
     apps: mApps.MOCK_APPS_1,
   });
-  journeys: {[key: number]: Journey} = {
-    0: this.testJourney1,
-    1: this.testJourney2,
+  journeys: {[key: string]: Journey} = {
+    // 0: this.testJourney1,
+    // 1: this.testJourney2,
   };
   dataUpdated = false;
 
-  constructor() { }
+  constructor(private controller: UserStoreControllerService) { }
 
   setUser(
     firstName: string,
@@ -56,11 +57,14 @@ export class UserStoreService {
     return input;
   }
 
-  fetchData() {
+  async fetchData() {
     // called on app init
     // performs API calls to fetch user data
-    console.log(this.user);
-    console.log("fetching data");
+    await this.controller.fetchUserJourneys(this.user.userid)
+      .then(value => {
+        this.journeys = value;
+      });
+    console.log("Fetched journeys: ", this.journeys);
   }
 
   updateData() {
@@ -69,16 +73,17 @@ export class UserStoreService {
 
   clearData() {
     this.user = undefined;
-    this.journeys = [this.testJourney1, this.testJourney2]; // TODO: temporary, remove later
+    // this.journeys = [this.testJourney1, this.testJourney2]; // TODO: temporary, remove later
+    this.journeys = {}; // TODO: temporary, remove later
   }
 
-  getJourney(id: number): Journey {
+  getJourney(id: string): Journey {
     // tslint:disable-next-line: radix
     // return this.journeys.find(element => element.id === id);
     return this.journeys[id];
   }
 
-  getApplication(journeyId: number, appId: number): Application {
+  getApplication(journeyId: string, appId: number): Application {
     // tslint:disable-next-line: radix
     return this.getJourney(journeyId).applications.find(element => element.id === appId);
   }
@@ -94,7 +99,7 @@ export class UserStoreService {
     console.log("journey added:", newJourney);
   }
 
-  addNewApplication(journeyId: number, appData: { [key: string]: any }) {
+  addNewApplication(journeyId: string, appData: { [key: string]: any }) {
     const journey = this.getJourney(journeyId);
     const appID = this._getNewAppID(journeyId);
     appData.id = appID;
@@ -112,7 +117,7 @@ export class UserStoreService {
     console.log(this.journeys);
   }
 
-  updateExistingApplication(journeyId: number, updatedApplication: Application) {
+  updateExistingApplication(journeyId: string, updatedApplication: Application) {
     // const updatedApplication = new Application(appData);
     const appID = updatedApplication.id;
     let existingApplication = this.getApplication(journeyId, appID);
@@ -129,7 +134,7 @@ export class UserStoreService {
     return maxID;
   }
 
-  private _getNewAppID(journeyId: number): number {
+  private _getNewAppID(journeyId: string): number {
     const apps = this.getJourney(journeyId).applications;
     let maxID = apps.length;
     apps.forEach((element) => {
