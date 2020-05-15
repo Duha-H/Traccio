@@ -1,15 +1,20 @@
-import { Component, OnChanges, Output, EventEmitter, Input } from '@angular/core';
-import { MatDatepickerInputEvent } from '@angular/material/datepicker';
-import { Journey } from 'src/app/models/journey';
-import { UserStoreService } from 'src/app/models/user-store.service';
+import {
+  Component,
+  OnChanges,
+  Output,
+  EventEmitter,
+  Input,
+} from "@angular/core";
+import { MatDatepickerInputEvent } from "@angular/material/datepicker";
+import { Journey } from "src/app/models/journey";
+import { UserStoreService } from "src/app/models/user-store.service";
 
 @Component({
-  selector: 'journey-input',
-  templateUrl: './journey-input.component.html',
-  styleUrls: ['./journey-input.component.css']
+  selector: "journey-input",
+  templateUrl: "./journey-input.component.html",
+  styleUrls: ["./journey-input.component.css"],
 })
 export class JourneyInputComponent implements OnChanges {
-
   @Input() journey: Journey;
   @Output() newDataLogged = new EventEmitter<object>();
   @Output() updateDataLogged = new EventEmitter<object>();
@@ -18,10 +23,6 @@ export class JourneyInputComponent implements OnChanges {
   maxDate: Date;
   today = new Date();
   title = '';
-  // day = this.today.getDate();
-  // month = this.today.getMonth() + 1;
-  // year = this.today.getFullYear();
-  // displayDate = new Date(`${this.month + 1}/${this.day}/${this.year}`);
   startDate = new Date();
   endDate = new Date();
   active = true;
@@ -34,76 +35,59 @@ export class JourneyInputComponent implements OnChanges {
 
   ngOnChanges() {
     if (this.journey) {
-      // this.day = this.journey.startDate[0];
-      // this.month = this.journey.startDate[1];
-      // this.year = this.journey.startDate[2];
       console.log("new journey", this.journey);
       this.active = this.journey.active;
       this.title = this.journey.title;
-      this.startDate = new Date(`${this.journey.startDate[1]}/${this.journey.startDate[0]}/${this.journey.startDate[2]}`);
-      this.endDate = this.journey.endDate.length === 0
-        ? new Date()
-        : new Date(`${this.journey.endDate[1]}/${this.journey.endDate[0]}/${this.journey.endDate[2]}`);
+      this.startDate = new Date(
+        `${this.journey.startDate[1]}/${this.journey.startDate[0]}/${this.journey.startDate[2]}`
+      );
+      this.endDate =
+        this.journey.endDate.length === 0
+          ? new Date()
+          : new Date(
+              `${this.journey.endDate[1]}/${this.journey.endDate[0]}/${this.journey.endDate[2]}`
+            );
     }
-    // this.displayDate = new Date(`${this.month}/${this.day}/${this.year}`);
   }
 
   onDataLogged() {
-    // console.log(this.title, this.day, this.month, this.year);
     if (this.title === "") {
       console.log("error: no title specifed");
     } else {
-      if (this.journey) {
-        this.journey.title = this.title;
-        this.journey.startDate = [
-          this.startDate.getDate(),
-          this.startDate.getMonth() + 1,
-          this.startDate.getFullYear()];
-        this.journey.active = this.active;
-        if (!this.active) {
-          this.journey.endDate = [
-            this.endDate.getDate(),
-            this.endDate.getMonth() + 1,
-            this.endDate.getFullYear(),
-          ];
-        } else {
-          this.journey.endDate = [];
-        }
-        this.userStore.updateExistingJourney(this.journey);
-        this.updateDataLogged.emit(this.journey);
-      } else {
-        const newJourney = {
-          title: this.title,
-          startDate: [
-            this.startDate.getDate(),
-            this.startDate.getMonth() + 1,
-            this.startDate.getFullYear()],
-          active: this.active,
-          endDate: [],
-        };
-        if (!newJourney.active) {
-          newJourney.endDate = [
-            this.endDate.getDate(),
-            this.endDate.getMonth() + 1,
-            this.endDate.getFullYear(),
-          ];
-        }
-        this.userStore.addNewJourney(newJourney);
-        this.newDataLogged.emit(newJourney); // HERE
+      const newJourney: { [key: string]: any } = {};
+      if (this.journey) { // if updating existing journey, copy over ID and apps
+        newJourney.id = this.journey.id;
+        newJourney.applications = this.journey.applications;
+        console.log("apps:", newJourney.applications);
       }
+      // copy over updated journey details from input
+      newJourney.title = this.title;
+      newJourney.startDate = [
+        this.startDate.getDate(),
+        this.startDate.getMonth() + 1,
+        this.startDate.getFullYear(),
+      ];
+      newJourney.active = this.active;
+      if (!this.active) {
+        newJourney.endDate = [
+          this.endDate.getDate(),
+          this.endDate.getMonth() + 1,
+          this.endDate.getFullYear(),
+        ];
+      } else {
+        newJourney.endDate = [];
+      }
+      this.newDataLogged.emit(newJourney);
       this.resetData();
     }
   }
 
   resetData() {
-    this.title = '';
+    this.title = "";
     this.startDate = new Date();
     this.endDate = new Date();
     this.active = true;
     this.journey = null;
-    // this.day = this.today.getDate();
-    // this.month = this.today.getMonth() + 1;
-    // this.year = this.today.getFullYear();
   }
 
   dateChange(event: MatDatepickerInputEvent<Date>) {
@@ -111,5 +95,4 @@ export class JourneyInputComponent implements OnChanges {
     // this.month = event.value.getMonth() + 1;
     // this.year = event.value.getFullYear();
   }
-
 }

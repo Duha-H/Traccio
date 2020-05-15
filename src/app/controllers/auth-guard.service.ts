@@ -12,7 +12,7 @@ export class AuthGuardService implements CanActivate {
   constructor(
     public amplifyService: AmplifyService,
     public router: Router,
-    public userStore: UserStoreService) {
+    private userStore: UserStoreService) {
     this.amplifyService = amplifyService;
   }
 

@@ -1,44 +1,35 @@
-import { Injectable } from '@angular/core';
-import { User } from './user';
-import { Journey } from './journey';
-import * as mApps from './mock-applications';
-import { Application } from './application';
-import { UserStoreControllerService } from '../controllers/user-store-controller.service';
+import { Injectable } from "@angular/core";
+import { User } from "./user";
+import { Journey } from "./journey";
+import * as mock from "./mock-journeys";
+import { Application } from "./application";
+import { UserStoreControllerService } from "../controllers/user-store-controller.service";
+import { Observable } from "rxjs/Observable";
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { map } from "rxjs/operators";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class UserStoreService {
 
   user: User;
-  testJourney1 = new Journey({
-    title: 'Test1',
-    startDate: [13, 4, 2019],
-    active: true,
-    id: 0,
-    apps: mApps.MOCK_APPS_2,
-  });
-  testJourney2 = new Journey({
-    title: 'Test2221',
-    startDate: [15, 9, 2017],
-    endDate: [20, 1, 2019],
-    active: false,
-    id: 1,
-    apps: mApps.MOCK_APPS_1,
-  });
-  journeys: {[key: string]: Journey} = {
-    // 0: this.testJourney1,
-    // 1: this.testJourney2,
-  };
+  initialJourneys: { [key: string]: Journey } = { };
   dataUpdated = false;
+
+  private _journeys: BehaviorSubject<{
+    [key: string]: Journey;
+  }> = new BehaviorSubject<{ [key: string]: Journey }>(this.initialJourneys);
+  // Not exposing _journeys observer to prevent clients
+  // of UserStoreService from directly updating values
+  // public readonly journeys: Observable<{[key: string]: Journey}> = this._journeys.asObservable();
+  public readonly journeys: Observable<Journey[]> = this._journeys.pipe(
+    map((entry) => Object.values(entry).reverse())
+  );
 
   constructor(private controller: UserStoreControllerService) { }
 
-  setUser(
-    firstName: string,
-    lastName: string,
-    id: string
-  ) {
+  setUser(firstName: string, lastName: string, id: string) {
     this.user = new User();
     this.user.firstName = firstName;
     this.user.lastName = lastName;
@@ -50,7 +41,7 @@ export class UserStoreService {
     const input = this.user.getGraphQLInput();
     const journeys = Object.values(this.journeys);
     if (journeys.length !== 0) {
-      input['journeys'] = journeys.map(journey => journey.getGraphQLInput());
+      input.journeys = journeys.map((journey) => journey.getGraphQLInput());
       console.log(input.journeys);
     }
     console.log(input);
@@ -58,13 +49,19 @@ export class UserStoreService {
   }
 
   async fetchData() {
-    // called on app init
-    // performs API calls to fetch user data
-    await this.controller.fetchUserJourneys(this.user.userid)
-      .then(value => {
-        this.journeys = value;
-      });
+    // Called on app init
+    // Performs API calls to fetch user data
+    console.log("before fetch: ", this.journeys);
+    await this.controller.fetchUserJourneys(this.user.userid).then((value) => {
+      // this.journeys = value;
+      this._journeys.next(value);
+    });
     console.log("Fetched journeys: ", this.journeys);
+  }
+
+  loadData() {
+    // Fires .next() on _journeys observable to update ("refresh") data
+    this._journeys.next(this._journeys.getValue());
   }
 
   updateData() {
@@ -73,30 +70,33 @@ export class UserStoreService {
 
   clearData() {
     this.user = undefined;
-    // this.journeys = [this.testJourney1, this.testJourney2]; // TODO: temporary, remove later
-    this.journeys = {}; // TODO: temporary, remove later
+    this._journeys.next({});
   }
 
   getJourney(id: string): Journey {
-    // tslint:disable-next-line: radix
-    // return this.journeys.find(element => element.id === id);
-    return this.journeys[id];
+    return this._journeys.getValue()[id];
   }
 
   getApplication(journeyId: string, appId: number): Application {
     // tslint:disable-next-line: radix
-    return this.getJourney(journeyId).applications.find(element => element.id === appId);
+    return this.getJourney(journeyId).applications.find(
+      (element) => element.id === appId
+    );
   }
 
   addNewJourney(journeyData: { [key: string]: any }) {
-    const journeyID = this._getNewJourneyID();
-    journeyData.id = journeyID;
+    console.log("curr id:", journeyData.id);
+    journeyData.id = journeyData.id // if ID is undefined, generate a new ID
+      ? journeyData.id
+      : this._getNewJourneyID();
     const newJourney = new Journey(journeyData);
-    // update current state
-    // this.journeys.push(newJourney);
-    this.journeys[journeyID] = newJourney;
+    // update current data
+    const updatedJourneys = this._journeys.getValue();
+    updatedJourneys[journeyData.id] = newJourney;
+    this._journeys.next(updatedJourneys);
     this.dataUpdated = true;
-    console.log("journey added:", newJourney);
+    console.log("journey added:", this.journeys);
+    // make necessary api calls
   }
 
   addNewApplication(journeyId: string, appData: { [key: string]: any }) {
@@ -109,16 +109,10 @@ export class UserStoreService {
     console.log("application added: ", newApplication);
   }
 
-  updateExistingJourney(udpatedJourney: Journey) {
-    const journeyID = udpatedJourney.id;
-    let existingJourney = this.getJourney(journeyID);
-    existingJourney = udpatedJourney;
-    console.log("journey updated:", existingJourney);
-    console.log(this.journeys);
-  }
-
-  updateExistingApplication(journeyId: string, updatedApplication: Application) {
-    // const updatedApplication = new Application(appData);
+  updateExistingApplication(
+    journeyId: string,
+    updatedApplication: Application
+  ) {
     const appID = updatedApplication.id;
     let existingApplication = this.getApplication(journeyId, appID);
     existingApplication = updatedApplication;
@@ -126,19 +120,31 @@ export class UserStoreService {
     console.log(this.journeys);
   }
 
-  private _getNewJourneyID(): number {
+  private _getNewJourneyID(): string {
     let maxID = 0;
-    Object.keys(this.journeys).forEach((id) => {
-      if (parseInt(id) >= maxID) { maxID = parseInt(id) + 1; }
+    Object.keys(this._journeys.getValue()).forEach((id) => {
+      // Note:
+      // IDs are in the format "cbsd2-nkbjkd-dn4jbks-01"
+      // where the last two digits represent the unique numerical ID of the journey
+      // and the initial string of characters is the owning-user's ID
+      // so we're extracting the digits and incrementing to generate a new ID
+      // while maintaining the user ID
+      const currval = +id.split("-").pop(); // TODO: TEST THIS
+      if (currval >= maxID) {
+        maxID = currval + 1;
+      }
     });
-    return maxID;
+    const newID = `${this.user.userid}-${maxID}`;
+    return newID;
   }
 
   private _getNewAppID(journeyId: string): number {
     const apps = this.getJourney(journeyId).applications;
     let maxID = apps.length;
     apps.forEach((element) => {
-      if (element.id >= maxID) { maxID = element.id + 1; }
+      if (element.id >= maxID) {
+        maxID = element.id + 1;
+      }
     });
     return maxID;
   }

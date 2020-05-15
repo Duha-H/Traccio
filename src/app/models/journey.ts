@@ -20,8 +20,8 @@ export class Journey {
 				? data.endDate
 				: []; // parse date string, ISO_8601 format -> milliseconds -> Date
 			this._active = data.active;
-			this._applications = data.apps
-				? data.apps // TODO: fix this
+			this._applications = data.applications
+				? data.applications
 				: [];
 		}
 	}

@@ -17,32 +17,28 @@ export class AppComponent implements OnInit {
   constructor(
     public amplifyService: AmplifyService,
     private userStore: UserStoreService,
-    public router: Router) {
-    this.router = router;
-    this.amplifyService.authStateChange$.subscribe((authState) => {
-      this.signedIn = authState.state === "signedIn";
-      console.log("state changed");
-      if (!this.signedIn) {
-        this.user = null;
-      } else {
-        this.user = authState.user;
-        // this.router.navigate(['']);
-        // set user attributes and navigate to dashboard
-        this.userStore.setUser(
-          this.user.attributes.given_name,
-          this.user.attributes.family_name,
-          this.user.attributes.sub
-        );
-        this.userStore.fetchData();
-        console.log("App init: user authenticated and data fetched");
-      }
-    });
-
-  }
+    public router: Router) {  }
 
   async ngOnInit() {
     try {
-      
+      this.amplifyService.authStateChange$.subscribe(async (authState) => {
+        this.signedIn = authState.state === "signedIn";
+        console.log("state changed");
+        if (!this.signedIn) {
+          this.user = null;
+        } else {
+          this.user = authState.user;
+          // this.router.navigate(['']);
+          // set user attributes and navigate to dashboard
+          this.userStore.setUser(
+            this.user.attributes.given_name,
+            this.user.attributes.family_name,
+            this.user.attributes.sub
+          );
+          await this.userStore.fetchData();
+          console.log("App init: user authenticated and data fetched");
+        }
+      });
     } catch (error) {
       console.log("App init: user not initialized:", error);
     }

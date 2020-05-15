@@ -32,7 +32,6 @@ export class JourneyViewComponent implements OnInit {
       id = params.id;
       return params.id;
     });
-    // const id = this.route.snapshot.paramMap.get('id');
     try {
       this.journey = this.userStore.getJourney(id);
       console.log('loaded journey', this.journey);

@@ -1,36 +1,31 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
-import { UserStoreService } from '../../models/user-store.service';
-import { Journey } from 'src/app/models/journey';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnChanges } from "@angular/core";
+import { UserStoreService } from "../../models/user-store.service";
+import { Journey } from "src/app/models/journey";
+import { Router, ActivatedRoute } from "@angular/router";
+import { Observable } from 'rxjs/Observable';
+import { map, pluck, flatMap, mergeMap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-journey-list',
-  templateUrl: './journey-list.component.html',
-  styleUrls: ['./journey-list.component.css']
+  selector: "app-journey-list",
+  templateUrl: "./journey-list.component.html",
+  styleUrls: ["./journey-list.component.css"],
 })
-export class JourneyListComponent implements OnInit, OnChanges {
+export class JourneyListComponent implements OnInit {
 
   displayDrawer = false;
-  currTitle = '';
-  currDate: number[] = [];
-  currStatus = false;
   currJourney: Journey = null;
-  // id = 0;
-  journeys: Journey[];
+  journeys: Observable<Journey[]>;
   editButton = false;
-  date = new Date();
 
-  constructor(public userStore: UserStoreService, private router: Router, private route: ActivatedRoute) { }
+  constructor(
+    public userStore: UserStoreService,
+    private router: Router,
+  ) { }
 
   ngOnInit() {
     console.log("initializing list");
-    this.journeys = Object.values(this.userStore.journeys);
-    console.log("journeys:", this.journeys);
-  }
-
-  ngOnChanges() {
-    console.log("back to list");
-    this.journeys = Object.values(this.userStore.journeys);
+    // this.journeys = this.userStore.journeys.pipe(map(entry => Object.values(entry).reverse()));
+    this.userStore.loadData();
   }
 
   displayJourneyDrawer() {
@@ -41,36 +36,21 @@ export class JourneyListComponent implements OnInit, OnChanges {
     this.displayDrawer = true;
     this.editButton = true;
     this.currJourney = selectedJourney;
-    // this.currTitle = selectedJourney.title;
-    // this.currStatus = selectedJourney.active;
-    // this.date.setDate(selectedJourney.startDate[0]);
-    // this.date.setMonth(selectedJourney.startDate[1]);
-    // this.date.setFullYear(selectedJourney.startDate[2]);
   }
 
   onNewDataLogged(journeyData: { [key: string]: any }) {
-    // console.log(journeyData);
-    // this.userStore.addNewJourney(journeyData);
+    this.userStore.addNewJourney(journeyData);
     this.displayDrawer = false;
-    this.journeys = Object.values(this.userStore.journeys);
-  }
-
-  onUpdateDataLogged(updatedJourney: Journey) {
-    // this.userStore.updateExistingJourney(updatedJourney);
-    // this.journeys = this.userStore.journeys;
-    this.displayDrawer = false;
-    console.log(this.journeys);
-    this.journeys = Object.values(this.userStore.journeys);
   }
 
   loadJourney(id: number) {
+    // Used when a click is detected on rect-item
+    // to discern whether the edit button was pressed
     if (!this.editButton) {
-      this.router.navigate(['/journeys', id]);
+      this.router.navigate(["/journeys", id]);
     } else {
-      console.log('edit button was pressed');
+      console.log("edit button was pressed");
       this.editButton = false;
-      this.userStore.updateExistingJourney(this.currJourney);
     }
   }
-
 }

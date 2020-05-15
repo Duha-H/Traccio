@@ -21,7 +21,9 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     try {
       this.name = `${this.userStore.user.firstName}`;
-      this.journeys = Object.values(this.userStore.journeys);
+      // this.journeys = Object.values(this.userStore.journeys);
+      this.userStore.journeys
+        .subscribe(journeys => this.journeys = Object.values(journeys) );
       // let res = await this.api.ListJourneys();
       // console.log(res);
       // console.log("anything");
