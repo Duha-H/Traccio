@@ -47,7 +47,7 @@
               <div class="spanning-content">
                 <span class="fixed-span" style="text-align: left;">Company: {{app.companyName}}</span>
                 <span class="fixed-span" style="text-align: center;">Application Date:
-                  {{app.appDate[0]}}/{{app.appDate[1]}}/{{app.appDate[2]}}</span>
+                  {{app.appDate.toLocaleDateString()}}</span>
                 <span class="fixed-span" style="text-align: right;">Applied via: {{app.source}}</span>
               </div>
             </div>

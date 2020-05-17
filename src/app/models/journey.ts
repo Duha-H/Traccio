@@ -67,13 +67,13 @@ export class Journey {
 		const input = {
 			id: this._id,
 			title: this._title,
-			startDate: `${this._startDate[2]}-${this._startDate[1]}-${this._startDate[0]}`, // "YYYY-MM-DD"
+			startDate: this._endDate.toISOString().split('T')[0], // "YYYY-MM-DD"
 			endDate: endDateFormatted,
 			active: this._active,
 			applications: applicationsFormatted
 		};
 		return input;
 	}
-	
+
 
 }

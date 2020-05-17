@@ -21,19 +21,19 @@ export class ApplicationInputComponent implements OnChanges {
   STATUSES = Object.values(STATUS);
   SOURCES = Object.values(APP_SOURCE);
 
-  appDetails = {
+  appDetails = { // use to fill in input fields and retrieve data
     company : '',
     title : '',
-    date : [],
+    date : new Date(),
     status : STATUS.IN_REVIEW.toString(),
     source : APP_SOURCE.JOB_BOARD.toString(),
     notes : '',
   };
 
-  startDate = new Date();
-  day = this.startDate.getDate();
-  month = this.startDate.getMonth() + 1;
-  year = this.startDate.getFullYear();
+  // startDate = new Date();
+  // day = this.startDate.getDate();
+  // month = this.startDate.getMonth() + 1;
+  // year = this.startDate.getFullYear();
 
   statuses = [
     {value: STATUS.IN_REVIEW.toString(), viewValue: STATUS.IN_REVIEW.toString()},
@@ -65,25 +65,27 @@ export class ApplicationInputComponent implements OnChanges {
       console.log("app specified");
     } else {
       this.appDetails.title = '';
-      this.appDetails.date = [this.startDate[1], this.startDate[0], this.startDate[2]];
+      this.appDetails.date = new Date();
       this.appDetails.company = '';
       this.appDetails.status = STATUS.IN_REVIEW.toString();
       this.appDetails.source = APP_SOURCE.JOB_BOARD.toString();
       this.appDetails.notes = '';
     }
-    this.startDate = this.appDetails.date.length === 0
-      ? new Date()
-      : new Date(`${this.appDetails.date[1]}/${this.appDetails.date[0]}/${this.appDetails.date[2]}`);
+    // this.startDate = this.appDetails.date
+    //   ? this.appDetails.date
+    //   : new Date();
   }
 
   onDateChange(event: MatDatepickerInputEvent<Date>) {
-    this.day = event.value.getDate();
-    this.month = event.value.getMonth() + 1;
-    this.year = event.value.getFullYear();
+    // this.day = event.value.getDate();
+    // this.month = event.value.getMonth() + 1;
+    // this.year = event.value.getFullYear();
+    // this.startDate = event.value;
+    this.appDetails.date = event.value;
   }
 
   onDataLogged() {
-    this.appDetails.date = [this.day, this.month, this.year];
+    // this.appDetails.date = this.startDate;
     if (!this.app) {
       this.userStore.addNewApplication(this.journeyId, this.appDetails);
     } else {
@@ -97,11 +99,7 @@ export class ApplicationInputComponent implements OnChanges {
     }
     // TODO: check if everything is fine here
     this.sidenav.close();
-    this.startDate = new Date();
-  }
-
-  openDatePicker() {
-    
+    // this.startDate = new Date();
   }
 
 }

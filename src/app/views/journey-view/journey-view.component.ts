@@ -28,6 +28,7 @@ export class JourneyViewComponent implements OnInit {
   ngOnInit() {
     console.log("view initialized");
     let id;
+    // extract journey ID from URL, then get journey from UserStore
     this.route.params.subscribe(params => {
       id = params.id;
       return params.id;

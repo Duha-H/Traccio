@@ -5,7 +5,7 @@ export class Application {
 	private _id = 0;
 	private _companyName = '';
 	private _positionTitle = '';
-	private _appDate: number[] = [];
+	private _appDate: Date = new Date();
 	private _status = STATUS.IN_REVIEW.toString();
 	private _source = APP_SOURCE.JOB_BOARD.toString();
 	private _notes = '';
@@ -15,7 +15,7 @@ export class Application {
 			this._id = data.id;
 			this._companyName = data.company;
 			this._positionTitle = data.title;
-			this._appDate = data.date;
+			this._appDate = new Date(data.date);
 			this._status = data.status;
 			this._source = data.source;
 			this._notes = data.notes;
@@ -31,8 +31,8 @@ export class Application {
 	get positionTitle() { return this._positionTitle; }
 	set positionTitle(name: string) { this._positionTitle = name; }
 
-	get appDate() { return this._appDate; }
-	set appDate(date: number[]) { this._appDate = date; }
+	get appDate(): Date { return this._appDate; }
+	set appDate(date: Date) { this._appDate = date; }
 
 	get status() { return this._status; }
 	set status(status: string) { this._status = status; }
@@ -48,7 +48,7 @@ export class Application {
 			id: this._id,
 			company: this._companyName,
 			title: this._positionTitle,
-			date: `${this._appDate[2]}-${this._appDate[1]}-${this._appDate[0]}`, // "YYYY-MM-DD"
+			date: this._appDate.toISOString().split('T')[0], // "YYYY-MM-DD"
 			status: this._status,
 			source: this._source,
 			notes: this._notes
