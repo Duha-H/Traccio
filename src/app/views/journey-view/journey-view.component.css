@@ -16,7 +16,12 @@ mat-drawer-content {
 }
 
 mat-drawer {
-  min-width: 400px;
+  min-width: 460px;
+  background-color: #24284d;
+}
+
+mat-icon {
+  color: var(--accent-dark);
 }
 
 .mat-drawer-inner-container {
@@ -64,7 +69,7 @@ mat-drawer {
 
 .details {
   text-align: left;
-  max-width: 800px;
+  max-width: 900px;
   margin: 25px auto;
   margin-bottom: 50px;
   padding: 0 auto;
@@ -149,5 +154,6 @@ mat-list-item {
 }
 
 .clickable-item:hover {
-  background-color: rgba(0, 0, 0, 0.05);
+  /* background-color: rgba(0, 0, 0, 0.05); */
+  background-color: var(--accent-hover-dark);
 }

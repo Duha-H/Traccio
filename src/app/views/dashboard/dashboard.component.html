@@ -7,9 +7,9 @@
 	<div *ngFor="let journey of journeys;" class="dashboard-carousel">
 		<div class="journey-details">
 			<div class="calendar-container">
-				<calendar-wrapper [data]="data" [from]="'2016-03-01'" [to]="'2016-07-12'" [emptyColor]="'#eeeeee'"
-					[colors]="[ '#61cdbb', '#97e3d5', '#e8c1a0', '#f47560' ]" [dayBorderColor]="'ffffff'" [yearSpacing]="yearSpacing"
-					[monthBorderColor]="'#ffffff'" [dayBorderWidth]="dayBorderWidth" [dayBorderColor]="'#ffffff'" [legends]="[
+				<calendar-wrapper [data]="data" [from]="'2016-03-01'" [to]="'2016-07-12'" [emptyColor]="'#21e6c214'"
+					[colors]="[ '#61cdbb', '#97e3d5', '#e8c1a0', '#f47560' ]" [yearSpacing]="yearSpacing"
+					[monthBorderColor]="'#24284d'" [dayBorderWidth]="dayBorderWidth" [dayBorderColor]="'#24284d'" [legends]="[
 						{
 							anchor: 'bottom-right',
 							direction: 'row',
@@ -18,9 +18,20 @@
 							itemWidth: 42,
 							itemHeight: 36,
 							itemsSpacing: 14,
-							itemDirection: 'right-to-left'
+							itemDirection: 'right-to-left',
+							textColor: '#f00',
+							itemTextColor: '#f00'
+						}]"
+						[theme]="{axis: {
+							textColor: '#f00'
+						},
+						textColor: '#f00',
+						background: '#f00',
+						markers: {
+							textColor: '#f00'
 						}
-				]">
+					}"
+				>
 				</calendar-wrapper>
 			</div>
 		</div>

@@ -1,6 +1,11 @@
 <div class="component-container">
   <!-- <label>Journey Title:</label> -->
-  <input type="text" [(ngModel)]="title" class="text-input" placeholder="Journey Title" />
+  <h3>Journey Details</h3>
+  <mat-form-field class="example-full-width" >
+    <mat-label>Journey Name</mat-label>
+    <input matInput placeholder="Journey 01" [(ngModel)]="title">
+  </mat-form-field>
+  <!-- <input type="text" [(ngModel)]="title" class="text-input" placeholder="Journey Title" /> -->
   <!-- <label>Start Date:</label> -->
   <!-- Start Date picker -->
   <mat-form-field>

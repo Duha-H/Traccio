@@ -29,11 +29,12 @@ export class UserStoreService {
 
   constructor(private controller: UserStoreControllerService) { }
 
-  setUser(firstName: string, lastName: string, id: string) {
+  async setUser(firstName: string, lastName: string, id: string) {
     this.user = new User();
     this.user.firstName = firstName;
     this.user.lastName = lastName;
     this.user.userid = id;
+    await this.fetchData();
   }
 
   getUserEntryInput() {
@@ -51,12 +52,16 @@ export class UserStoreService {
   async fetchData() {
     // Called on app init
     // Performs API calls to fetch user data
-    console.log("before fetch: ", this.journeys);
+    console.log("HERE:::data about to be fetched");
+    // this.journeys.subscribe(Object.values(this._journeys.getValue()).reverse());
+    let data = {};
     await this.controller.fetchUserJourneys(this.user.userid).then((value) => {
       // this.journeys = value;
-      this._journeys.next(value);
+      // this._journeys.next(value);
+      data = value;
     });
-    console.log("Fetched journeys: ", this.journeys);
+    console.log("HERE:::data fetched", data);
+    this._journeys.next(data);
   }
 
   loadData() {

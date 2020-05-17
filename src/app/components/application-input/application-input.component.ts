@@ -22,12 +22,12 @@ export class ApplicationInputComponent implements OnChanges {
   SOURCES = Object.values(APP_SOURCE);
 
   appDetails = {
-    company : 'Company Nameeee',
-    title : 'Position Title',
+    company : '',
+    title : '',
     date : [],
     status : STATUS.IN_REVIEW.toString(),
     source : APP_SOURCE.JOB_BOARD.toString(),
-    notes : '...',
+    notes : '',
   };
 
   startDate = new Date();
@@ -64,12 +64,12 @@ export class ApplicationInputComponent implements OnChanges {
       this.appDetails.notes = this.app.notes;
       console.log("app specified");
     } else {
-      this.appDetails.title = 'Position Title';
+      this.appDetails.title = '';
       this.appDetails.date = [this.startDate[1], this.startDate[0], this.startDate[2]];
-      this.appDetails.company = 'Company Name';
+      this.appDetails.company = '';
       this.appDetails.status = STATUS.IN_REVIEW.toString();
       this.appDetails.source = APP_SOURCE.JOB_BOARD.toString();
-      this.appDetails.notes = '...';
+      this.appDetails.notes = '';
     }
     this.startDate = this.appDetails.date.length === 0
       ? new Date()

@@ -7,6 +7,10 @@ button {
 	margin: 5px 0px 0;
 }
 
+::placeholder {
+  color: #d1d1d1;
+}
+
 .component-container label {
   font-size: 12pt;
 }
@@ -19,12 +23,25 @@ button {
   display: flex;
   flex-direction: column;
   padding: 25px;
-  margin-right: 20px;
+  /* margin-right: 20px; */
+  margin: 0 auto;
   position: fixed;
   top: 40%;
-  right: 15px;
+  right: 30px;
 	text-align: left;
-	width: 300px;
+	width: 260px;
+}
+
+.mat-input-element {
+  color: var(--text-dark);
+}
+
+.mat-form-field-empty.mat-form-field-label {
+  color: white;
+}
+
+.mat-form-field-underline .mat-form-field-underline-appearance-legacy {
+  background-color: white;
 }
 
 .text-input {
@@ -34,6 +51,8 @@ button {
   /* margin-top: 25px; */
   padding-bottom: 10px;
   width: 99%;
+  background-color: var(--secondary-dark);
+
 }
 
 .submit-button {

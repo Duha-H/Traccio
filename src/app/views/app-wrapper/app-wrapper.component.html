@@ -1,0 +1,33 @@
+<mat-sidenav-container class="sidenav-container" mode="push">
+	<!-- Nav -->
+  <mat-sidenav mode="side" role="navigation" opened>
+    <ul class="sidenav">
+      <li><a href="#" routerLink="">
+          <mat-icon [inline]="true" aria-hidden="false" aria-label="Dashboard icon">home</mat-icon>
+        </a></li>
+      <li><a href="#" routerLink="/journeys">
+          <mat-icon [inline]="true" aria-hidden="false" aria-label="Journeys icon">list</mat-icon>
+        </a></li>
+      <li><a href="#" routerLink="/search">
+          <mat-icon [inline]="true" aria-hidden="false" aria-label="Search icon">search</mat-icon>
+        </a></li>
+    </ul>
+  </mat-sidenav>
+  <!-- Content -->
+  <mat-sidenav-content role="main">
+
+    <!-- Toolbar -->
+    <div class="toolbar" role="banner">
+      <span>Tracker</span>
+      <div class="spacer"></div>
+      <mat-icon>account_box</mat-icon>
+      <button (click)="signOut()">Sign Out</button>
+		</div>
+		
+    <div class="content" role="main">
+      <router-outlet></router-outlet>
+      <!-- Footer -->
+      <footer></footer>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

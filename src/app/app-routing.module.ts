@@ -12,27 +12,32 @@ import { SettingsComponent } from "./views/settings/settings.component";
 import { SearchComponent } from "./views/search/search.component";
 import { JourneyViewComponent } from "./views/journey-view/journey-view.component";
 import { JourneyListComponent } from "./views/journey-list/journey-list.component";
+import { AppWrapperComponent } from './views/app-wrapper/app-wrapper.component';
 
 const routes: Routes = [
-  { path: "", redirectTo: "/home", pathMatch: "full" },
-  { path: "home", component: DashboardComponent, canActivate: [AuthGuard] },
+  // { path: "", redirectTo: "home", pathMatch: "full" },
+  { path: "", canActivate: [AuthGuard], component: AppWrapperComponent,
+    children: [
+      { path: "", component: DashboardComponent },
+      {
+        path: "journeys",
+        component: JourneysComponent,
+        children: [
+          { path: "", component: JourneyListComponent },
+          { path: ":id", component: JourneyViewComponent },
+        ],
+        // canActivate: [AuthGuard]
+      },
+      { path: "search", component: SearchComponent, canActivate: [AuthGuard] },
+      { path: "settings", component: SettingsComponent, canActivate: [AuthGuard] },
+    ]
+  },
   // { path: "", component: SearchComponent },
   { path: "signin", component: SignInComponent },
   { path: "signup", component: SignUpComponent },
   { path: "confirmsignup", component: ConfirmSignupComponent },
   { path: "login", component: LoginComponent }, // temp
-  {
-    path: "journeys",
-    component: JourneysComponent,
-    children: [
-      { path: "", component: JourneyListComponent },
-      { path: ":id", component: JourneyViewComponent },
-    ],
-    canActivate: [AuthGuard]
-  },
   // { path: 'applications', component: JourneyViewComponent },
-  { path: "search", component: SearchComponent, canActivate: [AuthGuard] },
-  { path: "settings", component: SettingsComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

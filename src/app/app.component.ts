@@ -30,12 +30,12 @@ export class AppComponent implements OnInit {
           this.user = authState.user;
           // this.router.navigate(['']);
           // set user attributes and navigate to dashboard
-          this.userStore.setUser(
+          await this.userStore.setUser(
             this.user.attributes.given_name,
             this.user.attributes.family_name,
             this.user.attributes.sub
           );
-          await this.userStore.fetchData();
+          // await this.userStore.fetchData();
           console.log("App init: user authenticated and data fetched");
         }
       });
@@ -50,14 +50,4 @@ export class AppComponent implements OnInit {
     return this.signedIn;
   }
 
-  async signOut() {
-    try {
-        await Auth.signOut();
-        this.signedIn = false;
-        this.userStore.clearData();
-        this.router.navigate(['signin']);
-    } catch (error) {
-        console.log('error signing out: ', error);
-    }
-  }
 }

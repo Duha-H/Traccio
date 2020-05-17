@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/cor
 import { Journey } from 'src/app/models/journey';
 import { MatSidenav } from '@angular/material/sidenav';
 import { UserStoreService } from 'src/app/models/user-store.service';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Application } from 'src/app/models/application';
 
 @Component({
@@ -23,7 +23,7 @@ export class JourneyViewComponent implements OnInit {
   drawerMode = 'add';
   selectedApp = null;
 
-  constructor(private route: ActivatedRoute, private userStore: UserStoreService) { }
+  constructor(private route: ActivatedRoute, private userStore: UserStoreService, private router: Router) { }
 
   ngOnInit() {
     console.log("view initialized");
@@ -32,11 +32,13 @@ export class JourneyViewComponent implements OnInit {
       id = params.id;
       return params.id;
     });
-    try {
-      this.journey = this.userStore.getJourney(id);
-      console.log('loaded journey', this.journey);
-    } catch (error) {
+    this.journey = this.userStore.getJourney(id);
+    if (!this.journey) {
       console.log('No journey loaded.');
+      this.router.navigate(["/journeys"]);
+      return;
+    } else {
+      console.log('loaded journey', this.journey);
     }
     this.setJourneyDetails();
   }

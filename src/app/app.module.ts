@@ -35,6 +35,7 @@ import { ApplicationInputComponent } from './components/application-input/applic
 import { SearchComponent } from './views/search/search.component';
 import { ConfirmSignupComponent } from './auth/confirm-signup/confirm-signup.component';
 import { ResponsiveCalendarComponent } from './components/responsive-calendar/responsive-calendar.component';
+import { AppWrapperComponent } from './views/app-wrapper/app-wrapper.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { ResponsiveCalendarComponent } from './components/responsive-calendar/re
     ApplicationInputComponent,
     SearchComponent,
     ConfirmSignupComponent,
-    ResponsiveCalendarComponent
+    ResponsiveCalendarComponent,
+    AppWrapperComponent
   ],
   imports: [
     BrowserModule,

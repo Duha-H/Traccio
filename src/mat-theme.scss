@@ -1,0 +1,31 @@
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// **Be sure that you only ever include this mixin once!**
+@include mat-core();
+
+// Define the default theme (same as the example above).
+$mat-app-primary: mat-palette($mat-pink);
+$app-primary: mat-palette($mat-pink);
+$mat-app-accent:  mat-palette($mat-pink, A200, A100, A400);
+$mat-app-theme:   mat-light-theme($mat-app-primary, $mat-app-accent);
+
+// Include the default theme styles.
+@include angular-material-theme($mat-app-theme);
+@include mat-form-field-theme($mat-app-theme);
+@include mat-input-theme($mat-app-theme);
+
+// Define an alternate light theme.
+$light-primary: mat-palette($mat-blue-grey);
+$light-accent:  mat-palette($mat-amber, A200, A100, A400);
+$light-warn:    mat-palette($mat-deep-orange);
+$light-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+// Include the alternative theme styles inside of a block with a CSS class. You can make this
+// CSS class whatever you want. In this example, any component inside of an element with
+// `.unicorn-dark-theme` will be affected by this alternate dark theme instead of the default theme.
+.light-theme {
+  @include angular-material-theme($light-theme);
+}

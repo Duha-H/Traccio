@@ -12,6 +12,7 @@ mat-drawer-container {
 
 mat-drawer {
   min-width: 400px;
+  background-color: #24284d;
 }
 
 .mat-drawer-inner-container {

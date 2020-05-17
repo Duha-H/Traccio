@@ -1,9 +1,15 @@
 <div class="component-container">
   <h3>Job Application Details</h3>
-  <input class="text-input" type="text" [(ngModel)]="appDetails.title" placeholder="{{appDetails.title}}" />
-    <!-- <mat-error *ngIf="invalidTitle">Title cannot be empty.</mat-error> -->
-  <input class="text-input" type="text" [(ngModel)]="appDetails.company" placeholder="{{appDetails.company}}" />
-  <!-- <div class="menu"> -->
+
+  <mat-form-field color="primary">
+    <mat-label>Company Name</mat-label>
+    <input matInput placeholder="NASA" [(ngModel)]="appDetails.company">
+  </mat-form-field>
+
+  <mat-form-field color="primary">
+    <mat-label>Position Title</mat-label>
+    <input matInput placeholder="Janitor" [(ngModel)]="appDetails.title">
+  </mat-form-field>
 
   <mat-form-field>
     <input matInput [matDatepicker]="picker" [(ngModel)]="startDate"
@@ -25,11 +31,6 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <!-- <label for="">Status: &nbsp; {{status}}</label>
-    <button mat-button [matMenuTriggerFor]="statusmenu"><mat-icon>keyboard_arrow_down</mat-icon></button>
-    <mat-menu #statusmenu="matMenu">
-      <button mat-menu-item *ngFor="let statusitem of STATUSES;" (click)="setStatus(statusitem)">{{statusitem}}</button>
-    </mat-menu> -->
   </div>
 
   <div>
