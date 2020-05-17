@@ -53,10 +53,8 @@ export class UserStoreService {
     // Called on app init
     // Performs API calls to fetch user data
     console.log("HERE:::data about to be fetched");
-    // this.journeys.subscribe(Object.values(this._journeys.getValue()).reverse());
     let data = {};
     await this.controller.fetchUserJourneys(this.user.userid).then((value) => {
-      // this.journeys = value;
       // this._journeys.next(value);
       data = value;
     });
@@ -90,7 +88,6 @@ export class UserStoreService {
   }
 
   addNewJourney(journeyData: { [key: string]: any }) {
-    console.log("curr id:", journeyData.id);
     journeyData.id = journeyData.id // if ID is undefined, generate a new ID
       ? journeyData.id
       : this._getNewJourneyID();

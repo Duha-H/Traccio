@@ -29,7 +29,6 @@ export class UserStoreControllerService {
               journeys[journey.id].applications = apps;
             });
         });
-        // console.log("user journeys:", journeys);
         return journeys;
       })
       .catch(error => {

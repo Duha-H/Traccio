@@ -4,8 +4,8 @@ export class Journey {
 
 	private _title = '';
 	private _id = '';
-	private _startDate: number[] = [];
-	private _endDate: number[] = [];
+	private _startDate: Date = new Date();
+	private _endDate: Date = new Date();
 	private _active = true;
 	private _applications: Application[] = [];
 
@@ -15,10 +15,10 @@ export class Journey {
 			const x = 1;
 			this._title = data.title;
 			this._id = data.id;
-			this._startDate = data.startDate; // parse date string, ISO_8601 format -> milliseconds -> Date
+			this._startDate = new Date(data.startDate); // parse date string, ISO_8601 format -> milliseconds -> Date
 			this._endDate = data.endDate
-				? data.endDate
-				: []; // parse date string, ISO_8601 format -> milliseconds -> Date
+				? new Date(data.endDate)
+				: undefined; // parse date string, ISO_8601 format -> milliseconds -> Date
 			this._active = data.active;
 			this._applications = data.applications
 				? data.applications
@@ -32,11 +32,11 @@ export class Journey {
 	get id() { return this._id; }
 	set id(id: string) { this._id = id; }
 
-	get startDate() { return this._startDate; }
-	set startDate(date: number[]) { this._startDate = date; }
+	get startDate(): Date { return this._startDate; }
+	set startDate(date: Date) { this._startDate = date; }
 
-	get endDate() { return this._endDate; }
-	set endDate(date: number[]) { this._endDate = date; }
+	get endDate(): Date { return this._endDate; }
+	set endDate(date: Date) { this._endDate = date; }
 
 	get applications() { return this._applications; }
 	set applications(apps: Application[]) { this._applications = apps; }
@@ -47,8 +47,8 @@ export class Journey {
 	toggleActive(active: boolean) {
 		this._active = active;
 		if (!this._active) {
-			const today = new Date();
-			this._endDate = [today.getDate(), today.getMonth(), today.getFullYear()]; // now
+			this._endDate = new Date();
+			// this._endDate = [today.getDate(), today.getMonth(), today.getFullYear()]; // now
 			// update database
 		}
 	}
@@ -60,9 +60,8 @@ export class Journey {
 
 	getGraphQLInput() {
 		// format null-able values
-		const endDateFormatted = this._endDate.length === 0
-			? ""
-			: `${this._endDate[2]}-${this._endDate[1]}-${this._endDate[0]}`;
+		const endDateFormatted = this._endDate.toISOString().split('T')[0]; // ISO String format: YYYY-MM-DDTHH:mm:ss.sssZ
+																																				// or ±YYYYYY-MM-DDTHH:mm:ss.sssZ
 		const applicationsFormatted = this._applications.map(app => app.getGraphQLInput());
 
 		const input = {
@@ -75,6 +74,6 @@ export class Journey {
 		};
 		return input;
 	}
-
+	
 
 }

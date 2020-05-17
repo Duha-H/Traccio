@@ -45,12 +45,10 @@ export class JourneyViewComponent implements OnInit {
 
   setJourneyDetails() {
     this.applications = this.journey.applications;
-    const stdate = this.journey.startDate;
-    this.startDate = `${stdate[0]}/${stdate[1]}/${stdate[2]}`;
-    const endate = this.journey.endDate;
-    this.endDate = endate.length === 0
-      ? 'Present'
-      : `${endate[0]}/${endate[1]}/${endate[2]}`;
+    this.startDate = this.journey.startDate.toLocaleDateString();
+    this.endDate = this.journey.endDate
+      ? this.journey.endDate.toLocaleDateString()
+      : 'Present';
     this.iconClass = this.journey.active
       ? 'active-icon'
       : 'inactive-icon';

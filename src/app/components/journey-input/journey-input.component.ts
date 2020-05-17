@@ -38,15 +38,10 @@ export class JourneyInputComponent implements OnChanges {
       console.log("new journey", this.journey);
       this.active = this.journey.active;
       this.title = this.journey.title;
-      this.startDate = new Date(
-        `${this.journey.startDate[1]}/${this.journey.startDate[0]}/${this.journey.startDate[2]}`
-      );
-      this.endDate =
-        this.journey.endDate.length === 0
-          ? new Date()
-          : new Date(
-              `${this.journey.endDate[1]}/${this.journey.endDate[0]}/${this.journey.endDate[2]}`
-            );
+      this.startDate = this.journey.startDate;
+      this.endDate = this.journey.endDate
+        ? this.journey.endDate
+        : new Date();
     }
   }
 
@@ -62,20 +57,12 @@ export class JourneyInputComponent implements OnChanges {
       }
       // copy over updated journey details from input
       newJourney.title = this.title;
-      newJourney.startDate = [
-        this.startDate.getDate(),
-        this.startDate.getMonth() + 1,
-        this.startDate.getFullYear(),
-      ];
+      newJourney.startDate = this.startDate;
       newJourney.active = this.active;
       if (!this.active) {
-        newJourney.endDate = [
-          this.endDate.getDate(),
-          this.endDate.getMonth() + 1,
-          this.endDate.getFullYear(),
-        ];
+        newJourney.endDate = this.endDate;
       } else {
-        newJourney.endDate = [];
+        newJourney.endDate = undefined;
       }
       this.newDataLogged.emit(newJourney);
       this.resetData();
