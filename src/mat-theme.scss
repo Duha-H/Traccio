@@ -1,18 +1,66 @@
 @import '~@angular/material/theming';
 // Plus imports for other components in your app.
 
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
 // **Be sure that you only ever include this mixin once!**
 @include mat-core();
 
-// Define the default theme (same as the example above).
-$mat-app-primary: mat-palette($mat-pink);
-$app-primary: mat-palette($mat-pink);
-$mat-app-accent:  mat-palette($mat-pink, A200, A100, A400);
-$mat-app-theme:   mat-light-theme($mat-app-primary, $mat-app-accent);
 
-// Include the default theme styles.
+$custom-background-color: #628cc9;
+
+$dark-theme-background: (
+  status-bar: #628cc9,
+  app-bar:    map_get($mat-blue, 900),
+  background: #7ea2c8,
+  hover:      rgba(white, 0.04), 
+  card:       #7ea2c8,
+  dialog:     map_get($mat-grey, 800),
+  disabled-button: $white-12-opacity,
+  raised-button: map-get($mat-grey, 800),
+  focused-button: $white-6-opacity,
+  selected-button: map_get($mat-grey, 900),
+  selected-disabled-button: map_get($mat-grey, 800),
+  disabled-button-toggle: black,
+  unselected-chip: map_get($mat-grey, 700),
+  disabled-list-option: black,
+);
+
+$dark-theme-foreground: (
+  // base:              yellow,
+  divider:           rgba(white, 0),
+  dividers:          rgba(white, 0),
+  disabled:          rgba(white, 0.3),
+  disabled-button:   rgba(white, 0.3),
+  disabled-text:     rgba(white, 0.3),
+  hint-text:         rgba(white, 0.3),
+  secondary-text:    rgba(white, 0.7),
+  icon:              white,
+  icons:             white,
+  text:              var(--text-dark),
+  slider-min:        white,
+  slider-off:        rgba(white, 0.3),
+  slider-off-active: rgba(white, 0.3),
+);
+
+// $background: map-get($mat-app-theme, background);
+// $background: map_merge($background, (background: $custom-background-color));
+// $mat-app-theme: map_merge($mat-app-theme, (background: $background));
+
+@function create-custom-theme($mat-app-primary, $mat-app-accent, $warn: mat-palette($mat-red)) {
+  @return (
+    primary: $mat-app-primary,
+    accent: $mat-app-accent,
+    warn: $warn,
+    is-dark: true,
+    foreground: $dark-theme-foreground,
+    background: $dark-theme-background,
+  );
+}
+$mat-app-primary: mat-palette($mat-teal, A200);
+$mat-app-accent:  mat-palette($mat-teal, A200);
+// $mat-app-theme:   mat-dark-theme($mat-app-primary, $mat-app-accent);
+$mat-app-theme: create-custom-theme($mat-app-primary, $mat-app-accent);
+
+// Include default theme styles.
 @include angular-material-theme($mat-app-theme);
 @include mat-form-field-theme($mat-app-theme);
 @include mat-input-theme($mat-app-theme);
@@ -21,7 +69,7 @@ $mat-app-theme:   mat-light-theme($mat-app-primary, $mat-app-accent);
 $light-primary: mat-palette($mat-blue-grey);
 $light-accent:  mat-palette($mat-amber, A200, A100, A400);
 $light-warn:    mat-palette($mat-deep-orange);
-$light-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+$light-theme:   mat-light-theme($light-primary, $light-accent, $light-warn);
 
 // Include the alternative theme styles inside of a block with a CSS class. You can make this
 // CSS class whatever you want. In this example, any component inside of an element with

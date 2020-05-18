@@ -3,17 +3,18 @@
 
   <mat-form-field color="primary">
     <mat-label>Company Name</mat-label>
-    <input matInput placeholder="NASA" [(ngModel)]="appDetails.company">
+    <input matInput placeholder="NASA" [(ngModel)]="appDetails.company" maxlength="60" required #companyInput>
+    <mat-hint>Company name cannot be empty: {{ companyInput.className }}</mat-hint>
   </mat-form-field>
 
   <mat-form-field color="primary">
     <mat-label>Position Title</mat-label>
-    <input matInput placeholder="Janitor" [(ngModel)]="appDetails.title">
+    <input matInput placeholder="Janitor" [(ngModel)]="appDetails.title" maxlength="100" required>
   </mat-form-field>
 
   <mat-form-field>
     <input matInput [matDatepicker]="picker" [(ngModel)]="appDetails.date"
-    (dateChange)="onDateChange($event)" placeholder="Date Applied" style="width: 250px;" (focus)="picker.open()" />
+    (dateChange)="onDateChange($event)" placeholder="Date Applied" style="width: 250px;" (focus)="picker.open()" required/>
       <!-- placeholder="{{startDate.getMonth() + 1}}/{{startDate.getDate()}}/{{startDate.getFullYear()}}" style="width: 250px;" -->
     <mat-datepicker-toggle matSuffix [for]="picker">
       <mat-icon matDatepickerToggleIcon>arrow_drop_down</mat-icon>
@@ -53,7 +54,7 @@
   <div>
     <mat-form-field style="margin: auto;">
       <!-- <label>Notes</label> -->
-      <textarea matInput rows="5" cols="36" placeholder="Other job details..." style="text-align: left;" [(ngModel)]="appDetails.notes"></textarea>
+      <textarea matInput rows="5" cols="36" placeholder="Other job details..." style="text-align: left;" [(ngModel)]="appDetails.notes" maxlength="500"></textarea>
     </mat-form-field>
   </div>
     

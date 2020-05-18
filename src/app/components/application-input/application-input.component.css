@@ -19,6 +19,18 @@ mat-datepicker-toggle {
   float: right;
 }
 
+.mat-input-element {
+  color: var(--text-dark);
+}
+
+.mat-form-field-empty.mat-form-field-label {
+  color: white;
+}
+
+.mat-form-field-underline .mat-form-field-underline-appearance-legacy {
+  background-color: white;
+}
+
 .menu {
   vertical-align: middle;
   margin: 10px auto;

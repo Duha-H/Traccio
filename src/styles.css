@@ -13,7 +13,6 @@ $app-theme: mat-light-theme($app-primary, $app-accent);
 */
 
 :root {
-  --amazonOrange: --squidInk;
   --background-dark: #1b1d38;
   --primary-dark: #252846;
   /* --primary-dark: #34364e; */
@@ -47,9 +46,9 @@ h3, h4, h5, h6 {
 	color: var(--titles-secondary-dark);
 }
 
-p, span {
+/* p, span {
 	color: var(--text-dark);
-}
+} */
 
 ::placeholder {
   color: #d1d1d1;
@@ -77,8 +76,9 @@ div.view-container {
   /* padding: 20px 20px; */
 }
 
-.mat-drawer-backdrop.mat-drawer-shown {
-  background-color: rgba(0, 0, 0, 0.05);
+div.mat-drawer-backdrop.mat-drawer-shown {
+  /* background-color: rgba(0, 0, 0, 0.05); */
+  background-color: rgba(27, 29, 56, 0.4);
 }
 
 .mat-form-field-empty.mat-form-field-label {
