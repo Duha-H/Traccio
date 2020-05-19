@@ -1,31 +1,44 @@
 <div class="component-container">
-  <!-- <label>Journey Title:</label> -->
-  <h3>Journey Details</h3>
-  <mat-form-field class="example-full-width" >
-    <mat-label>Journey Name</mat-label>
-    <input matInput placeholder="Journey 01" [(ngModel)]="title">
-  </mat-form-field>
-  <!-- <input type="text" [(ngModel)]="title" class="text-input" placeholder="Journey Title" /> -->
-  <!-- <label>Start Date:</label> -->
-  <!-- Start Date picker -->
-  <mat-form-field>
-    <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" (dateChange)="dateChange($event)"
-      placeholder="Start Date" [value]="startDate" [(ngModel)]="startDate" />
-    <mat-datepicker-toggle matSuffix [for]="picker">
-      <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-    </mat-datepicker-toggle>
-    <mat-datepicker color="primary" #picker></mat-datepicker>
-  </mat-form-field>
-  <mat-checkbox [(ngModel)]="active" color="primary">Active</mat-checkbox>
-  <!-- End Date picker -->
-  <mat-form-field *ngIf="!active">
-    <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" (dateChange)="dateChange($event)"
-      placeholder="End Date" [value]="endDate" [(ngModel)]="endDate" />
-    <mat-datepicker-toggle matSuffix [for]="picker">
-      <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-    </mat-datepicker-toggle>
-    <mat-datepicker color="primary" #picker></mat-datepicker>
-  </mat-form-field>
 
-  <button (click)="onDataLogged()" class="submit-button">Submit</button>
+  <form>
+    <h3>Journey Details</h3>
+
+    <!-- Journey Name input -->
+    <mat-form-field class="form-element">
+      <mat-label>Journey Name </mat-label>
+      <input matInput placeholder="Journey 01" [(ngModel)]="title" #name="ngModel" name="nameInput"
+        [errorStateMatcher]="errorStateMatcher" required>
+      <mat-error *ngIf="name.dirty && name.invalid" class="warning-text">Journey name cannot be empty</mat-error>
+    </mat-form-field>
+    
+    <!-- Start Date picker -->
+    <mat-form-field class="form-element">
+      <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" (dateChange)="dateChange($event)"
+        placeholder="Start Date " [value]="startDate" [(ngModel)]="startDate" name="stDate" #stDate="ngModel"
+        [errorStateMatcher]="errorStateMatcher" required />
+      <mat-error *ngIf="stDate.dirty && stDate.invalid" class="warning-text">Start Date is not valid</mat-error>
+      <mat-datepicker-toggle matSuffix [for]="picker">
+        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker color="primary" #picker></mat-datepicker>
+    </mat-form-field>
+
+    <!-- Active Checkbox -->
+    <mat-checkbox [(ngModel)]="active" color="primary" name="active" class="form-element">Active</mat-checkbox>
+    
+    <!-- End Date picker -->
+    <mat-form-field *ngIf="!active" class="form-element" style="margin-top: 25px;">
+      <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" (dateChange)="dateChange($event)"
+        placeholder="End Date" [value]="endDate" [(ngModel)]="endDate" name="enDate" #enDate="ngModel"
+        [errorStateMatcher]="errorStateMatcher" />
+      <mat-error *ngIf="enDate.dirty && enDate.invalid" class="warning-text">Start Date is not valid</mat-error>
+      <mat-datepicker-toggle matSuffix [for]="picker">
+        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker color="primary" #picker></mat-datepicker>
+    </mat-form-field>
+
+    <button (click)="onDataLogged()" class="submit-button">Submit</button>
+  </form>
+
 </div>

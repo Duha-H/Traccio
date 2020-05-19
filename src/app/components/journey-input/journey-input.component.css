@@ -32,6 +32,10 @@ button {
 	width: 260px;
 }
 
+form * {
+  width: 100%;
+}
+
 .mat-input-element {
   color: var(--text-dark);
 }
@@ -42,6 +46,18 @@ button {
 
 .mat-form-field-underline .mat-form-field-underline-appearance-legacy {
   background-color: white;
+}
+
+.form-element {
+  margin-bottom: 25px;
+}
+
+mat-checkbox {
+  margin-bottom: 25px;
+}
+
+.warning-text {
+  color: var(--text-warn);
 }
 
 .text-input {
@@ -57,7 +73,7 @@ button {
 
 .submit-button {
   margin: auto;
-  margin-left: 11px;
+  /* margin-left: 11px; */
   margin-top: 90px;
-  min-width: 100%;
+  /* min-width: 100%; */
 }

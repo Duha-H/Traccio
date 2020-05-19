@@ -11,7 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, ErrorStateMatcher } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -36,6 +36,7 @@ import { SearchComponent } from './views/search/search.component';
 import { ConfirmSignupComponent } from './auth/confirm-signup/confirm-signup.component';
 import { ResponsiveCalendarComponent } from './components/responsive-calendar/responsive-calendar.component';
 import { AppWrapperComponent } from './views/app-wrapper/app-wrapper.component';
+import { OnDirtyErrorStateMatcher } from './controllers/on-dirty-error-state-matcher';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { AppWrapperComponent } from './views/app-wrapper/app-wrapper.component';
   providers: [
     AmplifyService,
     UserStoreService,
+    { provide: ErrorStateMatcher, useClass: OnDirtyErrorStateMatcher },
   ],
   bootstrap: [AppComponent],
   entryComponents: [

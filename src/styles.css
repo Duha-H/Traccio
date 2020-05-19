@@ -24,6 +24,7 @@ $app-theme: mat-light-theme($app-primary, $app-accent);
   --titles-secondary-dark: #7ea2c8;
   --text-dark: #ffffff;
   --text-light: #2e32685c;
+  --text-warn: #df2151;
 }
 
 html,
@@ -91,6 +92,10 @@ div.mat-drawer-backdrop.mat-drawer-shown {
 
 .mat-input-element {
   color: var(--text-dark);
+}
+
+.warning-text {
+  color: var(--text-warn);
 }
 
 app-journeys,

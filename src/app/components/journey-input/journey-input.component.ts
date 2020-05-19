@@ -8,6 +8,7 @@ import {
 import { MatDatepickerInputEvent } from "@angular/material/datepicker";
 import { Journey } from "src/app/models/journey";
 import { UserStoreService } from "src/app/models/user-store.service";
+import { OnDirtyErrorStateMatcher } from 'src/app/controllers/on-dirty-error-state-matcher';
 
 @Component({
   selector: "journey-input",
@@ -23,9 +24,10 @@ export class JourneyInputComponent implements OnChanges {
   maxDate: Date;
   today = new Date();
   title = '';
-  startDate = new Date();
-  endDate = new Date();
+  startDate = undefined;
+  endDate = undefined;
   active = true;
+  errorStateMatcher = new OnDirtyErrorStateMatcher();
 
   constructor(private userStore: UserStoreService) {
     const thisYear = new Date().getFullYear();
@@ -42,6 +44,8 @@ export class JourneyInputComponent implements OnChanges {
       this.endDate = this.journey.endDate
         ? this.journey.endDate
         : new Date();
+    } else {
+      this.resetData(); // make sure all fields are clean
     }
   }
 
@@ -71,8 +75,8 @@ export class JourneyInputComponent implements OnChanges {
 
   resetData() {
     this.title = "";
-    this.startDate = new Date();
-    this.endDate = new Date();
+    this.startDate = undefined;
+    this.endDate = undefined;
     this.active = true;
     this.journey = null;
   }
