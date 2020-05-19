@@ -29,8 +29,6 @@ p {
 }
 
 .toolbar {
-  /* height: 60px; */
-  /* margin: -8px; */
   height: 6vh;
   display: flex;
   align-items: center;
@@ -75,28 +73,17 @@ ul.sidenav {
   padding: 0;
 	text-align: center;
 	padding-top: 30px;
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* display: table;
-  vertical-align: middle;
-  text-align: center; */
 }
 
 .sidenav li {
-  /* font-size: 25pt;
-  font-weight: 150;
-  line-height: 35pt; */
   width: 60px;
   height: 60px;
   border-radius: 100%;
   background-color: var(--accent-background-dark);
-  /* display: table-cell; */
 	vertical-align: middle;
-  /* padding: 8px; */
   padding: 0;
 	margin: 0;
 	margin: 15px auto;
-  /* margin: 5px; */
 }
 
 .sidenav li:hover {
@@ -110,7 +97,6 @@ ul.sidenav {
 
 mat-sidenav-container {
   margin: 0;
-  /* margin-top: 8px; */
   overflow-y: hidden;
   min-height: 100%;
   min-width: 100%;
@@ -123,12 +109,10 @@ mat-sidenav {
 }
 
 .sidenav mat-icon {
-  color: var(--accent-dark);
+  color: var(--titles-secondary-dark);
   margin: auto;
   line-height: 42pt;
   font-size: 25pt;
-  width: 60px;
-	height: 60px;
   margin: auto 0;
   display: inline;
   vertical-align: middle;

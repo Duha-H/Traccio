@@ -4,6 +4,7 @@ import { Application } from 'src/app/models/application';
 import { UserStoreService } from 'src/app/models/user-store.service';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatSidenav } from '@angular/material/sidenav';
+import { OnDirtyErrorStateMatcher } from 'src/app/controllers/on-dirty-error-state-matcher';
 
 @Component({
   selector: 'application-input',
@@ -29,11 +30,7 @@ export class ApplicationInputComponent implements OnChanges {
     source : APP_SOURCE.JOB_BOARD.toString(),
     notes : '',
   };
-
-  // startDate = new Date();
-  // day = this.startDate.getDate();
-  // month = this.startDate.getMonth() + 1;
-  // year = this.startDate.getFullYear();
+  errorStateMatcher = new OnDirtyErrorStateMatcher();
 
   statuses = [
     {value: STATUS.IN_REVIEW.toString(), viewValue: STATUS.IN_REVIEW.toString()},
@@ -71,16 +68,9 @@ export class ApplicationInputComponent implements OnChanges {
       this.appDetails.source = APP_SOURCE.JOB_BOARD.toString();
       this.appDetails.notes = '';
     }
-    // this.startDate = this.appDetails.date
-    //   ? this.appDetails.date
-    //   : new Date();
   }
 
   onDateChange(event: MatDatepickerInputEvent<Date>) {
-    // this.day = event.value.getDate();
-    // this.month = event.value.getMonth() + 1;
-    // this.year = event.value.getFullYear();
-    // this.startDate = event.value;
     this.appDetails.date = event.value;
   }
 
@@ -99,7 +89,6 @@ export class ApplicationInputComponent implements OnChanges {
     }
     // TODO: check if everything is fine here
     this.sidenav.close();
-    // this.startDate = new Date();
   }
 
 }

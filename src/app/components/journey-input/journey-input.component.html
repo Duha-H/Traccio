@@ -7,7 +7,7 @@
     <mat-form-field class="form-element">
       <mat-label>Journey Name </mat-label>
       <input matInput placeholder="Journey 01" [(ngModel)]="title" #name="ngModel" name="nameInput"
-        [errorStateMatcher]="errorStateMatcher" required>
+        [errorStateMatcher]="errorStateMatcher" maxlength="40" required>
       <mat-error *ngIf="name.dirty && name.invalid" class="warning-text">Journey name cannot be empty</mat-error>
     </mat-form-field>
     
