@@ -24,8 +24,8 @@ mat-icon {
   border-radius: 25px;
   padding: 20px; /* might need to remove this */
   text-align: center;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  background-color: var(--primary-dark);
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+  background-color: var(--secondary-dark);
   display: flex;
 }
 
@@ -37,8 +37,9 @@ mat-icon {
 }
 
 .container:hover:not(.add) {
-  transform: translateY(-4px);
   cursor: pointer;
+  box-shadow: 0 0 28px rgba(0, 0, 0, 0.4);
+  transform: scale(1.008);
 }
 
 .container.add:hover {
