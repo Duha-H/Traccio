@@ -37,6 +37,7 @@ import { ConfirmSignupComponent } from './auth/confirm-signup/confirm-signup.com
 import { ResponsiveCalendarComponent } from './components/responsive-calendar/responsive-calendar.component';
 import { AppWrapperComponent } from './views/app-wrapper/app-wrapper.component';
 import { OnDirtyErrorStateMatcher } from './controllers/on-dirty-error-state-matcher';
+import { AccountDropdownComponent } from './components/account-dropdown/account-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { OnDirtyErrorStateMatcher } from './controllers/on-dirty-error-state-mat
     SearchComponent,
     ConfirmSignupComponent,
     ResponsiveCalendarComponent,
-    AppWrapperComponent
+    AppWrapperComponent,
+    AccountDropdownComponent
   ],
   imports: [
     BrowserModule,

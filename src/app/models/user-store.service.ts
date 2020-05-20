@@ -14,7 +14,10 @@ import { map } from "rxjs/operators";
 export class UserStoreService {
 
   user: User;
-  initialJourneys: { [key: string]: Journey } = { };
+  initialJourneys: { [key: string]: Journey } = {
+    0: mock.testJourney1,
+    1: mock.testJourney2
+  };
   dataUpdated = false;
 
   private _journeys: BehaviorSubject<{
@@ -34,7 +37,7 @@ export class UserStoreService {
     this.user.firstName = firstName;
     this.user.lastName = lastName;
     this.user.userid = id;
-    await this.fetchData();
+    // await this.fetchData();
   }
 
   getUserEntryInput() {
@@ -73,7 +76,7 @@ export class UserStoreService {
 
   clearData() {
     this.user = undefined;
-    this._journeys.next({});
+    this._journeys.next(this.initialJourneys);
   }
 
   getJourney(id: string): Journey {

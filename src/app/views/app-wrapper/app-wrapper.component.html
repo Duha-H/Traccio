@@ -20,8 +20,10 @@
     <div class="toolbar" role="banner">
       <span>Tracker</span>
       <div class="spacer"></div>
-      <mat-icon>account_box</mat-icon>
-      <button (click)="signOut()">Sign Out</button>
+      <div #dropdownButton>
+        <mat-icon (click)="toggleAccountDropdown()" style="cursor: pointer;">account_box</mat-icon>
+      </div>
+      <account-dropdown *ngIf="displayDropdown" [dropdownItems]="dropdownItems" [(displayDropdown)]="displayDropdown"></account-dropdown>
 		</div>
 		
     <div class="content" role="main">

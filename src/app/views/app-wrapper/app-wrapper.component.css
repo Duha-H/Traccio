@@ -37,11 +37,14 @@ p {
   padding: 0 20px;
 }
 
-.toolbar mat-icon {
+.toolbar mat-icon.mat-icon {
 	color: var(--accent-dark);
-	width: 40px;
-	height: 40px;
-	text-align: center;
+	/* width: 80px;
+	height: 80px; */
+  text-align: center;
+  line-height: 24pt;
+  font-size: 24pt;
+  margin-right: 15px;
 }
 
 .toolbar span {
@@ -55,7 +58,7 @@ p {
 
 .toolbar #twitter-logo {
   height: 40px;
-  margin: 0 16px;
+  margin: 0 20px;
 }
 
 .toolbar #twitter-logo:hover {

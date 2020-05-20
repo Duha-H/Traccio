@@ -1,0 +1,9 @@
+<div class="dropdown-container">
+  <ul>
+    <li *ngFor="let item of dropdownItems;" class="{{item.type == 'button'? 'signout-button' : ''}}"
+      (click)="item.type == 'button'? item.callback() : ''"><a href="" [routerLink]="item.link">{{item.text}}</a></li>
+    <!-- <li>Profile settings</li>
+		<li>Theme</li>
+		<li class="signout-button">Sign out</li> -->
+  </ul>
+</div>

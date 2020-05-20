@@ -22,7 +22,6 @@ export class SignInComponent implements OnInit {
     try {
       const user = await Auth.signIn(this.email, this.password);
       console.log('signed in');
-      console.log(user);
       this.router.navigate(['']);
     } catch (error) {
       console.log('error signing in', error);
