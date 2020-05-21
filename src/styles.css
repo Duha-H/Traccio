@@ -1,26 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
-/* @import "~aws-amplify-angular/theme.css"; */
-
-/* @include mat-core();
-
-$app-primary: mat-palette($mat-white);
-$app-accent:  mat-palette($mat-pink);
-$app-theme: mat-light-theme($app-primary, $app-accent);
-@include angular-material-theme($app-theme); 
-
-// "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
-// 
-*/
-
 :root {
   --background-dark: #1b1d38;
   --primary-dark: #252846;
   /* --primary-dark: #34364e; */
   --secondary-dark: #24284d;
-  --accent-dark: #0aecc2;
+  --accent-dark: #32e0c0;
   --accent-background-dark: #2e32685c;
   --accent-hover-dark: #21e6c214;
-  --titles-primary-dark: #0aecc2;
+  --titles-primary-dark: #32e0c0;
   --titles-secondary-dark: #7ea2c8;
   --text-dark: #ffffff;
   --text-light: #2e32685c;

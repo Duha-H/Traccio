@@ -23,9 +23,10 @@
       <div #dropdownButton>
         <mat-icon (click)="toggleAccountDropdown()" style="cursor: pointer;">account_box</mat-icon>
       </div>
-      <account-dropdown *ngIf="displayDropdown" [dropdownItems]="dropdownItems" [(displayDropdown)]="displayDropdown"></account-dropdown>
+      <account-dropdown [dropdownItems]="dropdownItems" [displayDropdown]="displayDropdown"></account-dropdown>
 		</div>
-		
+    
+    <!-- Content Router -->
     <div class="content" role="main">
       <router-outlet></router-outlet>
       <!-- Footer -->
