@@ -13,6 +13,7 @@ import { SearchComponent } from "./views/search/search.component";
 import { JourneyViewComponent } from "./views/journey-view/journey-view.component";
 import { JourneyListComponent } from "./views/journey-list/journey-list.component";
 import { AppWrapperComponent } from './views/app-wrapper/app-wrapper.component';
+import { AccountRecoveryComponent } from './auth/account-recovery/account-recovery.component';
 
 const routes: Routes = [
   // { path: "", redirectTo: "home", pathMatch: "full" },
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: "signin", component: SignInComponent },
   { path: "signup", component: SignUpComponent },
   { path: "confirmsignup", component: ConfirmSignupComponent },
+  { path: "accountrecovery", component: AccountRecoveryComponent },
   { path: "login", component: LoginComponent }, // temp
   // { path: 'applications', component: JourneyViewComponent },
 ];

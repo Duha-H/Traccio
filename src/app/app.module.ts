@@ -38,6 +38,8 @@ import { ResponsiveCalendarComponent } from './components/responsive-calendar/re
 import { AppWrapperComponent } from './views/app-wrapper/app-wrapper.component';
 import { OnDirtyErrorStateMatcher } from './controllers/on-dirty-error-state-matcher';
 import { AccountDropdownComponent } from './components/account-dropdown/account-dropdown.component';
+import { TextFieldComponent } from './components/text-field/text-field.component';
+import { AccountRecoveryComponent } from './auth/account-recovery/account-recovery.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,9 @@ import { AccountDropdownComponent } from './components/account-dropdown/account-
     ConfirmSignupComponent,
     ResponsiveCalendarComponent,
     AppWrapperComponent,
-    AccountDropdownComponent
+    AccountDropdownComponent,
+    TextFieldComponent,
+    AccountRecoveryComponent
   ],
   imports: [
     BrowserModule,

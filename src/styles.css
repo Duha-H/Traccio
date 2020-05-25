@@ -93,6 +93,43 @@ app-dashboard {
   text-align: center;
 }
 
-app-journey-view {
-  /* width: 94vw; */
+.submit-button {
+  background-color: var(--titles-secondary-dark);
+  color: var(--text-dark);
+  font-size: 10pt;
+  padding: 12px;
+  border-radius: 15px;
+  border: 1px solid transparent;
+  margin: 50px 0;
+}
+
+.submit-button:hover {
+  background-color: var(--accent-dark);
+  cursor: pointer;
+  color: var(--background-dark);
+}
+
+.login-link {
+  font-size: 10pt;
+  text-align: center;
+  color: var(--titles-secondary-dark);
+}
+
+a.login-link,
+a.login-link:visited,
+a.login-link:hover {
+  color: #1976d2;
+  text-decoration: none;
+  margin: auto;
+  font-size: 10pt;
+  text-align: center;
+}
+
+a:hover {
+  color: #125699;
+}
+
+a.login-link.forgot-password {
+  text-align: left;
+  margin: 0;
 }

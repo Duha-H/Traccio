@@ -1,5 +1,11 @@
-<!-- <amplify-auth-sign-in></amplify-auth-sign-in> -->
-    <input  type="text" [(ngModel)]="email" />
-    <input  type="text" [(ngModel)]="password" />
-    <button (click)="signIn()">Submit</button>
-    <a href="#" routerLink="/signup">Don't have an account? Sign up</a>
+<div class="container">
+	<div class="signin-container">
+		<h2>Sign in</h2>
+		<text-field (inputChange)="email=$event" [label]="'Email'" [type]="'email'"></text-field>
+		<text-field (inputChange)="password=$event" [label]="'Password'" [type]="'password'"></text-field>
+		<p class="warning-text">{{error}}<br></p>
+		<button (click)="signIn()" class="submit-button">Submit</button>
+		<a href="#" routerLink="/accountrecovery" class="login-link">Forgot password?</a>
+		<p class="login-link">Don't have an account? <a href="#" routerLink="/signup" class="login-link">Sign up</a></p>
+	</div>
+</div>

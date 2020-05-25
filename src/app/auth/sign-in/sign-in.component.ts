@@ -11,6 +11,8 @@ export class SignInComponent implements OnInit {
 
   email = '';
   password = '';
+  error = '\n\n';
+  signInError = false;
 
   constructor(private router: Router) { }
 
@@ -19,12 +21,33 @@ export class SignInComponent implements OnInit {
 
 
   async signIn() {
+    if (this.email.length === 0 || this.password.length === 0) {
+      this.error = "All sign in fields must be filled";
+      this.signInError = true;
+      return;
+    }
+
     try {
-      const user = await Auth.signIn(this.email, this.password);
+      await Auth.signIn(this.email, this.password);
       console.log('signed in');
       this.router.navigate(['']);
     } catch (error) {
       console.log('error signing in', error);
+      this.signInError = true;
+      switch (error.code) {
+        case "UserNotFoundException":
+          this.error = "A user account with this email does not exist";
+          break;
+        case "InvalidParameterException":
+          this.error = "All sign in fields must be filled";
+          break;
+        case "NotAuthorizedException":
+          this.error = "Incorrect email or password";
+          break;
+        default:
+          this.error = error.message;
+          break;
+      }
     }
   }
 
