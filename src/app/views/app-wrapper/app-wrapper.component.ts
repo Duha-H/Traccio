@@ -32,7 +32,7 @@ export class AppWrapperComponent implements OnInit {
       this.signedIn = false;
       console.log(this);
       this.userStore.clearData();
-      this.router.navigate(["search"]);
+      this.router.navigate(["signin"]);
     } catch (error) {
       console.log("error signing out: ", error);
     }

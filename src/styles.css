@@ -7,10 +7,10 @@
   --accent-background-dark: #2e32685c;
   --accent-hover-dark: #21e6c214;
   --titles-primary-dark: #32e0c0;
-  --titles-secondary-dark: #7ea2c8;
+  --titles-secondary-dark: #99bde3;
   --text-dark: #ffffff;
   --text-light: #2e32685c;
-  --text-warn: #df2151;
+  --text-warn: #f94d78;
 }
 
 html,
@@ -80,7 +80,7 @@ div.mat-drawer-backdrop.mat-drawer-shown {
   color: var(--text-dark);
 }
 
-.warning-text {
+p.warning-text {
   color: var(--text-warn);
 }
 
@@ -101,6 +101,7 @@ app-dashboard {
   border-radius: 15px;
   border: 1px solid transparent;
   margin: 50px 0;
+  width: 100%;
 }
 
 .submit-button:hover {

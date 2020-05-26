@@ -1,0 +1,72 @@
+.recovery-container {
+  margin: 0 auto;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+
+  display: flex;
+	flex-direction: column;
+	text-align: center;
+	min-width: 340px;
+}
+
+.recovery-nav {
+	text-align: center;
+	margin: 20px 0;
+}
+
+.recovery-nav ul {
+	list-style: none;
+	display: flex;
+	flex-direction: row;
+	text-align: center;
+	margin: 30px 0;
+	padding: 0;
+	justify-content: space-around;
+}
+
+.recovery-nav li {
+	display: inline-block;
+	font-size: 13pt;
+	color: var(--text-dark);
+	opacity: 0.7;
+	background-color: var(--titles-secondary-dark);
+	width: 60px;
+	height: 60px;
+	border-radius: 100%;
+	line-height: 60px;
+}
+
+.recovery-nav li.active {
+	opacity: 1;
+}
+
+.recovery-component p:not(.warning-text) {
+	color: var(--titles-secondary-dark);
+	text-align: center;
+	padding-left: 10px;
+	font-size: 10pt;
+	margin-top: 40px;
+	line-height: 16pt;
+}
+
+.recovery-component p.secondary-label {
+	text-align: left;
+}
+
+.submit-button {
+	margin-top: 20px;
+}
+
+.recovery-component p.warning-text {
+	margin-top: 15px;
+	text-align: left;
+	padding-left: 10px;
+	white-space: pre-wrap;
+}
+
+.input-container label {
+	text-align: left;
+}

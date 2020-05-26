@@ -9,34 +9,53 @@
   margin: 10px auto;
 }
 
-input {
-  /* width: 300px; */
+.input-container div {
+  display: flex;
+  flex-direction: row;
   width: 92%;
   height: 18px;
   border-radius: 20px;
   padding: 16px;
-  font-size: 10pt;
   border: 1px solid transparent;
   background-color: var(--secondary-dark);
-  color: var(--text-dark);
   margin: 5px auto;
+  align-items: center;
 }
 
-input:focus {
+.input-container input {
+  font-size: 10pt;
+  width: 90%;
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--text-dark);
+}
+
+.input-container mat-icon {
+  color: var(--titles-secondary-dark);
+  cursor: pointer;
+}
+
+.input-container div:focus-within {
   border: 1px solid var(--accent-dark);
 }
 
-label {
+.input-container div:focus-within mat-icon {
+  color: var(--accent-dark);
+}
+
+.input-container label {
   font-size: 11pt;
   color: var(--titles-secondary-dark);
   height: 1.5em;
   padding-left: 10px;
+  text-align: left;
 }
 
-input:focus + label {
+.input-container div:focus-within + label {
   color: var(--accent-dark);
 }
 
-input:focus::placeholder {
+.input-container input:focus::placeholder {
 	color: var(--accent-dark);
 }

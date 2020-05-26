@@ -40,6 +40,9 @@ import { OnDirtyErrorStateMatcher } from './controllers/on-dirty-error-state-mat
 import { AccountDropdownComponent } from './components/account-dropdown/account-dropdown.component';
 import { TextFieldComponent } from './components/text-field/text-field.component';
 import { AccountRecoveryComponent } from './auth/account-recovery/account-recovery.component';
+import { ForgotPasswordComponent } from './auth/account-recovery/forgot-password.component';
+import { NewPasswordComponent } from './auth/account-recovery/new-password.component';
+import { ResetSuccessfulComponent } from './auth/account-recovery/reset-successful.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +64,10 @@ import { AccountRecoveryComponent } from './auth/account-recovery/account-recove
     AppWrapperComponent,
     AccountDropdownComponent,
     TextFieldComponent,
-    AccountRecoveryComponent
+    AccountRecoveryComponent,
+    ForgotPasswordComponent,
+    NewPasswordComponent,
+    ResetSuccessfulComponent
   ],
   imports: [
     BrowserModule,

@@ -1,1 +1,12 @@
-<p>account-recovery works!</p>
+<div class="recovery-container">
+	<h2>Password Recovery</h2>
+	<!-- <div class="recovery-nav">
+		<ul>
+			<li class="active">1</li>
+			<li>2</li>
+		</ul>
+	</div> -->
+  <forgot-password *ngIf="state == 'forgotPassword'" (submitEmail)="forgotPassword($event)" [error]="error"></forgot-password>
+	<new-password *ngIf="state == 'newPassword'" (submitNewPassword)="forgotPasswordSubmit($event)" (resendCode)="forgotPassword()" [error]="error"></new-password>
+	<reset-successful *ngIf="state == 'resetSuccessful'"></reset-successful>
+</div>

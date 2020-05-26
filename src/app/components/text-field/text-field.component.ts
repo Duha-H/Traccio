@@ -2,30 +2,36 @@ import { Component, OnInit, Input, Output, DoCheck, EventEmitter, OnChanges } fr
 
 @Component({
   selector: 'text-field',
-  // templateUrl: './text-field.component.html',
   template: '\
   <form>\
     <div class="input-container">\
-      <input type="{{type}}" [(ngModel)]="text" [value]="text" (input)="onInput()" \
-        name="inputField" #field="ngModel" placeholder="{{label}}" />\
-      <label for="inputField" >{{fieldLabel}}</label>\
+      <div>\
+        <input type="{{currType}}" [(ngModel)]="text" [value]="text" (input)="onInput()" \
+          name="inputField" #field="ngModel" placeholder="{{label}}" class="input"/>\
+        <mat-icon *ngIf="type == \'password\'" (click)="togglePasswordVisibility()" >{{visibilityIconName}}</mat-icon>\
+      </div>\
+      <label *ngIf="displayLabel" for="inputField" >{{fieldLabel}}</label>\
     </div>\
   </form>',
   styleUrls: ['./text-field.component.css']
 })
 export class TextFieldComponent implements OnInit {
 
-  @Input() label: string;
-  @Input() type = "text";
+  @Input() label = '';
+  @Input() type = 'text';
   @Input() required = false;
+  @Input() displayLabel = true;
   @Output() inputChange = new EventEmitter();
   text: string;
   fieldEmpty = true;
   fieldLabel = this.label;
+  visibilityIconName = 'visibility_off';
+  currType = this.type;
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.currType = this.type;
   }
 
   onInput() {
@@ -34,6 +40,16 @@ export class TextFieldComponent implements OnInit {
       this.fieldLabel = '\n';
     } else {
       this.fieldLabel = this.label;
+    }
+  }
+
+  togglePasswordVisibility() {
+    if (this.visibilityIconName === 'visibility') {
+      this.visibilityIconName = 'visibility_off';
+      this.currType = 'password';
+    } else {
+      this.visibilityIconName = 'visibility';
+      this.currType = 'text';
     }
   }
 

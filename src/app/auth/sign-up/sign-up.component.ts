@@ -20,6 +20,7 @@ export class SignUpComponent implements OnInit {
   constructor(private router: Router, private authStore: AuthStoreService, private userStore: UserStoreService) { }
 
   ngOnInit() {
+    console.log("sign up init");
   }
 
   async signUp() {
