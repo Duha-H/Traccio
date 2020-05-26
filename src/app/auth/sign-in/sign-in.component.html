@@ -4,7 +4,7 @@
 		<text-field (inputChange)="email=$event" [label]="'Email'" [type]="'email'"></text-field>
 		<text-field (inputChange)="password=$event" [label]="'Password'" [type]="'password'"></text-field>
 		<p class="warning-text">{{error}}<br></p>
-		<button (click)="signIn()" class="submit-button">Submit</button>
+		<button (click)="signIn()" class="submit-button">Sign in</button>
 		<a href="#" routerLink="/accountrecovery" class="login-link">Forgot password?</a>
 		<p class="login-link">Don't have an account? <a href="#" routerLink="/signup" class="login-link">Sign up</a></p>
 	</div>

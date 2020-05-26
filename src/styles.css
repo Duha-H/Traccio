@@ -82,6 +82,9 @@ div.mat-drawer-backdrop.mat-drawer-shown {
 
 p.warning-text {
   color: var(--text-warn);
+  max-width: 100%;
+  margin-bottom: 0;
+  white-space: pre-wrap;
 }
 
 app-journeys,

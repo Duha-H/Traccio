@@ -35,7 +35,7 @@ const routes: Routes = [
   },
   // { path: "", component: SearchComponent },
   { path: "signin", component: SignInComponent },
-  { path: "signup", component: SignUpComponent, pathMatch: "full" },
+  { path: "signup", component: SignUpComponent },
   { path: "confirmsignup", component: ConfirmSignupComponent },
   { path: "accountrecovery", component: AccountRecoveryComponent },
   { path: "login", component: LoginComponent }, // temp
@@ -47,5 +47,3 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
-
-// children: [ { path: 'applications', component: JourneyViewComponent } ]
