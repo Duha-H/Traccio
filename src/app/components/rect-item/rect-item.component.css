@@ -19,8 +19,8 @@ mat-icon {
 }
 
 .container {
-  width: 280px;
-  height: 400px;
+  min-width: 180px;
+  min-height: 200px;
   border-radius: 25px;
   padding: 20px; /* might need to remove this */
   text-align: center;

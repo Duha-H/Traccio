@@ -17,19 +17,21 @@
 .dropdown-container.hidden {
 	height: 0;
 	opacity: 0;
+	/* display: none; */
 }
 
 .dropdown-container.visible {
 	height: 130px;
 	opacity: 1;
   transform: translateY(0);
+	/* display: inline-block; */
 }
 
 ul {
 	list-style: none;
 	padding: 0;
 	text-align: left;
-	margin: 6px 5px;
+	margin: 6px 0;
 	transition: all 1s ease;
 }
 
@@ -39,7 +41,7 @@ li {
 	font-weight: 100;
 }
 
-li:hover {
+.dropdown-container.visible li:hover {
 	background-color: var(--titles-secondary-dark);
 	cursor: pointer;
 }
@@ -47,6 +49,13 @@ li:hover {
 li a {
 	text-decoration: none;
 	color: var(--text-dark);
+	display: inline-block;
+	width: 100%;
+}
+
+li:hover a {
+	color: var(--primary-dark);
+	font-weight: 400;
 }
 
 .signout-button {

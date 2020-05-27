@@ -3,7 +3,6 @@ import { Routes, RouterModule } from "@angular/router";
 import { DashboardComponent } from "./views/dashboard/dashboard.component";
 import { AuthGuardService as AuthGuard } from "./controllers/auth-guard.service";
 import { AppComponent } from "./app.component";
-import { LoginComponent } from "./auth/login/login.component";
 import { SignInComponent } from "./auth/sign-in/sign-in.component";
 import { SignUpComponent } from "./auth/sign-up/sign-up.component";
 import { ConfirmSignupComponent } from "./auth/confirm-signup/confirm-signup.component";
@@ -16,7 +15,6 @@ import { AppWrapperComponent } from './views/app-wrapper/app-wrapper.component';
 import { AccountRecoveryComponent } from './auth/account-recovery/account-recovery.component';
 
 const routes: Routes = [
-  // { path: "", redirectTo: "home", pathMatch: "full" },
   { path: "", canActivate: [AuthGuard], component: AppWrapperComponent,
     children: [
       { path: "", component: DashboardComponent },
@@ -32,13 +30,11 @@ const routes: Routes = [
       { path: "settings", component: SettingsComponent, canActivate: [AuthGuard] },
     ]
   },
-  // { path: "", component: SearchComponent },
   { path: "signin", component: SignInComponent },
   { path: "signup", component: SignUpComponent },
   { path: "confirmsignup", component: ConfirmSignupComponent },
   { path: "accountrecovery", component: AccountRecoveryComponent },
-  { path: "login", component: LoginComponent }, // temp
-  // { path: 'applications', component: JourneyViewComponent },
+  { path: '**', redirectTo: "" },
 ];
 
 @NgModule({

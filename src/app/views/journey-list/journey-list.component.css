@@ -12,7 +12,7 @@ mat-drawer-container {
 
 mat-drawer {
   min-width: 400px;
-  background-color: #24284d;
+  background-color: var(--primary-dark);
 }
 
 .mat-drawer-inner-container {
@@ -28,12 +28,14 @@ mat-drawer {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   justify-items: center;
-  margin: 25px 25px;
+  /* margin: 25px 25px; */
   /* height: 80%; */
 }
 
 .journey-item {
   grid-column-start: auto;
   grid-row-start: auto;
-  margin: 25px;
+  margin: 20px;
+  min-width: 100px;
+  min-height: 100px;
 }

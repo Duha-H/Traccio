@@ -22,7 +22,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { JourneysComponent } from './views/journeys/journeys.component';
-import { LoginComponent } from './auth/login/login.component';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { SettingsComponent } from './views/settings/settings.component';
@@ -50,7 +49,6 @@ import { SignupSuccessfulComponent } from './auth/confirm-signup/signup-successf
     AppComponent,
     DashboardComponent,
     JourneysComponent,
-    LoginComponent,
     SignInComponent,
     SignUpComponent,
     SettingsComponent,
