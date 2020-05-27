@@ -1,3 +1,11 @@
-<p>Confirmation code sent to {{email}}</p>
-<input type="text" [(ngModel)]="code">
-<button (click)="confirmSignup()">Submit</button>
+<div class="container">
+  <div class="confirm-signup-container" *ngIf="!success">
+    <h2>Confirm Sign Up</h2>
+    <p class="secondary-label">A confirmation code was sent to your email, enter the code below.</p>
+    <text-field (inputChange)="code=$event" [label]="'Confirmation Code'"></text-field>
+    <p class="warning-text">{{error}}<br></p>
+    <button (click)="confirmSignup()" class="submit-button">Confirm Sign Up</button>
+    <p>Didn't receive a confirmation code? <a role="button" (click)="handleResend()" class="login-link">Resend code</a></p>
+  </div>
+  <signup-successful *ngIf="success"></signup-successful>
+</div>

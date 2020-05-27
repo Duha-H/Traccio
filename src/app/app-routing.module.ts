@@ -17,7 +17,7 @@ import { AccountRecoveryComponent } from './auth/account-recovery/account-recove
 
 const routes: Routes = [
   // { path: "", redirectTo: "home", pathMatch: "full" },
-  { path: "", canActivate: [AuthGuard], component: AppWrapperComponent, pathMatch: "full",
+  { path: "", canActivate: [AuthGuard], component: AppWrapperComponent,
     children: [
       { path: "", component: DashboardComponent },
       {
@@ -27,7 +27,6 @@ const routes: Routes = [
           { path: "", component: JourneyListComponent },
           { path: ":id", component: JourneyViewComponent },
         ],
-        // canActivate: [AuthGuard]
       },
       { path: "search", component: SearchComponent, canActivate: [AuthGuard] },
       { path: "settings", component: SettingsComponent, canActivate: [AuthGuard] },

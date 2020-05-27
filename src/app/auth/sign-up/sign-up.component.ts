@@ -44,7 +44,6 @@ export class SignUpComponent implements OnInit {
     }
 
     try {
-      console.log(this.firstName, this.lastName, this.email);
       const user = await Auth.signUp({
         username: this.email,
         password: this.password,

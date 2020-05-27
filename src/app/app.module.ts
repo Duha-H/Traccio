@@ -43,6 +43,7 @@ import { AccountRecoveryComponent } from './auth/account-recovery/account-recove
 import { ForgotPasswordComponent } from './auth/account-recovery/forgot-password.component';
 import { NewPasswordComponent } from './auth/account-recovery/new-password.component';
 import { ResetSuccessfulComponent } from './auth/account-recovery/reset-successful.component';
+import { SignupSuccessfulComponent } from './auth/confirm-signup/signup-successful.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { ResetSuccessfulComponent } from './auth/account-recovery/reset-successf
     AccountRecoveryComponent,
     ForgotPasswordComponent,
     NewPasswordComponent,
-    ResetSuccessfulComponent
+    ResetSuccessfulComponent,
+    SignupSuccessfulComponent
   ],
   imports: [
     BrowserModule,

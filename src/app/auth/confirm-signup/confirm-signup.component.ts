@@ -13,6 +13,8 @@ export class ConfirmSignupComponent implements OnInit {
 
   code = '';
   email = '';
+  error = '';
+  success = true;
 
   constructor(private router: Router, private authStore: AuthStoreService, private api: APIService) { }
 
@@ -21,18 +23,34 @@ export class ConfirmSignupComponent implements OnInit {
   }
 
   async confirmSignup() {
+    if (this.email === '') {
+      this.router.navigate(['signin']);
+      return;
+    } else if (this.code === '') {
+      this.error = 'A confirmation code must be provided';
+      return;
+    }
+
     try {
       await Auth.confirmSignUp(this.authStore.email, this.code);
       console.log('sign up confirmed');
-      // const result = await this.api.CreateUserEntry({
-      //   firstName: this.authStore.firstName,
-      //   lastName: this.authStore.lastName,
-      //   id: this.authStore.id
-      // });
-      // console.log(result);
-      this.router.navigate(['signin']);
+      // this.router.navigate(['signin']);
+      this.success = true;
     } catch (error) {
-        console.log('error confirming sign up', error);
+      console.log('Error confirming sign up:', error);
+      if (error.code === 'CodeMismatchException') {
+        this.error = 'The code provide is incorrect or no longer valid, please try again.';
+      } else {
+        this.error = error.message;
+      }
+    }
+  }
+
+  handleResend() {
+    try {
+      Auth.resendSignUp(this.authStore.email);
+    } catch (error) {
+      console.log('Error resending code:', error);
     }
   }
 
