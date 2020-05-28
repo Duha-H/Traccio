@@ -41,7 +41,7 @@ li {
 	font-weight: 100;
 }
 
-.dropdown-container.visible li:hover {
+li:hover {
 	background-color: var(--titles-secondary-dark);
 	cursor: pointer;
 }

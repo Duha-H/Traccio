@@ -52,9 +52,9 @@ h6 {
   color: var(--titles-secondary-dark);
 }
 
-/* p, span {
+p {
 	color: var(--text-dark);
-} */
+}
 
 ::placeholder {
   color: #d1d1d1;
@@ -156,4 +156,8 @@ a:hover {
 a.login-link.forgot-password {
   text-align: left;
   margin: 0;
+}
+
+.spacer {
+  flex: 1;
 }

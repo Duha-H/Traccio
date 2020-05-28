@@ -3,6 +3,10 @@ h2 {
   display: flex;
 }
 
+span {
+  color: var(--text-dark);
+}
+
 mat-drawer-container {
   background: none;
   min-height: 94vh;
@@ -16,7 +20,7 @@ mat-drawer-content {
 }
 
 mat-drawer {
-  min-width: 460px;
+  min-width: 400px;
   background-color: var(--primary-dark);
 }
 

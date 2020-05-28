@@ -11,7 +11,7 @@ mat-drawer-container {
 }
 
 mat-drawer {
-  min-width: 400px;
+  min-width: 350px;
   background-color: var(--primary-dark);
 }
 
