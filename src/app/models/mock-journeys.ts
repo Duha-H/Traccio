@@ -16,3 +16,17 @@ export const testJourney2 = new Journey({
   id: 1,
   applications: mApps.MOCK_APPS_1,
 });
+export const testJourney3 = new Journey({
+  title: "New Active Journey",
+  startDate: "2020-5-15",
+  active: true,
+  id: 2,
+  applications: mApps.MOCK_APPS_3,
+});
+export const testJourney4 = new Journey({
+  title: "Papua New Guinea",
+  startDate: "2019-9-15",
+  active: true,
+  id: 3,
+  applications: mApps.MOCK_APPS_2,
+});

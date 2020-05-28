@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserStoreService } from 'src/app/models/user-store.service';
-import { data } from '../../models/data';
+import * as mockData from '../../models/data';
 import { Journey } from '../../models/journey';
 
 @Component({
@@ -11,22 +11,24 @@ import { Journey } from '../../models/journey';
 export class DashboardComponent implements OnInit {
 
   name = '';
-  data = data;
+  data = mockData.data;
   yearSpacing = 40;
   dayBorderWidth = 2;
-  journeys: Journey[];
+  activeJourneys: Journey[];
+  selectedJourney: {value: Journey, viewValue: string, data: object};
+  dropdownContent: {value: Journey, viewValue: string, data: object}[] = [];
 
   constructor(private userStore: UserStoreService) { }
 
   ngOnInit() {
     try {
-      this.name = `${this.userStore.user.firstName}`;
-      // this.journeys = Object.values(this.userStore.journeys);
-      this.userStore.journeys
-        .subscribe(journeys => this.journeys = Object.values(journeys) );
-      // let res = await this.api.ListJourneys();
-      // console.log(res);
-      // console.log("anything");
+      this.name = this.userStore.user.firstName;
+      this.userStore.activeJourneys
+        .subscribe(activeJourneys => {
+          this.activeJourneys = activeJourneys;
+          this.setDropdownContent();
+        });
+      this.selectedJourney = this.dropdownContent[0];
       console.log("dashboard init");
     } catch (error) {
       console.log("User not defined yet"); // should probably make sure this never happens
@@ -34,5 +36,14 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  setDropdownContent() {
+    this.activeJourneys.forEach(journey => {
+      this.dropdownContent.push({
+        value: journey,
+        viewValue: journey.title,
+        data: this.userStore.getCalendarData(journey.id)
+      });
+    });
+  }
 
 }

@@ -33,7 +33,7 @@ import { JourneyListComponent } from './views/journey-list/journey-list.componen
 import { ApplicationInputComponent } from './components/application-input/application-input.component';
 import { SearchComponent } from './views/search/search.component';
 import { ConfirmSignupComponent } from './auth/confirm-signup/confirm-signup.component';
-import { ResponsiveCalendarComponent } from './components/responsive-calendar/responsive-calendar.component';
+import { ResponsiveCalendarComponent } from './components/responsive-calendar.component';
 import { AppWrapperComponent } from './views/app-wrapper/app-wrapper.component';
 import { OnDirtyErrorStateMatcher } from './controllers/on-dirty-error-state-matcher';
 import { AccountDropdownComponent } from './components/account-dropdown/account-dropdown.component';

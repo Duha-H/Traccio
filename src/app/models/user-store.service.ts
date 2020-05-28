@@ -7,6 +7,7 @@ import { UserStoreControllerService } from "../controllers/user-store-controller
 import { Observable } from "rxjs/Observable";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { map } from "rxjs/operators";
+import { DataManagerService } from '../controllers/data-manager.service';
 
 @Injectable({
   providedIn: "root",
@@ -14,42 +15,41 @@ import { map } from "rxjs/operators";
 export class UserStoreService {
 
   user: User;
-  initialJourneys: { [key: string]: Journey } = {
+  placeholderJourneys: { [key: string]: Journey } = {
     0: mock.testJourney1,
-    1: mock.testJourney2
+    1: mock.testJourney2,
+    2: mock.testJourney3,
+    3: mock.testJourney4,
   };
   dataUpdated = false;
 
-  private _journeys: BehaviorSubject<{
-    [key: string]: Journey;
-  }> = new BehaviorSubject<{ [key: string]: Journey }>(this.initialJourneys);
   // Not exposing _journeys observer to prevent clients
   // of UserStoreService from directly updating values
   // public readonly journeys: Observable<{[key: string]: Journey}> = this._journeys.asObservable();
+  private _journeys: BehaviorSubject<{
+    [key: string]: Journey;
+  }> = new BehaviorSubject<{ [key: string]: Journey }>(this.placeholderJourneys);
   public readonly journeys: Observable<Journey[]> = this._journeys.pipe(
     map((entry) => Object.values(entry).reverse())
   );
 
-  constructor(private controller: UserStoreControllerService) { }
+  private _activeJourneys: BehaviorSubject<Journey[]> = new BehaviorSubject<Journey[]>(this.getActiveJourneys());
+  public readonly activeJourneys: Observable<Journey[]> = this._activeJourneys.asObservable();
+
+  constructor(
+    private controller: UserStoreControllerService,
+    private dataManager: DataManagerService) { }
+
+  /**
+   * Initial Setup Methods
+   */
 
   async setUser(firstName: string, lastName: string, id: string) {
     this.user = new User();
     this.user.firstName = firstName;
     this.user.lastName = lastName;
     this.user.userid = id;
-    // await this.fetchData();
-  }
-
-  getUserEntryInput() {
-    // use only when a user is first initialized
-    const input = this.user.getGraphQLInput();
-    const journeys = Object.values(this.journeys);
-    if (journeys.length !== 0) {
-      input.journeys = journeys.map((journey) => journey.getGraphQLInput());
-      console.log(input.journeys);
-    }
-    console.log(input);
-    return input;
+    await this.fetchData();
   }
 
   async fetchData() {
@@ -57,27 +57,40 @@ export class UserStoreService {
     // Performs API calls to fetch user data
     console.log("HERE:::data about to be fetched");
     let data = {};
-    await this.controller.fetchUserJourneys(this.user.userid).then((value) => {
-      // this._journeys.next(value);
-      data = value;
-    });
+    // await this.controller.fetchUserJourneys(this.user.userid).then((value) => {
+    //   // this._journeys.next(value);
+    //   data = value;
+    // });
+    data = this.placeholderJourneys; // TEMP
     console.log("HERE:::data fetched", data);
-    this._journeys.next(data);
+    this.updateJourneyData(data);
+    this.dataManager.collectData(data);
   }
+
+  /**
+   * Observable Update Trigger Methods
+   */
 
   loadData() {
-    // Fires .next() on _journeys observable to update ("refresh") data
+    // Fires .next() on _journeys and _activeJourneys observable to update ("refresh") data
     this._journeys.next(this._journeys.getValue());
+    this._activeJourneys.next(this.getActiveJourneys());
   }
 
-  updateData() {
-    this.dataUpdated = true;
+  updateJourneyData(newJourneys: {[key: string]: Journey}) {
+    // this.dataUpdated = true;
+    this._journeys.next(newJourneys);
+    this._activeJourneys.next(this.getActiveJourneys());
   }
 
   clearData() {
     this.user = undefined;
-    this._journeys.next(this.initialJourneys);
+    this.updateJourneyData(this.placeholderJourneys);
   }
+
+  /**
+   * Data Retrieval Methods
+   */
 
   getJourney(id: string): Journey {
     return this._journeys.getValue()[id];
@@ -90,6 +103,24 @@ export class UserStoreService {
     );
   }
 
+  getActiveJourneys() {
+    let activeJourneys = Object.values(this._journeys.getValue()).filter(journey =>
+      journey.active
+    );
+    activeJourneys = activeJourneys.sort((a: Journey, b: Journey) => { // sort journeys by latest start date
+      return a.startDate > b.endDate ? 1 : -1;
+    });
+    return activeJourneys;
+  }
+
+  getCalendarData(journeyid: string): { day: string; value: number; }[] {
+    return this.dataManager.getFormattedCalendarData(journeyid);
+  }
+
+  /**
+   * User Data Updating Methods
+   */
+
   addNewJourney(journeyData: { [key: string]: any }) {
     journeyData.id = journeyData.id // if ID is undefined, generate a new ID
       ? journeyData.id
@@ -98,8 +129,9 @@ export class UserStoreService {
     // update current data
     const updatedJourneys = this._journeys.getValue();
     updatedJourneys[journeyData.id] = newJourney;
-    this._journeys.next(updatedJourneys);
+    this.updateJourneyData(updatedJourneys);
     this.dataUpdated = true;
+    this.dataManager.addJourney(newJourney);
     console.log("journey added:", this.journeys);
     // make necessary api calls
   }
@@ -111,6 +143,7 @@ export class UserStoreService {
     const newApplication = new Application(appData);
     journey.applications.push(newApplication); // wooowiiieee
     this.dataUpdated = true;
+    this.dataManager.addApplication(journeyId, newApplication);
     console.log("application added: ", newApplication);
   }
 
@@ -124,6 +157,10 @@ export class UserStoreService {
     console.log("application updated: ", existingApplication);
     console.log(this.journeys);
   }
+
+  /**
+   * Auxiliary Methods
+   */
 
   private _getNewJourneyID(): string {
     let maxID = 0;
@@ -152,5 +189,15 @@ export class UserStoreService {
       }
     });
     return maxID;
+  }
+
+  private _getUserEntryInput() {
+    // use only when a user is first initialized
+    const input = this.user.getGraphQLInput();
+    const journeys = Object.values(this.journeys);
+    if (journeys.length !== 0) {
+      input.journeys = journeys.map((journey) => journey.getGraphQLInput());
+    }
+    return input;
   }
 }
