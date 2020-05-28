@@ -9,7 +9,7 @@ import { ResponsiveCalendarCanvas } from "@nivo/calendar";
 import { ReactWrapper } from './react-wrapper.component';
 
 interface CalendarProps {
-  data: any;
+  data: {day: string, value: number}[];
   from: string | Date;
   to: string | Date;
   emptyColor: string;
@@ -81,6 +81,14 @@ export class ResponsiveCalendarComponent extends ReactWrapper {
         this.getRootDomNode()
       );
     }
+  }
+
+  private _getEarliestDate() {
+    return this.data[0].day;
+  }
+
+  private _getLatestDate() {
+    return this.data[this.data.length - 1].day;
   }
 }
 

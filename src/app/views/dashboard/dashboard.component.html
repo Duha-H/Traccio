@@ -1,98 +1,64 @@
-
 <div class="view-container">
-	<div class="greeting">
-		<h2>Hi there, {{ name }}!</h2>
-	</div>
-	<div class="dashboard-content" *ngIf="selectedJourney; else elseContent">
-		<div class="dashboard-header">
-			<h3>{{selectedJourney.value.title}}</h3>
-			<div class="spacer"></div>
-			<div>
-				<mat-form-field>
-					<mat-select color="primary" [(ngModel)]="selectedJourney" name="journeySelection" >
-						<mat-option *ngFor="let journey of dropdownContent" [value]="journey">
-							{{journey.viewValue}}
-						</mat-option>
-					</mat-select>
-				</mat-form-field>
-			</div>
-		</div>
+  <div class="greeting">
+    <h2>Hi there, {{ name }}!</h2>
+  </div>
+  <div class="dashboard-content" *ngIf="selectedJourney; else elseContent">
+    <div class="dashboard-header">
+      <h3>{{selectedJourney.value.title}}</h3>
+      <div class="spacer"></div>
+      <div>
+        <mat-form-field>
+          <mat-select color="primary" [(ngModel)]="selectedJourney" name="journeySelection" (selectionChange)="selectYear(selectedJourney.years[0])">
+            <mat-option *ngFor="let journey of dropdownContent" [value]="journey">
+              {{journey.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
 
-		<div class="journey-details">
-			<div class="calendar-container">
-				<calendar-wrapper [data]="selectedJourney.data" [from]="'2019-07-01'" [to]="'2020-07-12'" [emptyColor]="'#21e6c214'"
-					[colors]="[ '#61cdbb', '#97e3d5', '#e8c1a0', '#f47560' ]" [yearSpacing]="yearSpacing"
-					[monthBorderColor]="'#24284d'" [dayBorderWidth]="dayBorderWidth" [dayBorderColor]="'#24284d'" [legends]="[
-						{
-							anchor: 'bottom-right',
-							direction: 'row',
-							translateY: 36,
-							itemCount: 4,
-							itemWidth: 42,
-							itemHeight: 36,
-							itemsSpacing: 14,
-							itemDirection: 'right-to-left',
+    <div class="journey-details">
+			<div class="calendar-data">
+				<div class="calendar-container">
+					<calendar-wrapper [data]="selectedJourney.data" [from]="currentYear+'-02-01'" [to]="currentYear+'-11-01'"
+						[emptyColor]="'#21e6c214'" [colors]="[ '#61cdbb', '#97e3d5', '#e8c1a0', '#f47560' ]"
+						[yearSpacing]="yearSpacing" [monthBorderColor]="'#24284d'" [dayBorderWidth]="dayBorderWidth"
+						[dayBorderColor]="'#24284d'" [legends]="[
+							{
+								anchor: 'bottom-right',
+								direction: 'row',
+								translateY: 36,
+								itemCount: 4,
+								itemWidth: 42,
+								itemHeight: 36,
+								itemsSpacing: 14,
+								itemDirection: 'right-to-left',
+								textColor: '#f00',
+								itemTextColor: '#f00'
+							}]" [theme]="{axis: {
+								textColor: '#f00'
+							},
 							textColor: '#f00',
-							itemTextColor: '#f00'
-						}]"
-						[theme]="{axis: {
-							textColor: '#f00'
-						},
-						textColor: '#f00',
-						background: '#f00',
-						markers: {
-							textColor: '#f00'
-						}
-					}"
-				>
-				</calendar-wrapper>
+							background: '#f00',
+							markers: {
+								textColor: '#f00'
+							}
+						}">
+					</calendar-wrapper>
+				</div>
+				<ul style="list-style: none;" class="year-selector">
+					<li *ngFor="let year of selectedJourney.years" (click)="selectYear(year)"
+						[style.background-color]="year == currentYear ? 'var(--titles-secondary-dark)' : 'transparent'">
+						<p [style.color]="year == currentYear ? 'var(--background-dark)' : 'var(--text-dark)'">{{year}}</p>
+					</li>
+				</ul>
 			</div>
-		</div>
+      
+    </div>
 
-		<p>Content: {{selectedJourney.data[0].day}}</p>
+  </div>
+  <ng-template class="dashboard-content" #elseContent>
+    <h4>No active journeys to display</h4>
+  </ng-template>
 
-	</div>
-	<ng-template class="dashboard-content" #elseContent>
-		<h4>No active journeys to display</h4>
-	</ng-template>
-	<!-- <div *ngFor="let journey of journeys;" class="dashboard-carousel">
-		<div class="journey-details">
-			<div class="calendar-container">
-				<calendar-wrapper [data]="data" [from]="'2016-03-01'" [to]="'2016-07-12'" [emptyColor]="'#21e6c214'"
-					[colors]="[ '#61cdbb', '#97e3d5', '#e8c1a0', '#f47560' ]" [yearSpacing]="yearSpacing"
-					[monthBorderColor]="'#24284d'" [dayBorderWidth]="dayBorderWidth" [dayBorderColor]="'#24284d'" [legends]="[
-						{
-							anchor: 'bottom-right',
-							direction: 'row',
-							translateY: 36,
-							itemCount: 4,
-							itemWidth: 42,
-							itemHeight: 36,
-							itemsSpacing: 14,
-							itemDirection: 'right-to-left',
-							textColor: '#f00',
-							itemTextColor: '#f00'
-						}]"
-						[theme]="{axis: {
-							textColor: '#f00'
-						},
-						textColor: '#f00',
-						background: '#f00',
-						markers: {
-							textColor: '#f00'
-						}
-					}"
-				>
-				</calendar-wrapper>
-			</div>
-		</div>
-	</div> -->
-		
-
-	<!-- <mat-tab label="Second"> Content 2 </mat-tab>
-	<mat-tab label="Third"> Content 3 </mat-tab> -->
 </div>
-
-
-
-<!-- margin="{ top: 40, right: 40, bottom: 40, left: 40 }" -->

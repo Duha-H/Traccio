@@ -42,7 +42,7 @@ mat-select {
   border-radius: 5px;
 }
 
-::ng-deep .mat-form-field-underline {
+::ng-deep .dashboard-header .mat-form-field-underline {
   display: none;
 }
 
@@ -57,26 +57,23 @@ mat-select {
   flex-direction: row;
 }
 
-.calendar-container {
-  /* max-height: 30vh; */
-  height: 20vh;
-  height: 270px;
-  /* background-color: var(--secondary-dark); */
-  /* width: 97vw; */
-  /* height: 100%; */
-  /* max-width: 700px; */
-  text-align: center;
-  align-content: center;
-  margin: 25px 0;
-  padding: 40px;
-
+.calendar-data {
   border-radius: 15px;
-  /* background-color: white; */
+  padding: 20px 40px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.calendar-container {
+  /* height: 20vh; */
+  height: 250px;
+  /* background-color: var(--secondary-dark); */
+  text-align: center;
+  align-content: center;
+  /* margin: 25px 0; */
+}
+
 calendar-wrapper {
-  max-width: 700px;
+  max-width: 650px;
 }
 
 calendar-wrapper span {
@@ -84,6 +81,22 @@ calendar-wrapper span {
   background-color: gray;
 }
 
-/* .calendar {
-  max-height: 100%;
-} */
+.year-selector {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.year-selector li {
+  color: var(--text-dark);
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 0 15px;
+}
+
+.year-selector li p {
+  margin: 0;
+}

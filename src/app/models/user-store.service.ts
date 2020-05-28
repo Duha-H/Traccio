@@ -129,9 +129,9 @@ export class UserStoreService {
     // update current data
     const updatedJourneys = this._journeys.getValue();
     updatedJourneys[journeyData.id] = newJourney;
+    this.dataManager.addJourney(newJourney);
     this.updateJourneyData(updatedJourneys);
     this.dataUpdated = true;
-    this.dataManager.addJourney(newJourney);
     console.log("journey added:", this.journeys);
     // make necessary api calls
   }
@@ -141,9 +141,10 @@ export class UserStoreService {
     const appID = this._getNewAppID(journeyId);
     appData.id = appID;
     const newApplication = new Application(appData);
-    journey.applications.push(newApplication); // wooowiiieee
-    this.dataUpdated = true;
     this.dataManager.addApplication(journeyId, newApplication);
+    journey.applications.push(newApplication); // wooowiiieee
+    // TODO: should this maybe trigger a data reload??
+    this.dataUpdated = true;
     console.log("application added: ", newApplication);
   }
 
