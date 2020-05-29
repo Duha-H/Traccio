@@ -117,6 +117,15 @@ export class UserStoreService {
     return this.dataManager.getFormattedCalendarData(journeyid);
   }
 
+  getStatusData(journeyid: string): {
+    id: string,
+    label: string,
+    value: number,
+    color: string
+  }[] {
+    return this.dataManager.getFormattedStatusData(journeyid);
+  }
+
   /**
    * User Data Updating Methods
    */

@@ -20,7 +20,7 @@
     <div class="journey-details">
 			<div class="data-container">
 				<div class="calendar-container">
-					<calendar-wrapper [data]="selectedJourney.data" [from]="currentYear+'-02-01'" [to]="currentYear+'-11-01'"
+					<calendar-wrapper [data]="selectedJourney.calendarData" [from]="currentYear+'-02-01'" [to]="currentYear+'-11-01'"
 						[emptyColor]="'#21e6c214'" [colors]="[ '#61cdbb', '#97e3d5', '#e8c1a0', '#f47560' ]"
 						[yearSpacing]="yearSpacing" [monthBorderColor]="'#22232d'" [dayBorderWidth]="dayBorderWidth"
 						[dayBorderColor]="'#22232d'" [legends]="[
@@ -57,7 +57,7 @@
 			<div class="data-container">
 				<div class="status-container" style="height: 400px;">
 					<pie-chart-wrapper
-					[data]="pieChartData"
+					[data]="selectedJourney.statusData"
 					[margin]="{ top: 40, right: 200, bottom: 40, left: 80 }"
 					[pixelRatio]="2"
 					[innerRadius]="0.5"

@@ -43,7 +43,7 @@ export const MOCK_APPS_1 = [
 		company: 'Bob\'s Burgers',
 		title: 'Cook',
 		date: [1, 1, 2019],
-		status: STATUS.IN_REVIEW.toString(),
+		status: STATUS.REJECTED.toString(),
 		source: APP_SOURCE.OTHER.toString(),
 		notes: 'probably will be ghosted',
 	}),
