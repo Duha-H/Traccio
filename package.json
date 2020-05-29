@@ -24,6 +24,7 @@
     "@angular/router": "~9.1.4",
     "@aws-amplify/ui-angular": "^0.2.4",
     "@nivo/calendar": "^0.61.1",
+    "@nivo/pie": "^0.61.1",
     "aws-amplify": "^3.0.10",
     "aws-amplify-angular": "^5.0.10",
     "react": "^16.13.1",
@@ -33,13 +34,15 @@
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.901.4",
+    "@angular-devkit/build-angular": "^0.901.7",
     "@angular/cli": "~9.1.4",
     "@angular/compiler-cli": "~9.1.4",
     "@angular/language-service": "~9.1.4",
-    "@types/node": "^12.11.1",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "^12.11.1",
+    "@types/react": "^16.9.17",
+    "@types/react-dom": "^16.9.4",
     "codelyzer": "^5.1.2",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
@@ -51,8 +54,6 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
-    "typescript": "~3.8.3",
-    "@types/react": "^16.9.17",
-    "@types/react-dom": "^16.9.4"
+    "typescript": "~3.8.3"
   }
 }

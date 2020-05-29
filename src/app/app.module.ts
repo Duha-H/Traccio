@@ -34,6 +34,7 @@ import { ApplicationInputComponent } from './components/application-input/applic
 import { SearchComponent } from './views/search/search.component';
 import { ConfirmSignupComponent } from './auth/confirm-signup/confirm-signup.component';
 import { ResponsiveCalendarComponent } from './components/responsive-calendar.component';
+import { ResponsivePieComponent } from './components/responsive-pie.component';
 import { AppWrapperComponent } from './views/app-wrapper/app-wrapper.component';
 import { OnDirtyErrorStateMatcher } from './controllers/on-dirty-error-state-matcher';
 import { AccountDropdownComponent } from './components/account-dropdown/account-dropdown.component';
@@ -60,6 +61,7 @@ import { SignupSuccessfulComponent } from './auth/confirm-signup/signup-successf
     SearchComponent,
     ConfirmSignupComponent,
     ResponsiveCalendarComponent,
+    ResponsivePieComponent,
     AppWrapperComponent,
     AccountDropdownComponent,
     TextFieldComponent,

@@ -152,3 +152,114 @@ export const data = [
     value: 138,
   },
 ];
+
+export const pieChartData = [
+  {
+    id: "java",
+    label: "java",
+    value: 355,
+    color: "hsl(184, 70%, 50%)",
+  },
+  {
+    id: "php",
+    label: "php",
+    value: 350,
+    color: "hsl(271, 70%, 50%)",
+  },
+  {
+    id: "rust",
+    label: "rust",
+    value: 473,
+    color: "hsl(111, 70%, 50%)",
+  },
+  {
+    id: "ruby",
+    label: "ruby",
+    value: 4,
+    color: "hsl(66, 70%, 50%)",
+  },
+  {
+    id: "hack",
+    label: "hack",
+    value: 348,
+    color: "hsl(8, 70%, 50%)",
+  },
+  {
+    id: "make",
+    label: "make",
+    value: 349,
+    color: "hsl(199, 70%, 50%)",
+  },
+  {
+    id: "go",
+    label: "go",
+    value: 318,
+    color: "hsl(11, 70%, 50%)",
+  },
+  {
+    id: "c",
+    label: "c",
+    value: 67,
+    color: "hsl(10, 70%, 50%)",
+  },
+  {
+    id: "scala",
+    label: "scala",
+    value: 426,
+    color: "hsl(323, 70%, 50%)",
+  },
+  {
+    id: "lisp",
+    label: "lisp",
+    value: 539,
+    color: "hsl(81, 70%, 50%)",
+  },
+  {
+    id: "erlang",
+    label: "erlang",
+    value: 305,
+    color: "hsl(196, 70%, 50%)",
+  },
+  {
+    id: "css",
+    label: "css",
+    value: 469,
+    color: "hsl(294, 70%, 50%)",
+  },
+  {
+    id: "javascript",
+    label: "javascript",
+    value: 553,
+    color: "hsl(213, 70%, 50%)",
+  },
+  {
+    id: "stylus",
+    label: "stylus",
+    value: 43,
+    color: "hsl(356, 70%, 50%)",
+  },
+  {
+    id: "python",
+    label: "python",
+    value: 561,
+    color: "hsl(85, 70%, 50%)",
+  },
+  {
+    id: "haskell",
+    label: "haskell",
+    value: 148,
+    color: "hsl(209, 70%, 50%)",
+  },
+  {
+    id: "elixir",
+    label: "elixir",
+    value: 123,
+    color: "hsl(209, 70%, 50%)",
+  },
+  {
+    id: "sass",
+    label: "sass",
+    value: 56,
+    color: "hsl(125, 70%, 50%)",
+  },
+];

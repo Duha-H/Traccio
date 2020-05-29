@@ -12,6 +12,7 @@ export class DashboardComponent implements OnInit {
 
   name = '';
   data = mockData.data;
+  pieChartData = mockData.pieChartData;
   yearSpacing = 40;
   dayBorderWidth = 2;
   activeJourneys: Journey[];

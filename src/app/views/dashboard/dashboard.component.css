@@ -57,15 +57,18 @@ mat-select {
   flex-direction: row;
 }
 
-.calendar-data {
+.data-container {
   border-radius: 15px;
-  padding: 20px 40px;
+  padding: 20px 60px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  /* width: 1200px; */
+
 }
 
 .calendar-container {
   /* height: 20vh; */
-  height: 250px;
+  height: 220px;
+  /* width: 1000px; */
   /* background-color: var(--secondary-dark); */
   text-align: center;
   align-content: center;
@@ -87,6 +90,7 @@ calendar-wrapper span {
   flex-direction: row;
   margin: 0 auto;
   justify-content: center;
+  margin-bottom: 20px;
 }
 
 .year-selector li {

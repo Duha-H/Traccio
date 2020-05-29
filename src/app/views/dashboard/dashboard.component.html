@@ -18,23 +18,23 @@
     </div>
 
     <div class="journey-details">
-			<div class="calendar-data">
+			<div class="data-container">
 				<div class="calendar-container">
 					<calendar-wrapper [data]="selectedJourney.data" [from]="currentYear+'-02-01'" [to]="currentYear+'-11-01'"
 						[emptyColor]="'#21e6c214'" [colors]="[ '#61cdbb', '#97e3d5', '#e8c1a0', '#f47560' ]"
-						[yearSpacing]="yearSpacing" [monthBorderColor]="'#24284d'" [dayBorderWidth]="dayBorderWidth"
-						[dayBorderColor]="'#24284d'" [legends]="[
+						[yearSpacing]="yearSpacing" [monthBorderColor]="'#22232d'" [dayBorderWidth]="dayBorderWidth"
+						[dayBorderColor]="'#22232d'" [legends]="[
 							{
 								anchor: 'bottom-right',
 								direction: 'row',
-								translateY: 36,
+								translateY: 0,
 								itemCount: 4,
 								itemWidth: 42,
 								itemHeight: 36,
 								itemsSpacing: 14,
-								itemDirection: 'right-to-left',
-								textColor: '#f00',
-								itemTextColor: '#f00'
+								itemDirection: 'left-to-right',
+								textColor: '#000',
+								itemTextColor: '#fff'
 							}]" [theme]="{axis: {
 								textColor: '#f00'
 							},
@@ -53,6 +53,118 @@
 					</li>
 				</ul>
 			</div>
+
+			<div class="data-container">
+				<div class="status-container" style="height: 400px;">
+					<pie-chart-wrapper
+					[data]="pieChartData"
+					[margin]="{ top: 40, right: 200, bottom: 40, left: 80 }"
+					[pixelRatio]="2"
+					[innerRadius]="0.5"
+					[padAngle]="0.7"
+					[cornerRadius]="3"
+					[colors]="{ scheme: 'paired' }"
+					[borderColor]="{ from: 'color', modifiers: [ [ 'darker', 0.6 ] ] }"
+					[radialLabelsSkipAngle]="10"
+					[radialLabelsTextXOffset]="6"
+					[radialLabelsTextColor]="'#333333'"
+					[radialLabelsLinkOffset]="0"
+					[radialLabelsLinkDiagonalLength]="16"
+					[radialLabelsLinkHorizontalLength]="24"
+					[radialLabelsLinkStrokeWidth]="1"
+					[radialLabelsLinkColor]="{ from: 'color' }"
+					[slicesLabelsSkipAngle]="10"
+					[slicesLabelsTextColor]="'#333333'"
+					[animate]="true"
+					[motionStiffness]="90"
+					[motionDamping]="15"
+					[defs]="[
+							{
+									id: 'dots',
+									type: 'patternDots',
+									background: 'inherit',
+									color: 'rgba(255, 255, 255, 0.3)',
+									size: 4,
+									padding: 1,
+									stagger: true
+							},
+							{
+									id: 'lines',
+									type: 'patternLines',
+									background: 'inherit',
+									color: 'rgba(255, 255, 255, 0.3)',
+									rotation: -45,
+									lineWidth: 6,
+									spacing: 10
+							}
+					]"
+					[fill]="[
+							{
+									match: {
+											id: 'ruby'
+									},
+									id: 'dots'
+							},
+							{
+									match: {
+											id: 'c'
+									},
+									id: 'dots'
+							},
+							{
+									match: {
+											id: 'go'
+									},
+									id: 'dots'
+							},
+							{
+									match: {
+											id: 'python'
+									},
+									id: 'dots'
+							},
+							{
+									match: {
+											id: 'scala'
+									},
+									id: 'lines'
+							},
+							{
+									match: {
+											id: 'lisp'
+									},
+									id: 'lines'
+							},
+							{
+									match: {
+											id: 'elixir'
+									},
+									id: 'lines'
+							},
+							{
+									match: {
+											id: 'javascript'
+									},
+									id: 'lines'
+							}
+					]"
+					[legends]="[
+							{
+									anchor: 'right',
+									direction: 'column',
+									translateX: 140,
+									itemWidth: 60,
+									itemHeight: 14,
+									itemsSpacing: 2,
+									symbolSize: 14,
+									symbolShape: 'circle'
+							}
+					]"
+					>
+					</pie-chart-wrapper>
+				</div>
+			</div>
+			
       
     </div>
 
