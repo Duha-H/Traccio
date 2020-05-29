@@ -34,6 +34,7 @@ p {
 
 mat-form-field {
   padding: 10px;
+  margin-right: 10px;
 }
 
 mat-select {
@@ -42,14 +43,19 @@ mat-select {
   border-radius: 5px;
 }
 
+.mat-select {
+  font-size: 10pt;
+}
+
 ::ng-deep .dashboard-header .mat-form-field-underline {
   display: none;
 }
 
 .journey-details {
-  padding: 15px;
+  /* padding: 15px;
   width: 90%;
-  margin: 0 auto;
+  margin: 0 auto; */
+  margin: 30px 0;
 }
 
 .dashboard-carousel {
@@ -57,22 +63,44 @@ mat-select {
   flex-direction: row;
 }
 
-.data-container {
+mat-grid-tile {
   border-radius: 15px;
-  padding: 20px 60px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  /* width: 1200px; */
+  
+}
 
+mat-grid-tile-header {
+  margin-bottom: 15px;
+}
+
+.data-container {
+  width: 100%;
+  height: 100%;
+}
+
+.data-container-title {
+  padding: 15px;
+  margin: 0;
+  text-align: left;
+  color: var(--titles-primary-dark);
+  font-weight: 200;
+  border-bottom: 0.8px solid var(--titles-primary-dark);
+}
+
+.stats-container {
+  text-align: left;
+  padding: 25px;
 }
 
 .calendar-container {
-  /* height: 20vh; */
-  height: 220px;
-  /* width: 1000px; */
-  /* background-color: var(--secondary-dark); */
+  height: 200px;
   text-align: center;
   align-content: center;
-  /* margin: 25px 0; */
+  padding: 20px 40px;
+}
+
+.status-container {
+  margin: 0 20px;
 }
 
 calendar-wrapper {
