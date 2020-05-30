@@ -1,14 +1,17 @@
 <mat-sidenav-container class="sidenav-container" mode="push">
-	<!-- Nav -->
+  <!-- Nav -->
   <mat-sidenav mode="side" role="navigation" opened>
     <ul class="sidenav">
-      <li><a href="#" routerLink="">
+      <li title="Dashboard"><a href="#" routerLink="" (click)="onNavIconClick(navHomeIcon)" routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact: true}" #navHomeIcon>
           <mat-icon [inline]="true" aria-hidden="false" aria-label="Dashboard icon">home</mat-icon>
         </a></li>
-      <li><a href="#" routerLink="/journeys">
+      <li title="Journeys"><a href="#" routerLink="/journeys" (click)="onNavIconClick(navJourneysIcon)"
+          routerLinkActive="active" #navJourneysIcon>
           <mat-icon [inline]="true" aria-hidden="false" aria-label="Journeys icon">list</mat-icon>
         </a></li>
-      <li><a href="#" routerLink="/search">
+      <li title="Search"><a href="#" routerLink="/search" (click)="onNavIconClick(navSearchIcon)"
+          routerLinkActive="active" #navSearchIcon>
           <mat-icon [inline]="true" aria-hidden="false" aria-label="Search icon">search</mat-icon>
         </a></li>
     </ul>
@@ -24,8 +27,8 @@
         <mat-icon (click)="toggleAccountDropdown()" style="cursor: pointer;">account_box</mat-icon>
       </div>
       <account-dropdown [dropdownItems]="dropdownItems" [displayDropdown]="displayDropdown"></account-dropdown>
-		</div>
-    
+    </div>
+
     <!-- Content Router -->
     <div class="content" role="main">
       <router-outlet></router-outlet>

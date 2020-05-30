@@ -10,20 +10,18 @@ h6 {
   color: var(--titles-secondary-dark);
 }
 
-p {
-  /* color: var(--text-dark); */
-}
-
 .view-container {
-  /* max-height: 250px; */
   max-width: 1200px;
   margin: 0 auto;
-  /* padding: 0 20px; */
 }
 
 .greeting {
   text-align: left;
   margin: 10px 0;
+}
+
+.greeting h2 {
+  margin-top: 0;
 }
 
 .dashboard-header {
@@ -52,9 +50,6 @@ mat-select {
 }
 
 .journey-details {
-  /* padding: 15px;
-  width: 90%;
-  margin: 0 auto; */
   margin: 30px 0;
 }
 

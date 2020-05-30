@@ -27,10 +27,9 @@
               Journey Stats
             </h4>  
             <div class="stats-container">
-              <p>Journey Details</p>
               <p>Start Date: {{selectedJourney.value.startDate.toLocaleDateString()}}</p>
               <p>Applications submitted: {{selectedJourney.value.applications.length}}</p>
-              <p>Application frequency: 1/day</p>
+              <p>Application frequency: {{selectedJourney.frequency}} / day</p>
             </div>
           </div>
         </mat-grid-tile>
@@ -40,7 +39,7 @@
             <h4 class="data-container-title">
               Status Breakdown
             </h4>  
-            <div class="status-container" style="height: 90%;">
+            <div class="status-container" style="height: 85%;">
               <pie-chart-wrapper [data]="selectedJourney.statusData"
                 [margin]="{ top: 40, right: 200, bottom: 40, left: 80 }" [pixelRatio]="2" [innerRadius]="0.3"
                 [padAngle]="0.7" [cornerRadius]="3" [colors]="{ scheme: 'nivo' }"
@@ -80,7 +79,7 @@
                   {
                     anchor: 'bottom-right',
                     direction: 'row',
-                    translateY: 0,
+                    translateY: 15,
                     itemCount: 4,
                     itemWidth: 42,
                     itemHeight: 36,

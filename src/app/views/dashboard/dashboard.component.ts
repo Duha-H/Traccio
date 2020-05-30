@@ -21,6 +21,7 @@ export class DashboardComponent implements OnInit {
     calendarData: object;
     years: string[];
     statusData: object;
+    frequency: string;
   };
   dropdownContent: {
     value: Journey;
@@ -28,6 +29,7 @@ export class DashboardComponent implements OnInit {
     calendarData: object;
     years: string[];
     statusData: object;
+    frequency: string;
   }[] = [];
   currentYear: string = new Date().getFullYear().toString();
   from: string;
@@ -59,6 +61,7 @@ export class DashboardComponent implements OnInit {
       calendarData: object;
       years: string[];
       statusData: object;
+      frequency: string;
     }[] = [];
     this.activeJourneys.forEach((journey) => {
       const journeyData = this.userStore.getCalendarData(journey.id);
@@ -69,6 +72,7 @@ export class DashboardComponent implements OnInit {
         calendarData: journeyData,
         years: this._setCalendarYears(journeyData),
         statusData: journeyStatusData,
+        frequency: this._getApplicationFrequency(journey.startDate, journey.applications.length),
       });
     });
     this.dropdownContent = newContent;
@@ -92,5 +96,15 @@ export class DashboardComponent implements OnInit {
       years.push(i);
     }
     return years;
+  }
+
+  private _getApplicationFrequency(startDate: Date, count: number): string {
+    let daysElapsed = (new Date()).getTime() - startDate.getTime(); // returns difference in milliseconds
+    daysElapsed = Math.floor(daysElapsed / (1000 * 3600 * 24)); // convert
+    const result = daysElapsed === 0
+      ? count.toFixed(2)  // if no days have passed, frequency is number of apps submitted today
+      : (count / daysElapsed).toFixed(2);
+    console.log(result, count, daysElapsed);
+    return result;
   }
 }
