@@ -57,7 +57,6 @@ export class JourneyInputComponent implements OnChanges {
       if (this.journey) { // if updating existing journey, copy over ID and apps
         newJourney.id = this.journey.id;
         newJourney.applications = this.journey.applications;
-        console.log("apps:", newJourney.applications);
       }
       // copy over updated journey details from input
       newJourney.title = this.title;

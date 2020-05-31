@@ -10,9 +10,9 @@ $custom-background-color: #628cc9;
 $dark-theme-background: (
   status-bar: #628cc9,
   app-bar:    map_get($mat-blue-grey, 800),
-  background: #7ea2c8,
+  background: #909ca8,
   hover:      rgba(white, 0.04), 
-  card:       #7ea2c8,
+  card:       #909ca8,
   dialog:     map_get($mat-grey, 800),
   disabled-button: $white-12-opacity,
   raised-button: map-get($mat-grey, 800),
@@ -74,6 +74,73 @@ $warn-map: (
   )
 );
 
+$dark-primary-map: (
+  50 : #ecebf9,
+  100 : #d0cdf0,
+  200 : #b0ace6,
+  300 : #908bdc,
+  400 : #7972d5,
+  500 : #6159cd,
+  600 : #5951c8,
+  700 : #4f48c1,
+  800 : #453eba,
+  900 : #332eae,
+  A100 : #f3f2ff,
+  A200 : #c2bfff,
+  A400 : #918cff,
+  A700 : #7873ff,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+$dark-accent-map: (
+  50 : #f2f3f5,
+  100 : #dee1e5,
+  200 : #c8ced4,
+  300 : #b1bac2,
+  400 : #a1abb5,
+  500 : #909ca8,
+  600 : #8894a0,
+  700 : #7d8a97,
+  800 : #73808d,
+  900 : #616e7d,
+  A100 : #eff7ff,
+  A200 : #bddcfd,
+  A400 : #89c2ff,
+  A700 : #6fb5ff,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 : #000000,
+    700 : #000000,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+
 // $background: map-get($mat-app-theme, background);
 // $background: map_merge($background, (background: $custom-background-color));
 // $mat-app-theme: map_merge($mat-app-theme, (background: $background));
@@ -88,10 +155,9 @@ $warn-map: (
     background: $dark-theme-background,
   );
 }
-$mat-app-primary: mat-palette($mat-teal, A200);
-$mat-app-accent:  mat-palette($mat-teal, A200);
+$mat-app-primary: mat-palette($dark-primary-map);
+$mat-app-accent:  mat-palette($dark-accent-map);
 $mat-app-warn: mat-palette($warn-map);
-// $mat-app-theme:   mat-dark-theme($mat-app-primary, $mat-app-accent);
 $mat-app-theme: create-custom-theme($mat-app-primary, $mat-app-accent, $mat-app-warn);
 
 // Include default theme styles.

@@ -110,3 +110,7 @@ div.mat-form-field-flex {
   margin-top: 90px;
   min-width: 100%;
 }
+
+::ng-deep .component-container .mat-select-value {
+  color: var(--text-dark);
+}
