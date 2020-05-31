@@ -23,7 +23,8 @@ const routes: Routes = [
         component: JourneysComponent,
         children: [
           { path: "", component: JourneyListComponent },
-          { path: ":id", component: JourneyViewComponent },
+          { path: ":id", component: JourneyViewComponent, data: { appref: '' } },
+          // { path: ":id/:appref", component: JourneyViewComponent }, // temporary lazy fix
         ],
       },
       { path: "search", component: SearchComponent, canActivate: [AuthGuard] },

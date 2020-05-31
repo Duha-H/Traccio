@@ -92,7 +92,7 @@ export class DashboardComponent implements OnInit {
   }
 
   selectApplication(app: Application) {
-    this.router.navigate(['/journeys', this.selectedJourney.value.id]);
+    this.router.navigate(['/journeys', this.selectedJourney.value.id, { appref: app.id }]);
   }
 
   private _setCalendarYears(data: { day: string; value: number }[]): string[] {

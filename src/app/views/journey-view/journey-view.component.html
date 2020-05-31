@@ -56,11 +56,9 @@
       </div>
     </div>
 
-    <mat-drawer position="end" [fixedInViewport]="true" mode="side" #sidenav>
+    <mat-drawer position="end" [fixedInViewport]="true" mode="side" [opened]="displayDrawer" #sidenav>
       <application-input [sidenav]="sidenav" [app]="selectedApp" [journeyId]="journey.id">
       </application-input>
-      <!-- <application-input (dataLogged)="onDataLogged($event)" [sidenav]="sidenav" [app]="selectedApp" [journeyId]="journey.id">
-      </application-input> -->
     </mat-drawer>
   </mat-drawer-container>
 </div>

@@ -5,6 +5,11 @@ import { UserStoreService } from 'src/app/models/user-store.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Application } from 'src/app/models/application';
 
+const DRAWER_MODES = {
+  ADD: 'add',
+  EDIT: 'edit',
+}; // don't want to take any chances
+
 @Component({
   selector: 'app-journey-view',
   templateUrl: './journey-view.component.html',
@@ -19,29 +24,35 @@ export class JourneyViewComponent implements OnInit {
   startDate: string;
   endDate: string;
   iconClass: string;
-  displayDrawer = true;
-  drawerMode = 'add';
-  selectedApp = null;
+  displayDrawer = false;
+  drawerMode = DRAWER_MODES.ADD;
+  selectedApp;
 
   constructor(private route: ActivatedRoute, private userStore: UserStoreService, private router: Router) { }
 
   ngOnInit() {
-    console.log("view initialized");
     let id;
+    let appref;
     // extract journey ID from URL, then get journey from UserStore
     this.route.params.subscribe(params => {
       id = params.id;
+      if (params.appref) {
+        appref = params.appref;
+      }
       return params.id;
     });
     this.journey = this.userStore.getJourney(id);
+    this.setJourneyDetails();
     if (!this.journey) {
       console.log('No journey loaded.');
       this.router.navigate(["/journeys"]);
       return;
     } else {
-      console.log('loaded journey', this.journey);
+      this.selectedApp = this.userStore.getApplication(this.journey.id, +appref);
+      if (appref && this.selectedApp) {
+        this.displayDrawer = true;
+      }
     }
-    this.setJourneyDetails();
   }
 
   setJourneyDetails() {
@@ -55,16 +66,9 @@ export class JourneyViewComponent implements OnInit {
       : 'inactive-icon';
   }
 
-  viewApplication(application: Application) {
-    this.displayDrawer = true;
-    this.drawerMode = 'edit';
-    this.selectedApp = application;
-    console.log("selected", application);
-  }
-
   addApplication() {
     this.displayDrawer = true;
-    this.drawerMode = 'add';
+    this.drawerMode = DRAWER_MODES.ADD;
   }
 
   openDrawer(mode: string, application: Application) {
@@ -80,10 +84,4 @@ export class JourneyViewComponent implements OnInit {
     }
   }
 
-  onDataLogged(applicationData: { [key: string]: any }) {
-    // console.log(journeyData);
-    // this.userStore.addNewJourney(journeyData);
-    // this.displayDrawer = false;
-    console.log("i don't know");
-  }
 }
