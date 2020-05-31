@@ -2,6 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { UserStoreService } from "src/app/models/user-store.service";
 import * as mockData from "../../models/data";
 import { Journey } from "../../models/journey";
+import { STATUS } from "../../models/constants";
+import { Application } from 'src/app/models/application';
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-dashboard",
@@ -10,10 +13,7 @@ import { Journey } from "../../models/journey";
 })
 export class DashboardComponent implements OnInit {
   name = "";
-  data = mockData.data;
   pieChartData = mockData.pieChartData;
-  yearSpacing = 40;
-  dayBorderWidth = 2;
   activeJourneys: Journey[];
   selectedJourney: {
     value: Journey;
@@ -34,8 +34,17 @@ export class DashboardComponent implements OnInit {
   currentYear: string = new Date().getFullYear().toString();
   from: string;
   to: string;
+  statuses = [
+    {value: '', viewValue: 'All Statuses'},
+    {value: STATUS.IN_REVIEW.toString(), viewValue: STATUS.IN_REVIEW.toString()},
+    {value: STATUS.INTERVIEW.toString(), viewValue: STATUS.INTERVIEW.toString()},
+    {value: STATUS.OFFER.toString(), viewValue: STATUS.OFFER.toString()},
+    {value: STATUS.REJECTED.toString(), viewValue: STATUS.REJECTED.toString()},
+    {value: STATUS.STALE.toString(), viewValue: STATUS.STALE.toString()}
+  ];
+  selectedStatus = this.statuses[0];
 
-  constructor(private userStore: UserStoreService) {}
+  constructor(private userStore: UserStoreService, private router: Router) {}
 
   ngOnInit() {
     try {
@@ -82,6 +91,10 @@ export class DashboardComponent implements OnInit {
     this.currentYear = year ? year : new Date().getFullYear().toString();
   }
 
+  selectApplication(app: Application) {
+    this.router.navigate(['/journeys', this.selectedJourney.value.id]);
+  }
+
   private _setCalendarYears(data: { day: string; value: number }[]): string[] {
     const years = [];
     data.sort((a, b) => {
@@ -104,7 +117,6 @@ export class DashboardComponent implements OnInit {
     const result = daysElapsed === 0
       ? count.toFixed(2)  // if no days have passed, frequency is number of apps submitted today
       : (count / daysElapsed).toFixed(2);
-    console.log(result, count, daysElapsed);
     return result;
   }
 }

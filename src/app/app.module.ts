@@ -44,6 +44,7 @@ import { ForgotPasswordComponent } from './auth/account-recovery/forgot-password
 import { NewPasswordComponent } from './auth/account-recovery/new-password.component';
 import { ResetSuccessfulComponent } from './auth/account-recovery/reset-successful.component';
 import { SignupSuccessfulComponent } from './auth/confirm-signup/signup-successful.component';
+import { AppFilterPipe } from './views/dashboard/app-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { SignupSuccessfulComponent } from './auth/confirm-signup/signup-successf
     ForgotPasswordComponent,
     NewPasswordComponent,
     ResetSuccessfulComponent,
-    SignupSuccessfulComponent
+    SignupSuccessfulComponent,
+    AppFilterPipe
   ],
   imports: [
     BrowserModule,

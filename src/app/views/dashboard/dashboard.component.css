@@ -10,6 +10,18 @@ h6 {
   color: var(--titles-secondary-dark);
 }
 
+span {
+  color: var(--text-dark);
+}
+
+.spacer {
+  flex: auto;
+}
+
+.fixed-span {
+  width: 600px;
+}
+
 .view-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -31,8 +43,8 @@ h6 {
 }
 
 mat-form-field {
-  padding: 10px;
-  margin-right: 10px;
+  /* padding: 10px; */
+  margin-right: 20px;
 }
 
 mat-select {
@@ -42,11 +54,16 @@ mat-select {
 }
 
 .mat-select {
-  font-size: 10pt;
+  font-size: 9pt;
 }
 
-::ng-deep .dashboard-header .mat-form-field-underline {
+::ng-deep .dashboard-header .mat-form-field-underline, ::ng-deep .data-container .mat-form-field-underline {
   display: none;
+}
+
+::ng-deep .data-container .mat-form-field-wrapper, ::ng-deep .data-container .mat-form-field-infix {
+  padding: 0;
+  border-top: none;
 }
 
 .journey-details {
@@ -61,7 +78,6 @@ mat-select {
 mat-grid-tile {
   border-radius: 15px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  
 }
 
 mat-grid-tile-header {
@@ -80,6 +96,15 @@ mat-grid-tile-header {
   color: var(--titles-primary-dark);
   font-weight: 200;
   border-bottom: 0.8px solid var(--titles-primary-dark);
+  display: inline-flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.data-container-title h4 {
+  margin: auto 0;
+  font-weight: 200;
+  color: var(--titles-primary-dark);
 }
 
 .stats-container {
@@ -126,4 +151,24 @@ calendar-wrapper span {
 
 .year-selector li p {
   margin: 0;
+}
+
+.spanning-content {
+  display: flex;
+  flex-direction: row;
+  vertical-align: middle;
+  align-items: center;
+}
+
+.app-list-container {
+  padding-bottom: 40px;
+}
+
+.clickable-item mat-icon {
+  color: var(--titles-secondary-dark);
+}
+
+.clickable-item:hover {
+  background-color: var(--secondary-dark);
+  cursor: pointer;
 }

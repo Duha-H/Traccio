@@ -67,6 +67,7 @@ export class ResponsivePieComponent extends ReactWrapper {
   @Input() cornerRadius: number;
   @Input() colors: string[];
   @Input() borderColor: string | { theme: string };
+  @Input() enableRadialLabels: boolean;
   @Input() radialLabelsSkipAngle: number;
   @Input() radialLabelsTextXOffset: number;
   @Input() radialLabelsTextColor: string | { theme: string };
@@ -94,6 +95,7 @@ export class ResponsivePieComponent extends ReactWrapper {
       cornerRadius,
       colors,
       borderColor,
+      enableRadialLabels,
       radialLabelsSkipAngle,
       radialLabelsTextXOffset,
       radialLabelsTextColor,
@@ -118,6 +120,7 @@ export class ResponsivePieComponent extends ReactWrapper {
       cornerRadius,
       colors,
       borderColor,
+      enableRadialLabels,
       radialLabelsSkipAngle,
       radialLabelsTextXOffset,
       radialLabelsTextColor,

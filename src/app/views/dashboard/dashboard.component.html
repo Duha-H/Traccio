@@ -27,7 +27,7 @@
               Journey Stats
             </h4>  
             <div class="stats-container">
-              <p>Start Date: {{selectedJourney.value.startDate.toLocaleDateString()}}</p>
+              <p>Start Date: {{selectedJourney.value.startDate | date }}</p>
               <p>Applications submitted: {{selectedJourney.value.applications.length}}</p>
               <p>Application frequency: {{selectedJourney.frequency}} / day</p>
             </div>
@@ -42,7 +42,7 @@
             <div class="status-container" style="height: 85%;">
               <pie-chart-wrapper [data]="selectedJourney.statusData"
                 [margin]="{ top: 40, right: 200, bottom: 40, left: 80 }" [pixelRatio]="2" [innerRadius]="0.3"
-                [padAngle]="0.7" [cornerRadius]="3" [colors]="{ scheme: 'nivo' }"
+                [padAngle]="0.7" [cornerRadius]="3" [colors]="{ scheme: 'nivo' }" [enableRadialLabels]="false"
                 [borderColor]="{ from: 'color', modifiers: [ [ 'darker', 0.6 ] ] }" [radialLabelsSkipAngle]="10"
                 [radialLabelsTextXOffset]="6" [radialLabelsTextColor]="'#fff'" [radialLabelsLinkOffset]="0"
                 [radialLabelsLinkDiagonalLength]="10" [radialLabelsLinkHorizontalLength]="20"
@@ -74,8 +74,8 @@
             <div class="calendar-container">
               <calendar-wrapper [data]="selectedJourney.calendarData" [from]="currentYear+'-02-01'"
                 [to]="currentYear+'-11-01'" [emptyColor]="'#21e6c214'"
-                [colors]="[ '#61cdbb', '#97e3d5', '#e8c1a0', '#f47560' ]" [yearSpacing]="yearSpacing"
-                [monthBorderColor]="'#22232d'" [dayBorderWidth]="dayBorderWidth" [dayBorderColor]="'#22232d'" [legends]="[
+                [colors]="[ '#61cdbb', '#97e3d5', '#e8c1a0', '#f47560' ]" [yearSpacing]="40"
+                [monthBorderColor]="'#22232d'" [dayBorderWidth]="2" [dayBorderColor]="'#22232d'" [legends]="[
                   {
                     anchor: 'bottom-right',
                     direction: 'row',
@@ -106,6 +106,42 @@
             </ul>
           </div>
         </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          <div class="data-container">
+            <div class="data-container-title" style="height: 8%;">
+              <h4>Applications</h4>
+              <div class="spacer"></div>
+              <mat-form-field style="padding: 0; margin-right: 50px; width: 120px;">
+                <mat-select color="primary" name="statusSelection" [(ngModel)]="selectedStatus" title="application status filter">
+                  <mat-option *ngFor="let status of statuses" [value]="status">
+                    {{status.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="app-list-container" style="height: 78%;">
+              <mat-list *ngIf="selectedJourney.value.applications.length > 0" style="height: 100%; overflow-y: scroll;" class="app-list-item">
+                <mat-list-item class="clickable-item" *ngFor="let app of (selectedJourney.value.applications | appFilter:'status':selectedStatus.value );"
+                  (click)="selectApplication(app)">
+                  <mat-icon matListIcon>folder</mat-icon>
+                  <div matLine>
+                    <div class="spanning-content">
+                      <h4 style="text-align: left; color: var(--text-dark);">{{app.positionTitle + '  '}}</h4>
+                      <span style="padding-left: 10px; color: var(--titles-secondary-dark);"> @ {{app.companyName}}</span>
+                      <div class="spacer"></div>
+                      <span>Date Applied: {{ app.appDate | date }}</span>
+                    </div>
+      
+                  </div>
+                  
+                </mat-list-item>
+              </mat-list>
+            </div>
+            
+          </div>
+        </mat-grid-tile>
+
         
       </mat-grid-list>
 
