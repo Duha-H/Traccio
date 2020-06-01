@@ -77,10 +77,15 @@ export class UserStoreService {
     this._activeJourneys.next(this.getActiveJourneys());
   }
 
-  updateJourneyData(newJourneys: {[key: string]: Journey}) {
+  updateJourneyData(newJourneys?: {[key: string]: Journey}) {
     // this.dataUpdated = true;
-    this._journeys.next(newJourneys);
-    this._activeJourneys.next(this.getActiveJourneys());
+    if (newJourneys) {
+      this._journeys.next(newJourneys);
+      this._activeJourneys.next(this.getActiveJourneys());
+    } else {
+      this._journeys.next(this._journeys.getValue());
+      this._activeJourneys.next(this.getActiveJourneys());
+    }
   }
 
   clearData() {
@@ -155,6 +160,7 @@ export class UserStoreService {
     // TODO: should this maybe trigger a data reload??
     this.dataUpdated = true;
     console.log("application added: ", newApplication);
+    this.updateJourneyData(); // data update, bubble .next() it to all observables
   }
 
   updateExistingApplication(
@@ -164,8 +170,17 @@ export class UserStoreService {
     const appID = updatedApplication.id;
     let existingApplication = this.getApplication(journeyId, appID);
     existingApplication = updatedApplication;
-    console.log("application updated: ", existingApplication);
-    console.log(this.journeys);
+    this.updateJourneyData(); // data updated, bubble .next() it to all observables
+  }
+
+  removeApplication(journeyid: string, appid: number) {
+    const journey = this.getJourney(journeyid);
+    const remainingApps = journey.applications.filter(app => {
+      return app.id !== appid;
+    });
+    this.dataManager.removeApplication(journeyid, this.getApplication(journeyid, appid));
+    journey.applications = remainingApps;
+    this.updateJourneyData(); // data updated, bubble .next() it to all observables
   }
 
   /**

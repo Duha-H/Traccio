@@ -62,6 +62,24 @@ export class DataManagerService {
     this.statusData[journeyid] = statusDatum;
   }
 
+  removeApplication(journeyid: string, app: Application) {
+    const calendarDatum = this.calendarData[journeyid];
+    const statusDatum = this.statusData[journeyid];
+    const dateString = app.appDate.toISOString().split('T')[0];
+    if (calendarDatum && calendarDatum[dateString]) {
+      calendarDatum[dateString] -= 1;
+      if (calendarDatum[dateString] === 0) { // remove date string if count reaches 0
+        delete calendarDatum.dateString;
+      }
+    }
+    if (statusDatum && statusDatum[app.status]) {
+      statusDatum[app.status] -= 1;
+      if (statusDatum[app.status] === 0) { // remove date string if count reaches 0
+        delete statusDatum[app.status];
+      }
+    }
+  }
+
   getFormattedCalendarData(journeyid: string): { day: string; value: number; }[] {
     const result = [];
     const journeyData = this.calendarData[journeyid];

@@ -4,6 +4,8 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { UserStoreService } from 'src/app/models/user-store.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Application } from 'src/app/models/application';
+import { MatTableDataSource } from '@angular/material/table';
+import { SelectionModel } from '@angular/cdk/collections';
 
 const DRAWER_MODES = {
   ADD: 'add',
@@ -27,6 +29,10 @@ export class JourneyViewComponent implements OnInit {
   displayDrawer = false;
   drawerMode = DRAWER_MODES.ADD;
   selectedApp;
+  dataSource = new MatTableDataSource<Application>();
+  displayedColumns = ['select', 'positionTitle', 'companyName', 'appDate', 'source', 'status', 'remove'];
+  selection = new SelectionModel<Application>(true, []);
+  deleteButtonPressed = false;
 
   constructor(private route: ActivatedRoute, private userStore: UserStoreService, private router: Router) { }
 
@@ -57,6 +63,7 @@ export class JourneyViewComponent implements OnInit {
 
   setJourneyDetails() {
     this.applications = this.journey.applications;
+    this.dataSource = new MatTableDataSource<Application>(this.applications);
     this.startDate = this.journey.startDate.toLocaleDateString();
     this.endDate = this.journey.endDate
       ? this.journey.endDate.toLocaleDateString()
@@ -72,6 +79,10 @@ export class JourneyViewComponent implements OnInit {
   }
 
   openDrawer(mode: string, application: Application) {
+    if (this.deleteButtonPressed) {
+      this.deleteButtonPressed = false;
+      return;
+    }
     this.drawerMode = mode;
     this.selectedApp = application;
     this.sidenav.open();
@@ -82,6 +93,36 @@ export class JourneyViewComponent implements OnInit {
       this.displayDrawer = false;
       this.sidenav.close();
     }
+  }
+
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  masterToggle() {
+    this.isAllSelected()
+      ? this.selection.clear()
+      : this.dataSource.data.forEach(row => this.selection.select(row));
+  }
+
+  checkboxLabel(app?: Application): string {
+    if (!app) {
+      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+    }
+    return `${this.selection.isSelected(app) ? 'deselect' : 'select'} row ${app.positionTitle}`;
+  }
+
+  removeApplications(apps: Application[]) {
+    this.deleteButtonPressed = true;
+    apps.forEach(app => {
+      this.userStore.removeApplication(this.journey.id, app.id);
+    });
+    // Update current journey details
+    // TODO: maybe handle this using an observable
+    this.journey = this.userStore.getJourney(this.journey.id);
+    this.setJourneyDetails();
   }
 
 }

@@ -73,7 +73,7 @@ mat-icon {
 
 .details {
   text-align: left;
-  max-width: 900px;
+  max-width: 1200px;
   margin: 25px auto;
   margin-bottom: 50px;
   padding: 0 auto;
@@ -99,7 +99,7 @@ mat-icon {
 }
 
 .title mat-icon {
-	font-size: 14pt;
+  font-size: 14pt;
 }
 
 button {
@@ -136,6 +136,57 @@ h4 {
   margin: 5px 0;
 }
 
+.edit-items {
+  margin: 0 10px;
+}
+
+mat-select {
+  background-color: var(--titles-primary-dark);
+  padding: 5px;
+  border-radius: 5px;
+}
+
+::ng-deep .edit-items .mat-form-field-underline {
+  display: none;
+}
+
+::ng-deep .edit-items .mat-form-field-wrapper, ::ng-deep .edit-items .mat-form-field-infix {
+  padding: 0;
+  border-top: none;
+}
+
+.app-table {
+  width: 100%;
+  background-color: var(--background-dark);
+  box-shadow: none;
+}
+
+.app-th {
+  color: var(--titles-secondary-dark);
+  font-size: 11pt;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(105, 104, 104, 0.637);
+  margin: 0;
+}
+
+th.app-th.mat-header-cell:first-of-type,
+td.mat-cell:first-of-type {
+  padding-left: 15px;
+}
+
+.app-tr {
+  color: var(--text-dark);
+  font-size: 11pt;
+  height: 70px;
+  padding-bottom: 0;
+}
+
+.delete-button {
+  float: right;
+  color: var(--text-warn);
+  cursor: pointer;
+}
+
 mat-list-item {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -150,6 +201,10 @@ mat-list-item {
 .bottom-border h2 {
   margin-left: 5px;
   font-weight: 600;
+}
+
+.options {
+  padding: 0 8px;
 }
 
 .clickable-item {
