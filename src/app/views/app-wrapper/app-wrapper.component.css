@@ -43,25 +43,28 @@
 .sidenav-container.mat-sidenav-container.mat-drawer-container {
   display: inline-block;
   height: 100vh;
-  width: 80vw;
+  width: 85vw;
 }
 
 ul.sidenav {
   list-style: none;
-  padding: 0;
+  padding: 30px 5px;
   text-align: center;
-  padding-top: 30px;
+  /* padding-top: 30px; */
 }
 
 .sidenav li {
   width: 60px;
   height: 60px;
   border-radius: 100%;
-  background-color: var(--accent-background-dark);
+  /* background-color: var(--accent-background-dark); */
+  background-color: var(--secondary-dark);
   vertical-align: middle;
   padding: 0;
-  margin: 0;
   margin: 15px auto;
+  box-shadow: 
+    -3px -3px 8px 0 rgba(68, 68, 68, 0.2),
+    3px 3px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .sidenav li:hover {
