@@ -4,8 +4,11 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { UserStoreService } from 'src/app/models/user-store.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Application } from 'src/app/models/application';
-import { MatTableDataSource } from '@angular/material/table';
-import { SelectionModel } from '@angular/cdk/collections';
+import { MatTableDataSource, MatTable } from '@angular/material/table';
+import { SelectionModel, DataSource } from '@angular/cdk/collections';
+import { STATUS } from 'src/app/models/constants';
+import { Observable, from, Subscription } from 'rxjs';
+import { MatSort } from '@angular/material/sort';
 
 const DRAWER_MODES = {
   ADD: 'add',
@@ -20,6 +23,8 @@ const DRAWER_MODES = {
 export class JourneyViewComponent implements OnInit {
 
   @ViewChild('sidenav', {static: false}) sidenav: MatSidenav;
+  @ViewChild('table', {static: false}) table: MatTable<any>;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   journey: Journey = new Journey();
   applications: Application[];
@@ -29,16 +34,21 @@ export class JourneyViewComponent implements OnInit {
   displayDrawer = false;
   drawerMode = DRAWER_MODES.ADD;
   selectedApp;
-  dataSource = new MatTableDataSource<Application>();
+  dataSource = new MatTableDataSource<Application>(this.applications);
+  // dataSource: ApplicationDataSource;
   displayedColumns = ['select', 'positionTitle', 'companyName', 'appDate', 'source', 'status', 'remove'];
   selection = new SelectionModel<Application>(true, []);
   deleteButtonPressed = false;
+  filterDropdown = [
+    { value: STATUS.IN_REVIEW.toString(), viewValue: STATUS.IN_REVIEW.toString() },
+  ];
+  appliedFilters = '';
 
   constructor(private route: ActivatedRoute, private userStore: UserStoreService, private router: Router) { }
 
   ngOnInit() {
-    let id;
-    let appref;
+    let id: string;
+    let appref: string | number;
     // extract journey ID from URL, then get journey from UserStore
     this.route.params.subscribe(params => {
       id = params.id;
@@ -48,6 +58,7 @@ export class JourneyViewComponent implements OnInit {
       return params.id;
     });
     this.journey = this.userStore.getJourney(id);
+    // this.dataSource = new ApplicationDataSource(id, this.userStore);
     this.setJourneyDetails();
     if (!this.journey) {
       console.log('No journey loaded.');
@@ -61,9 +72,22 @@ export class JourneyViewComponent implements OnInit {
     }
   }
 
+  updateView() {
+    if (this.journey) {
+      console.log("updating");
+      this.journey = this.userStore.getJourney(this.journey.id); // probably no longer necessary
+      this.applications = this.journey.applications;
+      // according to docs this will "render the diff since the last table render.
+      // If the data array reference is changed, the table will automatically trigger an update to the rows"
+      // this.table.renderRows();
+      this.dataSource.data = this.applications;
+    }
+  }
+
   setJourneyDetails() {
     this.applications = this.journey.applications;
-    this.dataSource = new MatTableDataSource<Application>(this.applications);
+    this.dataSource.data = this.applications;
+    this.dataSource.sort = this.sort;
     this.startDate = this.journey.startDate.toLocaleDateString();
     this.endDate = this.journey.endDate
       ? this.journey.endDate.toLocaleDateString()
@@ -95,7 +119,7 @@ export class JourneyViewComponent implements OnInit {
     }
   }
 
-  isAllSelected() {
+  isAllSelected(): boolean {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
     return numSelected === numRows;
@@ -119,10 +143,38 @@ export class JourneyViewComponent implements OnInit {
     apps.forEach(app => {
       this.userStore.removeApplication(this.journey.id, app.id);
     });
-    // Update current journey details
-    // TODO: maybe handle this using an observable
-    this.journey = this.userStore.getJourney(this.journey.id);
-    this.setJourneyDetails();
+    this.selection.deselect(...apps);
+    // Update current journey details and view
+    this.updateView();
+  }
+
+}
+
+export class ApplicationDataSource extends DataSource<any> {
+
+  data: Application[] = [];
+  subscription: Subscription;
+
+  constructor(private journeyid: string, private userStore: UserStoreService) {
+    super();
+  }
+
+  connect(): Observable<Application[]> {
+    let applications: Observable<Application[]> = from([]);
+    // subscribe to changes propagated from userStore
+    // update dataSource
+    this.subscription = this.userStore.journeys.subscribe( _ => {
+      const journey = this.userStore.getJourney(this.journeyid);
+      applications = from([journey.applications]);
+      this.data = journey.applications;
+      console.log("Updated:", this.data);
+      return applications;
+    });
+    return applications;
+  }
+
+  disconnect() {
+    this.subscription.unsubscribe();
   }
 
 }

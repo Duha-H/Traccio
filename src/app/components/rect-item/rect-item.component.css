@@ -25,9 +25,12 @@ mat-icon {
   padding: 20px; /* might need to remove this */
   text-align: center;
   /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
-  background-color: var(--secondary-dark);
+  background-color: var(--background-dark);
   display: flex;
   z-index: 1;
+  box-shadow: 
+    -6px -6px 4px 0 rgba(46, 46, 46, 0.548),
+    5px 5px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
 .container.add {
@@ -40,6 +43,7 @@ mat-icon {
 .container:hover:not(.add) {
   cursor: pointer;
   box-shadow: 0 0 28px rgba(0, 0, 0, 0.4);
+  background-color: var(--secondary-dark);
   transform: scale(1.008);
 }
 

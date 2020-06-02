@@ -1,5 +1,15 @@
 import { STATUS, APP_SOURCE } from './constants';
 
+export interface ApplicationInput {
+	id: number | string;
+	company: string;
+	title: string;
+	date: string | Date;
+	status: string;
+	source: string;
+	notes: string;
+}
+
 export class Application {
 
 	private _id = 0;
@@ -10,12 +20,15 @@ export class Application {
 	private _source = APP_SOURCE.JOB_BOARD.toString();
 	private _notes = '';
 
-	constructor(data?: { [key: string]: any }) {
+	constructor(data?: ApplicationInput) {
 		if (data) {
-			this._id = data.id;
+			this._id = typeof(data.id) === 'string'
+				? parseInt(data.id)
+				: data.id;
 			this._companyName = data.company;
 			this._positionTitle = data.title;
 			this._appDate = new Date(data.date);
+			// this._appDate = data.date;
 			this._status = data.status;
 			this._source = data.source;
 			this._notes = data.notes;

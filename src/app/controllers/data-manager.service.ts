@@ -80,6 +80,27 @@ export class DataManagerService {
     }
   }
 
+  updateExistingApplication(journeyid: string, prevApp: Application, updatedApp: Application) {
+    const dateString = prevApp.appDate.toISOString().split('T')[0];
+    const newDateString = updatedApp.appDate.toISOString().split('T')[0];
+    let calendarDatum = this.calendarData[journeyid];
+    let statusDatum = this.statusData[journeyid];
+    if (dateString !== newDateString) {
+      if (calendarDatum && calendarDatum[dateString]) { // double-checking that journey & dateString exists
+        calendarDatum[dateString] -= 1;
+        calendarDatum = this._updateDatum(calendarDatum, newDateString);
+      }
+    }
+    if (prevApp.status !== updatedApp.status) {
+      if (statusDatum && statusDatum[prevApp.status]) { // double-checking that journey & status exists
+        statusDatum[prevApp.status] -= 1;
+        statusDatum = this._updateDatum(statusDatum, updatedApp.status);
+      }
+    }
+    this.calendarData[journeyid] = calendarDatum;
+    this.statusData[journeyid] = statusDatum;
+  }
+
   getFormattedCalendarData(journeyid: string): { day: string; value: number; }[] {
     const result = [];
     const journeyData = this.calendarData[journeyid];
@@ -134,7 +155,16 @@ export class DataManagerService {
     return {
       calendarDatum,
       statusDatum
+    };
+  }
+
+  private _updateDatum(datum: {[key: string]: number}, property: string) {
+    if (datum.hasOwnProperty(property)) {
+      datum[property] += 1;
+    } else {
+      datum[property] = 1;
     }
+    return datum;
   }
 
 }

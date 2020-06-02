@@ -75,12 +75,12 @@ mat-select {
   flex-direction: row;
 }
 
-mat-grid-tile {
+mat-grid-tile.dashboard-component {
   border-radius: 15px;
   /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
   box-shadow: 
-    -5px -5px 8px 0 rgba(58, 58, 58, 0.2),
-    4px 4px 4px 0 rgba(0, 0, 0, 0.2);
+    -6px -6px 4px 0 rgba(46, 46, 46, 0.548),
+    5px 5px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
 mat-grid-tile-header {

@@ -21,10 +21,10 @@
           <div class="options">
             <mat-icon class="edit-items">filter_list</mat-icon>
             <mat-form-field style="padding: 0; width: 120px;" class="edit-items">
-              <mat-select color="primary" name="statusSelection" [(ngModel)]="selectedStatus"
-                title="application status filter">
-                <mat-option *ngFor="let status of statuses" [value]="status">
-                  {{status.viewValue}}
+              <mat-select color="primary" name="filterSelection" [(ngModel)]="appliedFilters"
+                title="application filters">
+                <mat-option *ngFor="let filter of filterDropdown" [value]="filter">
+                  {{filter.viewValue}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -36,7 +36,7 @@
 
         </div>
 
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" class="app-table">
+        <table mat-table [dataSource]="dataSource" matSort class="app-table" #table>
 
           <!-- Checkbox Column -->
           <ng-container matColumnDef="select">
@@ -56,31 +56,31 @@
 
           <!-- Position Title Column -->
           <ng-container matColumnDef="positionTitle">
-            <th mat-header-cell *matHeaderCellDef class="app-th"> Position Title </th>
+            <th mat-header-cell *matHeaderCellDef class="app-th" mat-sort-header="positionTitle"> Position Title </th>
             <td mat-cell *matCellDef="let element" class="app-tr"> {{element.positionTitle}} </td>
           </ng-container>
 
           <!-- Company Name Column -->
           <ng-container matColumnDef="companyName">
-            <th mat-header-cell *matHeaderCellDef class="app-th"> Company Name </th>
+            <th mat-header-cell *matHeaderCellDef class="app-th" mat-sort-header="companyName"> Company Name </th>
             <td mat-cell *matCellDef="let element" class="app-tr"> {{element.companyName}} </td>
           </ng-container>
 
           <!-- Date Column -->
           <ng-container matColumnDef="appDate">
-            <th mat-header-cell *matHeaderCellDef class="app-th"> Date Applied </th>
+            <th mat-header-cell *matHeaderCellDef class="app-th" mat-sort-header> Date Applied </th>
             <td mat-cell *matCellDef="let element" class="app-tr"> {{element.appDate | date}} </td>
           </ng-container>
 
           <!-- Source Column -->
           <ng-container matColumnDef="source">
-            <th mat-header-cell *matHeaderCellDef class="app-th"> Applied Via </th>
+            <th mat-header-cell *matHeaderCellDef class="app-th" mat-sort-header> Applied Via </th>
             <td mat-cell *matCellDef="let element" class="app-tr"> {{element.source}} </td>
           </ng-container>
 
           <!-- Status Column -->
           <ng-container matColumnDef="status">
-            <th mat-header-cell *matHeaderCellDef class="app-th"> Status </th>
+            <th mat-header-cell *matHeaderCellDef class="app-th" mat-sort-header> Status </th>
             <td mat-cell *matCellDef="let element" class="app-tr"> {{element.status}} </td>
           </ng-container>
 
@@ -107,11 +107,35 @@
           <h4>Add applications to track them here.</h4>
         </div>
 
+
+        <!-- <mat-list *ngIf="applications.length > 0">
+          <mat-list-item (click)="openDrawer('edit', app)" class="clickable-item" *ngFor="let app of applications;">
+            <mat-icon matListIcon>folder</mat-icon>
+            <div matLine>
+              <div class="spanning-content">
+                <h3 style="width: 100px">{{app.positionTitle}}</h3>
+                <div class="spacer"></div>
+                <h4>Status: {{app.status}}</h4>
+              </div>
+
+            </div>
+            <div matLine>
+              <div class="spanning-content">
+                <span class="fixed-span" style="text-align: left;">Company: {{app.companyName}}</span>
+                <span class="fixed-span" style="text-align: center;">Application Date:
+                  {{app.appDate.toLocaleDateString()}}</span>
+                <span class="fixed-span" style="text-align: right;">Applied via: {{app.source}}</span>
+              </div>
+            </div>
+          </mat-list-item>
+        </mat-list> -->
+
+
       </div>
     </div>
 
     <mat-drawer position="end" [fixedInViewport]="true" mode="side" [opened]="displayDrawer" #sidenav>
-      <application-input [sidenav]="sidenav" [app]="selectedApp" [journeyId]="journey.id">
+      <application-input [sidenav]="sidenav" [app]="selectedApp" [journeyId]="journey.id" (dataLogged)="updateView()">
       </application-input>
     </mat-drawer>
   </mat-drawer-container>

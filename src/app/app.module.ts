@@ -20,6 +20,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { JourneysComponent } from './views/journeys/journeys.component';
@@ -94,6 +95,7 @@ import { AppFilterPipe } from './views/dashboard/app-filter.pipe';
     MatInputModule,
     MatTabsModule,
     MatTableModule,
+    MatSortModule,
   ],
   providers: [
     AmplifyService,

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { STATUS, APP_SOURCE } from 'src/app/models/constants';
-import { Application } from 'src/app/models/application';
+import { Application, ApplicationInput } from 'src/app/models/application';
 import { UserStoreService } from 'src/app/models/user-store.service';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatSidenav } from '@angular/material/sidenav';
@@ -22,7 +22,8 @@ export class ApplicationInputComponent implements OnChanges {
   STATUSES = Object.values(STATUS);
   SOURCES = Object.values(APP_SOURCE);
 
-  appDetails = { // use to fill in input fields and retrieve data
+  appDetails: ApplicationInput = { // use to fill in input fields and retrieve data
+    id: -1,
     company : '',
     title : '',
     date : new Date(),
@@ -53,6 +54,7 @@ export class ApplicationInputComponent implements OnChanges {
 
   ngOnChanges() {
     if (this.app) { // if an application is specified, extract its data
+      this.appDetails.id = this.app.id;
       this.appDetails.title = this.app.positionTitle;
       this.appDetails.date = this.app.appDate;
       this.appDetails.company = this.app.companyName;
@@ -79,16 +81,27 @@ export class ApplicationInputComponent implements OnChanges {
     if (!this.app) {
       this.userStore.addNewApplication(this.journeyId, this.appDetails);
     } else {
-      this.app.companyName = this.appDetails.company;
-      this.app.positionTitle = this.appDetails.title;
-      this.app.appDate = this.appDetails.date;
-      this.app.status = this.appDetails.status;
-      this.app.source = this.appDetails.source;
-      this.app.notes = this.appDetails.notes;
-      this.userStore.updateExistingApplication(this.journeyId, this.app);
+      // this.app.companyName = this.appDetails.company;
+      // this.app.positionTitle = this.appDetails.title;
+      // this.app.appDate = this.appDetails.date;
+      // this.app.status = this.appDetails.status;
+      // this.app.source = this.appDetails.source;
+      // this.app.notes = this.appDetails.notes;
+      const updatedApp = new Application();
+      updatedApp.id = +this.appDetails.id;
+      updatedApp.positionTitle = this.appDetails.title;
+      updatedApp.companyName = this.appDetails.company;
+      updatedApp.appDate = this.appDetails.date as Date;
+      updatedApp.status = this.appDetails.status;
+      updatedApp.source = this.appDetails.source;
+      updatedApp.notes = this.appDetails.notes;
+      console.log(updatedApp);
+      this.userStore.updateExistingApplication(this.journeyId, updatedApp);
+      this.app = undefined;
     }
     // TODO: check if everything is fine here
     this.sidenav.close();
+    this.dataLogged.emit();
   }
 
 }

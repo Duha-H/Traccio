@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { APIService } from '../API.service';
-import { resolve } from 'dns';
 import { Journey } from '../models/journey';
-import { Application } from '../models/application';
+import { Application, ApplicationInput } from '../models/application';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +20,7 @@ export class UserStoreControllerService {
         journeyList.forEach(async journey => {
           await this.fetchJourneyApps(journey.id)
             .then(fetchedApps => {
-              const apps = fetchedApps.map((app) => {
+              const apps = fetchedApps.map((app: ApplicationInput) => {
                 return new Application(app);
               });
               // assign extracted values to a new Journey object
@@ -38,7 +37,7 @@ export class UserStoreControllerService {
   }
 
   async fetchJourneyApps(journeyid: string) {
-    let apps: object[] = [];
+    let apps: ApplicationInput[] = [];
     await this.api.GetJourney(journeyid)
       .then(value => {
         apps = value.applications.items;

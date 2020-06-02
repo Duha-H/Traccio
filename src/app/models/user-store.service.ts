@@ -2,18 +2,17 @@ import { Injectable } from "@angular/core";
 import { User } from "./user";
 import { Journey } from "./journey";
 import * as mock from "./mock-journeys";
-import { Application } from "./application";
+import { Application, ApplicationInput } from "./application";
 import { UserStoreControllerService } from "../controllers/user-store-controller.service";
 import { Observable } from "rxjs/Observable";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { map } from "rxjs/operators";
-import { DataManagerService } from '../controllers/data-manager.service';
+import { DataManagerService } from "../controllers/data-manager.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class UserStoreService {
-
   user: User;
   placeholderJourneys: { [key: string]: Journey } = {
     0: mock.testJourney1,
@@ -28,17 +27,24 @@ export class UserStoreService {
   // public readonly journeys: Observable<{[key: string]: Journey}> = this._journeys.asObservable();
   private _journeys: BehaviorSubject<{
     [key: string]: Journey;
-  }> = new BehaviorSubject<{ [key: string]: Journey }>(this.placeholderJourneys);
+  }> = new BehaviorSubject<{ [key: string]: Journey }>(
+    this.placeholderJourneys
+  );
   public readonly journeys: Observable<Journey[]> = this._journeys.pipe(
     map((entry) => Object.values(entry).reverse())
   );
 
-  private _activeJourneys: BehaviorSubject<Journey[]> = new BehaviorSubject<Journey[]>(this.getActiveJourneys());
-  public readonly activeJourneys: Observable<Journey[]> = this._activeJourneys.asObservable();
+  private _activeJourneys: BehaviorSubject<Journey[]> = new BehaviorSubject<
+    Journey[]
+  >(this.getActiveJourneys());
+  public readonly activeJourneys: Observable<
+    Journey[]
+  > = this._activeJourneys.asObservable();
 
   constructor(
     private controller: UserStoreControllerService,
-    private dataManager: DataManagerService) { }
+    private dataManager: DataManagerService
+  ) {}
 
   /**
    * Initial Setup Methods
@@ -77,7 +83,7 @@ export class UserStoreService {
     this._activeJourneys.next(this.getActiveJourneys());
   }
 
-  updateJourneyData(newJourneys?: {[key: string]: Journey}) {
+  updateJourneyData(newJourneys?: { [key: string]: Journey }) {
     // this.dataUpdated = true;
     if (newJourneys) {
       this._journeys.next(newJourneys);
@@ -109,24 +115,27 @@ export class UserStoreService {
   }
 
   getActiveJourneys() {
-    let activeJourneys = Object.values(this._journeys.getValue()).filter(journey =>
-      journey.active
+    let activeJourneys = Object.values(this._journeys.getValue()).filter(
+      (journey) => journey.active
     );
-    activeJourneys = activeJourneys.sort((a: Journey, b: Journey) => { // sort journeys by latest start date
+    activeJourneys = activeJourneys.sort((a: Journey, b: Journey) => {
+      // sort journeys by latest start date
       return a.startDate > b.endDate ? 1 : -1;
     });
     return activeJourneys;
   }
 
-  getCalendarData(journeyid: string): { day: string; value: number; }[] {
+  getCalendarData(journeyid: string): { day: string; value: number }[] {
     return this.dataManager.getFormattedCalendarData(journeyid);
   }
 
-  getStatusData(journeyid: string): {
-    id: string,
-    label: string,
-    value: number,
-    color: string
+  getStatusData(
+    journeyid: string
+  ): {
+    id: string;
+    label: string;
+    value: number;
+    color: string;
   }[] {
     return this.dataManager.getFormattedStatusData(journeyid);
   }
@@ -150,7 +159,7 @@ export class UserStoreService {
     // make necessary api calls
   }
 
-  addNewApplication(journeyId: string, appData: { [key: string]: any }) {
+  addNewApplication(journeyId: string, appData: ApplicationInput) {
     const journey = this.getJourney(journeyId);
     const appID = this._getNewAppID(journeyId);
     appData.id = appID;
@@ -164,21 +173,34 @@ export class UserStoreService {
   }
 
   updateExistingApplication(
-    journeyId: string,
+    journeyid: string,
     updatedApplication: Application
   ) {
     const appID = updatedApplication.id;
-    let existingApplication = this.getApplication(journeyId, appID);
-    existingApplication = updatedApplication;
+    const journey = this.getJourney(journeyid);
+    const existingApplication = this.getApplication(journeyid, appID);
+    this.dataManager.updateExistingApplication(
+      journeyid,
+      existingApplication,
+      updatedApplication
+    );
+    const updatedApps = journey.applications.map((app) => {
+      return app.id === updatedApplication.id ? updatedApplication : app;
+    });
+    // existingApplication = updatedApplication;
+    journey.applications = updatedApps;
     this.updateJourneyData(); // data updated, bubble .next() it to all observables
   }
 
   removeApplication(journeyid: string, appid: number) {
     const journey = this.getJourney(journeyid);
-    const remainingApps = journey.applications.filter(app => {
+    const remainingApps = journey.applications.filter((app) => {
       return app.id !== appid;
     });
-    this.dataManager.removeApplication(journeyid, this.getApplication(journeyid, appid));
+    this.dataManager.removeApplication(
+      journeyid,
+      this.getApplication(journeyid, appid)
+    );
     journey.applications = remainingApps;
     this.updateJourneyData(); // data updated, bubble .next() it to all observables
   }
