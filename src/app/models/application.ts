@@ -65,7 +65,12 @@ export class Application {
 			status: this._status,
 			source: this._source,
 			notes: this._notes
-		}
+		};
 		return input;
+	}
+
+	getFilteredString() {
+		const result = `${this._companyName}${this._positionTitle}${this._status}${this._source}`;
+		return result.toLocaleLowerCase();
 	}
 }

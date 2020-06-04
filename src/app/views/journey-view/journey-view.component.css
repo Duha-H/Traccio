@@ -155,6 +155,44 @@ mat-select {
   border-top: none;
 }
 
+ul.filter-values {
+  list-style: none;
+  display: flex;
+  margin: 15px;
+  padding: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.filter-values li {
+  font-size: 11pt;
+  border-radius: 5px;
+  min-width: 100px;
+  max-width: 260px;
+  height: 20px;
+  background-color: var(--titles-secondary-dark);
+  padding: 5px 10px;
+  line-height: 13pt;
+  margin: 5px 10px;
+  display: flex;
+}
+
+.filter-values li p {
+  font-size: 11pt;
+  color: var(--background-dark);
+  line-height: 13pt;
+  margin: 0;
+  width: 100%;
+}
+
+.filter-values mat-icon {
+  float: right;
+  color: var(--background-dark);
+  line-height: 13pt;
+  width: 20px;
+  margin-left: 10px;
+}
+
 .app-table {
   width: 100%;
   background-color: var(--background-dark);

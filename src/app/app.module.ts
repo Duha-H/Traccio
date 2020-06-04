@@ -101,6 +101,7 @@ import { AppFilterPipe } from './views/dashboard/app-filter.pipe';
     AmplifyService,
     UserStoreService,
     { provide: ErrorStateMatcher, useClass: OnDirtyErrorStateMatcher },
+    AppFilterPipe,
   ],
   bootstrap: [AppComponent],
   entryComponents: [
