@@ -4,6 +4,8 @@ import {
   ViewChild,
   Output,
   EventEmitter,
+  ViewChildren,
+  QueryList,
 } from "@angular/core";
 import { Journey } from "src/app/models/journey";
 import { MatSidenav } from "@angular/material/sidenav";
@@ -17,7 +19,7 @@ import { Observable, from, Subscription } from "rxjs";
 import { MatSort } from "@angular/material/sort";
 import { AppFilterPipe } from '../dashboard/app-filter.pipe';
 import { MatSelect, MatSelectChange } from '@angular/material/select';
-import { MatOptionSelectionChange } from '@angular/material/core';
+import { MatOptionSelectionChange, MatOption } from '@angular/material/core';
 
 const DRAWER_MODES = {
   ADD: "add",
@@ -30,10 +32,11 @@ const DRAWER_MODES = {
   styleUrls: ["./journey-view.component.css"],
 })
 export class JourneyViewComponent implements OnInit {
+
   @ViewChild("sidenav", { static: false }) sidenav: MatSidenav;
-  @ViewChild("table", { static: false }) table: MatTable<any>;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild("filterElement", {static: false}) dropdownElement: MatSelect;
+  @ViewChildren(MatOption) matOptions!: QueryList<MatOption>;
 
   journey: Journey = new Journey();
   applications: Application[];
@@ -77,10 +80,9 @@ export class JourneyViewComponent implements OnInit {
       ]
     },
   ];
-  filterValues: string[] = [];
   filterObjects = {
-    status: '',
-    source: '',
+    status: [],
+    source: [],
   };
 
   constructor(
@@ -121,12 +123,8 @@ export class JourneyViewComponent implements OnInit {
 
   updateView() {
     if (this.journey) {
-      console.log("updating");
       this.journey = this.userStore.getJourney(this.journey.id); // probably no longer necessary
       this.applications = this.journey.applications;
-      // according to docs this will "render the diff since the last table render.
-      // If the data array reference is changed, the table will automatically trigger an update to the rows"
-      // this.table.renderRows();
       this.dataSource.data = this.applications;
     }
   }
@@ -195,29 +193,41 @@ export class JourneyViewComponent implements OnInit {
     this.updateView();
   }
 
-  applyFilter(event: MatOptionSelectionChange) {
+  addFilter(event: MatOptionSelectionChange) {
     this.dropdownElement.close();
     const group = event.source.group.label.toLowerCase();
     const value = event.source.value;
-    if (event.source.selected) { // item was selected
-      this.filterObjects[group] += value;
-      this.filterValues.push(value);
-    } else { // item was deselected
-      this.filterObjects[group] = this.filterObjects[group].replace(value, '');
-      this.filterValues.filter(filterValue => filterValue !== value);
+    // apply added filters
+    this._applyFilter(group, value, event.source.selected);
+  }
+
+  removeFilter(property: string, value: string) {
+    // de-select option
+    const matOption = this.matOptions.filter(option => option.id === `${property}.${value}`)[0];
+    matOption.deselect();
+    // apply removed filter
+    this._applyFilter(property.toLowerCase(), value, false);
+  }
+
+  private _applyFilter(property: string, value: string, selected: boolean) {
+    if (selected) { // filter was selected
+      this.filterObjects[property].push(value);
+    } else { // filter was removed
+      this.filterObjects[property] = this.filterObjects[property].filter(filterValue => filterValue !== value);
     }
     // Apply filter to applications using pipe
-    this.dataSource.data = this.filterPipe.transform(this.applications, [
-      {
+    this.dataSource.data = this.filterPipe.transform(this.applications,
+    [{
         property: 'status',
-        value: this.filterObjects.status
+        value: this.filterObjects.status.join('')
       },
       {
         property: 'source',
-        value: this.filterObjects.source
+        value: this.filterObjects.source.join('')
       }
     ]);
   }
+
 }
 
 export class ApplicationDataSource extends DataSource<any> {

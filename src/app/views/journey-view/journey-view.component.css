@@ -146,6 +146,10 @@ mat-select {
   border-radius: 5px;
 }
 
+span.mat-select-placeholder {
+  padding: 5px;
+}
+
 ::ng-deep .edit-items .mat-form-field-underline {
   display: none;
 }
@@ -153,6 +157,11 @@ mat-select {
 ::ng-deep .edit-items .mat-form-field-wrapper, ::ng-deep .edit-items .mat-form-field-infix {
   padding: 0;
   border-top: none;
+}
+
+/* ::ng-deep .edit-items span.mat-option-text, ::ng-deep .mat-select-panel .mat-optgroup-label, ::ng-deep .mat-select-panel.mat-option { */
+::ng-deep .mat-select-panel .mat-optgroup-label, ::ng-deep .mat-select-panel .mat-option, ::ng-deep mat-optgroup.mat-optgroup-label, ::ng-deep .mat-select-panel mat-option.mat-option {
+  font-size: 10pt;
 }
 
 ul.filter-values {
@@ -243,6 +252,16 @@ mat-list-item {
 
 .options {
   padding: 0 8px;
+  display: inherit;
+  vertical-align: middle;
+}
+
+button.options {
+  height: 30px;
+}
+
+.options mat-icon {
+  font-size: 22pt;
 }
 
 .clickable-item {

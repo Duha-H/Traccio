@@ -19,18 +19,19 @@
           <h2>Applications</h2>
           <div class="spacer"></div>
           <div class="options">
-            <mat-icon class="edit-items">filter_list</mat-icon>
-            <mat-form-field class="edit-items">
-              <mat-select color="primary" name="filterSelection" title="application filters" multiple #filterElement>
-                <mat-optgroup *ngFor="let group of filterDropdown;" [label]="group.name">
-                  <mat-option *ngFor="let item of group.items" [value]="item.value"
-                    (onSelectionChange)="applyFilter($event)">
+            <!-- <mat-icon class="edit-items">filter_list</mat-icon> -->
+            <mat-form-field class="edit-items" floatLabel="never">
+              <mat-select color="primary" name="filterSelection" title="application filters" panelClass="cat-select-panel" placeholder="Application Filters" multiple #filterElement>
+                <mat-select-trigger><span>Application Filters</span></mat-select-trigger>
+                <mat-optgroup *ngFor="let group of filterDropdown; let i = index;" [label]="group.name">
+                  <mat-option *ngFor="let item of group.items; let j = index;" [value]="item.value"
+                    (onSelectionChange)="addFilter($event)" id="{{group.name}}.{{item.value}}" #matOption>
                     {{item.viewValue}}
                   </mat-option>
                 </mat-optgroup>
               </mat-select>
             </mat-form-field>
-            <mat-icon class="edit-items">sort</mat-icon>
+            <!-- <mat-icon class="edit-items">sort</mat-icon> -->
             <button (click)="openDrawer('add', null)" title="add application" class="edit-items">
               <mat-icon>add_box</mat-icon>
             </button>
@@ -39,9 +40,13 @@
         <div class="spanning-content">
           <div class="spacer"></div>
           <ul class="filter-values">
-            <li *ngFor="let filterValue of filterValues;">
-              <p>{{filterValue}}</p>
-              <mat-icon>clear</mat-icon>
+            <li *ngFor="let filterItem of filterObjects.status;">
+              <p>{{filterItem}}</p>
+              <mat-icon (click)="removeFilter('Status', filterItem)" style="cursor: pointer;">clear</mat-icon>
+            </li>
+            <li *ngFor="let filterItem of filterObjects.source;">
+              <p>{{filterItem}}</p>
+              <mat-icon (click)="removeFilter('Source', filterItem)" style="cursor: pointer;">clear</mat-icon>
             </li>
           </ul>
         </div>
@@ -112,34 +117,14 @@
           </tr>
         </table>
 
+        <div *ngIf="dataSource.data.length == 0" class="placeholder-text">
+          <h4>Applied filters do not match any applications.</h4>
+        </div>
+
         <div *ngIf="applications.length == 0" class="placeholder-text">
           <h4>No applications added.</h4>
           <h4>Add applications to track them here.</h4>
         </div>
-
-
-        <!-- <mat-list *ngIf="applications.length > 0">
-          <mat-list-item (click)="openDrawer('edit', app)" class="clickable-item" *ngFor="let app of applications;">
-            <mat-icon matListIcon>folder</mat-icon>
-            <div matLine>
-              <div class="spanning-content">
-                <h3 style="width: 100px">{{app.positionTitle}}</h3>
-                <div class="spacer"></div>
-                <h4>Status: {{app.status}}</h4>
-              </div>
-
-            </div>
-            <div matLine>
-              <div class="spanning-content">
-                <span class="fixed-span" style="text-align: left;">Company: {{app.companyName}}</span>
-                <span class="fixed-span" style="text-align: center;">Application Date:
-                  {{app.appDate.toLocaleDateString()}}</span>
-                <span class="fixed-span" style="text-align: right;">Applied via: {{app.source}}</span>
-              </div>
-            </div>
-          </mat-list-item>
-        </mat-list> -->
-
 
       </div>
     </div>

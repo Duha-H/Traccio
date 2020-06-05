@@ -26,11 +26,10 @@ export class AppFilterPipe implements PipeTransform {
     }[]
   ): boolean {
     let match = false;
+    if (filters.map(filter => filter.value).join('') === '') { // no filter values specified
+      return true;
+    }
     filters.forEach(filter => {
-      // if (filter.value !== '' && !filter.value.includes(item[filter.property])) {
-      //   match = false;
-      //   return;
-      // }
       if (filter.value !== '' && filter.value.includes(item[filter.property])) {
         match = true;
         return;
