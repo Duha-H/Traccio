@@ -60,13 +60,6 @@ mat-icon {
   width: 600px;
 }
 
-.spanning-content {
-  display: flex;
-  flex-direction: row;
-  vertical-align: middle;
-  align-items: center;
-}
-
 .mat-line {
   flex-direction: row;
 }

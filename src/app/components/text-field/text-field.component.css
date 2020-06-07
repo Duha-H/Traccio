@@ -5,14 +5,16 @@
 .input-container {
   display: flex;
   flex-direction: column-reverse;
-  width: 350px;
+  max-width: 350px;
+  /* min-width: 50px; */
   margin: 10px auto;
 }
 
 .input-container div {
   display: flex;
   flex-direction: row;
-  width: 92%;
+  /* min-width: 92%; */
+  width: 95%;
   height: 18px;
   border-radius: 20px;
   padding: 16px;
@@ -24,7 +26,8 @@
 
 .input-container input {
   font-size: 10pt;
-  width: 90%;
+  /* min-width: 95%; */
+  width: 100%;
   background: none;
   border: none;
   outline: none;

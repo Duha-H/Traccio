@@ -93,7 +93,8 @@ p.warning-text {
 }
 
 app-journeys,
-app-dashboard {
+app-dashboard,
+app-search {
   width: 100%;
 }
 
@@ -145,4 +146,22 @@ a.login-link.forgot-password {
 
 .spacer {
   flex: 1;
+}
+
+.spanning-content {
+  display: flex;
+  flex-direction: row;
+  vertical-align: middle;
+  align-items: center;
+}
+
+.placeholder-text {
+  margin: auto;
+  text-align: center;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  vertical-align: middle;
+  height: 200px;
+  margin-top: 150px;
 }

@@ -1,9 +1,46 @@
 <div class="view-container">
-  <div class="search">
-    <mat-form-field style="margin: auto;">
-      <!-- <label>Notes</label> -->
-      <input matInput rows="5" cols="500" class="search-bar" placeholder="Search for a journey or application..." style="text-align: left;" />
-      <mat-icon matSuffix>search</mat-icon>
-    </mat-form-field>
+  <div class="search" style="padding: 10px;">
+    <text-field (inputChange)="search($event)" [label]="'Search for a journey or application...'" [suffixIcon]="'search'" [width]="600"></text-field>
+  </div>
+
+  <div class="results">
+    <div class="result-section" *ngIf="filteredJourneys.length != 0">
+      <h3 class="result-title">Journey Results</h3>
+      <mat-list style="height: 100%;" class="app-list-item">
+        <mat-list-item class="clickable-item" *ngFor="let journey of filteredJourneys;">
+          <mat-icon matListIcon>folder</mat-icon>
+          <div matLine>
+            <div class="spanning-content">
+              <h4 style="text-align: left; color: var(--text-dark);">{{journey.title}}</h4>
+              <!-- <span style="padding-left: 10px; color: var(--titles-secondary-dark);"> @ {{app.companyName}}</span> -->
+              <div class="spacer"></div>
+              <span>Date Started: {{ journey.startDate | date }}</span>
+            </div>
+          </div>
+        </mat-list-item>
+      </mat-list>
+    </div>
+
+    <div class="result-section" *ngIf="filteredApps.length != 0">
+      <h3 class="result-title">Application Results</h3>
+      <mat-list style="height: 100%;" class="app-list-item">
+        <mat-list-item class="clickable-item" *ngFor="let app of filteredApps;">
+          <mat-icon matListIcon>folder</mat-icon>
+          <div matLine>
+            <div class="spanning-content">
+              <h4 style="text-align: left; color: var(--text-dark);">{{app.positionTitle + '  '}}</h4>
+              <span style="padding-left: 10px; color: var(--titles-secondary-dark);"> @ {{app.companyName}}</span>
+              <div class="spacer"></div>
+              <span>Date Applied: {{ app.appDate | date }}</span>
+            </div>
+          </div>
+        </mat-list-item>
+      </mat-list>
+    </div>
+
+    <div class="placeholder-text" *ngIf="query.length != 0 && filteredJourneys.length == 0 && filteredApps.length == 0">
+      <h4>Looks like your search has no matching results.</h4>
+    </div>
+
   </div>
 </div>

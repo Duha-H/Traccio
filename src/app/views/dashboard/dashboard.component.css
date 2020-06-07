@@ -156,13 +156,6 @@ calendar-wrapper span {
   margin: 0;
 }
 
-.spanning-content {
-  display: flex;
-  flex-direction: row;
-  vertical-align: middle;
-  align-items: center;
-}
-
 .app-list-container {
   padding-bottom: 40px;
 }

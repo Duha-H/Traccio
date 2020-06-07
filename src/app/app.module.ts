@@ -47,6 +47,7 @@ import { NewPasswordComponent } from './auth/account-recovery/new-password.compo
 import { ResetSuccessfulComponent } from './auth/account-recovery/reset-successful.component';
 import { SignupSuccessfulComponent } from './auth/confirm-signup/signup-successful.component';
 import { AppFilterPipe } from './views/dashboard/app-filter.pipe';
+import { SearchPipe } from './views/search/search-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { AppFilterPipe } from './views/dashboard/app-filter.pipe';
     NewPasswordComponent,
     ResetSuccessfulComponent,
     SignupSuccessfulComponent,
-    AppFilterPipe
+    AppFilterPipe,
+    SearchPipe
   ],
   imports: [
     BrowserModule,
@@ -102,6 +104,7 @@ import { AppFilterPipe } from './views/dashboard/app-filter.pipe';
     UserStoreService,
     { provide: ErrorStateMatcher, useClass: OnDirtyErrorStateMatcher },
     AppFilterPipe,
+    SearchPipe,
   ],
   bootstrap: [AppComponent],
   entryComponents: [
