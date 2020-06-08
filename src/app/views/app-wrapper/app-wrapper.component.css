@@ -14,12 +14,15 @@
 
 .toolbar mat-icon.mat-icon {
   color: var(--accent-dark);
-  /* width: 80px;
-	height: 80px; */
   text-align: center;
-  line-height: 24pt;
-  font-size: 24pt;
-  margin-right: 15px;
+  line-height: 30pt;
+  font-size: 28pt;
+  margin-right: 20px;
+}
+
+text-field.toolbar-item {
+  width: 350px;
+  margin: 0 20px;
 }
 
 .toolbar span {
@@ -38,6 +41,10 @@
 
 .toolbar #twitter-logo:hover {
   opacity: 0.8;
+}
+
+.search .input-container div {
+  height: 5px;
 }
 
 .sidenav-container.mat-sidenav-container.mat-drawer-container {

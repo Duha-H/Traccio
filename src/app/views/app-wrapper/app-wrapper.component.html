@@ -21,8 +21,11 @@
 
     <!-- Toolbar -->
     <div class="toolbar" role="banner">
-      <span></span>
+      <!-- <span></span> -->
       <div class="spacer"></div>
+      <text-field class="toolbar-item" (inputChange)="onSearch($event)" [text]="searchQuery"
+        [label]="'Search for a journey or application...'" [displayLabel]="false" [suffixIcon]="'search'"
+        [height]="1"></text-field>
       <div #dropdownButton>
         <mat-icon (click)="toggleAccountDropdown()" style="cursor: pointer;">account_box</mat-icon>
       </div>
@@ -31,7 +34,11 @@
 
     <!-- Content Router -->
     <div class="content" role="main">
-      <router-outlet></router-outlet>
+      <app-search *ngIf="searchQuery.length != 0; else appContent" [query]="searchQuery"
+        [parentSearchSubject]="searchSubject" (clearEvent)="searchQuery=''" #searchComponent></app-search>
+      <ng-template #appContent>
+        <router-outlet></router-outlet>
+      </ng-template>
       <!-- Footer -->
       <footer></footer>
     </div>

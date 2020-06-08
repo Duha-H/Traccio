@@ -1,7 +1,10 @@
-import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
+import { Component, OnInit, ElementRef, ViewChild, EventEmitter, Output, ViewChildren, QueryList, AfterViewInit } from "@angular/core";
 import { Auth } from "aws-amplify";
 import { UserStoreService } from "src/app/models/user-store.service";
 import { Router, ActivatedRoute } from "@angular/router";
+import { SearchComponent } from '../search/search.component';
+import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: "app-wrapper",
@@ -20,22 +23,18 @@ export class AppWrapperComponent implements OnInit {
     { text: "Theme: dark", type: "toggle" },
     { text: "Sign out", type: "button", callback: this.signOut.bind(this) },
   ];
-  currClassName: string;
+  searchQuery = '';
+  searchSubject: BehaviorSubject<string> = new BehaviorSubject(this.searchQuery);
+  @Output() submitSearch = new EventEmitter();
   @ViewChild("navHomeIcon", { read: ElementRef }) currNavIconRef: HTMLElement;
   @ViewChild("dropdownButton") dropdownRef: ElementRef;
 
   constructor(
     private userStore: UserStoreService,
     private router: Router,
-    private route: ActivatedRoute
   ) {  }
 
-  ngOnInit() {
-    // this.currClassName = this.currNavIconRef._elementRef.nativeElement.className;
-    // this.route.data.subscribe(data => {
-    //   console.log("route:", data);
-    // });
-  }
+  ngOnInit() {  }
 
   async signOut() {
     try {
@@ -49,14 +48,7 @@ export class AppWrapperComponent implements OnInit {
     }
   }
 
-  onNavIconClick(ref: HTMLElement) {
-    // console.log(this.currNavIconRef);
-    // console.log("click?", ref);
-    // this.currNavIconRef.className = "";
-    // this.currNavIconRef = ref;
-    // // this.currClassName = this.currNavIconRef._elementRef.nativeElement.className;
-    // this.currNavIconRef.className = "active";
-  }
+  onNavIconClick(ref: HTMLElement) {  }
 
   onWrapperClick(event: Event) {
     // If a click is registered outside of the dropdown toggle button
@@ -68,6 +60,11 @@ export class AppWrapperComponent implements OnInit {
 
   toggleAccountDropdown() {
     this.displayDropdown = !this.displayDropdown;
+  }
+
+  onSearch(query: string) {
+    this.searchQuery = query;
+    this.searchSubject.next(query);
   }
 }
 

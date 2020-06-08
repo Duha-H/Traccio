@@ -12,10 +12,20 @@ span {
   margin: auto;
 }
 
+.spanning-content h4 {
+  text-align: left;
+  color: var(--titles-primary-dark);
+}
+
+.spanning-content mat-icon {
+  color: var(--titles-primary-dark);
+  cursor: pointer;
+}
+
 .search {
-  margin: auto;
+  margin: 0 auto;
   margin-top: 30px;
-  max-width: 100%;
+  max-width: 80%;
 }
 
 .results {

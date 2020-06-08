@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, EventEmitter, Output } from '@angular/core';
 import { Journey } from 'src/app/models/journey';
 import { Application } from 'src/app/models/application';
 import { UserStoreService } from 'src/app/models/user-store.service';
 import { SearchPipe } from './search-pipe.pipe';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Component({
   selector: 'app-search',
@@ -11,7 +12,9 @@ import { SearchPipe } from './search-pipe.pipe';
 })
 export class SearchComponent implements OnInit {
 
-  query = '';
+  @Input() query = '';
+  @Input() parentSearchSubject: BehaviorSubject<string>;
+  @Output() clearEvent = new EventEmitter();
   journeys: Journey[] = [];
   applicationMap: {[journeyid: string]: Application[]} = {};
   applications: Application[] = [];
@@ -28,6 +31,9 @@ export class SearchComponent implements OnInit {
       });
     });
     this.applications = this.flattenedApps();
+    this.parentSearchSubject.subscribe(query => {
+      this.search(query);
+    });
   }
 
   flattenedApps(): Application[] {
@@ -42,6 +48,10 @@ export class SearchComponent implements OnInit {
     this.query = queryInput;
     this.filteredJourneys = this.searchPipe.transform(this.journeys, 'journey', queryInput) as Journey[];
     this.filteredApps = this.searchPipe.transform(this.applications, 'application', queryInput) as Application[];
+  }
+
+  clear() {
+    this.clearEvent.emit();
   }
 
 }
