@@ -48,6 +48,7 @@ import { ResetSuccessfulComponent } from './auth/account-recovery/reset-successf
 import { SignupSuccessfulComponent } from './auth/confirm-signup/signup-successful.component';
 import { AppFilterPipe } from './views/dashboard/app-filter.pipe';
 import { SearchPipe } from './views/search/search-pipe.pipe';
+import { WishlistComponent } from './views/wishlist/wishlist.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { SearchPipe } from './views/search/search-pipe.pipe';
     ResetSuccessfulComponent,
     SignupSuccessfulComponent,
     AppFilterPipe,
-    SearchPipe
+    SearchPipe,
+    WishlistComponent
   ],
   imports: [
     BrowserModule,

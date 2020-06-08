@@ -5,6 +5,20 @@
   --wrapperH: 40px;
 }
 
+.view-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.spanning-content {
+  margin: 15px 20px;
+}
+
+.spanning-content h2 {
+  color: var(--titles-primary-dark);
+  margin: 0;
+}
+
 mat-drawer-container {
   background: none;
   min-height: 94vh;

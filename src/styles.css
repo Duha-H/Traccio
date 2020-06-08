@@ -94,7 +94,8 @@ p.warning-text {
 
 app-journeys,
 app-dashboard,
-app-search {
+app-search,
+app-wishlist {
   width: 100%;
 }
 

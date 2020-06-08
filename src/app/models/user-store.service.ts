@@ -41,6 +41,9 @@ export class UserStoreService {
     Journey[]
   > = this._activeJourneys.asObservable();
 
+  private _wishlistApps: BehaviorSubject<Application[]> = new BehaviorSubject<Application[]>([]);
+  public readonly wishlistApps: Observable<Application[]> = this._wishlistApps.asObservable();
+
   constructor(
     private controller: UserStoreControllerService,
     private dataManager: DataManagerService
