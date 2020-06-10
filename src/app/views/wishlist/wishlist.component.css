@@ -18,3 +18,16 @@
   background-color: var(--titles-primary-dark);
   margin: 0;
 }
+
+.wishlist-apps span {
+  color: var(--text-dark);
+}
+
+.clickable-item mat-icon {
+  color: var(--titles-secondary-dark);
+}
+
+.clickable-item:hover {
+  background-color: var(--secondary-dark);
+  cursor: pointer;
+}
