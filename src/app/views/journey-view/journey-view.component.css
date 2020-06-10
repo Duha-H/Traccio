@@ -1,6 +1,14 @@
+.view-container {
+  --spanning-line-height: 40px;
+}
+
 h2 {
   margin: 0 15px;
   display: flex;
+}
+
+input {
+  font-family: Roboto, 'Helvetica', sans-serif;
 }
 
 span {
@@ -26,6 +34,111 @@ mat-drawer {
 
 mat-icon {
   color: var(--accent-dark);
+}
+
+.spanning-content {
+  margin: 5px 20px;
+  height: var(--spanning-line-height);
+}
+
+.spanning-content h2 {
+  margin: 0;
+}
+
+.title .status-toggle {
+  border-radius: 25px;
+  font-size: 12pt;
+  font-weight: 500;
+  padding: 0 30px;
+  line-height: 30px;
+  margin: 0 30px;
+  color: var(--titles-secondary-dark);
+  border: 1px solid var(--titles-secondary-dark);
+  cursor: pointer;
+}
+
+.title .status-toggle.active {
+  border: 1px solid var(--accent-dark);
+  color: var(--accent-dark);
+}
+
+.edit-button {
+  text-align: right;
+	float: right;
+}
+
+.edit-button button {
+	background: none;
+	border: none;
+	min-width: 35px;
+  min-height: 35px;
+	padding: 0;
+	border-radius: 4px;
+}
+
+.edit-button button.active {
+  /* background: var(--titles-secondary-dark); */
+  border: 1px solid var(--accent-dark);
+  cursor: pointer;
+}
+
+.edit-button mat-icon.mat-icon {
+	text-align: center;
+  max-width: 40px;
+}
+
+.form-element {
+  background-color: var(--secondary-dark);
+  border-radius: 25px;
+  margin: 0px 10px;
+  margin-right: 0;
+  padding: 4px;
+  width: 235px;
+}
+
+::ng-deep .details .mat-form-field-wrapper, ::ng-deep .details .mat-form-field-infix {
+  border-top: none;
+  height: 100%;
+}
+
+::ng-deep .details .mat-form-field-underline, ::ng-deep .details .mat-form-field-underline .mat-form-field-ripple {
+  background-color: transparent;
+  height: 0;
+}
+
+::ng-deep .details .mat-form-field-infix {
+  padding: 0;
+  padding-left: 10px;
+}
+
+::ng-deep .details .mat-form-field-suffix {
+  padding-right: 10px;
+}
+
+::ng-deep .details .mat-form-field-suffix button.mat-icon-button {
+  vertical-align: bottom;
+}
+
+::ng-deep .details .mat-form-field-disabled .mat-form-field-underline {
+  background: none;
+}
+
+.dates.spanning-content h3 {
+  line-height: var(--spanning-line-height);
+  margin: 0;
+}
+
+.dates.spanning-content .date-val h4 {
+  margin: 0;
+  margin-left: 15px;
+}
+
+.dates .mat-input-element {
+  color: var(--titles-secondary-dark);
+}
+
+.date-val {
+  line-height: var(--spanning-line-height);
 }
 
 .mat-drawer-inner-container {
@@ -92,7 +205,8 @@ mat-icon {
 }
 
 .title mat-icon {
-  font-size: 14pt;
+  font-size: 16pt;
+  line-height: 20pt;
 }
 
 button {
@@ -105,23 +219,17 @@ button {
   display: flex;
   align-items: center;
   vertical-align: middle;
-  padding: 15px;
+  margin-top: 20px;
 }
 
 .dates * {
   font-size: 12pt;
   height: 30px;
-  margin-top: auto;
-  margin-bottom: auto;
-}
-
-.dates h4 {
-  margin-left: 10px;
 }
 
 .apps {
   margin: 20px;
-  margin-top: 25px;
+  margin-top: 15px;
 }
 
 .apps h3,
@@ -130,7 +238,8 @@ h4 {
 }
 
 .edit-items {
-  margin: 0 10px;
+  margin: 0;
+  margin-left: 20px;
 }
 
 mat-select {
@@ -152,7 +261,6 @@ span.mat-select-placeholder {
   border-top: none;
 }
 
-/* ::ng-deep .edit-items span.mat-option-text, ::ng-deep .mat-select-panel .mat-optgroup-label, ::ng-deep .mat-select-panel.mat-option { */
 ::ng-deep .mat-select-panel .mat-optgroup-label, ::ng-deep .mat-select-panel .mat-option, ::ng-deep mat-optgroup.mat-optgroup-label, ::ng-deep .mat-select-panel mat-option.mat-option {
   font-size: 10pt;
 }
@@ -160,7 +268,8 @@ span.mat-select-placeholder {
 ul.filter-values {
   list-style: none;
   display: flex;
-  margin: 15px;
+  margin: 0;
+  margin-left: 15px;
   padding: 0;
   overflow-x: auto;
   overflow-y: hidden;
@@ -175,7 +284,8 @@ ul.filter-values {
   background-color: var(--titles-secondary-dark);
   padding: 5px 10px;
   line-height: 13pt;
-  margin: 5px 10px;
+  margin: 5px 20px;
+  margin-right: 0;
   display: flex;
 }
 
@@ -244,7 +354,8 @@ mat-list-item {
 }
 
 .options {
-  padding: 0 8px;
+  padding: 0;
+  padding-left: 16px;
   display: inherit;
   vertical-align: middle;
 }

@@ -15,6 +15,7 @@ import {
       <p *ngIf="type == \'email\' && field.invalid" class="warning-text">{{label}} is not valid</p>\
       <div style="height: {{height}}px;">\
         <input type="{{currType}}" [(ngModel)]="text" [value]="text" (input)="onInput()" maxLength="60" \
+          style="font-size: {{fontSize}}pt; color: {{fontColor}};" \
           name="inputField" #field="ngModel" placeholder="{{label}}" class="input" email="{{type == \'email\'}}"/>\
         <mat-icon *ngIf="type == \'password\'" (click)="togglePasswordVisibility()">{{visibilityIconName}}</mat-icon>\
         <mat-icon *ngIf="suffixIcon && type != \'password\'">{{suffixIcon}}</mat-icon>\
@@ -32,6 +33,8 @@ export class TextFieldComponent implements OnInit {
   @Input() suffixIcon = '';
   @Input() width = 350;
   @Input() height = 18;
+  @Input() fontSize = 10;
+  @Input() fontColor = 'var(--text-dark)';
   @Input() text: string;
   @Output() inputChange = new EventEmitter();
   fieldEmpty = true;

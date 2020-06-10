@@ -7,7 +7,7 @@
   flex-direction: column-reverse;
   max-width: 350px;
   /* min-width: 50px; */
-  margin: 10px auto;
+  margin: 0px auto;
 }
 
 .input-container div {
@@ -20,7 +20,7 @@
   padding: 16px;
   border: 1px solid transparent;
   background-color: var(--secondary-dark);
-  margin: 5px auto;
+  margin: 0px auto;
   align-items: center;
 }
 

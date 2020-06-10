@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { User } from "./user";
 import { Journey } from "./journey";
 import * as mock from "./mock-journeys";
+import * as mockApps from "./mock-applications";
 import { Application, ApplicationInput } from "./application";
 import { UserStoreControllerService } from "../controllers/user-store-controller.service";
 import { Observable } from "rxjs/Observable";
@@ -41,7 +42,7 @@ export class UserStoreService {
     Journey[]
   > = this._activeJourneys.asObservable();
 
-  private _wishlistApps: BehaviorSubject<Application[]> = new BehaviorSubject<Application[]>([]);
+  private _wishlistApps: BehaviorSubject<Application[]> = new BehaviorSubject<Application[]>(mockApps.MOCK_APPS_1);
   public readonly wishlistApps: Observable<Application[]> = this._wishlistApps.asObservable();
 
   constructor(

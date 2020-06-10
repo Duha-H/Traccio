@@ -58,11 +58,9 @@ mat-icon {
 }
 
 .edit-button {
-  
   text-align: right;
 	z-index: 2;
 	float: right;
-
 }
 
 .edit-button button {
@@ -88,7 +86,7 @@ mat-icon {
 .journey-content {
   text-align: left;
   vertical-align: bottom;
-  margin-top: 95%;
+  margin-top: 112%;
 }
 
 .container.add .journey-content {
