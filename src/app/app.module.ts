@@ -30,6 +30,7 @@ import { SettingsComponent } from './views/settings/settings.component';
 import { RectItemComponent } from './components/rect-item/rect-item.component';
 import { JourneyInputComponent } from './components/journey-input/journey-input.component';
 import { JourneyViewComponent } from './views/journey-view/journey-view.component';
+import { ApplicationListComponent } from './views/journey-view/application-list.component';
 import { UserStoreService } from './models/user-store.service';
 import { JourneyListComponent } from './views/journey-list/journey-list.component';
 import { ApplicationInputComponent } from './components/application-input/application-input.component';
@@ -77,7 +78,8 @@ import { WishlistComponent } from './views/wishlist/wishlist.component';
     SignupSuccessfulComponent,
     AppFilterPipe,
     SearchPipe,
-    WishlistComponent
+    WishlistComponent,
+    ApplicationListComponent
   ],
   imports: [
     BrowserModule,

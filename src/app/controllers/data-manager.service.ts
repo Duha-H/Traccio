@@ -74,7 +74,7 @@ export class DataManagerService {
     if (calendarDatum && calendarDatum[dateString]) {
       calendarDatum[dateString] -= 1;
       if (calendarDatum[dateString] === 0) { // remove date string if count reaches 0
-        delete calendarDatum.dateString;
+        delete calendarDatum[dateString];
       }
     }
     if (statusDatum && statusDatum[app.status]) {
@@ -83,6 +83,8 @@ export class DataManagerService {
         delete statusDatum[app.status];
       }
     }
+    this.calendarData[journeyid] = calendarDatum;
+    this.statusData[journeyid] = statusDatum;
   }
 
   updateExistingApplication(journeyid: string, prevApp: Application, updatedApp: Application) {
