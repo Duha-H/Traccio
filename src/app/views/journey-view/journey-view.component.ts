@@ -250,13 +250,18 @@ export class JourneyViewComponent implements OnInit {
   }
 
   removeApplications(apps: Application[]) {
+    const prompt = apps.length > 1
+      ? 'all selected applications'
+      : `your application for ${apps[0].positionTitle} at ${apps[0].companyName}`;
     this.deleteButtonPressed = true;
-    apps.forEach((app) => {
-      this.userStore.removeApplication(this.journey.id, app.id);
-    });
-    this.selection.deselect(...apps);
-    // Update current journey details and view
-    this.updateView();
+    if (confirm(`Are you sure you'd like to remove ${prompt}?`)) {
+      apps.forEach((app) => {
+        this.userStore.removeApplication(this.journey.id, app.id);
+      });
+      this.selection.deselect(...apps);
+      // Update current journey details and view
+      this.updateView();
+    }
   }
 
   addFilter(event: MatOptionSelectionChange) {
