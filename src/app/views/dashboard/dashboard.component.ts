@@ -95,6 +95,10 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/journeys', this.selectedJourney.value.id, { appref: app.id }]);
   }
 
+  isEmpty(obj: {[key: string]: any}) {
+    return (obj && Object.keys(obj).length === 0);
+  }
+
   private _setCalendarYears(data: { day: string; value: number }[]): string[] {
     const years = [];
     data.sort((a, b) => {

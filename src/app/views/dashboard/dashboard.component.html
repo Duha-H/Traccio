@@ -39,7 +39,7 @@
             <h4 class="data-container-title">
               Status Breakdown
             </h4>  
-            <div class="status-container" style="height: 85%;">
+            <div *ngIf="!isEmpty(selectedJourney.statusData); else statusPlaceholder;" class="status-container" style="height: 85%;">
               <pie-chart-wrapper [data]="selectedJourney.statusData"
                 [margin]="{ top: 40, right: 200, bottom: 40, left: 80 }" [pixelRatio]="2" [innerRadius]="0.3"
                 [padAngle]="0.7" [cornerRadius]="3" [colors]="{ scheme: 'nivo' }" [enableRadialLabels]="false"
@@ -63,6 +63,12 @@
               ]">
               </pie-chart-wrapper>
             </div>
+            <ng-template #statusPlaceholder>
+              <div class="status-container" style="height: 85%;">
+                <p>The status breakdown of added applications will appear here.</p>
+              </div>
+            </ng-template>
+            
           </div>
         </mat-grid-tile>
         
@@ -121,7 +127,7 @@
               </mat-form-field>
             </div>
             <div class="app-list-container" style="height: 78%;">
-              <mat-list *ngIf="selectedJourney.value.applications.length > 0" style="height: 100%; overflow-y: scroll;" class="app-list-item">
+              <mat-list *ngIf="selectedJourney.value.applications.length > 0; else applicationsPlaceholder" style="height: 100%; overflow-y: scroll;" class="app-list-item">
                 <mat-list-item class="clickable-item" *ngFor="let app of (selectedJourney.value.applications | appFilter:[{ property: 'status', value: selectedStatus.value }] );"
                   (click)="selectApplication(app)">
                   <mat-icon matListIcon>folder</mat-icon>
@@ -133,9 +139,13 @@
                       <span>Date Applied: {{ app.appDate | date }}</span>
                     </div>
                   </div>
-                  
                 </mat-list-item>
               </mat-list>
+              <ng-template #applicationsPlaceholder>
+                <div>
+                  <p>Added applications will appear here.</p>
+                </div>
+              </ng-template>
             </div>
             
           </div>
