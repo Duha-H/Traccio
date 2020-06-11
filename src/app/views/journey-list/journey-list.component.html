@@ -1,32 +1,49 @@
-<div class="view-container journey-container">
-	<mat-drawer-container hasBackdrop="unset" >
-		<div class="spanning-content">
-			<h2>Journeys</h2>
-		</div>
-		<div class="journey-grid">
-			<app-rect-item 
-				[type]="'add'"
-				class="journey-item"
-				(click)="displayJourneyDrawer()"
-				title="Add journey">
-			</app-rect-item>
-			<app-rect-item 
-				class="journey-item"
-				*ngFor="let journey of userStore.journeys | async;"
-				[linkedJourney]="journey"
-				(click)="loadJourney(journey.id)"
-				(editButtonPressed)="onEditButtonPressed($event)"
-			>
-			</app-rect-item>
-		</div>
+<mat-drawer-container hasBackdrop="unset" >
+	<div class="view-container journey-container">
+			<div class="spanning-content">
+				<h2>Journeys</h2>
+				<div class="spacer"></div>
+				<button class="add-btn" title="Add journey" (click)="displayJourneyDrawer()">
+					<p>Add</p>
+					<mat-icon [inline]="true" aria-hidden="false" aria-label="Add journey icon" >add</mat-icon>
+				</button>
+				<button class="add-btn disabled" title="Add journey" (click)="displayJourneyDrawer()" >
+					<p>Delete</p>
+					<mat-icon [inline]="true" aria-hidden="false" aria-label="Add journey icon">delete</mat-icon>
+				</button>
+			</div>
+			<div class="journey-grid">
+				<div *ngIf="!editButton; else disabledLink;">
+					<a *ngFor="let journey of userStore.journeys | async;" href="" routerLink="/journeys/{{journey.id}}" disabled="true" style="text-decoration: none;">
+						<app-rect-item 
+							class="journey-item"
+							[linkedJourney]="journey"
+							(editButtonPressed)="onEditButtonPressed($event)"
+							title="View journey"
+						>
+						</app-rect-item>
+					</a>
+				</div>
+				
 
-		<mat-drawer
-			position="end"
-			[(opened)]="displayDrawer"
-			[fixedInViewport]="true"
-			mode="side"
-		>
-			<journey-input (newDataLogged)="onNewDataLogged($event)" [journey]="currJourney"></journey-input>
-		</mat-drawer>
-	</mat-drawer-container>
-</div>
+				<ng-template #disabledLink>
+					<app-rect-item 
+						*ngFor="let journey of userStore.journeys | async;"
+						class="journey-item"
+						[linkedJourney]="journey"
+						(editButtonPressed)="onEditButtonPressed($event)"
+						title="View journey"
+					>
+					</app-rect-item>
+				</ng-template>
+			</div>
+	</div>
+
+	<mat-drawer
+		position="end"
+		[(opened)]="displayDrawer"
+		[fixedInViewport]="true"
+		mode="side">
+		<journey-input (newDataLogged)="onNewDataLogged($event)" [journey]="currJourney"></journey-input>
+	</mat-drawer>
+</mat-drawer-container>

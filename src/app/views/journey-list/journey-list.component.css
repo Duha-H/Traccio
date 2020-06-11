@@ -1,8 +1,5 @@
-:root {
-  --rowNum: 4;
-  --colNum: 5;
-  --gridHeight: 120px;
-  --wrapperH: 40px;
+.journey-container {
+  --spanning-line-height: 40px;
 }
 
 .view-container {
@@ -12,11 +9,58 @@
 
 .spanning-content {
   margin: 15px 20px;
+  border-bottom: 1px solid var(--titles-secondary-dark);
+  padding-bottom: 25px;
+  height: var(--spanning-line-height);
 }
 
 .spanning-content h2 {
   color: var(--titles-primary-dark);
   margin: 0;
+  line-height: var(--spanning-line-height);
+}
+
+.add-btn {
+  font-size: 11pt;
+  line-height: var(--spanning-line-height);
+  border-radius: 20px;
+  min-width: 100px;
+  border: 1px solid var(--accent-dark);
+  background: var(--accent-dark);
+  padding: 2px 20px;
+  padding-left: 25px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  margin-left: 20px;
+}
+
+.add-btn.disabled {
+  opacity: 0.5;
+}
+
+.add-btn p {
+  font-size: 11pt;
+  line-height: 30px;
+  font-weight: 500;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+.add-btn mat-icon {
+  line-height: 30px;
+  color: var(--text-dark);
+  margin-left: 10px;
+  font-weight: 500;
+  font-size: 16pt;
+}
+
+/* .add-btn:hover {
+  background-color: var(--accent-dark);
+} */
+
+.add-btn:hover mat-icon, .add-btn:hover p {
+  color: var(--background-dark);
 }
 
 mat-drawer-container {

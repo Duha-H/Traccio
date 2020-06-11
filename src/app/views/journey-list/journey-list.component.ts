@@ -16,6 +16,7 @@ export class JourneyListComponent implements OnInit {
   currJourney: Journey = null;
   journeys: Observable<Journey[]>;
   editButton = false;
+  disableDeleteBtn = true;
 
   constructor(
     public userStore: UserStoreService,
@@ -23,8 +24,6 @@ export class JourneyListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log("initializing list");
-    // this.journeys = this.userStore.journeys.pipe(map(entry => Object.values(entry).reverse()));
     this.userStore.loadData();
   }
 
