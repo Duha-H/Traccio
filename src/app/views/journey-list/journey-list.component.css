@@ -35,8 +35,8 @@
   margin-left: 20px;
 }
 
-.add-btn.disabled {
-  opacity: 0.5;
+.add-btn.active mat-icon, .add-btn.add-btn.active p {
+  color: var(--background-dark);
 }
 
 .add-btn p {

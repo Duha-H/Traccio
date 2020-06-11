@@ -6,18 +6,20 @@ import { Journey } from 'src/app/models/journey';
   templateUrl: './rect-item.component.html',
   styleUrls: ['./rect-item.component.css']
 })
-export class RectItemComponent implements OnChanges {
+export class RectItemComponent implements OnInit {
 
   @Input() type = 'item'; // type can either be 'add' or 'item'
   @Input() width = 250;
   @Input() height = 370;
-  @Output() editButtonPressed = new EventEmitter<object>();
+  @Input() selectionMode = false;
+  @Output() deleteButtonPressed = new EventEmitter<object>();
   private _linkedJourney: Journey;
   // @Input() linkedJourney: Journey = null;
 
   displayName = 'Title';
   displayDate = 'Date Started: ';
   displayStatus = 'Status: ';
+  mouseOver = false;
 
   constructor() { }
 
@@ -25,17 +27,10 @@ export class RectItemComponent implements OnChanges {
   set linkedJourney(journey: Journey) { this._linkedJourney = journey; }
   get linkedJourney() { return this._linkedJourney; }
 
-  ngOnChanges() {
-    if (this._linkedJourney) {
-      this.displayName = this._linkedJourney.title;
-      this.displayDate += this._linkedJourney.startDate.toLocaleDateString();
-      this.displayStatus += this.linkedJourney.active ? 'Active' : 'Inactive';
-    }
-  }
+  ngOnInit() { }
 
-  onEditButtonPressed() {
-    console.log("edit");
-    this.editButtonPressed.emit(this.linkedJourney);
+  onDeleteButtonPressed() {
+    this.deleteButtonPressed.emit(this.linkedJourney);
   }
 
   addJourney() {

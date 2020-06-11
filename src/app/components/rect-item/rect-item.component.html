@@ -3,22 +3,22 @@
   [style.width.px]="width"
   [style.height.px]="height"
   [className]="type === 'item' ? 'container' : 'container add'"
+  (mouseover)="mouseOver=true"
+  (mouseout)="mouseOver=false"
 >
-  <!-- <div class="edit-button">
-    <button  *ngIf="type === 'item'" (click)="onEditButtonPressed()">
-      <mat-icon>edit</mat-icon>
+  <div class="edit-button">
+    <button *ngIf="selectionMode" (click)="onDeleteButtonPressed()" title="Remove journey">
+      <mat-icon style="color: var(--text-warn);">delete</mat-icon>
     </button>
-  </div> -->
+  </div>
   
   <div class="journey-content" *ngIf="type === 'item'">
-    
-    <h2>{{ displayName }}</h2>
-    <p>{{ displayDate }}</p>
-    <p>{{ displayStatus }}</p>
+    <h2>{{ linkedJourney.title }}</h2>
+    <p>Date Started: {{ linkedJourney.startDate | date }}</p>
+    <p>Status: {{ linkedJourney.active ? 'Active' : 'Inactive' }}</p>
   </div>
   <div class="journey-content" *ngIf="type === 'add'">
-    <mat-icon [inline]="true" aria-hidden="false" aria-label="Add journey icon"
-      >add</mat-icon
+    <mat-icon [inline]="true" aria-hidden="false" aria-label="Add journey icon">add</mat-icon
     >
   </div>
 </div>

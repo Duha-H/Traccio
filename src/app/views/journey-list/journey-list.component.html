@@ -3,39 +3,26 @@
 			<div class="spanning-content">
 				<h2>Journeys</h2>
 				<div class="spacer"></div>
+				<button class="{{selectionMode ? 'add-btn active' : 'add-btn'}}" title="Toggle journey selection" (click)="activateSelectionMode()" >
+					<p>Remove</p>
+					<mat-icon [inline]="true" aria-hidden="false" aria-label="Select journey icon">delete</mat-icon>
+				</button>
 				<button class="add-btn" title="Add journey" (click)="displayJourneyDrawer()">
 					<p>Add</p>
 					<mat-icon [inline]="true" aria-hidden="false" aria-label="Add journey icon" >add</mat-icon>
 				</button>
-				<button class="add-btn disabled" title="Add journey" (click)="displayJourneyDrawer()" >
-					<p>Delete</p>
-					<mat-icon [inline]="true" aria-hidden="false" aria-label="Add journey icon">delete</mat-icon>
-				</button>
 			</div>
 			<div class="journey-grid">
-				<div *ngIf="!editButton; else disabledLink;">
-					<a *ngFor="let journey of userStore.journeys | async;" href="" routerLink="/journeys/{{journey.id}}" disabled="true" style="text-decoration: none;">
-						<app-rect-item 
-							class="journey-item"
-							[linkedJourney]="journey"
-							(editButtonPressed)="onEditButtonPressed($event)"
-							title="View journey"
-						>
-						</app-rect-item>
-					</a>
-				</div>
-				
-
-				<ng-template #disabledLink>
-					<app-rect-item 
-						*ngFor="let journey of userStore.journeys | async;"
+				<a *ngFor="let journey of userStore.journeys | async;" href="" [routerLink]="selectionMode ? [] : ['/journeys', journey.id]" (click)="deleteButton ? removeJourney(journey) : ''" style="text-decoration: none;">
+					<app-rect-item
 						class="journey-item"
 						[linkedJourney]="journey"
-						(editButtonPressed)="onEditButtonPressed($event)"
-						title="View journey"
+						(deleteButtonPressed)="onDeleteButtonPressed($event)"
+						title="{{!selectionMode ? 'View journey' : ''}}"
+						[selectionMode]="selectionMode"
 					>
 					</app-rect-item>
-				</ng-template>
+				</a>
 			</div>
 	</div>
 

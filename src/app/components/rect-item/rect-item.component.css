@@ -52,7 +52,7 @@ mat-icon {
 }
 
 #journey-container {
-  /* position: relative; */
+  position: relative;
   display: flex;
   flex-direction: column;
 }
@@ -86,7 +86,9 @@ mat-icon {
 .journey-content {
   text-align: left;
   vertical-align: bottom;
-  margin-top: 112%;
+  /* margin-top: 112%; */
+  position: absolute;
+  bottom: 15px;
 }
 
 .container.add .journey-content {

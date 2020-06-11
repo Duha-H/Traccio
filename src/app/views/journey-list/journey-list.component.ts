@@ -16,7 +16,8 @@ export class JourneyListComponent implements OnInit {
   currJourney: Journey = null;
   journeys: Observable<Journey[]>;
   editButton = false;
-  disableDeleteBtn = true;
+  deleteButton = false;
+  selectionMode = false;
 
   constructor(
     public userStore: UserStoreService,
@@ -31,10 +32,19 @@ export class JourneyListComponent implements OnInit {
     this.displayDrawer = true;
   }
 
-  onEditButtonPressed(selectedJourney: Journey) {
-    this.displayDrawer = true;
-    this.editButton = true;
-    this.currJourney = selectedJourney;
+  activateSelectionMode() {
+    this.selectionMode = !this.selectionMode;
+  }
+
+  onDeleteButtonPressed(selectedJourney: Journey) {
+    this.deleteButton = true;
+  }
+
+  removeJourney(selectedJourney: Journey) {
+    if (confirm(`Are you sure you'd like to remove ${selectedJourney.title}?`)) {
+      this.userStore.removeJourney(selectedJourney.id);
+      this.deleteButton = false;
+    }
   }
 
   onNewDataLogged(journeyData: { [key: string]: any }) {

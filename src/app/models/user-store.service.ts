@@ -163,6 +163,14 @@ export class UserStoreService {
     // make necessary api calls
   }
 
+  removeJourney(journeyid: string) {
+    const updatedJourneys = this._journeys.getValue();
+    delete updatedJourneys[journeyid];
+    this.dataManager.removeJourney(journeyid);
+    this.updateJourneyData(updatedJourneys);
+    this.dataUpdated = true;
+  }
+
   addNewApplication(journeyId: string, appData: ApplicationInput) {
     const journey = this.getJourney(journeyId);
     const appID = this._getNewAppID(journeyId);

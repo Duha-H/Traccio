@@ -43,6 +43,11 @@ export class DataManagerService {
     this.statusData[journey.id] = statusDatum;
   }
 
+  removeJourney(journeyid: string) {
+    delete this.calendarData[journeyid];
+    delete this.statusData[journeyid];
+  }
+
   addApplication(journeyid: string, app: Application) {
     const calendarDatum = this.calendarData[journeyid];
     const statusDatum = this.statusData[journeyid];
