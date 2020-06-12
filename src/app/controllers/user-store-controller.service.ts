@@ -10,6 +10,19 @@ export class UserStoreControllerService {
 
   constructor(private api: APIService) { }
 
+  async fetchTheme(userid: string): Promise<{
+    theme: string,
+    paletteID: number
+  }> {
+    const theme = 'dark';
+    const paletteID = 0;
+    // retrieve theme details from user entry in DB
+    return {
+      theme,
+      paletteID
+    };
+  }
+
   async fetchUserJourneys(userid: string) {
     const journeys: {[key: string]: any} = {};
     // fetch user journeys

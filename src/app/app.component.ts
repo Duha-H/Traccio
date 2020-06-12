@@ -33,7 +33,8 @@ export class AppComponent implements OnInit {
           await this.userStore.setUser(
             this.user.attributes.given_name,
             this.user.attributes.family_name,
-            this.user.attributes.sub
+            this.user.attributes.sub,
+            this.user.attributes.email,
           );
           // await this.userStore.fetchData();
           console.log("App init: user authenticated and data fetched");

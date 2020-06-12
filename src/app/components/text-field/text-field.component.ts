@@ -11,10 +11,10 @@ import {
   template:
     '\
   <form>\
-    <div class="input-container" style="max-width: {{width}}px;">\
+    <div class="{{center ? \'input-container center\' : \'input-container\'}}" style="max-width: {{width}}px;">\
       <p *ngIf="type == \'email\' && field.invalid" class="warning-text">{{label}} is not valid</p>\
-      <div style="height: {{height}}px;" class="{{valueUpdated && showUpdatedBorder ? \'updated\' : \'\'}}">\
-        <input type="{{currType}}" [(ngModel)]="text" [value]="text" (input)="onInput()" maxLength="60" \
+      <div style="height: {{height}}px;" class="{{showUpdatedBorder ? \'updated\' : \'\'}}">\
+        <input type="{{currType}}" [(ngModel)]="value" [value]="value" (input)="onInput()" maxLength="60" \
           style="font-size: {{fontSize}}pt; color: {{fontColor}};" \
           name="inputField" #field="ngModel" placeholder="{{label}}"\
           email="{{type == \'email\'}}"/>\
@@ -36,6 +36,7 @@ export class TextFieldComponent implements OnInit {
   @Input() height = 18;
   @Input() fontSize = 10;
   @Input() fontColor = 'var(--text-dark)';
+  @Input() center = true;
   @Input() text: string;
   @Input() showUpdatedBorder = false; // unique border color if field value has been changed
   @Output() inputChange = new EventEmitter();
@@ -44,17 +45,19 @@ export class TextFieldComponent implements OnInit {
   valueUpdated = false;
   visibilityIconName = "visibility_off";
   currType = this.type; // using a second type property because it might change (e.g. password visibility)
+  value = this.text;
 
   constructor() {}
 
   ngOnInit() {
     this.currType = this.type;
+    this.value = this.text;
   }
 
   onInput() {
     this.valueUpdated = true;
-    this.inputChange.emit(this.text);
-    if (this.text === "") {
+    this.inputChange.emit(this.value);
+    if (this.value === "") {
       this.fieldLabel = "\n";
     } else {
       this.fieldLabel = this.label;
@@ -69,5 +72,9 @@ export class TextFieldComponent implements OnInit {
       this.visibilityIconName = "visibility";
       this.currType = "text";
     }
+  }
+
+  resetValue() {
+    this.value = this.text;
   }
 }

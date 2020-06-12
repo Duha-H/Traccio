@@ -2,20 +2,20 @@
   <div class="spanning-content">
     <h2>Settings</h2>
     <div class="spacer"></div>
-    <button class="save-btn" [disabled]="true">
+    <button class="save-btn" [disabled]="!changes" (click)="saveChanges()">
       <p>Save Changes</p>
     </button>
   </div>
   <div class="tabs">
-    <mat-tab-group mat-align-tabs="center" animationDuration="0ms">
+    <mat-tab-group mat-align-tabs="center" animationDuration="0ms" >
       <mat-tab label="Profile Settings">
         <div class="setting-tab">
           <div class="setting">
             <p class="label">first name</p>
-            <text-field class="value" [width]="450" [height]="10" [displayLabel]="false" [text]="'First Name'" [label]="'First Name'" [showUpdatedBorder]="true"></text-field>
+            <text-field class="value" [width]="500" [height]="10" [center]="false" [displayLabel]="false" [text]="currState.given_name" [showUpdatedBorder]="updateList[ATTRIBS.FIRST_NAME]" (inputChange)="addUpdate(ATTRIBS.FIRST_NAME, $event)" #firstNameField></text-field>
             <div class="undo-button">
-              <button title="undo changes" [disabled]="true">
-                <mat-icon>undo</mat-icon>
+              <button title="undo changes" [disabled]="!updateList[ATTRIBS.FIRST_NAME]" (click)="undoChange(ATTRIBS.FIRST_NAME, firstNameField)">
+                <mat-icon>replay</mat-icon>
               </button>
             </div>
           </div>
@@ -25,10 +25,10 @@
 
           <div class="setting">
             <p class="label">last name</p>
-            <text-field class="value" [width]="450" [height]="10" [displayLabel]="false" [text]="'First Name'" [label]="'First Name'" [showUpdatedBorder]="true"></text-field>
+            <text-field class="value" [width]="500" [height]="10" [center]="false" [displayLabel]="false" [text]="currState.family_name" [showUpdatedBorder]="updateList[ATTRIBS.LAST_NAME]" (inputChange)="addUpdate(ATTRIBS.LAST_NAME, $event)" #lastNameField></text-field>
             <div class="undo-button">
-              <button title="undo changes" [disabled]="true">
-                <mat-icon>undo</mat-icon>
+              <button title="undo changes" [disabled]="!updateList[ATTRIBS.LAST_NAME]" (click)="undoChange(ATTRIBS.LAST_NAME, lastNameField)">
+                <mat-icon>replay</mat-icon>
               </button>
             </div>
           </div>
@@ -37,11 +37,11 @@
           </div>
 
           <div class="setting">
-            <p class="label">account email</p>
-            <text-field class="value" [width]="450" [height]="10" [displayLabel]="false" [text]="'First Name'" [label]="'First Name'" [showUpdatedBorder]="true"></text-field>
+            <p class="label">change email</p>
+            <text-field class="value" [width]="500" [height]="10" [center]="false" [displayLabel]="false" [text]="currState.email" [showUpdatedBorder]="updateList[ATTRIBS.EMAIL]" (inputChange)="addUpdate(ATTRIBS.EMAIL, $event)" #emailField></text-field>
             <div class="undo-button">
-              <button title="undo changes" [disabled]="true">
-                <mat-icon>undo</mat-icon>
+              <button title="undo changes" [disabled]="!updateList[ATTRIBS.EMAIL]" (click)="undoChange(ATTRIBS.FIRST_NAME, emailField)">
+                <mat-icon>replay</mat-icon>
               </button>
             </div>
           </div>
@@ -49,17 +49,43 @@
             <p>Your email address is used as a login credential, so make sure you provide a valid address.</p>
           </div>
 
-          <div class="setting" style="border-bottom: none;">
-            <p class="label">account password</p>
-            <text-field class="value" [width]="450" [height]="10" [displayLabel]="false" [text]="'First Name'" [label]="'First Name'" [showUpdatedBorder]="true"></text-field>
-            <div class="undo-button">
-              <button title="undo changes" [disabled]="true">
-                <mat-icon>undo</mat-icon>
+          <div class="setting" style="height: 250px;">
+            <div class="label" style="display: flex; flex-direction: column;">
+              <p class="label" style="line-height: 12pt;">change password</p>
+              <div class="info" style="padding: 5px 0;">
+                <p>Make password good so account is good.</p>
+              </div>
+            </div>
+            <div *ngIf="!changePassword" class="value" style="margin-left: 80px;">
+              <button class="toggle" (click)="toggleChangePassword()">
+                <p>Change Password</p>
               </button>
             </div>
-          </div>
-          <div class="info">
-            <p>Make password good so account is good.</p>
+            <div *ngIf="changePassword" class="value value-div" style="margin-left: 90px;">
+              <text-field  [width]="500" [height]="10" [center]="false" [displayLabel]="false" [text]="" [type]="'password'" (inputChange)="addPasswordChange(PASSWORD.OLD, $event)"></text-field>
+              <text-field  [width]="500" [height]="10" [center]="false" [displayLabel]="false" [text]="" [type]="'password'" (inputChange)="addPasswordChange(PASSWORD.NEW, $event)"></text-field>
+              <text-field  [width]="500" [height]="10" [center]="false" [displayLabel]="false" [text]="" [type]="'password'" (inputChange)="addPasswordChange(PASSWORD.CONFIRM, $event)"></text-field>
+              <div style="display: flex; flex-direction: row; margin: 0;">
+                <ul class="toggle-btns">
+                  <li>
+                    <button class="toggle" (click)="toggleChangePassword()">
+                      <p>Update Password</p>
+                    </button>
+                  </li>
+                  <li>
+                    <button class="toggle" (click)="toggleChangePassword()">
+                      <p>Cancel</p>
+                    </button>
+                  </li>
+                </ul>
+                <a href="#" routerLink="/accountrecovery" class="login-link">Forgot your password?</a>
+              </div>
+              
+            </div>
+
+            <div class="undo-button">
+              
+            </div>
           </div>
 
           <div class="info info-centered">
@@ -99,20 +125,20 @@
             </div>
             <ul class="value toggle-btns" style="flex-direction: column; margin-left: 40px;">
               <li>
-                <input type="radio" name="palette" id="palette-1" checked>
-                <label for="palette-1">Cosmos</label>
+                <input type="radio" name="palette" id="palette-0" checked>
+                <label for="palette-0">Cosmos</label>
               </li>
               <li>
-                <input type="radio" name="palette" id="palette-2">
+                <input type="radio" name="palette" id="palette-1">
                 <label for="palette-1">Superbubbles</label>
               </li>
               <li>
-                <input type="radio" name="palette" id="palette-3">
-                <label for="palette-1">Shockwave</label>
+                <input type="radio" name="palette" id="palette-2">
+                <label for="palette-2">Shockwave</label>
               </li>
               <li>
-                <input type="radio" name="palette" id="palette-4">
-                <label for="palette-1">Dave</label>
+                <input type="radio" name="palette" id="palette-3">
+                <label for="palette-3">Dave</label>
               </li>
             </ul>
           </div>

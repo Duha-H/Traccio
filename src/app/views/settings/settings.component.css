@@ -50,6 +50,7 @@ button.save-btn:disabled {
   flex-direction: column;
   max-width: 100%;
   margin: 40px 20px;
+  margin-bottom: 10px;
 }
 
 .info {
@@ -73,11 +74,13 @@ button.save-btn:disabled {
   font-weight: 300;
   width: 100%;
   font-size: 10pt;
+  line-height: 12pt;
+  margin-top: 25px;
 }
 
 .info.info-centered {
   margin: auto;
-  margin-top: 40px;
+  margin-top: 30px;
 }
 
 .info.info-centered p {
@@ -93,12 +96,18 @@ button.save-btn:disabled {
   margin-top: 20px;
 }
 
-.setting .label {
+.setting .label * {
+  width: 100%;
+}
+
+.setting p.label, .setting div.label {
   width: 40%;
 }
 
 .setting .value {
   width: 60%;
+  text-align: left;
+  margin-left: 100px;
 }
 
 .setting p {
@@ -112,6 +121,18 @@ button.save-btn:disabled {
 
 .setting text-field {
   margin: auto 10px;
+}
+
+.value-div {
+  display: flex;
+  flex-direction: column;
+  line-height: 250px;
+}
+
+.setting .value-div text-field {
+  margin: auto 0px;
+  margin-top: 0;
+  margin-bottom: 20px;
 }
 
 .setting div.undo-button {
@@ -155,7 +176,7 @@ button.save-btn:disabled {
   color: var(--background-dark);
 }
 
-.setting ul.value.toggle-btns {
+.setting ul.value.toggle-btns, .setting ul.toggle-btns {
   list-style: none;
   display: flex;
   flex-direction: row;
@@ -165,12 +186,33 @@ button.save-btn:disabled {
   text-align: left;
 }
 
-.setting .toggle-btns button {
+.setting .value-div ul.toggle-btns {
+  margin: 0;
+}
+
+.setting .toggle-btns button, .setting .toggle-btns button.toggle {
   width: 130px;
   display: flex;
   height: 35px;
   margin: 0 20px;
   padding: 0 20px;
+}
+
+.setting button.toggle, .setting ul.toggle-btns button.toggle {
+  margin: auto;
+  background-color: var(--titles-secondary-dark);
+  width: 150px;
+  height: 40px;
+  line-height: var(--setting-line-height);
+  margin-left: 0px;
+  margin-right: 25px;
+}
+
+.setting button.toggle p {
+  margin: auto;
+  line-height: 40px;
+  text-align: center;
+  font-size: 10pt;
 }
 
 .setting .toggle-btns p {
@@ -184,6 +226,12 @@ button.save-btn:disabled {
 
 .setting .value.toggle-btns li {
   margin: 5px 0;
+}
+
+.setting .value-div a {
+  line-height: 45px;
+  font-size: 10pt;
+  margin-left: 10px;
 }
 
 .setting .value label {

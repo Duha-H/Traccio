@@ -54,25 +54,24 @@ export class UserStoreService {
    * Initial Setup Methods
    */
 
-  async setUser(firstName: string, lastName: string, id: string) {
+  async setUser(firstName: string, lastName: string, id: string, email: string) {
     this.user = new User();
     this.user.firstName = firstName;
     this.user.lastName = lastName;
     this.user.userid = id;
+    this.user.email = email;
     await this.fetchData();
   }
 
   async fetchData() {
     // Called on app init
     // Performs API calls to fetch user data
-    console.log("HERE:::data about to be fetched");
     let data = {};
     // await this.controller.fetchUserJourneys(this.user.userid).then((value) => {
     //   // this._journeys.next(value);
     //   data = value;
     // });
     data = this.placeholderJourneys; // TEMP
-    console.log("HERE:::data fetched", data);
     this.updateJourneyData(data);
     this.dataManager.collectData(data);
   }
@@ -99,7 +98,7 @@ export class UserStoreService {
   }
 
   clearData() {
-    this.user = undefined;
+    this.user = new User();
     this.updateJourneyData(this.placeholderJourneys);
   }
 
