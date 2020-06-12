@@ -7,7 +7,7 @@
   flex-direction: column-reverse;
   max-width: 350px;
   /* min-width: 50px; */
-  margin: 0px auto;
+  margin: auto;
 }
 
 .input-container div {
@@ -27,11 +27,15 @@
 .input-container input {
   font-size: 10pt;
   /* min-width: 95%; */
-  width: 100%;
+  width: 95%;
   background: none;
   border: none;
   outline: none;
   color: var(--text-dark);
+}
+
+.input-container div.updated {
+  border: 1px solid var(--accent-secondary-dark);
 }
 
 .input-container mat-icon {

@@ -13,10 +13,11 @@ import {
   <form>\
     <div class="input-container" style="max-width: {{width}}px;">\
       <p *ngIf="type == \'email\' && field.invalid" class="warning-text">{{label}} is not valid</p>\
-      <div style="height: {{height}}px;">\
+      <div style="height: {{height}}px;" class="{{valueUpdated && showUpdatedBorder ? \'updated\' : \'\'}}">\
         <input type="{{currType}}" [(ngModel)]="text" [value]="text" (input)="onInput()" maxLength="60" \
           style="font-size: {{fontSize}}pt; color: {{fontColor}};" \
-          name="inputField" #field="ngModel" placeholder="{{label}}" class="input" email="{{type == \'email\'}}"/>\
+          name="inputField" #field="ngModel" placeholder="{{label}}"\
+          email="{{type == \'email\'}}"/>\
         <mat-icon *ngIf="type == \'password\'" (click)="togglePasswordVisibility()">{{visibilityIconName}}</mat-icon>\
         <mat-icon *ngIf="suffixIcon && type != \'password\'">{{suffixIcon}}</mat-icon>\
       </div>\
@@ -36,9 +37,11 @@ export class TextFieldComponent implements OnInit {
   @Input() fontSize = 10;
   @Input() fontColor = 'var(--text-dark)';
   @Input() text: string;
+  @Input() showUpdatedBorder = false; // unique border color if field value has been changed
   @Output() inputChange = new EventEmitter();
   fieldEmpty = true;
   fieldLabel = this.label;
+  valueUpdated = false;
   visibilityIconName = "visibility_off";
   currType = this.type; // using a second type property because it might change (e.g. password visibility)
 
@@ -49,6 +52,7 @@ export class TextFieldComponent implements OnInit {
   }
 
   onInput() {
+    this.valueUpdated = true;
     this.inputChange.emit(this.text);
     if (this.text === "") {
       this.fieldLabel = "\n";

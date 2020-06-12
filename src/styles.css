@@ -4,6 +4,7 @@
   --primary-dark: #252635;
   --secondary-dark: #282935;
   --accent-dark: #9f9dea;
+  --accent-secondary-dark: #85d2d8;
   --accent-background-dark: #4144685c;
   --accent-hover-dark: #22232dc2;
   --titles-primary-dark: #9f9dea;
@@ -11,6 +12,7 @@
   --text-dark: #ffffff;
   --text-light: #2e32685c;
   --text-warn: #f94d78;
+  --disabled-dark: #797f85;
 }
 
 html,
@@ -95,7 +97,8 @@ p.warning-text {
 app-journeys,
 app-dashboard,
 app-search,
-app-wishlist {
+app-wishlist,
+app-settings {
   width: 100%;
 }
 

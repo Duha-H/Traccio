@@ -1,1 +1,126 @@
-<p>settings works!</p>
+<div class="view-container">
+  <div class="spanning-content">
+    <h2>Settings</h2>
+    <div class="spacer"></div>
+    <button class="save-btn" [disabled]="true">
+      <p>Save Changes</p>
+    </button>
+  </div>
+  <div class="tabs">
+    <mat-tab-group mat-align-tabs="center" animationDuration="0ms">
+      <mat-tab label="Profile Settings">
+        <div class="setting-tab">
+          <div class="setting">
+            <p class="label">first name</p>
+            <text-field class="value" [width]="450" [height]="10" [displayLabel]="false" [text]="'First Name'" [label]="'First Name'" [showUpdatedBorder]="true"></text-field>
+            <div class="undo-button">
+              <button title="undo changes" [disabled]="true">
+                <mat-icon>undo</mat-icon>
+              </button>
+            </div>
+          </div>
+          <div class="info">
+            <p>Your first name is only used to personalize your experience</p>
+          </div>
+
+          <div class="setting">
+            <p class="label">last name</p>
+            <text-field class="value" [width]="450" [height]="10" [displayLabel]="false" [text]="'First Name'" [label]="'First Name'" [showUpdatedBorder]="true"></text-field>
+            <div class="undo-button">
+              <button title="undo changes" [disabled]="true">
+                <mat-icon>undo</mat-icon>
+              </button>
+            </div>
+          </div>
+          <div class="info">
+            <p>Your last name is only used to personalize your experience</p>
+          </div>
+
+          <div class="setting">
+            <p class="label">account email</p>
+            <text-field class="value" [width]="450" [height]="10" [displayLabel]="false" [text]="'First Name'" [label]="'First Name'" [showUpdatedBorder]="true"></text-field>
+            <div class="undo-button">
+              <button title="undo changes" [disabled]="true">
+                <mat-icon>undo</mat-icon>
+              </button>
+            </div>
+          </div>
+          <div class="info">
+            <p>Your email address is used as a login credential, so make sure you provide a valid address.</p>
+          </div>
+
+          <div class="setting" style="border-bottom: none;">
+            <p class="label">account password</p>
+            <text-field class="value" [width]="450" [height]="10" [displayLabel]="false" [text]="'First Name'" [label]="'First Name'" [showUpdatedBorder]="true"></text-field>
+            <div class="undo-button">
+              <button title="undo changes" [disabled]="true">
+                <mat-icon>undo</mat-icon>
+              </button>
+            </div>
+          </div>
+          <div class="info">
+            <p>Make password good so account is good.</p>
+          </div>
+
+          <div class="info info-centered">
+            <p>All information displayed above is only available and visible to you, and not shared with anyone.</p>
+          </div>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Account Preferences">
+        <div class="setting-tab">
+
+          <div class="setting">
+            <p class="label">application theme</p>
+            <ul class="value toggle-btns">
+              <li><button class="active">
+                <p>Dark</p>
+                <div style="flex: 1;"></div>
+                <mat-icon>brightness_2</mat-icon>
+              </button></li>
+              <li><button>
+                <p>Light</p>
+                <div style="flex: 1;"></div>
+                <mat-icon>brightness_5</mat-icon>
+              </button></li>
+            </ul>
+          </div>
+          <div class="info">
+            <p>Just something silly to balance the view out.</p>
+          </div>
+
+          <div class="setting" style="height: 200px;">
+            <div class="label" style="display: flex; flex-direction: column;">
+              <p class="label" style="line-height: 12pt;">color palette</p>
+              <div class="info" style="padding: 5px 0;">
+                <p>Colors and things.</p>
+              </div>
+            </div>
+            <ul class="value toggle-btns" style="flex-direction: column; margin-left: 40px;">
+              <li>
+                <input type="radio" name="palette" id="palette-1" checked>
+                <label for="palette-1">Cosmos</label>
+              </li>
+              <li>
+                <input type="radio" name="palette" id="palette-2">
+                <label for="palette-1">Superbubbles</label>
+              </li>
+              <li>
+                <input type="radio" name="palette" id="palette-3">
+                <label for="palette-1">Shockwave</label>
+              </li>
+              <li>
+                <input type="radio" name="palette" id="palette-4">
+                <label for="palette-1">Dave</label>
+              </li>
+            </ul>
+          </div>
+          
+        </div>
+      </mat-tab>
+
+
+    </mat-tab-group>    
+  </div>
+</div>

@@ -1,0 +1,197 @@
+.view-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  --spanning-line-height: 40px;
+  --setting-line-height: 50px;
+}
+
+.spanning-content {
+  margin: 15px 20px;
+  border-bottom: 1px solid var(--titles-secondary-dark);
+  padding-bottom: 25px;
+  height: var(--spanning-line-height);
+}
+
+::ng-deep .tabs .mat-tab-label, ::ng-deep .tabs .mat-tab-label-content {
+  color: var(--text-dark);
+}
+
+button.save-btn {
+  line-height: var(--spanning-line-height);
+  height: 35px;
+  width: 150px;
+  border: 1px solid var(--accent-dark);
+  border-radius: 25px;
+  background-color: var(--accent-dark);
+  cursor: pointer;
+}
+
+.save-btn p {
+  margin: 0;
+  line-height: 30px;
+  text-align: center;
+  color: var(--text-dark);
+  font-size: 11pt;
+}
+
+button.save-btn:hover:not(:disabled) p { /** hover while not disabled */
+  color: var(--background-dark);
+}
+
+button.save-btn:disabled {
+  background-color: var(--disabled-dark);
+  border: 1px solid var(--disabled-dark);
+  opacity: 0.2;
+  cursor: default;
+}
+
+.setting-tab {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  margin: 40px 20px;
+}
+
+.info {
+  padding: 5px 20px;
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.info p {
+  font-size: 10pt;
+  color: var(--titles-secondary-dark);
+  margin: 0;
+  width: 35%;
+  line-height: 12pt;
+  font-weight: 300;
+}
+
+.label .info p {
+  font-weight: 300;
+  width: 100%;
+  font-size: 10pt;
+}
+
+.info.info-centered {
+  margin: auto;
+  margin-top: 40px;
+}
+
+.info.info-centered p {
+  width: 100%;
+}
+
+.setting {
+  padding: 5px 20px;
+  display: flex;
+  flex-direction: row;
+  /* border-bottom: 0.3px solid var(--titles-secondary-dark); */
+  height: var(--setting-line-height);
+  margin-top: 20px;
+}
+
+.setting .label {
+  width: 40%;
+}
+
+.setting .value {
+  width: 60%;
+}
+
+.setting p {
+  text-align: left;
+  margin: 0;
+  line-height: var(--setting-line-height);
+  font-size: 11pt;
+  margin-right: 10px;
+  font-weight: 500;
+}
+
+.setting text-field {
+  margin: auto 10px;
+}
+
+.setting div.undo-button {
+  line-height: var(--setting-line-height);
+  height: var(--setting-line-height);
+  width: 45px;
+  display: inherit;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.undo-button button:disabled {
+  opacity: 0.2;
+}
+
+.setting button {
+  line-height: 45px;
+  height: 45px;
+  background: none;
+  border: 1px solid var(--titles-secondary-dark);
+  border-radius: 25px;
+  cursor: pointer;
+  margin: auto;
+}
+
+.setting button.active {
+  background-color: var(--accent-dark);
+}
+
+.setting button:hover {
+  background-color: var(--titles-secondary-dark);
+}
+
+.setting mat-icon {
+  line-height: 45px;
+  color: var(--text-dark);
+  font-size: 16pt;
+}
+
+.setting button:hover mat-icon, .setting button:hover p {
+  color: var(--background-dark);
+}
+
+.setting ul.value.toggle-btns {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  padding: 0;
+  height: var(--setting-line-height);
+  text-align: left;
+}
+
+.setting .toggle-btns button {
+  width: 130px;
+  display: flex;
+  height: 35px;
+  margin: 0 20px;
+  padding: 0 20px;
+}
+
+.setting .toggle-btns p {
+  margin: 0;
+  line-height: 35px;
+}
+
+.setting .toggle-btns mat-icon {
+  line-height: 35px;
+}
+
+.setting .value.toggle-btns li {
+  margin: 5px 0;
+}
+
+.setting .value label {
+  color: var(--text-dark);
+  padding: 5px;
+}
+
+.setting input[type=radio]:checked {
+  color: var(--accent-dark);
+  background-color: var(--accent-dark);
+}
