@@ -50,6 +50,7 @@ import { SignupSuccessfulComponent } from './auth/confirm-signup/signup-successf
 import { AppFilterPipe } from './views/dashboard/app-filter.pipe';
 import { SearchPipe } from './views/search/search-pipe.pipe';
 import { WishlistComponent } from './views/wishlist/wishlist.component';
+import { OverlayComponent } from './components/overlay/overlay.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { WishlistComponent } from './views/wishlist/wishlist.component';
     AppFilterPipe,
     SearchPipe,
     WishlistComponent,
-    ApplicationListComponent
+    ApplicationListComponent,
+    OverlayComponent
   ],
   imports: [
     BrowserModule,

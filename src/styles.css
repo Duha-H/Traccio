@@ -131,7 +131,8 @@ app-dashboard {
 
 a.login-link,
 a.login-link:visited,
-a.login-link:hover {
+a.login-link:hover,
+p a.login-link {
   color: #1976d2;
   text-decoration: none;
   margin: auto;
