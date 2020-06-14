@@ -98,7 +98,8 @@ app-journeys,
 app-dashboard,
 app-search,
 app-wishlist,
-app-settings {
+app-settings,
+app-sign-up {
   width: 100%;
 }
 

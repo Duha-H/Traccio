@@ -7,8 +7,8 @@ import { OnInit, Component, EventEmitter, Output, Input } from "@angular/core";
     <p>Awesome! A verification code was sent to your email.<br>\
     Enter the verification code below.</p>\
     <br>\
-		<text-field (inputChange)="code=$event" [label]="\'Verification Code\'"></text-field>\
-		<text-field (inputChange)="newPassword=$event" [label]="\'New Password\'" [type]="\'password\'"></text-field>\
+		<text-field [width]="360" (inputChange)="code=$event" [label]="\'Verification Code\'"></text-field>\
+		<text-field [width]="360" (inputChange)="newPassword=$event" [label]="\'New Password\'" [type]="\'password\'"></text-field>\
 		<text-field (inputChange)="confirmedPassword=$event" [label]="\'Re-enter Your New Password\'" [type]="\'password\'"></text-field>\
 		<p class="warning-text">{{error}}<br></p>\
     <button (click)="handleSubmit()" class="submit-button">Set New Password</button>\

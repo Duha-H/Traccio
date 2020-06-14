@@ -1,23 +1,26 @@
 .signin-container {
-  margin: 0 auto;
-  position: absolute;
-  top: 25%;
-  left: 50%;
-  -ms-transform: translateX(-50%);
-  transform: translateX(-50%);
-
+  margin: auto;
+  margin-top: 20vh;
   display: flex;
   flex-direction: column;
+  max-width: 360px;
+  padding: 0 20px;
 }
 
 .signin-container h2 {
   text-align: center;
   color: var(--accent-dark);
   margin: 20px 0;
-  margin-bottom: 30px;
+  margin-bottom: 70px;
 }
 
 p.warning-text {
   text-align: center;
   font-size: 10pt;
+  height: 10pt;
+}
+
+.signin-container text-field {
+  width: 100%;
+  margin-bottom: 20px;
 }

@@ -1,11 +1,11 @@
 <div class="container">
   <div class="signup-container">
     <h2>Sign up</h2>
-    <text-field (inputChange)="firstName=$event" [label]="'First Name'" ></text-field>
-    <text-field (inputChange)="lastName=$event" [label]="'Last Name'" ></text-field>
-    <text-field (inputChange)="email=$event" [label]="'Email'" [type]="'email'" ></text-field>
-    <text-field (inputChange)="password=$event" [label]="'Password'" [type]="'password'" ></text-field>
-    <text-field (inputChange)="confirmPassword=$event" [label]="'Re-enter Password'" [type]="'password'" ></text-field>
+    <text-field [width]="400" [height]="8" (inputChange)="firstName=$event" [label]="'First Name'" ></text-field>
+    <text-field [width]="400" [height]="8" (inputChange)="lastName=$event" [label]="'Last Name'" ></text-field>
+    <text-field [width]="400" [height]="8" (inputChange)="email=$event" [label]="'Email'" [type]="'email'" ></text-field>
+    <text-field [width]="400" [height]="8" (inputChange)="password=$event" [label]="'Password'" [type]="'password'" ></text-field>
+    <text-field [width]="400" [height]="8" (inputChange)="confirmPassword=$event" [label]="'Re-enter Password'" [type]="'password'" ></text-field>
 		<p class="warning-text">{{error}}<br></p>
 		<button (click)="signUp()" class="submit-button">Sign up</button>
 		<p class="login-link">Already have an account? <a href="#" routerLink="/signin" class="login-link">Sign in</a></p>

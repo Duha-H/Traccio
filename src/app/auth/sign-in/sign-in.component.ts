@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Auth } from 'aws-amplify';
 import { Router } from '@angular/router';
+import { AuthWrapperService } from '../auth-wrapper.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -14,40 +15,20 @@ export class SignInComponent implements OnInit {
   error = '\n\n';
   signInError = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authWrapper: AuthWrapperService) { }
 
   ngOnInit() {
   }
 
 
   async signIn() {
-    if (this.email.length === 0 || this.password.length === 0) {
-      this.error = "All sign in fields must be filled";
-      this.signInError = true;
-      return;
-    }
-
-    try {
-      await Auth.signIn(this.email, this.password);
-      console.log('signed in');
+    const response = await this.authWrapper.signIn(this.email, this.password);
+    if (response.successful) {
+      console.log("Looking good");
       this.router.navigate(['']);
-    } catch (error) {
-      console.log('error signing in', error);
+    } else {
       this.signInError = true;
-      switch (error.code) {
-        case "UserNotFoundException":
-          this.error = "A user account with this email does not exist";
-          break;
-        case "InvalidParameterException":
-          this.error = "All sign in fields must be filled";
-          break;
-        case "NotAuthorizedException":
-          this.error = "Incorrect email or password";
-          break;
-        default:
-          this.error = error.message;
-          break;
-      }
+      this.error = response.message;
     }
   }
 

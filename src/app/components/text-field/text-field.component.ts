@@ -12,7 +12,7 @@ import {
     '\
   <form>\
     <div class="{{center ? \'input-container center\' : \'input-container\'}}" style="max-width: {{width}}px;">\
-      <p *ngIf="type == \'email\' && field.invalid" class="warning-text">{{label}} is not valid</p>\
+      <p *ngIf="type == \'email\' && field.invalid && displayError" class="warning-text">{{label}} is not valid</p>\
       <div style="height: {{height}}px;" class="{{showUpdatedBorder ? \'updated\' : \'\'}}">\
         <input type="{{currType}}" [(ngModel)]="value" [value]="value" (input)="onInput()" maxLength="60" \
           style="font-size: {{fontSize}}pt; color: {{fontColor}};" \
@@ -39,6 +39,7 @@ export class TextFieldComponent implements OnInit {
   @Input() center = true;
   @Input() text: string;
   @Input() showUpdatedBorder = false; // unique border color if field value has been changed
+  @Input() displayError = true;
   @Output() inputChange = new EventEmitter();
   fieldEmpty = true;
   fieldLabel = this.label;
