@@ -24,7 +24,6 @@ export class SignInComponent implements OnInit {
   async signIn() {
     const response = await this.authWrapper.signIn(this.email, this.password);
     if (response.successful) {
-      console.log("Looking good");
       this.router.navigate(['']);
     } else {
       this.signInError = true;

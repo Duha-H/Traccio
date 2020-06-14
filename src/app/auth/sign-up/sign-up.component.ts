@@ -25,49 +25,9 @@ export class SignUpComponent implements OnInit {
     private authWrapper: AuthWrapperService,
   ) {}
 
-  ngOnInit() {
-    console.log("sign up init");
-  }
+  ngOnInit() {  }
 
   async signUp() {
-    // check for empty fields
-    // if (
-    //   this.firstName.length === 0 ||
-    //   this.lastName.length === 0 ||
-    //   this.email.length === 0 ||
-    //   this.password.length === 0 ||
-    //   this.confirmPassword.length === 0
-    // ) {
-    //   this.error = 'All fields are required and must be filled in';
-    //   return;
-    // } else if (this.password !== this.confirmPassword) {
-    //   this.error = 'Looks like your passwords don\'t match.\nRe-enter to make sure they match.';
-    //   return;
-    // }
-
-    // try {
-    //   const user = await Auth.signUp({
-    //     username: this.email,
-    //     password: this.password,
-    //     attributes: {
-    //       email: this.email,
-    //       given_name: this.firstName,
-    //       family_name: this.lastName,
-    //     },
-    //   });
-    //   console.log("user:", { user });
-    //   console.log("signup successful");
-    //   this.authStore.setUserDetails(
-    //     this.firstName,
-    //     this.lastName,
-    //     this.email,
-    //     user.userSub
-    //   );
-    //   this.router.navigate(["confirmsignup"]);
-    // } catch (error) {
-    //   console.log("Error signing up:", error);
-    //   this.error = error.message;
-    // }
     const response = await this.authWrapper.signUp(this.firstName, this.lastName, this.email, this.password, this.confirmPassword);
     if (response.successful && response.payload) {
       const user = response.payload;

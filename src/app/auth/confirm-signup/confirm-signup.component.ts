@@ -32,27 +32,6 @@ export class ConfirmSignupComponent implements OnInit {
   }
 
   async confirmSignup() {
-    // if (this.email === '') {
-    //   this.router.navigate(['signin']);
-    //   return;
-    // } else if (this.code === '') {
-    //   this.error = 'A confirmation code must be provided';
-    //   return;
-    // }
-
-    // try {
-    //   await Auth.confirmSignUp(this.authStore.email, this.code);
-    //   console.log('sign up confirmed');
-    //   // this.router.navigate(['signin']);
-    //   this.success = true;
-    // } catch (error) {
-    //   console.log('Error confirming sign up:', error);
-    //   if (error.code === 'CodeMismatchException') {
-    //     this.error = 'The code provide is incorrect or no longer valid, please try again.';
-    //   } else {
-    //     this.error = error.message;
-    //   }
-    // }
     if (this.email === '') {
       this.router.navigate(['signin']);
       return;
@@ -67,11 +46,6 @@ export class ConfirmSignupComponent implements OnInit {
   }
 
   async handleResend() {
-    // try {
-    //   Auth.resendSignUp(this.authStore.email);
-    // } catch (error) {
-    //   console.log('Error resending code:', error);
-    // }
     await this.authWrapper.resendSignUp(this.email);
   }
 
