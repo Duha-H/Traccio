@@ -24,8 +24,8 @@ export class AccountRecoveryComponent implements OnInit {
     this.forgotPass = state;
   }
 
-  async forgotPassword(email: string) {
-    this.email = email;
+  async forgotPassword(email?: string) {
+    this.email = email ? email : this.email; // if email is not specified, use stored value
     const response = await this.authWrapper.forgotPassword(this.email);
     if (response.successful) {
       this.forgotPass = false;

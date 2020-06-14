@@ -27,12 +27,13 @@ export class ConfirmSignupComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.email = this.authStore.email;
-    this.email = this.userStore.user.email;
+    this.userStore.user.subscribe(user => {
+      this.email = user.email;
+    });
   }
 
   async confirmSignup() {
-    if (this.email === '') {
+    if (!this.email) {
       this.router.navigate(['signin']);
       return;
     }

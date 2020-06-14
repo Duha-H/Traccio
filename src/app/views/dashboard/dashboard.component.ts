@@ -48,7 +48,9 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     try {
-      this.name = this.userStore.user.firstName;
+      this.userStore.user.subscribe(user => {
+        this.name = user.firstName;
+      });
       this.userStore.activeJourneys.subscribe((activeJourneys) => {
         this.activeJourneys = activeJourneys;
         this.setDropdownContent();
@@ -57,9 +59,11 @@ export class DashboardComponent implements OnInit {
       this.currentYear = this.selectedJourney.years[0]
         ? this.selectedJourney.years[0]
         : this.currentYear;
-      console.log("dashboard init");
+      console.log("Dashboard initialized");
     } catch (error) {
       console.log("User not defined yet:", error); // should probably make sure this never happens
+      this.name = '';
+      this.activeJourneys = [];
     }
   }
 

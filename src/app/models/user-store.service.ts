@@ -15,7 +15,7 @@ import { Auth } from 'aws-amplify';
   providedIn: "root",
 })
 export class UserStoreService {
-  user: User;
+  // user: User;
   placeholderJourneys: { [key: string]: Journey } = {
     0: mock.testJourney1,
     1: mock.testJourney2,
@@ -46,6 +46,9 @@ export class UserStoreService {
   private _wishlistApps: BehaviorSubject<Application[]> = new BehaviorSubject<Application[]>(mockApps.MOCK_APPS_1);
   public readonly wishlistApps: Observable<Application[]> = this._wishlistApps.asObservable();
 
+  private _user: BehaviorSubject<User> = new BehaviorSubject<User>(new User());
+  public readonly user: Observable<User> = this._user.asObservable();
+
   constructor(
     private controller: UserStoreControllerService,
     private dataManager: DataManagerService
@@ -56,12 +59,13 @@ export class UserStoreService {
    */
 
   async setUser(firstName: string, lastName: string, id: string, email: string, verified: boolean) {
-    this.user = new User();
-    this.user.firstName = firstName;
-    this.user.lastName = lastName;
-    this.user.userid = id;
-    this.user.email = email;
-    this.user.verified = verified;
+    const newUser = new User();
+    newUser.firstName = firstName;
+    newUser.lastName = lastName;
+    newUser.userid = id;
+    newUser.email = email;
+    newUser.verified = verified;
+    this._user.next(newUser);
     console.log(verified);
     await this.fetchData();
   }
@@ -73,12 +77,14 @@ export class UserStoreService {
     try {
       const result = await Auth.updateUserAttributes(currUser, updates);
       currUser = await Auth.currentAuthenticatedUser();
-      this.user.firstName = currUser.attributes.given_name;
-      this.user.lastName = currUser.attributes.family_name;
-      this.user.email = currUser.attributes.email;
+      const updatedUser = this._user.getValue();
+      updatedUser.firstName = currUser.attributes.given_name;
+      updatedUser.lastName = currUser.attributes.family_name;
+      updatedUser.email = currUser.attributes.email;
       if (updates['email']) { // if the user's email has been updated
-        this.user.verified = false; // expect verification flow
+        updatedUser.verified = false; // expect verification flow
       }
+      this._user.next(updatedUser);
     } catch (error) {
       console.error("Error updating user attributes:", error);
     }
@@ -87,7 +93,9 @@ export class UserStoreService {
   async verifyUser(code: string) {
     try {
       const result = await Auth.verifyCurrentUserAttributeSubmit('email', code);
-      this.user.verified = true;
+      const updatedUser = this._user.getValue();
+      updatedUser.verified = true;
+      this._user.next(updatedUser);
       console.log(result);
       return result;
     } catch (error) {
@@ -131,7 +139,7 @@ export class UserStoreService {
   }
 
   clearData() {
-    this.user = new User();
+    this._user.next(new User());
     this.updateJourneyData(this.placeholderJourneys);
   }
 
@@ -267,7 +275,7 @@ export class UserStoreService {
         maxID = currval + 1;
       }
     });
-    const newID = `${this.user.userid}-${maxID}`;
+    const newID = `${this._user.getValue().userid}-${maxID}`;
     return newID;
   }
 
@@ -284,7 +292,7 @@ export class UserStoreService {
 
   private _getUserEntryInput() {
     // use only when a user is first initialized
-    const input = this.user.getGraphQLInput();
+    const input = this._user.getValue().getGraphQLInput();
     const journeys = Object.values(this.journeys);
     if (journeys.length !== 0) {
       input.journeys = journeys.map((journey) => journey.getGraphQLInput());
