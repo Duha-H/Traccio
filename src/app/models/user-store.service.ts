@@ -9,6 +9,7 @@ import { Observable } from "rxjs/Observable";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { map } from "rxjs/operators";
 import { DataManagerService } from "../controllers/data-manager.service";
+import { Auth } from 'aws-amplify';
 
 @Injectable({
   providedIn: "root",
@@ -54,13 +55,45 @@ export class UserStoreService {
    * Initial Setup Methods
    */
 
-  async setUser(firstName: string, lastName: string, id: string, email: string) {
+  async setUser(firstName: string, lastName: string, id: string, email: string, verified: boolean) {
     this.user = new User();
     this.user.firstName = firstName;
     this.user.lastName = lastName;
     this.user.userid = id;
     this.user.email = email;
+    this.user.verified = verified;
+    console.log(verified);
     await this.fetchData();
+  }
+
+  async updateUserAttributes(updates: {
+    [key: string]: string
+  }) {
+    let currUser = await Auth.currentAuthenticatedUser();
+    try {
+      const result = await Auth.updateUserAttributes(currUser, updates);
+      currUser = await Auth.currentAuthenticatedUser();
+      this.user.firstName = currUser.attributes.given_name;
+      this.user.lastName = currUser.attributes.family_name;
+      this.user.email = currUser.attributes.email;
+      if (updates['email']) { // if the user's email has been updated
+        this.user.verified = false; // expect verification flow
+      }
+    } catch (error) {
+      console.error("Error updating user attributes:", error);
+    }
+  }
+
+  async verifyUser(code: string) {
+    try {
+      const result = await Auth.verifyCurrentUserAttributeSubmit('email', code);
+      this.user.verified = true;
+      console.log(result);
+      return result;
+    } catch (error) {
+      console.error("Error confirming code:", error);
+      return error;
+    }
   }
 
   async fetchData() {

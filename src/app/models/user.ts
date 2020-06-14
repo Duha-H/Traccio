@@ -4,6 +4,7 @@ export class User {
 	private _lastName = '';
 	private _userid = '';
 	private _email = '';
+	private _verified = false;
 
   constructor(userparams?: { [key: string]: any }) {
 		if (userparams) {
@@ -11,6 +12,7 @@ export class User {
 			this._lastName = userparams.lastName;
 			this._userid = userparams.id;
 			this._email = userparams.email;
+			this._verified = userparams.email_verified;
 		}
 	}
 
@@ -26,8 +28,15 @@ export class User {
 	get email() { return this._email; }
 	set email(email: string) { this._email = email; }
 
+	get verified() { return this._verified; }
+	set verified(status: boolean) { this._verified = status; }
+
 	isDefined() {
 		return (this._firstName && this._lastName && this._userid);
+	}
+
+	notVerified() {
+		return this._verified;
 	}
 
 	getGraphQLInput(): { [key: string]: any } {

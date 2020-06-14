@@ -51,6 +51,7 @@ import { AppFilterPipe } from './views/dashboard/app-filter.pipe';
 import { SearchPipe } from './views/search/search-pipe.pipe';
 import { WishlistComponent } from './views/wishlist/wishlist.component';
 import { OverlayComponent } from './components/overlay/overlay.component';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -104,6 +105,7 @@ import { OverlayComponent } from './components/overlay/overlay.component';
     MatTabsModule,
     MatTableModule,
     MatSortModule,
+    AuthModule,
   ],
   providers: [
     AmplifyService,
