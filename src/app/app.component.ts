@@ -35,7 +35,6 @@ export class AppComponent implements OnInit {
           this.authWrapper.authState.signedIn = true;
           // this.router.navigate(['']);
           // set user attributes and navigate to dashboard
-          console.log(this.user);
           await this.userStore.setUser(
             this.user.attributes.given_name,
             this.user.attributes.family_name,
