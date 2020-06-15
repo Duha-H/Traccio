@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
 
 import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
+import { AuthModule } from './auth/auth.module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -51,7 +52,8 @@ import { AppFilterPipe } from './views/dashboard/app-filter.pipe';
 import { SearchPipe } from './views/search/search-pipe.pipe';
 import { WishlistComponent } from './views/wishlist/wishlist.component';
 import { OverlayComponent } from './components/overlay/overlay.component';
-import { AuthModule } from './auth/auth.module';
+import { ProfileSettingsComponent } from './views/settings/profile-settings.component';
+import { PreferenceSettingsComponent } from './views/settings/preference-settings.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +84,9 @@ import { AuthModule } from './auth/auth.module';
     SearchPipe,
     WishlistComponent,
     ApplicationListComponent,
-    OverlayComponent
+    OverlayComponent,
+    ProfileSettingsComponent,
+    PreferenceSettingsComponent,
   ],
   imports: [
     BrowserModule,

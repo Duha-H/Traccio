@@ -13,6 +13,8 @@
   --text-light: #2e32685c;
   --text-warn: #f94d78;
   --disabled-dark: #797f85;
+  --success-background: #94f4c24f;
+  --error-background: #f9769685;
 }
 
 html,

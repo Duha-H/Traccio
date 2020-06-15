@@ -107,10 +107,10 @@ button.save-btn:disabled {
 .setting .value {
   width: 60%;
   text-align: left;
-  margin-left: 100px;
+  margin-left: 70px;
 }
 
-.setting p {
+.setting .label p, p.label {
   text-align: left;
   margin: 0;
   line-height: var(--setting-line-height);
@@ -126,7 +126,7 @@ button.save-btn:disabled {
 .value-div {
   display: flex;
   flex-direction: column;
-  line-height: 250px;
+  margin-bottom: 20px;
 }
 
 .setting .value-div text-field {
@@ -205,7 +205,7 @@ button.save-btn:disabled {
   height: 40px;
   line-height: var(--setting-line-height);
   margin-left: 0px;
-  margin-right: 25px;
+  margin-right: 10px;
 }
 
 .setting button.toggle p {
@@ -218,6 +218,7 @@ button.save-btn:disabled {
 .setting .toggle-btns p {
   margin: 0;
   line-height: 35px;
+  font-size: 10pt;
 }
 
 .setting .toggle-btns mat-icon {
@@ -242,4 +243,63 @@ button.save-btn:disabled {
 .setting input[type=radio]:checked {
   color: var(--accent-dark);
   background-color: var(--accent-dark);
+}
+
+div.overlay-content {
+  padding: 0 20px;
+}
+
+div.overlay-content p {
+  font-size: 10pt;
+  font-weight: 400;
+  margin: 10px auto;
+}
+
+p#alt-info {
+  font-weight: 300;
+  line-height: 12pt;
+  font-size: 10pt;
+}
+
+div#alert-div {
+  display: flex;
+  flex-direction: row;
+}
+
+div#alert-div p.warning-text {
+  margin: 0;
+  font-size: 10pt;
+  font-weight: 300;
+  margin-left: 30px;
+  line-height: 12pt;
+  margin-bottom: 15px;
+}
+
+.alert.spanning-content {
+  height: 40px;
+  padding: 10px 20px;
+  margin: 0 20px;
+  border-bottom: none;
+}
+
+.alert.success {
+  background-color: var(--success-background);
+}
+
+.alert.error {
+  background-color: var(--error-background);
+}
+
+.alert p, .alert mat-icon {
+  line-height: 40px;
+  height: 40px;
+  color: var(--text-dark);
+}
+
+.alert p {
+  font-size: 10pt;
+}
+
+.alert mat-icon {
+  cursor: pointer;
 }

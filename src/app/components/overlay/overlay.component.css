@@ -26,6 +26,7 @@ div.overlay-content {
   padding-top: 25px;
   border-radius: 20px;
   border: 1px solid var(--titles-secondary-dark);
+	box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
 }
 
 mat-icon.close-btn {

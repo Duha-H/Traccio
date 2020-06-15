@@ -3,6 +3,7 @@ import { UserStoreService } from '../models/user-store.service';
 import { User } from '../models/user';
 import { UserStoreControllerService } from './user-store-controller.service';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Response } from '../utils/response';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +45,7 @@ export class AppStateStoreService {
   }
 
   updateAttributes(updates: {[key: string]: string | number}) {
+    const response = new Response();
     const profileUpdates: {[key: string]: string} = {};
     const currState = this._state.getValue();
     let updatedUser = {
@@ -73,19 +75,22 @@ export class AppStateStoreService {
         default:
           break;
       }
-    };
+    }
     if (Object.keys(profileUpdates).length !== 0) {
-      updatedUser = this._updateProfile(profileUpdates);
+      // updatedUser = this._updateProfile(profileUpdates);
+
     }
 
-    this._state.next({
-      given_name: updatedUser.given_name,
-      family_name: updatedUser.family_name,
-      email: updatedUser.email,
-      email_verified: updatedUser.email_verified,
-      theme: updatedTheme,
-      paletteID: updatedPalette,
-    });
+    // this._state.next({
+    //   given_name: updatedUser.given_name,
+    //   family_name: updatedUser.family_name,
+    //   email: updatedUser.email,
+    //   email_verified: updatedUser.email_verified,
+    //   theme: updatedTheme,
+    //   paletteID: updatedPalette,
+    // });
+
+    return response;
   }
 
   verifyEmail(code: string): string {
