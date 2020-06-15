@@ -23,8 +23,16 @@ export class AuthWrapperService {
     } catch (error) {
       result = false;
     }
-
     return result;
+  }
+
+  async getCurrentAuthenticatedUser(): Promise<any> {
+    try {
+      const user = await Auth.currentAuthenticatedUser();
+      return user;
+    } catch (error) {
+      return null;
+    }
   }
 
   async signIn(email: string, password: string): Promise<Response> {
@@ -267,12 +275,113 @@ export class AuthWrapperService {
 
     return response;
   }
+
+  async updateUserAttributes(attrUpdates: {[key: string]: string}): Promise<Response> {
+    const response = new Response();
+
+    for (const attribute of Object.keys(attrUpdates)) {
+      if (!validUpdateAttributes[attribute]) {
+        // since this doesn't need to be user-facing
+        // log the error, and remove the invalid attribute
+        delete attrUpdates[attribute];
+        console.log('AuthWrapper error: attempted to update an invalid parameter:', attribute);
+      }
+    }
+
+    try {
+      // SUCCESS
+      const user = await this.getCurrentAuthenticatedUser();
+      await Auth.updateUserAttributes(user, attrUpdates);
+      const updatedUser = await this.getCurrentAuthenticatedUser();
+      response.payload = updatedUser;
+      console.log("looks like everything's fine");
+    } catch (error) {
+      response.payload = error.code;
+      switch (error.code) {
+        case 'AliasExistsException':
+          response.error('Another account with the email address you provided already exists. No changes were saved.');
+          break;
+        case 'InvalidParameterException':
+          response.error('Attempted to update an invalid parameter:', error.message);
+          break;
+        case 'PasswordResetRequiredException':
+          // tslint:disable-next-line: max-line-length
+          response.error('Looks like your password needs to be updated before any changes can be applied. Please reset your password first then try again');
+          break;
+        case 'UserNotConfirmedException':
+          response.error('Looks like your email address was not verified. Please verify your email first before applying any changes.');
+          break;
+        case 'UserNotFoundException':
+          response.error('A user account with the email address you provided does not exist.');
+          console.error('AuthError: updateAttributes user not found, this should not happen.', error);
+          break;
+        default:
+          console.error('AuthWrapper: unexpected forgotPassword error:', error);
+          response.error('An unexpected error occured, please try again');
+          break;
+      }
+      console.log("nope", error);
+    }
+
+    return response;
+  }
+
+  async verifyCurrentUserAttributeSubmit(attribute: string, code: string): Promise<Response> {
+    const response = new Response();
+
+    if (!validUpdateAttributes[attribute]) {
+      response.error('Attempted to verify an invalid parameter');
+      console.log('AuthWrapper error: attempted to verify an invalid parameter:', attribute);
+      return response;
+    }
+
+    try {
+      await Auth.verifyCurrentUserAttributeSubmit(attribute, code);
+    } catch (error) {
+      switch (error.code) {
+        case 'CodeMismatchException':
+          response.error('Looks like the verification code you provided is incorrect. Please make sure you\'ve entered the correct code');
+          break;
+        case 'ExpiredCodeException':
+          // tslint:disable-next-line: max-line-length
+          response.error('Looks like the verificated code you provided is no longer valid. Worry not! A new code was sent to your email address, please enter the new code.');
+          break;
+        case 'InvalidParameterException':
+          response.error('Attempted to update an invalid parameter:', attribute);
+          break;
+        case 'PasswordResetRequiredException':
+          // tslint:disable-next-line: max-line-length
+          response.error('Looks like your password needs to be updated before any changes can be applied. Please reset your password first then try again');
+          break;
+        case 'UserNotConfirmedException':
+          response.error('Looks like your email address was not verified. Please verify your email first before applying any changes.');
+          break;
+        case 'UserNotFoundException':
+          response.error('A user account with the email address you provided does not exist.');
+          console.error('AuthError: updateAttributes user not found, this should not happen.', error);
+          break;
+        default:
+          console.error('AuthWrapper: unexpected forgotPassword error:', error);
+          response.error('An unexpected error occured, please try again');
+          break;
+      }
+    }
+
+    return response;
+  }
 }
 
 export interface AuthState {
   signedIn: boolean;
   signedUp: boolean;
 }
+
+// temporarily hard-coding valid attributes for update (based on current CognitoUserPool)
+export const validUpdateAttributes = {
+  given_name: true,
+  family_name: true,
+  email: true,
+};
 
 // can sign_in => when not signed in
 // can sign_up => when not signed in

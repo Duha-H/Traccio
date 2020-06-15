@@ -10,6 +10,7 @@ import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { map } from "rxjs/operators";
 import { DataManagerService } from "../controllers/data-manager.service";
 import { Auth } from 'aws-amplify';
+import { AuthWrapperService } from '../auth/auth-wrapper.service';
 
 @Injectable({
   providedIn: "root",
@@ -51,7 +52,8 @@ export class UserStoreService {
 
   constructor(
     private controller: UserStoreControllerService,
-    private dataManager: DataManagerService
+    private dataManager: DataManagerService,
+    private authWrapper: AuthWrapperService,
   ) {}
 
   /**
@@ -66,42 +68,46 @@ export class UserStoreService {
     newUser.email = email;
     newUser.verified = verified;
     this._user.next(newUser);
-    console.log(verified);
+    console.log('UserStore: user verified:', verified);
     await this.fetchData();
   }
 
   async updateUserAttributes(updates: {
     [key: string]: string
   }) {
-    let currUser = await Auth.currentAuthenticatedUser();
-    try {
-      const result = await Auth.updateUserAttributes(currUser, updates);
-      currUser = await Auth.currentAuthenticatedUser();
+    // On success, updated CognitoUser is returned in the response's payload
+    // On failure, an error code is returned in the response's payload
+    const response = await this.authWrapper.updateUserAttributes(updates);
+    console.log(response);
+    if (response.successful) {
       const updatedUser = this._user.getValue();
-      updatedUser.firstName = currUser.attributes.given_name;
-      updatedUser.lastName = currUser.attributes.family_name;
-      updatedUser.email = currUser.attributes.email;
-      if (updates['email']) { // if the user's email has been updated
+      updatedUser.firstName = response.payload.attributes.given_name;
+      updatedUser.lastName = response.payload.attributes.family_name;
+      updatedUser.email = response.payload.attributes.email;
+      if (updates.email) { // if the user's email has been updated
         updatedUser.verified = false; // expect verification flow
+        console.log('UserStore: email updated and not verified');
       }
       this._user.next(updatedUser);
-    } catch (error) {
-      console.error("Error updating user attributes:", error);
+    } else {
+      console.log('UserStore: attributes not updated:', response.payload);
     }
+
+    return response;
   }
 
   async verifyUser(code: string) {
-    try {
-      const result = await Auth.verifyCurrentUserAttributeSubmit('email', code);
+    const response = await this.authWrapper.verifyCurrentUserAttributeSubmit('email', code);
+    if (response.successful) {
       const updatedUser = this._user.getValue();
       updatedUser.verified = true;
       this._user.next(updatedUser);
-      console.log(result);
-      return result;
-    } catch (error) {
-      console.error("Error confirming code:", error);
-      return error;
+      response.success('Email verified successfully!');
+    } else {
+      console.log('UserStore: error confirming code:', response.payload);
     }
+
+    return response;
   }
 
   async fetchData() {
