@@ -1,10 +1,6 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
-import { AppStateStoreService, StateStore, DEFAULT_STATE, STATE_ATTRIBS } from 'src/app/controllers/app-state-store.service';
-import { TextFieldComponent } from 'src/app/components/text-field/text-field.component';
-import { Response } from 'src/app/utils/response';
-import { User } from 'src/app/models/user';
-import { UserStoreService } from 'src/app/models/user-store.service';
-import { DEFAULT_PREFERENCES_UPDATE_LIST } from './settings.component';
+import { Component, OnInit, ViewChild, Output, EventEmitter, ElementRef } from '@angular/core';
+import { DEFAULT_PREFERENCES_UPDATE_CHECK } from './constants';
+import { PreferencesType, DEFAULT_PREFERENCES, PreferencesStoreService } from 'src/app/controllers/preferences-store.service';
 
 @Component({
   selector: 'settings-preferences',
@@ -14,7 +10,29 @@ import { DEFAULT_PREFERENCES_UPDATE_LIST } from './settings.component';
 export class PreferenceSettingsComponent implements OnInit {
 
   updateList: {[key: string]: string | number} = {};
-  updateCheck = Object.assign({}, DEFAULT_PREFERENCES_UPDATE_LIST); // easier lookup for updated attribs
+  updateCheck = Object.assign({}, DEFAULT_PREFERENCES_UPDATE_CHECK); // easier lookup for updated attribs
+  preferences: PreferencesType = DEFAULT_PREFERENCES;
 
-  ngOnInit() { }
+  @Output() updates: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  constructor(private preferencesStore: PreferencesStoreService) { }
+
+  ngOnInit() {
+    this.preferencesStore.preferences.subscribe(preferences => {
+      this.preferences = preferences;
+      console.log('PreferenceSettings: preferences updated:', this.preferences);
+    });
+    this.toggleTheme(this.preferences.theme); // set currently active theme
+  }
+
+  addUpdate(updateAttrib: string, updateValue: string | number) {
+    this.updates.emit(true);
+    this.updateList[updateAttrib] = updateValue;
+    this.updateCheck[updateAttrib] = true;
+    this.preferences[updateAttrib] = updateValue;
+  }
+
+  toggleTheme(theme: 'dark' | 'light') {
+    this.addUpdate('theme', theme);
+  }
 }

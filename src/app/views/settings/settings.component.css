@@ -119,6 +119,10 @@ button.save-btn:disabled {
   font-weight: 500;
 }
 
+div.label p.label {
+  line-height: var(--setting-line-height);
+}
+
 .setting text-field {
   margin: auto 10px;
 }

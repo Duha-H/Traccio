@@ -4,7 +4,7 @@ import { TextFieldComponent } from 'src/app/components/text-field/text-field.com
 import { Response } from 'src/app/utils/response';
 import { User } from 'src/app/models/user';
 import { UserStoreService } from 'src/app/models/user-store.service';
-import { DEFAULT_PROFILE_UPDATE_LIST } from './settings.component';
+import { DEFAULT_PROFILE_UPDATE_CHECK } from './constants';
 
 @Component({
   selector: 'settings-profile',
@@ -15,7 +15,7 @@ export class ProfileSettingsComponent implements OnInit {
 
   ATTRIBS = STATE_ATTRIBS;
   user: User;
-  updateCheck = Object.assign({}, DEFAULT_PROFILE_UPDATE_LIST); // easier lookup for updated attribs
+  updateCheck = Object.assign({}, DEFAULT_PROFILE_UPDATE_CHECK); // easier lookup for updated attribs
   // changes = false;
   displayVerifyOverlay = false;
   verificationCode = '';
@@ -39,6 +39,12 @@ export class ProfileSettingsComponent implements OnInit {
     });
   }
 
+  addUpdate(updateAttrib: string, updateValue: string) {
+    this.updates.emit(true);
+    this.updateList[updateAttrib] = updateValue;
+    this.updateCheck[updateAttrib] = true;
+  }
+
   undoChange(updateAttrib: string, field: TextFieldComponent) {
     field.resetValue();
     delete this.updateList[updateAttrib];
@@ -46,12 +52,6 @@ export class ProfileSettingsComponent implements OnInit {
     if (Object.keys(this.updateList).length === 0) {
       this.updates.emit(false);
     }
-  }
-
-  addUpdate(updateAttrib: string, updateValue: string) {
-    this.updates.emit(true);
-    this.updateList[updateAttrib] = updateValue;
-    this.updateCheck[updateAttrib] = true;
   }
 
   addPasswordChange(category: string, value: string) {

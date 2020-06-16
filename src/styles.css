@@ -173,3 +173,7 @@ a.login-link.forgot-password {
   height: 200px;
   margin-top: 150px;
 }
+
+::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled), ::ng-deep .mat-selected span.mat-option-text {
+  color: var(--accent-background-dark);
+}

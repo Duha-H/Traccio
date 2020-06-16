@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AppStateStoreService, StateStore, DEFAULT_STATE, STATE_ATTRIBS } from 'src/app/controllers/app-state-store.service';
-import { TextFieldComponent } from 'src/app/components/text-field/text-field.component';
 import { Response } from 'src/app/utils/response';
 import { ProfileSettingsComponent } from './profile-settings.component';
 import { MatTabGroup } from '@angular/material/tabs';
 import { UserStoreService } from 'src/app/models/user-store.service';
 import { PreferenceSettingsComponent } from './preference-settings.component';
+import { DEFAULT_PROFILE_UPDATE_CHECK, DEFAULT_PREFERENCES_UPDATE_CHECK } from './constants';
+import { PreferencesStoreService } from 'src/app/controllers/preferences-store.service';
 
 @Component({
   selector: 'app-settings',
@@ -15,7 +16,6 @@ import { PreferenceSettingsComponent } from './preference-settings.component';
 export class SettingsComponent implements OnInit {
 
   ATTRIBS = STATE_ATTRIBS;
-  currState: StateStore = DEFAULT_STATE;
   changes = false;
   changePassword = false;
   displayVerifyOverlay = false;
@@ -34,13 +34,16 @@ export class SettingsComponent implements OnInit {
   @ViewChild(ProfileSettingsComponent) profileSettingsComp: ProfileSettingsComponent;
   @ViewChild(PreferenceSettingsComponent) prefSettingsComp: PreferenceSettingsComponent;
 
-  constructor(private stateStore: AppStateStoreService, private userStore: UserStoreService) { }
+  constructor(
+    private userStore: UserStoreService,
+    private preferencesStore: PreferencesStoreService,
+  ) { }
 
   ngOnInit() { }
 
   setChange(index: number, changeState: boolean) {
     this.tabChanges[index] = changeState;
-    if (this.tabGroup.selectedIndex === index) {
+    if (this.tabGroup && this.tabGroup.selectedIndex === index) {
       this.changes = this.tabChanges[index];
     }
   }
@@ -66,7 +69,7 @@ export class SettingsComponent implements OnInit {
       if (this.profileSettingsComp.updateCheck.email) { // if email has been changed, display verification overlay
         this.profileSettingsComp.displayVerifyOverlay = true;
       }
-      this.profileSettingsComp.updateCheck = Object.assign({}, DEFAULT_PROFILE_UPDATE_LIST);
+      this.profileSettingsComp.updateCheck = Object.assign({}, DEFAULT_PROFILE_UPDATE_CHECK);
       this.setChange(this.PROFILE_IDX, false);
     } else {
       this.displayAlert = true;
@@ -76,6 +79,9 @@ export class SettingsComponent implements OnInit {
 
   savePreferencesChanges() {
     // changes propagated to SettingsStore
+    this.preferencesStore.updatePreferences(this.preferencesUpdateList);
+    this.prefSettingsComp.updateCheck = Object.assign({}, DEFAULT_PREFERENCES_UPDATE_CHECK);
+    this.setChange(this.PREFERENCES_IDX, false);
   }
 
   showAlert(responseObject: Response) {
@@ -87,16 +93,4 @@ export class SettingsComponent implements OnInit {
     this.displayAlert = false;
   }
 
-}
-
-export const DEFAULT_PROFILE_UPDATE_LIST = {
-  given_name: false,
-  family_name: false,
-  email: false,
-  password: false,
-};
-
-export const DEFAULT_PREFERENCES_UPDATE_LIST = {
-  theme: false,
-  palette: false,
 }

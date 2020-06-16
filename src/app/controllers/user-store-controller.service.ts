@@ -12,14 +12,14 @@ export class UserStoreControllerService {
 
   async fetchTheme(userid: string): Promise<{
     theme: string,
-    paletteID: number
+    colorPalette: number
   }> {
     const theme = 'dark';
-    const paletteID = 0;
+    const colorPalette = 0;
     // retrieve theme details from user entry in DB
     return {
       theme,
-      paletteID
+      colorPalette
     };
   }
 

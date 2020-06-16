@@ -25,9 +25,9 @@ export class AppStateStoreService {
     let currPalette = 0;
     if (this.user.isDefined()) {
       this.controller.fetchUserJourneys(this.user.userid)
-        .then((result: { theme: string, paletteID: number }) => {
+        .then((result: { theme: string, colorPalette: number }) => {
           currTheme = result.theme;
-          currPalette = result.paletteID;
+          currPalette = result.colorPalette;
         })
         .catch(error => {
           currTheme = 'dark';
@@ -40,7 +40,7 @@ export class AppStateStoreService {
       email: this.user.email,
       email_verified: this.user.verified,
       theme: currTheme,
-      paletteID: currPalette
+      colorPalette: currPalette
     });
   }
 
@@ -55,7 +55,7 @@ export class AppStateStoreService {
       email_verified: currState.email_verified,
     };
     let updatedTheme = currState.theme;
-    let updatedPalette = currState.paletteID;
+    let updatedPalette = currState.colorPalette;
 
     for (const attrib of Object.keys(updates)) {
       const value = updates[attrib];
@@ -87,7 +87,7 @@ export class AppStateStoreService {
     //   email: updatedUser.email,
     //   email_verified: updatedUser.email_verified,
     //   theme: updatedTheme,
-    //   paletteID: updatedPalette,
+    //   colorPalette: updatedPalette,
     // });
 
     return response;
@@ -103,7 +103,7 @@ export class AppStateStoreService {
           email: this.user.email,
           email_verified: this.user.verified,
           theme: this._state.getValue().theme,
-          paletteID: this._state.getValue().paletteID,
+          colorPalette: this._state.getValue().colorPalette,
         });
         return result;
       })
@@ -135,9 +135,9 @@ export interface StateStore {
   given_name: string;
   family_name: string;
   email: string;
-  email_verified: boolean,
+  email_verified: boolean;
   theme: 'dark' | 'light' | string;
-  paletteID: 0 | 1 | 2 | 3 | number;
+  colorPalette: 0 | 1 | 2 | 3 | number;
 }
 
 export const DEFAULT_STATE: StateStore = {
@@ -146,7 +146,7 @@ export const DEFAULT_STATE: StateStore = {
   email: '',
   email_verified: true,
   theme: 'dark',
-  paletteID: 0
+  colorPalette: 0
 };
 
 export const PALETTES = {
@@ -163,5 +163,5 @@ export const STATE_ATTRIBS = { // attribute names match an AuthUser object's att
   VERIFIED: 'email_verified',
   PASSWORD: 'password',
   THEME: 'theme',
-  PALETTE: 'paletteID'
+  PALETTE: 'colorPalette'
 };
