@@ -6,14 +6,14 @@
   height: 6vh;
   display: flex;
   align-items: center;
-  background-color: var(--background-dark);
+  background-color: var(--bg);
   font-weight: 600;
   padding: 0 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.479), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .toolbar mat-icon.mat-icon {
-  color: var(--accent-dark);
+  color: var(--accent);
   text-align: center;
   line-height: 30pt;
   font-size: 28pt;
@@ -26,7 +26,7 @@ text-field.toolbar-item {
 }
 
 .toolbar span {
-  color: var(--titles-primary-dark);
+  color: var(--titles-primary);
   font-size: 18pt;
 }
 
@@ -64,18 +64,15 @@ ul.sidenav {
   width: 60px;
   height: 60px;
   border-radius: 100%;
-  /* background-color: var(--accent-background-dark); */
-  background-color: var(--secondary-dark);
+  background-color: var(--element-bg-secondary);
   vertical-align: middle;
   padding: 0;
   margin: 15px auto;
-  box-shadow: 
-    -3px -3px 8px 0 rgba(68, 68, 68, 0.411),
-    3px 3px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-neumorphic-nav);
 }
 
 .sidenav li:hover {
-  background-color: var(--accent-hover-dark);
+  background-color: var(--accent-hover);
 }
 
 .sidenav a {
@@ -91,13 +88,13 @@ mat-sidenav-container {
 }
 
 mat-sidenav {
-  background-color: var(--secondary-dark);
+  background-color: var(--element-bg-secondary);
   min-height: 100%;
   padding: 0 5px;
 }
 
 .sidenav mat-icon {
-  color: var(--titles-secondary-dark);
+  color: var(--titles-secondary);
   margin: auto;
   line-height: 42pt;
   font-size: 25pt;
@@ -111,7 +108,7 @@ mat-sidenav {
 }
 
 .sidenav a.active mat-icon {
-  color: var(--accent-dark);
+  color: var(--accent);
 }
 
 .content {
@@ -119,7 +116,7 @@ mat-sidenav {
   width: 100%;
   flex-direction: column;
   align-items: center;
-  background-color: var(--background-dark);
+  background-color: var(--bg);
 }
 
 svg.material-icons {

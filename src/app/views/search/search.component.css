@@ -1,5 +1,5 @@
 span {
-  color: var(--text-dark);
+  color: var(--text);
 }
 
 .view-container {
@@ -14,11 +14,11 @@ span {
 
 .spanning-content h4 {
   text-align: left;
-  color: var(--titles-primary-dark);
+  color: var(--titles-primary);
 }
 
 .spanning-content mat-icon {
-  color: var(--titles-primary-dark);
+  color: var(--titles-primary);
   cursor: pointer;
 }
 
@@ -35,16 +35,16 @@ span {
 }
 
 .result-title {
-  border-bottom: 0.5px solid var(--titles-secondary-dark);
+  border-bottom: 0.5px solid var(--titles-secondary);
   padding: 10px;
   text-align: left;
 }
 
 .clickable-item mat-icon {
-  color: var(--titles-secondary-dark);
+  color: var(--titles-secondary);
 }
 
 .clickable-item:hover {
-  background-color: var(--secondary-dark);
+  background-color: var(--element-bg-secondary);
   cursor: pointer;
 }

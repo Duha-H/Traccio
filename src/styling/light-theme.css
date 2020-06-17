@@ -1,0 +1,73 @@
+body[theme='light'] {
+  /** backgrounds */
+  --bg: #F6F6F6;
+  --bg-backdrop: #adadad9c;
+  --element-bg-primary: #E8E8F3;
+  --element-bg-secondary: #E8E8F3;
+  /** accent colors */
+  --accent: #9f9dea;
+  --accent-hover: #CFCFEE;
+  /** text */
+  --titles-primary: #9f9dea;
+  --titles-secondary: #909ca8;
+  --text: #494a4f;
+  /** feedback colors */
+  --valid: #76dbca;
+  --warn: #f94d78;
+  --disabled-bg: #797f85;
+  --success-bg: #94f4c24f;
+  --error-bg: #f9769685;
+  /** shadows */
+  --shadow-neumorphic-element:
+    -6px -6px 4px 0 rgba(255, 255, 255, 0.7),
+    5px 5px 4px 0 rgba(174, 174, 174, 0.15);
+  --shadow-neumorphic-nav:
+    -3px -3px 8px 0 rgba(244, 244, 254, 1),
+    3px 3px 8px 0 rgba(201, 201, 217, 0.8);
+  --shadow-clickable: 0 0 15px rgba(0, 0, 0, 0.4);
+  --shadow-overlay: 0 0 30px rgba(0, 0, 0, 0.6);
+}
+
+body[theme='light'][palette='palette-0'] {
+  /** backgrounds */
+  --element-bg-primary: #E8E8F3;
+  --element-bg-secondary: #E8E8F3;
+  /** accent colors */
+  --accent: #9f9dea;
+  --accent-hover: #CFCFEE;
+  /** text */
+  --titles-primary: #9f9dea;
+}
+
+body[theme='light'][palette='palette-1'] {
+  /** backgrounds */
+  --element-bg-primary: #E3F7F4;
+  --element-bg-secondary: #E3F7F4;
+  /** accent colors */
+  --accent: #47D4BC;
+  --accent-hover: #C1F5ED;
+  /** text */
+  --titles-primary: #47D4BC;
+}
+
+body[theme='light'][palette='palette-2'] {
+  /** backgrounds */
+  --element-bg-primary: #F2DBE0;
+  --element-bg-secondary: #F2DBE0;
+  /** accent colors */
+  --accent: #EF4D73;
+  --accent-hover: #F7CFD8;
+  /** text */
+  --titles-primary: #EF4D73;
+}
+
+body[theme='light'][palette='palette-3'] {
+  /** backgrounds */
+  --element-bg-primary: #DDE7F6;
+  --element-bg-secondary: #DDE7F6;
+  /** accent colors */
+  --accent: #7EABEF;
+  --accent-hover: #C9DCF8;
+  /** text */
+  --titles-primary: #7EABEF;
+}

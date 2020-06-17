@@ -18,12 +18,12 @@ h4,
 h5,
 h6 {
   margin: 8px 0;
-  color: var(--titles-primary-dark);
-  background-color: var(--titles-primary-dark);
+  color: var(--titles-primary);
+  background-color: var(--titles-primary);
   font-weight: 100;
 }
 
 p {
   margin: 0;
-  color: var(--text-dark);
+  color: var(--text);
 }

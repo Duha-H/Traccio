@@ -35,7 +35,7 @@ export class TextFieldComponent implements OnInit {
   @Input() width = 350;
   @Input() height = 18;
   @Input() fontSize = 10;
-  @Input() fontColor = 'var(--text-dark)';
+  @Input() fontColor = 'var(--text)';
   @Input() center = true;
   @Input() text: string;
   @Input() showUpdatedBorder = false; // unique border color if field value has been changed

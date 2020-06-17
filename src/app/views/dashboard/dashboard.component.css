@@ -1,17 +1,17 @@
 h1,
 h2 {
-  color: var(--titles-primary-dark);
+  color: var(--titles-primary);
 }
 
 h3,
 h4,
 h5,
 h6 {
-  color: var(--titles-secondary-dark);
+  color: var(--titles-secondary);
 }
 
 span {
-  color: var(--text-dark);
+  color: var(--text);
 }
 
 .spacer {
@@ -48,7 +48,7 @@ mat-form-field {
 }
 
 mat-select {
-  background-color: var(--titles-primary-dark);
+  background-color: var(--titles-primary);
   padding: 10px;
   border-radius: 5px;
 }
@@ -78,9 +78,7 @@ mat-select {
 mat-grid-tile.dashboard-component {
   border-radius: 15px;
   /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
-  box-shadow: 
-    -6px -6px 4px 0 rgba(46, 46, 46, 0.548),
-    5px 5px 4px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-neumorphic-element);
 }
 
 mat-grid-tile-header {
@@ -96,9 +94,9 @@ mat-grid-tile-header {
   padding: 15px;
   margin: 0;
   text-align: left;
-  color: var(--titles-primary-dark);
+  color: var(--titles-primary);
   font-weight: 200;
-  border-bottom: 0.8px solid var(--titles-primary-dark);
+  border-bottom: 0.8px solid var(--titles-primary);
   display: inline-flex;
   flex-direction: row;
   width: 100%;
@@ -107,7 +105,7 @@ mat-grid-tile-header {
 .data-container-title h4 {
   margin: auto 0;
   font-weight: 200;
-  color: var(--titles-primary-dark);
+  color: var(--titles-primary);
 }
 
 .stats-container {
@@ -145,7 +143,7 @@ calendar-wrapper span {
 }
 
 .year-selector li {
-  color: var(--text-dark);
+  color: var(--text);
   cursor: pointer;
   border-radius: 5px;
   padding: 10px;
@@ -161,10 +159,10 @@ calendar-wrapper span {
 }
 
 .clickable-item mat-icon {
-  color: var(--titles-secondary-dark);
+  color: var(--titles-secondary);
 }
 
 .clickable-item:hover {
-  background-color: var(--secondary-dark);
+  background-color: var(--element-bg-secondary);
   cursor: pointer;
 }

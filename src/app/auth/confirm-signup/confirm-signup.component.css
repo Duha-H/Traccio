@@ -12,7 +12,7 @@
 
 .confirm-signup-container h2 {
   text-align: center;
-  color: var(--accent-dark);
+  color: var(--accent);
   margin: 20px 0;
   margin-bottom: 30px;
 }
@@ -23,7 +23,7 @@ p.warning-text {
 }
 
 .confirm-signup-container p:not(.warning-text) {
-	color: var(--titles-secondary-dark);
+	color: var(--titles-secondary);
 	text-align: center;
 	font-size: 10pt;
   /* margin-top: 40px; */

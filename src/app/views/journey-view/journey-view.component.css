@@ -12,7 +12,7 @@ input {
 }
 
 span {
-  color: var(--text-dark);
+  color: var(--text);
 }
 
 mat-drawer-container {
@@ -29,11 +29,11 @@ mat-drawer-content {
 
 mat-drawer {
   min-width: 400px;
-  background-color: var(--primary-dark);
+  background-color: var(--element-bg-primary);
 }
 
 mat-icon {
-  color: var(--accent-dark);
+  color: var(--accent);
 }
 
 .spanning-content {
@@ -52,14 +52,14 @@ mat-icon {
   padding: 0 30px;
   line-height: 30px;
   margin: 0 30px;
-  color: var(--titles-secondary-dark);
-  border: 1px solid var(--titles-secondary-dark);
+  color: var(--titles-secondary);
+  border: 1px solid var(--titles-secondary);
   cursor: pointer;
 }
 
 .title .status-toggle.active {
-  border: 1px solid var(--accent-dark);
-  color: var(--accent-dark);
+  border: 1px solid var(--accent);
+  color: var(--accent);
 }
 
 .edit-button {
@@ -77,8 +77,8 @@ mat-icon {
 }
 
 .edit-button button.active {
-  /* background: var(--titles-secondary-dark); */
-  border: 1px solid var(--accent-dark);
+  /* background: var(--titles-secondary); */
+  border: 1px solid var(--accent);
   cursor: pointer;
 }
 
@@ -88,7 +88,7 @@ mat-icon {
 }
 
 .form-element {
-  background-color: var(--secondary-dark);
+  background-color: var(--element-bg-secondary);
   border-radius: 25px;
   margin: 0px 10px;
   margin-right: 0;
@@ -134,7 +134,7 @@ mat-icon {
 }
 
 .dates .mat-input-element {
-  color: var(--titles-secondary-dark);
+  color: var(--titles-secondary);
 }
 
 .date-val {
@@ -243,7 +243,7 @@ h4 {
 }
 
 mat-select {
-  background-color: var(--titles-primary-dark);
+  background-color: var(--titles-primary);
   padding: 5px;
   border-radius: 5px;
 }
@@ -281,7 +281,7 @@ ul.filter-values {
   min-width: 100px;
   max-width: 260px;
   height: 20px;
-  background-color: var(--titles-secondary-dark);
+  background-color: var(--titles-secondary);
   padding: 5px 10px;
   line-height: 13pt;
   margin: 5px 20px;
@@ -291,7 +291,7 @@ ul.filter-values {
 
 .filter-values li p {
   font-size: 11pt;
-  color: var(--background-dark);
+  color: var(--bg);
   line-height: 13pt;
   margin: 0;
   width: 100%;
@@ -299,7 +299,7 @@ ul.filter-values {
 
 .filter-values mat-icon {
   float: right;
-  color: var(--background-dark);
+  color: var(--bg);
   line-height: 13pt;
   width: 20px;
   margin-left: 10px;
@@ -307,12 +307,12 @@ ul.filter-values {
 
 .app-table {
   width: 100%;
-  background-color: var(--background-dark);
+  background-color: var(--bg);
   box-shadow: none;
 }
 
 .app-th {
-  color: var(--titles-secondary-dark);
+  color: var(--titles-secondary);
   font-size: 11pt;
   padding-bottom: 10px;
   border-bottom: 1px solid rgba(105, 104, 104, 0.637);
@@ -325,7 +325,7 @@ td.mat-cell:first-of-type {
 }
 
 .app-tr {
-  color: var(--text-dark);
+  color: var(--text);
   font-size: 11pt;
   height: 70px;
   padding-bottom: 0;
@@ -333,7 +333,7 @@ td.mat-cell:first-of-type {
 
 .delete-button {
   float: right;
-  color: var(--text-warn);
+  color: var(--warn);
   cursor: pointer;
 }
 
@@ -375,6 +375,6 @@ button.options {
 
 .clickable-item:hover {
   cursor: pointer;
-  box-shadow: 0 0 28px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--shadow-clickable);
   transform: scale(1.005);
 }

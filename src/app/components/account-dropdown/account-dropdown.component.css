@@ -1,9 +1,9 @@
 .dropdown-container {
 	width: 170px;
 	height: 130px;
-	background-color: var(--background-dark);
+	background-color: var(--bg);
 	border-radius: 8px;
-	box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+	box-shadow: var(--shadow-overlay);
 	display: flex;
 	vertical-align: middle;
 	flex-direction: column;
@@ -42,19 +42,19 @@ li {
 }
 
 li:hover {
-	background-color: var(--titles-secondary-dark);
+	background-color: var(--titles-secondary);
 	cursor: pointer;
 }
 
 li a {
 	text-decoration: none;
-	color: var(--text-dark);
+	color: var(--text);
 	display: inline-block;
 	width: 100%;
 }
 
 li:hover a {
-	color: var(--primary-dark);
+	color: var(--element-bg-primary);
 	font-weight: 400;
 }
 

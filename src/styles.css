@@ -1,20 +1,18 @@
 :root {
-  --background-dark: #22232d;
-  --background-backdrop-dark: #22232dab;
-  --primary-dark: #252635;
-  --secondary-dark: #282935;
-  --accent-dark: #9f9dea;
-  --accent-secondary-dark: #85d2d8;
-  --accent-background-dark: #4144685c;
-  --accent-hover-dark: #22232dc2;
-  --titles-primary-dark: #9f9dea;
-  --titles-secondary-dark: #909ca8;
-  --text-dark: #ffffff;
-  --text-light: #2e32685c;
-  --text-warn: #f94d78;
-  --disabled-dark: #797f85;
-  --success-background: #94f4c24f;
-  --error-background: #f9769685;
+  /* --bg: var(--bg); */
+  --bg-backdrop: #22232dab;
+  --element-bg-primary: #252635;
+  --element-bg-secondary: #282935;
+  --accent: #9f9dea;
+  --valid: #85d2d8;
+  --accent-hover: #22232dc2;
+  --titles-primary: #9f9dea;
+  --titles-secondary: #909ca8;
+  --text: #ffffff;
+  --warn: #f94d78;
+  --disabled-bg: #797f85;
+  --success-bg: #94f4c24f;
+  --error-bg: #f9769685;
 }
 
 html,
@@ -22,7 +20,7 @@ body {
   height: 100%;
   width: 100%;
   overflow: hidden;
-  background-color: var(--background-dark);
+  background-color: var(--bg);
 }
 body {
   margin: 0;
@@ -31,18 +29,18 @@ body {
 
 h1,
 h2 {
-  color: var(--titles-primary-dark);
+  color: var(--titles-primary);
 }
 
 h3,
 h4,
 h5,
 h6 {
-  color: var(--titles-secondary-dark);
+  color: var(--titles-secondary);
 }
 
 p {
-	color: var(--text-dark);
+	color: var(--text);
 }
 
 ::placeholder {
@@ -74,7 +72,7 @@ div.view-container {
 
 div.mat-drawer-backdrop.mat-drawer-shown {
   /* background-color: rgba(0, 0, 0, 0.05); */
-  background-color: var(--background-backdrop-dark);
+  background-color: var(--bg-backdrop);
 }
 
 .mat-form-field-empty.mat-form-field-label {
@@ -86,11 +84,11 @@ div.mat-drawer-backdrop.mat-drawer-shown {
 }
 
 .mat-input-element {
-  color: var(--text-dark);
+  color: var(--text);
 }
 
 p.warning-text {
-  color: var(--text-warn);
+  color: var(--warn);
   max-width: 100%;
   margin-bottom: 0;
   white-space: pre-wrap;
@@ -110,8 +108,8 @@ app-dashboard {
 }
 
 .submit-button {
-  background-color: var(--titles-secondary-dark);
-  color: var(--text-dark);
+  background-color: var(--titles-secondary);
+  color: var(--text);
   font-size: 10pt;
   padding: 12px;
   border-radius: 15px;
@@ -121,15 +119,15 @@ app-dashboard {
 }
 
 .submit-button:hover {
-  background-color: var(--accent-dark);
+  background-color: var(--accent);
   cursor: pointer;
-  color: var(--background-dark);
+  color: var(--bg);
 }
 
 .login-link {
   font-size: 10pt;
   text-align: center;
-  color: var(--titles-secondary-dark);
+  color: var(--titles-secondary);
 }
 
 a.login-link,
@@ -172,8 +170,4 @@ a.login-link.forgot-password {
   vertical-align: middle;
   height: 200px;
   margin-top: 150px;
-}
-
-::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled), ::ng-deep .mat-selected span.mat-option-text {
-  color: var(--accent-background-dark);
 }

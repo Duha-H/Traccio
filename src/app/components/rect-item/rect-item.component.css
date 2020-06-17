@@ -1,12 +1,12 @@
 p {
   margin: 5px 0;
-  color: var(--text-dark);
+  color: var(--text);
 }
 
 h2 {
   height: 25px;
   margin: 10px 0;
-  color: var(--titles-secondary-dark);
+  color: var(--titles-secondary);
 }
 
 mat-icon {
@@ -15,7 +15,7 @@ mat-icon {
   display: inline-block;
   vertical-align: middle;
   height: 100%;
-  color: var(--accent-dark);
+  color: var(--accent);
 }
 
 .container {
@@ -25,12 +25,10 @@ mat-icon {
   padding: 20px; /* might need to remove this */
   text-align: center;
   /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
-  background-color: var(--background-dark);
+  background-color: var(--bg);
   display: flex;
   z-index: 1;
-  box-shadow: 
-    -6px -6px 4px 0 rgba(46, 46, 46, 0.548),
-    5px 5px 4px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-neumorphic-element);
 }
 
 .container.add {
@@ -42,8 +40,8 @@ mat-icon {
 
 .container:hover:not(.add) {
   cursor: pointer;
-  box-shadow: 0 0 28px rgba(0, 0, 0, 0.4);
-  background-color: var(--secondary-dark);
+  box-shadow: var(--shadow-clickable);
+  background-color: var(--element-bg-secondary);
   transform: scale(1.008);
 }
 
@@ -73,7 +71,7 @@ mat-icon {
 }
 
 .edit-button button:hover {
-  background: var(--accent-hover-dark);
+  background: var(--accent-hover);
   cursor: pointer;
 }
 

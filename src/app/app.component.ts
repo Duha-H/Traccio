@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   title = "Tracker";
   signedIn: boolean;
   user: any; // I don't like this
+  theme = 'dark';
 
   constructor(
     public amplifyService: AmplifyService,

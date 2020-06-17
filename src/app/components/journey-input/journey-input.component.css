@@ -38,7 +38,7 @@ form * {
 }
 
 .mat-input-element {
-  color: var(--text-dark);
+  color: var(--text);
 }
 
 .mat-form-field-empty.mat-form-field-label {
@@ -58,7 +58,7 @@ mat-checkbox {
 }
 
 .warning-text {
-  color: var(--text-warn);
+  color: var(--warn);
 }
 
 .text-input {
@@ -68,7 +68,7 @@ mat-checkbox {
   /* margin-top: 25px; */
   padding-bottom: 10px;
   width: 99%;
-  background-color: var(--secondary-dark);
+  background-color: var(--element-bg-secondary);
 
 }
 

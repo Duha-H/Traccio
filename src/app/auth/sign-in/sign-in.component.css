@@ -9,7 +9,7 @@
 
 .signin-container h2 {
   text-align: center;
-  color: var(--accent-dark);
+  color: var(--accent);
   margin: 20px 0;
   margin-bottom: 70px;
 }

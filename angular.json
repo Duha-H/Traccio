@@ -25,7 +25,11 @@
             ],
             "styles": [
               "src/styles.css",
-              "src/mat-theme.scss"
+              "src/mat-theme.scss",
+              "src/styling/dark-theme.css",
+              "src/styling/light-theme.css",
+              "src/styling/mat-dark-theme.scss",
+              "src/styling/mat-light-theme.scss"
             ],
             "scripts": []
           },
@@ -90,7 +94,11 @@
             ],
             "styles": [
               "src/styles.css",
-              "src/mat-theme.scss"
+              "src/mat-theme.scss",
+              "src/styling/dark-theme.css",
+              "src/styling/light-theme.css",
+              "src/styling/mat-dark-theme.scss",
+              "src/styling/mat-light-theme.scss"
             ],
             "scripts": []
           }

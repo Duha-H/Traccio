@@ -7,22 +7,22 @@
 
 .spanning-content {
   margin: 15px 20px;
-  border-bottom: 1px solid var(--titles-secondary-dark);
+  border-bottom: 1px solid var(--titles-secondary);
   padding-bottom: 25px;
   height: var(--spanning-line-height);
 }
 
 ::ng-deep .tabs .mat-tab-label, ::ng-deep .tabs .mat-tab-label-content {
-  color: var(--text-dark);
+  color: var(--text);
 }
 
 button.save-btn {
   line-height: var(--spanning-line-height);
   height: 35px;
   width: 150px;
-  border: 1px solid var(--accent-dark);
+  border: 1px solid var(--accent);
   border-radius: 25px;
-  background-color: var(--accent-dark);
+  background-color: var(--accent);
   cursor: pointer;
 }
 
@@ -30,17 +30,17 @@ button.save-btn {
   margin: 0;
   line-height: 30px;
   text-align: center;
-  color: var(--text-dark);
+  color: var(--text);
   font-size: 11pt;
 }
 
 button.save-btn:hover:not(:disabled) p { /** hover while not disabled */
-  color: var(--background-dark);
+  color: var(--bg);
 }
 
 button.save-btn:disabled {
-  background-color: var(--disabled-dark);
-  border: 1px solid var(--disabled-dark);
+  background-color: var(--disabled-bg);
+  border: 1px solid var(--disabled-bg);
   opacity: 0.2;
   cursor: default;
 }
@@ -63,7 +63,7 @@ button.save-btn:disabled {
 
 .info p {
   font-size: 10pt;
-  color: var(--titles-secondary-dark);
+  color: var(--titles-secondary);
   margin: 0;
   width: 35%;
   line-height: 12pt;
@@ -91,7 +91,7 @@ button.save-btn:disabled {
   padding: 5px 20px;
   display: flex;
   flex-direction: row;
-  /* border-bottom: 0.3px solid var(--titles-secondary-dark); */
+  /* border-bottom: 0.3px solid var(--titles-secondary); */
   height: var(--setting-line-height);
   margin-top: 20px;
 }
@@ -156,28 +156,28 @@ div.label p.label {
   line-height: 45px;
   height: 45px;
   background: none;
-  border: 1px solid var(--titles-secondary-dark);
+  border: 1px solid var(--titles-secondary);
   border-radius: 25px;
   cursor: pointer;
   margin: auto;
 }
 
 .setting button.active {
-  background-color: var(--accent-dark);
+  background-color: var(--accent);
 }
 
 .setting button:hover {
-  background-color: var(--titles-secondary-dark);
+  background-color: var(--titles-secondary);
 }
 
 .setting mat-icon {
   line-height: 45px;
-  color: var(--text-dark);
+  color: var(--text);
   font-size: 16pt;
 }
 
 .setting button:hover mat-icon, .setting button:hover p {
-  color: var(--background-dark);
+  color: var(--bg);
 }
 
 .setting ul.value.toggle-btns, .setting ul.toggle-btns {
@@ -204,7 +204,7 @@ div.label p.label {
 
 .setting button.toggle, .setting ul.toggle-btns button.toggle {
   margin: auto;
-  background-color: var(--titles-secondary-dark);
+  background-color: var(--titles-secondary);
   width: 150px;
   height: 40px;
   line-height: var(--setting-line-height);
@@ -240,13 +240,13 @@ div.label p.label {
 }
 
 .setting .value label {
-  color: var(--text-dark);
+  color: var(--text);
   padding: 5px;
 }
 
 .setting input[type=radio]:checked {
-  color: var(--accent-dark);
-  background-color: var(--accent-dark);
+  color: var(--accent);
+  background-color: var(--accent);
 }
 
 div.overlay-content {
@@ -287,17 +287,17 @@ div#alert-div p.warning-text {
 }
 
 .alert.success {
-  background-color: var(--success-background);
+  background-color: var(--success-bg);
 }
 
 .alert.error {
-  background-color: var(--error-background);
+  background-color: var(--error-bg);
 }
 
 .alert p, .alert mat-icon {
   line-height: 40px;
   height: 40px;
-  color: var(--text-dark);
+  color: var(--text);
 }
 
 .alert p {

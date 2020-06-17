@@ -1,5 +1,5 @@
 ::placeholder {
-	color: var(--titles-secondary-dark);
+	color: var(--titles-secondary);
 }
 
 .input-container {
@@ -23,7 +23,7 @@
   border-radius: 20px;
   padding: 16px;
   border: 1px solid transparent;
-  background-color: var(--secondary-dark);
+  background-color: var(--element-bg-secondary);
   margin: 0px auto;
   align-items: center;
 }
@@ -35,29 +35,29 @@
   background: none;
   border: none;
   outline: none;
-  color: var(--text-dark);
+  color: var(--text);
 }
 
 .input-container div.updated {
-  border: 1px solid var(--accent-secondary-dark);
+  border: 1px solid var(--valid);
 }
 
 .input-container mat-icon {
-  color: var(--titles-secondary-dark);
+  color: var(--titles-secondary);
   cursor: pointer;
 }
 
 .input-container div:focus-within {
-  border: 1px solid var(--accent-dark);
+  border: 1px solid var(--accent);
 }
 
 .input-container div:focus-within mat-icon {
-  color: var(--accent-dark);
+  color: var(--accent);
 }
 
 .input-container label {
   font-size: 11pt;
-  color: var(--titles-secondary-dark);
+  color: var(--titles-secondary);
   height: 11pt;
   padding-left: 10px;
   text-align: left;
@@ -65,11 +65,11 @@
 }
 
 .input-container div:focus-within + label {
-  color: var(--accent-dark);
+  color: var(--accent);
 }
 
 .input-container input:focus::placeholder {
-	color: var(--accent-dark);
+	color: var(--accent);
 }
 
 p.warning-text {

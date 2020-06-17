@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter, ElementRef } from '@angular/core';
 import { DEFAULT_PREFERENCES_UPDATE_CHECK } from './constants';
 import { PreferencesType, DEFAULT_PREFERENCES, PreferencesStoreService } from 'src/app/controllers/preferences-store.service';
+import { ThemeManagerService } from 'src/app/controllers/theme-manager.service';
 
 @Component({
   selector: 'settings-preferences',
@@ -15,7 +16,10 @@ export class PreferenceSettingsComponent implements OnInit {
 
   @Output() updates: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  constructor(private preferencesStore: PreferencesStoreService) { }
+  constructor(
+    private preferencesStore: PreferencesStoreService,
+    private themeManager: ThemeManagerService
+  ) {  }
 
   ngOnInit() {
     this.preferencesStore.preferences.subscribe(preferences => {
@@ -30,6 +34,9 @@ export class PreferenceSettingsComponent implements OnInit {
     this.updateList[updateAttrib] = updateValue;
     this.updateCheck[updateAttrib] = true;
     this.preferences[updateAttrib] = updateValue;
+    if (updateAttrib === 'theme') {
+      this.themeManager.setTheme(updateValue as string);
+    }
   }
 
   toggleTheme(theme: 'dark' | 'light') {

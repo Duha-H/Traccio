@@ -21,7 +21,7 @@ mat-datepicker-toggle {
 }
 
 .mat-input-element {
-  color: var(--text-dark);
+  color: var(--text);
 }
 
 .mat-form-field-empty.mat-form-field-label {
@@ -115,5 +115,5 @@ div.mat-form-field-flex {
 }
 
 ::ng-deep .component-container .mat-select-value {
-  color: var(--text-dark);
+  color: var(--text);
 }

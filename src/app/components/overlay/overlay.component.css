@@ -9,7 +9,7 @@
   right: 0;
   bottom: 0;
   z-index: 15;
-  background-color: var(--background-backdrop-dark);
+  background-color: var(--bg-backdrop);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,17 +21,17 @@
 div.overlay-content {
   max-width: 600px;
   max-height: 400px;
-  background-color: var(--background-dark);
+  background-color: var(--bg);
   padding: 40px 20px;
   padding-top: 25px;
   border-radius: 20px;
-  border: 1px solid var(--titles-secondary-dark);
-	box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--titles-secondary);
+	box-shadow: var(--shadow-overlay);
 }
 
 mat-icon.close-btn {
   float: right;
-  color: var(--text-dark);
+  color: var(--text);
   font-size: 18pt;
   font-weight: 600;
   cursor: pointer;
