@@ -65,7 +65,6 @@ export class SettingsComponent implements OnInit {
     const response = await this.userStore.updateUserAttributes(this.profileUpdateList);
     if (response.successful) {
       this.alert.success('Profile updates saved successfully!');
-      this.showAlert();
       if (this.profileSettingsComp.updateCheck.email) { // if email has been changed, display verification overlay
         this.profileSettingsComp.displayVerifyOverlay = true;
       }
@@ -73,8 +72,8 @@ export class SettingsComponent implements OnInit {
       this.setChange(this.PROFILE_IDX, false);
     } else {
       this.alert.error(response.message);
-      this.showAlert();
     }
+    this.showAlert();
   }
 
   savePreferencesChanges() {
@@ -83,6 +82,25 @@ export class SettingsComponent implements OnInit {
     this.prefSettingsComp.updateCheck = Object.assign({}, DEFAULT_PREFERENCES_UPDATE_CHECK);
     this.setChange(this.PREFERENCES_IDX, false);
     this.alert.success('Preferences updated successfully!');
+    this.showAlert();
+  }
+
+  async applyPasswordChange(passwordDetails: {
+    oldPassword: string,
+    newPassword: string,
+    confirmPassword: string,
+  }) {
+    const response = await this.userStore.changeUserPassword(
+      passwordDetails.oldPassword,
+      passwordDetails.newPassword,
+      passwordDetails.confirmPassword
+    );
+    if (response.successful) {
+      this.alert.success('Password changed successfully!');
+      this.profileSettingsComp.resetPasswordChange();
+    } else {
+      this.alert = response;
+    }
     this.showAlert();
   }
 

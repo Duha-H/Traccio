@@ -72,16 +72,16 @@
       </button>
     </div>
     <div *ngIf="changePassword" class="value value-div" style="line-height: 250px;">
-      <text-field  [width]="500" [height]="10" [center]="false" [displayLabel]="false" [text]="" [type]="'password'" [label]="'Old Password'" (inputChange)="addPasswordChange(PASSWORD.OLD, $event)"></text-field>
-      <text-field  [width]="500" [height]="10" [center]="false" [displayLabel]="false" [text]="" [type]="'password'" [label]="'New Password'" (inputChange)="addPasswordChange(PASSWORD.NEW, $event)"></text-field>
-      <text-field  [width]="500" [height]="10" [center]="false" [displayLabel]="false" [text]="" [type]="'password'" [label]="'Confirm New Password'" (inputChange)="addPasswordChange(PASSWORD.CONFIRM, $event)"></text-field>
-      <div *ngIf="user.verified" id="alert-div">
+      <text-field  [width]="500" [height]="10" [center]="false" [displayLabel]="false" [text]="" [type]="'password'" [label]="'Old Password'" (inputChange)="addPasswordChange('oldPassword', $event)"></text-field>
+      <text-field  [width]="500" [height]="10" [center]="false" [displayLabel]="false" [text]="" [type]="'password'" [label]="'New Password'" (inputChange)="addPasswordChange('newPassword', $event)"></text-field>
+      <text-field  [width]="500" [height]="10" [center]="false" [displayLabel]="false" [text]="" [type]="'password'" [label]="'Confirm New Password'" (inputChange)="addPasswordChange('confirmPassword', $event)"></text-field>
+      <div *ngIf="!user.verified" id="alert-div">
         <p class="warning-text">Your email was not verified,</p><a class="login-link" style="line-height: 12pt; cursor: pointer;" role="button" (click)="displayVerifyOverlay=true">verify email</a>
       </div>
       <div style="display: flex; flex-direction: row; margin: 0; margin-left: 20px;">
         <ul class="toggle-btns">
           <li>
-            <button class="toggle" (click)="toggleChangePassword()">
+            <button class="toggle" (click)="applyPasswordChange()">
               <p>Update Password</p>
             </button>
           </li>

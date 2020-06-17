@@ -12,9 +12,9 @@
       <div class="spacer"></div>
       <mat-icon (click)="closeAlert()">clear</mat-icon>
     </div>
-    <mat-tab-group mat-align-tabs="center" animationDuration="0ms" (selectedIndexChange)="changes=tabChanges[$event]" [selectedIndex]="1" #tabGroup>
+    <mat-tab-group mat-align-tabs="center" animationDuration="0ms" (selectedIndexChange)="changes=tabChanges[$event]" #tabGroup>
       <mat-tab label="Profile Settings">
-        <settings-profile (updates)="setChange(0, $event)" (showAlert)="showAlert($event)"></settings-profile>
+        <settings-profile (updates)="setChange(0, $event)" (showAlert)="showAlert($event)" (updatePassword)="applyPasswordChange($event)"></settings-profile>
       </mat-tab>
 
       <mat-tab label="Account Preferences">

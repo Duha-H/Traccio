@@ -111,7 +111,7 @@ export class AuthWrapperService {
       switch (error.code) {
         case 'InvalidPasswordException':
         case 'InvalidParameterException':
-          response.error('The password you provided is invalid.\nMake sure you provide a compliant password.');
+          response.error('The password you provided is invalid.\nMake sure that you provide a compliant password.');
           break;
         case 'UsernameExistsException':
           response.error('Looks like an account with this email address already exists.\nPlease specify a different email address.');
@@ -294,7 +294,6 @@ export class AuthWrapperService {
       await Auth.updateUserAttributes(user, attrUpdates);
       const updatedUser = await this.getCurrentAuthenticatedUser();
       response.payload = updatedUser;
-      console.log("looks like everything's fine");
     } catch (error) {
       response.payload = error.code;
       switch (error.code) {
@@ -359,6 +358,61 @@ export class AuthWrapperService {
         case 'UserNotFoundException':
           response.error('A user account with the email address you provided does not exist.');
           console.error('AuthError: updateAttributes user not found, this should not happen.', error);
+          break;
+        default:
+          console.error('AuthWrapper: unexpected forgotPassword error:', error);
+          response.error('An unexpected error occured, please try again');
+          break;
+      }
+    }
+
+    return response;
+  }
+
+  async changePassword(oldPassword: string, newPassword: string, confirmPassword: string): Promise<Response> {
+    const response = new Response();
+
+    if (!oldPassword) {
+      response.error('Old password was not specified');
+      return response;
+    } else if (!newPassword) {
+      response.error('New password was not specified');
+      return response;
+    } else if (!confirmPassword) {
+      response.error('New password was not re-entered.\nRe-enter new password to confirm it.');
+      return response;
+    } else if (newPassword.trim() !== confirmPassword.trim()) {
+      response.error('Looks like your passwords don\'t match.\nRe-enter to make sure they match.');
+      return response;
+    }
+
+    try {
+      // SUCCESS
+      const user = await this.getCurrentAuthenticatedUser();
+      await Auth.changePassword(user, oldPassword, newPassword);
+    } catch (error) {
+      switch (error.code) {
+        case 'InvalidParameterException':
+        case 'InvalidPasswordException':
+          response.error('The new password you provided is invalid.\nMake sure that you provide a compliant password.');
+          break;
+        case 'PasswordResetRequiredException':
+          // tslint:disable-next-line: max-line-length
+          response.error('Looks like your password needs to be updated before any changes can be applied. Please reset your password first then try again');
+          break;
+        case 'NotAuthorizedException':
+          response.error('The old password provided is incorrect.\nPlease try again.');
+          break;
+        case 'TooManyRequestsException':
+          response.error('An invalid attempt was made too many times.\nPlease try again later.');
+          break;
+        case 'UserNotConfirmedException':
+          // tslint:disable-next-line: max-line-length
+          response.error('Looks like your account was never successfully verified/confirmed.\nPlease verify your email address first before proceeding.');
+          break;
+        case 'UserNotFoundException':
+          response.error('A user account with the email address you provided does not exist.');
+          console.error('AuthError: changePassword user not found, this should not happen.', error);
           break;
         default:
           console.error('AuthWrapper: unexpected forgotPassword error:', error);

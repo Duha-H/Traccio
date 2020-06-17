@@ -20,14 +20,15 @@ export class ProfileSettingsComponent implements OnInit {
   displayVerifyOverlay = false;
   verificationCode = '';
   changePassword = false;
-  PASSWORD = {
-    OLD: 'old',
-    NEW: 'new',
-    CONFIRM: 'confirm',
+  passwordDetails = {
+    oldPassword: '',
+    newPassword: '',
+    confirmPassword: '',
   };
   updateList: {[key: string]: string } = {};
 
   @Output() updates: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() updatePassword: EventEmitter<object> = new EventEmitter<object>();
   @Output() showAlert: EventEmitter<Response> = new EventEmitter<Response>();
 
   constructor(private userStore: UserStoreService) { }
@@ -54,7 +55,20 @@ export class ProfileSettingsComponent implements OnInit {
   }
 
   addPasswordChange(category: string, value: string) {
+    this.passwordDetails[category] = value;
+  }
 
+  applyPasswordChange() {
+    this.updatePassword.emit(this.passwordDetails);
+  }
+
+  resetPasswordChange() {
+    this.changePassword = false;
+    this.passwordDetails = {
+      oldPassword: '',
+      newPassword: '',
+      confirmPassword: '',
+    };
   }
 
   closeVerifyOverlay() {

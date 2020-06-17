@@ -109,6 +109,10 @@ export class UserStoreService {
     return response;
   }
 
+  async changeUserPassword(oldPassword: string, newPassword: string, confirmPassword: string) {
+    return await this.authWrapper.changePassword(oldPassword, newPassword, confirmPassword);
+  }
+
   async fetchData() {
     // Called on app init
     // Performs API calls to fetch user data
