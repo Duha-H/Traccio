@@ -42,12 +42,12 @@
             <div *ngIf="!isEmpty(selectedJourney.statusData); else statusPlaceholder;" class="status-container" style="height: 85%;">
               <pie-chart-wrapper [data]="selectedJourney.statusData"
                 [margin]="{ top: 40, right: 200, bottom: 40, left: 80 }" [pixelRatio]="2" [innerRadius]="0.3"
-                [padAngle]="0.7" [cornerRadius]="3" [colors]="colorPalette" [enableRadialLabels]="false"
+                [padAngle]="0.7" [cornerRadius]="3" [colors]="pieChartPalette" [enableRadialLabels]="false"
                 [borderColor]="{ from: 'color', modifiers: [ [ 'darker', 0.6 ] ] }" [radialLabelsSkipAngle]="10"
-                [radialLabelsTextXOffset]="6" [radialLabelsTextColor]="'#fff'" [radialLabelsLinkOffset]="0"
+                [radialLabelsTextXOffset]="6" [radialLabelsTextColor]="theme.textColor" [radialLabelsLinkOffset]="0"
                 [radialLabelsLinkDiagonalLength]="10" [radialLabelsLinkHorizontalLength]="20"
                 [radialLabelsLinkStrokeWidth]="1" [radialLabelsLinkColor]="{ from: 'color' }" [slicesLabelsSkipAngle]="10"
-                [slicesLabelsTextColor]="'#333333'" [animate]="true" [motionStiffness]="90" [motionDamping]="15" [legends]="[
+                [slicesLabelsTextColor]="theme.textColor" [animate]="true" [motionStiffness]="90" [motionDamping]="15" [legends]="[
                   {
                       anchor: 'bottom-right',
                       direction: 'column',
@@ -57,8 +57,8 @@
                       itemsSpacing: 2,
                       symbolSize: 14,
                       symbolShape: 'circle',
-                      textColor: '#fff',
-                      itemTextColor: '#fff'
+                      textColor: theme.textColor,
+                      itemTextColor: theme.textColor
                   }
               ]">
               </pie-chart-wrapper>
@@ -79,9 +79,9 @@
             </h4>  
             <div class="calendar-container">
               <calendar-wrapper [data]="selectedJourney.calendarData" [from]="currentYear+'-02-01'"
-                [to]="currentYear+'-11-01'" [emptyColor]="'#21e6c214'"
-                [colors]="colorPalette" [yearSpacing]="40"
-                [monthBorderColor]="'#22232d'" [dayBorderWidth]="2" [dayBorderColor]="'#22232d'" [legends]="[
+                [to]="currentYear+'-11-01'" [emptyColor]="theme.emptyColor"
+                [colors]="calendarPalette" [yearSpacing]="40"
+                [monthBorderColor]="theme.background" [dayBorderWidth]="2" [dayBorderColor]="theme.background" [legends]="[
                   {
                     anchor: 'bottom-right',
                     direction: 'row',
@@ -91,15 +91,15 @@
                     itemHeight: 36,
                     itemsSpacing: 14,
                     itemDirection: 'left-to-right',
-                    textColor: '#000',
-                    itemTextColor: '#fff'
+                    textColor: theme.textColor,
+                    itemTextColor: theme.textColor
                   }]" [theme]="{axis: {
-                    textColor: '#f00'
+                    textColor: theme.textColor
                   },
-                  textColor: '#f00',
-                  background: '#f00',
+                  textColor: theme.textColor,
+                  background: theme.textColor,
                   markers: {
-                    textColor: '#f00'
+                    textColor: theme.textColor
                   }
                 }">
               </calendar-wrapper>

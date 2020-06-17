@@ -6,7 +6,7 @@ import { STATUS } from "../../models/constants";
 import { Application } from 'src/app/models/application';
 import { Router } from '@angular/router';
 import { PreferencesStoreService } from 'src/app/controllers/preferences-store.service';
-import { PALETTES } from '../../../styling/palettes';
+import { PALETTES, THEMES } from '../../../styling/palettes';
 
 @Component({
   selector: "app-dashboard",
@@ -45,7 +45,9 @@ export class DashboardComponent implements OnInit {
     {value: STATUS.STALE.toString(), viewValue: STATUS.STALE.toString()}
   ];
   selectedStatus = this.statuses[0];
-  colorPalette = ['#AC98FB', '#6E89F8', '#81BEFA', '#C1E0F8', '#D1C3EB'];
+  theme = THEMES.light;
+  pieChartPalette = ['#AC98FB', '#6E89F8', '#81BEFA', '#C1E0F8', '#D1C3EB'];
+  calendarPalette = ['#AC98FB', '#6E89F8', '#81BEFA', '#C1E0F8', '#D1C3EB'];
 
   constructor(private userStore: UserStoreService, private router: Router, private prefStore: PreferencesStoreService) {}
 
@@ -63,7 +65,9 @@ export class DashboardComponent implements OnInit {
         ? this.selectedJourney.years[0]
         : this.currentYear;
       this.prefStore.preferences.subscribe(preferences => {
-        this.colorPalette = PALETTES[preferences.colorPalette];
+        this.theme = preferences.theme;
+        this.pieChartPalette = preferences.colorPalette.colors;
+        this.calendarPalette = [this.theme.emptyColor, ...preferences.colorPalette.colors];
       });
       console.log("Dashboard initialized");
     } catch (error) {

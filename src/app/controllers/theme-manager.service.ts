@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { PALETTES } from '../../styling/palettes';
+import { PALETTES, THEMES, ThemeType, PaletteType } from '../../styling/palettes';
 
 /**
  * Handles applying theme and palette changes
@@ -11,26 +11,19 @@ export class ThemeManagerService {
 
   constructor() { }
 
-  setTheme(theme: string) {
-    if (!THEMES[theme]) {
-      console.log('ThemeManager: unsupported theme:', theme);
+  setTheme(theme: ThemeType) {
+    if (!THEMES[theme.name]) {
+      console.log('ThemeManager: unsupported theme:', theme.name);
       return;
     }
-    console.log('ThemeManager: new theme:', theme);
-    document.body.setAttribute('theme', theme);
+    document.body.setAttribute('theme', theme.name);
   }
 
-  setPalette(colorPalette: number) {
-    if (!PALETTES[colorPalette]) {
-      console.log('ThemeManager: unsupported palette:', colorPalette);
+  setPalette(colorPalette: PaletteType) {
+    if (!PALETTES[colorPalette.name]) {
+      console.log('ThemeManager: unsupported palette:', colorPalette.name);
       return;
     }
-    console.log('ThemeManager: new palette:', colorPalette);
-    document.body.setAttribute('palette', `palette-${colorPalette}`);
+    document.body.setAttribute('palette', colorPalette.name);
   }
 }
-
-export const THEMES = {
-  dark: 'dark',
-  light: 'light'
-};

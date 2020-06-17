@@ -3,12 +3,12 @@
   <div class="setting">
     <p class="label">application theme</p>
     <ul class="value toggle-btns">
-      <li><button (click)="addUpdate('theme', 'dark')" class="{{preferences.theme == 'dark' ? 'active' : ''}}">
+      <li><button (click)="addUpdate('theme', 'dark')" class="{{preferences.theme.name == 'dark' ? 'active' : ''}}">
         <p>Dark</p>
         <div style="flex: 1;"></div>
         <mat-icon>brightness_2</mat-icon>
       </button></li>
-      <li><button (click)="addUpdate('theme', 'light')" class="{{preferences.theme == 'light' ? 'active' : ''}}">
+      <li><button (click)="addUpdate('theme', 'light')" class="{{preferences.theme.name == 'light' ? 'active' : ''}}">
         <p>Light</p>
         <div style="flex: 1;"></div>
         <mat-icon>brightness_5</mat-icon>
@@ -28,19 +28,19 @@
     </div>
     <ul class="value toggle-btns" style="flex-direction: column; margin-left: 40px;">
       <li>
-        <input type="radio" name="palette" id="palette-0" [value]="0" [ngModel]="preferences.colorPalette" (change)="addUpdate('colorPalette', 0)">
+        <input type="radio" name="palette" id="palette-0" [value]="'palette-0'" [ngModel]="preferences.colorPalette.name" (change)="addUpdate('colorPalette', 'palette-0')">
         <label for="palette-0">Cosmos</label>
       </li>
       <li>
-        <input type="radio" name="palette" id="palette-1" [value]="1" [ngModel]="preferences.colorPalette" (change)="addUpdate('colorPalette', 1)">
+        <input type="radio" name="palette" id="palette-1" [value]="'palette-1'" [ngModel]="preferences.colorPalette.name" (change)="addUpdate('colorPalette', 'palette-1')">
         <label for="palette-1">Superbubbles</label>
       </li>
       <li>
-        <input type="radio" name="palette" id="palette-2" [value]="2" [ngModel]="preferences.colorPalette" (change)="addUpdate('colorPalette', 2)">
+        <input type="radio" name="palette" id="palette-2" [value]="'palette-2'" [ngModel]="preferences.colorPalette.name" (change)="addUpdate('colorPalette', 'palette-2')">
         <label for="palette-2">Shockwave</label>
       </li>
       <li>
-        <input type="radio" name="palette" id="palette-3" [value]="3" [ngModel]="preferences.colorPalette" (change)="addUpdate('colorPalette', 3)">
+        <input type="radio" name="palette" id="palette-3" [value]="'palette-3'" [ngModel]="preferences.colorPalette.name" (change)="addUpdate('colorPalette', 'palette-3')">
         <label for="palette-3">Dave</label>
       </li>
     </ul>

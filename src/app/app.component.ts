@@ -4,6 +4,7 @@ import { AmplifyService } from "aws-amplify-angular";
 import { Auth } from 'aws-amplify';
 import { UserStoreService } from './models/user-store.service';
 import { AuthWrapperService } from './auth/auth-wrapper.service';
+import { PreferencesStoreService } from './controllers/preferences-store.service';
 
 @Component({
   selector: "app-root",
@@ -21,9 +22,11 @@ export class AppComponent implements OnInit {
     private userStore: UserStoreService,
     public router: Router,
     private authWrapper: AuthWrapperService,
+    private prefStore: PreferencesStoreService
   ) {  }
 
   async ngOnInit() {
+    this.prefStore.reset();
     try {
       this.amplifyService.authStateChange$.subscribe(async (authState) => {
         this.signedIn = authState.state === "signedIn";
@@ -42,6 +45,8 @@ export class AppComponent implements OnInit {
             this.user.attributes.email,
             this.user.attributes.email_verified,
           );
+          // set user preferences
+          this.prefStore.init(); // specify attributes later
           // await this.userStore.fetchData();
           console.log("App init: user authenticated and data fetched");
         }

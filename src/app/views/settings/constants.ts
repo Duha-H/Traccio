@@ -7,5 +7,5 @@ export const DEFAULT_PROFILE_UPDATE_CHECK = {
 
 export const DEFAULT_PREFERENCES_UPDATE_CHECK = {
   theme: false,
-  palette: false,
+  colorPalette: false,
 };

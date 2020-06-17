@@ -1,7 +1,7 @@
 body[theme='light'] {
   /** backgrounds */
   --bg: #F6F6F6;
-  --bg-backdrop: #adadad9c;
+  --bg-backdrop: #f6f6f68c;
   --element-bg-primary: #E8E8F3;
   --element-bg-secondary: #E8E8F3;
   /** accent colors */
@@ -17,6 +17,7 @@ body[theme='light'] {
   --disabled-bg: #797f85;
   --success-bg: #94f4c24f;
   --error-bg: #f9769685;
+  --warn-bg: #797f8585;
   /** shadows */
   --shadow-neumorphic-element:
     -6px -6px 4px 0 rgba(255, 255, 255, 0.7),

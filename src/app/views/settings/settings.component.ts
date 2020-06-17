@@ -22,7 +22,7 @@ export class SettingsComponent implements OnInit {
   displayAlert = false;
   alert: Response = new Response();
   profileUpdateList: {[key: string]: string } = {};
-  preferencesUpdateList: {[key: string]: string | number} = {};
+  preferencesUpdateList: {[key: string]: string} = {};
   PROFILE_IDX = 0;
   PREFERENCES_IDX = 1;
   tabChanges: {[key: number]: boolean} = {
@@ -64,16 +64,16 @@ export class SettingsComponent implements OnInit {
     // set change status based on success or failure
     const response = await this.userStore.updateUserAttributes(this.profileUpdateList);
     if (response.successful) {
-      this.displayAlert = true;
       this.alert.success('Profile updates saved successfully!');
+      this.showAlert();
       if (this.profileSettingsComp.updateCheck.email) { // if email has been changed, display verification overlay
         this.profileSettingsComp.displayVerifyOverlay = true;
       }
       this.profileSettingsComp.updateCheck = Object.assign({}, DEFAULT_PROFILE_UPDATE_CHECK);
       this.setChange(this.PROFILE_IDX, false);
     } else {
-      this.displayAlert = true;
       this.alert.error(response.message);
+      this.showAlert();
     }
   }
 
@@ -82,11 +82,18 @@ export class SettingsComponent implements OnInit {
     this.preferencesStore.updatePreferences(this.preferencesUpdateList);
     this.prefSettingsComp.updateCheck = Object.assign({}, DEFAULT_PREFERENCES_UPDATE_CHECK);
     this.setChange(this.PREFERENCES_IDX, false);
+    this.alert.success('Preferences updated successfully!');
+    this.showAlert();
   }
 
-  showAlert(responseObject: Response) {
-    this.alert = responseObject;
+  showAlert(responseObject?: Response) {
+    this.alert = responseObject ? responseObject : this.alert;
     this.displayAlert = true;
+    if (this.alert.successful) { // if successful, hide alert after 5 seconds
+      setTimeout(() => {
+        this.closeAlert();
+      }, 5000);
+    }
   }
 
   closeAlert() {

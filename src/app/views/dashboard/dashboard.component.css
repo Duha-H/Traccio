@@ -128,9 +128,8 @@ calendar-wrapper {
   max-width: 650px;
 }
 
-calendar-wrapper span {
-  color: black;
-  background-color: gray;
+::ng-deep calendar-wrapper span, ::ng-deep pie-chart-wrapper span {
+  color: #494a4f;
 }
 
 .year-selector {

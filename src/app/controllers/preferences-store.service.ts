@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Response } from '../utils/response';
-import { ThemeManagerService, THEMES } from './theme-manager.service';
-import { PALETTES } from '../../styling/palettes';
+import { ThemeManagerService } from './theme-manager.service';
+import { PALETTES, THEMES, ThemeType, PaletteType } from '../../styling/palettes';
 
 @Injectable({
   providedIn: 'root'
@@ -12,49 +12,88 @@ export class PreferencesStoreService {
   private _preferences: BehaviorSubject<PreferencesType> = new BehaviorSubject<PreferencesType>(DEFAULT_PREFERENCES);
   public readonly preferences: Observable<PreferencesType> = this._preferences.asObservable();
 
-  constructor(private themeManager: ThemeManagerService) { }
+  constructor(private themeManager: ThemeManagerService) {  }
 
-  updatePreferences(updates: {[key: string]: string | number}) {
-    const resopnse = new Response();
+  init(params?: {
+    theme: string,
+    palette: number
+  }) {
+    let currTheme;
+    let currPalette;
+    if (params) {
+      currTheme = params.theme;
+      currPalette = params.palette;
+    } else {
+      currTheme = document.body.getAttribute('theme');
+      currPalette = document.body.getAttribute('palette');
+    }
+
+    if (!currTheme || !THEMES[currTheme]) {
+      console.log('PreferencesStore: encountered unsupported theme, resetting to:', DEFAULT_PREFERENCES.theme.name);
+      currTheme = DEFAULT_PREFERENCES.theme.name;
+    }
+    if (!currPalette || !PALETTES[currPalette]) {
+      console.log('PreferencesStore: encountered unsupported color palette, resetting to:', DEFAULT_PREFERENCES.colorPalette);
+      currPalette = DEFAULT_PREFERENCES.colorPalette.name;
+    }
+
+    const currPreferences: PreferencesType = {
+      theme: THEMES[currTheme],
+      colorPalette: PALETTES[currPalette]
+    };
+    this._preferences.next(currPreferences);
+    this.reset();
+  }
+
+  reset() {
+    // apply theme & palette settings based on current values
+    this.updateTheme(this._preferences.getValue().theme.name);
+    this.updatePalette(this._preferences.getValue().colorPalette.name);
+  }
+
+  updatePreferences(updates: {[key: string]: string}) {
+    const response = new Response();
     const updatedPreferences = this._preferences.getValue();
     for (const attribute of Object.keys(updates)) {
       if (updatedPreferences[attribute]) {
-        updatedPreferences[attribute] = updates[attribute];
+        // apply changes
         if (attribute === 'theme') {
-          this.updateTheme(updates[attribute] as string);
+          this.updateTheme(updates[attribute]);
+          updatedPreferences[attribute] = THEMES[updates[attribute]];
         } else if (attribute === 'colorPalette') {
-          this.updatePalette(updates[attribute] as number);
+          this.updatePalette(updates[attribute]);
+          updatedPreferences[attribute] = PALETTES[updates[attribute]];
         }
       }
     }
     this._preferences.next(updatedPreferences);
-    return resopnse;
+    return response;
   }
 
   updateTheme(theme: string) {
     if (!THEMES[theme]) {
       return;
     }
-    console.log('PreferencesStore: updating theme:', theme);
-    this.themeManager.setTheme(theme);
+    const themeObject = THEMES[theme];
+    this.themeManager.setTheme(themeObject);
   }
 
-  updatePalette(palette: number) {
+  updatePalette(palette: string) {
     if (!PALETTES[palette]) { // palette ID is invalid
       return;
     }
-    console.log('PreferencesStore: updating palette:', palette);
-    this.themeManager.setPalette(palette);
+    const paletteObject = PALETTES[palette];
+    this.themeManager.setPalette(paletteObject);
   }
 
 }
 
 export const DEFAULT_PREFERENCES: PreferencesType = {
-  theme: 'light',
-  colorPalette: 0,
+  theme: THEMES.dark,
+  colorPalette: PALETTES['palette-0'],
 };
 
 export interface PreferencesType {
-  theme: 'dark' | 'light';
-  colorPalette: 0 | 1 | 2 | 3;
+  theme: ThemeType;
+  colorPalette: PaletteType;
 }

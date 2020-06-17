@@ -18,6 +18,7 @@ body[theme='dark'] {
   --disabled-bg: #797f85;
   --success-bg: #94f4c24f;
   --error-bg: #f9769685;
+  --warn-bg: #797f8585;
   /** shadows */
   --shadow-neumorphic-element:
     -6px -6px 4px 0 rgba(46, 46, 46, 0.548),
