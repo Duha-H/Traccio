@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthModule } from './auth.module';
 import { Auth } from 'aws-amplify';
-import { Response } from '../utils/response';
+import { Response } from 'src/app/utils/response';
 
 @Injectable({
   providedIn: AuthModule

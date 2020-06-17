@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Journey } from '../models/journey';
-import { Application } from '../models/application';
-import { STATUS } from '../models/constants';
+import { Journey } from 'src/app/models/journey';
+import { Application } from 'src/app/models/application';
 
 export interface CalendarDatum {
   day: string;

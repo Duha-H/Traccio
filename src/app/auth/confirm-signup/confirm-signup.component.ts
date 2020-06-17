@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Auth } from 'aws-amplify';
-import { AuthStoreService } from '../../controllers/auth-store.service';
+import { AuthStoreService } from 'src/app/controllers/auth-store.service';
 import { Router } from '@angular/router';
 import { APIService } from 'src/app/API.service';
 import { UserStoreService } from 'src/app/models/user-store.service';
-import { AuthWrapperService } from '../auth-wrapper.service';
+import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
 
 @Component({
   selector: 'app-confirm-signup',

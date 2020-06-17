@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { UserStoreService } from '../models/user-store.service';
-import { User } from '../models/user';
+import { UserStoreService } from 'src/app/models/user-store.service';
+import { User } from 'src/app/models/user';
 import { UserStoreControllerService } from './user-store-controller.service';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Response } from '../utils/response';
+import { Response } from 'src/app/utils/response';
 
 @Injectable({
   providedIn: 'root'

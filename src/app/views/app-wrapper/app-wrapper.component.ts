@@ -1,9 +1,7 @@
-import { Component, OnInit, ElementRef, ViewChild, EventEmitter, Output, ViewChildren, QueryList, AfterViewInit } from "@angular/core";
+import { Component, OnInit, ElementRef, ViewChild, EventEmitter, Output } from "@angular/core";
 import { Auth } from "aws-amplify";
 import { UserStoreService } from "src/app/models/user-store.service";
-import { Router, ActivatedRoute } from "@angular/router";
-import { SearchComponent } from '../search/search.component';
-import { Subject } from 'rxjs/Subject';
+import { Router } from "@angular/router";
 import { BehaviorSubject } from 'rxjs';
 
 @Component({

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { PALETTES, THEMES, ThemeType, PaletteType } from '../../styling/palettes';
+import { PALETTES, THEMES, ThemeType, PaletteType } from 'src/styling/palettes';
 
 /**
  * Handles applying theme and palette changes

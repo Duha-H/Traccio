@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
-import { AmplifyService } from "aws-amplify-angular";
-import { UserStoreService } from '../models/user-store.service';
-import { Auth } from '@aws-amplify/auth';
-import { AuthWrapperService } from '../auth/auth-wrapper.service';
+import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
 
 @Injectable({
   providedIn: 'root'

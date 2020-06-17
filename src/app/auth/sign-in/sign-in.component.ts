@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Auth } from 'aws-amplify';
 import { Router } from '@angular/router';
-import { AuthWrapperService } from '../auth-wrapper.service';
+import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
 
 @Component({
   selector: 'app-sign-in',

@@ -1,12 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { UserStoreService } from "src/app/models/user-store.service";
-import * as mockData from "../../models/data";
-import { Journey } from "../../models/journey";
-import { STATUS } from "../../models/constants";
+import * as mockData from "src/app/models/data";
+import { Journey } from "src/app/models/journey";
+import { STATUS } from "src/app/models/constants";
 import { Application } from 'src/app/models/application';
 import { Router } from '@angular/router';
 import { PreferencesStoreService } from 'src/app/controllers/preferences-store.service';
-import { PALETTES, THEMES } from '../../../styling/palettes';
+import { PALETTES, THEMES } from 'src/styling/palettes';
 
 @Component({
   selector: "app-dashboard",

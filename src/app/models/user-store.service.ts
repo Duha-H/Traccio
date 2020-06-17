@@ -4,13 +4,12 @@ import { Journey } from "./journey";
 import * as mock from "./mock-journeys";
 import * as mockApps from "./mock-applications";
 import { Application, ApplicationInput } from "./application";
-import { UserStoreControllerService } from "../controllers/user-store-controller.service";
+import { UserStoreControllerService } from "src/app/controllers/user-store-controller.service";
 import { Observable } from "rxjs/Observable";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { map } from "rxjs/operators";
-import { DataManagerService } from "../controllers/data-manager.service";
-import { Auth } from 'aws-amplify';
-import { AuthWrapperService } from '../auth/auth-wrapper.service';
+import { DataManagerService } from "src/app/controllers/data-manager.service";
+import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
 
 @Injectable({
   providedIn: "root",

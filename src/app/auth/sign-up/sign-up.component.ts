@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { Auth } from "aws-amplify";
 import { Router } from "@angular/router";
-import { AuthStoreService } from "../../controllers/auth-store.service";
+import { AuthStoreService } from "src/app/controllers/auth-store.service";
 import { UserStoreService } from "src/app/models/user-store.service";
-import { AuthWrapperService } from '../auth-wrapper.service';
+import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
 
 @Component({
   selector: "app-sign-up",

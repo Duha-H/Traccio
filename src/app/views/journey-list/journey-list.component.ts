@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges } from "@angular/core";
-import { UserStoreService } from "../../models/user-store.service";
+import { UserStoreService } from "src/app/models/user-store.service";
 import { Journey } from "src/app/models/journey";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Observable } from 'rxjs/Observable';

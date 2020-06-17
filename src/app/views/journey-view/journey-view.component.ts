@@ -2,25 +2,17 @@ import {
   Component,
   OnInit,
   ViewChild,
-  Output,
-  EventEmitter,
   ViewChildren,
   QueryList,
   ElementRef,
-  AfterViewInit,
 } from "@angular/core";
 import { Journey } from "src/app/models/journey";
 import { MatSidenav } from "@angular/material/sidenav";
 import { UserStoreService } from "src/app/models/user-store.service";
-import { ActivatedRoute, ParamMap, Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Application } from "src/app/models/application";
-import { MatTableDataSource, MatTable } from "@angular/material/table";
-import { SelectionModel, DataSource } from "@angular/cdk/collections";
 import { STATUS, APP_SOURCE } from "src/app/models/constants";
-import { Observable, from, Subscription } from "rxjs";
-import { MatSort } from "@angular/material/sort";
-import { AppFilterPipe } from "../dashboard/app-filter.pipe";
-import { MatSelect, MatSelectChange } from "@angular/material/select";
+import { MatSelect } from "@angular/material/select";
 import { MatOptionSelectionChange, MatOption } from "@angular/material/core";
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { ApplicationListComponent } from './application-list.component';

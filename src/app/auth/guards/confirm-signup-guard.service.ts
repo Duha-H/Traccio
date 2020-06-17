@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
-import { AuthWrapperService } from '../auth-wrapper.service';
-import { AuthModule } from '../auth.module';
+import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
+import { AuthModule } from 'src/app/auth/auth.module';
 
 @Injectable({
   providedIn: AuthModule

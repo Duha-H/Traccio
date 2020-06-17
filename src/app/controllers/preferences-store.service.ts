@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Response } from '../utils/response';
+import { Response } from 'src/app/utils/response';
 import { ThemeManagerService } from './theme-manager.service';
-import { PALETTES, THEMES, ThemeType, PaletteType } from '../../styling/palettes';
+import { PALETTES, THEMES, ThemeType, PaletteType } from 'src/styling/palettes';
 
 @Injectable({
   providedIn: 'root'

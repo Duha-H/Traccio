@@ -11,7 +11,7 @@ import { Application } from 'src/app/models/application';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { UserStoreService } from 'src/app/models/user-store.service';
-import { AppFilterPipe } from '../dashboard/app-filter.pipe';
+import { AppFilterPipe } from 'src/app/views/dashboard/app-filter.pipe';
 import { MatSort } from '@angular/material/sort';
 
 @Component({
