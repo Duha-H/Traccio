@@ -105,7 +105,9 @@ export class SettingsComponent implements OnInit {
     this.displayAlert = true;
     if (this.alert.successful) { // if successful, hide alert after 5 seconds
       setTimeout(() => {
-        this.closeAlert();
+        if (this.alert.successful) { // basically check again if the displayed alert is still successful
+          this.closeAlert();
+        }
       }, 5000);
     }
   }

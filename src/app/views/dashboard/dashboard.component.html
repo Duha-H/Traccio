@@ -7,8 +7,8 @@
       <h3>{{selectedJourney.value.title}}</h3>
       <div class="spacer"></div>
       <div>
-        <mat-form-field>
-          <mat-select color="primary" [(ngModel)]="selectedJourney" name="journeySelection"
+        <mat-form-field color="accent">
+          <mat-select color="accent" [(ngModel)]="selectedJourney" name="journeySelection"
             (selectionChange)="selectYear(selectedJourney.years[0])" title="active journeys">
             <mat-option *ngFor="let journey of dropdownContent" [value]="journey">
               {{journey.viewValue}}
@@ -119,7 +119,7 @@
               <h4>Applications</h4>
               <div class="spacer"></div>
               <mat-form-field style="padding: 0; margin-right: 50px; width: 120px;">
-                <mat-select color="primary" name="statusSelection" [(ngModel)]="selectedStatus" title="application status filter">
+                <mat-select color="accent" name="statusSelection" [(ngModel)]="selectedStatus" title="application status filter">
                   <mat-option *ngFor="let status of statuses" [value]="status">
                     {{status.viewValue}}
                   </mat-option>

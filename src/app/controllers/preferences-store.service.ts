@@ -89,8 +89,8 @@ export class PreferencesStoreService {
 }
 
 export const DEFAULT_PREFERENCES: PreferencesType = {
-  theme: THEMES.light,
-  colorPalette: PALETTES['palette-0'],
+  theme: THEMES.dark,
+  colorPalette: PALETTES['palette-2'],
 };
 
 export interface PreferencesType {

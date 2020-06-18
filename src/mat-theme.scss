@@ -1,180 +1,99 @@
 @import '~@angular/material/theming';
-// Plus imports for other components in your app.
+@import 'src/styling/mat-dark-theme.scss';
+@import 'src/styling/mat-light-theme.scss';
 
-// **Be sure that you only ever include this mixin once!**
 @include mat-core();
 
 
-$custom-background-color: #628cc9;
-
-$dark-theme-background: (
-  status-bar: #628cc9,
-  app-bar:    map_get($mat-blue-grey, 800),
-  background: #909ca8,
-  hover:      rgba(white, 0.04), 
-  card:       #909ca8,
-  dialog:     map_get($mat-grey, 800),
-  disabled-button: $white-12-opacity,
-  raised-button: map-get($mat-grey, 800),
-  focused-button: $white-6-opacity,
-  selected-button: map_get($mat-grey, 900),
-  selected-disabled-button: map_get($mat-grey, 800),
-  disabled-button-toggle: black,
-  unselected-chip: map_get($mat-grey, 700),
-  disabled-list-option: black,
-);
-
-$dark-theme-foreground: (
-  // base:              yellow,
-  divider:           rgba(white, 0),
-  dividers:          rgba(white, 0),
-  disabled:          rgba(white, 0.3),
-  disabled-button:   rgba(white, 0.3),
-  disabled-text:     rgba(white, 0.3),
-  hint-text:         rgba(white, 0.3),
-  secondary-text:    rgba(white, 0.7),
-  icon:              white,
-  icons:             white,
-  text:              var(--element-bg-primary),
-  slider-min:        white,
-  slider-off:        rgba(white, 0.3),
-  slider-off-active: rgba(white, 0.3),
-);
-
-$warn-map: (
-  50: #fce3e9,
-  100: #f7b9c9,
-  200: #f28ca5,
-  300: #eb5f82,
-  400: #e53f68,
-  500: #df2151,
-  600: #cf1d4e,
-  700: #ba184b,
-  800: #a61248,
-  900: #820a41,
-  A100 : #fff6f7,
-  A200 : #ffc3c9,
-  A400 : #ff909c,
-  A700 : #ff7685,
-  contrast: (
-    50 : #000000,
-    100 : #000000,
-    200 : #000000,
-    300 : #000000,
-    400 : #ffffff,
-    500 : #ffffff,
-    600 : #ffffff,
-    700 : #ffffff,
-    800 : #ffffff,
-    900 : #ffffff,
-    A100 : #000000,
-    A200 : #000000,
-    A400 : #000000,
-    A700 : #000000,
-  )
-);
-
-
-$dark-primary-map: (
-  50 : #f3f3fc,
-  100 : #e2e2f9,
-  200 : #cfcef5,
-  300 : #bcbaf0,
-  400 : #adaced,
-  500 : #9f9dea,
-  600 : #9795e7,
-  700 : #8d8be4,
-  800 : #8381e1,
-  900 : #726fdb,
-  A100 : #ffffff,
-  A200 : #ffffff,
-  A400 : #eeeeff,
-  A700 : #d6d4ff,
-  contrast: (
-    50 : #000000,
-    100 : #000000,
-    200 : #000000,
-    300 : #000000,
-    400 : #000000,
-    500 : #000000,
-    600 : #000000,
-    700 : #000000,
-    800 : #000000,
-    900 : #ffffff,
-    A100 : #000000,
-    A200 : #000000,
-    A400 : #000000,
-    A700 : #000000,
-  )
-);
-
-$dark-accent-map: (
-  50 : #f2f3f5,
-  100 : #dee1e5,
-  200 : #c8ced4,
-  300 : #b1bac2,
-  400 : #a1abb5,
-  500 : #909ca8,
-  600 : #8894a0,
-  700 : #7d8a97,
-  800 : #73808d,
-  900 : #616e7d,
-  A100 : #eff7ff,
-  A200 : #bddcfd,
-  A400 : #89c2ff,
-  A700 : #6fb5ff,
-  contrast: (
-    50 : #000000,
-    100 : #000000,
-    200 : #000000,
-    300 : #000000,
-    400 : #000000,
-    500 : #000000,
-    600 : #000000,
-    700 : #000000,
-    800 : #ffffff,
-    900 : #ffffff,
-    A100 : #000000,
-    A200 : #000000,
-    A400 : #000000,
-    A700 : #000000,
-  )
-);
-
-
-// $background: map-get($mat-app-theme, background);
-// $background: map_merge($background, (background: $custom-background-color));
-// $mat-app-theme: map_merge($mat-app-theme, (background: $background));
-
+// SHARED
 @function create-custom-theme($primary, $accent, $warn) {
   @return (
     primary: $primary,
     accent: $accent,
     warn: $warn,
     is-dark: true,
-    foreground: $dark-theme-foreground,
-    background: $dark-theme-background,
+    foreground: $theme-foreground,
+    background: $theme-background
   );
 }
-$mat-app-primary: mat-palette($dark-primary-map);
-$mat-app-accent:  mat-palette($dark-accent-map);
-$mat-app-warn: mat-palette($warn-map);
-$mat-app-theme: create-custom-theme($mat-app-primary, $mat-app-accent, $mat-app-warn);
 
-// Include default theme styles.
-@include angular-material-theme($mat-app-theme);
-@include mat-form-field-theme($mat-app-theme);
-@include mat-input-theme($mat-app-theme);
+$theme-background: (
+  status-bar:               var(--bg),
+  app-bar:                  map_get($mat-blue-grey, 800),
+  background:               var(--bg),
+  hover:                    var(--accent-hover), 
+  card:                     var(--bg),
+  dialog:                   var(--element-bg-secondary),
+  disabled-button:          $white-12-opacity,
+  raised-button:            var(--element-bg-secondary),
+  focused-button:           $white-6-opacity,
+  selected-button:          var(--element-bg-secondary),
+  selected-disabled-button: var(--element-bg-secondary),
+  disabled-button-toggle:   black,
+  unselected-chip:          var(--element-bg-secondary),
+  disabled-list-option:     black,
+);
 
-// Define an alternate light theme.
-$light-primary: mat-palette($mat-blue-grey);
-$light-accent:  mat-palette($mat-amber, A200, A100, A400);
-$light-warn:    mat-palette($mat-deep-orange);
-$light-theme:   mat-light-theme($light-primary, $light-accent, $light-warn);
+$theme-foreground: (
+  base:              var(--bg),
+  divider:           var(--bg),
+  dividers:          var(--bg),
+  disabled:          rgba(white, 0.3),
+  disabled-button:   rgba(white, 0.3),
+  disabled-text:     rgba(white, 0.3),
+  hint-text:         rgba(white, 0.3),
+  secondary-text:    var(--text),
+  icon:              var(--text),
+  icons:             var(--text),
+  text:              var(--text),
+  slider-min:        white,
+  slider-off:        rgba(white, 0.3),
+  slider-off-active: rgba(white, 0.3),
+);
 
-// Include the alternative theme styles inside of a block with a CSS class. You can make this
-// CSS class whatever you want. In this example, any component inside of an element with
-// `.unicorn-dark-theme` will be affected by this alternate dark theme instead of the default theme.
-.light-theme {
-  @include angular-material-theme($light-theme);
+// THEME DEFINITIONS
+$dark-palette0-theme: create-custom-theme($dark-primary-map, $dark-palette0-accent, $dark-warn-map);
+$dark-palette1-theme: create-custom-theme($dark-primary-map, $dark-palette1-accent, $dark-warn-map);
+$dark-palette2-theme: create-custom-theme($dark-primary-map, $dark-palette2-accent, $dark-warn-map);
+$dark-palette3-theme: create-custom-theme($dark-primary-map, $dark-palette3-accent, $dark-warn-map);
+
+$light-palette0-theme: create-custom-theme($light-primary-map, $light-palette0-accent, $light-warn-map);
+$light-palette1-theme: create-custom-theme($light-primary-map, $light-palette1-accent, $light-warn-map);
+$light-palette2-theme: create-custom-theme($light-primary-map, $light-palette2-accent, $light-warn-map);
+$light-palette3-theme: create-custom-theme($light-primary-map, $light-palette3-accent, $light-warn-map);
+
+
+@include angular-material-theme($dark-palette0-theme); // default theme
+
+// Theme selectors
+body[theme='dark'][palette='palette-0'] {
+  @include angular-material-theme($dark-palette0-theme);
+}
+
+body[theme='dark'][palette='palette-1'] {
+  @include angular-material-theme($dark-palette1-theme);
+}
+
+body[theme='dark'][palette='palette-2'] {
+  @include angular-material-theme($dark-palette2-theme);
+}
+
+body[theme='dark'][palette='palette-3'] {
+  @include angular-material-theme($dark-palette3-theme);
+}
+
+body[theme='light'][palette='palette-0'] {
+  @include angular-material-theme($light-palette0-theme);
+}
+
+body[theme='light'][palette='palette-1'] {
+  @include angular-material-theme($light-palette1-theme);
+}
+
+body[theme='light'][palette='palette-2'] {
+  @include angular-material-theme($light-palette2-theme);
+}
+
+body[theme='light'][palette='palette-3'] {
+  @include angular-material-theme($light-palette3-theme);
 }

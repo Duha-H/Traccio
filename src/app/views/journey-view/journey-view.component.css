@@ -374,6 +374,6 @@ button.options {
 }
 
 .clickable-item:hover {
-  background-color: var(--element-bg-secondary);
+  background-color: var(--element-bg-secondary) !important;
   cursor: pointer;
 }
