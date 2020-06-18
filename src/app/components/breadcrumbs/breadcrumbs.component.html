@@ -1,0 +1,7 @@
+<div class="container spanning-content">
+  <div class="breadcrumb-item" *ngFor="let item of data.paths">
+    <a href="#" routerLink="{{item.url}}" class="breadcrumb-text">{{item.name}}</a>
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </div>
+  <p class="breadcrumb-text">{{data.current.name}}</p>
+</div>

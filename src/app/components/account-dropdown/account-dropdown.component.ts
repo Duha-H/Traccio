@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, ElementRef, ViewChild } from '@angular/core';
-import { DropdownItem } from 'src/app/views/app-wrapper/app-wrapper.component';
+import { DropdownItem } from 'src/app/components/types';
 
 @Component({
   // tslint:disable-next-line: component-selector

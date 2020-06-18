@@ -16,6 +16,7 @@ import { MatSelect } from "@angular/material/select";
 import { MatOptionSelectionChange, MatOption } from "@angular/material/core";
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { ApplicationListComponent } from './application-list.component';
+import { BreadcrumbsData } from 'src/app/components/types';
 
 const DRAWER_MODES = {
   ADD: "add",
@@ -91,6 +92,15 @@ export class JourneyViewComponent implements OnInit {
     status: [],
     source: [],
   };
+  breadcrumbsData: BreadcrumbsData = {
+    current: {
+      name: '',
+      url: ''
+    },
+    paths: [
+      { name: 'Journeys', url: '/journeys' },
+    ]
+  };
 
   constructor(
     private route: ActivatedRoute,
@@ -115,6 +125,8 @@ export class JourneyViewComponent implements OnInit {
       this.router.navigate(["/journeys"]);
       return;
     } else {
+      this.breadcrumbsData.current.name = this.journey.title;
+      this.breadcrumbsData.current.url = `/journeys/${this.journey.id}`;
       this.selectedApp = this.userStore.getApplication(
         this.journey.id,
         +appref

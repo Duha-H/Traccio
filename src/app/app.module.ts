@@ -54,6 +54,7 @@ import { WishlistComponent } from './views/wishlist/wishlist.component';
 import { OverlayComponent } from './components/overlay/overlay.component';
 import { ProfileSettingsComponent } from './views/settings/profile-settings.component';
 import { PreferenceSettingsComponent } from './views/settings/preference-settings.component';
+import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import { PreferenceSettingsComponent } from './views/settings/preference-setting
     OverlayComponent,
     ProfileSettingsComponent,
     PreferenceSettingsComponent,
+    BreadcrumbsComponent,
   ],
   imports: [
     BrowserModule,

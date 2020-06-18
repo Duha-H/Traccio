@@ -3,6 +3,7 @@ import { Auth } from "aws-amplify";
 import { UserStoreService } from "src/app/models/user-store.service";
 import { Router } from "@angular/router";
 import { BehaviorSubject } from 'rxjs';
+import { DropdownItem } from 'src/app/components/types';
 
 @Component({
   selector: "app-wrapper",
@@ -64,11 +65,4 @@ export class AppWrapperComponent implements OnInit {
     this.searchQuery = query;
     this.searchSubject.next(query);
   }
-}
-
-export interface DropdownItem {
-  text: string;
-  readonly type: "button" | "link" | "item" | "toggle";
-  readonly callback?: () => void;
-  readonly link?: string;
 }
