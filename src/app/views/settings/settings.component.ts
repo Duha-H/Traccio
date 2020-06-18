@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AppStateStoreService, StateStore, DEFAULT_STATE, STATE_ATTRIBS } from 'src/app/controllers/app-state-store.service';
 import { Response } from 'src/app/utils/response';
 import { ProfileSettingsComponent } from './profile-settings.component';
 import { MatTabGroup } from '@angular/material/tabs';
@@ -15,10 +14,7 @@ import { PreferencesStoreService } from 'src/app/controllers/preferences-store.s
 })
 export class SettingsComponent implements OnInit {
 
-  ATTRIBS = STATE_ATTRIBS;
   changes = false;
-  changePassword = false;
-  displayVerifyOverlay = false;
   displayAlert = false;
   alert: Response = new Response();
   profileUpdateList: {[key: string]: string } = {};

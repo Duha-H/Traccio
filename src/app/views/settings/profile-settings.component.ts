@@ -16,7 +16,6 @@ export class ProfileSettingsComponent implements OnInit {
   ATTRIBS = STATE_ATTRIBS;
   user: User;
   updateCheck = Object.assign({}, DEFAULT_PROFILE_UPDATE_CHECK); // easier lookup for updated attribs
-  // changes = false;
   displayVerifyOverlay = false;
   verificationCode = '';
   changePassword = false;

@@ -5,7 +5,7 @@
       <div class="title spanning-content">
         <h2 *ngIf="viewMode == 'view'; else titleEdit;" style="font-weight: 400; margin-top: 15px;">{{journey.title}} Details</h2>
         <ng-template #titleEdit>
-          <text-field style="margin-left: 15px;" (inputChange)="journey.title=$event" [width]="400" [height]="8" [fontSize]="20" [fontColor]="'var(--titles-primary)'" [text]="journey.title" [displayLabel]="false"></text-field>
+          <text-field (inputChange)="journey.title=$event" [width]="400" [height]="8" [fontSize]="20" [fontColor]="'var(--titles-primary)'" [center]="false" [text]="journey.title" [displayLabel]="false"></text-field>
         </ng-template>
         <div class="spacer"></div>
         <div class="{{ journey.active ? 'status-toggle active' : 'status-toggle' }}" (click)="toggleJourneyActive()" title="toggle journey status">

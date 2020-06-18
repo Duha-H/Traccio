@@ -77,7 +77,6 @@ export class UserStoreService {
     // On success, updated CognitoUser is returned in the response's payload
     // On failure, an error code is returned in the response's payload
     const response = await this.authWrapper.updateUserAttributes(updates);
-    console.log(response);
     if (response.successful) {
       const updatedUser = this._user.getValue();
       updatedUser.firstName = response.payload.attributes.given_name;

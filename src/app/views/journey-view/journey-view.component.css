@@ -50,7 +50,7 @@ mat-icon {
   font-size: 12pt;
   font-weight: 500;
   padding: 0 30px;
-  line-height: 30px;
+  line-height: 35px;
   margin: 0 30px;
   color: var(--titles-secondary);
   border: 1px solid var(--titles-secondary);
@@ -200,13 +200,13 @@ mat-icon {
   margin-top: auto;
   margin-bottom: auto;
   line-height: 16pt;
-  height: 30px;
+  height: 35px;
   font-size: 20pt;
 }
 
 .title mat-icon {
   font-size: 16pt;
-  line-height: 20pt;
+  line-height: 30px;
 }
 
 button {
@@ -374,7 +374,6 @@ button.options {
 }
 
 .clickable-item:hover {
+  background-color: var(--element-bg-secondary);
   cursor: pointer;
-  box-shadow: var(--shadow-clickable);
-  transform: scale(1.005);
 }

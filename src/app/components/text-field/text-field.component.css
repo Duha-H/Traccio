@@ -22,10 +22,14 @@
   height: 18px;
   border-radius: 20px;
   padding: 16px;
-  border: 1px solid transparent;
+  border: 1.5px solid transparent;
   background-color: var(--element-bg-secondary);
-  margin: 0px auto;
+  margin: 0;
   align-items: center;
+}
+
+.input-container.center div {
+  margin: 0 auto;
 }
 
 .input-container input {
@@ -39,7 +43,7 @@
 }
 
 .input-container div.updated {
-  border: 1px solid var(--valid);
+  border: 1.5px solid var(--valid);
 }
 
 .input-container mat-icon {
@@ -48,7 +52,7 @@
 }
 
 .input-container div:focus-within {
-  border: 1px solid var(--accent);
+  border: 1.5px solid var(--accent);
 }
 
 .input-container div:focus-within mat-icon {
