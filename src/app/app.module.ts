@@ -55,6 +55,8 @@ import { OverlayComponent } from './components/overlay/overlay.component';
 import { ProfileSettingsComponent } from './views/settings/profile-settings.component';
 import { PreferenceSettingsComponent } from './views/settings/preference-settings.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
+import { ApplicationViewComponent } from './views/application-view/application-view.component';
+import { TimelineComponent } from './components/timeline/timeline.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +91,8 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
     ProfileSettingsComponent,
     PreferenceSettingsComponent,
     BreadcrumbsComponent,
+    ApplicationViewComponent,
+    TimelineComponent,
   ],
   imports: [
     BrowserModule,

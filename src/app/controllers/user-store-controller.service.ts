@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { APIService } from 'src/app/API.service';
 import { Journey } from 'src/app/models/journey';
-import { Application, ApplicationInput } from 'src/app/models/application';
+import { Application } from 'src/app/models/application';
+import { ApplicationInput } from 'src/app/models/types';
 
 @Injectable({
   providedIn: 'root'

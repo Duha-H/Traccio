@@ -190,6 +190,10 @@ export class JourneyViewComponent implements OnInit {
     }
   }
 
+  navigateToApplication(application: Application) {
+    this.router.navigate(['/journeys', this.journey.id, application.id]);
+  }
+
   addFilter(event: MatOptionSelectionChange) {
     this.dropdownElement.close();
     const group = event.source.group.label.toLowerCase();

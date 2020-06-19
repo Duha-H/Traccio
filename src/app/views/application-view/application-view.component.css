@@ -1,0 +1,17 @@
+.view-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.spanning-content {
+  margin: 15px 20px;
+  border-bottom: 1px solid var(--titles-secondary);
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  vertical-align: middle;
+  align-items: center;
+  margin: 10px 20px;
+}

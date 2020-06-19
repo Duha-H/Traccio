@@ -5,6 +5,7 @@ div.container.spanning-content {
   display: flex;
   flex-direction: row;
   margin-left: 35px;
+  margin-bottom: 15px;
 }
 
 div.breadcrumb-item {

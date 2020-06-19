@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { STATUS, APP_SOURCE } from 'src/app/models/constants';
-import { Application, ApplicationInput } from 'src/app/models/application';
+import { Application } from 'src/app/models/application';
+import { ApplicationInput } from 'src/app/models/types';
 import { UserStoreService } from 'src/app/models/user-store.service';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatSidenav } from '@angular/material/sidenav';

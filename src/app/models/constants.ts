@@ -1,6 +1,7 @@
 export const STATUS = {
 	IN_REVIEW: "In Review",
 	INTERVIEW: "Interview",
+	ASSESSMENT: "Assessment",
 	OFFER: "Offer",
 	REJECTED: "Rejected",
 	STALE: "Stale/Ghosted",

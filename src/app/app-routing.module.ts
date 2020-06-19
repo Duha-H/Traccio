@@ -19,6 +19,7 @@ import { JourneyListComponent } from "./views/journey-list/journey-list.componen
 import { AppWrapperComponent } from './views/app-wrapper/app-wrapper.component';
 import { AccountRecoveryComponent } from './auth/account-recovery/account-recovery.component';
 import { WishlistComponent } from './views/wishlist/wishlist.component';
+import { ApplicationViewComponent } from './views/application-view/application-view.component';
 
 const routes: Routes = [
   { path: "", canActivate: [AuthGuard], component: AppWrapperComponent,
@@ -30,7 +31,7 @@ const routes: Routes = [
         children: [
           { path: "", component: JourneyListComponent },
           { path: ":id", component: JourneyViewComponent, data: { appref: '' } },
-          // { path: ":id/:appref", component: JourneyViewComponent }, // temporary lazy fix
+          { path: ":id/:appref", component: ApplicationViewComponent },
         ],
       },
       { path: "wishlist", component: WishlistComponent, canActivate: [AuthGuard] },

@@ -15,3 +15,11 @@ export interface BreadcrumbsData {
     url: string,
   }[];
 }
+
+export interface TimelinePropType {
+  width: number;
+  height: number;
+  size?: number; // size in pixels
+  colors?: string[]; // timeline marker colors
+  isInteractive?: boolean; // display or click timeline markers
+}

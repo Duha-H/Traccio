@@ -1,14 +1,5 @@
 import { STATUS, APP_SOURCE } from './constants';
-
-export interface ApplicationInput {
-	id: number | string;
-	company: string;
-	title: string;
-	date: string | Date;
-	status: string;
-	source: string;
-	notes: string;
-}
+import { ApplicationInput, TimelineDatum } from './types';
 
 export class Application {
 
@@ -17,6 +8,7 @@ export class Application {
 	private _positionTitle = '';
 	private _appDate: Date = new Date();
 	private _status = STATUS.IN_REVIEW.toString();
+	private _timeline: TimelineDatum[] = [];
 	private _source = APP_SOURCE.JOB_BOARD.toString();
 	private _notes = '';
 
@@ -30,6 +22,10 @@ export class Application {
 			this._appDate = new Date(data.date);
 			// this._appDate = data.date;
 			this._status = data.status;
+			this._timeline.push({
+				status: this._status,
+				date: this._appDate
+			});
 			this._source = data.source;
 			this._notes = data.notes;
 		}
