@@ -4,6 +4,7 @@ import { UserStoreService } from "src/app/models/user-store.service";
 import { Router } from "@angular/router";
 import { BehaviorSubject } from 'rxjs';
 import { DropdownItem } from 'src/app/components/types';
+import { TextFieldComponent } from 'src/app/components/text-field/text-field.component';
 
 @Component({
   selector: "app-wrapper",
@@ -27,6 +28,7 @@ export class AppWrapperComponent implements OnInit {
   @Output() submitSearch = new EventEmitter();
   @ViewChild("navHomeIcon", { read: ElementRef }) currNavIconRef: HTMLElement;
   @ViewChild("dropdownButton") dropdownRef: ElementRef;
+  @ViewChild(TextFieldComponent) searchField: TextFieldComponent;
 
   constructor(
     private userStore: UserStoreService,
@@ -64,5 +66,11 @@ export class AppWrapperComponent implements OnInit {
   onSearch(query: string) {
     this.searchQuery = query;
     this.searchSubject.next(query);
+  }
+
+  clearSearch() {
+    // use to clear search field when navigating away or on the field's clearEvent
+    this.searchQuery = '';
+    this.searchField.resetValue('');
   }
 }

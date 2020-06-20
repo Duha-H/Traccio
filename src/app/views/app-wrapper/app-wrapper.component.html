@@ -2,15 +2,15 @@
   <!-- Nav -->
   <mat-sidenav mode="side" role="navigation" opened>
     <ul class="sidenav">
-      <li title="Dashboard"><a href="#" routerLink="" (click)="onNavIconClick(navHomeIcon)" routerLinkActive="active"
+      <li title="Dashboard"><a href="#" routerLink="" (click)="clearSearch()" routerLinkActive="active"
           [routerLinkActiveOptions]="{exact: true}" #navHomeIcon>
           <mat-icon [inline]="true" aria-hidden="false" aria-label="Dashboard icon">home</mat-icon>
         </a></li>
-      <li title="Journeys"><a href="#" routerLink="/journeys" (click)="onNavIconClick(navJourneysIcon)"
+      <li title="Journeys"><a href="#" routerLink="/journeys" (click)="clearSearch()"
           routerLinkActive="active" #navJourneysIcon>
           <mat-icon [inline]="true" aria-hidden="false" aria-label="Journeys icon">list</mat-icon>
         </a></li>
-      <li title="Wishlist"><a href="#" routerLink="/wishlist" (click)="onNavIconClick(navWishlistIcon)"
+      <li title="Wishlist"><a href="#" routerLink="/wishlist" (click)="clearSearch()"
           routerLinkActive="active" #navWishlistIcon>
           <mat-icon [inline]="true" aria-hidden="false" aria-label="Search icon">star_border</mat-icon>
         </a></li>
@@ -25,7 +25,7 @@
       <div class="spacer"></div>
       <text-field class="toolbar-item" (inputChange)="onSearch($event)" [text]="searchQuery"
         [label]="'Search for a journey or application...'" [displayLabel]="false" [suffixIcon]="'search'"
-        [height]="1"></text-field>
+        [height]="1" #searchField></text-field>
       <div #dropdownButton>
         <mat-icon (click)="toggleAccountDropdown()" style="cursor: pointer;">account_box</mat-icon>
       </div>
@@ -35,7 +35,7 @@
     <!-- Content Router -->
     <div class="content" role="main">
       <app-search *ngIf="searchQuery.length != 0; else appContent" [query]="searchQuery"
-        [parentSearchSubject]="searchSubject" (clearEvent)="searchQuery=''" #searchComponent></app-search>
+        [parentSearchSubject]="searchSubject" (clearEvent)="clearSearch()" #searchComponent></app-search>
       <ng-template #appContent>
         <router-outlet></router-outlet>
       </ng-template>

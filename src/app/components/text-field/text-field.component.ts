@@ -75,7 +75,7 @@ export class TextFieldComponent implements OnInit {
     }
   }
 
-  resetValue() {
-    this.value = this.text;
+  resetValue(value?: string) {
+    this.value = value.length !== undefined ? value : this.text;
   }
 }
