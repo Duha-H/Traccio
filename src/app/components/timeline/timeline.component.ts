@@ -1,21 +1,20 @@
 import { OnInit, Component, ViewChild, ElementRef, Input } from '@angular/core';
 import { TimelineDatum } from 'src/app/models/types';
 import { STATUS } from 'src/app/models/constants';
-import { TimelinePropType } from '../types';
+import { TimelinePropType, TimelineTooltipPropType } from '../types';
+import { TimelineMarker } from './timeline-marker';
+import { msToDays, collision } from './utils';
 
 @Component({
   selector: "timeline",
   template: '\
-  <div style="width: 100%; height: 150px; display: grid; align-items: center; align-content: center;" #parent>\
-    <div *ngIf="displayTooltip"\
-    style="background: var(--element-bg-primary); position: absolute; z-index: 30;\
-      top: {{tooltipPosition.y}}px; left: {{tooltipPosition.x}}px;">\
-      <h3>HERE {{marker.status}}</h3>\
-    </div>\
-    <canvas (mousemove)="onMouseHover($event)" (mouseLeave)="onMouseLeave()" #canvas></canvas>\
+  <div id="timeline-parent" #parent>\
+    <timeline-tooltip *ngIf="displayTooltip" [props]="tooltipProps" style="position: absolute;\
+      z-index: 15; top: {{tooltipProps.y}}px; left: {{tooltipProps.x}}px;"></timeline-tooltip>\
+    <canvas (mousemove)="onMouseHover($event)" (mouseleave)="onMouseLeave()" #canvas></canvas>\
   </div>\
   ',
-  styleUrls: []
+  styleUrls: ['timeline.component.css']
 })
 export class TimelineComponent implements OnInit {
 
@@ -24,17 +23,15 @@ export class TimelineComponent implements OnInit {
   height: number;
   canvasX: number;
   canvasY: number;
-  xMarkerPositions: number[];
+  markerPositions: {x: number, y: number, duration: number}[] = [];
   mouseOverCanvas = false;
   marker: TimelineDatum;
+  markers: TimelineMarker[] = [];
   displayTooltip = false;
-  tooltipPosition = {
-    x: 0, y: 0
-  };
+  tooltipProps: TimelineTooltipPropType;
   pixelRatio: number;
 
   @Input() timelineProps: TimelinePropType = defaultProps;
-  @Input() timelineData: TimelineDatum[] = placeholderData;
   @ViewChild('canvas', { static: true }) canvas: ElementRef<HTMLCanvasElement>;
   @ViewChild('parent', { static: true }) parentDiv: ElementRef<HTMLDivElement>;
 
@@ -45,7 +42,7 @@ export class TimelineComponent implements OnInit {
       this.draw();
     });
     console.log(this.parentDiv.nativeElement);
-    if (!this.timelineData) {
+    if (!this.timelineProps.data) {
       throw new TypeError('Timeline data not specified.');
     }
     this.ctx = this.canvas.nativeElement.getContext('2d');
@@ -54,47 +51,48 @@ export class TimelineComponent implements OnInit {
   }
 
   draw() {
-    // const positions = this._computeMarkerPositions();
-    const y = this.height / 2;
     this.ctx.lineWidth = this.timelineProps.size;
     this.ctx.strokeStyle = this.timelineProps.colors[0];
     this.ctx.fillStyle = this.timelineProps.colors[0];
-    // draw lines
-    for (let i = 1; i < this.xMarkerPositions.length; i++) {
-      const x = this.xMarkerPositions[i];
+    // draw line to first marker
+    if (this.markers.length > 0) {
+      this.ctx.beginPath();
+      this.ctx.moveTo(0, this.markers[0].y);
+      this.ctx.lineTo(this.markers[0].x, this.markers[0].y);
+      this.ctx.stroke();
+    }
+    // draw remaining lines
+    for (let i = 1; i < this.markers.length; i++) {
+      // update styles for next marker
+      this.ctx.strokeStyle = this.timelineProps.colors[i];
+      this.ctx.fillStyle = this.timelineProps.colors[i];
+      const x = this.markers[i].x;
+      const y = this.markers[i].y;
       // draw line
       this.ctx.beginPath();
-      this.ctx.moveTo(this.xMarkerPositions[i - 1], y);
+      this.ctx.moveTo(this.markers[i - 1].x, this.markers[i - 1].y);
       this.ctx.lineTo(x, y);
       this.ctx.stroke();
-      // update styles for next marker
-      this.ctx.strokeStyle = this.timelineProps.colors[i];
-      this.ctx.fillStyle = this.timelineProps.colors[i];
     }
-    this.ctx.strokeStyle = this.timelineProps.colors[0];
-    this.ctx.fillStyle = this.timelineProps.colors[0];
     // draw markers (drawing them separately for now to make sure that markers are on top)
-    for (let i = 1; i < this.xMarkerPositions.length; i++) {
-      const x = this.xMarkerPositions[i];
-      // draw marker
-      this.drawMarker(x, y, MARKER_WIDTH, MARKER_HEIGHT);
-      // update styles for next marker
-      this.ctx.strokeStyle = this.timelineProps.colors[i];
-      this.ctx.fillStyle = this.timelineProps.colors[i];
-    }
+    this.markers.forEach(marker => {
+      this.ctx.strokeStyle = marker.payload.color;
+      this.ctx.fillStyle = marker.payload.color;
+      marker.draw(this.ctx, MARKER_WIDTH, MARKER_HEIGHT, true, false);
+    });
   }
 
   onMouseHover(event: MouseEvent) {
     this.mouseOverCanvas = true;
-    const marker = this._getMarkerOnHover((event.x - this.canvasX) * this.pixelRatio, (event.y - this.canvasY) * this.pixelRatio);
-    // console.log(event.x, event.y);
-    if (marker) {
-      // console.log(marker);
-      this.marker = marker;
+    // detect collisions with markers
+    const markerOnHover = this._getMarkerOnHover((event.x - this.canvasX) * this.pixelRatio, (event.y - this.canvasY) * this.pixelRatio);
+    if (markerOnHover) {
       this.displayTooltip = true;
-      this.tooltipPosition = {
-        x: (event.x - this.canvasX),
-        y: event.y + 50
+      this.tooltipProps = {
+        x: event.x - this.canvasX,
+        y: event.y + 30,
+        text: `${markerOnHover.payload.status}: ${markerOnHover.payload.duration} days`,
+        color: markerOnHover.payload.color
       };
     } else {
       this.displayTooltip = false;
@@ -108,10 +106,8 @@ export class TimelineComponent implements OnInit {
   private _calibrateCanvas() {
     // called on window resize
     // adjusts canvas position (bounds), width & height, pixel ratio, and marker positions
-    const parentRect = this.parentDiv.nativeElement.getBoundingClientRect();
     const parentWidth = this.parentDiv.nativeElement.offsetWidth;
     const parentHeight = this.parentDiv.nativeElement.offsetHeight;
-    // console.log(this.parentDiv.nativeElement.getBoundingClientRect());
     this.pixelRatio = window.devicePixelRatio;
     // adjust canvas size relative to pixel ratio
     this.canvas.nativeElement.width = parentWidth * this.pixelRatio;
@@ -124,126 +120,54 @@ export class TimelineComponent implements OnInit {
     // update size and marker positions
     this.width = this.canvas.nativeElement.width;
     this.height = this.canvas.nativeElement.height;
-    this.xMarkerPositions = this._computeMarkerPositions();
+    this._generateMarkersFromData();
   }
 
-  private _computeMarkerPositions(): number[] {
-    const positions = [];
+  private _generateMarkersFromData() {
+    this.markers = []; // clear current markers
     const adjustedWidth = this.width - (MARKER_WIDTH / 2);
+    const y = this.height / 2; // centered vertically in canvas
     const today = new Date();
-    const start = this.timelineData[0].date;
-    const timeElapsed = today.getTime() - start.getTime();
-    this.timelineData.forEach(item => {
-      const statusTimeElapsed = today.getTime() - item.date.getTime();
-      const newPosition = this.width - ( (adjustedWidth * statusTimeElapsed) / timeElapsed );
-      positions.push(newPosition);
-    });
-    positions.push(adjustedWidth);
-
-    return positions;
+    if (this.timelineProps.data.length > 0) {
+      const start = this.timelineProps.data[0].date;
+      const totalTimeElapsed = today.getTime() - start.getTime();
+      let prevX = 0;
+      for (let i = 0; i < this.timelineProps.data.length; i++) {
+        const item = this.timelineProps.data[i];
+        const nextItem = this.timelineProps.data[i + 1];
+        let statusTimeElapsed;
+        if (nextItem) {
+          statusTimeElapsed =  nextItem.date.getTime() - item.date.getTime();
+        } else {
+          statusTimeElapsed =  today.getTime() - item.date.getTime();
+        }
+        const ratio = statusTimeElapsed / totalTimeElapsed;
+        const newX = prevX + (ratio * adjustedWidth);
+        if (newX - prevX < MARKER_WIDTH && this.markers[i - 1]) {
+          // correcting for markers that end up being too close to be discernible
+          this.markers[i - 1].x -= MARKER_WIDTH;
+        }
+        const newMarker = new TimelineMarker(newX, y, 'rounded-rect', {
+          status: item.status,
+          duration: msToDays(statusTimeElapsed),
+          color: this.timelineProps.colors[i]
+        });
+        this.markers.push(newMarker);
+        prevX = newX;
+      }
+    }
   }
 
   private _getMarkerOnHover(cursorX: number, cursorY: number) {
-    const y = this.height / 2;
-    const yBounds = {
-      min: y - HOVER_THRESHOLD_Y,
-      max: y + HOVER_THRESHOLD_Y
-    };
-    let marker;
-    for (let i = 0; i < this.xMarkerPositions.length; i++) {
-      const x = this.xMarkerPositions[i];
-      const xBounds = {
-        min: x - HOVER_THRESHOLD_X,
-        max: x + HOVER_THRESHOLD_X
-      };
-      if (
-        cursorX >= xBounds.min &&
-        cursorX <= xBounds.max &&
-        cursorY >= yBounds.min &&
-        cursorY <= yBounds.max
-      ) {
-        console.log('over a marker');
-        marker = this.timelineData[i - 1];
+    let markerOnHover: TimelineMarker | undefined;
+    for (const marker of this.markers) {
+      const x = marker.x;
+      const y = marker.y;
+      if (collision(cursorX, cursorY, x, y, HOVER_THRESHOLD_X, HOVER_THRESHOLD_Y)) {
+        markerOnHover = marker;
       }
     }
-    return marker;
-  }
-
-  drawMarker(centerX: number, centerY: number, width: number, height: number, fill?: boolean, stroke?: boolean) {
-    // Partial reference: https://stackoverflow.com/a/3368118/11526051
-    if (!fill) {
-      fill = true;
-    }
-    if (!stroke) {
-      stroke = false;
-    }
-    /**
-     * points diagram (marker is a rectangle with rounded corners)
-     * (arc intersections represent where rounded corner arcs meet)
-     *          topArcIntersection
-     *                /\
-     *               /  \
-     *              /    \
-     *    topLeft  |     | topRight
-     *             |     |
-     *             |     |
-     *             |     |
-     *             |     |
-     *  bottomLeft |     | bottomRight
-     *             \    /
-     *              \  /
-     *               \/
-     *        bottomArcIntersection
-     */
-    const radius = width / 2;
-    const p = { // point positions
-      topArcIntersection: {
-        x: centerX, y: centerY - (height / 2)
-      },
-      topRight: {
-        x: centerX + radius, y: centerY - (height / 2) + radius
-      },
-      bottomRight: {
-        x: centerX + radius, y: centerY + (height / 2) - radius
-      },
-      bottomArcIntersection: {
-        x: centerX, y: centerY + (height / 2)
-      },
-      bottomLeft: {
-        x: centerX - radius, y: centerY + (height / 2) - radius
-      },
-      topLeft: {
-        x: centerX - radius, y: centerY - (height / 2) + radius
-      }
-    };
-    const cp = { // control point positions
-      topRight: {
-        x: centerX + radius, y: centerY - (height / 2)
-      },
-      bottomRight: {
-        x: centerX + radius, y: centerY + (height / 2)
-      },
-      bottomLeft:  {
-        x: centerX - radius, y: centerY + (height / 2)
-      },
-      topLeft: {
-        x: centerX - radius, y: centerY - (height / 2)
-      }
-    };
-    this.ctx.beginPath();
-    this.ctx.moveTo(p.topArcIntersection.x, p.topArcIntersection.y);
-    this.ctx.arcTo(cp.topRight.x, cp.topRight.y, p.topRight.x, p.topRight.y, radius);
-    this.ctx.lineTo(p.bottomRight.x, p.bottomRight.y);
-    this.ctx.arcTo(cp.bottomRight.x, cp.bottomRight.y, p.bottomArcIntersection.x, p.bottomArcIntersection.y, radius);
-    this.ctx.arcTo(cp.bottomLeft.x, cp.bottomLeft.y, p.bottomLeft.x, p.bottomLeft.y, radius);
-    this.ctx.lineTo(p.topLeft.x, p.topLeft.y);
-    this.ctx.arcTo(cp.topLeft.x, cp.topLeft.y, p.topArcIntersection.x, p.topArcIntersection.y, radius);
-    if (fill) {
-      this.ctx.fill();
-    }
-    if (stroke) {
-      this.ctx.stroke();
-    }
+    return markerOnHover;
   }
 
 }
@@ -253,18 +177,20 @@ export const placeholderData = [
   { status: STATUS.ASSESSMENT, date: new Date("2020-03-01") },
   { status: STATUS.INTERVIEW, date: new Date("2020-03-12") },
   { status: STATUS.OFFER, date: new Date("2020-04-05") },
+  { status: STATUS.STALE, date: new Date("2020-04-06") },
 ];
+
+const MARKER_WIDTH = 15;
+const MARKER_HEIGHT = 52.5;
+const MARKER_RADIUS = MARKER_WIDTH / 2;
+const HOVER_THRESHOLD_X = (MARKER_WIDTH / 2) * 2;
+const HOVER_THRESHOLD_Y = (MARKER_HEIGHT / 2) * 2;
 
 export const defaultProps: TimelinePropType = {
   width: 600,
   height: 100,
+  data: placeholderData,
   size: 7.5,
   colors: ['#E76F51', '#F4A261', '#E9C46A', '#2A9D8F', '#264653', '#A6A8A8'],
   isInteractive: true
 };
-
-const MARKER_WIDTH = 15;
-const MARKER_HEIGHT = 50;
-const MARKER_RADIUS = MARKER_WIDTH / 2;
-const HOVER_THRESHOLD_X = (MARKER_WIDTH / 2) * 1.5;
-const HOVER_THRESHOLD_Y = (MARKER_HEIGHT / 2) * 1.5;

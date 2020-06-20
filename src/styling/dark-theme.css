@@ -27,6 +27,7 @@ body[theme='dark'] {
     -3px -3px 8px 0 rgba(68, 68, 68, 0.411),
     3px 3px 8px 0 rgba(0, 0, 0, 0.2);
   --shadow-clickable: 0 0 15px rgba(0, 0, 0, 0.4);
+  --shadow-tooltip: 0 0 8px rgba(0, 0, 0, 0.4);
   --shadow-overlay: 0 0 30px rgba(0, 0, 0, 0.6);
 }
 

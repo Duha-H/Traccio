@@ -50,7 +50,6 @@ export class ApplicationViewComponent implements OnInit {
         name: this.userStore.getJourney(journeyid).title,
         url: `/journeys/${journeyid}`
       });
-      // console.log(this.timeline.nativeElement.clientWidth, this.timeline.nativeElement.clientHeight);
     }
   }
 

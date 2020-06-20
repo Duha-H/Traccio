@@ -57,6 +57,7 @@ import { PreferenceSettingsComponent } from './views/settings/preference-setting
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { ApplicationViewComponent } from './views/application-view/application-view.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
+import { TimelineTooltipComponent } from './components/timeline/timeline-tooltip.component';
 
 @NgModule({
   declarations: [
@@ -93,6 +94,7 @@ import { TimelineComponent } from './components/timeline/timeline.component';
     BreadcrumbsComponent,
     ApplicationViewComponent,
     TimelineComponent,
+    TimelineTooltipComponent
   ],
   imports: [
     BrowserModule,
