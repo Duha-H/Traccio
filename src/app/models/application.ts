@@ -22,10 +22,14 @@ export class Application {
 			this._appDate = new Date(data.date);
 			// this._appDate = data.date;
 			this._status = data.status;
-			this._timeline.push({
-				status: this._status,
-				date: this._appDate
-			});
+			if (data.timeline) {
+				this._timeline = this._modifyTimelineData(data.timeline);
+			} else {
+				this._timeline.push({
+					status: this._status,
+					date: this._appDate
+				});
+			}
 			this._source = data.source;
 			this._notes = data.notes;
 		}
@@ -44,13 +48,20 @@ export class Application {
 	set appDate(date: Date) { this._appDate = date; }
 
 	get status() { return this._status; }
-	set status(status: string) { this._status = status; }
+	set status(status: string) {
+		this._status = status;
+		this._timeline.push({
+			status, date: new Date()
+		});
+	}
 
 	get source() { return this._source; }
 	set source(source: string) { this._source = source; }
 
 	get notes() { return this._notes; }
 	set notes(notes: string) { this._notes = notes; }
+
+	get timeline() { return this._timeline; }
 
 	getGraphQLInput() {
 		const input = {
@@ -68,5 +79,19 @@ export class Application {
 	getFilteredString() {
 		const result = `${this._companyName}${this._positionTitle}${this._status}${this._source}`;
 		return result.toLocaleLowerCase();
+	}
+
+	private _modifyTimelineData(data: TimelineDatum[] | { status: string, date: string }[]): TimelineDatum[] {
+		const modifiedData: TimelineDatum[] = [];
+		data.forEach(item => {
+			let storedDate = item.date;
+			if (typeof storedDate === 'string') {
+				storedDate = new Date(storedDate);
+			}
+			modifiedData.push({
+				status: item.status, date: storedDate
+			});
+		});
+		return modifiedData;
 	}
 }

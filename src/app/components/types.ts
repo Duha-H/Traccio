@@ -19,11 +19,12 @@ export interface BreadcrumbsData {
 }
 
 export interface TimelinePropType {
-  width: number;
-  height: number;
   data: TimelineDatum[];
+  width?: number;
+  height?: number;
   size?: number; // size in pixels
   colors?: string[]; // timeline marker colors
+  colorMappings?: { [status: string]: string};
   isInteractive?: boolean; // display or click timeline markers
 }
 

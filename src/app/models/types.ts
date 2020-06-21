@@ -10,6 +10,7 @@ export interface ApplicationInput {
 	status: string;
 	source: string;
 	notes: string;
+	timeline?: TimelineDatum[] | { status: string, date: string }[];
 }
 
 export interface TimelineDatum {

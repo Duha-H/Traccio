@@ -23,54 +23,51 @@ export class TimelineComponent implements OnInit {
   height: number;
   canvasX: number;
   canvasY: number;
-  markerPositions: {x: number, y: number, duration: number}[] = [];
-  mouseOverCanvas = false;
-  marker: TimelineDatum;
   markers: TimelineMarker[] = [];
   displayTooltip = false;
   tooltipProps: TimelineTooltipPropType;
   pixelRatio: number;
 
-  @Input() timelineProps: TimelinePropType = defaultProps;
+  @Input() props: TimelinePropType;
   @ViewChild('canvas', { static: true }) canvas: ElementRef<HTMLCanvasElement>;
   @ViewChild('parent', { static: true }) parentDiv: ElementRef<HTMLDivElement>;
 
   ngOnInit() {
-    window.addEventListener('resize', () => {
-      // responsive width on resize
-      this._calibrateCanvas();
-      this.draw();
-    });
-    console.log(this.parentDiv.nativeElement);
-    if (!this.timelineProps.data) {
-      throw new TypeError('Timeline data not specified.');
+    if (!this.props) {
+      throw new TypeError('Timeline props not specified.');
     }
+    this.props = Object.assign({}, defaultProps, this.props);
     this.ctx = this.canvas.nativeElement.getContext('2d');
     this._calibrateCanvas();
     this.draw();
+    // make size responsive to window resize
+    window.addEventListener('resize', () => {
+      this._calibrateCanvas();
+      this.draw();
+    });
   }
 
   draw() {
-    this.ctx.lineWidth = this.timelineProps.size;
-    this.ctx.strokeStyle = this.timelineProps.colors[0];
-    this.ctx.fillStyle = this.timelineProps.colors[0];
-    // draw line to first marker
-    if (this.markers.length > 0) {
-      this.ctx.beginPath();
-      this.ctx.moveTo(0, this.markers[0].y);
-      this.ctx.lineTo(this.markers[0].x, this.markers[0].y);
-      this.ctx.stroke();
-    }
-    // draw remaining lines
-    for (let i = 1; i < this.markers.length; i++) {
+    this.ctx.lineWidth = this.props.size;
+    // draw lines
+    for (let i = 0; i < this.markers.length; i++) {
       // update styles for next marker
-      this.ctx.strokeStyle = this.timelineProps.colors[i];
-      this.ctx.fillStyle = this.timelineProps.colors[i];
+      this.ctx.strokeStyle = this.markers[i].payload.color;
+      this.ctx.fillStyle = this.markers[i].payload.color;
       const x = this.markers[i].x;
       const y = this.markers[i].y;
+      let prevPoint;
+      if (i > 0) {
+        prevPoint = {
+          x: this.markers[i - 1].x,
+          y: this.markers[i - 1].y
+        };
+      } else {
+        prevPoint = { x: 0, y: this.markers[0].y };
+      }
       // draw line
       this.ctx.beginPath();
-      this.ctx.moveTo(this.markers[i - 1].x, this.markers[i - 1].y);
+      this.ctx.moveTo(prevPoint.x, prevPoint.y);
       this.ctx.lineTo(x, y);
       this.ctx.stroke();
     }
@@ -83,15 +80,14 @@ export class TimelineComponent implements OnInit {
   }
 
   onMouseHover(event: MouseEvent) {
-    this.mouseOverCanvas = true;
     // detect collisions with markers
     const markerOnHover = this._getMarkerOnHover((event.x - this.canvasX) * this.pixelRatio, (event.y - this.canvasY) * this.pixelRatio);
     if (markerOnHover) {
       this.displayTooltip = true;
       this.tooltipProps = {
-        x: event.x - this.canvasX,
-        y: event.y + 30,
-        text: `${markerOnHover.payload.status}: ${markerOnHover.payload.duration} days`,
+        x: (markerOnHover.x + this.canvasX) / this.pixelRatio,
+        y: (markerOnHover.y / this.pixelRatio) + 30 + this.canvasY,
+        text: `${markerOnHover.payload.status}: ${markerOnHover.payload.duration} day${markerOnHover.payload.duration === 1 ? '' : 's'}`,
         color: markerOnHover.payload.color
       };
     } else {
@@ -125,16 +121,16 @@ export class TimelineComponent implements OnInit {
 
   private _generateMarkersFromData() {
     this.markers = []; // clear current markers
-    const adjustedWidth = this.width - (MARKER_WIDTH / 2);
+    const adjustedWidth = this.width - MARKER_WIDTH;
     const y = this.height / 2; // centered vertically in canvas
     const today = new Date();
-    if (this.timelineProps.data.length > 0) {
-      const start = this.timelineProps.data[0].date;
+    if (this.props.data.length > 0) {
+      const start = this.props.data[0].date;
       const totalTimeElapsed = today.getTime() - start.getTime();
       let prevX = 0;
-      for (let i = 0; i < this.timelineProps.data.length; i++) {
-        const item = this.timelineProps.data[i];
-        const nextItem = this.timelineProps.data[i + 1];
+      for (let i = 0; i < this.props.data.length; i++) {
+        const item = this.props.data[i];
+        const nextItem = this.props.data[i + 1];
         let statusTimeElapsed;
         if (nextItem) {
           statusTimeElapsed =  nextItem.date.getTime() - item.date.getTime();
@@ -147,10 +143,13 @@ export class TimelineComponent implements OnInit {
           // correcting for markers that end up being too close to be discernible
           this.markers[i - 1].x -= MARKER_WIDTH;
         }
+        const markerColor = this.props.colorMappings && this.props.colorMappings[item.status]
+          ? this.props.colorMappings[item.status]
+          : this.props.colors[i];
         const newMarker = new TimelineMarker(newX, y, 'rounded-rect', {
-          status: item.status,
+          ...item,
           duration: msToDays(statusTimeElapsed),
-          color: this.timelineProps.colors[i]
+          color: markerColor
         });
         this.markers.push(newMarker);
         prevX = newX;
