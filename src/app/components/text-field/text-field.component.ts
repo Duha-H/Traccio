@@ -13,7 +13,7 @@ import {
   <form>\
     <div class="{{center ? \'input-container center\' : \'input-container\'}}" style="max-width: {{width}}px;">\
       <p *ngIf="type == \'email\' && field.invalid && displayError" class="warning-text">{{label}} is not valid</p>\
-      <div style="height: {{height}}px;" class="{{showUpdatedBorder ? \'updated\' : \'\'}}">\
+      <div class="{{showUpdatedBorder ? \'updated\' : \'\'}}">\
         <input type="{{currType}}" [(ngModel)]="value" [value]="value" (input)="onInput()" maxLength="60" \
           style="font-size: {{fontSize}}pt; color: {{fontColor}};" \
           name="inputField" #field="ngModel" placeholder="{{label}}"\
@@ -53,16 +53,13 @@ export class TextFieldComponent implements OnInit {
   ngOnInit() {
     this.currType = this.type;
     this.value = this.text;
+    this._setLabel();
   }
 
   onInput() {
     this.valueUpdated = true;
     this.inputChange.emit(this.value);
-    if (this.value === "") {
-      this.fieldLabel = "\n";
-    } else {
-      this.fieldLabel = this.label;
-    }
+    this._setLabel();
   }
 
   togglePasswordVisibility() {
@@ -76,6 +73,14 @@ export class TextFieldComponent implements OnInit {
   }
 
   resetValue(value?: string) {
-    this.value = value.length !== undefined ? value : this.text;
+    this.value = value !== undefined ? value : this.text;
+  }
+
+  private _setLabel() {
+    if (!this.value) { // value is empty or undefined
+      this.fieldLabel = "\n";
+    } else {
+      this.fieldLabel = this.label;
+    }
   }
 }

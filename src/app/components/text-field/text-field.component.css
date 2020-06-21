@@ -18,14 +18,15 @@
   display: flex;
   flex-direction: row;
   /* min-width: 92%; */
-  width: 85%;
-  height: 18px;
-  border-radius: 20px;
-  padding: 16px;
-  border: 1.5px solid transparent;
-  background-color: var(--element-bg-secondary);
+  width: 100%;
+  height: 100%;
+  /* height: 18px; */
   margin: 0;
   align-items: center;
+
+  border-radius: 25px;
+  border: 1.5px solid transparent;
+  background-color: var(--element-bg-secondary);
 }
 
 .input-container.center div {
@@ -35,11 +36,13 @@
 .input-container input {
   font-size: 10pt;
   /* min-width: 95%; */
-  width: 95%;
+  width: 100%;
   background: none;
   border: none;
   outline: none;
   color: var(--text);
+  
+  padding: 10px 16px;
 }
 
 .input-container div.updated {
@@ -49,11 +52,16 @@
 .input-container mat-icon {
   color: var(--titles-secondary);
   cursor: pointer;
+  margin-right: 15px;
 }
 
 .input-container div:focus-within {
   border: 1.5px solid var(--accent);
 }
+
+/* .input-container input:focus {
+  border: 1.5px solid var(--accent);
+} */
 
 .input-container div:focus-within mat-icon {
   color: var(--accent);
@@ -63,9 +71,9 @@
   font-size: 11pt;
   color: var(--titles-secondary);
   height: 11pt;
-  padding-left: 10px;
+  /* padding-left: 10px; */
   text-align: left;
-  margin-bottom: 6px;
+  margin-bottom: 10px;
 }
 
 .input-container div:focus-within + label {

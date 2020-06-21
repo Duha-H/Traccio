@@ -40,7 +40,7 @@ $theme-foreground: (
   dividers:          var(--bg),
   disabled:          rgba(white, 0.3),
   disabled-button:   rgba(white, 0.3),
-  disabled-text:     rgba(white, 0.3),
+  disabled-text:     var(--text),
   hint-text:         rgba(white, 0.3),
   secondary-text:    var(--text),
   icon:              var(--text),
@@ -96,4 +96,8 @@ body[theme='light'][palette='palette-2'] {
 
 body[theme='light'][palette='palette-3'] {
   @include angular-material-theme($light-palette3-theme);
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-underline {
+  background-color: transparent;
 }
