@@ -106,7 +106,7 @@ export class DashboardComponent implements OnInit {
   }
 
   selectApplication(app: Application) {
-    this.router.navigate(['/journeys', this.selectedJourney.value.id, { appref: app.id }]);
+    this.router.navigate(['/journeys', this.selectedJourney.value.id, app.id]);
   }
 
   isEmpty(obj: {[key: string]: any}) {

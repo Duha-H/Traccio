@@ -3,10 +3,63 @@
   <div class="spanning-content">
     <h2>Application Details</h2>
     <div class="spacer"></div>
+    <button class="save-btn" [disabled]="false" (click)="saveChanges()">
+      <p>Save Changes</p>
+    </button>
   </div>
-  <div class="timeline">
-    <mat-icon style="text-align: right; color: var(--titles-secondary); width: 100%">info</mat-icon>
-    <timeline style="width: 100%; height: 150px;" #timeline></timeline>
+  
+  <div class="status-info">
+    <div class="spanning-content block-title status-title" style>
+      <p>Status Timeline</p>
+      <div class="spacer"></div>
+      <div class="timeline-legend">
+        <div class="legend-item" *ngFor="let status of STATUS_COLORS | keyvalue: originalOrder;">
+          <div class="legend-label" style="background: {{status.value}};"></div>
+          <p>{{status.key}}</p>
+        </div>
+      </div>
+      <!-- <mat-icon style="text-align: right; color: var(--titles-secondary);">info</mat-icon> -->
+    </div>
+    <div class="timeline">
+      <timeline style="width: 85%; height: 100px;" [props]="timelineProps" #timeline></timeline>
+      <div class="status" style="width: 15%; min-width: 100px; color: {{STATUS_COLORS[application.status]}}; border: 1.5px solid {{STATUS_COLORS[application.status]}};">
+        <p style="font-size: 11pt; color: {{STATUS_COLORS[application.status]}}; cursor: pointer; margin: 0;">{{application.status}}</p>
+        <p>Since: {{application.timeline[application.timeline.length - 1].date | date}}</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="position-info">
+    <p class="block-title">General Info</p>
+    <div class="info-item">
+      <text-field class="value" [width]="600" [height]="10" [center]="false" [displayLabel]="true" [label]="'Position Title'" [text]="application.positionTitle" [showUpdatedBorder]="false" style="margin-right: 25px;" #titleField></text-field>
+      <text-field class="value" [width]="600" [height]="10" [center]="false" [displayLabel]="true" [label]="'Company'" [text]="application.companyName" [showUpdatedBorder]="false" #titleField></text-field>
+    </div>
+    <div class="info-item">
+      <div class="date-value" style="margin-right: 35px;" >
+        <label for="">Application Date</label>
+        <mat-form-field class="form-element" color="accent">
+          <input matInput [matDatepicker]="startPicker" (dateChange)="updateDate($event)" [value]="application.appDate" [(ngModel)]="application.appDate" name="stDate" #stDate="ngModel" disabled/>
+          <mat-datepicker-toggle matSuffix [for]="startPicker">
+            <mat-icon matDatepickerToggleIcon>arrow_drop_down</mat-icon>
+          </mat-datepicker-toggle>
+          <mat-datepicker color="accent" disabled="false" #startPicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="source-value" style="width: 50%;">
+        <label for="">Application Source</label>
+        <mat-form-field class="form-element" color="accent">
+          <mat-select color="accent" name="filterSelection" title="application filters" panelClass="cat-select-panel" floatLabel="never" [(ngModel)]="application.source" #statusDropdown>
+            <mat-option *ngFor="let source of sources;" [value]="source.value">{{source.viewValue}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+  <div class="additional-info">
+    <p class="block-title">Additional Info</p>
+    <textarea name="additional-info" id="additional-info" cols="300" rows="10">{{application.notes}}</textarea>
   </div>
 
 </div>

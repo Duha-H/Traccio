@@ -12,7 +12,7 @@
       <div class="spacer"></div>
       <mat-icon (click)="closeAlert()">clear</mat-icon>
     </div>
-    <mat-tab-group mat-align-tabs="center" animationDuration="0ms" (selectedIndexChange)="changes=tabChanges[$event]" #tabGroup>
+    <mat-tab-group mat-align-tabs="center" animationDuration="0ms" (selectedIndexChange)="changes=tabChanges[$event]" color="accent" #tabGroup>
       <mat-tab label="Profile Settings">
         <settings-profile (updates)="setChange(0, $event)" (showAlert)="showAlert($event)" (updatePassword)="applyPasswordChange($event)"></settings-profile>
       </mat-tab>
