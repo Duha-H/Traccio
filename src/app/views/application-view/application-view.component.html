@@ -3,7 +3,7 @@
   <div class="spanning-content">
     <h2>Application Details</h2>
     <div class="spacer"></div>
-    <button class="save-btn" [disabled]="false" (click)="saveChanges()">
+    <button class="save-btn" [disabled]="!detailsUpdated" (click)="saveChanges()">
       <p>Save Changes</p>
     </button>
   </div>
@@ -22,24 +22,33 @@
     </div>
     <div class="timeline">
       <timeline style="width: 85%; height: 100px;" [props]="timelineProps" #timeline></timeline>
-      <div class="status" style="width: 15%; min-width: 100px; color: {{STATUS_COLORS[application.status]}}; border: 1.5px solid {{STATUS_COLORS[application.status]}};">
-        <p style="font-size: 11pt; color: {{STATUS_COLORS[application.status]}}; cursor: pointer; margin: 0;">{{application.status}}</p>
-        <p>Since: {{application.timeline[application.timeline.length - 1].date | date}}</p>
+      <!-- <div class="status" style="width: 15%; min-width: 100px; color: {{STATUS_COLORS[currApplicationDetails.status]}}; border: 1.5px solid {{STATUS_COLORS[currApplicationDetails.status]}};">
+        <p style="font-size: 11pt; color: {{STATUS_COLORS[currApplicationDetails.status]}}; cursor: pointer; margin: 0;">{{currApplicationDetails.status}}</p>
+        
+        <p>Since: {{currApplicationDetails.timeline[currApplicationDetails.timeline.length - 1].date | date}}</p>
+      </div> -->
+      <div class="status" style="width: 15%; min-width: 100px;">
+        <mat-select class="status" style="color: {{STATUS_COLORS[currApplicationDetails.status]}}; border: 1.5px solid {{STATUS_COLORS[currApplicationDetails.status]}};"
+          color="accent" name="statusSelection" title="update status" floatLabel="never" [ngModel]="currApplicationDetails.status" (selectionChange)="updateField(ATTRIBS.STATUS, $event.value)"  #statusDropdown>
+          <mat-option *ngFor="let status of statuses;" [value]="status.value" >{{status.viewValue}}</mat-option>
+        </mat-select>
+        <p>Since: {{currApplicationDetails.timeline[currApplicationDetails.timeline.length - 1].date | date}}</p>
       </div>
+      
     </div>
   </div>
   
   <div class="position-info">
     <p class="block-title">General Info</p>
     <div class="info-item">
-      <text-field class="value" [width]="600" [height]="10" [center]="false" [displayLabel]="true" [label]="'Position Title'" [text]="application.positionTitle" [showUpdatedBorder]="false" style="margin-right: 25px;" #titleField></text-field>
-      <text-field class="value" [width]="600" [height]="10" [center]="false" [displayLabel]="true" [label]="'Company'" [text]="application.companyName" [showUpdatedBorder]="false" #titleField></text-field>
+      <text-field class="value" [width]="600" [height]="10" [center]="false" [displayLabel]="true" [label]="'Position Title'" [text]="currApplicationDetails.positionTitle" [showUpdatedBorder]="false" style="margin-right: 25px;" (inputChange)="updateField(ATTRIBS.POSITION, $event)" #titleField></text-field>
+      <text-field class="value" [width]="600" [height]="10" [center]="false" [displayLabel]="true" [label]="'Company'" [text]="currApplicationDetails.companyName" [showUpdatedBorder]="false" (inputChange)="updateField(ATTRIBS.COMPANY, $event)" #titleField></text-field>
     </div>
     <div class="info-item">
       <div class="date-value" style="margin-right: 35px;" >
         <label for="">Application Date</label>
         <mat-form-field class="form-element" color="accent">
-          <input matInput [matDatepicker]="startPicker" (dateChange)="updateDate($event)" [value]="application.appDate" [(ngModel)]="application.appDate" name="stDate" #stDate="ngModel" disabled/>
+          <input matInput [matDatepicker]="startPicker" (dateChange)="updateField(ATTRIBS.DATE, $event.value)" [value]="currApplicationDetails.appDate" [(ngModel)]="currApplicationDetails.appDate" name="stDate" #stDate="ngModel" disabled/>
           <mat-datepicker-toggle matSuffix [for]="startPicker">
             <mat-icon matDatepickerToggleIcon>arrow_drop_down</mat-icon>
           </mat-datepicker-toggle>
@@ -49,7 +58,7 @@
       <div class="source-value" style="width: 50%;">
         <label for="">Application Source</label>
         <mat-form-field class="form-element" color="accent">
-          <mat-select color="accent" name="filterSelection" title="application filters" panelClass="cat-select-panel" floatLabel="never" [(ngModel)]="application.source" #statusDropdown>
+          <mat-select color="accent" name="filterSelection" title="application filters" panelClass="cat-select-panel" floatLabel="never" [(ngModel)]="currApplicationDetails.source" #statusDropdown>
             <mat-option *ngFor="let source of sources;" [value]="source.value">{{source.viewValue}}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -58,8 +67,8 @@
   </div>
 
   <div class="additional-info">
-    <p class="block-title">Additional Info</p>
-    <textarea name="additional-info" id="additional-info" cols="300" rows="10">{{application.notes}}</textarea>
+    <p class="block-title">Additional Notes</p>
+    <textarea name="additional-info" id="additional-info" cols="300" rows="10" [(ngModel)]="currApplicationDetails.notes" (ngModelChange)="detailsUpdated=true" #notesTextArea>{{currApplicationDetails.notes}}</textarea>
   </div>
 
 </div>

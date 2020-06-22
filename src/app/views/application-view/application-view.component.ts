@@ -4,7 +4,7 @@ import { Application } from 'src/app/models/application';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserStoreService } from 'src/app/models/user-store.service';
 import { TimelineComponent } from 'src/app/components/timeline/timeline.component';
-import { STATUS_COLORS, STATUS, APP_SOURCE } from 'src/app/models/constants';
+import { STATUS_COLORS, STATUS, APP_SOURCE, APP_ATTRIBS } from 'src/app/models/constants';
 import { KeyValue } from '@angular/common';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
@@ -24,9 +24,13 @@ export class ApplicationViewComponent implements OnInit {
       { name: 'Journeys', url: '/journeys' },
     ]
   };
-  application: Application;
+  journeyid: string;
+  inputApplication: Application;
+  currApplicationDetails: Application;
+  detailsUpdated = false;
   timelineProps: TimelinePropType;
   STATUS_COLORS = STATUS_COLORS;
+  ATTRIBS = APP_ATTRIBS;
   statuses = [
     {value: STATUS.IN_REVIEW.toString(), viewValue: STATUS.IN_REVIEW.toString()},
     {value: STATUS.ASSESSMENT.toString(), viewValue: STATUS.ASSESSMENT.toString()},
@@ -42,7 +46,8 @@ export class ApplicationViewComponent implements OnInit {
     {value: APP_SOURCE.OTHER.toString(), viewValue: APP_SOURCE.OTHER.toString()},
   ];
 
-  @ViewChild('timeline', { static: true }) timeline: ElementRef<any>;
+  @ViewChild(TimelineComponent, { static: true }) timeline: TimelineComponent;
+  @ViewChild('notesTextArea', { static: true }) notesTextArea: ElementRef<any>;
 
   constructor(
     private route: ActivatedRoute,
@@ -51,37 +56,49 @@ export class ApplicationViewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    let journeyid: string;
     let appid: string;
     this.route.params.subscribe(params => {
-      journeyid = params.id;
+      this.journeyid = params.id;
       appid = params.appref;
     });
-    this.application = this.userStore.getApplication(journeyid, +appid); // TODO: sort out application id thing
-    if (!this.application) {
+    this.inputApplication = this.userStore.getApplication(this.journeyid, +appid); // TODO: sort out application id thing
+    this.currApplicationDetails = Object.assign(new Application(), this.inputApplication);
+    if (!this.inputApplication) {
       console.log('ApplicationViewComponent: no application retrieved with id:', appid);
       this.router.navigate(['/journeys']);
       return;
     } else {
       this.breadcrumbsData.current.name = 'Application';
-      this.breadcrumbsData.current.url = `/journeys/${journeyid}/${appid}`;
+      this.breadcrumbsData.current.url = `/journeys/${this.journeyid}/${appid}`;
       this.breadcrumbsData.paths.push({
-        name: this.userStore.getJourney(journeyid).title,
-        url: `/journeys/${journeyid}`
+        name: this.userStore.getJourney(this.journeyid).title,
+        url: `/journeys/${this.journeyid}`
       });
       this.timelineProps = {
-        data: this.application.timeline,
+        data: this.inputApplication.timeline,
         colorMappings: STATUS_COLORS
       };
+      // this.timeline.draw();
+    }
+    // make textarea responsive to tab key press
+    this.notesTextArea.nativeElement.addEventListener('keydown', (event) => this.keyboardHandler(event));
+  }
+
+  updateField(attrib: string, value: string) {
+    this.detailsUpdated = true;
+    if (this.currApplicationDetails[attrib]) {
+      if (attrib === this.ATTRIBS.STATUS) {
+        this.currApplicationDetails.status = value; // handles adding the new status to the application's timeline
+      } else {
+        this.currApplicationDetails[attrib] = value;
+      }
     }
   }
 
-  updateDate(event: MatDatepickerInputEvent<Date>) {
-
-  }
-
   saveChanges() {
-
+    // this.inputApplication = this.currApplicationDetails;
+    this.userStore.updateExistingApplication(this.journeyid, this.currApplicationDetails);
+    this.detailsUpdated = false;
   }
 
   /**
@@ -89,6 +106,13 @@ export class ApplicationViewComponent implements OnInit {
    */
   originalOrder(a: KeyValue<number, string>, b: KeyValue<number, string>): number {
     return 0;
+  }
+
+  keyboardHandler(event: KeyboardEvent) {
+    if (event.keyCode === 9) { // handles tab click within textarea
+      this.notesTextArea.nativeElement.value += '\t';
+      event.preventDefault();
+    }
   }
 
 }

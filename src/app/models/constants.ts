@@ -22,3 +22,15 @@ export const STATUS_COLORS = { // color mappings for statuses
 	[STATUS.REJECTED]: '#264653',
 	[STATUS.STALE]: '#A6A8A8',
 };
+
+export const APP_ATTRIBS = {
+	ID: 'id',
+	POSITION: 'positionTitle',
+	COMPANY: 'companyName',
+	DATE: 'appDate',
+	STATUS: 'status',
+	TIMELINE: 'timeline',
+	SOURCE: 'source',
+	NOTES: 'notes'
+};
+

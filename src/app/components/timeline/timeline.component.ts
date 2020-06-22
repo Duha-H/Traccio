@@ -1,4 +1,4 @@
-import { OnInit, Component, ViewChild, ElementRef, Input } from '@angular/core';
+import { OnInit, Component, ViewChild, ElementRef, Input, AfterViewInit } from '@angular/core';
 import { TimelineDatum } from 'src/app/models/types';
 import { STATUS } from 'src/app/models/constants';
 import { TimelinePropType, TimelineTooltipPropType } from '../types';
@@ -16,7 +16,7 @@ import { msToDays, collision } from './utils';
   ',
   styleUrls: ['timeline.component.css']
 })
-export class TimelineComponent implements OnInit {
+export class TimelineComponent implements OnInit, AfterViewInit {
 
   ctx: CanvasRenderingContext2D;
   width: number;
@@ -38,16 +38,19 @@ export class TimelineComponent implements OnInit {
     }
     this.props = Object.assign({}, defaultProps, this.props);
     this.ctx = this.canvas.nativeElement.getContext('2d');
-    this._calibrateCanvas();
     this.draw();
-    // make size responsive to window resize
+    // make size responsive to window resize and trigger re-draw
     window.addEventListener('resize', () => {
-      this._calibrateCanvas();
       this.draw();
     });
   }
 
+  ngAfterViewInit() {
+    this.draw();
+  }
+
   draw() {
+    this._calibrateCanvas();
     this.ctx.lineWidth = this.props.size;
     // draw lines
     for (let i = 0; i < this.markers.length; i++) {
@@ -85,9 +88,12 @@ export class TimelineComponent implements OnInit {
     if (markerOnHover) {
       this.displayTooltip = true;
       this.tooltipProps = {
-        x: (markerOnHover.x + this.canvasX) / this.pixelRatio,
-        y: (markerOnHover.y / this.pixelRatio) + 30 + this.canvasY,
-        text: `${markerOnHover.payload.status}: ${markerOnHover.payload.duration} day${markerOnHover.payload.duration === 1 ? '' : 's'}`,
+        // x: (markerOnHover.x + this.canvasX) / this.pixelRatio,
+        // y: (markerOnHover.y / this.pixelRatio) + 30 + this.canvasY,
+        x: (event.x - this.canvasX),
+        y: event.y + 30,
+        // text: `${markerOnHover.payload.status}: ${markerOnHover.payload.duration} day${markerOnHover.payload.duration === 1 ? '' : 's'}`,
+        text: `${markerOnHover.payload.status}: ${markerOnHover.payload.date.toLocaleDateString()}`,
         color: markerOnHover.payload.color
       };
     } else {
@@ -131,11 +137,14 @@ export class TimelineComponent implements OnInit {
       for (let i = 0; i < this.props.data.length; i++) {
         const item = this.props.data[i];
         const nextItem = this.props.data[i + 1];
-        let statusTimeElapsed;
+        let statusTimeElapsed: number;
+        let nextDate: Date;
         if (nextItem) {
           statusTimeElapsed =  nextItem.date.getTime() - item.date.getTime();
+          nextDate = nextItem.date;
         } else {
           statusTimeElapsed =  today.getTime() - item.date.getTime();
+          nextDate = today;
         }
         const ratio = statusTimeElapsed / totalTimeElapsed;
         const newX = prevX + (ratio * adjustedWidth);
@@ -147,7 +156,8 @@ export class TimelineComponent implements OnInit {
           ? this.props.colorMappings[item.status]
           : this.props.colors[i];
         const newMarker = new TimelineMarker(newX, y, 'rounded-rect', {
-          ...item,
+          status: item.status,
+          date: nextDate,
           duration: msToDays(statusTimeElapsed),
           color: markerColor
         });

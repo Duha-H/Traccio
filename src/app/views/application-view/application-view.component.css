@@ -70,13 +70,25 @@ button.save-btn:disabled {
   border-radius: 20px;
   height: 30px;
   line-height: 30px;
-  border: 1.5px solid var(--accent);
+  /* border: 1.5px solid var(--accent); */
   /* cursor: pointer; */
+}
+
+.status mat-select {
+  margin-left: 0;
 }
 
 .status p {
   color: var(--text);
   font-size: 10pt;
+}
+
+::ng-deep .status .mat-select-arrow {
+  /* display: none; */
+  visibility: hidden;
+  width: 0;
+  margin: 0;
+  padding: 0;
 }
 
 div.timeline-legend {
