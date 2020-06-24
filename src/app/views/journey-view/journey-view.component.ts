@@ -50,20 +50,12 @@ export class JourneyViewComponent implements OnInit {
     {
       name: "Status",
       items: [
-        {
-          value: STATUS.IN_REVIEW.toString(),
-          viewValue: STATUS.IN_REVIEW.toString(),
-        },
-        {
-          value: STATUS.INTERVIEW.toString(),
-          viewValue: STATUS.INTERVIEW.toString(),
-        },
-        { value: STATUS.OFFER.toString(), viewValue: STATUS.OFFER.toString() },
-        {
-          value: STATUS.REJECTED.toString(),
-          viewValue: STATUS.REJECTED.toString(),
-        },
-        { value: STATUS.STALE.toString(), viewValue: STATUS.STALE.toString() },
+        { value: STATUS.IN_REVIEW, viewValue: STATUS.IN_REVIEW },
+        { value: STATUS.ASSESSMENT, viewValue: STATUS.ASSESSMENT },
+        { value: STATUS.INTERVIEW, viewValue: STATUS.INTERVIEW },
+        { value: STATUS.OFFER, viewValue: STATUS.OFFER },
+        { value: STATUS.REJECTED, viewValue: STATUS.REJECTED },
+        { value: STATUS.STALE, viewValue: STATUS.STALE },
       ],
     },
     {

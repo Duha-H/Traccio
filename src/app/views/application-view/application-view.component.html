@@ -6,9 +6,12 @@
     <button class="save-btn" [disabled]="!detailsUpdated" (click)="saveChanges()">
       <p>Save Changes</p>
     </button>
+    <button *ngIf="wishlistApp" class="save-btn" (click)="displayAddToJourneyOverlay()">
+      <p>Add to Journey</p>
+    </button>
   </div>
   
-  <div class="status-info">
+  <div *ngIf="!wishlistApp" class="status-info">
     <div class="spanning-content block-title status-title" style>
       <p>Status Timeline</p>
       <div class="spacer"></div>
@@ -18,15 +21,9 @@
           <p>{{status.key}}</p>
         </div>
       </div>
-      <!-- <mat-icon style="text-align: right; color: var(--titles-secondary);">info</mat-icon> -->
     </div>
     <div class="timeline">
       <timeline style="width: 85%; height: 100px;" [props]="timelineProps" #timeline></timeline>
-      <!-- <div class="status" style="width: 15%; min-width: 100px; color: {{STATUS_COLORS[currApplicationDetails.status]}}; border: 1.5px solid {{STATUS_COLORS[currApplicationDetails.status]}};">
-        <p style="font-size: 11pt; color: {{STATUS_COLORS[currApplicationDetails.status]}}; cursor: pointer; margin: 0;">{{currApplicationDetails.status}}</p>
-        
-        <p>Since: {{currApplicationDetails.timeline[currApplicationDetails.timeline.length - 1].date | date}}</p>
-      </div> -->
       <div class="status" style="width: 15%; min-width: 100px;">
         <mat-select class="status" style="color: {{STATUS_COLORS[currApplicationDetails.status]}}; border: 1.5px solid {{STATUS_COLORS[currApplicationDetails.status]}};"
           color="accent" name="statusSelection" title="update status" floatLabel="never" [ngModel]="currApplicationDetails.status" (selectionChange)="updateField(ATTRIBS.STATUS, $event.value)"  #statusDropdown>
@@ -72,3 +69,28 @@
   </div>
 
 </div>
+
+<app-overlay *ngIf="displayAddOverlay" (closeOverlay)="displayAddOverlay=false">
+  <div class="overlay-content">
+    <p>Add to journey:</p>
+    <!-- <ul class="value toggle-btns" style="flex-direction: column; margin-left: 40px;">
+      <li>
+        <input type="radio" name="palette" id="palette-0" [value]="'palette-0'" [ngModel]="preferences.colorPalette.name" (change)="addUpdate('colorPalette', 'palette-0')">
+        <label for="palette-0">Cosmos</label>
+      </li>
+      <li>
+        <input type="radio" name="palette" id="palette-1" [value]="'palette-1'" [ngModel]="preferences.colorPalette.name" (change)="addUpdate('colorPalette', 'palette-1')">
+        <label for="palette-1">Superbubbles</label>
+      </li>
+      <li>
+        <input type="radio" name="palette" id="palette-2" [value]="'palette-2'" [ngModel]="preferences.colorPalette.name" (change)="addUpdate('colorPalette', 'palette-2')">
+        <label for="palette-2">Shockwave</label>
+      </li>
+      <li>
+        <input type="radio" name="palette" id="palette-3" [value]="'palette-3'" [ngModel]="preferences.colorPalette.name" (change)="addUpdate('colorPalette', 'palette-3')">
+        <label for="palette-3">Dave</label>
+      </li>
+    </ul> -->
+    <button class="submit-button">Add</button>
+  </div>
+</app-overlay>

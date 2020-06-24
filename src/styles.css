@@ -99,7 +99,8 @@ app-dashboard,
 app-search,
 app-wishlist,
 app-settings,
-app-sign-up {
+app-sign-up,
+app-wishlist-wrapper {
   width: 100%;
 }
 

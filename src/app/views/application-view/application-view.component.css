@@ -16,17 +16,24 @@ button.save-btn {
   border-radius: 25px;
   background-color: var(--accent);
   cursor: pointer;
+  text-align: center;
+  margin-left: 20px;
 }
 
 .save-btn p {
   margin: 0;
-  line-height: 30px;
+  line-height: 35px;
   text-align: center;
   color: var(--text);
   font-size: 11pt;
 }
 
-button.save-btn:hover:not(:disabled) p { /** hover while not disabled */
+.save-btn mat-icon {
+  line-height: 35px;
+  color: var(--text);
+}
+
+button.save-btn:hover:not(:disabled) p, button.save-btn:hover:not(:disabled) mat-icon { /** hover while not disabled */
   color: var(--bg);
 }
 
