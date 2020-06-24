@@ -58,7 +58,10 @@ mat-icon {
 .edit-button {
   text-align: right;
 	z-index: 2;
-	float: right;
+  float: right;
+  position: absolute;
+  top: -20px;
+  right: -20px;
 }
 
 .edit-button button {
@@ -67,11 +70,12 @@ mat-icon {
 	min-width: 40px;
   min-height: 40px;
 	padding: 0;
-	border-radius: 4px;
+	border-radius: 20px;
+  background: var(--accent-hover);
 }
 
 .edit-button button:hover {
-  background: var(--accent-hover);
+  background: var(--error-bg);
   cursor: pointer;
 }
 

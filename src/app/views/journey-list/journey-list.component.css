@@ -55,12 +55,15 @@
   font-size: 16pt;
 }
 
-/* .add-btn:hover {
-  background-color: var(--accent);
-} */
-
 .add-btn:hover mat-icon, .add-btn:hover p {
   color: var(--bg);
+}
+
+button.add-btn:disabled {
+  background-color: var(--disabled-bg);
+  border: 1px solid var(--disabled-bg);
+  opacity: 0.2;
+  cursor: default;
 }
 
 mat-drawer-container {
