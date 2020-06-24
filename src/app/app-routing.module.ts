@@ -20,6 +20,7 @@ import { AppWrapperComponent } from './views/app-wrapper/app-wrapper.component';
 import { AccountRecoveryComponent } from './auth/account-recovery/account-recovery.component';
 import { WishlistComponent } from './views/wishlist/wishlist.component';
 import { ApplicationViewComponent } from './views/application-view/application-view.component';
+import { WishlistWrapperComponent } from './views/wishlist/wishlist-wrapper.component';
 
 const routes: Routes = [
   { path: "", canActivate: [AuthGuard], component: AppWrapperComponent,
@@ -28,13 +29,22 @@ const routes: Routes = [
       {
         path: "journeys",
         component: JourneysComponent,
+        canActivate: [AuthGuard],
         children: [
           { path: "", component: JourneyListComponent },
           { path: ":id", component: JourneyViewComponent, data: { appref: '' } },
           { path: ":id/:appref", component: ApplicationViewComponent },
         ],
       },
-      { path: "wishlist", component: WishlistComponent, canActivate: [AuthGuard] },
+      {
+        path: "wishlist",
+        component: WishlistWrapperComponent,
+        canActivate: [AuthGuard],
+        children: [
+          { path: "", component: WishlistComponent },
+          { path: ":appref", component: ApplicationViewComponent }
+        ]
+      },
       { path: "settings", component: SettingsComponent, canActivate: [AuthGuard] },
     ]
   },

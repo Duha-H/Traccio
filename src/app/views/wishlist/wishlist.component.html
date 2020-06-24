@@ -7,7 +7,7 @@
 
   <div class="wishlist-apps" *ngIf="applications.length != 0; else emptyWishlist">
     <mat-list style="height: 100%;" class="app-list-item">
-      <mat-list-item class="clickable-item" *ngFor="let app of applications;">
+      <mat-list-item class="clickable-item" *ngFor="let app of applications;" (click)="selectApplication(app)">
         <mat-icon matListIcon>star</mat-icon>
         <div matLine>
           <div class="spanning-content">

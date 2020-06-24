@@ -167,6 +167,12 @@ export class UserStoreService {
     );
   }
 
+  getWishlistApplication(appId: number): Application {
+    return this._wishlistApps.getValue().find(
+      (element) => element.id === appId
+    );
+  }
+
   getActiveJourneys() {
     let activeJourneys = Object.values(this._journeys.getValue()).filter(
       (journey) => journey.active
@@ -251,6 +257,10 @@ export class UserStoreService {
     // existingApplication = updatedApplication;
     journey.applications = updatedApps;
     this.updateJourneyData(); // data updated, bubble .next() it to all observables
+  }
+
+  updateWishlistApplication(updatedApplication: Application) {
+    
   }
 
   removeApplication(journeyid: string, appid: number) {
