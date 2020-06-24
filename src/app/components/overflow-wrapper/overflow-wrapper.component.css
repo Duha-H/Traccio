@@ -1,0 +1,25 @@
+.overflow-container {
+  display: flex;
+  flex-direction: row;
+  /* max-width: 500px; */
+  /* max-width: 100%; */
+  flex: 1;
+}
+
+.overflow-content {
+  width: 100%;
+  overflow: scroll;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  /* scrollbar-width: none;
+  -ms-overflow-style: none; */
+}
+
+.scroll-button {
+  cursor: pointer;
+}
+
+.overflow-content::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* make scrollbar transparent */
+}

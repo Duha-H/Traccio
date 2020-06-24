@@ -1,0 +1,7 @@
+<div class="overflow-container">
+  <mat-icon class="scroll-button" (click)="scroll('left')">keyboard_arrow_left</mat-icon>
+  <div class="overflow-content" #overflowContent>
+    <ng-content></ng-content>
+  </div>
+  <mat-icon class="scroll-button" (click)="scroll('right')">keyboard_arrow_right</mat-icon>
+</div>

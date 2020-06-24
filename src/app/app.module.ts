@@ -58,6 +58,8 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
 import { ApplicationViewComponent } from './views/application-view/application-view.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
 import { TimelineTooltipComponent } from './components/timeline/timeline-tooltip.component';
+import { WishlistWrapperComponent } from './views/wishlist/wishlist-wrapper.component';
+import { OverflowWrapperComponent } from './components/overflow-wrapper/overflow-wrapper.component';
 
 @NgModule({
   declarations: [
@@ -94,7 +96,9 @@ import { TimelineTooltipComponent } from './components/timeline/timeline-tooltip
     BreadcrumbsComponent,
     ApplicationViewComponent,
     TimelineComponent,
-    TimelineTooltipComponent
+    TimelineTooltipComponent,
+    WishlistWrapperComponent,
+    OverflowWrapperComponent
   ],
   imports: [
     BrowserModule,
