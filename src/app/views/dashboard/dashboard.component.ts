@@ -59,11 +59,11 @@ export class DashboardComponent implements OnInit {
       this.userStore.activeJourneys.subscribe((activeJourneys) => {
         this.activeJourneys = activeJourneys;
         this.setDropdownContent();
+        this.selectedJourney = this.dropdownContent[0];
+        this.currentYear = this.selectedJourney.years[0]
+          ? this.selectedJourney.years[0]
+          : this.currentYear;
       });
-      this.selectedJourney = this.dropdownContent[0];
-      this.currentYear = this.selectedJourney.years[0]
-        ? this.selectedJourney.years[0]
-        : this.currentYear;
       this.prefStore.preferences.subscribe(preferences => {
         this.theme = preferences.theme;
         this.pieChartPalette = preferences.colorPalette.colors;

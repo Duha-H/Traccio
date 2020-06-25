@@ -9,6 +9,7 @@ import { DropdownItem } from 'src/app/components/types';
 })
 export class AccountDropdownComponent implements OnInit, OnChanges {
 
+  toggleClick = false;
   @Input() dropdownItems: DropdownItem[];
   @Input() displayDropdown: boolean;
   @ViewChild("dropdownContainer") dropdownRef: ElementRef;
@@ -27,7 +28,17 @@ export class AccountDropdownComponent implements OnInit, OnChanges {
         this.dropdownRef.nativeElement.className = 'dropdown-container visible';
       } else {
         this.dropdownRef.nativeElement.className = 'dropdown-container hidden';
+        this.toggleClick = false;
       }
+    }
+  }
+
+  onItemClick(item: DropdownItem) {
+    if (item.callback) {
+      item.callback();
+    }
+    if (item.type === 'toggle') {
+      this.toggleClick = !this.toggleClick;
     }
   }
 

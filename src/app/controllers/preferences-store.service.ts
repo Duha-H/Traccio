@@ -70,6 +70,18 @@ export class PreferencesStoreService {
     return response;
   }
 
+  toggleTheme() {
+    const updatedPreferences = this._preferences.getValue();
+    if (this._preferences.getValue().theme.name === 'dark') {
+      this.updateTheme('light');
+      updatedPreferences.theme = THEMES.light;
+    } else {
+      this.updateTheme('dark');
+      updatedPreferences.theme = THEMES.dark;
+    }
+    this._preferences.next(updatedPreferences);
+  }
+
   updateTheme(theme: string) {
     if (!THEMES[theme]) {
       return;

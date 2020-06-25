@@ -12,6 +12,8 @@ body[theme='light'] {
   --titles-secondary: #7e8992;
   --text: #494a4f;
   /** feedback colors */
+  --theme-dark: #22232d;
+  --theme-light: #F6F6F6;
   --valid: #29b983;
   --warn: #f94d78;
   --disabled-bg: #797f85;
