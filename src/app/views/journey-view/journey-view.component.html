@@ -5,16 +5,13 @@
 
       <div class="details">
         <div class="title spanning-content">
-          <h2 *ngIf="viewMode == 'view'; else titleEdit;" style="font-weight: 400; margin-top: 15px;">{{journey.title}} Details</h2>
-          <ng-template #titleEdit>
-            <text-field (inputChange)="journey.title=$event" [width]="400" [fontSize]="20" [fontColor]="'var(--titles-primary)'" [center]="false" [text]="journey.title" [displayLabel]="false"></text-field>
-          </ng-template>
+          <h2 style="font-weight: 400; margin-top: 15px;">{{journey.title}} details</h2>
           <div class="spacer"></div>
           <button class="add-btn" title="Add application" (click)="openDrawer('add', null)" [disabled]="viewMode != 'view' || !journey.active">
             <p>New Application</p>
             <mat-icon [inline]="true" aria-hidden="false" aria-label="Add journey icon">add</mat-icon>
           </button>
-          <button class="add-btn" title="Toggle journey selection" (click)="toggleViewMode()" [disabled]="!journey.active">
+          <button class="add-btn" title="Toggle journey selection" (click)="displayEditOverlay=true">
             <p>Edit Journey</p>
             <mat-icon [inline]="true" aria-hidden="false" aria-label="Select journey icon">edit</mat-icon>
           </button>
@@ -42,7 +39,7 @@
 
   <div class="side-content">
     <div class="status">
-      <div class="{{ journey.active ? 'status-toggle active' : 'status-toggle' }}" (click)="toggleJourneyActive()" title="toggle journey status">
+      <div class="{{ journey.active ? 'status-toggle active' : 'status-toggle' }}" title="journey status">
         {{ journey.active ? 'Active' : 'Inactive' }}
       </div>
     </div>
@@ -50,16 +47,15 @@
       <p>Start: {{ journey.startDate | date }}</p>
       <p>End: {{ journey.active ? 'Present' : journey.endDate | date }}</p>
     </div>
+
     <div class="filter-dropdown">
       <mat-form-field class="edit-items" floatLabel="never" color="accent">
-        <mat-select color="accent" name="filterSelection" title="application filters" placeholder="Application Filters" multiple #filterElement>
-          <mat-select-trigger><span>Application Filters</span></mat-select-trigger>
-          <mat-optgroup *ngFor="let group of filterDropdown; let i = index;" [label]="group.name" color="accent">
-            <mat-option *ngFor="let item of group.items; let j = index;" [value]="item.value"
-              (onSelectionChange)="addFilter($event)" id="{{group.name}}.{{item.value}}" color="accent" #matOption>
-              {{item.viewValue}}
-            </mat-option>
-          </mat-optgroup>
+        <mat-select color="accent" name="filterSelection" title="application filters" placeholder="Status Filters" multiple #filterElement>
+          <mat-select-trigger><span>Status Filters</span></mat-select-trigger>
+          <mat-option *ngFor="let item of statusFilterDropdown; let j = index;" [value]="item.value"
+            (onSelectionChange)="addFilter($event, 'Status')" id="Status.{{item.value}}" color="accent" #matOption>
+            {{item.viewValue}}
+          </mat-option>
         </mat-select>
       </mat-form-field>
     </div>
@@ -70,6 +66,22 @@
           <div class="spacer"></div>
           <mat-icon [inline]="true" (click)="removeFilter('Status', filterItem)" style="cursor: pointer;">clear</mat-icon>
         </li>
+      </ul>
+    </div>
+
+    <div class="filter-dropdown">
+      <mat-form-field class="edit-items" floatLabel="never" color="accent">
+        <mat-select color="accent" name="filterSelection" title="application filters" placeholder="Source Filters" multiple #filterElement>
+          <mat-select-trigger><span>Source Filters</span></mat-select-trigger>
+          <mat-option *ngFor="let item of sourceFilterDropdown; let j = index;" [value]="item.value"
+            (onSelectionChange)="addFilter($event, 'Source')" id="Source.{{item.value}}" color="accent" #matOption>
+            {{item.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="filter-values">
+      <ul class="filter-values">
         <li *ngFor="let filterItem of filterObjects.source;">
           <p>{{filterItem}}</p>
           <div class="spacer"></div>
@@ -77,6 +89,40 @@
         </li>
       </ul>
     </div>
+
   </div>
-  
 </div>
+
+<app-overlay *ngIf="displayEditOverlay" (closeOverlay)="displayEditOverlay=false" [title]="'Edit journey details'">
+  <div class="overlay-content">
+    <text-field class="overlay-item" [text]="currJourneyDetails.title" [width]="500" [label]="'Journey Title'" (inputChange)="currJourneyDetails.title=$event"></text-field>
+
+    <div class="overlay-item" #startDateEdit>
+      <label>Start Date</label>
+      <mat-form-field class="form-element"  color="accent">
+        <input matInput [matDatepicker]="startPicker" [value]="currJourneyDetails.startDate" [(ngModel)]="currJourneyDetails.startDate" name="stDate" #stDate="ngModel" disabled/>
+        <mat-datepicker-toggle matSuffix [for]="startPicker">
+          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker color="accent" disabled="false" #startPicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="overlay-item" #endDateEdit>
+      <label>End Date</label>
+      <mat-form-field class="form-element" color="accent">
+        <input matInput [matDatepicker]="endPicker" (click)="endPicker.open()" [value]="currJourneyDetails.endDate" [(ngModel)]="currJourneyDetails.endDate" name="enDate" #enDate="ngModel" disabled/>
+        <mat-datepicker-toggle matSuffix [for]="endPicker">
+          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker color="accent" disabled="false" #endPicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="overlay-item" style="margin-left: 10px;">
+      <mat-checkbox [ngModel]="currJourneyDetails.active" (change)="toggleJourneyActive()" color="accent" name="active">Active</mat-checkbox>
+    </div>
+
+    <button class="submit-button" (click)="saveJourneyUpdates()">Save Changes</button>
+  </div>
+</app-overlay>

@@ -37,6 +37,7 @@ export class JourneyViewComponent implements OnInit {
 
   viewMode: "edit" | "view" = "view";
   journey: Journey = new Journey();
+  currJourneyDetails = Object.assign(new Journey(), this.journey);
   applications: Application[];
   startDate: string;
   endDate: string;
@@ -46,6 +47,32 @@ export class JourneyViewComponent implements OnInit {
   today = new Date();
   selectedApp;
   deleteButtonPressed = false;
+  statusFilterDropdown = [
+    { value: STATUS.IN_REVIEW, viewValue: STATUS.IN_REVIEW },
+    { value: STATUS.ASSESSMENT, viewValue: STATUS.ASSESSMENT },
+    { value: STATUS.INTERVIEW, viewValue: STATUS.INTERVIEW },
+    { value: STATUS.OFFER, viewValue: STATUS.OFFER },
+    { value: STATUS.REJECTED, viewValue: STATUS.REJECTED },
+    { value: STATUS.STALE, viewValue: STATUS.STALE },
+  ];
+  sourceFilterDropdown = [
+    {
+      value: APP_SOURCE.JOB_BOARD.toString(),
+      viewValue: APP_SOURCE.JOB_BOARD.toString(),
+    },
+    {
+      value: APP_SOURCE.REFERRAL.toString(),
+      viewValue: APP_SOURCE.REFERRAL.toString(),
+    },
+    {
+      value: APP_SOURCE.FAIR.toString(),
+      viewValue: APP_SOURCE.FAIR.toString(),
+    },
+    {
+      value: APP_SOURCE.OTHER.toString(),
+      viewValue: APP_SOURCE.OTHER.toString(),
+    },
+  ];
   filterDropdown = [
     {
       name: "Status",
@@ -93,6 +120,7 @@ export class JourneyViewComponent implements OnInit {
       { name: 'Journeys', url: '/journeys' },
     ]
   };
+  displayEditOverlay = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -112,6 +140,7 @@ export class JourneyViewComponent implements OnInit {
       return params.id;
     });
     this.journey = this.userStore.getJourney(id);
+    this.currJourneyDetails = Object.assign(new Journey(), this.journey);
     if (!this.journey) {
       console.log("No journey loaded.");
       this.router.navigate(["/journeys"]);
@@ -140,26 +169,30 @@ export class JourneyViewComponent implements OnInit {
 
   updateEndDate(event: MatDatepickerInputEvent<Date>) {
     if (event.value) {
-      this.journey.active = false;
+      this.currJourneyDetails.active = false;
     }
+  }
+
+  saveJourneyUpdates() {
+    this.journey = this.currJourneyDetails;
     this.userStore.loadData();
+    this.displayEditOverlay = false;
   }
 
   toggleJourneyActive() {
-    if (this.journey.active) {
-      this.journey.active = false;
-      this.journey.endDate = this.today;
+    if (this.currJourneyDetails.active) {
+      this.currJourneyDetails.active = false;
+      this.currJourneyDetails.endDate = this.today;
     } else {
-      this.journey.active = true;
-      this.journey.endDate = undefined;
+      this.currJourneyDetails.active = true;
+      this.currJourneyDetails.endDate = undefined;
     }
-    this.userStore.loadData();
   }
 
   updateView() {
     if (this.journey) {
       this.journey = this.userStore.getJourney(this.journey.id); // probably no longer necessary
-      // this.applications = this.journey.applications;
+      this.currJourneyDetails = Object.assign(new Journey(), this.journey);
       this.appList.updateView();
     }
   }
@@ -186,9 +219,11 @@ export class JourneyViewComponent implements OnInit {
     this.router.navigate(['/journeys', this.journey.id, application.id]);
   }
 
-  addFilter(event: MatOptionSelectionChange) {
+  addFilter(event: MatOptionSelectionChange, group: string) {
     this.dropdownElement.close();
-    const group = event.source.group.label.toLowerCase();
+    console.log(event);
+    // const group = event.source.group.label.toLowerCase();
+    group = group.toLowerCase();
     const value = event.source.value;
     // apply added filters
     this._applyFilter(group, value, event.source.selected);

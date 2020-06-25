@@ -71,7 +71,6 @@ mat-icon {
   line-height: 35px;
   color: var(--titles-secondary);
   border: 1px solid var(--titles-secondary);
-  cursor: pointer;
 }
 
 .status-toggle.active {
@@ -161,32 +160,34 @@ button.add-btn:disabled mat-icon, button.add-btn:disabled p {
 .form-element {
   background-color: var(--element-bg-secondary);
   border-radius: 25px;
-  margin: 0px 10px;
+  /* margin: 0px 10px; */
   margin-right: 0;
-  padding: 4px;
-  width: 235px;
+  padding: 8px;
+  /* width: 235px; */
 }
 
-::ng-deep .details .mat-form-field-wrapper, ::ng-deep .details .mat-form-field-infix {
+::ng-deep .overlay-content .mat-form-field-wrapper, ::ng-deep .overlay-content .mat-form-field-infix {
   border-top: none;
   height: 100%;
+  padding-bottom: 0;
 }
 
-::ng-deep .details .mat-form-field-underline, ::ng-deep .details .mat-form-field-underline .mat-form-field-ripple {
+::ng-deep .overlay-content .mat-form-field-underline, ::ng-deep .overlay-content .mat-form-field-underline .mat-form-field-ripple {
   background-color: transparent;
   height: 0;
+  opacity: 0;
 }
 
-::ng-deep .details .mat-form-field-infix {
+::ng-deep .overlay-content .mat-form-field-infix {
   /* padding: 0; */
   padding-left: 10px;
 }
 
-::ng-deep .details .mat-form-field-suffix {
-  padding-right: 10px;
+::ng-deep .overlay-content .mat-form-field-suffix {
+  /* padding-right: 10px; */
 }
 
-::ng-deep .details .mat-form-field-disabled .mat-form-field-underline {
+::ng-deep .overlay-content .mat-form-field-disabled .mat-form-field-underline {
   background: none;
 }
 
@@ -198,7 +199,6 @@ button.add-btn:disabled mat-icon, button.add-btn:disabled p {
   margin-top: 8px;
   display: block;
   text-align: left;
-  border-bottom: 1px solid var(--titles-secondary);
 }
 
 .dates p {
@@ -284,7 +284,7 @@ button.add-btn:disabled mat-icon, button.add-btn:disabled p {
 button {
   cursor: pointer;
   border: none;
-  background: none;
+  /* background: none; */
 }
 
 .dates * {
@@ -320,7 +320,9 @@ mat-select {
 }
 
 .filter-dropdown {
-  margin-top: 10px;
+  margin-top: 15px;
+  padding: 15px 0;
+  border-top: 1px solid #909ca869;
 }
 
 ::ng-deep .filter-dropdown .mat-form-field {
@@ -328,7 +330,6 @@ mat-select {
 }
 
 ::ng-deep .filter-dropdown .mat-select-arrow-wrapper {
-  /* max-width: 0; */
   opacity: 0;
 }
 
@@ -352,7 +353,7 @@ ul.filter-values {
   padding: 0;
   scrollbar-width: none;
   line-height: var(--app-header-height);
-  height: var(--app-header-height);
+  /* height: var(--app-header-height); */
 }
 
 .filter-values li {
@@ -437,4 +438,27 @@ mat-list-item {
 .clickable-item:hover {
   background-color: var(--element-bg-secondary) !important;
   cursor: pointer;
+}
+
+.overlay-content {
+  margin: 0 auto;
+  width: 350px;
+  padding: 10px 15px;
+  height: 100%;
+}
+
+.overlay-item {
+  margin: 20px 0;
+  display: grid;
+  text-align: left;
+}
+
+.overlay-item label {
+  color: var(--titles-secondary);
+  margin-bottom: 5px;
+  font-size: 11pt;
+}
+
+.overlay-item mat-checkbox {
+  margin-top: 15px;
 }

@@ -25,16 +25,22 @@ export class AppFilterPipe implements PipeTransform {
       value: string;
     }[]
   ): boolean {
-    let match = false;
     if (filters.map(filter => filter.value).join('') === '') { // no filter values specified
       return true;
     }
+    // filtering is disjunctive within a specific property (OR-ing)
+    // but conjunctive across properties (AND-ing)
+    const match: boolean[] = [];
     filters.forEach(filter => {
-      if (filter.value !== '' && filter.value.includes(item[filter.property])) {
-        match = true;
-        return;
+      if (
+        (filter.value !== '' && filter.value.includes(item[filter.property])) ||
+        filter.value === ''
+      ) {
+        match.push(true);
+      } else {
+        match.push(false);
       }
     });
-    return match;
+    return match.every((value) => value); // true if every value is true
   }
 }
