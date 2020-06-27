@@ -163,10 +163,12 @@ div.label p.label {
 }
 
 .setting button.active {
+  border: 1px solid var(--accent);
   background-color: var(--accent);
 }
 
 .setting button:hover {
+  border: 1px solid var(--titles-secondary);
   background-color: var(--titles-secondary);
 }
 

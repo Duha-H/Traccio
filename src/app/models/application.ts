@@ -8,7 +8,9 @@ export class Application {
 	private _positionTitle = '';
 	private _appDate: Date = new Date();
 	private _status = STATUS.IN_REVIEW.toString();
-	private _timeline: TimelineDatum[] = [];
+	private _timeline: TimelineDatum[] = [
+		{ status: this._status, date: this._appDate }
+	];
 	private _source = APP_SOURCE.JOB_BOARD.toString();
 	private _notes = '';
 
@@ -53,6 +55,7 @@ export class Application {
 		this._timeline.push({
 			status, date: new Date()
 		});
+		console.log(this._timeline);
 	}
 
 	get source() { return this._source; }

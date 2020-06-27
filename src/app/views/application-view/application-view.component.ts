@@ -8,6 +8,7 @@ import { STATUS_COLORS, STATUS, APP_SOURCE, APP_ATTRIBS } from 'src/app/models/c
 import { KeyValue } from '@angular/common';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { Journey } from 'src/app/models/journey';
+import { ApplicationInput } from 'src/app/models/types';
 
 @Component({
   selector: 'app-application-view',
@@ -45,6 +46,7 @@ export class ApplicationViewComponent implements OnInit {
     {value: APP_SOURCE.OTHER.toString(), viewValue: APP_SOURCE.OTHER.toString()},
   ];
   wishlistApp = true; // true if application in current view is a wishlist application
+  newApp = true; // true if application in current view is being added
   displayAddOverlay = false;
 
   @ViewChild(TimelineComponent, { static: true }) timeline: TimelineComponent;
@@ -64,10 +66,19 @@ export class ApplicationViewComponent implements OnInit {
         this.wishlistApp = false;
       }
       appid = params.appref;
+      if (appid === 'new-app') {
+        this.newApp = true;
+      } else {
+        this.newApp = false;
+      }
     });
-    this.inputApplication = !this.wishlistApp
-      ? this.userStore.getApplication(this.journeyid, +appid)
-      : this.userStore.getWishlistApplication(+appid); // TODO: sort out application id thing
+    if (this.wishlistApp) {
+      this.inputApplication = this.userStore.getWishlistApplication(+appid);
+    } else if (this.newApp) {
+      this.inputApplication = new Application();
+    } else {
+      this.inputApplication = this.userStore.getApplication(this.journeyid, +appid);
+    }
     this.currApplicationDetails = Object.assign(new Application(), this.inputApplication);
     if (!this.inputApplication) {
       console.log('ApplicationViewComponent: no application retrieved with id:', appid);
@@ -103,7 +114,7 @@ export class ApplicationViewComponent implements OnInit {
 
   updateField(attrib: string, value: string) {
     this.detailsUpdated = true;
-    if (this.currApplicationDetails[attrib]) {
+    if (this.currApplicationDetails[attrib] !== undefined) { // value can be empty string
       if (attrib === this.ATTRIBS.STATUS) {
         this.currApplicationDetails.status = value; // handles adding the new status to the application's timeline
       } else {
@@ -113,13 +124,24 @@ export class ApplicationViewComponent implements OnInit {
   }
 
   saveChanges() {
-    // this.inputApplication = this.currApplicationDetails;
     if (this.wishlistApp) {
       this.userStore.updateWishlistApplication(this.currApplicationDetails);
+    } else if (this.newApp) {
+      const newApp = this.userStore.addNewApplication(this.journeyid, this.currApplicationDetails);
+      this.router.navigate(['/journeys', this.journeyid, newApp.id]);
     } else {
       this.userStore.updateExistingApplication(this.journeyid, this.currApplicationDetails);
     }
     this.detailsUpdated = false;
+  }
+
+  cancelChanges() {
+    // navigates away from new-app view
+    if (this.newApp) {
+      this.router.navigate(['/journeys', this.journeyid]);
+    } else if (this.wishlistApp) {
+      this.router.navigate(['/wishlist']);
+    }
   }
 
   displayAddToJourneyOverlay() {
@@ -127,7 +149,7 @@ export class ApplicationViewComponent implements OnInit {
   }
 
   addApplicationToJourney(journey: Journey) {
-    // this.userStore.addNewApplication(journey.id, this.currApplicationDetails);
+    this.userStore.addNewApplication(journey.id, this.currApplicationDetails);
   }
 
   /**

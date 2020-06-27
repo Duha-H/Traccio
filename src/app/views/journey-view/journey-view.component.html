@@ -1,17 +1,15 @@
 <breadcrumbs [data]="breadcrumbsData"></breadcrumbs>
 <div class="view-container">
   <div class="main-content">
-    <mat-drawer-container hasBackdrop="unset">
-
       <div class="details">
         <div class="title spanning-content">
           <h2 style="font-weight: 400; margin-top: 15px;">{{journey.title}} details</h2>
           <div class="spacer"></div>
-          <button class="add-btn" title="Add application" (click)="openDrawer('add', null)" [disabled]="viewMode != 'view' || !journey.active">
+          <button class="add-btn" title="Add application" (click)="addApplication()" [disabled]="viewMode != 'view' || !journey.active">
             <p>New Application</p>
             <mat-icon [inline]="true" aria-hidden="false" aria-label="Add journey icon">add</mat-icon>
           </button>
-          <button class="add-btn" title="Toggle journey selection" (click)="displayEditOverlay=true">
+          <button class="add-btn" title="Toggle journey selection" (click)="showEditOverlay()">
             <p>Edit Journey</p>
             <mat-icon [inline]="true" aria-hidden="false" aria-label="Select journey icon">edit</mat-icon>
           </button>
@@ -21,6 +19,7 @@
           <p>Applications</p>
           <div class="spacer"></div>            
         </div>
+      </div>
   
         <div class="apps">
           <application-list
@@ -28,13 +27,6 @@
             (applicationClick)="navigateToApplication($event)"
           ></application-list>
         </div>
-      </div>
-  
-      <mat-drawer position="end" [fixedInViewport]="true" mode="side" [opened]="displayDrawer" #sidenav>
-        <application-input [sidenav]="sidenav" [app]="selectedApp" [journeyId]="journey.id" (dataLogged)="updateView()">
-        </application-input>
-      </mat-drawer>
-    </mat-drawer-container>
   </div>
 
   <div class="side-content">

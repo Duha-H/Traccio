@@ -42,7 +42,8 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         children: [
           { path: "", component: WishlistComponent },
-          { path: ":appref", component: ApplicationViewComponent }
+          { path: ":appref", component: ApplicationViewComponent },
+          { path: "new-app", component: ApplicationViewComponent },
         ]
       },
       { path: "settings", component: SettingsComponent, canActivate: [AuthGuard] },

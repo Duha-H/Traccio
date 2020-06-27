@@ -198,8 +198,7 @@ export class JourneyViewComponent implements OnInit {
   }
 
   addApplication() {
-    this.displayDrawer = true;
-    this.drawerMode = DRAWER_MODES.ADD;
+    this.router.navigate(['/journeys', this.journey.id, 'new-app']);
   }
 
   openDrawer(mode: string, application: Application) {
@@ -213,6 +212,11 @@ export class JourneyViewComponent implements OnInit {
       this.displayDrawer = false;
       this.sidenav.close();
     }
+  }
+
+  showEditOverlay() {
+    this.currJourneyDetails = Object.assign(new Journey(), this.journey);
+    this.displayEditOverlay = true;
   }
 
   navigateToApplication(application: Application) {

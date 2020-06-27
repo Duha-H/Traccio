@@ -77,7 +77,7 @@ export class TextFieldComponent implements OnInit {
   }
 
   private _setLabel() {
-    if (!this.value) { // value is empty or undefined
+    if (this.value === undefined) { // verbose check because value can be an empty string
       this.fieldLabel = "\n";
     } else {
       this.fieldLabel = this.label;

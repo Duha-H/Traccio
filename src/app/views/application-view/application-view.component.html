@@ -9,9 +9,12 @@
     <button *ngIf="wishlistApp" class="save-btn" (click)="displayAddToJourneyOverlay()">
       <p>Add to Journey</p>
     </button>
+    <button *ngIf="newApp || wishlistApp" class="save-btn" (click)="cancelChanges()">
+      <p>Cancel</p>
+    </button>
   </div>
   
-  <div *ngIf="!wishlistApp" class="status-info">
+  <div *ngIf="!wishlistApp && !newApp" class="status-info">
     <div class="spanning-content block-title status-title" style>
       <p>Status Timeline</p>
       <div class="spacer"></div>
@@ -43,7 +46,7 @@
     </div>
     <div class="info-item">
       <div class="date-value" style="margin-right: 35px;" >
-        <label for="">Application Date</label>
+        <label for="">Date Applied</label>
         <mat-form-field class="form-element" color="accent">
           <input matInput [matDatepicker]="startPicker" (dateChange)="updateField(ATTRIBS.DATE, $event.value)" [value]="currApplicationDetails.appDate" [(ngModel)]="currApplicationDetails.appDate" name="stDate" #stDate="ngModel" disabled/>
           <mat-datepicker-toggle matSuffix [for]="startPicker">

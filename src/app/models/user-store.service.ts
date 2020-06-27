@@ -226,17 +226,24 @@ export class UserStoreService {
     this.dataUpdated = true;
   }
 
-  addNewApplication(journeyId: string, appData: ApplicationInput) {
+  addNewApplication(journeyId: string, appData: ApplicationInput | Application) {
     const journey = this.getJourney(journeyId);
     const appID = this._getNewAppID(journeyId);
     appData.id = appID;
-    const newApplication = new Application(appData);
+    let newApplication: Application;
+    if (appData instanceof Application) {
+      newApplication = appData;
+    } else {
+      newApplication = new Application(appData);
+    }
+    // const newApplication = new Application(appData);
     this.dataManager.addApplication(journeyId, newApplication);
     journey.applications.push(newApplication); // wooowiiieee
     // TODO: should this maybe trigger a data reload??
     this.dataUpdated = true;
     console.log("application added: ", newApplication);
     this.updateJourneyData(); // data update, bubble .next() it to all observables
+    return newApplication;
   }
 
   updateExistingApplication(

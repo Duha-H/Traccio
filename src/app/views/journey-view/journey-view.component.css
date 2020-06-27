@@ -292,6 +292,7 @@ button {
 }
 
 .apps {
+  text-align: left;
   margin: 20px;
   margin-top: 15px;
 }
@@ -410,8 +411,12 @@ td.mat-cell:first-of-type {
 
 .delete-button {
   float: right;
-  color: var(--warn);
+  color: var(--titles-secondary);
   cursor: pointer;
+}
+
+mat-icon.delete-button:hover {
+  color: var(--warn);
 }
 
 mat-list-item {
