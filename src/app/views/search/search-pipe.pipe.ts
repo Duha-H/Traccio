@@ -13,7 +13,9 @@ export class SearchPipe implements PipeTransform {
     } else if (!query) {
       return [];
     }
-    query = query.toLowerCase();
+    if (typeof query === 'string') {
+      query = query.toLowerCase();
+    }
     if (type === 'journey') {
       return (items as Journey[]).filter(journey => journey.title.toLowerCase().indexOf(query) !== -1);
     } else if (type === 'application') {

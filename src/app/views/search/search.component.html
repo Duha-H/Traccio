@@ -9,10 +9,10 @@
     </div>
   
     <div class="results">
-      <div class="result-section" *ngIf="filteredJourneys.length != 0">
+      <div class="result-section" *ngIf="filteredJourneys.length != 0;">
         <h3 class="result-title">Journeys</h3>
         <mat-list style="height: 100%;" class="app-list-item">
-          <mat-list-item class="clickable-item" *ngFor="let journey of filteredJourneys;">
+          <mat-list-item class="clickable-item" *ngFor="let journey of filteredJourneys;" (click)="viewResult('journey', journey, journey.id)">
             <mat-icon matListIcon>folder</mat-icon>
             <div matLine>
               <div class="spanning-content">
@@ -25,24 +25,27 @@
         </mat-list>
       </div>
   
-      <div class="result-section" *ngIf="filteredApps.length != 0">
+      <div class="result-section" *ngIf="(filteredAppsMap | keys).length != 0;">
         <h3 class="result-title">Applications</h3>
         <mat-list style="height: 100%;" class="app-list-item">
-          <mat-list-item class="clickable-item" *ngFor="let app of filteredApps;">
-            <mat-icon matListIcon>folder</mat-icon>
-            <div matLine>
-              <div class="spanning-content">
-                <h4 style="text-align: left; color: var(--text);">{{app.positionTitle + '  '}}</h4>
-                <span style="padding-left: 10px; color: var(--titles-secondary);"> @ {{app.companyName}}</span>
-                <div class="spacer"></div>
-                <span>Date Applied: {{ app.appDate | date }}</span>
+          <div *ngFor="let item of filteredAppsMap | keyvalue;">
+            <mat-list-item class="clickable-item" *ngFor="let app of item.value;" (click)="viewResult('application', app, item.key)">
+              <mat-icon matListIcon>folder</mat-icon>
+              <div matLine>
+                <div class="spanning-content">
+                  <h4 style="text-align: left; color: var(--text);">{{ app.positionTitle + '  ' }}</h4>
+                  <span style="padding-left: 10px; color: var(--titles-secondary);"> @ {{ app.companyName }}</span>
+                  <div class="spacer"></div>
+                  <span>Date Applied: {{ app.appDate | date }}</span>
+                </div>
               </div>
-            </div>
-          </mat-list-item>
+            </mat-list-item>
+          </div>
         </mat-list>
       </div>
   
-      <div class="placeholder-text" *ngIf="query.length != 0 && filteredJourneys.length == 0 && filteredApps.length == 0">
+      <div class="placeholder-text" 
+        *ngIf="filteredJourneys.length == 0 && (filteredAppsMap | keys).length == 0 && query.length != 0">
         <h4>Looks like your search has no matching results.</h4>
       </div>
   

@@ -50,6 +50,7 @@ import { ResetSuccessfulComponent } from './auth/account-recovery/reset-successf
 import { SignupSuccessfulComponent } from './auth/confirm-signup/signup-successful.component';
 import { AppFilterPipe } from './views/dashboard/app-filter.pipe';
 import { SearchPipe } from './views/search/search-pipe.pipe';
+import { KeysPipe } from './views/search/keys-pipe.pipe';
 import { WishlistComponent } from './views/wishlist/wishlist.component';
 import { OverlayComponent } from './components/overlay/overlay.component';
 import { ProfileSettingsComponent } from './views/settings/profile-settings.component';
@@ -88,6 +89,7 @@ import { OverflowWrapperComponent } from './components/overflow-wrapper/overflow
     SignupSuccessfulComponent,
     AppFilterPipe,
     SearchPipe,
+    KeysPipe,
     WishlistComponent,
     ApplicationListComponent,
     OverlayComponent,
@@ -129,6 +131,7 @@ import { OverflowWrapperComponent } from './components/overflow-wrapper/overflow
     { provide: ErrorStateMatcher, useClass: OnDirtyErrorStateMatcher },
     AppFilterPipe,
     SearchPipe,
+    KeysPipe,
   ],
   bootstrap: [AppComponent],
   entryComponents: [
