@@ -27,6 +27,7 @@ export class TimelineComponent implements OnInit, AfterViewInit {
   displayTooltip = false;
   tooltipProps: TimelineTooltipPropType;
   pixelRatio: number;
+  markerOnHover: TimelineMarker;
 
   @Input() props: TimelinePropType;
   @ViewChild('canvas', { static: true }) canvas: ElementRef<HTMLCanvasElement>;
@@ -59,19 +60,19 @@ export class TimelineComponent implements OnInit, AfterViewInit {
       this.ctx.fillStyle = this.markers[i].payload.color;
       const x = this.markers[i].x;
       const y = this.markers[i].y;
-      let prevPoint;
-      if (i > 0) {
-        prevPoint = {
-          x: this.markers[i - 1].x,
-          y: this.markers[i - 1].y
+      let nextPoint;
+      if (i < this.markers.length - 1) {
+        nextPoint = {
+          x: this.markers[i + 1].x,
+          y: this.markers[i + 1].y,
         };
       } else {
-        prevPoint = { x: 0, y: this.markers[0].y };
+        nextPoint = { x: this.width, y: this.markers[0].y };
       }
       // draw line
       this.ctx.beginPath();
-      this.ctx.moveTo(prevPoint.x, prevPoint.y);
-      this.ctx.lineTo(x, y);
+      this.ctx.moveTo(x, y);
+      this.ctx.lineTo(nextPoint.x, nextPoint.y);
       this.ctx.stroke();
     }
     // draw markers (drawing them separately for now to make sure that markers are on top)
@@ -80,12 +81,21 @@ export class TimelineComponent implements OnInit, AfterViewInit {
       this.ctx.fillStyle = marker.payload.color;
       marker.draw(this.ctx, MARKER_WIDTH, MARKER_HEIGHT, true, false);
     });
+    // draw ending marker/tick
+    this.ctx.strokeStyle = '#797f85';
+    this.ctx.fillStyle = '#797f85';
+    this.ctx.lineWidth = 2;
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.width, this.markers[0].y - (MARKER_HEIGHT / 2) + MARKER_RADIUS);
+    this.ctx.lineTo(this.width, this.markers[0].y + (MARKER_HEIGHT / 2) - MARKER_RADIUS);
+    this.ctx.stroke();
   }
 
   onMouseHover(event: MouseEvent) {
     // detect collisions with markers
     const markerOnHover = this._getMarkerOnHover((event.x - this.canvasX) * this.pixelRatio, (event.y - this.canvasY) * this.pixelRatio);
     if (markerOnHover) {
+      this.markerOnHover = markerOnHover;
       this.displayTooltip = true;
       this.tooltipProps = {
         // x: (markerOnHover.x + this.canvasX) / this.pixelRatio,
@@ -97,6 +107,7 @@ export class TimelineComponent implements OnInit, AfterViewInit {
         color: markerOnHover.payload.color
       };
     } else {
+      this.markerOnHover = undefined;
       this.displayTooltip = false;
     }
   }
@@ -137,17 +148,10 @@ export class TimelineComponent implements OnInit, AfterViewInit {
       for (let i = 0; i < this.props.data.length; i++) {
         const item = this.props.data[i];
         const nextItem = this.props.data[i + 1];
-        let statusTimeElapsed: number;
-        let nextDate: Date;
-        if (nextItem) {
-          statusTimeElapsed =  nextItem.date.getTime() - item.date.getTime();
-          nextDate = nextItem.date;
-        } else {
-          statusTimeElapsed =  today.getTime() - item.date.getTime();
-          nextDate = today;
-        }
+        const nextDate = nextItem ? nextItem.date : today;
+        const statusTimeElapsed = item.date.getTime() - start.getTime();
         const ratio = statusTimeElapsed / totalTimeElapsed;
-        const newX = prevX + (ratio * adjustedWidth);
+        const newX = (ratio * adjustedWidth) + (MARKER_WIDTH / 2);
         if (newX - prevX < MARKER_WIDTH && this.markers[i - 1]) {
           // correcting for markers that end up being too close to be discernible
           this.markers[i - 1].x -= MARKER_WIDTH;
@@ -155,10 +159,9 @@ export class TimelineComponent implements OnInit, AfterViewInit {
         const markerColor = this.props.colorMappings && this.props.colorMappings[item.status]
           ? this.props.colorMappings[item.status]
           : this.props.colors[i];
-        const newMarker = new TimelineMarker(newX, y, 'rounded-rect', {
-          status: item.status,
-          date: nextDate,
-          duration: msToDays(statusTimeElapsed),
+        const newMarker = new TimelineMarker(i, newX, y, 'rounded-rect', {
+          ...item,
+          duration: msToDays(nextDate.getTime() - item.date.getTime()),
           color: markerColor
         });
         this.markers.push(newMarker);

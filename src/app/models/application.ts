@@ -55,7 +55,6 @@ export class Application {
 		this._timeline.push({
 			status, date: new Date()
 		});
-		console.log(this._timeline);
 	}
 
 	get source() { return this._source; }

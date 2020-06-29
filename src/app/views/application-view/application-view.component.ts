@@ -49,7 +49,7 @@ export class ApplicationViewComponent implements OnInit {
   newApp = true; // true if application in current view is being added
   displayAddOverlay = false;
 
-  @ViewChild(TimelineComponent, { static: true }) timeline: TimelineComponent;
+  @ViewChild('timeline', { static: false }) timeline: TimelineComponent;
   @ViewChild('notesTextArea', { static: true }) notesTextArea: ElementRef<any>;
 
   constructor(
@@ -117,6 +117,7 @@ export class ApplicationViewComponent implements OnInit {
     if (this.currApplicationDetails[attrib] !== undefined) { // value can be empty string
       if (attrib === this.ATTRIBS.STATUS) {
         this.currApplicationDetails.status = value; // handles adding the new status to the application's timeline
+        this.timeline.draw(); // trigger timeline re-draw
       } else {
         this.currApplicationDetails[attrib] = value;
       }

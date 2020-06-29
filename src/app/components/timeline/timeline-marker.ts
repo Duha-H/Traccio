@@ -1,17 +1,21 @@
 export class TimelineMarker {
 
   // private _ctx: CanvasRenderingContext2D;
+  private _id: number;
   private _x: number;
   private _y: number;
   private _shape: 'circle' | 'rounded-rect';
   private _payload: any;
 
-  constructor(x?: number, y?: number, shape?: 'circle' | 'rounded-rect', payload?: any) {
+  constructor(id?: number, x?: number, y?: number, shape?: 'circle' | 'rounded-rect', payload?: any) {
+    this._id = id ? id : 0;
     this._x = x ? x : 0;
     this._y = y ? y : 0;
     this._shape = shape ? shape : 'rounded-rect';
     this._payload = payload ? payload : null;
   }
+
+  get id() { return this._id; }
 
   get x() { return this._x; }
   set x(value: number) { this._x = value; }
@@ -100,5 +104,15 @@ export class TimelineMarker {
     if (stroke) {
       ctx.stroke();
     }
+  }
+
+  drawDateLabel(ctx: CanvasRenderingContext2D) {
+    // console.log(getComputedStyle(document.documentElement));
+    ctx.strokeStyle = '#000';
+    ctx.beginPath();
+    ctx.setLineDash([10, 5]);
+    ctx.moveTo(this._x, this._y - 80);
+    ctx.lineTo(this._x, this._y);
+    ctx.stroke();
   }
 }
