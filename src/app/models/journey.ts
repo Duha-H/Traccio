@@ -1,4 +1,5 @@
 import { Application } from './application';
+import { MONTH_VALS } from './constants'
 // Object representation of a Journey
 export class Journey {
 
@@ -15,7 +16,9 @@ export class Journey {
 			const x = 1;
 			this._title = data.title;
 			this._id = data.id;
-			this._startDate = new Date(data.startDate); // parse date string, ISO_8601 format -> milliseconds -> Date
+			this._startDate = typeof data.startDate === 'string' // accepts ISO-formated, 1-indexed date string
+				? this._adjustDateString(data.startDate)
+				: new Date(data.startDate);
 			this._endDate = data.endDate
 				? new Date(data.endDate)
 				: undefined; // parse date string, ISO_8601 format -> milliseconds -> Date
@@ -60,14 +63,13 @@ export class Journey {
 
 	getGraphQLInput() {
 		// format null-able values
-		const endDateFormatted = this._endDate.toISOString().split('T')[0]; // ISO String format: YYYY-MM-DDTHH:mm:ss.sssZ
-																																				// or ±YYYYYY-MM-DDTHH:mm:ss.sssZ
+		const endDateFormatted = this._endDate.toLocaleDateString();
 		const applicationsFormatted = this._applications.map(app => app.getGraphQLInput());
 
 		const input = {
 			id: this._id,
 			title: this._title,
-			startDate: this._endDate.toISOString().split('T')[0], // "YYYY-MM-DD"
+			startDate: this._endDate.toLocaleDateString(), // "YYYY-MM-DD"
 			endDate: endDateFormatted,
 			active: this._active,
 			applications: applicationsFormatted
@@ -75,5 +77,16 @@ export class Journey {
 		return input;
 	}
 
+	private _adjustDateString(date: string) {
+		const components = date.split('-');
+		if (components.length !== 3) {
+			console.log('Application: invalid date string:', date);
+			return new Date();
+		} else {
+			// accepts 1-indexed ISO date string (YYYY-MM-DD)
+			const updatedDateStr = `${MONTH_VALS[+components[1]]} ${components[2]}, ${components[0]}`;
+			return new Date(updatedDateStr);
+		}
+	}
 
 }

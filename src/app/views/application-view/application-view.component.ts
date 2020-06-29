@@ -80,6 +80,7 @@ export class ApplicationViewComponent implements OnInit {
       this.inputApplication = this.userStore.getApplication(this.journeyid, +appid);
     }
     this.currApplicationDetails = Object.assign(new Application(), this.inputApplication);
+    console.log(this.currApplicationDetails);
     if (!this.inputApplication) {
       console.log('ApplicationViewComponent: no application retrieved with id:', appid);
       this.router.navigate(['/journeys']);

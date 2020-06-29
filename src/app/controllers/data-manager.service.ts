@@ -50,7 +50,7 @@ export class DataManagerService {
   addApplication(journeyid: string, app: Application) {
     const calendarDatum = this.calendarData[journeyid];
     const statusDatum = this.statusData[journeyid];
-    const dateString = app.appDate.toISOString().split('T')[0];
+    const dateString = app.appDate.toLocaleDateString();
     const status = app.status;
     if (calendarDatum.hasOwnProperty(dateString)) {
       calendarDatum[dateString] += 1;
@@ -69,7 +69,7 @@ export class DataManagerService {
   removeApplication(journeyid: string, app: Application) {
     const calendarDatum = this.calendarData[journeyid];
     const statusDatum = this.statusData[journeyid];
-    const dateString = app.appDate.toISOString().split('T')[0];
+    const dateString = app.appDate.toLocaleDateString();
     if (calendarDatum && calendarDatum[dateString]) {
       calendarDatum[dateString] -= 1;
       if (calendarDatum[dateString] === 0) { // remove date string if count reaches 0
@@ -87,8 +87,8 @@ export class DataManagerService {
   }
 
   updateExistingApplication(journeyid: string, prevApp: Application, updatedApp: Application) {
-    const dateString = prevApp.appDate.toISOString().split('T')[0];
-    const newDateString = updatedApp.appDate.toISOString().split('T')[0];
+    const dateString = prevApp.appDate.toLocaleDateString();
+    const newDateString = updatedApp.appDate.toLocaleDateString();
     let calendarDatum = this.calendarData[journeyid];
     let statusDatum = this.statusData[journeyid];
     if (dateString !== newDateString) {
@@ -145,7 +145,7 @@ export class DataManagerService {
     const calendarDatum: {[key: string]: number} = {};
     const statusDatum: {[key: string]: number} = {};
     apps.forEach(app => {
-      const dateString = app.appDate.toISOString().split('T')[0];
+      const dateString = app.appDate.toLocaleDateString();
       if (calendarDatum.hasOwnProperty(dateString)) {
         calendarDatum[dateString] += 1;
       } else {

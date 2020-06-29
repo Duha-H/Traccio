@@ -1,4 +1,4 @@
-import { STATUS, APP_SOURCE } from './constants';
+import { STATUS, APP_SOURCE, MONTH_VALS } from './constants';
 import { ApplicationInput, TimelineDatum } from './types';
 
 export class Application {
@@ -21,7 +21,9 @@ export class Application {
 				: data.id;
 			this._companyName = data.company;
 			this._positionTitle = data.title;
-			this._appDate = new Date(data.date);
+			this._appDate = typeof data.date === 'string'
+				? this._adjustDateString(data.date)
+				: new Date(data.date);
 			// this._appDate = data.date;
 			this._status = data.status;
 			if (data.timeline) {
@@ -70,7 +72,7 @@ export class Application {
 			id: this._id,
 			company: this._companyName,
 			title: this._positionTitle,
-			date: this._appDate.toISOString().split('T')[0], // "YYYY-MM-DD"
+			date: this._appDate.toLocaleDateString(), // "YYYY-MM-DD"
 			status: this._status,
 			source: this._source,
 			notes: this._notes
@@ -95,5 +97,17 @@ export class Application {
 			});
 		});
 		return modifiedData;
+	}
+
+	private _adjustDateString(date: string) {
+		const components = date.split('-');
+		if (components.length !== 3) {
+			console.log('Application: invalid date string:', date);
+			return new Date();
+		} else {
+			// accepts 1-indexed ISO date string (YYYY-MM-DD)
+			const updatedDateStr = `${MONTH_VALS[+components[1]]} ${components[2]}, ${components[0]}`;
+			return new Date(updatedDateStr);
+		}
 	}
 }

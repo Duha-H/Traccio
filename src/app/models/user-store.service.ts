@@ -214,7 +214,6 @@ export class UserStoreService {
     this.dataManager.addJourney(newJourney);
     this.updateJourneyData(updatedJourneys);
     this.dataUpdated = true;
-    console.log("journey added:", this.journeys);
     // make necessary api calls
   }
 
@@ -236,12 +235,10 @@ export class UserStoreService {
     } else {
       newApplication = new Application(appData);
     }
-    // const newApplication = new Application(appData);
     this.dataManager.addApplication(journeyId, newApplication);
     journey.applications.push(newApplication); // wooowiiieee
     // TODO: should this maybe trigger a data reload??
     this.dataUpdated = true;
-    console.log("application added: ", newApplication);
     this.updateJourneyData(); // data update, bubble .next() it to all observables
     return newApplication;
   }
