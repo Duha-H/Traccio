@@ -38,14 +38,14 @@
           <div class="data-container">
             <h4 class="data-container-title">
               Status Breakdown
-            </h4>  
+            </h4>
             <div *ngIf="!isEmpty(selectedJourney.statusData); else statusPlaceholder;" class="status-container" style="height: 85%;">
               <pie-chart-wrapper [data]="selectedJourney.statusData"
                 [margin]="{ top: 40, right: 200, bottom: 40, left: 80 }" [pixelRatio]="2" [innerRadius]="0.3"
                 [padAngle]="0.7" [cornerRadius]="3" [colors]="pieChartPalette" [enableRadialLabels]="false"
                 [borderColor]="{ from: 'color', modifiers: [ [ 'darker', 0.6 ] ] }" [radialLabelsSkipAngle]="10"
                 [radialLabelsTextXOffset]="6" [radialLabelsTextColor]="theme.textColor" [radialLabelsLinkOffset]="0"
-                [radialLabelsLinkDiagonalLength]="10" [radialLabelsLinkHorizontalLength]="20"
+                [radialLabelsLinkDiagonalLength]="10" [radialLabelsLinkHorizontalLength]="20" [sliceLabel]="'percentage'"
                 [radialLabelsLinkStrokeWidth]="1" [radialLabelsLinkColor]="{ from: 'color' }" [slicesLabelsSkipAngle]="10"
                 [slicesLabelsTextColor]="theme.textColor" [animate]="true" [motionStiffness]="90" [motionDamping]="15" [legends]="[
                   {

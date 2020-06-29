@@ -3,7 +3,7 @@ import * as ReactDOM from "react-dom";
 
 import { Component, Input } from "@angular/core";
 import { ReactWrapper } from "./react-wrapper.component";
-import { ResponsivePieCanvas, PieCanvasProps } from "@nivo/pie";
+import { ResponsivePieCanvas, PieCanvasProps, AccessorFunc } from "@nivo/pie";
 
 interface PieChartProps {
   data: {
@@ -78,6 +78,7 @@ export class ResponsivePieComponent extends ReactWrapper {
   @Input() radialLabelsLinkColor: string | { theme: string };
   @Input() slicesLabelsSkipAngle: number;
   @Input() slicesLabelsTextColor: string | { theme: string };
+  @Input() sliceLabel: string | AccessorFunc;
   @Input() animate: boolean;
   @Input() motionStiffness: number;
   @Input() motionDamping: number;
@@ -106,6 +107,7 @@ export class ResponsivePieComponent extends ReactWrapper {
       radialLabelsLinkColor,
       slicesLabelsSkipAngle,
       slicesLabelsTextColor,
+      sliceLabel,
       animate,
       motionStiffness,
       motionDamping,
@@ -131,6 +133,7 @@ export class ResponsivePieComponent extends ReactWrapper {
       radialLabelsLinkColor,
       slicesLabelsSkipAngle,
       slicesLabelsTextColor,
+      sliceLabel,
       animate,
       motionStiffness,
       motionDamping,

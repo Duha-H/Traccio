@@ -123,10 +123,12 @@ export class DataManagerService {
     id: string,
     label: string,
     value: number,
-    color: string
+    color: string,
+    percentage: string,
   }[] {
     const result = [];
     const journeyData = this.statusData[journeyid];
+    let total = 0;
     for (const status of Object.keys(journeyData)) {
       result.push({
         id: status,
@@ -134,6 +136,11 @@ export class DataManagerService {
         value: journeyData[status],
         color: this.statusColors[status],
       });
+      total += journeyData[status];
+    }
+    for (const item of result) {
+      const percentage = (item.value / total) * 100;
+      item.percentage = `${Math.floor(percentage)}%`;
     }
     return result;
   }
@@ -158,6 +165,7 @@ export class DataManagerService {
         statusDatum[status] = 1;
       }
     });
+    console.log(statusDatum);
     return {
       calendarDatum,
       statusDatum
