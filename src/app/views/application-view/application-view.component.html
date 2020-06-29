@@ -13,7 +13,7 @@
       <p>Cancel</p>
     </button>
   </div>
-  
+
   <div *ngIf="!wishlistApp && !newApp" class="status-info">
     <div class="spanning-content block-title status-title" style>
       <p>Status Timeline</p>
@@ -28,27 +28,37 @@
     <div class="timeline">
       <timeline style="width: 85%; height: 100px;" [props]="timelineProps" #timeline></timeline>
       <div class="status" style="width: 15%; min-width: 100px;">
-        <mat-select class="status" style="color: {{STATUS_COLORS[currApplicationDetails.status]}}; border: 1.5px solid {{STATUS_COLORS[currApplicationDetails.status]}};"
-          color="accent" name="statusSelection" title="update status" floatLabel="never" [ngModel]="currApplicationDetails.status" (selectionChange)="updateField(ATTRIBS.STATUS, $event.value)"  #statusDropdown>
-          <mat-option *ngFor="let status of statuses;" [value]="status.value" >{{status.viewValue}}</mat-option>
+        <mat-select class="status"
+          style="color: {{STATUS_COLORS[currApplicationDetails.status]}}; border: 1.5px solid {{STATUS_COLORS[currApplicationDetails.status]}};"
+          color="accent" name="statusSelection" title="update status" floatLabel="never"
+          [ngModel]="currApplicationDetails.status" (selectionChange)="updateField(ATTRIBS.STATUS, $event.value)"
+          #statusDropdown>
+          <mat-option *ngFor="let status of statuses;" [value]="status.value">{{status.viewValue}}</mat-option>
         </mat-select>
         <p>Since: {{currApplicationDetails.timeline[currApplicationDetails.timeline.length - 1].date | date}}</p>
       </div>
-      
+
     </div>
   </div>
-  
+
   <div class="position-info">
     <p class="block-title">General Info</p>
     <div class="info-item">
-      <text-field class="value" [width]="600" [height]="10" [center]="false" [displayLabel]="true" [label]="'Position Title'" [text]="currApplicationDetails.positionTitle" [showUpdatedBorder]="false" style="margin-right: 25px;" (inputChange)="updateField(ATTRIBS.POSITION, $event)" #titleField></text-field>
-      <text-field class="value" [width]="600" [height]="10" [center]="false" [displayLabel]="true" [label]="'Company'" [text]="currApplicationDetails.companyName" [showUpdatedBorder]="false" (inputChange)="updateField(ATTRIBS.COMPANY, $event)" #titleField></text-field>
+      <text-field class="value" [width]="600" [height]="10" [center]="false" [displayLabel]="true"
+        [label]="'Position Title'" [text]="currApplicationDetails.positionTitle" [showUpdatedBorder]="false"
+        style="margin-right: 25px;" (inputChange)="updateField(ATTRIBS.POSITION, $event)" [displayError]="true"
+        #titleField></text-field>
+      <text-field class="value" [width]="600" [height]="10" [center]="false" [displayLabel]="true" [label]="'Company'"
+        [text]="currApplicationDetails.companyName" [showUpdatedBorder]="false"
+        (inputChange)="updateField(ATTRIBS.COMPANY, $event)" [displayError]="true" #titleField></text-field>
     </div>
     <div class="info-item">
-      <div class="date-value" style="margin-right: 35px;" >
+      <div class="date-value" style="margin-right: 35px;">
         <label for="">Date Applied</label>
         <mat-form-field class="form-element" color="accent">
-          <input matInput [matDatepicker]="startPicker" (dateChange)="updateField(ATTRIBS.DATE, $event.value)" [value]="currApplicationDetails.appDate" [(ngModel)]="currApplicationDetails.appDate" name="stDate" #stDate="ngModel" disabled/>
+          <input matInput [matDatepicker]="startPicker" (dateChange)="updateField(ATTRIBS.DATE, $event.value)"
+            [value]="currApplicationDetails.appDate" [(ngModel)]="currApplicationDetails.appDate" name="stDate"
+            #stDate="ngModel" disabled />
           <mat-datepicker-toggle matSuffix [for]="startPicker">
             <mat-icon matDatepickerToggleIcon>arrow_drop_down</mat-icon>
           </mat-datepicker-toggle>
@@ -58,7 +68,8 @@
       <div class="source-value" style="width: 50%;">
         <label for="">Application Source</label>
         <mat-form-field class="form-element" color="accent">
-          <mat-select color="accent" name="filterSelection" title="application filters" panelClass="cat-select-panel" floatLabel="never" [(ngModel)]="currApplicationDetails.source" #statusDropdown>
+          <mat-select color="accent" name="filterSelection" title="application filters" panelClass="cat-select-panel"
+            floatLabel="never" [(ngModel)]="currApplicationDetails.source" #statusDropdown>
             <mat-option *ngFor="let source of sources;" [value]="source.value">{{source.viewValue}}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -68,7 +79,9 @@
 
   <div class="additional-info">
     <p class="block-title">Additional Notes</p>
-    <textarea name="additional-info" id="additional-info" cols="300" rows="10" [(ngModel)]="currApplicationDetails.notes" (ngModelChange)="detailsUpdated=true" #notesTextArea>{{currApplicationDetails.notes}}</textarea>
+    <textarea name="additional-info" id="additional-info" cols="300" rows="10"
+      [(ngModel)]="currApplicationDetails.notes" (ngModelChange)="detailsUpdated=true"
+      #notesTextArea>{{currApplicationDetails.notes}}</textarea>
   </div>
 
 </div>
@@ -76,24 +89,6 @@
 <app-overlay *ngIf="displayAddOverlay" (closeOverlay)="displayAddOverlay=false">
   <div class="overlay-content">
     <p>Add to journey:</p>
-    <!-- <ul class="value toggle-btns" style="flex-direction: column; margin-left: 40px;">
-      <li>
-        <input type="radio" name="palette" id="palette-0" [value]="'palette-0'" [ngModel]="preferences.colorPalette.name" (change)="addUpdate('colorPalette', 'palette-0')">
-        <label for="palette-0">Cosmos</label>
-      </li>
-      <li>
-        <input type="radio" name="palette" id="palette-1" [value]="'palette-1'" [ngModel]="preferences.colorPalette.name" (change)="addUpdate('colorPalette', 'palette-1')">
-        <label for="palette-1">Superbubbles</label>
-      </li>
-      <li>
-        <input type="radio" name="palette" id="palette-2" [value]="'palette-2'" [ngModel]="preferences.colorPalette.name" (change)="addUpdate('colorPalette', 'palette-2')">
-        <label for="palette-2">Shockwave</label>
-      </li>
-      <li>
-        <input type="radio" name="palette" id="palette-3" [value]="'palette-3'" [ngModel]="preferences.colorPalette.name" (change)="addUpdate('colorPalette', 'palette-3')">
-        <label for="palette-3">Dave</label>
-      </li>
-    </ul> -->
     <button class="submit-button">Add</button>
   </div>
 </app-overlay>

@@ -4,7 +4,7 @@ import { Application } from 'src/app/models/application';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserStoreService } from 'src/app/models/user-store.service';
 import { TimelineComponent } from 'src/app/components/timeline/timeline.component';
-import { STATUS_COLORS, STATUS, APP_SOURCE, APP_ATTRIBS } from 'src/app/models/constants';
+import { STATUS_COLORS, STATUS, APP_SOURCE, APP_ATTRIBS, REQUIRED_APP_ATTRIBS } from 'src/app/models/constants';
 import { KeyValue } from '@angular/common';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { Journey } from 'src/app/models/journey';
@@ -113,7 +113,6 @@ export class ApplicationViewComponent implements OnInit {
   }
 
   updateField(attrib: string, value: string) {
-    this.detailsUpdated = true;
     if (this.currApplicationDetails[attrib] !== undefined) { // value can be empty string
       if (attrib === this.ATTRIBS.STATUS) {
         this.currApplicationDetails.status = value; // handles adding the new status to the application's timeline
@@ -122,6 +121,7 @@ export class ApplicationViewComponent implements OnInit {
         this.currApplicationDetails[attrib] = value;
       }
     }
+    this.detailsUpdated = this._allDetailsValid();
   }
 
   saveChanges() {
@@ -165,6 +165,15 @@ export class ApplicationViewComponent implements OnInit {
       this.notesTextArea.nativeElement.value += '\t';
       event.preventDefault();
     }
+  }
+
+  private _allDetailsValid(): boolean {
+    for (const key of Object.keys(this.currApplicationDetails)) {
+      if (REQUIRED_APP_ATTRIBS[key] && this.currApplicationDetails[key] === '') {
+        return false;
+      }
+    }
+    return true;
   }
 
 }

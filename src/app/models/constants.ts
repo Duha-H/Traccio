@@ -34,3 +34,13 @@ export const APP_ATTRIBS = {
 	NOTES: 'notes'
 };
 
+export const REQUIRED_APP_ATTRIBS = {
+	_id: false,
+	_position: true,
+	_companyName: true,
+	_appDate: true,
+	_status: true,
+	_timeline: false,
+	_source: true,
+	_notes: false,
+};
