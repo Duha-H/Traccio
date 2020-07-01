@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 import { DropdownItem } from 'src/app/components/types';
 import { TextFieldComponent } from 'src/app/components/text-field/text-field.component';
 import { PreferencesStoreService } from 'src/app/controllers/preferences-store.service';
+import { ResizeService } from 'src/app/controllers/resize.service';
 
 @Component({
   selector: "app-wrapper",
@@ -35,12 +36,17 @@ export class AppWrapperComponent implements OnInit {
   constructor(
     private userStore: UserStoreService,
     private router: Router,
-    private prefStore: PreferencesStoreService
+    private prefStore: PreferencesStoreService,
+    public resizeService: ResizeService
   ) {  }
 
   ngOnInit() {
     this.prefStore.preferences.subscribe(preferences => {
-      this.dropdownItems[2].text = `Theme: ${preferences.theme.name}`; // TODO: update text differently
+      this.dropdownItems[2].text = `Theme: ${preferences.theme.name}`; // TODO: update text dynamically
+    });
+
+    this.userStore.user.subscribe(user => {
+      this.dropdownItems[0].text = `Signed in as: ${user.email}`;
     });
   }
 

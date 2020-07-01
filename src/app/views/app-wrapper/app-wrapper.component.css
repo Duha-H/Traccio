@@ -3,7 +3,7 @@
 }
 
 .toolbar {
-  height: 4vh;
+  height: 5vh;
   display: flex;
   align-items: center;
   background-color: var(--bg);
@@ -15,14 +15,14 @@
 .toolbar mat-icon.mat-icon {
   color: var(--accent);
   text-align: center;
-  line-height: 30pt;
-  font-size: 28pt;
-  margin-right: 20px;
+  line-height: 38pt;
+  font-size: 34pt;
+  margin-right: 30px;
 }
 
 text-field.toolbar-item {
-  width: 350px;
-  margin: 0 20px;
+  width: 280px;
+  margin: 0 15px;
 }
 
 .toolbar span {
@@ -107,8 +107,47 @@ mat-sidenav {
   text-align: center;
 }
 
-.sidenav a.active mat-icon {
+.sidenav a.active mat-icon, .bottomnav a.active mat-icon {
   color: var(--accent);
+}
+
+ul.bottomnav {
+  list-style: none;
+  padding: 15px 0;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: var(--element-bg-secondary);
+  z-index: 5;
+  margin: 0;
+  margin-top: 15px;
+  transform: translate3d(0,0,0);
+  -webkit-transform: translate3d(0,0,0);
+}
+
+.bottomnav li {
+  border-radius: 100%;
+  vertical-align: middle;
+  padding: 0;
+  margin: auto;
+}
+
+.bottomnav mat-icon {
+  color: var(--titles-secondary);
+  margin: auto;
+  line-height: 20pt;
+  font-size: 18pt;
+  margin: auto 0;
+  display: inline;
+  vertical-align: middle;
+  align-items: center;
+  align-self: center;
+  align-content: center;
+  text-align: center;
 }
 
 .content {
@@ -201,8 +240,7 @@ svg#clouds {
 }
 
 @media screen and (max-width: 575px) {
-  svg#rocket-smoke {
-    display: none;
-    visibility: hidden;
+  .toolbar {
+    padding: 15px 0;
   }
 }

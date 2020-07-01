@@ -165,7 +165,6 @@ export class DataManagerService {
         statusDatum[status] = 1;
       }
     });
-    console.log(statusDatum);
     return {
       calendarDatum,
       statusDatum

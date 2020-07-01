@@ -21,7 +21,7 @@
     <div class="journey-details">
       <mat-grid-list cols="2" rowHeight="380px" gutterSize="30px">
 
-        <mat-grid-tile [colspan]="1" [rowspan]="1" class="dashboard-component">
+        <mat-grid-tile [colspan]="(resizeService.tabletSize$ | async) ? 2 : 1" [rowspan]="1" class="dashboard-component">
           <div class="data-container">
             <h4 class="data-container-title">
               Journey Stats
@@ -34,7 +34,7 @@
           </div>
         </mat-grid-tile>
 
-        <mat-grid-tile [colspan]="1" [rowspan]="1" class="dashboard-component">
+        <mat-grid-tile [colspan]="(resizeService.tabletSize$ | async) ? 2 : 1" [rowspan]="1" class="dashboard-component">
           <div class="data-container">
             <h4 class="data-container-title">
               Status Breakdown

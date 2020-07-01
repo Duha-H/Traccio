@@ -7,6 +7,7 @@ import { Application } from 'src/app/models/application';
 import { Router } from '@angular/router';
 import { PreferencesStoreService } from 'src/app/controllers/preferences-store.service';
 import { PALETTES, THEMES } from 'src/styling/palettes';
+import { ResizeService } from 'src/app/controllers/resize.service';
 
 @Component({
   selector: "app-dashboard",
@@ -49,7 +50,12 @@ export class DashboardComponent implements OnInit {
   pieChartPalette = ['#AC98FB', '#6E89F8', '#81BEFA', '#C1E0F8', '#D1C3EB'];
   calendarPalette = ['#AC98FB', '#6E89F8', '#81BEFA', '#C1E0F8', '#D1C3EB'];
 
-  constructor(private userStore: UserStoreService, private router: Router, private prefStore: PreferencesStoreService) {}
+  constructor(
+    private userStore: UserStoreService,
+    private router: Router,
+    private prefStore: PreferencesStoreService,
+    public resizeService: ResizeService
+  ) {}
 
   ngOnInit() {
     try {
