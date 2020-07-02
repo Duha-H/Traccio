@@ -30,6 +30,7 @@ body {
 h1,
 h2 {
   color: var(--titles-primary);
+  font-size: 1.5em;
 }
 
 h3,
@@ -37,10 +38,16 @@ h4,
 h5,
 h6 {
   color: var(--titles-secondary);
+  font-size: 1.25em;
 }
 
-p {
-	color: var(--text);
+h4, h5 {
+  font-size: 1em;
+}
+
+p, span {
+  color: var(--text);
+  font-size: 1em;
 }
 
 ::placeholder {
@@ -176,6 +183,6 @@ a.login-link.forgot-password {
 
 @media screen and (max-width: 575px) {
   div.content {
-    height: 90vh;
+    height: 85vh;
   }
 }

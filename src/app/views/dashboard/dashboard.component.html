@@ -9,7 +9,8 @@
       <div>
         <mat-form-field color="accent">
           <mat-select color="accent" [(ngModel)]="selectedJourney" name="journeySelection"
-            (selectionChange)="selectYear(selectedJourney.years[0])" title="active journeys">
+            (selectionChange)="selectYear(selectedJourney.years[0])" title="select an active journeys">
+            <mat-select-trigger></mat-select-trigger>
             <mat-option *ngFor="let journey of dropdownContent" [value]="journey">
               {{journey.viewValue}}
             </mat-option>
@@ -130,15 +131,30 @@
               <mat-list *ngIf="selectedJourney.value.applications.length > 0; else applicationsPlaceholder" style="height: 100%; overflow-y: scroll;" class="app-list-item">
                 <mat-list-item class="clickable-item" *ngFor="let app of (selectedJourney.value.applications | appFilter:[{ property: 'status', value: selectedStatus.value }] );"
                   (click)="selectApplication(app)">
-                  <mat-icon matListIcon>folder</mat-icon>
-                  <div matLine>
-                    <div class="spanning-content">
+                  <!-- Web default list-item -->
+                  <mat-icon *ngIf="(resizeService.mobileSize$ | async) ? false : true" matListIcon>folder</mat-icon>
+                  <div *ngIf="(resizeService.mobileSize$ | async) ? false : true" class="app-list-item" matLine>
+                    <div class="spanning-content" >
                       <h4 style="text-align: left; color: var(--text);">{{app.positionTitle + '  '}}</h4>
                       <span style="padding-left: 10px; color: var(--titles-secondary);"> @ {{app.companyName}}</span>
                       <div class="spacer"></div>
                       <span>Date Applied: {{ app.appDate | date }}</span>
                     </div>
                   </div>
+                  <!-- Mobile view list-item -->
+                  <div *ngIf="(resizeService.mobileSize$ | async) ? true : false" class="app-list-item" matLine>
+                    <div class="spanning-content">
+                      <h4 style="text-align: left; color: var(--text);">{{app.positionTitle + '  '}}</h4>
+                    </div>
+                  </div>
+                  <div *ngIf="(resizeService.mobileSize$ | async) ? true : false" class="app-list-item" matLine>
+                    <div class="spanning-content">
+                      <span style="color: var(--titles-secondary);"> @ {{app.companyName}}</span>
+                      <div class="spacer"></div>
+                      <span>Applied: {{ app.appDate | date }}</span>
+                    </div>
+                  </div>
+                  
                 </mat-list-item>
               </mat-list>
               <ng-template #applicationsPlaceholder>

@@ -40,6 +40,7 @@ span {
   height: 4vh;
   display: flex;
   align-items: center;
+  text-align: left;
 }
 
 mat-form-field {
@@ -48,13 +49,18 @@ mat-form-field {
 }
 
 mat-select {
-  background-color: var(--titles-primary);
+  background-color: var(--element-bg-secondary);
   padding: 10px;
   border-radius: 5px;
 }
 
+.dashboard-header mat-select {
+  text-align: center;
+  border-radius: 1em;
+}
+
 .mat-select {
-  font-size: 9pt;
+  font-size: 0.85em;
 }
 
 ::ng-deep .dashboard-header .mat-form-field-underline, ::ng-deep .data-container .mat-form-field-underline {
@@ -64,6 +70,10 @@ mat-select {
 ::ng-deep .data-container .mat-form-field-wrapper, ::ng-deep .data-container .mat-form-field-infix {
   padding: 0;
   border-top: none;
+}
+
+::ng-deep .dashboard-header .mat-form-field-infix {
+  width: 1.25em;
 }
 
 .journey-details {
@@ -155,6 +165,16 @@ calendar-wrapper {
 
 .app-list-container {
   padding-bottom: 40px;
+}
+
+.app-list-item .spanning-content {
+  padding: 5px 0;
+}
+
+.app-list-item h4 {
+  color: var(--text);
+  text-align: left;
+  margin: 0;
 }
 
 .clickable-item mat-icon {
