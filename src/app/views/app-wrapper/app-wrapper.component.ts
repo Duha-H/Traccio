@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, EventEmitter, Output } from "@angular/core";
+import { Component, OnInit, ElementRef, ViewChild, EventEmitter, Output, QueryList } from "@angular/core";
 import { Auth } from "aws-amplify";
 import { UserStoreService } from "src/app/models/user-store.service";
 import { Router } from "@angular/router";
@@ -31,7 +31,9 @@ export class AppWrapperComponent implements OnInit {
   @Output() submitSearch = new EventEmitter();
   @ViewChild("navHomeIcon", { read: ElementRef }) currNavIconRef: HTMLElement;
   @ViewChild("dropdownButton") dropdownRef: ElementRef;
+  @ViewChild("searchField", { static: false, read: ElementRef }) searchFieldElement: ElementRef;
   @ViewChild(TextFieldComponent) searchField: TextFieldComponent;
+  @ViewChild("activateSearchButton", { static: false, read: ElementRef }) activateSearchButton: ElementRef;
 
   constructor(
     private userStore: UserStoreService,
@@ -54,7 +56,6 @@ export class AppWrapperComponent implements OnInit {
     try {
       await Auth.signOut();
       this.signedIn = false;
-      console.log(this);
       this.userStore.clearData();
       this.router.navigate(["signin"]);
     } catch (error) {
@@ -70,10 +71,27 @@ export class AppWrapperComponent implements OnInit {
     if (!this.dropdownRef.nativeElement.contains(event.target)) {
       this.displayDropdown = false;
     }
+    // If a click is registered outside of the search field toggle button
+    // and mobile size is active, hide the search field
+    if (
+      this.activateSearchButton &&
+      !this.activateSearchButton.nativeElement.contains(event.target) &&
+      this.resizeService.mobileSize$.value &&
+      !this.searchQuery
+    ) {
+      this.searchFieldElement.nativeElement.classList = 'toolbar-search';
+      this.activateSearchButton.nativeElement.style.display = 'block';
+    }
   }
 
   toggleAccountDropdown() {
     this.displayDropdown = !this.displayDropdown;
+  }
+
+  displaySearchField() {
+    this.searchFieldElement.nativeElement.classList += ' visible';
+    this.searchField.focus();
+    this.activateSearchButton.nativeElement.style.display = 'none';
   }
 
   onSearch(query: string) {

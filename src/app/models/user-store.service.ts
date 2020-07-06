@@ -60,7 +60,7 @@ export class UserStoreService {
    * Initial Setup Methods
    */
 
-  async setUser(firstName: string, lastName: string, id: string, email: string, verified: boolean) {
+  setUser(firstName: string, lastName: string, id: string, email: string, verified: boolean) {
     const newUser = new User();
     newUser.firstName = firstName;
     newUser.lastName = lastName;
@@ -69,7 +69,7 @@ export class UserStoreService {
     newUser.verified = verified;
     this._user.next(newUser);
     console.log('UserStore: user verified:', verified);
-    await this.fetchData();
+    this.fetchData();
   }
 
   async updateUserAttributes(updates: {
@@ -124,6 +124,7 @@ export class UserStoreService {
     data = this.placeholderJourneys; // TEMP
     this.updateJourneyData(data);
     this.dataManager.collectData(data);
+    this.loadData();
   }
 
   /**

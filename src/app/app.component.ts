@@ -45,6 +45,7 @@ export class AppComponent implements OnInit {
             this.user.attributes.email,
             this.user.attributes.email_verified,
           );
+          this.userStore.loadData();
           // set user preferences
           this.prefStore.init(); // specify attributes later
           // await this.userStore.fetchData();

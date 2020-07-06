@@ -15,13 +15,19 @@
   --error-bg: #f9769685;
 }
 
+* {
+  font-size: 10pt;
+}
+
 html,
 body {
   height: 100%;
   width: 100%;
   overflow: hidden;
   background-color: var(--bg);
+  font-size: 12pt;
 }
+
 body {
   margin: 0;
   /* font-family: Roboto, "Helvetica Neue", sans-serif; */
@@ -163,6 +169,7 @@ a.login-link.forgot-password {
 }
 
 .spanning-content {
+  /* margin: 15px 20px; */
   display: flex;
   flex-direction: row;
   vertical-align: middle;
@@ -182,7 +189,15 @@ a.login-link.forgot-password {
 
 
 @media screen and (max-width: 575px) {
+  input, select, textarea { /** primarily to prevent mobile browsers from zooming in onFocus*/
+    font-size: 16px !important;
+  }
+
   div.content {
     height: 85vh;
+  }
+
+  div.view-container {
+    padding: 0 10px;
   }
 }

@@ -15,14 +15,18 @@
 .toolbar mat-icon.mat-icon {
   color: var(--accent);
   text-align: center;
-  line-height: 38pt;
-  font-size: 34pt;
-  margin-right: 30px;
+  line-height: 28pt;
+  font-size: 24pt;
+  margin-right: 20px;
+  width: auto;
+  height: auto;
+  cursor: pointer;
 }
 
-text-field.toolbar-item {
-  width: 280px;
+text-field.toolbar-search {
+  width: 300px;
   margin: 0 15px;
+  line-height: 28pt;
 }
 
 .toolbar span {
@@ -239,8 +243,22 @@ svg#clouds {
   }
 }
 
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 500px) {
   .toolbar {
     padding: 15px 0;
+  }
+
+  text-field.toolbar-search {
+    opacity: 0;
+    transition: all 0.2s ease-in;
+    width: 0;
+    margin: 0;
+  }
+
+  text-field.toolbar-search.visible {
+    margin: 0 15px;
+    transform: scaleX(1);
+    width: 280px;
+    opacity: 1;
   }
 }

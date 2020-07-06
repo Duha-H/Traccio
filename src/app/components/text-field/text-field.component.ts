@@ -4,6 +4,8 @@ import {
   Input,
   Output,
   EventEmitter,
+  ViewChild,
+  ElementRef,
 } from "@angular/core";
 
 @Component({
@@ -20,7 +22,7 @@ import {
         <input type="{{currType}}" [(ngModel)]="value" [value]="value" (input)="onInput()" maxLength="60" \
           style="font-size: {{fontSize}}pt; color: {{fontColor}};" \
           name="inputField" #field="ngModel" placeholder="{{label}}"\
-          email="{{type == \'email\'}}"/>\
+          email="{{type == \'email\'}}" #input/>\
         <mat-icon *ngIf="type == \'password\'" (click)="togglePasswordVisibility()">{{visibilityIconName}}</mat-icon>\
         <mat-icon *ngIf="suffixIcon && type != \'password\'">{{suffixIcon}}</mat-icon>\
       </div>\
@@ -44,6 +46,7 @@ export class TextFieldComponent implements OnInit {
   @Input() showUpdatedBorder = false; // unique border color if field value has been changed
   @Input() displayError = false;
   @Output() inputChange = new EventEmitter();
+  @ViewChild('input', { static: true }) input: ElementRef;
   fieldEmpty = true;
   fieldLabel = this.label;
   valueUpdated = false;
@@ -77,6 +80,10 @@ export class TextFieldComponent implements OnInit {
 
   resetValue(value?: string) {
     this.value = value !== undefined ? value : this.text;
+  }
+
+  focus() {
+    this.input.nativeElement.focus();
   }
 
   private _setLabel() {

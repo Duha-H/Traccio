@@ -49,7 +49,7 @@
 .input-container mat-icon {
   color: var(--titles-secondary);
   cursor: pointer;
-  margin-right: 15px;
+  margin-right: 14px;
 }
 
 .input-container div:focus-within {

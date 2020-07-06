@@ -1,6 +1,6 @@
 <mat-sidenav-container class="sidenav-container" mode="push">
   <!-- Nav -->
-  <mat-sidenav mode="side" role="navigation" [opened]="(resizeService.mobileSize$ | async) ? false : true">
+  <mat-sidenav mode="side" role="navigation" [opened]="!(resizeService.mobileSize$ | async)">
     <ul class="sidenav">
       <li title="Dashboard"><a href="#" routerLink="" (click)="clearSearch()" routerLinkActive="active"
           [routerLinkActiveOptions]="{exact: true}" #navHomeIcon>
@@ -23,13 +23,14 @@
     <!-- Toolbar -->
     <div class="toolbar" role="banner">
       <!-- <span></span> -->
-      <div class="spacer" *ngIf="(resizeService.mobileSize$ | async) ? false : true"></div>
-      <text-field class="toolbar-item" (inputChange)="onSearch($event)" [text]="searchQuery"
-        [label]="'Search for a journey or application...'" [displayLabel]="false" [suffixIcon]="'search'"
+      <div class="spacer"></div>
+      <mat-icon *ngIf="resizeService.mobileSize$ | async" (click)="displaySearchField()" #activateSearchButton>search</mat-icon>
+      <text-field class="toolbar-search" (inputChange)="onSearch($event)" [text]="searchQuery"
+        [label]="'Search'" [displayLabel]="false" [suffixIcon]="'search'"
         [height]="1" #searchField></text-field>
-      <div class="spacer" *ngIf="(resizeService.mobileSize$ | async) ? true : false"></div>
+      <!-- <div class="spacer" *ngIf="(resizeService.mobileSize$ | async) ? true : false"></div> -->
       <div #dropdownButton>
-        <mat-icon (click)="toggleAccountDropdown()" style="cursor: pointer;">account_box</mat-icon>
+        <mat-icon (click)="toggleAccountDropdown()">account_box</mat-icon>
       </div>
       <account-dropdown [dropdownItems]="dropdownItems" [displayDropdown]="displayDropdown"></account-dropdown>
     </div>
@@ -46,7 +47,7 @@
     </div>
 
     <!-- Conditionally-visible Bottom Nav -->
-    <div *ngIf="(resizeService.mobileSize$ | async) ? true : false">
+    <div *ngIf="resizeService.mobileSize$ | async">
       <ul class="bottomnav">
         <li title="Journeys"><a href="#" routerLink="/journeys" (click)="clearSearch()"
             routerLinkActive="active" #navJourneysIcon>
