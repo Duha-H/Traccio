@@ -16,17 +16,17 @@
   align-items: center;
   text-align: center;
   padding: 0 auto;
+  overflow-y: scroll;
 }
 
-div.overlay-content {
+div.overlay-inner-container {
   max-width: 600px;
-  max-height: 450px;
   background-color: var(--bg);
   padding: 40px 20px;
   padding-top: 25px;
   border-radius: 20px;
-  /* border: 1px solid var(--titles-secondary); */
 	box-shadow: var(--shadow-overlay);
+  width: 350px;
 }
 
 .header {
@@ -53,4 +53,16 @@ p.title {
   margin: 0;
   line-height: 20px;
   font-weight: 500;
+}
+
+@media screen and (max-width: 500px) {
+  .overlay-container {
+    background-color: var(--bg);
+    overflow: scroll;
+  }
+
+  div.overlay-inner-container {
+    box-shadow: none;
+    border-radius: 0;
+  }
 }

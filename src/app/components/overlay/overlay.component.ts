@@ -5,7 +5,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
   template:
     '\
     <div class="overlay-container">\
-      <div class="overlay-content">\
+      <div class="overlay-inner-container">\
         <div class="header">\
           <p *ngIf="title" class="title">{{title}}</p>\
           <div class="spacer"></div>\
