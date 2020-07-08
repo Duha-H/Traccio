@@ -4,7 +4,7 @@ div.container.spanning-content {
   height: 1.5em;
   display: flex;
   flex-direction: row;
-  margin-left: 35px;
+  margin-left: 20px;
   margin-bottom: 15px;
 }
 
@@ -15,17 +15,15 @@ div.breadcrumb-item {
 }
 
 .breadcrumb-item mat-icon {
-  height: 1.5em;
-  font-size: 16pt;
+  height: 1em;
   color: var(--titles-secondary);
   margin: 0 auto;
 }
 
 .breadcrumb-text {
-  font-size: 10pt;
-  line-height: 1.5em;
+  line-height: 1em;
   color: var(--titles-secondary);
-  padding: 0 5px;
+  padding: 0;
 }
 
 a.breadcrumb-text {
@@ -34,4 +32,10 @@ a.breadcrumb-text {
   margin: auto;
   font-size: 10pt;
   text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  div.container.spanning-content {
+    margin-bottom: 5px;
+  }
 }

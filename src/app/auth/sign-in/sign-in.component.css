@@ -22,5 +22,14 @@ p.warning-text {
 
 .signin-container text-field {
   width: 100%;
-  margin-bottom: 20px;
+  /* margin-bottom: 60px; */
+}
+
+form {
+  margin: 40px 0;
+}
+
+.submit-button {
+  margin: 90px 0;
+  margin-bottom: 0;
 }

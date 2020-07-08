@@ -17,6 +17,7 @@ import { MatOptionSelectionChange, MatOption } from "@angular/material/core";
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { ApplicationListComponent } from './application-list.component';
 import { BreadcrumbsData } from 'src/app/components/types';
+import { ResizeService } from 'src/app/controllers/resize.service';
 
 const DRAWER_MODES = {
   ADD: "add",
@@ -121,11 +122,13 @@ export class JourneyViewComponent implements OnInit {
     ]
   };
   displayEditOverlay = false;
+  displayFilterOverlay = false;
 
   constructor(
     private route: ActivatedRoute,
     private userStore: UserStoreService,
     private router: Router,
+    public rs: ResizeService
   ) { }
 
   ngOnInit() {
@@ -168,8 +171,12 @@ export class JourneyViewComponent implements OnInit {
   }
 
   updateEndDate(event: MatDatepickerInputEvent<Date>) {
-    if (event.value) {
+    const selectedDate = event.value;
+    const today = new Date();
+    if (selectedDate && selectedDate.getTime() <= today.getTime()) {
       this.currJourneyDetails.active = false;
+    } else if (selectedDate && selectedDate.getTime() > today.getTime()) {
+      this.currJourneyDetails.active = true;
     }
   }
 
@@ -225,7 +232,6 @@ export class JourneyViewComponent implements OnInit {
 
   addFilter(event: MatOptionSelectionChange, group: string) {
     this.dropdownElement.close();
-    console.log(event);
     // const group = event.source.group.label.toLowerCase();
     group = group.toLowerCase();
     const value = event.source.value;

@@ -1,7 +1,7 @@
 body[theme='light'] {
   /** backgrounds */
-  --bg: #F6F6F6;
-  --bg-backdrop: #f6f6f68c;
+  --bg: #F2F2F2;
+  --bg-backdrop: #F2F2F28c;
   --element-bg-primary: #E8E8F3;
   --element-bg-secondary: #E8E8F3;
   /** accent colors */
@@ -45,8 +45,8 @@ body[theme='light'][palette='palette-0'] {
 
 body[theme='light'][palette='palette-1'] {
   /** backgrounds */
-  --element-bg-primary: #E3F7F4;
-  --element-bg-secondary: #E3F7F4;
+  --element-bg-primary: #D2EAE6;
+  --element-bg-secondary: #D2EAE6;
   /** accent colors */
   --accent: #47D4BC;
   --accent-hover: #C1F5ED;

@@ -54,6 +54,7 @@ h4, h5 {
 p, span {
   color: var(--text);
   font-size: 1em;
+  font-weight: 400;
 }
 
 ::placeholder {
@@ -72,7 +73,7 @@ div.content {
   overflow-y: scroll;
   overflow-x: hidden;
   margin: 0;
-  height: 92vh;
+  height: 91vh;
 }
 
 div.view-container {
@@ -80,7 +81,7 @@ div.view-container {
   height: 100%;
   text-align: center;
   align-content: center;
-  padding: 0px 20px;
+  padding: 0px 10px;
 }
 
 div.mat-drawer-backdrop.mat-drawer-shown {
@@ -197,7 +198,4 @@ a.login-link.forgot-password {
     height: 85vh;
   }
 
-  div.view-container {
-    padding: 0 10px;
-  }
 }

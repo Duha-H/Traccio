@@ -1,4 +1,4 @@
-.view-container {
+.view-container, app-overlay {
   --spanning-line-height: 40px;
   --app-header-height: 25px;
   display: grid;
@@ -10,6 +10,7 @@
 .main-content {
   width: 80%;
   margin: 25px auto;
+  padding: 0 10px;
 }
 
 .side-content {
@@ -23,7 +24,7 @@ h2 {
 }
 
 input {
-  font-family: Roboto, 'Helvetica', sans-serif;
+  /* font-family: Roboto, 'Helvetica', sans-serif; */
 }
 
 span {
@@ -52,7 +53,7 @@ mat-icon {
 }
 
 .spanning-content {
-  margin: 5px 20px;
+  margin: 5px 0px;
   height: var(--spanning-line-height);
   border-bottom: 1px solid var(--text);
   padding-bottom: 20px;
@@ -104,9 +105,9 @@ mat-icon {
 
 .add-btn {
   font-size: 11pt;
-  line-height: var(--spanning-line-height);
+  /* line-height: var(--spanning-line-height); */
   border-radius: 20px;
-  min-width: 100px;
+  /* min-width: 100px; */
   border: 1px solid var(--accent);
   background: var(--accent);
   padding: 2px 10px;
@@ -123,10 +124,10 @@ mat-icon {
 
 .add-btn p {
   font-size: 11pt;
-  line-height: 30px;
+  /* line-height: 30px; */
   font-weight: 500;
   color: var(--text);
-  margin: 0;
+  margin: auto 0;
 }
 
 .add-btn mat-icon {
@@ -179,7 +180,6 @@ button.add-btn:disabled mat-icon, button.add-btn:disabled p {
 }
 
 ::ng-deep .overlay-content .mat-form-field-infix {
-  /* padding: 0; */
   padding-left: 10px;
 }
 
@@ -260,20 +260,17 @@ button.add-btn:disabled mat-icon, button.add-btn:disabled p {
 .placeholder-text {
   margin: auto;
   text-align: center;
-  margin: auto;
+  margin: auto 10px;
   display: flex;
   flex-direction: column;
   vertical-align: middle;
-  height: 200px;
-  margin-top: 150px;
+  height: 350px;
+  margin-top: 100px;
 }
 
 .title * {
   margin-top: auto;
   margin-bottom: auto;
-  line-height: 16pt;
-  height: 35px;
-  font-size: 20pt;
 }
 
 .title mat-icon {
@@ -284,7 +281,6 @@ button.add-btn:disabled mat-icon, button.add-btn:disabled p {
 button {
   cursor: pointer;
   border: none;
-  /* background: none; */
 }
 
 .dates * {
@@ -293,8 +289,15 @@ button {
 
 .apps {
   text-align: left;
-  margin: 20px;
+  margin: 20px 0px;
   margin-top: 15px;
+  overflow: auto;
+  scrollbar-width: none;
+}
+
+.apps::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* make scrollbar transparent */
 }
 
 .apps h3,
@@ -315,9 +318,14 @@ mat-form-field.edit-items {
 }
 
 mat-select {
-  background-color: var(--titles-primary);
+  background-color: var(--element-bg-secondary);
   border-radius: 5px;
   line-height: var(--app-header-height);
+  /* padding: 5px; */
+}
+
+mat-select span {
+  padding-left: 10px;
 }
 
 .filter-dropdown {
@@ -327,11 +335,12 @@ mat-select {
 }
 
 ::ng-deep .filter-dropdown .mat-form-field {
-  text-align: center;
+  text-align: left;
 }
 
 ::ng-deep .filter-dropdown .mat-select-arrow-wrapper {
-  opacity: 0;
+  /* opacity: 0; */
+  padding-right: 10px;
 }
 
 ::ng-deep .edit-items .mat-form-field-underline {
@@ -341,6 +350,10 @@ mat-select {
 ::ng-deep .edit-items .mat-form-field-wrapper, ::ng-deep .edit-items .mat-form-field-infix {
   padding-bottom: 0;
   border-top: none;
+}
+
+::ng-deep .filter-dropdown .mat-form-field-label-wrapper {
+  left: 10px;
 }
 
 ::ng-deep .mat-select-panel .mat-optgroup-label, ::ng-deep .mat-select-panel .mat-option, ::ng-deep mat-optgroup.mat-optgroup-label, ::ng-deep .mat-select-panel mat-option.mat-option {
@@ -373,6 +386,7 @@ ul.filter-values {
   line-height: var(--app-header-height);
   margin: 0;
   float: left;
+  font-weight: 400;
 }
 
 .filter-values mat-icon {
@@ -447,9 +461,13 @@ mat-list-item {
 
 .overlay-content {
   margin: 0 auto;
-  width: 350px;
+  /* width: 350px; */
   padding: 10px 15px;
   height: 100%;
+}
+
+.overlay-content .submit-button {
+  margin-bottom: 0;
 }
 
 .overlay-item {
@@ -466,4 +484,55 @@ mat-list-item {
 
 .overlay-item mat-checkbox {
   margin-top: 15px;
+}
+
+@media screen and (max-width:768px) {
+  .main-content {
+    width: 95%;
+    margin: 0 10px;
+    padding: 0;
+  }
+
+  .spanning-content {
+    padding-bottom: 10px;
+  }
+
+  .add-btn {
+    padding: 2px 10px;
+    margin-left: 10px;
+  }
+
+  .add-btn mat-icon {
+    margin-left: 0;
+  }
+
+  .status-toggle {
+    padding: 0 15px;
+    font-size: 1em;
+    line-height: 25px;
+  }
+
+  .filter-dropdown {
+    padding: 0;
+    border-top: none;
+    margin: 15px;
+  }
+
+  ul.filter-values {
+    padding: 0 15px;
+  }
+
+  .detail-item {
+    display: flex;
+    flex-direction: row;
+    margin: 5px 10px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .placeholder-text {
+    margin-top: 70px;
+  }  
+
+  
 }

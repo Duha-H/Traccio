@@ -73,7 +73,7 @@
           </div>
         </mat-grid-tile>
         
-        <mat-grid-tile [colspan]="2" [rowspan]="1" class="dashboard-component">
+        <mat-grid-tile [colspan]="2" [rowspan]="(resizeService.mobileSize$ | async) ? 2 : 1" class="dashboard-component">
           <div class="data-container">
             <h4 class="data-container-title">
               Calendar Graph
@@ -81,7 +81,7 @@
             <div class="calendar-container">
               <calendar-wrapper [data]="selectedJourney.calendarData" [from]="currentYear+'-02-01'"
                 [to]="currentYear+'-11-01'" [emptyColor]="theme.emptyColor"
-                [colors]="calendarPalette" [yearSpacing]="40"
+                [colors]="calendarPalette" [yearSpacing]="40" [direction]="(resizeService.mobileSize$ | async) ? 'vertical' : 'horizontal'"
                 [monthBorderColor]="theme.background" [dayBorderWidth]="2" [dayBorderColor]="theme.background" [legends]="[
                   {
                     anchor: 'bottom-right',
@@ -132,8 +132,8 @@
                 <mat-list-item class="clickable-item" *ngFor="let app of (selectedJourney.value.applications | appFilter:[{ property: 'status', value: selectedStatus.value }] );"
                   (click)="selectApplication(app)">
                   <!-- Web default list-item -->
-                  <mat-icon *ngIf="(resizeService.mobileSize$ | async) ? false : true" matListIcon>folder</mat-icon>
-                  <div *ngIf="(resizeService.mobileSize$ | async) ? false : true" class="app-list-item" matLine>
+                  <mat-icon *ngIf="!(resizeService.mobileSize$ | async)" matListIcon>folder</mat-icon>
+                  <div *ngIf="!(resizeService.mobileSize$ | async)" class="app-list-item" matLine>
                     <div class="spanning-content" >
                       <h4 style="text-align: left; color: var(--text);">{{app.positionTitle + '  '}}</h4>
                       <span style="padding-left: 10px; color: var(--titles-secondary);"> @ {{app.companyName}}</span>
@@ -142,12 +142,12 @@
                     </div>
                   </div>
                   <!-- Mobile view list-item -->
-                  <div *ngIf="(resizeService.mobileSize$ | async) ? true : false" class="app-list-item" matLine>
+                  <div *ngIf="resizeService.mobileSize$ | async" class="app-list-item" matLine>
                     <div class="spanning-content">
                       <h4 style="text-align: left; color: var(--text);">{{app.positionTitle + '  '}}</h4>
                     </div>
                   </div>
-                  <div *ngIf="(resizeService.mobileSize$ | async) ? true : false" class="app-list-item" matLine>
+                  <div *ngIf="resizeService.mobileSize$ | async" class="app-list-item" matLine>
                     <div class="spanning-content">
                       <span style="color: var(--titles-secondary);"> @ {{app.companyName}}</span>
                       <div class="spacer"></div>

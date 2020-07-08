@@ -9,7 +9,7 @@ import { Journey } from 'src/app/models/journey';
 export class RectItemComponent implements OnInit {
 
   @Input() type = 'item'; // type can either be 'add' or 'item'
-  @Input() width = 250;
+  @Input() width = '18em';
   @Input() height = 370;
   @Input() selectionMode = false;
   @Output() deleteButtonPressed = new EventEmitter<object>();

@@ -41,8 +41,8 @@ mat-icon {
 .container:hover:not(.add) {
   cursor: pointer;
   box-shadow: var(--shadow-clickable);
-  background-color: var(--element-bg-secondary);
-  transform: scale(1.008);
+  /* background-color: var(--element-bg-secondary); */
+  transform: scale(1.01);
 }
 
 .container.add:hover {

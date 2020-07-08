@@ -17,7 +17,7 @@
   text-align: center;
   line-height: 28pt;
   font-size: 24pt;
-  margin-right: 20px;
+  margin-right: 10px;
   width: auto;
   height: auto;
   cursor: pointer;
@@ -68,11 +68,11 @@ ul.sidenav {
   width: 60px;
   height: 60px;
   border-radius: 100%;
-  background-color: var(--element-bg-secondary);
+  /* background-color: var(--element-bg-secondary); */
   vertical-align: middle;
   padding: 0;
   margin: 15px auto;
-  box-shadow: var(--shadow-neumorphic-nav);
+  /* box-shadow: var(--shadow-neumorphic-nav); */
 }
 
 .sidenav li:hover {
@@ -122,13 +122,14 @@ ul.bottomnav {
   display: flex;
   flex-direction: row;
   
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
+  height: 4vh;
   background-color: var(--element-bg-secondary);
   z-index: 5;
   margin: 0;
-  margin-top: 15px;
+  /* margin-top: 15px; */
   transform: translate3d(0,0,0);
   -webkit-transform: translate3d(0,0,0);
 }
@@ -160,6 +161,7 @@ ul.bottomnav {
   flex-direction: column;
   align-items: center;
   background-color: var(--bg);
+  margin-bottom: 15px;
 }
 
 svg.material-icons {
@@ -253,6 +255,7 @@ svg#clouds {
     transition: all 0.2s ease-in;
     width: 0;
     margin: 0;
+    display: none;
   }
 
   text-field.toolbar-search.visible {
@@ -260,5 +263,6 @@ svg#clouds {
     transform: scaleX(1);
     width: 280px;
     opacity: 1;
+    display: block;
   }
 }

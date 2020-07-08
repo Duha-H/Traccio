@@ -8,7 +8,7 @@
 }
 
 .spanning-content {
-  margin: 15px 20px;
+  /* margin: 15px 20px; */
   border-bottom: 1px solid var(--titles-secondary);
   padding-bottom: 25px;
   height: var(--spanning-line-height);
@@ -21,14 +21,14 @@
 }
 
 .add-btn {
-  font-size: 11pt;
+  /* font-size: 11pt; */
   line-height: var(--spanning-line-height);
   border-radius: 20px;
-  min-width: 100px;
+  /* min-width: 100px; */
   border: 1px solid var(--accent);
   background: var(--accent);
   padding: 2px 20px;
-  padding-left: 25px;
+  /* padding-left: 25px; */
   font-weight: 500;
   cursor: pointer;
   display: flex;
@@ -40,17 +40,18 @@
 }
 
 .add-btn p {
-  font-size: 11pt;
+  /* font-size: 11pt; */
   line-height: 30px;
   font-weight: 500;
   color: var(--text);
   margin: 0;
+  margin-right: 8px;
 }
 
 .add-btn mat-icon {
   line-height: 30px;
   color: var(--text);
-  margin-left: 10px;
+  /* margin-left: 8px; */
   font-weight: 500;
   font-size: 16pt;
 }
@@ -87,8 +88,9 @@ mat-drawer {
 
 .journey-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(22em, 1fr));
   justify-items: center;
+  margin-top: 10px;
   /* margin: 25px 25px; */
   /* height: 80%; */
 }
@@ -99,4 +101,16 @@ mat-drawer {
   margin: 20px;
   min-width: 100px;
   min-height: 100px;
+}
+
+
+
+@media screen and (max-width: 768px) {
+  .spanning-content {
+    padding-bottom: 10px;
+  }
+
+  .journey-container {
+    margin: 0 10px;
+  }
 }

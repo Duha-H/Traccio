@@ -5,7 +5,7 @@ import {
   Component,
   Input,
 } from "@angular/core";
-import { ResponsiveCalendarCanvas } from "@nivo/calendar";
+import { ResponsiveCalendarCanvas, CalendarDirection } from "@nivo/calendar";
 import { ReactWrapper } from './react-wrapper.component';
 
 interface CalendarProps {
@@ -20,6 +20,7 @@ interface CalendarProps {
   dayBorderWidth: any;
   dayBorderColor: string;
   legends: any;
+  direction: CalendarDirection;
 }
 
 @Component({
@@ -39,6 +40,7 @@ export class ResponsiveCalendarComponent extends ReactWrapper {
   @Input() dayBorderWidth: any;
   @Input() dayBorderColor: string;
   @Input() legends: any;
+  @Input() direction: CalendarDirection;
 
 
   protected getProps(): CalendarProps {
@@ -54,6 +56,7 @@ export class ResponsiveCalendarComponent extends ReactWrapper {
       dayBorderWidth,
       dayBorderColor,
       legends,
+      direction,
     } = this;
     return {
       data,
@@ -67,6 +70,7 @@ export class ResponsiveCalendarComponent extends ReactWrapper {
       dayBorderWidth,
       dayBorderColor,
       legends,
+      direction,
     };
   }
 

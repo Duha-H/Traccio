@@ -4,6 +4,7 @@ import { Journey } from "src/app/models/journey";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Observable } from 'rxjs/Observable';
 import { map, pluck, flatMap, mergeMap } from 'rxjs/operators';
+import { ResizeService } from 'src/app/controllers/resize.service';
 
 @Component({
   selector: "app-journey-list",
@@ -22,6 +23,7 @@ export class JourneyListComponent implements OnInit {
   constructor(
     public userStore: UserStoreService,
     private router: Router,
+    public rs: ResizeService,
   ) { }
 
   ngOnInit() {
