@@ -109,7 +109,7 @@ export class DataManagerService {
 
   getFormattedCalendarData(journeyid: string): { day: string; value: number; }[] {
     const result = [];
-    const journeyData = this.calendarData[journeyid];
+    const journeyData = Object.assign({}, this.calendarData[journeyid]); // to avoid a potentially non-existent journeyid
     for (const date of Object.keys(journeyData)) {
       result.push({
         day: date,
@@ -127,7 +127,7 @@ export class DataManagerService {
     percentage: string,
   }[] {
     const result = [];
-    const journeyData = this.statusData[journeyid];
+    const journeyData = Object.assign({}, this.statusData[journeyid]); // to avoid a potentially non-existent journeyid
     let total = 0;
     for (const status of Object.keys(journeyData)) {
       result.push({
