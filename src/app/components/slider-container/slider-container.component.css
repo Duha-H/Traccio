@@ -1,0 +1,16 @@
+.slider-container {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+
+  overflow: hidden;
+  /* overflow-x: scroll; */
+  scrollbar-width: none;
+  padding: 0 30px;
+}
+
+.buffer-item {
+  opacity: 0;
+  cursor: none;
+  pointer-events: none;
+}

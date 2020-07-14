@@ -61,18 +61,15 @@ ul.sidenav {
   list-style: none;
   padding: 30px 5px;
   text-align: center;
-  /* padding-top: 30px; */
 }
 
 .sidenav li {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border-radius: 100%;
-  /* background-color: var(--element-bg-secondary); */
   vertical-align: middle;
   padding: 0;
   margin: 15px auto;
-  /* box-shadow: var(--shadow-neumorphic-nav); */
 }
 
 .sidenav li:hover {
@@ -100,7 +97,7 @@ mat-sidenav {
 .sidenav mat-icon {
   color: var(--titles-secondary);
   margin: auto;
-  line-height: 42pt;
+  line-height: 37pt;
   font-size: 25pt;
   margin: auto 0;
   display: inline;
@@ -115,23 +112,20 @@ mat-sidenav {
   color: var(--accent);
 }
 
-ul.bottomnav {
+.bottomnav ul {
   list-style: none;
-  padding: 15px 0;
+  padding: 10px 0;
   text-align: center;
   display: flex;
   flex-direction: row;
-  
-  position: fixed;
-  bottom: 0;
+
   width: 100%;
-  height: 4vh;
-  background-color: var(--element-bg-secondary);
+  /* height: 4vh; */
+  /* background-color: var(--element-bg-secondary); */
   z-index: 5;
   margin: 0;
   /* margin-top: 15px; */
-  transform: translate3d(0,0,0);
-  -webkit-transform: translate3d(0,0,0);
+  /* padding-bottom: 25px; */
 }
 
 .bottomnav li {
@@ -158,10 +152,11 @@ ul.bottomnav {
 .content {
   display: flex;
   width: 100%;
+  height: 93vh;
   flex-direction: column;
   align-items: center;
   background-color: var(--bg);
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
 }
 
 svg.material-icons {
@@ -247,7 +242,22 @@ svg#clouds {
 
 @media screen and (max-width: 500px) {
   .toolbar {
-    padding: 15px 0;
+    padding: 10px 0;
+  }
+
+  .content {
+    height: 86vh;
+  }
+
+  .bottomnav {
+    height: 5vh;
+    padding-bottom: 20px;
+    background-color: var(--element-bg-secondary);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    transform: translate3d(0,0,0);
+    -webkit-transform: translate3d(0,0,0);
   }
 
   text-field.toolbar-search {

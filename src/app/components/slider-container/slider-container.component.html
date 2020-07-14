@@ -1,0 +1,9 @@
+<div class="slider-container" (swipeLeft)="onSwipe('left', $event)" (swipeRight)="onSwipe('right', $event)" #content>
+  <a *ngIf="contentType == 'rect-item'" href="" class="buffer-item">
+    <app-rect-item></app-rect-item>
+  </a>
+  <ng-content></ng-content>
+  <a *ngIf="contentType == 'rect-item'" href="" class="buffer-item">
+    <app-rect-item></app-rect-item>
+  </a>
+</div>

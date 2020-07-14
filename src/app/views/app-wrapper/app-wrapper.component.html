@@ -47,8 +47,8 @@
     </div>
 
     <!-- Conditionally-visible Bottom Nav -->
-    <div *ngIf="resizeService.mobileSize$ | async">
-      <ul class="bottomnav">
+    <div *ngIf="resizeService.mobileSize$ | async" class="bottomnav">
+      <ul>
         <li title="Journeys"><a href="#" routerLink="/journeys" (click)="clearSearch()"
             routerLinkActive="active" #navJourneysIcon>
             <mat-icon [inline]="true" aria-hidden="false" aria-label="Journeys icon">list</mat-icon>

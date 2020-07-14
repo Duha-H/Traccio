@@ -1,17 +1,18 @@
-import { Component, OnInit, OnChanges } from "@angular/core";
+import { Component, OnInit, OnChanges, ViewChild, QueryList, ViewChildren, ElementRef, AfterViewInit } from "@angular/core";
 import { UserStoreService } from "src/app/models/user-store.service";
 import { Journey } from "src/app/models/journey";
-import { Router, ActivatedRoute } from "@angular/router";
+import { Router } from "@angular/router";
 import { Observable } from 'rxjs/Observable';
-import { map, pluck, flatMap, mergeMap } from 'rxjs/operators';
 import { ResizeService } from 'src/app/controllers/resize.service';
+import { RectItemComponent } from 'src/app/components/rect-item/rect-item.component';
+import { SliderContainerComponent } from 'src/app/components/slider-container/slider-container.component';
 
 @Component({
   selector: "app-journey-list",
   templateUrl: "./journey-list.component.html",
   styleUrls: ["./journey-list.component.css"],
 })
-export class JourneyListComponent implements OnInit {
+export class JourneyListComponent implements OnInit, AfterViewInit {
 
   displayDrawer = false;
   currJourney: Journey = null;
@@ -19,6 +20,10 @@ export class JourneyListComponent implements OnInit {
   editButton = false;
   deleteButton = false;
   selectionMode = false;
+  sliderIdx = 0;
+  swipeOffset = 0;
+  @ViewChild(SliderContainerComponent) sliderContainer: SliderContainerComponent;
+  @ViewChildren('journeyItem', { read: ElementRef }) journeyList!: QueryList<ElementRef>;
 
   constructor(
     public userStore: UserStoreService,
@@ -28,6 +33,10 @@ export class JourneyListComponent implements OnInit {
 
   ngOnInit() {
     this.userStore.loadData();
+  }
+
+  ngAfterViewInit() {
+    this.onSwipe(0);
   }
 
   displayJourneyDrawer() {
@@ -63,5 +72,20 @@ export class JourneyListComponent implements OnInit {
       console.log("edit button was pressed");
       this.editButton = false;
     }
+  }
+
+  onSliderInit() {
+    // this.sliderContainer.setContent(this.journeyList);
+    // console.log(this.journeyList);
+    // if (this.journeyList) {
+    //   this.journeyList.toArray()[0].nativeElement.scrollIntoView({behavior: "smooth", block: "end", inline: "center"});
+    // }
+  }
+
+  onSwipe(idx: number) {
+    // idx is set here for styling
+    this.sliderIdx = idx;
+    // scrolling is done here for now to avoid passing undefined elementRefs to SliderContainerComponent
+    this.journeyList.toArray()[this.sliderIdx].nativeElement.scrollIntoView({behavior: "smooth", block: "end", inline: "center"});
   }
 }

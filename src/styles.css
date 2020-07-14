@@ -116,6 +116,7 @@ app-settings,
 app-sign-up,
 app-wishlist-wrapper {
   width: 100%;
+  height: 100%;
 }
 
 app-dashboard {
@@ -149,7 +150,7 @@ a.login-link,
 a.login-link:visited,
 a.login-link:hover,
 p a.login-link {
-  color: #1976d2;
+  color: #3081d3;
   text-decoration: none;
   margin: auto;
   font-size: 10pt;

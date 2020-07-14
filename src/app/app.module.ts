@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -61,6 +61,7 @@ import { TimelineComponent } from './components/timeline/timeline.component';
 import { TimelineTooltipComponent } from './components/timeline/timeline-tooltip.component';
 import { WishlistWrapperComponent } from './views/wishlist/wishlist-wrapper.component';
 import { OverflowWrapperComponent } from './components/overflow-wrapper/overflow-wrapper.component';
+import { SliderContainerComponent } from './components/slider-container/slider-container.component';
 
 @NgModule({
   declarations: [
@@ -100,10 +101,12 @@ import { OverflowWrapperComponent } from './components/overflow-wrapper/overflow
     TimelineComponent,
     TimelineTooltipComponent,
     WishlistWrapperComponent,
-    OverflowWrapperComponent
+    OverflowWrapperComponent,
+    SliderContainerComponent
   ],
   imports: [
     BrowserModule,
+    HammerModule,
     CommonModule,
     AppRoutingModule,
     // AmplifyUIAngularModule,

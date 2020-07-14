@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges, EventEmitter, Output } from '@angular/core';
 import { Journey } from 'src/app/models/journey';
+import { ResizeService } from 'src/app/controllers/resize.service';
 
 @Component({
   selector: 'app-rect-item',
@@ -13,7 +14,7 @@ export class RectItemComponent implements OnInit {
   @Input() height = 370;
   @Input() selectionMode = false;
   @Output() deleteButtonPressed = new EventEmitter<object>();
-  private _linkedJourney: Journey;
+  private _linkedJourney: Journey = new Journey();
   // @Input() linkedJourney: Journey = null;
 
   displayName = 'Title';
@@ -21,13 +22,16 @@ export class RectItemComponent implements OnInit {
   displayStatus = 'Status: ';
   mouseOver = false;
 
-  constructor() { }
+  constructor(private rs: ResizeService) { }
 
   @Input()
   set linkedJourney(journey: Journey) { this._linkedJourney = journey; }
   get linkedJourney() { return this._linkedJourney; }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.width = this.rs.mobileSize$.value ? '13em' : '18em';
+    this.height = this.rs.mobileSize$.value ? 300 : 370;
+  }
 
   onDeleteButtonPressed() {
     this.deleteButtonPressed.emit(this.linkedJourney);
