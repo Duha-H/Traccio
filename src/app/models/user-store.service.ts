@@ -174,7 +174,11 @@ export class UserStoreService {
     );
   }
 
-  getActiveJourneys() {
+  getJourneys(): Journey[] {
+    return Object.values(this._journeys.getValue());
+  }
+
+  getActiveJourneys(): Journey[] {
     let activeJourneys = Object.values(this._journeys.getValue()).filter(
       (journey) => journey.active
     );

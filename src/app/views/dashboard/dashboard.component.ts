@@ -66,7 +66,7 @@ export class DashboardComponent implements OnInit {
         this.activeJourneys = activeJourneys;
         this.setDropdownContent();
         this.selectedJourney = this.dropdownContent[0];
-        this.currentYear = this.selectedJourney.years[0]
+        this.currentYear = this.selectedJourney && this.selectedJourney.years[0]
           ? this.selectedJourney.years[0]
           : this.currentYear;
       });

@@ -7,14 +7,14 @@ const SCROLL_RATE = 200;
   templateUrl: './slider-container.component.html',
   styleUrls: ['./slider-container.component.css']
 })
-export class SliderContainerComponent implements OnInit {
+export class SliderContainerComponent implements OnInit, AfterViewInit {
 
   @Input() contentType: 'rect-item' | string = 'rect-item';
   @Input() content: any[];
   @Input() scrollRate = SCROLL_RATE;
+  @Input() idx = 0;
   @Output() sliderInit: EventEmitter<boolean> = new EventEmitter();
   @Output() idxChange: EventEmitter<number> = new EventEmitter();
-  idx = 0;
 
   constructor() { }
 
@@ -22,11 +22,12 @@ export class SliderContainerComponent implements OnInit {
     this.sliderInit.emit();
   }
 
-  // ngAfterViewInit() {
-  //   if (!this.content) {
-  //     console.log("SliderContainer: content not defined");
-  //   }
-  // }
+  ngAfterViewInit() {
+    if (!this.content) {
+      console.log("SliderContainer: content not defined");
+    }
+    // this.idxChange.emit(0);
+  }
 
   // setContent(content: QueryList<ElementRef>) {
   //   this.content = content;
