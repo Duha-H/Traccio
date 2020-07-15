@@ -39,9 +39,11 @@ export class Response {
    * Sets successful to true, and assigns a success message
    * @param message success message to assign
    */
-  success(message: string, ...optionalRemainder: string[]) {
+  success(message?: string, ...optionalRemainder: string[]) {
     this._successful = true;
-    this._message = message + optionalRemainder.join('');
+    if (message) {
+      this._message = message + optionalRemainder.join('');
+    }
   }
 
 }

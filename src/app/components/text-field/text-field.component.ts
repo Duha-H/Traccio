@@ -21,30 +21,33 @@ import {
       <div class="{{showUpdatedBorder ? \'updated\' : \'\'}}">\
         <input type="{{currType}}" [(ngModel)]="value" [value]="value" (input)="onInput()" maxLength="60" \
           style="font-size: {{fontSize}}pt; color: {{fontColor}};" \
-          name="inputField" #field="ngModel" placeholder="{{label}}"\
+          name="field" #field="ngModel" placeholder="{{ displayPlaceholder ? label : \'\'}}"\
+          maxLength="{{maxLength}}"\
           email="{{type == \'email\'}}" #input/>\
         <mat-icon *ngIf="type == \'password\'" (click)="togglePasswordVisibility()">{{visibilityIconName}}</mat-icon>\
         <mat-icon *ngIf="suffixIcon && type != \'password\'">{{suffixIcon}}</mat-icon>\
       </div>\
-      <label *ngIf="displayLabel" for="inputField" >{{fieldLabel}}</label>\
+      <label *ngIf="displayLabel" for="field" >{{fieldLabel}}</label>\
     </div>\
   </form>',
   styleUrls: ["./text-field.component.css"],
 })
 export class TextFieldComponent implements OnInit {
+  @Input() text: string;
   @Input() label = "";
   @Input() type = "text";
   @Input() required = false;
   @Input() displayLabel = true;
+  @Input() displayPlaceholder = true;
   @Input() suffixIcon = '';
   @Input() width = 350;
   @Input() height = 18;
   @Input() fontSize = 10;
   @Input() fontColor = 'var(--text)';
   @Input() center = true;
-  @Input() text: string;
   @Input() showUpdatedBorder = false; // unique border color if field value has been changed
   @Input() displayError = false;
+  @Input() maxLength = 60;
   @Output() inputChange = new EventEmitter();
   @ViewChild('input', { static: true }) input: ElementRef;
   fieldEmpty = true;

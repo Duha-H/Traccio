@@ -4,8 +4,8 @@ button {
   /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
     Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; */
   /* font-family: Roboto, 'Helvetica', sans-serif; */
-	font-size: 11pt;
-	margin: 5px 0px 0;
+	/* font-size: 11pt; */
+	/* margin: 5px 0px 0; */
 }
 
 ::placeholder {
@@ -13,7 +13,7 @@ button {
 }
 
 .component-container label {
-  font-size: 12pt;
+  /* font-size: 12pt; */
 }
 
 /* .component-container input {
@@ -23,16 +23,16 @@ button {
 .component-container {
   display: flex;
   flex-direction: column;
-  padding: 25px;
+  /* padding: 25px; */
   /* margin-right: 20px; */
-  margin: 0 auto;
-  position: fixed;
+  /* margin: 0 auto; */
+  /* position: fixed;
   top: 35%;
-  right: 35px;
+  right: 35px; */
 	text-align: left;
-	width: 260px;
+	/* width: 260px; */
 }
-
+/* 
 form * {
   width: 100%;
 }
@@ -47,18 +47,75 @@ form * {
 
 .mat-form-field-underline .mat-form-field-underline-appearance-legacy {
   background-color: white;
-}
+} */
 
 .form-element {
-  margin-bottom: 25px;
+  /* margin-bottom: 25px; */
+  background-color: var(--element-bg-secondary);
+  border-radius: 25px;
+  margin-right: 0;
+  padding: 8px;
 }
 
+::ng-deep .overlay-content .mat-form-field-wrapper, ::ng-deep .overlay-content .mat-form-field-infix {
+  border-top: none;
+  height: 100%;
+  padding-bottom: 0;
+}
+
+::ng-deep .overlay-content .mat-form-field-underline, ::ng-deep .overlay-content .mat-form-field-underline .mat-form-field-ripple {
+  background-color: transparent;
+  height: 0;
+  opacity: 0;
+}
+
+::ng-deep .overlay-content .mat-form-field-infix {
+  padding-left: 10px;
+}
+
+::ng-deep .overlay-content .mat-form-field-suffix {
+  /* padding-right: 10px; */
+}
+
+::ng-deep .overlay-content .mat-form-field-disabled .mat-form-field-underline {
+  background: none;
+}
+
+.overlay-content {
+  /* margin: 0 auto; */
+  /* width: 350px; */
+  padding: 10px 15px;
+  height: 100%;
+}
+
+.overlay-content .submit-button {
+  margin-bottom: 0;
+}
+
+.overlay-item {
+  margin: 20px 0;
+  display: grid;
+  text-align: left;
+}
+
+.overlay-item label {
+  color: var(--titles-secondary);
+  margin-bottom: 5px;
+  font-size: 11pt;
+}
+
+.overlay-item mat-checkbox {
+  margin-top: 15px;
+}
+
+
 mat-checkbox {
-  margin-bottom: 25px;
+  /* margin-bottom: 25px; */
 }
 
 .warning-text {
   color: var(--warn);
+  text-align: center;
 }
 
 .text-input {
@@ -75,6 +132,6 @@ mat-checkbox {
 .submit-button {
   margin: auto;
   /* margin-left: 11px; */
-  margin-top: 90px;
+  margin-top: 70px;
   /* min-width: 100%; */
 }

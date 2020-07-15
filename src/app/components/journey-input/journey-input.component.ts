@@ -1,21 +1,22 @@
 import {
   Component,
-  OnChanges,
   Output,
   EventEmitter,
   Input,
+  OnInit
 } from "@angular/core";
 import { MatDatepickerInputEvent } from "@angular/material/datepicker";
 import { Journey } from "src/app/models/journey";
-import { UserStoreService } from "src/app/models/user-store.service";
 import { OnDirtyErrorStateMatcher } from 'src/app/controllers/on-dirty-error-state-matcher';
+import { Response } from 'src/app/utils/response';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 
 @Component({
   selector: "journey-input",
   templateUrl: "./journey-input.component.html",
   styleUrls: ["./journey-input.component.css"],
 })
-export class JourneyInputComponent implements OnChanges {
+export class JourneyInputComponent implements OnInit {
   @Input() journey: Journey;
   @Output() newDataLogged = new EventEmitter<object>();
   @Output() updateDataLogged = new EventEmitter<object>();
@@ -28,30 +29,24 @@ export class JourneyInputComponent implements OnChanges {
   endDate = undefined;
   active = true;
   errorStateMatcher = new OnDirtyErrorStateMatcher();
+  response = new Response();
 
-  constructor(private userStore: UserStoreService) {
+  constructor() {
     const thisYear = new Date().getFullYear();
     this.minDate = new Date(thisYear - 20, 0, 1);
     this.maxDate = new Date(thisYear, 11, 31);
   }
 
-  ngOnChanges() {
-    if (this.journey) {
-      console.log("new journey", this.journey);
-      this.active = this.journey.active;
-      this.title = this.journey.title;
-      this.startDate = this.journey.startDate;
-      this.endDate = this.journey.endDate
-        ? this.journey.endDate
-        : new Date();
-    } else {
-      this.resetData(); // make sure all fields are clean
-    }
-  }
+  ngOnInit() { }
 
   onDataLogged() {
-    if (this.title === "") {
+    if (!this.title) {
       console.log("error: no title specifed");
+      this.response.error('A journey title must be specified');
+    } else if (!this.startDate) {
+      this.response.error('Start date is not specified or invalid');
+    } else if (!this.active && !this.endDate) {
+      this.response.error('Since the journey is inactive, an end date must be specified');
     } else {
       const newJourney: { [key: string]: any } = {};
       if (this.journey) { // if updating existing journey, copy over ID and apps
@@ -80,9 +75,24 @@ export class JourneyInputComponent implements OnChanges {
     this.journey = null;
   }
 
-  dateChange(event: MatDatepickerInputEvent<Date>) {
-    // this.day = event.value.getDate();
-    // this.month = event.value.getMonth() + 1;
-    // this.year = event.value.getFullYear();
+  dateChange(event: MatDatepickerInputEvent<Date>, type: 'start' | 'end') {
+    const date = event.value;
+    if (date instanceof Date) {
+      if (type === 'end') {
+        this.active = false;
+      }
+      this.response.success();
+    } else {
+      this.response.error('Date is invalid, it must have the format MM/DD/YYYY');
+    }
+  }
+
+  onActiveToggle(event: MatCheckboxChange) {
+    if (!event.checked) {
+      this.endDate = new Date();
+    } else {
+      this.endDate = undefined;
+    }
+    this.response.success();
   }
 }

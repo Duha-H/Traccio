@@ -161,10 +161,8 @@ button.add-btn:disabled mat-icon, button.add-btn:disabled p {
 .form-element {
   background-color: var(--element-bg-secondary);
   border-radius: 25px;
-  /* margin: 0px 10px; */
   margin-right: 0;
   padding: 8px;
-  /* width: 235px; */
 }
 
 ::ng-deep .overlay-content .mat-form-field-wrapper, ::ng-deep .overlay-content .mat-form-field-infix {

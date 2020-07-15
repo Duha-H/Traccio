@@ -8,7 +8,7 @@
   --accent-hover: #22232dc2;
   --titles-primary: #9f9dea;
   --titles-secondary: #909ca8;
-  --text: #ffffff;
+  --text: rgb(255, 255, 255);
   --warn: #f94d78;
   --disabled-bg: #797f85;
   --success-bg: #94f4c24f;
@@ -55,6 +55,12 @@ p, span {
   color: var(--text);
   font-size: 1em;
   font-weight: 400;
+}
+
+input {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 ::placeholder {
