@@ -56,7 +56,7 @@ mat-icon {
   margin: 5px 0px;
   height: var(--spanning-line-height);
   border-bottom: 1px solid var(--text);
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   margin-bottom: 0;
 }
 
@@ -106,12 +106,12 @@ mat-icon {
 .add-btn {
   font-size: 11pt;
   /* line-height: var(--spanning-line-height); */
-  border-radius: 20px;
+  border-radius: 5px;
   /* min-width: 100px; */
-  border: 1px solid var(--accent);
+  /* border: 1px solid var(--accent); */
   background: var(--accent);
-  padding: 2px 10px;
-  padding-left: 25px;
+  /* padding: 2px 10px; */
+  padding-left: 15px;
   font-weight: 500;
   cursor: pointer;
   display: flex;
@@ -160,7 +160,7 @@ button.add-btn:disabled mat-icon, button.add-btn:disabled p {
 
 .form-element {
   background-color: var(--element-bg-secondary);
-  border-radius: 25px;
+  border-radius: 5px;
   margin-right: 0;
   padding: 8px;
 }
@@ -532,5 +532,7 @@ mat-list-item {
     margin-top: 70px;
   }  
 
-  
+  .add-btn {
+    padding: 0 5px;
+  }
 }

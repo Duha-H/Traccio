@@ -11,7 +11,7 @@
 .spanning-content {
   /* margin: 15px 20px; */
   border-bottom: 1px solid var(--titles-secondary);
-  padding-bottom: 15px;
+  padding-bottom: 10px;
   height: var(--spanning-line-height);
 }
 
@@ -24,11 +24,11 @@
 .add-btn {
   /* font-size: 11pt; */
   line-height: var(--spanning-line-height);
-  border-radius: 20px;
+  border-radius: 5px;
   /* min-width: 100px; */
-  border: 1px solid var(--accent);
+  /* border: 1px solid var(--accent); */
   background: var(--accent);
-  padding: 2px 20px;
+  padding: 0px 15px;
   /* padding-left: 25px; */
   font-weight: 500;
   cursor: pointer;
@@ -131,5 +131,9 @@ slider-container .journey-item.current {
 @media screen and (max-width: 500px) {
   .journey-item {
     margin: 0;
+  }
+
+  .add-btn {
+    padding: 0 5px;
   }
 }

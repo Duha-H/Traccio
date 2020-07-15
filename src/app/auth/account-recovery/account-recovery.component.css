@@ -34,7 +34,7 @@
 	background-color: var(--titles-secondary);
 	width: 60px;
 	height: 60px;
-	border-radius: 100%;
+	border-radius: 5px;
 	line-height: 60px;
 }
 

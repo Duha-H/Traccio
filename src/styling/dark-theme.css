@@ -10,7 +10,7 @@ body[theme='dark'] {
   /** text */
   --titles-primary: #9f9dea;
   --titles-secondary: #909ca8;
-  --text: #ffffff;
+  --text: rgb(255, 255, 255);
   /** feedback colors */
   --theme-dark: #22232d;
   --theme-light: #F6F6F6;

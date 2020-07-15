@@ -4,12 +4,12 @@
     <p class="label">application theme</p>
     <ul class="value toggle-btns">
       <li><button (click)="addUpdate('theme', 'dark')" class="{{preferences.theme.name == 'dark' ? 'active' : ''}}">
-        <p>Dark</p>
+        <p style="line-height: 35px;">Dark</p>
         <div style="flex: 1;"></div>
         <mat-icon>brightness_2</mat-icon>
       </button></li>
       <li><button (click)="addUpdate('theme', 'light')" class="{{preferences.theme.name == 'light' ? 'active' : ''}}">
-        <p>Light</p>
+        <p style="line-height: 35px;">Light</p>
         <div style="flex: 1;"></div>
         <mat-icon>brightness_5</mat-icon>
       </button></li>

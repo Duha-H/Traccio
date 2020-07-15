@@ -63,6 +63,10 @@ input {
   text-overflow: ellipsis;
 }
 
+button {
+  border: none;
+}
+
 ::placeholder {
   color: #d1d1d1;
 }
@@ -134,7 +138,7 @@ app-dashboard {
   color: var(--text);
   font-size: 10pt;
   padding: 12px;
-  border-radius: 15px;
+  border-radius: 5px;
   border: 1px solid transparent;
   margin: 50px 0;
   width: 100%;

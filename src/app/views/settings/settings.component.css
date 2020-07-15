@@ -8,7 +8,7 @@
 .spanning-content {
   margin: 15px 20px;
   border-bottom: 1px solid var(--titles-secondary);
-  padding-bottom: 25px;
+  padding-bottom: 10px;
   height: var(--spanning-line-height);
 }
 
@@ -17,18 +17,15 @@
 }
 
 button.save-btn {
-  line-height: var(--spanning-line-height);
-  height: 35px;
   width: 150px;
-  border: 1px solid var(--accent);
-  border-radius: 25px;
+  border-radius: 5px;
   background-color: var(--accent);
   cursor: pointer;
+  padding: 5px;
 }
 
 .save-btn p {
   margin: 0;
-  line-height: 30px;
   text-align: center;
   color: var(--text);
   font-size: 11pt;
@@ -91,7 +88,6 @@ button.save-btn:disabled {
   padding: 5px 20px;
   display: flex;
   flex-direction: row;
-  /* border-bottom: 0.3px solid var(--titles-secondary); */
   height: var(--setting-line-height);
   margin-top: 20px;
 }
@@ -153,11 +149,10 @@ div.label p.label {
 }
 
 .setting button {
-  line-height: 45px;
-  height: 45px;
+  height: 35px;
   background: none;
   border: 1px solid var(--titles-secondary);
-  border-radius: 25px;
+  border-radius: 5px;
   cursor: pointer;
   margin: auto;
 }
@@ -173,7 +168,7 @@ div.label p.label {
 }
 
 .setting mat-icon {
-  line-height: 45px;
+  line-height: 30px;
   color: var(--text);
   font-size: 16pt;
 }
@@ -208,22 +203,21 @@ div.label p.label {
   margin: auto;
   background-color: var(--titles-secondary);
   width: 150px;
-  height: 40px;
-  line-height: var(--setting-line-height);
   margin-left: 0px;
   margin-right: 10px;
+  padding: 5px;
 }
 
 .setting button.toggle p {
   margin: auto;
-  line-height: 40px;
+  /* line-height: 40px; */
   text-align: center;
   font-size: 10pt;
 }
 
 .setting .toggle-btns p {
   margin: 0;
-  line-height: 35px;
+  /* line-height: 35px; */
   font-size: 10pt;
 }
 
