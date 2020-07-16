@@ -17,7 +17,17 @@
   <!-- Position Title Column -->
   <ng-container matColumnDef="positionTitle">
     <th mat-header-cell *matHeaderCellDef class="app-th" mat-sort-header="positionTitle" style="padding-left: 10px;"> Position </th>
-    <td mat-cell *matCellDef="let element" class="app-tr" style="padding-left: 10px;"> {{element.positionTitle}} </td>
+    <td mat-cell *matCellDef="let element" class="app-tr" style="padding: 0 10px;">
+      <div *ngIf="!(rs.tabletSize$ | async); else mobilePositionCell">
+        {{element.positionTitle}}
+      </div>
+      <ng-template #mobilePositionCell>
+        <div>
+          <div style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; max-width: 80px;">{{element.positionTitle}}</div>
+          <div style="color: var(--titles-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 90px;">@ {{element.companyName}}</div>
+        </div>
+      </ng-template>
+    </td>    
   </ng-container>
 
   <!-- Company Name Column -->
@@ -29,7 +39,16 @@
   <!-- Date Column -->
   <ng-container matColumnDef="appDate">
     <th mat-header-cell *matHeaderCellDef class="app-th" mat-sort-header> Date Applied </th>
-    <td mat-cell *matCellDef="let element" class="app-tr"> {{element.appDate | date}} </td>
+    <td mat-cell *matCellDef="let element" class="app-tr">
+      <div *ngIf="!(rs.tabletSize$ | async); else mobilePositionCell">
+        {{ element.appDate | date}}
+      </div>
+      <ng-template #mobilePositionCell>
+        <div>
+          {{element.appDate | date:'MMM yyyy'}}
+        </div>
+      </ng-template>
+    </td>    
   </ng-container>
 
   <!-- Source Column -->
@@ -56,8 +75,8 @@
     </td>
   </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onApplicationClick(row)" class="clickable-item">
+  <tr mat-header-row *matHeaderRowDef="(rs.tabletSize$ | async) ? displayedColumnsMobile : displayedColumnsDefault"></tr>
+  <tr mat-row *matRowDef="let row; columns: ((rs.tabletSize$ | async) ? displayedColumnsMobile : displayedColumnsDefault);" (click)="onApplicationClick(row)" class="clickable-item">
   </tr>
 </table>
 

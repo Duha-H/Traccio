@@ -414,6 +414,10 @@ td.mat-cell:first-of-type {
   padding-left: 15px;
 }
 
+td.mat-cell:last-of-type {
+  padding-right: 10px;
+}
+
 .app-tr {
   color: var(--text);
   font-size: 11pt;
@@ -534,5 +538,9 @@ mat-list-item {
 
   .add-btn {
     padding: 0 5px;
+  }
+
+  .app-tr {
+    font-size: 10pt;
   }
 }

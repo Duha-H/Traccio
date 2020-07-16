@@ -13,6 +13,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { UserStoreService } from 'src/app/models/user-store.service';
 import { AppFilterPipe } from 'src/app/views/dashboard/app-filter.pipe';
 import { MatSort } from '@angular/material/sort';
+import { ResizeService } from 'src/app/controllers/resize.service';
 
 @Component({
   selector: "application-list",
@@ -28,12 +29,19 @@ export class ApplicationListComponent implements OnInit {
   applications: Application[] = [];
   deleteButtonPressed = false;
   dataSource = new MatTableDataSource<Application>(this.applications);
-  displayedColumns = [
+  displayedColumnsDefault = [
     "select",
     "positionTitle",
     "companyName",
     "appDate",
     "source",
+    "status",
+    "remove",
+  ];
+  displayedColumnsMobile = [
+    "select",
+    "positionTitle",
+    "appDate",
     "status",
     "remove",
   ];
@@ -45,7 +53,8 @@ export class ApplicationListComponent implements OnInit {
 
   constructor(
     private userStore: UserStoreService,
-    private filterPipe: AppFilterPipe
+    private filterPipe: AppFilterPipe,
+    public rs: ResizeService,
   ) { }
 
   ngOnInit() {
