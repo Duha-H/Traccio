@@ -127,8 +127,10 @@ export class DashboardComponent implements OnInit {
     if (data.length === 0) {
       return years;
     }
-    const startYear = +data[0].day.split("-")[0]; // extract year as a number
-    const endYear = +data[data.length - 1].day.split("-")[0];
+    // okay, we can't be parsing a date string because that creates unpredictable messes
+    // so we're gonna use the date string to create a new Date object, then extract the year from that
+    const startYear = new Date(data[0].day).getFullYear(); // extract year as a number
+    const endYear = new Date(data[data.length - 1].day).getFullYear();
     for (let i = startYear; i <= endYear; i++) {
       years.push(i);
     }
