@@ -1,48 +1,66 @@
 <div class="setting-tab">
   <div class="setting">
-    <p class="label">first name</p>
-    <text-field class="value" [width]="500" [height]="10" [center]="false" [displayLabel]="false" [text]="user.firstName" [showUpdatedBorder]="updateCheck[ATTRIBS.FIRST_NAME]" (inputChange)="addUpdate(ATTRIBS.FIRST_NAME, $event)" #firstNameField></text-field>
-    <div class="undo-button">
-      <button title="undo changes" [disabled]="!updateList[ATTRIBS.FIRST_NAME]" (click)="undoChange(ATTRIBS.FIRST_NAME, firstNameField)">
-        <mat-icon>replay</mat-icon>
-      </button>
+    <p class="label">
+      first name
+      <mat-icon class="info-icon" (click)="displayTooltip('first-name', $event)">info</mat-icon>
+    </p>
+    <div class="setting-textfield">
+      <text-field class="value" [width]="800" [height]="10" [center]="false" [displayLabel]="false" [text]="user.firstName" [showUpdatedBorder]="updateCheck[ATTRIBS.FIRST_NAME]" (inputChange)="addUpdate(ATTRIBS.FIRST_NAME, $event)" #firstNameField></text-field>
+      <div class="undo-button">
+        <button title="undo changes" [disabled]="!updateCheck[ATTRIBS.FIRST_NAME]" (click)="undoChange(ATTRIBS.FIRST_NAME, firstNameField)">
+          <mat-icon>replay</mat-icon>
+        </button>
+      </div>
     </div>
   </div>
-  <div class="info">
+  <div class="info" id="first-name">
     <p>Your first name is only used to personalize your experience</p>
   </div>
 
   <div class="setting">
-    <p class="label">last name</p>
-    <text-field class="value" [width]="500" [height]="10" [center]="false" [displayLabel]="false" [text]="user.lastName" [showUpdatedBorder]="updateCheck[ATTRIBS.LAST_NAME]" (inputChange)="addUpdate(ATTRIBS.LAST_NAME, $event)" #lastNameField></text-field>
-    <div class="undo-button">
-      <button title="undo changes" [disabled]="!updateCheck[ATTRIBS.LAST_NAME]" (click)="undoChange(ATTRIBS.LAST_NAME, lastNameField)">
-        <mat-icon>replay</mat-icon>
-      </button>
+    <p class="label">
+      last name
+      <mat-icon class="info-icon" (click)="displayTooltip('last-name', $event)">info</mat-icon>
+    </p>
+    <div class="setting-textfield">
+      <text-field class="value" [width]="800" [height]="10" [center]="false" [displayLabel]="false" [text]="user.lastName" [showUpdatedBorder]="updateCheck[ATTRIBS.LAST_NAME]" (inputChange)="addUpdate(ATTRIBS.LAST_NAME, $event)" #lastNameField></text-field>
+      <div class="undo-button">
+        <button title="undo changes" [disabled]="!updateCheck[ATTRIBS.LAST_NAME]" (click)="undoChange(ATTRIBS.LAST_NAME, lastNameField)">
+          <mat-icon>replay</mat-icon>
+        </button>
+      </div>
     </div>
+    
   </div>
-  <div class="info">
+  <div class="info" id="last-name">
     <p>Your last name is only used to personalize your experience</p>
   </div>
 
-  <div class="setting" style="height: 60px;">
-    <div class="label" style="display: flex; flex-direction: column;">
-      <p class="label">change email</p>
-      <div class="info" style="padding: 5px 0;">
+  <div class="setting">
+    <div class="label">
+      <p class="label">
+        change email
+        <mat-icon class="info-icon" (click)="displayTooltip('email', $event)">info</mat-icon>
+      </p>
+      
+      <div class="info" style="padding: 5px 0;" id="email">
         <p id="alt-info">Your email address is used as a login credential, so make sure you provide a valid address.</p>
       </div>
     </div>
-    <div class="value value-div">
-      <text-field [width]="500" [height]="10" [center]="false" [displayLabel]="false" [text]="user.email" [showUpdatedBorder]="updateCheck[ATTRIBS.EMAIL]" (inputChange)="addUpdate(ATTRIBS.EMAIL, $event)" #emailField></text-field>
-      <div *ngIf="!user.verified" id="alert-div">
-        <p class="warning-text">Your email was not verified,<a class="login-link" style="line-height: 12pt; cursor: pointer; z-index: 2; margin-left: 5px;" role="button" (click)="displayVerifyOverlay=true">verify email</a></p>
+    <div class="setting-textfield" style="align-items: flex-start;">
+      <div class="value value-div">
+        <text-field [width]="800" [height]="10" [center]="false" [displayLabel]="false" [text]="user.email" [showUpdatedBorder]="updateCheck[ATTRIBS.EMAIL]" (inputChange)="addUpdate(ATTRIBS.EMAIL, $event)" #emailField></text-field>
+        <div *ngIf="!user.verified" id="alert-div">
+          <p class="warning-text">Your email was not verified,<a class="login-link" style="line-height: 12pt; cursor: pointer; z-index: 2; margin-left: 5px;" role="button" (click)="displayVerifyOverlay=true">verify email</a></p>
+        </div>
+      </div>
+      <div class="undo-button">
+        <button title="undo changes" [disabled]="!updateCheck[ATTRIBS.EMAIL]" (click)="undoChange(ATTRIBS.EMAIL, emailField)">
+          <mat-icon>replay</mat-icon>
+        </button>
       </div>
     </div>
-    <div class="undo-button">
-      <button title="undo changes" [disabled]="!updateCheck[ATTRIBS.EMAIL]" (click)="undoChange(ATTRIBS.EMAIL, emailField)">
-        <mat-icon>replay</mat-icon>
-      </button>
-    </div>
+    
     <app-overlay *ngIf="displayVerifyOverlay" (closeOverlay)="closeVerifyOverlay()">
       <div class="overlay-content">
         <p>Since your email was changed, a verification code was sent to your new email.</p>
@@ -59,26 +77,30 @@
   
   
 
-  <div class="setting" style="height: 250px;">
-    <div class="label" style="display: flex; flex-direction: column;">
-      <p class="label">change password</p>
-      <div class="info" style="padding: 5px 0;">
+  <div class="setting">
+    <div class="label">
+      <p class="label">
+        change password
+        <mat-icon class="info-icon" (click)="displayTooltip('password', $event)">info</mat-icon>
+      </p>
+      <div class="info" style="padding: 5px 0;" id="password">
         <p id="alt-info">Make password good so account is good.</p>
       </div>
     </div>
-    <div *ngIf="!changePassword" class="value" style="margin-left: 70px;">
+    
+    <div *ngIf="!changePassword" class="value password-change">
       <button class="toggle" (click)="toggleChangePassword()">
         <p>Change Password</p>
       </button>
     </div>
-    <div *ngIf="changePassword" class="value value-div" style="line-height: 250px;">
-      <text-field  [width]="500" [height]="10" [center]="false" [displayLabel]="false" [text]="" [type]="'password'" [label]="'Old Password'" (inputChange)="addPasswordChange('oldPassword', $event)"></text-field>
-      <text-field  [width]="500" [height]="10" [center]="false" [displayLabel]="false" [text]="" [type]="'password'" [label]="'New Password'" (inputChange)="addPasswordChange('newPassword', $event)"></text-field>
-      <text-field  [width]="500" [height]="10" [center]="false" [displayLabel]="false" [text]="" [type]="'password'" [label]="'Confirm New Password'" (inputChange)="addPasswordChange('confirmPassword', $event)"></text-field>
+    <div *ngIf="changePassword" class="value value-div password-change">
+      <text-field  [width]="800" [height]="10" [center]="false" [displayLabel]="false" [text]="" [type]="'password'" [label]="'Old Password'" (inputChange)="addPasswordChange('oldPassword', $event)"></text-field>
+      <text-field  [width]="800" [height]="10" [center]="false" [displayLabel]="false" [text]="" [type]="'password'" [label]="'New Password'" (inputChange)="addPasswordChange('newPassword', $event)"></text-field>
+      <text-field  [width]="800" [height]="10" [center]="false" [displayLabel]="false" [text]="" [type]="'password'" [label]="'Confirm New Password'" (inputChange)="addPasswordChange('confirmPassword', $event)"></text-field>
       <div *ngIf="!user.verified" id="alert-div">
         <p class="warning-text">Your email was not verified,</p><a class="login-link" style="line-height: 12pt; cursor: pointer;" role="button" (click)="displayVerifyOverlay=true">verify email</a>
       </div>
-      <div style="display: flex; flex-direction: row; margin: 0;">
+      <div style="display: flex; flex-direction: row; margin: 10px 0; flex-wrap: wrap;">
         <ul class="toggle-btns">
           <li>
             <button class="toggle" (click)="applyPasswordChange()">
@@ -91,11 +113,11 @@
             </button>
           </li>
         </ul>
-        <a href="#" routerLink="/accountrecovery" class="login-link">Forgot your password?</a>
+        <a href="#" routerLink="/accountrecovery" class="login-link" style="line-height: normal;">Forgot your password?</a>
       </div>
       
     </div>
-    <div class="undo-button"></div>
+    <!-- <div class="undo-button"></div> -->
 
   </div>
 

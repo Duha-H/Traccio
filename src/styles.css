@@ -202,7 +202,7 @@ a.login-link.forgot-password {
 
 @media screen and (max-width: 575px) {
   input, select, textarea { /** primarily to prevent mobile browsers from zooming in onFocus*/
-    font-size: 16px !important;
+    /* font-size: 16px !important; */
   }
 
   div.content {

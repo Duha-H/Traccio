@@ -6,10 +6,14 @@
 }
 
 .spanning-content {
-  margin: 15px 20px;
+  margin: 15px 10px;
   border-bottom: 1px solid var(--titles-secondary);
   padding-bottom: 10px;
   height: var(--spanning-line-height);
+}
+
+::ng-deep .tabs .mat-tab-body.mat-tab-body-active {
+  overflow-y: hidden;
 }
 
 ::ng-deep .tabs .mat-tab-label, ::ng-deep .tabs .mat-tab-label-content {
@@ -51,11 +55,10 @@ button.save-btn:disabled {
 }
 
 .info {
-  padding: 5px 20px;
+  padding: 5px 10px;
   display: flex;
   flex-direction: row;
   text-align: left;
-  margin-bottom: 10px;
 }
 
 .info p {
@@ -75,6 +78,14 @@ button.save-btn:disabled {
   margin-top: 25px;
 }
 
+.setting mat-icon.info-icon, .setting .label mat-icon.info-icon {
+  display: none;
+  font-size: 1.25em;
+  line-height: var(--setting-line-height);
+  margin-left: 15px;
+  color: var(--titles-secondary);
+}
+
 .info.info-centered {
   margin: auto;
   margin-top: 30px;
@@ -85,15 +96,10 @@ button.save-btn:disabled {
 }
 
 .setting {
-  padding: 5px 20px;
+  padding: 5px 10px;
   display: flex;
   flex-direction: row;
-  height: var(--setting-line-height);
-  margin-top: 20px;
-}
-
-.setting .label * {
-  width: 100%;
+  margin-top: 1em;
 }
 
 .setting p.label, .setting div.label {
@@ -101,9 +107,8 @@ button.save-btn:disabled {
 }
 
 .setting .value {
-  width: 60%;
+  width: 100%;
   text-align: left;
-  margin-left: 70px;
 }
 
 .setting .label p, p.label {
@@ -117,27 +122,40 @@ button.save-btn:disabled {
 
 div.label p.label {
   line-height: var(--setting-line-height);
+  display: flex;
+  flex-direction: column;
 }
 
 .setting text-field {
   margin: auto 10px;
 }
 
+.setting-textfield {
+  display: flex;
+  flex-direction: row;
+  width: 60%;
+}
+
 .value-div {
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
 }
 
 .setting .value-div text-field {
-  margin: auto 0px;
-  margin-top: 0;
-  margin-bottom: 20px;
+  margin: auto 10px;
+  margin-left: 15px;
+}
+
+.setting .value-div.password-change text-field {
+  margin: 10px 0;
+}
+
+.setting .value.password-change, .setting .value-div.password-change {
+  margin-left: 20px;
+  width: 60%;
 }
 
 .setting div.undo-button {
-  line-height: var(--setting-line-height);
-  height: var(--setting-line-height);
   width: 45px;
   display: inherit;
   align-items: center;
@@ -210,14 +228,12 @@ div.label p.label {
 
 .setting button.toggle p {
   margin: auto;
-  /* line-height: 40px; */
   text-align: center;
   font-size: 10pt;
 }
 
 .setting .toggle-btns p {
   margin: 0;
-  /* line-height: 35px; */
   font-size: 10pt;
 }
 
@@ -302,4 +318,70 @@ div#alert-div p.warning-text {
 
 .alert mat-icon {
   cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .setting {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .setting-tab {
+    margin: 40px 0px;
+  }
+
+  .setting div.label {
+    width: 100%;
+  }
+
+  div.label p.label {
+    flex-direction: row;
+    width: auto;
+  }
+
+  .setting .value {
+    margin-left: 0;
+    width: 90%;
+  }
+
+  .setting .value.password-change, .setting .value-div.password-change {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 10px;
+  }
+
+  .setting text-field {
+    margin: 0;
+  }
+
+  .setting .value-div text-field {
+    margin: 0;
+  }
+
+  .setting-textfield {
+    width: 100%;
+  }
+
+  .info {
+    display: none;
+  }
+
+  .info.visible {
+    display: block;
+    position: fixed;
+    box-shadow: var(--shadow-tooltip);
+    background-color: var(--bg);
+    border-radius: 5px;
+    z-index: 2;
+    padding: 5px;
+  }
+
+  .info.visible p {
+    width: auto;
+  }
+
+  .setting mat-icon.info-icon, .setting .label mat-icon.info-icon {
+    display: inline;
+    cursor: pointer;
+  }
 }
