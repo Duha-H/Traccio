@@ -22,14 +22,10 @@
 }
 
 .add-btn {
-  /* font-size: 11pt; */
   line-height: var(--spanning-line-height);
   border-radius: 5px;
-  /* min-width: 100px; */
-  /* border: 1px solid var(--accent); */
   background: var(--accent);
   padding: 0px 15px;
-  /* padding-left: 25px; */
   font-weight: 500;
   cursor: pointer;
   display: flex;

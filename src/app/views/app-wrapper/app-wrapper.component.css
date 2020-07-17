@@ -34,8 +34,10 @@ text-field.toolbar-search {
   font-size: 18pt;
 }
 
-.toolbar img {
-  margin: 0 16px;
+img.logo {
+  width: 10em;
+  margin-right: 10px;
+  color: var(--titles-secondary);
 }
 
 .toolbar #twitter-logo {
@@ -53,13 +55,13 @@ text-field.toolbar-search {
 
 .sidenav-container.mat-sidenav-container.mat-drawer-container {
   display: inline-block;
-  height: 100vh;
+  /* height: 100vh; */
   width: 85vw;
 }
 
 ul.sidenav {
   list-style: none;
-  padding: 30px 5px;
+  padding: 50px 5px;
   text-align: center;
 }
 
@@ -70,10 +72,6 @@ ul.sidenav {
   vertical-align: middle;
   padding: 0;
   margin: 15px auto;
-}
-
-.sidenav li:hover {
-  background-color: var(--accent-hover);
 }
 
 .sidenav a {
@@ -91,7 +89,6 @@ mat-sidenav-container {
 mat-sidenav {
   background-color: var(--element-bg-secondary);
   min-height: 100%;
-  padding: 0 5px;
 }
 
 .sidenav mat-icon {
@@ -112,6 +109,10 @@ mat-sidenav {
   color: var(--accent);
 }
 
+.sidenav mat-icon:hover, .bottomnav mat-icon:hover {
+  color: var(--accent);
+}
+
 .bottomnav ul {
   list-style: none;
   padding: 10px 0;
@@ -120,12 +121,9 @@ mat-sidenav {
   flex-direction: row;
 
   width: 100%;
-  /* height: 4vh; */
-  /* background-color: var(--element-bg-secondary); */
   z-index: 5;
   margin: 0;
-  /* margin-top: 15px; */
-  /* padding-bottom: 25px; */
+  position: absolute;
 }
 
 .bottomnav li {
@@ -157,30 +155,6 @@ mat-sidenav {
   align-items: center;
   background-color: var(--bg);
   /* margin-bottom: 15px; */
-}
-
-svg.material-icons {
-  height: 24px;
-  width: auto;
-}
-
-svg.material-icons:not(:last-child) {
-  margin-right: 8px;
-}
-
-svg#rocket {
-  width: 80px;
-  position: absolute;
-  left: -10px;
-  top: -24px;
-}
-
-svg#rocket-smoke {
-  height: 100vh;
-  position: absolute;
-  top: 10px;
-  right: 180px;
-  z-index: -10;
 }
 
 a,
@@ -245,6 +219,11 @@ svg#clouds {
     padding: 10px 0;
   }
 
+  img.logo {
+    width: 2em;
+    margin-left: 15px;
+  }
+
   .content {
     height: 86vh;
   }
@@ -258,6 +237,7 @@ svg#clouds {
     width: 100%;
     transform: translate3d(0,0,0);
     -webkit-transform: translate3d(0,0,0);
+    z-index: 10;
   }
 
   text-field.toolbar-search {
