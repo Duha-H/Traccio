@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Response } from 'src/app/utils/response';
 import { ProfileSettingsComponent } from './profile-settings.component';
 import { MatTabGroup } from '@angular/material/tabs';
@@ -6,11 +6,16 @@ import { UserStoreService } from 'src/app/models/user-store.service';
 import { PreferenceSettingsComponent } from './preference-settings.component';
 import { DEFAULT_PROFILE_UPDATE_CHECK, DEFAULT_PREFERENCES_UPDATE_CHECK } from './constants';
 import { PreferencesStoreService } from 'src/app/controllers/preferences-store.service';
+import { ResizeService } from 'src/app/controllers/resize.service';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.css']
+  styleUrls: ['./settings.component.css'],
+  // tslint:disable-next-line: no-host-metadata-property
+  host: {
+    "(document:click)": "onViewClick($event)",
+  },
 })
 export class SettingsComponent implements OnInit {
 
@@ -25,6 +30,8 @@ export class SettingsComponent implements OnInit {
     [this.PROFILE_IDX]: false, // profile changes
     [this.PREFERENCES_IDX]: false, // preferences changes
   };
+  visibleTooltip: ElementRef = undefined;
+  clickedIcon: EventTarget = undefined;
 
   @ViewChild('tabGroup') tabGroup: MatTabGroup;
   @ViewChild(ProfileSettingsComponent) profileSettingsComp: ProfileSettingsComponent;
@@ -33,6 +40,7 @@ export class SettingsComponent implements OnInit {
   constructor(
     private userStore: UserStoreService,
     private preferencesStore: PreferencesStoreService,
+    public rs: ResizeService,
   ) { }
 
   ngOnInit() { }
@@ -114,6 +122,35 @@ export class SettingsComponent implements OnInit {
 
   closeAlert() {
     this.displayAlert = false;
+  }
+
+  showTooltip(input: {
+    tooltip: ElementRef,
+    event: MouseEvent
+  }) {
+    if (this.visibleTooltip) {
+      this.hideTooltip(this.visibleTooltip); // hide already-visible tooltip
+    }
+    this.visibleTooltip = input.tooltip;
+    this.clickedIcon = input.event.target;
+    this.visibleTooltip.nativeElement.style.top = `${input.event.y + 10}px`;
+    this.visibleTooltip.nativeElement.style.left = `${input.event.x + 10}px`;
+    this.visibleTooltip.nativeElement.className += ' visible';
+  }
+
+  hideTooltip(tooltip: ElementRef) {
+    tooltip.nativeElement.className = 'info';
+    clearTimeout();
+  }
+
+  onViewClick(event: MouseEvent) {
+    if (this.visibleTooltip &&
+        !this.visibleTooltip.nativeElement.contains(event.target) &&
+        this.clickedIcon !== event.target
+    ) {
+      // console.log('hiding ittt');
+      this.hideTooltip(this.visibleTooltip);
+    }
   }
 
 }

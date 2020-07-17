@@ -10,11 +10,7 @@ import { ResizeService } from 'src/app/controllers/resize.service';
 @Component({
   selector: 'settings-profile',
   templateUrl: './profile-settings.component.html',
-  styleUrls: ['./settings.component.css'],
-  // tslint:disable-next-line: no-host-metadata-property
-  host: {
-    "(document:click)": "onViewClick($event)",
-  },
+  styleUrls: ['./settings.component.css']
 })
 export class ProfileSettingsComponent implements OnInit {
 
@@ -30,11 +26,14 @@ export class ProfileSettingsComponent implements OnInit {
     confirmPassword: '',
   };
   updateList: {[key: string]: string } = {};
-  visibleTooltip: ElementRef = undefined;
+  // visibleTooltip: ElementRef = undefined;
+  // clickedTooltipIcon: EventTarget = undefined;
 
   @Output() updates: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() updatePassword: EventEmitter<object> = new EventEmitter<object>();
   @Output() showAlert: EventEmitter<Response> = new EventEmitter<Response>();
+  @Output() showTooltip: EventEmitter<object> = new EventEmitter<object>();
+  @Output() hideTooltip: EventEmitter<ElementRef> = new EventEmitter<ElementRef>();
 
   constructor(private userStore: UserStoreService, public rs: ResizeService) { }
 
@@ -85,33 +84,14 @@ export class ProfileSettingsComponent implements OnInit {
   }
 
   displayTooltip(id: string, event: MouseEvent) {
-    if (this.visibleTooltip) {
-      this.visibleTooltip.nativeElement.className = 'info'; // hide already-visible tooltip
-    }
-    this.visibleTooltip = new ElementRef(document.getElementById(id));
-    this.visibleTooltip.nativeElement.style.top = `${event.y + 20}px`;
-    this.visibleTooltip.nativeElement.style.left = `${event.x + 20}px`;
-    this.visibleTooltip.nativeElement.className += ' visible';
+    const tooltip = new ElementRef(document.getElementById(id));
+    this.showTooltip.emit({
+      tooltip,
+      event
+    });
     setTimeout(() => {
-      this.hideTooltip();
+      this.hideTooltip.emit(tooltip);
     }, 8000);
-    event.preventDefault();
-  }
-
-  hideTooltip() {
-    if (this.visibleTooltip) {
-      this.visibleTooltip.nativeElement.className = 'info';
-      this.visibleTooltip = undefined;
-    }
-  }
-
-  onViewClick(event: MouseEvent) {
-    let tooltipVisible = false;
-    if (this.visibleTooltip && !this.visibleTooltip.nativeElement.contains(event.target)) {
-      console.log('hiding ittt');
-      tooltipVisible = true;
-      // this.hideTooltip();
-    }
   }
 
   async verifyEmail(code: string) {

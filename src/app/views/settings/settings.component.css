@@ -21,18 +21,23 @@
 }
 
 button.save-btn {
-  width: 150px;
-  border-radius: 5px;
-  background-color: var(--accent);
   cursor: pointer;
-  padding: 5px;
+  border-radius: 5px;
+  background: var(--accent);
+  padding: 0px 15px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  margin-left: 20px;
 }
 
 .save-btn p {
   margin: 0;
+  margin-right: 8px;
   text-align: center;
   color: var(--text);
-  font-size: 11pt;
+  font-size: 1em;
+  line-height: 30px;
 }
 
 button.save-btn:hover:not(:disabled) p { /** hover while not disabled */
@@ -44,6 +49,17 @@ button.save-btn:disabled {
   border: 1px solid var(--disabled-bg);
   opacity: 0.2;
   cursor: default;
+}
+
+.save-btn mat-icon {
+  line-height: 30px;
+  color: var(--text);
+  font-weight: 500;
+  font-size: 16pt;
+}
+
+button.save-btn:hover:not(:disabled) mat-icon {
+  color: var(--bg);
 }
 
 .setting-tab {
@@ -201,8 +217,8 @@ div.label p.label {
   flex-direction: row;
   margin: 0 auto;
   padding: 0;
-  height: var(--setting-line-height);
   text-align: left;
+  margin-left: 10px;
 }
 
 .setting .value-div ul.toggle-btns {
@@ -212,9 +228,29 @@ div.label p.label {
 .setting .toggle-btns button, .setting .toggle-btns button.toggle {
   width: 130px;
   display: flex;
-  height: 35px;
-  margin: 0 20px;
+  height: 30px;
+  margin: 0 auto;
   padding: 0 20px;
+}
+
+.setting .toggle-btns.palette-list li {
+  width: 300px;
+  display: flex;
+  margin: 10px auto;
+}
+
+.setting .palette-list .colors li {
+  margin: auto 0;
+  width: 20px;
+  height: 20px;
+}
+
+.setting .palette-list li label {
+  width: 10em;
+}
+
+.setting .toggle-btns li button p {
+  line-height: 30px;
 }
 
 .setting button.toggle, .setting ul.toggle-btns button.toggle {
@@ -223,7 +259,6 @@ div.label p.label {
   width: 150px;
   margin-left: 0px;
   margin-right: 10px;
-  padding: 5px;
 }
 
 .setting button.toggle p {
@@ -238,11 +273,12 @@ div.label p.label {
 }
 
 .setting .toggle-btns mat-icon {
-  line-height: 35px;
+  line-height: 30px;
 }
 
 .setting .value.toggle-btns li {
   margin: 5px 0;
+  margin-right: 20px;
 }
 
 .setting .value-div a {
@@ -334,7 +370,7 @@ div#alert-div p.warning-text {
     width: 100%;
   }
 
-  div.label p.label {
+  div.label p.label, .setting p.label {
     flex-direction: row;
     width: auto;
   }
@@ -383,5 +419,24 @@ div#alert-div p.warning-text {
   .setting mat-icon.info-icon, .setting .label mat-icon.info-icon {
     display: inline;
     cursor: pointer;
+  }
+
+  .setting ul.value.toggle-btns {
+    width: 400px;
+    margin: 0 auto;
+  }
+
+  .setting .value.toggle-btns li {
+    margin: 5px auto;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .setting.setting-alt {
+    flex-direction: column;
+  }
+
+  button.save-btn {
+    padding: 0 5px;
   }
 }
