@@ -4,6 +4,8 @@ import { PreferencesType, DEFAULT_PREFERENCES, PreferencesStoreService } from 's
 import { ThemeManagerService } from 'src/app/controllers/theme-manager.service';
 import { THEMES, PALETTES } from 'src/styling/palettes';
 import { Response } from 'src/app/utils/response';
+import { KeyValue } from '@angular/common';
+import { TextFieldComponent } from 'src/app/components/text-field/text-field.component';
 
 @Component({
   selector: 'settings-preferences',
@@ -15,9 +17,13 @@ export class PreferenceSettingsComponent implements OnInit, OnDestroy {
   updateList: {[key: string]: string} = {};
   updateCheck = Object.assign({}, DEFAULT_PREFERENCES_UPDATE_CHECK); // easier lookup for updated attribs
   preferences: PreferencesType = DEFAULT_PREFERENCES;
+  visibleTooltip: ElementRef = undefined;
+  palettes = PALETTES;
 
   @Output() updates: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() showAlert: EventEmitter<Response> = new EventEmitter<Response>();
+  @Output() showTooltip: EventEmitter<object> = new EventEmitter<object>();
+  @Output() hideTooltip: EventEmitter<ElementRef> = new EventEmitter<ElementRef>();
 
   constructor(
     private prefStore: PreferencesStoreService,
@@ -42,8 +48,28 @@ export class PreferenceSettingsComponent implements OnInit, OnDestroy {
     this._applyTemporaryUpdate(updateAttrib, updateValue);
   }
 
+  undoChange(updateAttrib: string, field: TextFieldComponent) {
+    field.resetValue();
+    delete this.updateList[updateAttrib];
+    this.updateCheck[updateAttrib] = false;
+    if (Object.keys(this.updateList).length === 0) {
+      this.updates.emit(false);
+    }
+  }
+
   toggleTheme(theme: string) {
     this.addUpdate('theme', theme);
+  }
+
+  displayTooltip(id: string, event: MouseEvent) {
+    const tooltip = new ElementRef(document.getElementById(id));
+    this.showTooltip.emit({
+      tooltip,
+      event
+    });
+    setTimeout(() => {
+      this.hideTooltip.emit(tooltip);
+    }, 8000);
   }
 
   private _applyTemporaryUpdate(attribute: string, value: string) {
@@ -57,5 +83,12 @@ export class PreferenceSettingsComponent implements OnInit, OnDestroy {
     const response = new Response();
     response.error('Applied changes are not saved yet.');
     this.showAlert.emit(response);
+  }
+
+  /**
+   * KeyValue pipe ordering by entry
+   */
+  originalOrder(a: KeyValue<number, string>, b: KeyValue<number, string>): number {
+    return 0;
   }
 }

@@ -20,10 +20,10 @@ export class ThemeManagerService {
   }
 
   setPalette(colorPalette: PaletteType) {
-    if (!PALETTES[colorPalette.name]) {
+    if (!PALETTES[colorPalette.id]) {
       console.log('ThemeManager: unsupported palette:', colorPalette.name);
       return;
     }
-    document.body.setAttribute('palette', colorPalette.name);
+    document.body.setAttribute('palette', colorPalette.id);
   }
 }

@@ -16,16 +16,24 @@ export class PreferencesStoreService {
 
   init(params?: {
     theme: string,
-    palette: number
+    palette: number,
+    journeyInactive: number,
+    appStale: number,
   }) {
     let currTheme;
     let currPalette;
+    let journeyInactive;
+    let appStale;
     if (params) {
       currTheme = params.theme;
       currPalette = params.palette;
+      journeyInactive = params.journeyInactive;
+      appStale = params.appStale;
     } else {
       currTheme = document.body.getAttribute('theme');
       currPalette = document.body.getAttribute('palette');
+      journeyInactive = DEFAULT_PREFERENCES.journeyInactive;
+      appStale = DEFAULT_PREFERENCES.appStale;
     }
 
     if (!currTheme || !THEMES[currTheme]) {
@@ -34,12 +42,14 @@ export class PreferencesStoreService {
     }
     if (!currPalette || !PALETTES[currPalette]) {
       console.log('PreferencesStore: encountered unsupported color palette, resetting to:', DEFAULT_PREFERENCES.colorPalette);
-      currPalette = DEFAULT_PREFERENCES.colorPalette.name;
+      currPalette = DEFAULT_PREFERENCES.colorPalette.id;
     }
 
     const currPreferences: PreferencesType = {
       theme: THEMES[currTheme],
-      colorPalette: PALETTES[currPalette]
+      colorPalette: PALETTES[currPalette],
+      journeyInactive,
+      appStale,
     };
     this._preferences.next(currPreferences);
     this.reset();
@@ -48,7 +58,7 @@ export class PreferencesStoreService {
   reset() {
     // apply theme & palette settings based on current values
     this.updateTheme(this._preferences.getValue().theme.name);
-    this.updatePalette(this._preferences.getValue().colorPalette.name);
+    this.updatePalette(this._preferences.getValue().colorPalette.id);
   }
 
   updatePreferences(updates: {[key: string]: string}) {
@@ -102,10 +112,14 @@ export class PreferencesStoreService {
 
 export const DEFAULT_PREFERENCES: PreferencesType = {
   theme: THEMES.dark,
-  colorPalette: PALETTES['palette-2'],
+  colorPalette: PALETTES['palette-3'],
+  journeyInactive: 60,
+  appStale: 90,
 };
 
 export interface PreferencesType {
   theme: ThemeType;
   colorPalette: PaletteType;
+  journeyInactive: number;
+  appStale: number;
 }
