@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { UserStoreService } from "src/app/models/user-store.service";
 import * as mockData from "src/app/models/data";
 import { Journey } from "src/app/models/journey";
@@ -49,6 +49,8 @@ export class DashboardComponent implements OnInit {
   theme = THEMES.light;
   pieChartPalette = ['#AC98FB', '#6E89F8', '#81BEFA', '#C1E0F8', '#D1C3EB'];
   calendarPalette = ['#AC98FB', '#6E89F8', '#81BEFA', '#C1E0F8', '#D1C3EB'];
+
+  @ViewChild('statusContainer') statContainer: ElementRef;
 
   constructor(
     private userStore: UserStoreService,
@@ -108,7 +110,7 @@ export class DashboardComponent implements OnInit {
   }
 
   selectYear(year: string) {
-    this.currentYear = year ? year : new Date().getFullYear().toString();
+    this.currentYear = year ? year : new Date().getUTCFullYear().toString();
   }
 
   selectApplication(app: Application) {
@@ -129,8 +131,8 @@ export class DashboardComponent implements OnInit {
     }
     // okay, we can't be parsing a date string because that creates unpredictable messes
     // so we're gonna use the date string to create a new Date object, then extract the year from that
-    const startYear = new Date(data[0].day).getFullYear(); // extract year as a number
-    const endYear = new Date(data[data.length - 1].day).getFullYear();
+    const startYear = new Date(data[0].day).getUTCFullYear(); // extract year as a number
+    const endYear = new Date(data[data.length - 1].day).getUTCFullYear();
     for (let i = startYear; i <= endYear; i++) {
       years.push(i);
     }

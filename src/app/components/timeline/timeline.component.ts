@@ -4,6 +4,7 @@ import { STATUS } from 'src/app/models/constants';
 import { TimelinePropType, TimelineTooltipPropType } from '../types';
 import { TimelineMarker } from './timeline-marker';
 import { msToDays, collision } from './utils';
+import * as utils from 'src/app/controllers/utils';
 
 @Component({
   selector: "timeline",
@@ -103,7 +104,7 @@ export class TimelineComponent implements OnInit, AfterViewInit {
         x: (event.x - this.canvasX),
         y: event.y + 30,
         // text: `${markerOnHover.payload.status}: ${markerOnHover.payload.duration} day${markerOnHover.payload.duration === 1 ? '' : 's'}`,
-        text: `${markerOnHover.payload.status}: ${markerOnHover.payload.date.toLocaleDateString()}`,
+        text: `${markerOnHover.payload.status}: ${utils.getDateString(markerOnHover.payload.date)}`,
         color: markerOnHover.payload.color
       };
     } else {

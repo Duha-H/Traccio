@@ -1,5 +1,7 @@
 import { Application } from './application';
 import { MONTH_VALS } from './constants'
+import * as utils from 'src/app/controllers/utils';
+
 // Object representation of a Journey
 export class Journey {
 
@@ -63,13 +65,13 @@ export class Journey {
 
 	getGraphQLInput() {
 		// format null-able values
-		const endDateFormatted = this._endDate.toLocaleDateString();
+		const endDateFormatted = utils.getDateString(this._endDate);
 		const applicationsFormatted = this._applications.map(app => app.getGraphQLInput());
 
 		const input = {
 			id: this._id,
 			title: this._title,
-			startDate: this._endDate.toLocaleDateString(), // "YYYY-MM-DD"
+			startDate: utils.getDateString(this._endDate), // "YYYY-MM-DD"
 			endDate: endDateFormatted,
 			active: this._active,
 			applications: applicationsFormatted

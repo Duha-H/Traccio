@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Journey } from 'src/app/models/journey';
 import { Application } from 'src/app/models/application';
+import * as utils from 'src/app/controllers/utils';
 
 export interface CalendarDatum {
   day: string;
@@ -50,7 +51,7 @@ export class DataManagerService {
   addApplication(journeyid: string, app: Application) {
     const calendarDatum = this.calendarData[journeyid];
     const statusDatum = this.statusData[journeyid];
-    const dateString = app.appDate.toLocaleDateString();
+    const dateString = utils.getDateString(app.appDate);
     const status = app.status;
     if (calendarDatum.hasOwnProperty(dateString)) {
       calendarDatum[dateString] += 1;
@@ -69,7 +70,7 @@ export class DataManagerService {
   removeApplication(journeyid: string, app: Application) {
     const calendarDatum = this.calendarData[journeyid];
     const statusDatum = this.statusData[journeyid];
-    const dateString = app.appDate.toLocaleDateString();
+    const dateString = utils.getDateString(app.appDate);
     if (calendarDatum && calendarDatum[dateString]) {
       calendarDatum[dateString] -= 1;
       if (calendarDatum[dateString] === 0) { // remove date string if count reaches 0
@@ -87,8 +88,8 @@ export class DataManagerService {
   }
 
   updateExistingApplication(journeyid: string, prevApp: Application, updatedApp: Application) {
-    const dateString = prevApp.appDate.toLocaleDateString();
-    const newDateString = updatedApp.appDate.toLocaleDateString();
+    const dateString = utils.getDateString(prevApp.appDate);
+    const newDateString = utils.getDateString(updatedApp.appDate);
     let calendarDatum = this.calendarData[journeyid];
     let statusDatum = this.statusData[journeyid];
     if (dateString !== newDateString) {
@@ -152,7 +153,7 @@ export class DataManagerService {
     const calendarDatum: {[key: string]: number} = {};
     const statusDatum: {[key: string]: number} = {};
     apps.forEach(app => {
-      const dateString = app.appDate.toLocaleDateString();
+      const dateString = utils.getDateString(app.appDate);
       if (calendarDatum.hasOwnProperty(dateString)) {
         calendarDatum[dateString] += 1;
       } else {
@@ -179,5 +180,4 @@ export class DataManagerService {
     }
     return datum;
   }
-
 }

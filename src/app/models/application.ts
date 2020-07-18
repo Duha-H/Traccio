@@ -1,5 +1,6 @@
 import { STATUS, APP_SOURCE, MONTH_VALS } from './constants';
 import { ApplicationInput, TimelineDatum } from './types';
+import * as utils from 'src/app/controllers/utils';
 
 export class Application {
 
@@ -72,7 +73,7 @@ export class Application {
 			id: this._id,
 			company: this._companyName,
 			title: this._positionTitle,
-			date: this._appDate.toLocaleDateString(), // "YYYY-MM-DD"
+			date: utils.getDateString(this._appDate), // "YYYY-MM-DD"
 			status: this._status,
 			source: this._source,
 			notes: this._notes
