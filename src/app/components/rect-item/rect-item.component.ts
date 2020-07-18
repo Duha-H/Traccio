@@ -29,8 +29,8 @@ export class RectItemComponent implements OnInit {
   get linkedJourney() { return this._linkedJourney; }
 
   ngOnInit() {
-    this.width = this.rs.mobileSize$.value ? '13em' : '18em';
-    this.height = this.rs.mobileSize$.value ? 300 : 370;
+    this.width = this.rs.mobileSize$.value ? '11em' : '18em';
+    this.height = this.rs.mobileSize$.value ? 260 : 370;
   }
 
   onDeleteButtonPressed() {

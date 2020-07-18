@@ -28,7 +28,7 @@
         <a *ngFor="let journey of userStore.journeys | async; let i = index;" href=""
           [routerLink]="selectionMode || sliderIdx != i ? [] : ['/journeys', journey.id]"
           (click)="deleteButton ? removeJourney(journey, i) : journeyItemClick(i)"
-          style="text-decoration: none; margin: auto 20px;"
+          style="text-decoration: none; margin: auto 0px; transform: {{ i == sliderIdx ? 'scale(1.15)' : ( i > sliderIdx ? 'rotateY(-50deg)' : 'rotateY(50deg)' ) }};"
           class="{{ sliderIdx == i ? 'journey-item current' : 'journey-item'}}" #journeyItem>
           <app-rect-item class="{{ sliderIdx == i ? 'journey-item current' : 'journey-item'}}" [linkedJourney]="journey"
             (deleteButtonPressed)="onDeleteButtonPressed($event)" title="{{!selectionMode ? 'View journey' : ''}}"
