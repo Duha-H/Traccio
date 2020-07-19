@@ -1,6 +1,7 @@
 body[theme='dark'] {
   /** backgrounds */
   --bg: #22232d;
+  --bg-secondary: #262732;
   --bg-backdrop: #22232dab;
   --element-bg-primary: #252635;
   --element-bg-secondary: #282935;

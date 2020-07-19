@@ -165,6 +165,7 @@ p a.login-link {
   margin: auto;
   font-size: 10pt;
   text-align: center;
+  font-weight: 500;
 }
 
 a:hover {
@@ -195,8 +196,55 @@ a.login-link.forgot-password {
   display: flex;
   flex-direction: column;
   vertical-align: middle;
-  height: 200px;
+  /* height: 200px; */
   margin-top: 150px;
+  height: 40%;
+  padding: 20px;
+}
+
+.add-btn {
+  /* line-height: var(--spanning-line-height); */
+  border-radius: 5px;
+  background: var(--accent);
+  padding: 0px 15px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  margin-left: 20px;
+}
+
+.add-btn.active mat-icon, .add-btn.add-btn.active p {
+  color: var(--bg);
+}
+
+.add-btn p {
+  /* font-size: 11pt; */
+  line-height: 30px;
+  font-weight: 500;
+  color: var(--text);
+  margin: 0;
+  margin-right: 8px;
+}
+
+.add-btn mat-icon, .add-btn mat-icon.mat-icon-inline {
+  line-height: 30px;
+  color: var(--text);
+  /* margin-left: 8px; */
+  font-weight: 500;
+  font-size: 16pt;
+}
+
+button.add-btn:hover mat-icon,
+button.add-btn:hover mat-icon.mat-icon-inline,
+button.add-btn:hover p {
+  color: var(--bg);
+}
+
+button.add-btn:disabled {
+  background-color: var(--disabled-bg);
+  border: 1px solid var(--disabled-bg);
+  opacity: 0.2;
+  cursor: default;
 }
 
 

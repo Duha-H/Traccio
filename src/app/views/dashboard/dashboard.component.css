@@ -8,6 +8,7 @@ h4,
 h5,
 h6 {
   color: var(--titles-secondary);
+  font-weight: 400;
 }
 
 span {
@@ -56,7 +57,7 @@ mat-select {
 }
 
 .dashboard-header mat-select {
-  text-align: center;
+  text-align: left;
   border-radius: 5px;
 }
 
@@ -74,7 +75,8 @@ mat-select {
 }
 
 ::ng-deep .dashboard-header .mat-form-field-infix {
-  width: 1.25em;
+  /* width: 1.25em; */
+  width: 10em;
 }
 
 .journey-details {
@@ -89,7 +91,8 @@ mat-select {
 mat-grid-tile.dashboard-component {
   border-radius: 15px;
   /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
-  box-shadow: var(--shadow-neumorphic-element);
+  background-color: var(--bg-secondary);
+  /* box-shadow: var(--shadow-neumorphic-element); */
 }
 
 mat-grid-tile-header {
@@ -106,8 +109,8 @@ mat-grid-tile-header {
   margin: 0;
   text-align: left;
   color: var(--titles-primary);
-  font-weight: 200;
-  border-bottom: 0.8px solid var(--titles-primary);
+  font-weight: 400;
+  /* border-bottom: 0.8px solid var(--titles-primary); */
   display: inline-flex;
   flex-direction: row;
   width: 100%;
@@ -185,4 +188,27 @@ calendar-wrapper {
 .clickable-item:hover {
   background-color: var(--element-bg-secondary);
   cursor: pointer;
+}
+
+.add-btn {
+  margin: 10px auto;
+  width: 6em;
+}
+
+.add-btn mat-icon {
+  line-height: 30px;
+  font-weight: 500;
+  font-size: 16pt;
+}
+
+.placeholder-text {
+  margin-top: 150px;
+}
+
+@media screen and (max-width: 500px) {
+  .add-btn {
+    padding: 0 5px;
+    width: auto;
+    height: auto;
+  }
 }

@@ -5,7 +5,7 @@ p {
 
 h2 {
   /* height: 25px; */
-  font-size: 1.25em;
+  /* font-size: 1.25em; */
   margin: 10px 0;
   color: var(--titles-secondary);
   font-weight: 400;
@@ -52,10 +52,6 @@ mat-icon {
 
 .container.add:hover {
   cursor: pointer;
-}
-
-.container p {
-  font-size: 0.85em;
 }
 
 #journey-container {
@@ -123,10 +119,18 @@ mat-icon {
 
 
 @media screen and (max-width: 500px) {
+  h2 {
+    font-size: 1.25em;
+  }
+
   .container {
     min-width: 100px;
     min-height: 200px;
     box-shadow: none;
     background-color: var(--element-bg-secondary);
+  }
+  
+  .container p {
+    font-size: 0.85em;
   }
 }

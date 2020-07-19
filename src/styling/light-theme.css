@@ -1,6 +1,7 @@
 body[theme='light'] {
   /** backgrounds */
-  --bg: #F2F2F2;
+  --bg: #F7F7F7;
+  --bg-secondary: #FCFCFC;
   --bg-backdrop: #F2F2F28c;
   --element-bg-primary: #E8E8F3;
   --element-bg-secondary: #E8E8F3;
@@ -27,7 +28,7 @@ body[theme='light'] {
   --shadow-neumorphic-nav:
     -3px -3px 8px 0 rgba(244, 244, 254, 1),
     3px 3px 8px 0 rgba(201, 201, 217, 0.8);
-  --shadow-clickable: 0 0 15px rgba(0, 0, 0, 0.4);
+  --shadow-clickable: 0 0 10px rgba(0, 0, 0, 0.4);
   --shadow-tooltip: 0 0 8px rgba(0, 0, 0, 0.4);
   --shadow-overlay: 0 0 30px rgba(0, 0, 0, 0.6);
 }

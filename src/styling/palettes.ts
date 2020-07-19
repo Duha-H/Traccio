@@ -26,13 +26,15 @@ export const THEMES: {[key: string]: ThemeType} = {
     name: 'dark',
     emptyColor: '#494848',
     textColor: '#ffffff',
-    background: '#22232d'
+    background: '#262732',
+    transparent: '#00000000',
   },
   light: {
     name: 'light',
     emptyColor: '#DCDCDC',
     textColor: '#494a4f',
-    background: '#F6F6F6'
+    background: '#FCFCFC',
+    transparent: '#00000000',
   }
 };
 
@@ -41,6 +43,7 @@ export interface ThemeType {
   emptyColor: string;
   textColor: string;
   background: string;
+  transparent?: string;
 }
 
 export interface PaletteType {

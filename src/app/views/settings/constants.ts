@@ -8,6 +8,6 @@ export const DEFAULT_PROFILE_UPDATE_CHECK = {
 export const DEFAULT_PREFERENCES_UPDATE_CHECK = {
   theme: false,
   colorPalette: false,
-  journeyInactive: 60,
-  appStale: 90,
+  journeyInactive: false,
+  appStale: false,
 };
