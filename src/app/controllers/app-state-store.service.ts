@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { UserStoreService } from 'src/app/models/user-store.service';
 import { User } from 'src/app/models/user';
 import { UserStoreControllerService } from './user-store-controller.service';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 import { Response } from 'src/app/utils/response';
 
 @Injectable({

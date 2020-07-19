@@ -6,9 +6,7 @@ import { UserStoreService } from 'src/app/models/user-store.service';
 import { TimelineComponent } from 'src/app/components/timeline/timeline.component';
 import { STATUS_COLORS, STATUS, APP_SOURCE, APP_ATTRIBS, REQUIRED_APP_ATTRIBS } from 'src/app/models/constants';
 import { KeyValue } from '@angular/common';
-import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { Journey } from 'src/app/models/journey';
-import { ApplicationInput } from 'src/app/models/types';
 
 @Component({
   selector: 'app-application-view',

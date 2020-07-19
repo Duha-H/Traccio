@@ -1,5 +1,5 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
+import { createElement } from "react";
+import { render } from "react-dom";
 
 import { Component, Input } from "@angular/core";
 import { ReactWrapper } from "./react-wrapper.component";
@@ -60,6 +60,8 @@ export class ResponsivePieComponent extends ReactWrapper {
     value: number;
     [key: string]: string | number;
   }[];
+  @Input() width = 300;
+  @Input() height = 300;
   @Input() margin: {};
   @Input() pixelRatio: number;
   @Input() innerRadius: number;
@@ -89,6 +91,8 @@ export class ResponsivePieComponent extends ReactWrapper {
   protected getProps(): PieCanvasProps {
     const {
       data,
+      width,
+      height,
       margin,
       pixelRatio,
       innerRadius,
@@ -115,6 +119,8 @@ export class ResponsivePieComponent extends ReactWrapper {
     } = this;
     return {
       data,
+      // height,
+      // width,
       margin,
       pixelRatio,
       innerRadius,
@@ -147,8 +153,8 @@ export class ResponsivePieComponent extends ReactWrapper {
 
   protected render() {
     if (this.isMounted()) {
-      ReactDOM.render(
-        React.createElement(ResponsivePieCanvas, this.getProps()),
+      render(
+        createElement(ResponsivePieCanvas, this.getProps()),
         this.getRootDomNode()
       );
     }

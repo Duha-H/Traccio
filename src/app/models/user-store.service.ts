@@ -8,7 +8,7 @@ import { ApplicationInput } from "src/app/models/types";
 import { UserStoreControllerService } from "src/app/controllers/user-store-controller.service";
 import { Observable } from "rxjs/Observable";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
-import { map } from "rxjs/operators";
+import { map } from "rxjs/operators/map";
 import { DataManagerService } from "src/app/controllers/data-manager.service";
 import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
 

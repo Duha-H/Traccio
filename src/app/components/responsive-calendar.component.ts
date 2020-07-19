@@ -1,5 +1,5 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
+import { createElement } from "react";
+import { render } from "react-dom";
 
 import {
   Component,
@@ -80,8 +80,8 @@ export class ResponsiveCalendarComponent extends ReactWrapper {
 
   protected render() {
     if (this.isMounted()) {
-      ReactDOM.render(
-        React.createElement(ResponsiveCalendarCanvas, this.getProps()),
+      render(
+        createElement(ResponsiveCalendarCanvas, this.getProps()),
         this.getRootDomNode()
       );
     }

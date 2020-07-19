@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Auth } from 'aws-amplify';
 import { AuthStoreService } from 'src/app/controllers/auth-store.service';
 import { Router } from '@angular/router';
 import { APIService } from 'src/app/API.service';

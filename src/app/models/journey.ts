@@ -1,5 +1,5 @@
 import { Application } from './application';
-import { MONTH_VALS } from './constants'
+import { MONTH_VALS } from './constants';
 import * as utils from 'src/app/controllers/utils';
 
 // Object representation of a Journey

@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from '@angular/router';
 import { AmplifyService } from "aws-amplify-angular";
-import { Auth } from 'aws-amplify';
 import { UserStoreService } from './models/user-store.service';
 import { AuthWrapperService } from './auth/auth-wrapper.service';
 import { PreferencesStoreService } from './controllers/preferences-store.service';

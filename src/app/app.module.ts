@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
 
-import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
+import { AmplifyService } from 'aws-amplify-angular';
 import { AuthModule } from './auth/auth.module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,7 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatListModule } from '@angular/material/list';
-import { MatMenuModule } from '@angular/material/menu';
+// import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
@@ -109,8 +109,6 @@ import { SliderContainerComponent } from './components/slider-container/slider-c
     HammerModule,
     CommonModule,
     AppRoutingModule,
-    // AmplifyUIAngularModule,
-    AmplifyAngularModule,
     BrowserAnimationsModule,
     MatSidenavModule,
     MatGridListModule,
@@ -120,7 +118,7 @@ import { SliderContainerComponent } from './components/slider-container/slider-c
     MatNativeDateModule,
     MatCheckboxModule,
     MatListModule,
-    MatMenuModule,
+    // MatMenuModule,
     MatSelectModule,
     MatInputModule,
     MatTabsModule,

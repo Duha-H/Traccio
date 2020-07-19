@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Auth } from 'aws-amplify';
 import { Router } from '@angular/router';
 import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
 

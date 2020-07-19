@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild, EventEmitter, Output, QueryLi
 import { Auth } from "aws-amplify";
 import { UserStoreService } from "src/app/models/user-store.service";
 import { Router } from "@angular/router";
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { DropdownItem } from 'src/app/components/types';
 import { TextFieldComponent } from 'src/app/components/text-field/text-field.component';
 import { PreferencesStoreService } from 'src/app/controllers/preferences-store.service';
