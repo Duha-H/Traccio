@@ -11,6 +11,7 @@ import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { map } from "rxjs/operators/map";
 import { DataManagerService } from "src/app/controllers/data-manager.service";
 import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
+import { FormattedFrequencyData } from 'src/app/controllers/types';
 
 @Injectable({
   providedIn: "root",
@@ -202,6 +203,10 @@ export class UserStoreService {
     color: string;
   }[] {
     return this.dataManager.getFormattedStatusData(journeyid);
+  }
+
+  getFrequencyData(journeyid: string): FormattedFrequencyData {
+    return this.dataManager.getFormattedFrequencyData(journeyid);
   }
 
   /**

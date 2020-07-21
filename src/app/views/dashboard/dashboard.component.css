@@ -105,21 +105,25 @@ mat-grid-tile-header {
 }
 
 .data-container-title {
-  padding: 15px;
+  padding: 15px 20px;
   margin: 0;
   text-align: left;
   color: var(--titles-primary);
   font-weight: 400;
   /* border-bottom: 0.8px solid var(--titles-primary); */
-  display: inline-flex;
-  flex-direction: row;
-  width: 100%;
+  /* display: inline-flex; */
+  /* flex-direction: row; */
+  /* width: 100%; */
 }
 
 .data-container-title h4 {
-  margin: auto 0;
+  margin: 0;
   font-weight: 200;
   color: var(--titles-primary);
+}
+
+.data-container-title p {
+  margin: 0;
 }
 
 .stats-container {
@@ -142,7 +146,7 @@ calendar-wrapper {
   max-width: 650px;
 }
 
-::ng-deep calendar-wrapper span, ::ng-deep pie-chart-wrapper span {
+::ng-deep calendar-wrapper span, ::ng-deep pie-chart-wrapper span, ::ng-deep line-chart-wrapper span {
   color: #494a4f;
 }
 

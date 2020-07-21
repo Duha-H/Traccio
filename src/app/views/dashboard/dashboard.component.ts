@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { PreferencesStoreService } from 'src/app/controllers/preferences-store.service';
 import { PALETTES, THEMES } from 'src/styling/palettes';
 import { ResizeService } from 'src/app/controllers/resize.service';
+import { FormattedFrequencyData, WEEKDAYS, MONTHS } from 'src/app/controllers/types';
 
 @Component({
   selector: "app-dashboard",
@@ -18,22 +19,8 @@ export class DashboardComponent implements OnInit {
   name = "";
   pieChartData = mockData.pieChartData;
   activeJourneys: Journey[];
-  selectedJourney: {
-    value: Journey;
-    viewValue: string;
-    calendarData: object;
-    years: string[];
-    statusData: object;
-    frequency: string;
-  };
-  dropdownContent: {
-    value: Journey;
-    viewValue: string;
-    calendarData: object;
-    years: string[];
-    statusData: object;
-    frequency: string;
-  }[] = [];
+  selectedJourney: JourneyDropdownItem;
+  dropdownContent: JourneyDropdownItem[] = [];
   currentYear: string = new Date().getFullYear().toString();
   from: string;
   to: string;
@@ -49,6 +36,9 @@ export class DashboardComponent implements OnInit {
   theme = THEMES.light;
   pieChartPalette = ['#AC98FB', '#6E89F8', '#81BEFA', '#C1E0F8', '#D1C3EB'];
   calendarPalette = ['#AC98FB', '#6E89F8', '#81BEFA', '#C1E0F8', '#D1C3EB'];
+  weekAxis = [];
+  monthAxis = [];
+  yearAxis = [];
 
   @ViewChild('statusContainer') statContainer: ElementRef;
 
@@ -69,14 +59,18 @@ export class DashboardComponent implements OnInit {
         this.setDropdownContent();
         this.selectedJourney = this.dropdownContent[0];
         this.currentYear = this.selectedJourney && this.selectedJourney.years[0]
-          ? this.selectedJourney.years[0]
+          ? this.selectedJourney.years[this.selectedJourney.years.length - 1]
           : this.currentYear;
+        if (this.selectedJourney) {
+          this._setLineChartAxes(this.selectedJourney.frequencyData);
+        }
       });
       this.prefStore.preferences.subscribe(preferences => {
         this.theme = preferences.theme;
         this.pieChartPalette = preferences.colorPalette.colors;
         this.calendarPalette = [this.theme.emptyColor, ...preferences.colorPalette.colors];
       });
+      console.log(this.selectedJourney.frequencyData);
       console.log("Dashboard initialized");
     } catch (error) {
       console.log("User not defined yet:", error); // should probably make sure this never happens
@@ -86,17 +80,11 @@ export class DashboardComponent implements OnInit {
   }
 
   setDropdownContent() {
-    const newContent: {
-      value: Journey;
-      viewValue: string;
-      calendarData: object;
-      years: string[];
-      statusData: object;
-      frequency: string;
-    }[] = [];
+    const newContent: JourneyDropdownItem[] = [];
     this.activeJourneys.forEach((journey) => {
       const journeyData = this.userStore.getCalendarData(journey.id);
       const journeyStatusData = this.userStore.getStatusData(journey.id);
+      const frequencyData = this.userStore.getFrequencyData(journey.id);
       newContent.push({
         value: journey,
         viewValue: journey.title,
@@ -104,6 +92,7 @@ export class DashboardComponent implements OnInit {
         years: this._setCalendarYears(journeyData),
         statusData: journeyStatusData,
         frequency: this._getApplicationFrequency(journey.startDate, journey.applications.length),
+        frequencyData,
       });
     });
     this.dropdownContent = newContent;
@@ -119,6 +108,13 @@ export class DashboardComponent implements OnInit {
 
   isEmpty(obj: {[key: string]: any}) {
     return (obj && Object.keys(obj).length === 0);
+  }
+
+  private _setLineChartAxes(frequencyData: FormattedFrequencyData) {
+    const weekYVals = frequencyData.week[0].data.map(value => value.y);
+    this.weekAxis = frequencyData.week[0].data.map(value => value.y);
+    this.monthAxis = frequencyData.month[0].data.map(value => value.x);
+    this.yearAxis = frequencyData.year[0].data.map(value => value.x);
   }
 
   private _setCalendarYears(data: { day: string; value: number }[]): string[] {
@@ -147,4 +143,14 @@ export class DashboardComponent implements OnInit {
       : (count / daysElapsed).toFixed(2);
     return result;
   }
+}
+
+export interface JourneyDropdownItem {
+  value: Journey;
+  viewValue: string;
+  calendarData: object;
+  years: string[];
+  statusData: object;
+  frequency: string;
+  frequencyData: FormattedFrequencyData;
 }
