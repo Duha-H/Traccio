@@ -5,23 +5,10 @@ import {
   Component,
   Input,
 } from "@angular/core";
-import { ResponsiveCalendarCanvas, CalendarDirection } from "@nivo/calendar";
+import { ResponsiveCalendarCanvas, CalendarDirection, CalendarSvgProps } from "@nivo/calendar";
 import { ReactWrapper } from './react-wrapper.component';
+import { Theme } from '@nivo/core';
 
-interface CalendarProps {
-  data: {day: string, value: number}[];
-  from: string | Date;
-  to: string | Date;
-  emptyColor: string;
-  colors: string[];
-  margin: any;
-  yearSpacing: any;
-  monthBorderColor: string;
-  dayBorderWidth: any;
-  dayBorderColor: string;
-  legends: any;
-  direction: CalendarDirection;
-}
 
 @Component({
   selector: "calendar-wrapper",
@@ -34,6 +21,7 @@ export class ResponsiveCalendarComponent extends ReactWrapper {
   @Input() to: string;
   @Input() emptyColor: string;
   @Input() colors: string[];
+  @Input() theme: Theme;
   @Input() margin: any;
   @Input() yearSpacing: any;
   @Input() monthBorderColor: string;
@@ -43,13 +31,14 @@ export class ResponsiveCalendarComponent extends ReactWrapper {
   @Input() direction: CalendarDirection;
 
 
-  protected getProps(): CalendarProps {
+  protected getProps(): CalendarSvgProps {
     const {
       data,
       from,
       to,
       emptyColor,
       colors,
+      theme,
       margin,
       yearSpacing,
       monthBorderColor,
@@ -64,6 +53,7 @@ export class ResponsiveCalendarComponent extends ReactWrapper {
       to,
       emptyColor,
       colors,
+      theme,
       margin,
       yearSpacing,
       monthBorderColor,
