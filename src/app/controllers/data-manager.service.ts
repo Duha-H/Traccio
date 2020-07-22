@@ -174,19 +174,24 @@ export class DataManagerService {
 
   getFormattedFrequencyData(journeyid: string): FormattedFrequencyData {
     const today = new Date();
-    const weekVals = Object.values(this.frequencyData[journeyid].week);
+    const weekVals = this.frequencyData[journeyid]
+      ? Object.values(this.frequencyData[journeyid].week)
+      : [];
     const week = [].concat(
       weekVals.slice(today.getUTCDay()),
       weekVals.slice(0, today.getUTCDay())
     );
-    console.log(week);
-    const monthVals = Object.values(this.frequencyData[journeyid].month);
+    const monthVals = this.frequencyData[journeyid]
+    ? Object.values(this.frequencyData[journeyid].month)
+    : [];
     const month = [].concat(
       monthVals.slice(today.getUTCDate() - 1), // remember, dates are 1-indexed while arrays are 0-indexed
       monthVals.slice(0, today.getUTCDate() - 1)
     );
     // console.log(month);
-    const yearVals = Object.values(this.frequencyData[journeyid].year);
+    const yearVals = this.frequencyData[journeyid]
+    ? Object.values(this.frequencyData[journeyid].year)
+    : [];
     const year = [].concat(
       yearVals.slice(today.getUTCMonth() + 1),
       yearVals.slice(0, today.getUTCMonth() + 1)

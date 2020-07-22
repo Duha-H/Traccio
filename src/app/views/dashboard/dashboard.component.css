@@ -26,12 +26,13 @@ span {
 .view-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0;
 }
 
 .greeting {
   text-align: left;
   margin: 10px 0;
+  padding: 0 15px;
 }
 
 .greeting h2 {
@@ -43,6 +44,7 @@ span {
   display: flex;
   align-items: center;
   text-align: left;
+  padding: 0 15px;
 }
 
 mat-form-field {
@@ -65,11 +67,11 @@ mat-select {
   font-size: 0.85em;
 }
 
-::ng-deep .dashboard-header .mat-form-field-underline, ::ng-deep .data-container .mat-form-field-underline {
+::ng-deep .dashboard-header .mat-form-field-underline, ::ng-deep .dashboard-component .mat-form-field-underline {
   display: none;
 }
 
-::ng-deep .data-container .mat-form-field-wrapper, ::ng-deep .data-container .mat-form-field-infix {
+::ng-deep .dashboard-component .mat-form-field-wrapper, ::ng-deep .dashboard-component .mat-form-field-infix {
   padding: 0;
   border-top: none;
 }
@@ -81,6 +83,10 @@ mat-select {
 
 .journey-details {
   margin: 30px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: stretch;
 }
 
 .dashboard-carousel {
@@ -88,10 +94,15 @@ mat-select {
   flex-direction: row;
 }
 
-mat-grid-tile.dashboard-component {
+.dashboard-component {
   border-radius: 15px;
   /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
   background-color: var(--bg-secondary);
+  /* width: 50%; */
+  min-height: 420px;
+  margin: 15px;
+  flex-grow: 2;
+  width: 400px;
   /* box-shadow: var(--shadow-neumorphic-element); */
 }
 
@@ -101,7 +112,8 @@ mat-grid-tile-header {
 
 .data-container {
   width: 100%;
-  height: 100%;
+  height: 500px;
+  margin: 15px;
 }
 
 .data-container-title {
@@ -132,10 +144,10 @@ mat-grid-tile-header {
 }
 
 .calendar-container {
-  height: 200px;
+  /* height: 200px; */
   text-align: center;
   align-content: center;
-  padding: 20px 40px;
+  /* padding: 20px 40px; */
 }
 
 .status-container {

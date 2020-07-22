@@ -36,6 +36,7 @@ export class DashboardComponent implements OnInit {
   theme = THEMES.light;
   pieChartPalette = ['#AC98FB', '#6E89F8', '#81BEFA', '#C1E0F8', '#D1C3EB'];
   calendarPalette = ['#AC98FB', '#6E89F8', '#81BEFA', '#C1E0F8', '#D1C3EB'];
+  lineChartMode: 'week' | 'month' | 'year' = 'week';
   weekAxis = [];
   monthAxis = [];
   yearAxis = [];
@@ -70,7 +71,7 @@ export class DashboardComponent implements OnInit {
         this.pieChartPalette = preferences.colorPalette.colors;
         this.calendarPalette = [this.theme.emptyColor, ...preferences.colorPalette.colors];
       });
-      console.log(this.selectedJourney.frequencyData);
+      // console.log(this.selectedJourney.frequencyData);
       console.log("Dashboard initialized");
     } catch (error) {
       console.log("User not defined yet:", error); // should probably make sure this never happens
@@ -108,6 +109,22 @@ export class DashboardComponent implements OnInit {
 
   isEmpty(obj: {[key: string]: any}) {
     return (obj && Object.keys(obj).length === 0);
+  }
+
+  toggleLineChartMode() {
+    switch (this.lineChartMode) {
+      case 'week':
+        this.lineChartMode = 'month';
+        break;
+      case 'month':
+        this.lineChartMode = 'year';
+        break;
+      case 'year':
+        this.lineChartMode = 'week';
+        break;
+      default:
+        break;
+    }
   }
 
   private _setLineChartAxes(frequencyData: FormattedFrequencyData) {
