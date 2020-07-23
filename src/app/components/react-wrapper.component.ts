@@ -5,6 +5,7 @@ import {
 	OnDestroy,
 	OnChanges,
 	AfterViewInit,
+  SimpleChanges,
 } from "@angular/core";
 import * as uuid from "uuid";
 import * as invariant from "invariant";
@@ -22,8 +23,15 @@ export class ReactWrapper implements OnInit, OnDestroy, OnChanges, AfterViewInit
     this.rootDomID = uuid.v1();
   }
 
-  ngOnChanges() {
-    this.render();
+  ngOnChanges(changes: SimpleChanges) {
+    for (const prop of Object.keys(changes)) {
+      const prevValue = JSON.stringify(changes[prop].previousValue);
+      const currValue = JSON.stringify(changes[prop].currentValue);
+      if (prevValue !== currValue) { // restricting re-render call to only when previous prop value is not equal to current
+        this.render();
+        break;
+      }
+    }
   }
 
   ngAfterViewInit() {

@@ -3,11 +3,9 @@ import { render } from "react-dom";
 
 import { Component, Input } from "@angular/core";
 import { ReactWrapper } from "./react-wrapper.component";
-import { ResponsivePieCanvas, PieCanvasProps, AccessorFunc } from "@nivo/pie";
 import { ResponsiveLineCanvas, LineCanvasProps, Serie, DatumValue, Layer, PointMouseHandler, SliceTooltip, PointTooltip } from "@nivo/line";
 import { Scale } from "@nivo/scales";
 import { CartesianMarkerProps, Theme } from "@nivo/core";
-import { LegendProps } from "@nivo/legends";
 import { OrdinalColorsInstruction } from "@nivo/colors";
 import { GridValues, AxisProps } from "@nivo/axes";
 import { CrosshairType } from "@nivo/tooltip";
@@ -93,7 +91,6 @@ export class ResponsiveLineComponent extends ReactWrapper {
   @Input() legends: any;
 
   protected getProps(): Attributes & LineCanvasProps {
-    console.log(this.data);
     const {
       data,
       xScale,
