@@ -24,6 +24,7 @@ export class DataManagerService {
   // mapping of journey IDs to application (status, count) pairs
   statusData: { [key: string]: { [key: string]: number } } = {};
   // mapping of journey IDs to (Week, Month, and Year app frequencies)
+  // contains data from the past week, month, and year ONLY
   frequencyData: { [key: string]: AppFrequencyDatum } = {};
   statusColors = {
     "In Review": "hsl(213, 70%, 50%)",
@@ -50,16 +51,18 @@ export class DataManagerService {
   }
 
   addJourney(journey: Journey) {
-    const { calendarDatum, statusDatum } = this._extractData(
+    const { calendarDatum, statusDatum, frequencyDatum } = this._extractData(
       journey.applications
     );
     this.calendarData[journey.id] = calendarDatum;
     this.statusData[journey.id] = statusDatum;
+    this.frequencyData[journey.id] = frequencyDatum;
   }
 
   removeJourney(journeyid: string) {
     delete this.calendarData[journeyid];
     delete this.statusData[journeyid];
+    delete this.frequencyData[journeyid];
   }
 
   addApplication(journeyid: string, app: Application) {
@@ -77,8 +80,10 @@ export class DataManagerService {
     } else {
       statusDatum[status] = 1;
     }
+    const frequencyDatum = this._updateFrequencyDatum(this.frequencyData[journeyid], app.appDate);
     this.calendarData[journeyid] = calendarDatum; // this may not be necessary
     this.statusData[journeyid] = statusDatum;
+    this.frequencyData[journeyid] = frequencyDatum;
   }
 
   removeApplication(journeyid: string, app: Application) {
@@ -99,8 +104,10 @@ export class DataManagerService {
         delete statusDatum[app.status];
       }
     }
+    const frequencyDatum = this._updateFrequencyDatum(this.frequencyData[journeyid], app.appDate, 'remove');
     this.calendarData[journeyid] = calendarDatum;
     this.statusData[journeyid] = statusDatum;
+    this.frequencyData[journeyid] = frequencyDatum;
   }
 
   updateExistingApplication(
@@ -108,6 +115,7 @@ export class DataManagerService {
     prevApp: Application,
     updatedApp: Application
   ) {
+    // update calendar and status data
     const dateString = utils.getDateString(prevApp.appDate);
     const newDateString = utils.getDateString(updatedApp.appDate);
     let calendarDatum = this.calendarData[journeyid];
@@ -128,6 +136,18 @@ export class DataManagerService {
     }
     this.calendarData[journeyid] = calendarDatum;
     this.statusData[journeyid] = statusDatum;
+
+    // update frequency datum
+    if (!utils.datesEqual(prevApp.appDate, updatedApp.appDate)) {
+      let updatedFrequencyDatum = this.frequencyData[journeyid];
+      updatedFrequencyDatum = this._updateFrequencyDatum(
+        updatedFrequencyDatum, prevApp.appDate, 'remove'
+      ); // remove old date (if it exists)
+      updatedFrequencyDatum = this._updateFrequencyDatum(
+        updatedFrequencyDatum, updatedApp.appDate, 'add'
+      ); // add the new one (if appropriate)
+      this.frequencyData[journeyid] = updatedFrequencyDatum;
+    }
   }
 
   getFormattedCalendarData(
@@ -178,17 +198,16 @@ export class DataManagerService {
       ? Object.values(this.frequencyData[journeyid].week)
       : [];
     const week = [].concat(
-      weekVals.slice(today.getUTCDay()),
-      weekVals.slice(0, today.getUTCDay())
+      weekVals.slice(today.getUTCDay() + 1),
+      weekVals.slice(0, today.getUTCDay() + 1)
     );
     const monthVals = this.frequencyData[journeyid]
     ? Object.values(this.frequencyData[journeyid].month)
     : [];
     const month = [].concat(
-      monthVals.slice(today.getUTCDate() - 1), // remember, dates are 1-indexed while arrays are 0-indexed
-      monthVals.slice(0, today.getUTCDate() - 1)
+      monthVals.slice(today.getUTCDate()), // remember, dates are 1-indexed while arrays are 0-indexed
+      monthVals.slice(0, today.getUTCDate())
     );
-    // console.log(month);
     const yearVals = this.frequencyData[journeyid]
     ? Object.values(this.frequencyData[journeyid].year)
     : [];
@@ -219,10 +238,9 @@ export class DataManagerService {
     statusDatum: { [key: string]: number };
     frequencyDatum: AppFrequencyDatum;
   } {
-    const today = new Date();
     const calendarDatum: { [key: string]: number } = {};
     const statusDatum: { [key: string]: number } = {};
-    const frequencyDatum = this._initFrequencyData();
+    let frequencyDatum = this._initFrequencyData();
     apps.forEach((app) => {
       const dateString = utils.getDateString(app.appDate);
       if (calendarDatum.hasOwnProperty(dateString)) {
@@ -236,27 +254,9 @@ export class DataManagerService {
       } else {
         statusDatum[status] = 1;
       }
-      const weekday = app.appDate.getUTCDay();
-      const day = app.appDate.getUTCDate();
-      const month = app.appDate.getUTCMonth() + 1;
-      const year = app.appDate.getUTCFullYear();
-      if (this._dateInPastYear(app.appDate)) {
-        // application sent in the past 365 days
-        frequencyDatum.year[month].y += 1;
-        frequencyDatum.year[month].label = `${MONTHS[month]}, ${year}`;
-        if (this._dateInPastMonth(app.appDate)) {
-          // application sent in the past 30/31 days
-          frequencyDatum.month[day].y += 1;
-          frequencyDatum.month[day].label = `${MONTHS[month]} ${day}`;
-          if (this._dateInPastWeek(app.appDate)) {
-            // application sent in the past 7 days
-            frequencyDatum.week[weekday].y += 1;
-            frequencyDatum.week[weekday].label = `${MONTHS[month]} ${day}`;
-          }
-        }
-      }
+      frequencyDatum = this._updateFrequencyDatum(frequencyDatum, app.appDate);
     });
-    // console.log(frequencyDatum);
+
     return {
       calendarDatum,
       statusDatum,
@@ -314,6 +314,54 @@ export class DataManagerService {
       monthIdx = monthIdx === 12 ? 1 : monthIdx + 1;
     }
     return result;
+  }
+
+  private _updateFrequencyDatum(
+    datum: AppFrequencyDatum,
+    appDate: Date,
+    mode?: 'add' | 'remove'
+  ): AppFrequencyDatum {
+    if (!datum) {
+      return;
+    }
+    if (!mode) {
+      mode = 'add';
+    }
+    const updatedDatum = datum;
+    const weekday = appDate.getUTCDay();
+    const day = appDate.getUTCDate();
+    const month = appDate.getUTCMonth() + 1;
+    const year = appDate.getUTCFullYear();
+    if (mode === 'add') {
+      if (this._dateInPastYear(appDate)) { // application sent in the past 365 days
+        updatedDatum.year[month].y += 1;
+        updatedDatum.year[month].label = `${MONTHS[month]}, ${year}`;
+
+        if (this._dateInPastMonth(appDate)) { // application sent in the past 30/31 days
+          updatedDatum.month[day].y += 1;
+          updatedDatum.month[day].label = `${MONTHS[month]} ${day}`;
+
+          if (this._dateInPastWeek(appDate)) { // application sent in the past 7 days
+            updatedDatum.week[weekday].y += 1;
+            updatedDatum.week[weekday].label = `${MONTHS[month]} ${day}`;
+          }
+        }
+      }
+    } else if (mode === 'remove') { // remove
+      if (this._dateInPastYear(appDate)) { // application sent in the past 365 days
+        updatedDatum.year[month].y -= 1;
+
+        if (this._dateInPastMonth(appDate)) { // application sent in the past 30/31 days
+          updatedDatum.month[day].y -= 1;
+
+          if (this._dateInPastWeek(appDate)) { // application sent in the past 7 days
+            updatedDatum.week[weekday].y -= 1;
+          }
+        }
+      }
+    }
+
+    return updatedDatum;
   }
 
   private _dateInPastWeek(date: Date) {
