@@ -8,7 +8,7 @@ h4,
 h5,
 h6 {
   color: var(--titles-secondary);
-  font-weight: 400;
+  font-weight: 500;
 }
 
 span {
@@ -24,7 +24,7 @@ span {
 }
 
 .view-container {
-  max-width: 1200px;
+  max-width: 1230px;
   margin: 0 auto;
   padding: 0;
 }
@@ -130,7 +130,7 @@ mat-grid-tile-header {
 
 .data-container-title h4 {
   margin: 0;
-  font-weight: 200;
+  font-weight: 500;
   color: var(--titles-primary);
 }
 
@@ -138,9 +138,54 @@ mat-grid-tile-header {
   margin: 0;
 }
 
+.data-container-title mat-icon {
+  font-size: 1.5em;
+  cursor: pointer;
+  margin-left: 10px;
+  width: 20px;
+  height: 20px;
+}
+
 .stats-container {
   text-align: left;
-  padding: 25px;
+  /* padding: 25px; */
+  display: flex;
+  flex-direction: row;
+  padding: 0 auto;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.stats-container .stat-item {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 10px auto;
+}
+
+.stat-item .stat-item-content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: baseline;
+  padding: 0 30px;
+}
+
+p.stat-item-primary-text {
+  font-size: 6em;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-weight: 700;
+  color: var(--titles-secondary);
+  margin: 0;
+}
+
+p.stat-item-secondary-text {
+  font-size: 2em;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-weight: 500;
+  color: var(--titles-secondary);
+  margin: 0;
+  margin-left: 10px;
 }
 
 .calendar-container {
@@ -166,9 +211,8 @@ calendar-wrapper {
   list-style: none;
   display: flex;
   flex-direction: row;
-  margin: 0 auto;
+  margin: 20px auto;
   justify-content: center;
-  margin-bottom: 20px;
 }
 
 .year-selector li {
@@ -226,5 +270,14 @@ calendar-wrapper {
     padding: 0 5px;
     width: auto;
     height: auto;
+  }
+
+  .stats-container {
+    padding: 15px 25px;
+    margin: auto;
+  }
+
+  p.stat-item-primary-text {
+    font-size: 5em;
   }
 }

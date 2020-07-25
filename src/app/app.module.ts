@@ -50,6 +50,8 @@ import { NewPasswordComponent } from './auth/account-recovery/new-password.compo
 import { ResetSuccessfulComponent } from './auth/account-recovery/reset-successful.component';
 import { SignupSuccessfulComponent } from './auth/confirm-signup/signup-successful.component';
 import { AppFilterPipe } from './views/dashboard/app-filter.pipe';
+import { ArrayFilterPipe } from './utils/array-filter.pipe';
+import { ArrayFormatterPipe } from './utils/array-formatter.pipe';
 import { SearchPipe } from './views/search/search-pipe.pipe';
 import { KeysPipe } from './views/search/keys-pipe.pipe';
 import { WishlistComponent } from './views/wishlist/wishlist.component';
@@ -91,6 +93,8 @@ import { SliderContainerComponent } from './components/slider-container/slider-c
     ResetSuccessfulComponent,
     SignupSuccessfulComponent,
     AppFilterPipe,
+    ArrayFilterPipe,
+    ArrayFormatterPipe,
     SearchPipe,
     KeysPipe,
     WishlistComponent,
@@ -133,6 +137,8 @@ import { SliderContainerComponent } from './components/slider-container/slider-c
     UserStoreService,
     { provide: ErrorStateMatcher, useClass: OnDirtyErrorStateMatcher },
     AppFilterPipe,
+    ArrayFilterPipe,
+    ArrayFormatterPipe,
     SearchPipe,
     KeysPipe,
   ],

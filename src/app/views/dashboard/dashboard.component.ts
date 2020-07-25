@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from "@angular/core";
 import { UserStoreService } from "src/app/models/user-store.service";
 import * as mockData from "src/app/models/data";
 import { Journey } from "src/app/models/journey";
@@ -9,13 +9,16 @@ import { PreferencesStoreService } from 'src/app/controllers/preferences-store.s
 import { PALETTES, THEMES } from 'src/styling/palettes';
 import { ResizeService } from 'src/app/controllers/resize.service';
 import { FormattedFrequencyData, WEEKDAYS, MONTHS } from 'src/app/controllers/types';
+import { ArrayFilterPipe } from 'src/app/utils/array-filter.pipe';
+import { Subscription } from 'rxjs';
+import { ArrayFormatterPipe } from 'src/app/utils/array-formatter.pipe';
 
 @Component({
   selector: "app-dashboard",
   templateUrl: "./dashboard.component.html",
   styleUrls: ["./dashboard.component.css"],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
   name = "";
   pieChartData = mockData.pieChartData;
   activeJourneys: Journey[];
@@ -37,9 +40,16 @@ export class DashboardComponent implements OnInit {
   pieChartPalette = ['#AC98FB', '#6E89F8', '#81BEFA', '#C1E0F8', '#D1C3EB'];
   calendarPalette = ['#AC98FB', '#6E89F8', '#81BEFA', '#C1E0F8', '#D1C3EB'];
   lineChartMode: 'week' | 'month' | 'year' = 'week';
-  weekAxis = [];
-  monthAxis = [];
-  yearAxis = [];
+  // axisValues: { [key: string]: AxisValues } = {
+  //   week: { x: [], y: [] },
+  //   month: { x: [], y: [] },
+  //   year: { x: [], y: [] },
+  // };
+  // weekAxis = [];
+  // monthAxis = [];
+  // yearAxis = [];
+  journeySub: Subscription;
+  prefSub: Subscription;
 
   @ViewChild('statusContainer') statContainer: ElementRef;
 
@@ -47,7 +57,9 @@ export class DashboardComponent implements OnInit {
     private userStore: UserStoreService,
     private router: Router,
     private prefStore: PreferencesStoreService,
-    public resizeService: ResizeService
+    public resizeService: ResizeService,
+    private arrayFilter: ArrayFilterPipe,
+    private arrayFormatter: ArrayFormatterPipe
   ) {}
 
   ngOnInit() {
@@ -55,7 +67,7 @@ export class DashboardComponent implements OnInit {
       this.userStore.user.subscribe(user => {
         this.name = user.firstName;
       });
-      this.userStore.activeJourneys.subscribe((activeJourneys) => {
+      this.journeySub = this.userStore.activeJourneys.subscribe(activeJourneys => {
         this.activeJourneys = activeJourneys;
         this.setDropdownContent();
         this.selectedJourney = this.dropdownContent[0];
@@ -66,10 +78,10 @@ export class DashboardComponent implements OnInit {
           this._setLineChartAxes(this.selectedJourney.frequencyData);
         }
       });
-      this.prefStore.preferences.subscribe(preferences => {
+      this.prefSub = this.prefStore.preferences.subscribe(preferences => {
         this.theme = preferences.theme;
         this.pieChartPalette = preferences.colorPalette.colors;
-        this.calendarPalette = [this.theme.emptyColor, ...preferences.colorPalette.colors];
+        this.calendarPalette = preferences.colorPalette.colors;
       });
       // console.log(this.selectedJourney.frequencyData);
       console.log("Dashboard initialized");
@@ -78,6 +90,11 @@ export class DashboardComponent implements OnInit {
       this.name = '';
       this.activeJourneys = [];
     }
+  }
+
+  ngOnDestroy() {
+    this.journeySub.unsubscribe();
+    this.prefSub.unsubscribe();
   }
 
   setDropdownContent() {
@@ -94,6 +111,7 @@ export class DashboardComponent implements OnInit {
         statusData: journeyStatusData,
         frequency: this._getApplicationFrequency(journey.startDate, journey.applications.length),
         frequencyData,
+        frequencyAxes: this._setLineChartAxes(frequencyData)
       });
     });
     this.dropdownContent = newContent;
@@ -127,11 +145,32 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  private _setLineChartAxes(frequencyData: FormattedFrequencyData) {
+  private _setLineChartAxes(frequencyData: FormattedFrequencyData): {
+    week: AxisValues,
+    month: AxisValues,
+    year: AxisValues
+  } {
+    const weekXVals = frequencyData.week[0].data.map(value => value.x);
     const weekYVals = frequencyData.week[0].data.map(value => value.y);
-    this.weekAxis = frequencyData.week[0].data.map(value => value.y);
-    this.monthAxis = frequencyData.month[0].data.map(value => value.x);
-    this.yearAxis = frequencyData.year[0].data.map(value => value.x);
+
+    const monthXVals = frequencyData.month[0].data.reduce((accumulator, currentValue, index) => {
+      if (index % 2 !== 0) {
+        accumulator.push(currentValue.x);
+      }
+      return accumulator;
+    }, []);
+    const monthYVals = frequencyData.month[0].data.map(value => value.y);
+    // this.axisValues.month = frequencyData.month[0].data.filter((value, index) => {
+    //   return (index % 2 === 0)
+    // });
+    const yearXVals = frequencyData.year[0].data.map(value => value.x);
+    const yearYVals = frequencyData.year[0].data.map(value => value.y);
+    // console.log(this.axisValues);
+    return {
+      week: { x: weekXVals, y: weekYVals },
+      month: { x: monthXVals, y: monthYVals },
+      year: { x: yearXVals, y: yearYVals },
+    };
   }
 
   private _setCalendarYears(data: { day: string; value: number }[]): string[] {
@@ -170,4 +209,14 @@ export interface JourneyDropdownItem {
   statusData: object;
   frequency: string;
   frequencyData: FormattedFrequencyData;
+  frequencyAxes: {
+    week: AxisValues,
+    month: AxisValues,
+    year: AxisValues
+  };
+}
+
+export interface AxisValues {
+  x: number[] | string[];
+  y: number[] | string[];
 }

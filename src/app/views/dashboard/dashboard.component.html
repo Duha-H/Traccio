@@ -23,27 +23,28 @@
 
         <div class="dashboard-component">
           <div class="data-container-title spanning-content">
-            <h4 style="font-weight: 400;">Journey Stats</h4>
+            <h4 style="font-weight: 500;">Recent Stats</h4>
             <div class="spacer"></div>
-            <p>past <b style="cursor: pointer;" (click)="toggleLineChartMode()">{{lineChartMode}}</b></p>
+            <p>past <b style="cursor: pointer; color: var(--accent);" (click)="toggleLineChartMode()">{{lineChartMode}}</b></p>
+            <mat-icon title="save info">save_alt</mat-icon>
           </div> 
-          <div class="stats-container" style="display: flex; flex-direction: row; padding: 0 auto; flex-wrap: wrap;">
-            <div class="stat-item" style="display: flex; flex-direction: column; text-align: center; margin: 10px auto;">
-              <div style="display: flex; flex-direction: row; flex-wrap: nowrap; align-items: baseline; padding: 0 10px;">
-                <p style="font-size: 6em; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-weight: 700; color: var(--titles-secondary); margin: 0;">
-                  {{ selectedJourney.value.applications.length }}
+          <div class="stats-container">
+            <div class="stat-item">
+              <div class="stat-item-content">
+                <p class="stat-item-primary-text">
+                  {{ selectedJourney.frequencyAxes[lineChartMode].y | arrayFilter:'count' }}
                 </p>
-                <p style="font-size: 2em; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-weight: 500; color: var(--titles-secondary); margin: 0; margin-left: 10px;">apps</p>
+                <p class="stat-item-secondary-text">apps</p>
               </div>
-              
               <p style="color: var(--titles-secondary);">submitted in the past {{lineChartMode}}</p>
             </div>
-            <div class="stat-item" style="display: flex; flex-direction: column; text-align: center; margin: 10px auto;">
-              <div style="display: flex; flex-direction: row; flex-wrap: nowrap; align-items: baseline; padding: 0 10px;">
-                <p style="font-size: 6em; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-weight: 700; color: var(--titles-secondary); margin: 0;">
+
+            <div class="stat-item">
+              <div class="stat-item-content">
+                <p class="stat-item-primary-text">
                   {{ selectedJourney.frequency }}
                 </p>
-                <p style="font-size: 2em; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-weight: 500; color: var(--titles-secondary); margin: 0; margin-left: 10px;">per day</p>
+                <p class="stat-item-secondary-text">per day</p>
               </div>
               <p style="color: var(--titles-secondary);">average application frequency</p>
             </div>
@@ -51,7 +52,7 @@
             <p>Applications submitted: {{selectedJourney.value.applications.length}}</p>
             <p>Application frequency: {{selectedJourney.frequency}} / day</p> -->
           </div>
-          <line-chart-wrapper style="width: 100%; height: 40%; display: block;"
+          <line-chart-wrapper *ngIf="(selectedJourney.frequencyAxes[lineChartMode].y | arrayFilter) > 0; else noChart" style="width: 100%; height: 40%; display: block; margin: 0 auto;"
             [data]="selectedJourney.frequencyData[lineChartMode]"
             [curve]="'monotoneX'"
             [xScale]="{
@@ -59,6 +60,13 @@
             }"
             [yScale]="{
               type: 'linear'
+            }"
+            [xFormat]="label"
+            [axisBottom]="{
+              tickValues: selectedJourney.frequencyAxes[lineChartMode].x
+            }"
+            [axisLeft]="{
+              tickValues: (selectedJourney.frequencyAxes[lineChartMode].y | arrayFormatter:['fill', 'reduce'])
             }"
             [isInteractive]="true"
             [margin]="{ top: 10, bottom: 40, right: 40, left: 40 }"
@@ -75,13 +83,21 @@
             }"
             [motionDamping]="30">
           </line-chart-wrapper>
+          <ng-template #noChart>
+            <div>Nope. No Chart.</div>
+          </ng-template>
         </div>
 
         <div class="dashboard-component">
-          <h4 class="data-container-title">
-            Status Breakdown
-          </h4>
-          <div *ngIf="!isEmpty(selectedJourney.statusData); else statusPlaceholder;" class="status-container" style="width: 90%; height: 80%;" #statusContainer>
+          <div class="data-container-title spanning-content">
+            <h4>
+              Status Breakdown
+            </h4>
+            <div class="spacer"></div>
+            <mat-icon title="save info">save_alt</mat-icon>
+          </div>
+          
+          <div *ngIf="!isEmpty(selectedJourney.statusData); else statusPlaceholder;" class="status-container" style="width: 90%; height: 80%; margin: 0 auto;" #statusContainer>
             <pie-chart-wrapper [data]="selectedJourney.statusData"
               [width]="800" [height]="800"
               [margin]="{ top: 0, right: 60, bottom: 0, left: 10 }" [pixelRatio]="2" [innerRadius]="0.3"
@@ -115,9 +131,13 @@
         </div>
         
         <div class="dashboard-component" style="width: 100%;">
-          <h4 class="data-container-title">
-            Calendar Graph
-          </h4>  
+          <div class="data-container-title spanning-content">
+            <h4>
+              Productivity Calendar
+            </h4>
+            <div class="spacer"></div>
+            <mat-icon title="save info">save_alt</mat-icon>
+          </div>
           <div class="calendar-container" style="width: 90%; height: 50%; margin: 0 auto;">
             <calendar-wrapper [data]="selectedJourney.calendarData" [from]="currentYear+'-02-01'"
               [to]="currentYear+'-11-01'" [emptyColor]="theme.emptyColor"
@@ -136,15 +156,17 @@
                   itemDirection: 'left-to-right',
                   textColor: theme.textColor,
                   itemTextColor: theme.textColor
-                }]" [theme]="{
-                  axis: {
-                    textColor: theme.textColor
-                  },
-                  textColor: theme.textColor,
-                  markers: {
-                    textColor: theme.textColor
-                  }
-                }">
+                }]"
+              [theme]="{
+                axis: {
+                  textColor: theme.textColor
+                },
+                textColor: theme.textColor,
+                markers: {
+                  textColor: theme.textColor
+                }
+              }"
+              [minValue]="'auto'">
             </calendar-wrapper>
           </div>
           <ul style="list-style: none;" class="year-selector">
@@ -155,7 +177,7 @@
           </ul>
         </div>
 
-        <div class="dashboard-component" style="width: 100%;">
+        <div class="dashboard-component" style="width: 100%; height: 420px;">
           <div class="data-container-title spanning-content">
             <h4>Applications</h4>
             <div class="spacer"></div>

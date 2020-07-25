@@ -29,6 +29,8 @@ export class ResponsiveCalendarComponent extends ReactWrapper {
   @Input() dayBorderColor: string;
   @Input() legends: any;
   @Input() direction: CalendarDirection;
+  @Input() minValue: number | 'auto' = 0;
+  @Input() maxValue: number | 'auto' = 'auto';
 
 
   protected getProps(): CalendarSvgProps {
@@ -46,6 +48,8 @@ export class ResponsiveCalendarComponent extends ReactWrapper {
       dayBorderColor,
       legends,
       direction,
+      minValue,
+      maxValue,
     } = this;
     return {
       data,
@@ -61,6 +65,8 @@ export class ResponsiveCalendarComponent extends ReactWrapper {
       dayBorderColor,
       legends,
       direction,
+      minValue,
+      maxValue
     };
   }
 
