@@ -7,6 +7,7 @@ import { TimelineComponent } from 'src/app/components/timeline/timeline.componen
 import { STATUS_COLORS, STATUS, APP_SOURCE, APP_ATTRIBS, REQUIRED_APP_ATTRIBS } from 'src/app/models/constants';
 import { KeyValue } from '@angular/common';
 import { Journey } from 'src/app/models/journey';
+import { ResizeService } from 'src/app/controllers/resize.service';
 
 @Component({
   selector: 'app-application-view',
@@ -53,7 +54,8 @@ export class ApplicationViewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private userStore: UserStoreService,
-    private router: Router
+    private router: Router,
+    public rs: ResizeService,
   ) { }
 
   ngOnInit() {
@@ -78,7 +80,6 @@ export class ApplicationViewComponent implements OnInit {
       this.inputApplication = this.userStore.getApplication(this.journeyid, +appid);
     }
     this.currApplicationDetails = Object.assign(new Application(), this.inputApplication);
-    console.log(this.currApplicationDetails);
     if (!this.inputApplication) {
       console.log('ApplicationViewComponent: no application retrieved with id:', appid);
       this.router.navigate(['/journeys']);

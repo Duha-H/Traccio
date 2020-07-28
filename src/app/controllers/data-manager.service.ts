@@ -366,8 +366,6 @@ export class DataManagerService {
 
   private _dateInPastWeek(date: Date) {
     // returns true if applicate DATE is WITHIN the past 7 days
-    const today = new Date().getUTCDate();
-    const appDate = date.getUTCDate();
     const diff = new Date().getTime() - date.getTime();
     if (diff <= MS_IN_A_WEEK) {
       return true;

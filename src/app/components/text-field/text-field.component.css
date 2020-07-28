@@ -66,6 +66,7 @@
   height: 11pt;
   text-align: left;
   margin-bottom: 10px;
+  font-weight: 300;
 }
 
 .input-container div:focus-within + label {

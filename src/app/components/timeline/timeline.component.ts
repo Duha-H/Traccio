@@ -12,7 +12,7 @@ import * as utils from 'src/app/controllers/utils';
   <div id="timeline-parent" #parent>\
     <timeline-tooltip *ngIf="displayTooltip" [props]="tooltipProps" style="position: absolute;\
       z-index: 15; top: {{tooltipProps.y}}px; left: {{tooltipProps.x}}px;"></timeline-tooltip>\
-    <canvas (mousemove)="onMouseHover($event)" (mouseleave)="onMouseLeave()" #canvas></canvas>\
+    <canvas (mousemove)="onMouseHover($event)" (mouseleave)="onMouseLeave()" (click)="onMouseClick($event)" #canvas></canvas>\
   </div>\
   ',
   styleUrls: ['timeline.component.css']
@@ -115,6 +115,11 @@ export class TimelineComponent implements OnInit, AfterViewInit {
 
   onMouseLeave() {
     this.displayTooltip = false;
+  }
+
+  onMouseClick(event: MouseEvent) {
+    console.log('click');
+    this.onMouseHover(event);
   }
 
   private _calibrateCanvas() {
