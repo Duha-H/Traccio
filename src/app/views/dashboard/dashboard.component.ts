@@ -12,6 +12,7 @@ import { FormattedFrequencyData, WEEKDAYS, MONTHS } from 'src/app/controllers/ty
 import { ArrayFilterPipe } from 'src/app/utils/array-filter.pipe';
 import { Subscription } from 'rxjs';
 import { ArrayFormatterPipe } from 'src/app/utils/array-formatter.pipe';
+import { DatumValue } from '@nivo/line';
 
 @Component({
   selector: "app-dashboard",
@@ -145,6 +146,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
   }
 
+  setCustomTooltip(value?: DatumValue): string {
+    return 'string';
+  }
+
   private _setLineChartAxes(frequencyData: FormattedFrequencyData): {
     week: AxisValues,
     month: AxisValues,
@@ -218,5 +223,5 @@ export interface JourneyDropdownItem {
 
 export interface AxisValues {
   x: number[] | string[];
-  y: number[] | string[];
+  y: number[];
 }

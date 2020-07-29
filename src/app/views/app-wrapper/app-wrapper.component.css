@@ -9,7 +9,7 @@
   background-color: var(--bg);
   font-weight: 600;
   padding: 10px 20px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.479), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.479), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
 }
 
 .toolbar mat-icon.mat-icon {
@@ -79,16 +79,27 @@ ul.sidenav {
   vertical-align: middle;
 }
 
-mat-sidenav-container {
+mat-sidenav-container, .sidenav-container {
   margin: 0;
   overflow-y: hidden;
   min-height: 100%;
-  min-width: 100%;
+  width: 100%;
+  /* width: 95vw; */
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
 }
 
-mat-sidenav {
+.sidenav-content {
+  /* width: 90vw; */
+  height: 100%;
+  width: inherit;
+}
+
+mat-sidenav, div.sidenav {
   background-color: var(--element-bg-secondary);
-  min-height: 100%;
+  /* width: 10vw; */
+  /* min-height: 100%; */
 }
 
 .sidenav mat-icon {
@@ -226,6 +237,11 @@ svg#clouds {
 
   .content {
     height: 86vh;
+  }
+
+  .sidenav-content {
+    width: 100vw;
+    height: 95vh;
   }
 
   .bottomnav {

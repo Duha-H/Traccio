@@ -168,7 +168,7 @@ div.info-item {
 .additional-info textarea#additional-info {
   background-color: var(--element-bg-secondary);
   border-radius: 5px;
-  padding: 16px;
+  padding: 10px;
   font-size: 11pt;
   /* font-family: Roboto, 'Helvetica', sans-serif; */
   font-family: Inter var, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;

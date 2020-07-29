@@ -1,6 +1,6 @@
-<mat-sidenav-container class="sidenav-container" mode="push">
+<div class="sidenav-container" mode="push">
   <!-- Nav -->
-  <mat-sidenav mode="side" role="navigation" [opened]="!(resizeService.mobileSize$ | async)">
+  <div class="sidenav" mode="side" role="navigation" *ngIf="!(resizeService.mobileSize$ | async)">
     <ul class="sidenav">
       <li title="Dashboard"><a href="#" routerLink="" (click)="clearSearch()" routerLinkActive="active"
           [routerLinkActiveOptions]="{exact: true}" #navHomeIcon>
@@ -15,10 +15,10 @@
           <mat-icon [inline]="true" aria-hidden="false" aria-label="Search icon">star_border</mat-icon>
         </a></li>
     </ul>
-  </mat-sidenav>
+  </div>
 
   <!-- Content -->
-  <mat-sidenav-content role="main">
+  <div class="sidenav-content" role="main">
 
     <!-- Toolbar -->
     <div class="toolbar" role="banner">
@@ -52,23 +52,24 @@
       <footer></footer>
     </div>
 
-    <!-- Conditionally-visible Bottom Nav -->
-    <div *ngIf="resizeService.mobileSize$ | async" class="bottomnav">
-      <ul>
-        <li title="Journeys"><a href="#" routerLink="/journeys" (click)="clearSearch()" routerLinkActive="active"
-            #navJourneysIcon>
-            <mat-icon [inline]="true" aria-hidden="false" aria-label="Journeys icon">list</mat-icon>
-          </a></li>
-        <li title="Dashboard"><a href="#" routerLink="" (click)="clearSearch()" routerLinkActive="active"
-            [routerLinkActiveOptions]="{exact: true}" #navHomeIcon>
-            <mat-icon [inline]="true" aria-hidden="false" aria-label="Dashboard icon">home</mat-icon>
-          </a></li>
-        <li title="Wishlist"><a href="#" routerLink="/wishlist" (click)="clearSearch()" routerLinkActive="active"
-            #navWishlistIcon>
-            <mat-icon [inline]="true" aria-hidden="false" aria-label="Search icon">star_border</mat-icon>
-          </a></li>
-      </ul>
-    </div>
+  </div>
 
-  </mat-sidenav-content>
-</mat-sidenav-container>
+  <!-- Conditionally-visible Bottom Nav -->
+  <div *ngIf="resizeService.mobileSize$ | async" class="bottomnav">
+    <ul>
+      <li title="Journeys"><a href="#" routerLink="/journeys" (click)="clearSearch()" routerLinkActive="active"
+          #navJourneysIcon>
+          <mat-icon [inline]="true" aria-hidden="false" aria-label="Journeys icon">list</mat-icon>
+        </a></li>
+      <li title="Dashboard"><a href="#" routerLink="" (click)="clearSearch()" routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact: true}" #navHomeIcon>
+          <mat-icon [inline]="true" aria-hidden="false" aria-label="Dashboard icon">home</mat-icon>
+        </a></li>
+      <li title="Wishlist"><a href="#" routerLink="/wishlist" (click)="clearSearch()" routerLinkActive="active"
+          #navWishlistIcon>
+          <mat-icon [inline]="true" aria-hidden="false" aria-label="Search icon">star_border</mat-icon>
+        </a></li>
+    </ul>
+  </div>
+
+</div>
