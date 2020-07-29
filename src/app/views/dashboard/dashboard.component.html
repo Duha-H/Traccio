@@ -34,7 +34,7 @@
                 <p class="stat-item-primary-text">
                   {{ selectedJourney.frequencyAxes[lineChartMode].y | arrayFilter:'count' }}
                 </p>
-                <p class="stat-item-secondary-text">apps</p>
+                <p class="stat-item-secondary-text">applications</p>
               </div>
               <p style="color: var(--titles-secondary);">submitted in the past {{lineChartMode}}</p>
             </div>
@@ -42,9 +42,9 @@
             <div class="stat-item">
               <div class="stat-item-content">
                 <p class="stat-item-primary-text">
-                  {{ selectedJourney.frequency }}
+                  {{ selectedJourney.frequencyAxes[lineChartMode].y | arrayFilter:'average' }}
                 </p>
-                <p class="stat-item-secondary-text">per day</p>
+                <p class="stat-item-secondary-text">/{{ lineChartMode === 'year' ? 'month' : 'day'}}</p>
               </div>
               <p style="color: var(--titles-secondary);">average application frequency</p>
             </div>
@@ -61,7 +61,7 @@
             [yScale]="{
               type: 'linear'
             }"
-            [xFormat]="label"
+            [tooltipFormat]="setCustomTooltip()"
             [axisBottom]="{
               tickValues: selectedJourney.frequencyAxes[lineChartMode].x
             }"
@@ -194,8 +194,8 @@
               <mat-list-item class="clickable-item" *ngFor="let app of (selectedJourney.value.applications | appFilter:[{ property: 'status', value: selectedStatus.value }] );"
                 (click)="selectApplication(app)">
                 <!-- Web default list-item -->
-                <mat-icon *ngIf="!(resizeService.mobileSize$ | async)" matListIcon>folder</mat-icon>
-                <div *ngIf="!(resizeService.mobileSize$ | async)" class="app-list-item" matLine>
+                <mat-icon *ngIf="!(resizeService.tabletSize$ | async)" matListIcon>folder</mat-icon>
+                <div *ngIf="!(resizeService.tabletSize$ | async); else mobileListItem" class="app-list-item" matLine>
                   <div class="spanning-content" >
                     <h4 style="text-align: left; color: var(--text);">{{app.positionTitle + '  '}}</h4>
                     <span style="padding-left: 10px; color: var(--titles-secondary);"> @ {{app.companyName}}</span>
@@ -204,18 +204,21 @@
                   </div>
                 </div>
                 <!-- Mobile view list-item -->
-                <div *ngIf="resizeService.mobileSize$ | async" class="app-list-item" matLine>
-                  <div class="spanning-content">
-                    <h4 style="text-align: left; color: var(--text);">{{app.positionTitle + '  '}}</h4>
+                <ng-template #mobileListItem>
+                  <div class="app-list-item" matLine>
+                    <div class="spanning-content">
+                      <h4 style="text-align: left; color: var(--text);">{{app.positionTitle + '  '}}</h4>
+                    </div>
                   </div>
-                </div>
-                <div *ngIf="resizeService.mobileSize$ | async" class="app-list-item" matLine>
-                  <div class="spanning-content">
-                    <span style="color: var(--titles-secondary);"> @ {{app.companyName}}</span>
-                    <div class="spacer"></div>
-                    <span>Applied: {{ app.appDate | date }}</span>
+                  <div class="app-list-item" matLine>
+                    <div class="spanning-content">
+                      <span style="color: var(--titles-secondary);"> @ {{app.companyName}}</span>
+                      <div class="spacer"></div>
+                      <span>Applied: {{ app.appDate | date }}</span>
+                    </div>
                   </div>
-                </div>
+                </ng-template>
+                
                 
               </mat-list-item>
             </mat-list>
