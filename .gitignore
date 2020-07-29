@@ -62,3 +62,6 @@ amplifyxc.config
 
 # asset creation files
 *.ai
+
+# source maps
+source-map-test.html

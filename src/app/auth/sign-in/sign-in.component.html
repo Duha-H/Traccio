@@ -2,8 +2,8 @@
 	<div class="signin-container">
 		<h2>Sign in</h2>
 		<form action="#" (keyup.enter)="signIn()">
-			<text-field [width]="360" height="8" (inputChange)="email=$event" [label]="'Email'" [type]="'email'"></text-field>
-			<text-field [width]="360" height="8" (inputChange)="password=$event" [label]="'Password'" [type]="'password'"></text-field>
+			<text-field [width]="360" height="8" (inputChange)="setInput($event, 'email')" [label]="'Email'" [type]="'email'"></text-field>
+			<text-field [width]="360" height="8" (inputChange)="setInput($event, 'password')" [label]="'Password'" [type]="'password'"></text-field>
 			<p class="warning-text">{{error}}</p>
 			<button (click)="signIn()" type="submit" class="submit-button">Sign in</button>
 		</form>

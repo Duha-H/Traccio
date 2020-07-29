@@ -258,3 +258,10 @@ button.add-btn:disabled {
   }
 
 }
+
+
+@media screen and (max-width: 500px) {
+  .add-btn {
+    padding: 0 5px;
+  }
+}

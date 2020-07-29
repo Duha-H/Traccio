@@ -52,7 +52,7 @@ mat-drawer {
 
 .journey-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(22em, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(23em, 1fr));
   justify-items: center;
   margin-top: 10px;
 }

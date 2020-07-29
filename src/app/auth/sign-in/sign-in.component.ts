@@ -19,7 +19,6 @@ export class SignInComponent implements OnInit {
   ngOnInit() {
   }
 
-
   async signIn() {
     const response = await this.authWrapper.signIn(this.email, this.password);
     if (response.successful) {
@@ -28,6 +27,15 @@ export class SignInComponent implements OnInit {
       this.signInError = true;
       this.error = response.message;
     }
+  }
+
+  setInput(value: string, type: string) {
+    if (type === 'email') {
+      this.email = value;
+    } else if (type === 'password') {
+      this.password = value;
+    }
+    this.error = ''; // remove current error on new input
   }
 
 }

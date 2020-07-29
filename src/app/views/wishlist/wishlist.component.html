@@ -2,14 +2,19 @@
   <div class="spanning-content">
     <h2>Wishlist</h2>
     <div class="spacer"></div>
-    <button class="submit-button">Add Application</button>
+    <!-- <button class="submit-button">Add Application</button> -->
+    <button class="add-btn" title="Add application" (click)="addApplication()">
+      <p *ngIf="!(rs.mobileSize$ | async)">Add Application</p>
+      <mat-icon [inline]="true" aria-hidden="false" aria-label="Add application icon">add</mat-icon>
+    </button>
   </div>
 
   <div class="wishlist-apps" *ngIf="applications.length != 0; else emptyWishlist">
     <mat-list style="height: 100%;" class="app-list-item">
       <mat-list-item class="clickable-item" *ngFor="let app of applications;" (click)="selectApplication(app)">
         <mat-icon matListIcon>star</mat-icon>
-        <div matLine>
+        
+        <div *ngIf="!(rs.tabletSize$ | async); else mobileListItem" class="app-list-item" matLine>
           <div class="spanning-content">
             <h4 style="text-align: left; color: var(--text);">{{app.positionTitle + '  '}}</h4>
             <span style="padding-left: 10px; color: var(--titles-secondary);"> @ {{app.companyName}}</span>
@@ -17,6 +22,23 @@
             <span>Date Added: {{ app.appDate | date }}</span>
           </div>
         </div>
+
+        <!-- Mobile view list-item -->
+        <ng-template #mobileListItem>
+          <div class="app-list-item" matLine>
+            <div class="spanning-content">
+              <h4 style="text-align: left; color: var(--text);">{{app.positionTitle + '  '}}</h4>
+            </div>
+          </div>
+          <div class="app-list-item" matLine>
+            <div class="spanning-content">
+              <span style="color: var(--titles-secondary);"> @ {{app.companyName}}</span>
+              <div class="spacer"></div>
+              <span>Applied: {{ app.appDate | date }}</span>
+            </div>
+          </div>
+        </ng-template>
+
       </mat-list-item>
     </mat-list>
   </div>
