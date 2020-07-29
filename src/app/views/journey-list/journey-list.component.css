@@ -90,6 +90,9 @@ slider-container .journey-item.current {
 }
 
 @media screen and (max-width: 500px) {
+  .view-container {
+    padding: 0 15px;
+  }
   .journey-item {
     margin: 0;
   }

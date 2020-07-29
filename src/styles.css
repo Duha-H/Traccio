@@ -261,6 +261,14 @@ button.add-btn:disabled {
 
 
 @media screen and (max-width: 500px) {
+  h2 {
+    font-size: 1.25em;
+  }
+
+  div.view-container {
+    padding: 0 15px;
+  }
+
   .add-btn {
     padding: 0 5px;
   }

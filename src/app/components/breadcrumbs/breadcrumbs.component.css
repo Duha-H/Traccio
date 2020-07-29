@@ -39,3 +39,9 @@ a.breadcrumb-text {
     margin-bottom: 5px;
   }
 }
+
+@media screen and (max-width: 500px) {
+  div.container.spanning-content {
+    margin-left: 15px;
+  }
+}

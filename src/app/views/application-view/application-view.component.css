@@ -292,7 +292,24 @@ div.info-item {
 }
 
 @media screen and (max-width: 500px) {
+  div.view-container {
+    padding: 0 15px;
+  }
+
+  .spanning-content {
+    margin: 15px 0;
+  }
+
+  .position-info, .date-info, .additional-info, .status-info {
+    margin: 10px 0;
+  }
+
   button.save-btn {
     padding: 0 5px;
+    margin-left: 10px;
+  }
+
+  .save-btn p {
+    margin: 0 8px;
   }
 }

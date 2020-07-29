@@ -42,3 +42,9 @@
   background-color: var(--element-bg-secondary);
   cursor: pointer;
 }
+
+@media screen and (max-width: 500px) {
+  .spanning-content {
+    margin: 15px 0;
+  }
+}

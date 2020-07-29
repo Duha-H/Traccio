@@ -9,7 +9,9 @@
       <mat-icon [inline]="true" aria-hidden="false" aria-label="Save changes icon">save</mat-icon>
     </button>
     <button *ngIf="wishlistApp" class="save-btn" (click)="displayAddToJourneyOverlay()">
-      <p>Add to Journey</p>
+      <p *ngIf="!(rs.mobileSize$ | async)">Add to Journey</p>
+      <div class="spacer"></div>
+      <mat-icon [inline]="true" aria-hidden="false" aria-label="Add to journey icon">add</mat-icon>
     </button>
     <button *ngIf="newApp || wishlistApp" class="save-btn" (click)="cancelChanges()">
       <p>Cancel</p>

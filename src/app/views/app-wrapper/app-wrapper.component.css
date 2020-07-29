@@ -135,6 +135,7 @@ mat-sidenav, div.sidenav {
   z-index: 5;
   margin: 0;
   position: absolute;
+  margin-bottom: 20px;
 }
 
 .bottomnav li {
@@ -236,17 +237,17 @@ svg#clouds {
   }
 
   .content {
-    height: 86vh;
+    height: 87vh;
   }
 
   .sidenav-content {
     width: 100vw;
-    height: 95vh;
+    height: 92%;
   }
 
   .bottomnav {
-    height: 5vh;
-    padding-bottom: 20px;
+    height: 8%;
+    /* padding-bottom: 20px; */
     background-color: var(--element-bg-secondary);
     position: fixed;
     bottom: 0;
