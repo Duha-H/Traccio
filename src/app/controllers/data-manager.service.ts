@@ -293,7 +293,7 @@ export class DataManagerService {
     // month
     const daysInMonth = new Date(
       today.getUTCFullYear(),
-      today.getUTCMonth(),
+      today.getUTCMonth() + 1, // adding 1 because getUTCMonth() returns 0-indexed months
       0
     ).getDate();
     let dayIdx = today.getUTCDate();
