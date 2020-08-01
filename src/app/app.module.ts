@@ -1,24 +1,25 @@
-import { BrowserModule, HammerModule } from '@angular/platform-browser';
+import { HammerModule, BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+// import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
+import { SharedModule } from './shared.module';
 
 import { AmplifyService } from 'aws-amplify-angular';
 import { AuthModule } from './auth/auth.module';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSidenavModule } from '@angular/material/sidenav';
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule, ErrorStateMatcher } from '@angular/material/core';
-import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
+// import { MatNativeDateModule, ErrorStateMatcher } from '@angular/material/core';
+// import { MatInputModule } from '@angular/material/input';
+// import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatListModule } from '@angular/material/list';
+// import { MatListModule } from '@angular/material/list';
 // import { MatMenuModule } from '@angular/material/menu';
-import { MatSelectModule } from '@angular/material/select';
+// import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
@@ -65,11 +66,14 @@ import { TimelineTooltipComponent } from './components/timeline/timeline-tooltip
 import { WishlistWrapperComponent } from './views/wishlist/wishlist-wrapper.component';
 import { OverflowWrapperComponent } from './components/overflow-wrapper/overflow-wrapper.component';
 import { SliderContainerComponent } from './components/slider-container/slider-container.component';
+import { DataManagerService } from './controllers/data-manager.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import { DashboardModule } from './dashboard/dashboard.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
+    // DashboardComponent,
     JourneysComponent,
     SignInComponent,
     SignUpComponent,
@@ -81,19 +85,19 @@ import { SliderContainerComponent } from './components/slider-container/slider-c
     ApplicationInputComponent,
     SearchComponent,
     ConfirmSignupComponent,
-    ResponsiveCalendarComponent,
-    ResponsivePieComponent,
-    ResponsiveLineComponent,
+    // ResponsiveCalendarComponent,
+    // ResponsivePieComponent,
+    // ResponsiveLineComponent,
     AppWrapperComponent,
     AccountDropdownComponent,
-    TextFieldComponent,
+    // TextFieldComponent,
     AccountRecoveryComponent,
     ForgotPasswordComponent,
     NewPasswordComponent,
     ResetSuccessfulComponent,
     SignupSuccessfulComponent,
     AppFilterPipe,
-    ArrayFilterPipe,
+    // ArrayFilterPipe,
     ArrayFormatterPipe,
     SearchPipe,
     KeysPipe,
@@ -111,45 +115,46 @@ import { SliderContainerComponent } from './components/slider-container/slider-c
     SliderContainerComponent
   ],
   imports: [
-    BrowserModule,
+    // BrowserModule,
+    SharedModule,
     HammerModule,
     CommonModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatSidenavModule,
+    // MatSidenavModule,
     MatGridListModule,
-    MatIconModule,
-    FormsModule,
+    // MatIconModule,
+    // FormsModule,
     MatDatepickerModule,
-    MatNativeDateModule,
+    // MatNativeDateModule,
     MatCheckboxModule,
-    MatListModule,
+    // MatListModule,
     // MatMenuModule,
-    MatSelectModule,
-    MatInputModule,
+    // MatSelectModule,
+    // MatInputModule,
     MatTabsModule,
     MatTableModule,
     MatSortModule,
     AuthModule,
+    // DashboardModule
   ],
   providers: [
     AmplifyService,
-    UserStoreService,
-    { provide: ErrorStateMatcher, useClass: OnDirtyErrorStateMatcher },
+    // UserStoreService,
+    // DataManagerService,
+    // { provide: ErrorStateMatcher, useClass: OnDirtyErrorStateMatcher },
     AppFilterPipe,
-    ArrayFilterPipe,
+    // ArrayFilterPipe,
     ArrayFormatterPipe,
     SearchPipe,
     KeysPipe,
   ],
   bootstrap: [AppComponent],
-  entryComponents: [
-    RectItemComponent,
-  ],
+  // entryComponents: [
+  //   RectItemComponent,
+  // ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
   ]
 })
-export class AppModule {
-
-}
+export class AppModule { }

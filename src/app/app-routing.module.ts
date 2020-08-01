@@ -25,7 +25,8 @@ import { WishlistWrapperComponent } from './views/wishlist/wishlist-wrapper.comp
 const routes: Routes = [
   { path: "", canActivate: [AuthGuard], component: AppWrapperComponent,
     children: [
-      { path: "", component: DashboardComponent },
+      { path: "", loadChildren: () => import('src/app/views/dashboard/dashboard.module').then(m => m.DashboardModule) },
+      // { path: "", component: DashboardComponent },
       {
         path: "journeys",
         component: JourneysComponent,
