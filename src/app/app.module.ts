@@ -25,16 +25,16 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 
 import { DashboardComponent } from './views/dashboard/dashboard.component';
-import { JourneysComponent } from './views/journeys/journeys.component';
+// import { JourneysComponent } from './views/journeys/journeys.component';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { SettingsComponent } from './views/settings/settings.component';
 import { RectItemComponent } from './components/rect-item/rect-item.component';
 import { JourneyInputComponent } from './components/journey-input/journey-input.component';
-import { JourneyViewComponent } from './views/journey-view/journey-view.component';
-import { ApplicationListComponent } from './views/journey-view/application-list.component';
+// import { JourneyViewComponent } from './views/journey-view/journey-view.component';
+// import { ApplicationListComponent } from './views/journey-view/application-list.component';
 import { UserStoreService } from './models/user-store.service';
-import { JourneyListComponent } from './views/journey-list/journey-list.component';
+// import { JourneyListComponent } from './views/journey-list/journey-list.component';
 import { ApplicationInputComponent } from './components/application-input/application-input.component';
 import { SearchComponent } from './views/search/search.component';
 import { ConfirmSignupComponent } from './auth/confirm-signup/confirm-signup.component';
@@ -68,20 +68,21 @@ import { OverflowWrapperComponent } from './components/overflow-wrapper/overflow
 import { SliderContainerComponent } from './components/slider-container/slider-container.component';
 import { DataManagerService } from './controllers/data-manager.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 // import { DashboardModule } from './dashboard/dashboard.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     // DashboardComponent,
-    JourneysComponent,
+    // JourneysComponent,
     SignInComponent,
     SignUpComponent,
     SettingsComponent,
-    RectItemComponent,
-    JourneyInputComponent,
-    JourneyViewComponent,
-    JourneyListComponent,
+    // RectItemComponent,
+    // JourneyInputComponent,
+    // JourneyViewComponent,
+    // JourneyListComponent,
     ApplicationInputComponent,
     SearchComponent,
     ConfirmSignupComponent,
@@ -96,23 +97,23 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NewPasswordComponent,
     ResetSuccessfulComponent,
     SignupSuccessfulComponent,
-    AppFilterPipe,
+    // AppFilterPipe,
     // ArrayFilterPipe,
-    ArrayFormatterPipe,
+    // ArrayFormatterPipe,
     SearchPipe,
     KeysPipe,
     WishlistComponent,
-    ApplicationListComponent,
-    OverlayComponent,
+    // ApplicationListComponent,
+    // OverlayComponent,
     ProfileSettingsComponent,
     PreferenceSettingsComponent,
-    BreadcrumbsComponent,
-    ApplicationViewComponent,
-    TimelineComponent,
-    TimelineTooltipComponent,
+    // BreadcrumbsComponent,
+    // ApplicationViewComponent,
+    // TimelineComponent,
+    // TimelineTooltipComponent,
     WishlistWrapperComponent,
     OverflowWrapperComponent,
-    SliderContainerComponent
+    // SliderContainerComponent
   ],
   imports: [
     // BrowserModule,
@@ -121,20 +122,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CommonModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    // FormsModule,
     // MatSidenavModule,
     MatGridListModule,
     // MatIconModule,
     // FormsModule,
     MatDatepickerModule,
     // MatNativeDateModule,
-    MatCheckboxModule,
+    // MatCheckboxModule,
     // MatListModule,
     // MatMenuModule,
     // MatSelectModule,
     // MatInputModule,
     MatTabsModule,
-    MatTableModule,
-    MatSortModule,
+    // MatTableModule,
+    // MatSortModule,
     AuthModule,
     // DashboardModule
   ],
@@ -143,9 +145,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     // UserStoreService,
     // DataManagerService,
     // { provide: ErrorStateMatcher, useClass: OnDirtyErrorStateMatcher },
-    AppFilterPipe,
+    // AppFilterPipe,
     // ArrayFilterPipe,
-    ArrayFormatterPipe,
+    // ArrayFormatterPipe,
     SearchPipe,
     KeysPipe,
   ],

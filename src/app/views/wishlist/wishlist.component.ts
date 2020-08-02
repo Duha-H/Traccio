@@ -26,4 +26,7 @@ export class WishlistComponent implements OnInit {
     this.router.navigate(['/wishlist', app.id]);
   }
 
+  addApplication() {
+    // this.router.navigate(['/journeys/'])
+  }
 }

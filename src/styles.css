@@ -118,7 +118,10 @@ p.warning-text {
   white-space: pre-wrap;
 }
 
+app-sign-in,
 app-journeys,
+app-journey-list,
+app-journey-view,
 app-dashboard,
 app-search,
 app-wishlist,

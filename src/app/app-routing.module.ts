@@ -14,28 +14,25 @@ import { ConfirmSignupComponent } from "./auth/confirm-signup/confirm-signup.com
 import { JourneysComponent } from "./views/journeys/journeys.component";
 import { SettingsComponent } from "./views/settings/settings.component";
 import { SearchComponent } from "./views/search/search.component";
-import { JourneyViewComponent } from "./views/journey-view/journey-view.component";
-import { JourneyListComponent } from "./views/journey-list/journey-list.component";
+// import { JourneyViewComponent } from "./views/journey-view/journey-view.component";
+// import { JourneyListComponent } from "./views/journey-list/journey-list.component";
 import { AppWrapperComponent } from './views/app-wrapper/app-wrapper.component';
 import { AccountRecoveryComponent } from './auth/account-recovery/account-recovery.component';
 import { WishlistComponent } from './views/wishlist/wishlist.component';
 import { ApplicationViewComponent } from './views/application-view/application-view.component';
 import { WishlistWrapperComponent } from './views/wishlist/wishlist-wrapper.component';
+import { JourneysModule } from './views/journeys/journeys.module';
 
 const routes: Routes = [
   { path: "", canActivate: [AuthGuard], component: AppWrapperComponent,
     children: [
-      { path: "", loadChildren: () => import('src/app/views/dashboard/dashboard.module').then(m => m.DashboardModule) },
+      { path: "",
+        loadChildren: () => import('src/app/views/dashboard/dashboard.module').then(m => m.DashboardModule)
+      },
       // { path: "", component: DashboardComponent },
       {
         path: "journeys",
-        component: JourneysComponent,
-        canActivate: [AuthGuard],
-        children: [
-          { path: "", component: JourneyListComponent },
-          { path: ":id", component: JourneyViewComponent, data: { appref: '' } },
-          { path: ":id/:appref", component: ApplicationViewComponent },
-        ],
+        loadChildren: () => import('src/app/views/journeys/journeys.module').then(m => m.JourneysModule)
       },
       {
         path: "wishlist",
