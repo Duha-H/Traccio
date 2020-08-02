@@ -3,8 +3,8 @@ import { Auth } from "aws-amplify";
 import { UserStoreService } from "src/app/models/user-store.service";
 import { Router } from "@angular/router";
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { DropdownItem } from 'src/app/components/types';
-import { TextFieldComponent } from 'src/app/components/text-field/text-field.component';
+import { DropdownItem } from 'src/app/shared-components/types';
+import { TextFieldComponent } from 'src/app/shared-components/text-field/text-field.component';
 import { PreferencesStoreService } from 'src/app/controllers/preferences-store.service';
 import { ResizeService } from 'src/app/controllers/resize.service';
 

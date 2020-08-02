@@ -1,0 +1,47 @@
+div.container.spanning-content {
+  width: 100%;
+  font-size: 10pt;
+  height: 1.5em;
+  display: flex;
+  flex-direction: row;
+  margin-left: 25px;
+  margin-bottom: 15px;
+}
+
+div.breadcrumb-item {
+  height: 1.5em;
+  display: flex;
+  flex-direction: row;
+}
+
+.breadcrumb-item mat-icon {
+  height: 1em;
+  color: var(--titles-secondary);
+  margin: 0 auto;
+}
+
+.breadcrumb-text {
+  line-height: 1em;
+  color: var(--titles-secondary);
+  padding: 0;
+}
+
+a.breadcrumb-text {
+  color: #1976d2;
+  text-decoration: none;
+  margin: auto;
+  font-size: 10pt;
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  div.container.spanning-content {
+    margin-bottom: 5px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  div.container.spanning-content {
+    margin-left: 15px;
+  }
+}

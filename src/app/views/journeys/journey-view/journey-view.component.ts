@@ -16,7 +16,7 @@ import { MatSelect } from "@angular/material/select";
 import { MatOptionSelectionChange, MatOption } from "@angular/material/core";
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { ApplicationListComponent } from './application-list.component';
-import { BreadcrumbsData } from 'src/app/components/types';
+import { BreadcrumbsData } from 'src/app/shared-components/types';
 import { ResizeService } from 'src/app/controllers/resize.service';
 
 const DRAWER_MODES = {

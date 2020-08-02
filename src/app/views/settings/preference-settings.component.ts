@@ -5,7 +5,7 @@ import { ThemeManagerService } from 'src/app/controllers/theme-manager.service';
 import { THEMES, PALETTES } from 'src/styling/palettes';
 import { Response } from 'src/app/utils/response';
 import { KeyValue } from '@angular/common';
-import { TextFieldComponent } from 'src/app/components/text-field/text-field.component';
+import { TextFieldComponent } from 'src/app/shared-components/text-field/text-field.component';
 
 @Component({
   selector: 'settings-preferences',

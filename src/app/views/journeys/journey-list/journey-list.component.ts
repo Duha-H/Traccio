@@ -4,7 +4,7 @@ import { Journey } from "src/app/models/journey";
 import { Router } from "@angular/router";
 import { Observable } from 'rxjs/Observable';
 import { ResizeService } from 'src/app/controllers/resize.service';
-import { SliderContainerComponent } from 'src/app/components/slider-container/slider-container.component';
+import { SliderContainerComponent } from 'src/app/shared-components/slider-container/slider-container.component';
 
 @Component({
   selector: "app-journey-list",

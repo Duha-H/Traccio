@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter, ElementRef } from '@angular/core';
 import { STATE_ATTRIBS } from 'src/app/controllers/app-state-store.service';
-import { TextFieldComponent } from 'src/app/components/text-field/text-field.component';
+import { TextFieldComponent } from 'src/app/shared-components/text-field/text-field.component';
 import { Response } from 'src/app/utils/response';
 import { User } from 'src/app/models/user';
 import { UserStoreService } from 'src/app/models/user-store.service';
