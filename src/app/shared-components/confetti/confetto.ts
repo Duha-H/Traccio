@@ -14,8 +14,8 @@ interface Color {
   side2: string;
 }
 
-const CONFETTO_WIDTH = 15;
-const CONFETTO_HEIGHT = 30;
+const CONFETTO_WIDTH = 25;
+const CONFETTO_HEIGHT = 40;
 
 export class Confetto {
 
@@ -30,7 +30,7 @@ export class Confetto {
   };
   firingVelocity: ValuePair = {
     x: 0,
-    y: utils.randomNumberInRange(70, 130)
+    y: utils.randomNumberInRange(150, 230)
   };
   scale = {
     x: 1,

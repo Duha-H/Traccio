@@ -49,6 +49,7 @@ export class ApplicationViewComponent implements OnInit {
   wishlistApp = true; // true if application in current view is a wishlist application
   newApp = true; // true if application in current view is being added
   displayAddOverlay = false;
+  statusUpdated = false;
 
   @ViewChild('timeline', { static: false }) timeline: TimelineComponent;
   @ViewChild('notesTextArea', { static: true }) notesTextArea: ElementRef<any>;
@@ -121,6 +122,7 @@ export class ApplicationViewComponent implements OnInit {
       if (attrib === this.ATTRIBS.STATUS) {
         this.currApplicationDetails.status = value; // handles adding the new status to the application's timeline
         this.timeline.draw(); // trigger timeline re-draw
+        this.statusUpdated = true;
       } else {
         this.currApplicationDetails[attrib] = value;
       }
@@ -138,8 +140,11 @@ export class ApplicationViewComponent implements OnInit {
       this.userStore.updateExistingApplication(this.journeyid, this.currApplicationDetails);
     }
     this.detailsUpdated = false;
-    if (this.currApplicationDetails.status === STATUS.OFFER) {
-      this.confetti.draw();
+    if (this.statusUpdated && this.currApplicationDetails.status === STATUS.OFFER) {
+      setTimeout(() => {
+        this.confetti.draw();
+      }, 800);
+      this.statusUpdated = false;
     }
   }
 

@@ -28,7 +28,7 @@ export class ConfettiComponent implements OnInit {
       this.props = Object.assign({}, DEFAULT_PROPS, this.props);
     }
     this.props.colors.forEach(color => {
-      this.darkerColors.push(utils.shadeHexColor(color, 15));
+      this.darkerColors.push(utils.shadeHexColor(color, -30));
     });
     this.ctx = this.canvas.nativeElement.getContext('2d');
     this.canvas.nativeElement.width = window.innerWidth * window.devicePixelRatio;
@@ -49,14 +49,14 @@ export class ConfettiComponent implements OnInit {
         },
         utils.randomNumberInRange(0, 2 * Math.PI),
         {
-          x: utils.randomNumberInRange(15, 30),
-          y: utils.randomNumberInRange(10, 25)
+          x: utils.randomNumberInRange(30, 50),
+          y: utils.randomNumberInRange(25, 40), // 25, 40
         },
         {
           side1: this.props.colors[i % colorCount],
           side2: this.darkerColors[i % colorCount],
         },
-        utils.randomNumberInRange(10, this.canvasHeight / 4),
+        utils.randomNumberInRange(10, this.canvasHeight / 5),
       ));
     }
   }
@@ -65,17 +65,18 @@ export class ConfettiComponent implements OnInit {
     this.ctx.clearRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
 
     this.confetti.forEach((confetto, index) => {
-      confetto.scale.y = Math.cos(confetto.position.y * 0.3);
-      // console.log(0.0005 * this.canvasHeight, this.ctx.globalAlpha);
-      this.ctx.fillStyle = confetto.scale.y > 0 ? confetto.color.side1 : confetto.color.side2;
+      confetto.scale.y = Math.cos(confetto.position.y * 0.8);
+      this.ctx.fillStyle = confetto.color.side1;
       // apply confetto transformations
       this.ctx.translate(confetto.position.x, confetto.position.y);
       this.ctx.rotate(confetto.rotation);
+      if (confetto.falling) {
+        this.ctx.scale(1, confetto.scale.y);
+      }
       // draw confetto
-      this.ctx.fillRect(0, 0, CONFETTO_WIDTH, CONFETTO_HEIGHT);
+      this.ctx.fillRect(-CONFETTO_WIDTH / 2, -CONFETTO_HEIGHT / 2, CONFETTO_WIDTH, CONFETTO_HEIGHT);
       // undo confetto transformations
-      this.ctx.rotate(-confetto.rotation);
-      this.ctx.translate(-confetto.position.x, -confetto.position.y);
+      this.ctx.setTransform(1, 0, 0, 1, 0, 0);
 
       if (confetto.falling && !confetto.inFrame(this.canvasWidth, this.canvasHeight)) { // if out of frame, remove from confetti array
         this.confetti.splice(index, 1);
@@ -84,10 +85,9 @@ export class ConfettiComponent implements OnInit {
           confetto.falling = true;
         }
         if (confetto.falling) {
-          confetto.position.x += Math.random() > 0.5 ? confetto.velocity.x : -confetto.velocity.x;
-          confetto.position.y += confetto.velocity.y;
+          confetto.position.y += confetto.velocity.y * (confetto.position.y / this.canvasHeight) + 10;
         } else {
-          confetto.position.y -= confetto.firingVelocity.y * (confetto.position.y / this.canvasHeight) + 5;
+          confetto.position.y -= confetto.firingVelocity.y * (confetto.position.y / this.canvasHeight) + 2;
         }
       }
     });
@@ -119,7 +119,7 @@ export class ConfettiComponent implements OnInit {
 const DEFAULT_PROPS: ConfettiPropType = {
   colors: ['#E76F51', '#F4A261', '#E9C46A', '#2A9D8F', '#264653', '#A6A8A8'],
   animDuration: 5000,
-  count: 50,
+  count: 70,
 };
-const CONFETTO_WIDTH = 20;
+const CONFETTO_WIDTH = 25;
 const CONFETTO_HEIGHT = 40;

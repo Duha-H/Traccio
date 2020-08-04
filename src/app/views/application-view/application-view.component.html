@@ -1,6 +1,6 @@
 <breadcrumbs [data]="breadcrumbsData"></breadcrumbs>
 <div class="view-container">
-  <confetti [props]="{ colors: (prefStore.preferences | async).colorPalette.colors }"></confetti>
+  <confetti [props]="{ colors: (prefStore.preferences | async).colorPalette.colors, count: 100 }"></confetti>
 
   <div class="spanning-content">
     <h2>Application Details</h2>
