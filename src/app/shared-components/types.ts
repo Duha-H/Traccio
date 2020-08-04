@@ -34,3 +34,9 @@ export interface TimelineTooltipPropType {
   text?: string;
   color?: string;
 }
+
+export interface ConfettiPropType {
+  colors: string[];
+  count?: number;  // number of confetti particles?
+  animDuration?: number; // animation duration in ms
+}

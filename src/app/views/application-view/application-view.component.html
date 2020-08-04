@@ -1,5 +1,7 @@
 <breadcrumbs [data]="breadcrumbsData"></breadcrumbs>
 <div class="view-container">
+  <confetti [props]="{ colors: (prefStore.preferences | async).colorPalette.colors }"></confetti>
+
   <div class="spanning-content">
     <h2>Application Details</h2>
     <div class="spacer"></div>

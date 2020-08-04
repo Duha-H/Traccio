@@ -8,6 +8,8 @@ import { STATUS_COLORS, STATUS, APP_SOURCE, APP_ATTRIBS, REQUIRED_APP_ATTRIBS } 
 import { KeyValue } from '@angular/common';
 import { Journey } from 'src/app/models/journey';
 import { ResizeService } from 'src/app/controllers/resize.service';
+import { PreferencesStoreService } from 'src/app/controllers/preferences-store.service';
+import { ConfettiComponent } from 'src/app/shared-components/confetti/confetti.component';
 
 @Component({
   selector: 'app-application-view',
@@ -50,12 +52,14 @@ export class ApplicationViewComponent implements OnInit {
 
   @ViewChild('timeline', { static: false }) timeline: TimelineComponent;
   @ViewChild('notesTextArea', { static: true }) notesTextArea: ElementRef<any>;
+  @ViewChild(ConfettiComponent) confetti: ConfettiComponent;
 
   constructor(
     private route: ActivatedRoute,
     private userStore: UserStoreService,
     private router: Router,
     public rs: ResizeService,
+    public prefStore: PreferencesStoreService,
   ) { }
 
   ngOnInit() {
@@ -134,6 +138,9 @@ export class ApplicationViewComponent implements OnInit {
       this.userStore.updateExistingApplication(this.journeyid, this.currApplicationDetails);
     }
     this.detailsUpdated = false;
+    if (this.currApplicationDetails.status === STATUS.OFFER) {
+      this.confetti.draw();
+    }
   }
 
   cancelChanges() {
