@@ -22,11 +22,10 @@ export class WishlistComponent implements OnInit {
   }
 
   selectApplication(app: Application) {
-    console.log('clicked?', app);
     this.router.navigate(['/wishlist', app.id]);
   }
 
   addApplication() {
-    // this.router.navigate(['/journeys/'])
+    this.router.navigate(['/wishlist', 'new-app']);
   }
 }

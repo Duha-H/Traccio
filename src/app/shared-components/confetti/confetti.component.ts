@@ -35,7 +35,7 @@ export class ConfettiComponent implements OnInit {
     this.canvas.nativeElement.height = window.innerHeight * window.devicePixelRatio;
     this.canvasWidth = this.canvas.nativeElement.width;
     this.canvasHeight = this.canvas.nativeElement.height;
-    window.addEventListener('keydown', (event) => this.keyboardHandler(event));
+    // window.addEventListener('keydown', (event) => this.keyboardHandler(event));
     this.initConfetti();
   }
 

@@ -16,7 +16,7 @@
       <mat-icon [inline]="true" aria-hidden="false" aria-label="Add to journey icon">add</mat-icon>
     </button>
     <button *ngIf="newApp || wishlistApp" class="save-btn" (click)="cancelChanges()">
-      <p>Cancel</p>
+      <p style="margin-right: 0;">Cancel</p>
     </button>
   </div>
 
@@ -94,9 +94,14 @@
 
 </div>
 
-<app-overlay *ngIf="displayAddOverlay" (closeOverlay)="displayAddOverlay=false">
+<app-overlay *ngIf="displayAddOverlay" (closeOverlay)="displayAddOverlay=false" [title]="'Add to journey:'">
   <div class="overlay-content">
-    <p>Add to journey:</p>
-    <button class="submit-button">Add</button>
+    <ul class="journey-list">
+      <li *ngFor="let journey of userStore.activeJourneys | async">
+        <input type="radio" name="journey" id="{{journey.id}}" [value]="journey" (change)="selectedJourney=journey">
+        <label for="journey">{{ journey.title }}</label>
+      </li>
+    </ul>
+    <button class="submit-button" (click)="addApplicationToJourney(selectedJourney.id)">Add</button>
   </div>
 </app-overlay>

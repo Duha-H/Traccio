@@ -236,6 +236,31 @@ div.info-item {
   background: none;
 }
 
+ul.journey-list {
+  padding: 15px;
+  text-align: left;
+  list-style: none;
+  margin: 2em 0;
+}
+
+.journey-list li {
+  padding: 10px 0;
+  display: flex;
+}
+
+.journey-list li label {
+  color: var(--titles-secondary);
+  font-size: 1.125em;
+  margin-left: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+app-overlay button.submit-button {
+  margin: 0;
+}
+
 ::ng-deep .position-info .mat-form-field-flex {
   align-items: center;
   /* margin-top: 5px; */

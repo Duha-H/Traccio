@@ -31,6 +31,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   statuses = [
     {value: '', viewValue: 'All Statuses'},
     {value: STATUS.IN_REVIEW.toString(), viewValue: STATUS.IN_REVIEW.toString()},
+    {value: STATUS.ASSESSMENT.toString(), viewValue: STATUS.ASSESSMENT.toString()},
     {value: STATUS.INTERVIEW.toString(), viewValue: STATUS.INTERVIEW.toString()},
     {value: STATUS.OFFER.toString(), viewValue: STATUS.OFFER.toString()},
     {value: STATUS.REJECTED.toString(), viewValue: STATUS.REJECTED.toString()},
@@ -41,14 +42,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   pieChartPalette = ['#AC98FB', '#6E89F8', '#81BEFA', '#C1E0F8', '#D1C3EB'];
   calendarPalette = ['#AC98FB', '#6E89F8', '#81BEFA', '#C1E0F8', '#D1C3EB'];
   lineChartMode: 'week' | 'month' | 'year' = 'week';
-  // axisValues: { [key: string]: AxisValues } = {
-  //   week: { x: [], y: [] },
-  //   month: { x: [], y: [] },
-  //   year: { x: [], y: [] },
-  // };
-  // weekAxis = [];
-  // monthAxis = [];
-  // yearAxis = [];
   journeySub: Subscription;
   prefSub: Subscription;
 

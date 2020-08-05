@@ -10,6 +10,7 @@ import { Journey } from 'src/app/models/journey';
 import { ResizeService } from 'src/app/controllers/resize.service';
 import { PreferencesStoreService } from 'src/app/controllers/preferences-store.service';
 import { ConfettiComponent } from 'src/app/shared-components/confetti/confetti.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-application-view',
@@ -50,6 +51,9 @@ export class ApplicationViewComponent implements OnInit {
   newApp = true; // true if application in current view is being added
   displayAddOverlay = false;
   statusUpdated = false;
+  activeJourneys: Journey[] = [];
+  activeJourneySub: Subscription = new Subscription();
+  selectedJourney: Journey;
 
   @ViewChild('timeline', { static: false }) timeline: TimelineComponent;
   @ViewChild('notesTextArea', { static: true }) notesTextArea: ElementRef<any>;
@@ -57,7 +61,7 @@ export class ApplicationViewComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private userStore: UserStoreService,
+    public userStore: UserStoreService,
     private router: Router,
     public rs: ResizeService,
     public prefStore: PreferencesStoreService,
@@ -78,7 +82,10 @@ export class ApplicationViewComponent implements OnInit {
       }
     });
     if (this.wishlistApp) {
-      this.inputApplication = this.userStore.getWishlistApplication(+appid);
+      this.inputApplication = appid === 'new-app' ? new Application() : this.userStore.getWishlistApplication(+appid);
+      this.activeJourneySub = this.userStore.activeJourneys.subscribe(journeys => {
+        this.activeJourneys = journeys;
+      });
     } else if (this.newApp) {
       this.inputApplication = new Application();
     } else {
@@ -117,6 +124,10 @@ export class ApplicationViewComponent implements OnInit {
     this.notesTextArea.nativeElement.addEventListener('keydown', (event) => this.keyboardHandler(event));
   }
 
+  ngOnDestroy() {
+    this.activeJourneySub.unsubscribe();
+  }
+
   updateField(attrib: string, value: string) {
     if (this.currApplicationDetails[attrib] !== undefined) { // value can be empty string
       if (attrib === this.ATTRIBS.STATUS) {
@@ -131,14 +142,18 @@ export class ApplicationViewComponent implements OnInit {
   }
 
   saveChanges() {
-    if (this.wishlistApp) {
+    if (this.wishlistApp && this.newApp) { // new wishlist application
+      this.currApplicationDetails = this.userStore.addNewWishlistApplication(this.currApplicationDetails);
+      this.router.navigate(['/wishlist', this.currApplicationDetails.id]);
+    } else if (this.wishlistApp && !this.newApp) { // existing wishlist application
       this.userStore.updateWishlistApplication(this.currApplicationDetails);
-    } else if (this.newApp) {
+    } else if (this.newApp && !this.wishlistApp) { // completely new application
       const newApp = this.userStore.addNewApplication(this.journeyid, this.currApplicationDetails);
       this.router.navigate(['/journeys', this.journeyid, newApp.id]);
-    } else {
+    } else { // existing application
       this.userStore.updateExistingApplication(this.journeyid, this.currApplicationDetails);
     }
+
     this.detailsUpdated = false;
     if (this.statusUpdated && this.currApplicationDetails.status === STATUS.OFFER) {
       setTimeout(() => {
@@ -161,8 +176,19 @@ export class ApplicationViewComponent implements OnInit {
     this.displayAddOverlay = true;
   }
 
-  addApplicationToJourney(journey: Journey) {
-    this.userStore.addNewApplication(journey.id, this.currApplicationDetails);
+  addApplicationToJourney(journeyid: string) {
+    if (!journeyid) {
+      console.log('ApplicationView: trying to add to journey with invalid id:', journeyid);
+      return;
+    }
+    // add appliaction to journey
+    const result = this.userStore.addNewApplication(journeyid, this.currApplicationDetails);
+    if (result) {
+      // if successfully added, remove application from wishlist
+      this.userStore.removeWishlistApplication(this.currApplicationDetails.id);
+      this.router.navigate(['/journeys', journeyid, result.id]);
+      // probably trigger some sort of success message later on
+    }
   }
 
   /**

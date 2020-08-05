@@ -237,6 +237,10 @@ export class UserStoreService {
 
   addNewApplication(journeyId: string, appData: ApplicationInput | Application) {
     const journey = this.getJourney(journeyId);
+    if (!journey) {
+      console.log('UserStore: journey with id', journeyId, 'does not exist.');
+      return;
+    }
     const appID = this._getNewAppID(journeyId);
     appData.id = appID;
     let newApplication: Application;
@@ -273,10 +277,6 @@ export class UserStoreService {
     this.updateJourneyData(); // data updated, bubble .next() it to all observables
   }
 
-  updateWishlistApplication(updatedApplication: Application) {
-    
-  }
-
   removeApplication(journeyid: string, appid: number) {
     const journey = this.getJourney(journeyid);
     const remainingApps = journey.applications.filter((app) => {
@@ -288,6 +288,33 @@ export class UserStoreService {
     );
     journey.applications = remainingApps;
     this.updateJourneyData(); // data updated, bubble .next() it to all observables
+  }
+
+  addNewWishlistApplication(appData: Application | ApplicationInput) {
+    const appID = this._getNewAppID();
+    appData.id = appID;
+    let newApplication: Application;
+    if (appData instanceof Application) {
+      newApplication = appData;
+    } else {
+      newApplication = new Application(appData);
+    }
+    const updatedWishlist = this._wishlistApps.getValue();
+    updatedWishlist.push(newApplication);
+    this._wishlistApps.next(updatedWishlist);
+    return newApplication;
+  }
+
+  updateWishlistApplication(updatedApplication: Application) {
+    const updatedWishlist = this._wishlistApps.getValue().map(app => {
+      return app.id === updatedApplication.id ? updatedApplication : app;
+    });
+    this._wishlistApps.next(updatedWishlist);
+  }
+
+  removeWishlistApplication(appid: number) {
+    const updatedWishlistApps = this._wishlistApps.getValue().filter(app => app.id !== appid);
+    this._wishlistApps.next(updatedWishlistApps);
   }
 
   /**
@@ -312,8 +339,8 @@ export class UserStoreService {
     return newID;
   }
 
-  private _getNewAppID(journeyId: string): number {
-    const apps = this.getJourney(journeyId).applications;
+  private _getNewAppID(journeyId?: string): number {
+    const apps = journeyId ? this.getJourney(journeyId).applications : this._wishlistApps.getValue();
     let maxID = apps.length;
     apps.forEach((element) => {
       if (element.id >= maxID) {
