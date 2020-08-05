@@ -253,6 +253,15 @@ button.add-btn:disabled mat-icon, button.add-btn:disabled p {
   line-height: 30px;
 }
 
+.title p#journey-title {
+  font-weight: 400;
+  color: var(--accent);
+  font-size: 1.5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 button {
   cursor: pointer;
   border: none;

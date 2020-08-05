@@ -3,7 +3,7 @@
   <div class="main-content">
       <div class="details">
         <div class="title spanning-content">
-          <p style="font-weight: 400; color: var(--accent); font-size: 1.5em;">{{journey.title}} details</p>
+          <p id="journey-title" style="">{{journey.title}} details</p>
           <div class="spacer"></div>
           <button class="add-btn" title="Add application" (click)="addApplication()" [disabled]="viewMode != 'view' || !journey.active">
             <p *ngIf="!(rs.tabletSize$ | async)">New Application</p>

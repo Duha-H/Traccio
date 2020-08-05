@@ -24,6 +24,10 @@ div.breadcrumb-item {
   line-height: 1em;
   color: var(--titles-secondary);
   padding: 0;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 a.breadcrumb-text {
