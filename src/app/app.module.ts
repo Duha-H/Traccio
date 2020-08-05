@@ -54,10 +54,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SignupSuccessfulComponent,
     SearchPipe,
     KeysPipe,
-    WishlistComponent,
+    // WishlistComponent,
     ProfileSettingsComponent,
     PreferenceSettingsComponent,
-    WishlistWrapperComponent,
+    // WishlistWrapperComponent,
     OverflowWrapperComponent,
   ],
   imports: [

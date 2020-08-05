@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-wishlist-wrapper',
-  template: '<router-outlet></router-outlet>'
+  template: ''
 })
 export class WishlistWrapperComponent implements OnInit {
 

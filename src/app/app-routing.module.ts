@@ -36,13 +36,7 @@ const routes: Routes = [
       },
       {
         path: "wishlist",
-        component: WishlistWrapperComponent,
-        canActivate: [AuthGuard],
-        children: [
-          { path: "", component: WishlistComponent },
-          { path: ":appref", component: ApplicationViewComponent },
-          { path: "new-app", component: ApplicationViewComponent },
-        ]
+        loadChildren: () => import('src/app/views/wishlist/wishlist.module').then(m => m.WishlistModule)
       },
       { path: "settings", component: SettingsComponent, canActivate: [AuthGuard] },
     ]
