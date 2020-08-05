@@ -51,8 +51,6 @@ export class ApplicationViewComponent implements OnInit {
   newApp = true; // true if application in current view is being added
   displayAddOverlay = false;
   statusUpdated = false;
-  activeJourneys: Journey[] = [];
-  activeJourneySub: Subscription = new Subscription();
   selectedJourney: Journey;
 
   @ViewChild('timeline', { static: false }) timeline: TimelineComponent;
@@ -83,9 +81,6 @@ export class ApplicationViewComponent implements OnInit {
     });
     if (this.wishlistApp) {
       this.inputApplication = appid === 'new-app' ? new Application() : this.userStore.getWishlistApplication(+appid);
-      this.activeJourneySub = this.userStore.activeJourneys.subscribe(journeys => {
-        this.activeJourneys = journeys;
-      });
     } else if (this.newApp) {
       this.inputApplication = new Application();
     } else {
@@ -122,10 +117,6 @@ export class ApplicationViewComponent implements OnInit {
     }
     // make textarea responsive to tab key press
     this.notesTextArea.nativeElement.addEventListener('keydown', (event) => this.keyboardHandler(event));
-  }
-
-  ngOnDestroy() {
-    this.activeJourneySub.unsubscribe();
   }
 
   updateField(attrib: string, value: string) {
@@ -165,10 +156,10 @@ export class ApplicationViewComponent implements OnInit {
 
   cancelChanges() {
     // navigates away from new-app view
-    if (this.newApp) {
-      this.router.navigate(['/journeys', this.journeyid]);
-    } else if (this.wishlistApp) {
+    if (this.wishlistApp) {
       this.router.navigate(['/wishlist']);
+    } else if (this.newApp) {
+      this.router.navigate(['/journeys', this.journeyid]);
     }
   }
 

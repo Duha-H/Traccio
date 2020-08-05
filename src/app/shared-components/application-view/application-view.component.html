@@ -34,7 +34,7 @@
     <div class="timeline">
       <timeline style="height: 100px;" [props]="timelineProps" #timeline></timeline>
       <div class="status">
-        <p class="label" *ngIf="(rs.tabletSize$ | async)">Status:</p>
+        <p class="label" *ngIf="(rs.tabletSize$ | async)">Status</p>
         <div class="spacer"></div>
         <mat-select class="status"
           style="color: {{STATUS_COLORS[currApplicationDetails.status]}}; border: 1.5px solid {{STATUS_COLORS[currApplicationDetails.status]}};"

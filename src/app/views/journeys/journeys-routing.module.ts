@@ -4,7 +4,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { JourneysComponent } from "./journeys.component";
 import { JourneyViewComponent } from "./journey-view/journey-view.component";
 import { JourneyListComponent } from "./journey-list/journey-list.component";
-import { ApplicationViewComponent } from '../application-view/application-view.component';
+import { ApplicationViewComponent } from 'src/app/shared-components/application-view/application-view.component';
 
 const routes: Routes = [
   { path: "", component: JourneyListComponent, },

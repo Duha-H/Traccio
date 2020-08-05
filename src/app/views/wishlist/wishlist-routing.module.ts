@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 // Views
-import { ApplicationViewComponent } from '../application-view/application-view.component';
+import { ApplicationViewComponent } from 'src/app/shared-components/application-view/application-view.component';
 import { WishlistComponent } from './wishlist.component';
 
 const routes: Routes = [

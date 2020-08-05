@@ -155,7 +155,6 @@ export class JourneyViewComponent implements OnInit {
         this.journey.id,
         +appref
       );
-      console.log(this.breadcrumbsData);
       if (appref && this.selectedApp) {
         this.displayDrawer = true;
       }

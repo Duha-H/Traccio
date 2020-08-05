@@ -1,0 +1,345 @@
+.view-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.spanning-content {
+  margin: 15px 20px;
+  /* border-bottom: 1px solid var(--text); */
+}
+
+button.save-btn {
+  border-radius: 5px;
+  background-color: var(--accent);
+  cursor: pointer;
+  text-align: center;
+  margin-left: 20px;
+  padding: 0px 15px;
+  display: flex;
+}
+
+.save-btn p {
+  margin: 0;
+  /* margin-right: 8px; */
+  text-align: center;
+  color: var(--text);
+  font-size: 1em;
+  line-height: 30px;
+}
+
+.save-btn mat-icon {
+  line-height: 30px;
+  color: var(--text);
+  font-weight: 500;
+  font-size: 16pt;
+  margin-left: 8px;
+}
+
+button.save-btn:hover:not(:disabled) p, button.save-btn:hover:not(:disabled) mat-icon { /** hover while not disabled */
+  color: var(--bg);
+}
+
+button.save-btn:disabled {
+  background-color: var(--disabled-bg);
+  border: 1px solid var(--disabled-bg);
+  opacity: 0.2;
+  cursor: default;
+}
+
+.block-title {
+  border-bottom: 0.8px solid var(--titles-secondary);
+  padding-bottom: 8px;
+  width: 100%;
+}
+
+.status-title p, .position-info p, .additional-info p {
+  font-weight: bolder;
+  margin: 0;
+  color: var(--titles-secondary);
+  text-align: left;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.status-info {
+  display: flex;
+  flex-direction: column;
+  vertical-align: middle;
+  align-items: center;
+  margin: 10px 20px;
+}
+
+.status {
+  margin: auto 0;
+  margin-left: 15px;
+  border-radius: 20px;
+  height: 30px;
+  line-height: 30px;
+  /* border: 1.5px solid var(--accent); */
+  /* cursor: pointer; */
+}
+
+.status mat-select {
+  margin-left: 0;
+}
+
+.status p {
+  color: var(--text);
+  font-size: 10pt;
+}
+
+::ng-deep .status .mat-select-arrow {
+  /* display: none; */
+  visibility: hidden;
+  width: 0;
+  margin: 0;
+  padding: 0;
+}
+
+div.timeline-legend {
+  display: flex;
+  text-align: right;
+  /* width: 100%; */
+}
+
+.timeline timeline {
+  width: 80%;
+}
+
+.timeline div.status {
+  width: 20%;
+}
+
+.status .label {
+  font-size: 11pt;
+  color: var(--titles-secondary);
+  text-align: left;
+  font-weight: 300;
+}
+
+.legend-item {
+  height: 10pt;
+  display: flex;
+  margin-right: 15px;
+}
+
+.legend-item p {
+  font-size: 9pt;
+  margin: 0;
+  margin-left: 10px;
+}
+
+.legend-item .legend-label {
+  width: 14px;
+  height: 14px;
+  line-height: 10pt;
+}
+
+.position-info, .date-info, .additional-info, .status-info {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 20px;
+  margin-bottom: 35px;
+}
+
+div.info-item {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.info-item text-field {
+  width: 50%;
+  /* margin-right: 10px; */
+}
+
+.form-element {
+  background-color: var(--element-bg-secondary);
+  border-radius: 5px;
+  margin-right: 0;
+  padding: 8px 0;
+  width: 100%;
+}
+
+.additional-info textarea#additional-info {
+  background-color: var(--element-bg-secondary);
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 11pt;
+  /* font-family: Roboto, 'Helvetica', sans-serif; */
+  font-family: Inter var, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  border: none;
+  color: var(--text);
+  margin: 20px 0;
+  resize: vertical;
+}
+
+.date-value, .source-value {
+  width: 50%;
+  line-height: 35px;
+  text-align: left;
+  /* margin-right: 15px; */
+}
+
+.date-value {
+  margin-right: 25px;
+}
+
+.date-value label, .source-value label {
+  font-size: 11pt;
+  color: var(--titles-secondary);
+  height: 11pt;
+  text-align: left;
+  margin-bottom: 10px;
+  font-weight: 300;
+}
+
+::ng-deep .source-value .mat-select {
+  line-height: 20px;
+}
+
+::ng-deep .position-info .mat-form-field-wrapper, ::ng-deep .position-info .mat-form-field-infix, ::ng-deep .position-info .mat-select-trigger {
+  border-top: none;
+  height: 100%;
+  padding-bottom: 0;
+}
+
+::ng-deep .position-info .mat-form-field-appearance-legacy .mat-form-field-underline, ::ng-deep .position-info .mat-form-field-appearance-legacy .mat-form-field-underline .mat-form-field-ripple {
+  background-color: transparent;
+  height: 0;
+}
+
+::ng-deep .position-info .mat-form-field-infix {
+  padding: 0;
+  padding-left: 10px;
+}
+
+::ng-deep .position-info .mat-form-field-suffix, ::ng-deep .position-info .mat-select-arrow-wrapper {
+  padding-right: 10px;
+}
+
+::ng-deep .position-info .mat-form-field-suffix button.mat-icon-button {
+  vertical-align: bottom;
+}
+
+::ng-deep .position-info .mat-form-field-appearance-legacy .mat-form-field-suffix .mat-icon-button mat-icon.mat-icon {
+  font-size: 18pt;
+  height: auto;
+  line-height: auto;
+}
+
+::ng-deep .position-info .mat-form-field-disabled .mat-form-field-underline {
+  background: none;
+}
+
+ul.journey-list {
+  padding: 15px;
+  text-align: left;
+  list-style: none;
+  margin: 2em 0;
+}
+
+.journey-list li {
+  padding: 10px 0;
+  display: flex;
+}
+
+.journey-list li label {
+  color: var(--titles-secondary);
+  font-size: 1.125em;
+  margin-left: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+app-overlay button.submit-button {
+  margin: 0;
+}
+
+::ng-deep .position-info .mat-form-field-flex {
+  align-items: center;
+  /* margin-top: 5px; */
+}
+
+@media screen and (max-width: 768px) {
+  div.timeline-legend {
+    flex-direction: column;
+    display: none;
+  }
+
+  .status-info {
+    margin-bottom: 25px;
+  }
+
+  .timeline {
+    flex-direction: column;
+  }
+
+  .timeline timeline {
+    width: 100%;
+  }
+
+  .timeline div.status {
+    /* width: auto; */
+    width: 100%;
+    height: auto;
+    margin-left: 0;
+    display: flex;
+    flex-direction: row;
+  }
+
+  div.status mat-select {
+    width: 150px;
+  }
+
+  div.info-item {
+    flex-direction: column;
+    margin: 0;
+  }
+
+  .info-item text-field {
+    width: 100%;
+  }
+
+  .date-value, .source-value {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .value {
+    margin: 10px 0;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  div.view-container {
+    padding: 0 15px;
+  }
+
+  .spanning-content {
+    margin: 15px 0;
+  }
+
+  .position-info, .date-info, .additional-info, .status-info {
+    margin: 10px 0;
+  }
+
+  button.save-btn {
+    padding: 0 5px;
+    margin-left: 10px;
+  }
+
+  .save-btn p {
+    margin: 0 8px;
+  }
+
+  .save-btn mat-icon {
+    margin: 0;
+  }
+}

@@ -18,7 +18,7 @@ import { KeysPipe } from './views/search/keys-pipe.pipe';
 import { OverlayComponent } from './shared-components/overlay/overlay.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { BreadcrumbsComponent } from './shared-components/breadcrumbs/breadcrumbs.component';
-import { ApplicationViewComponent } from './views/application-view/application-view.component';
+import { ApplicationViewComponent } from './shared-components/application-view/application-view.component';
 import { TimelineComponent } from './shared-components/timeline/timeline.component';
 import { TimelineTooltipComponent } from './shared-components/timeline/timeline-tooltip.component';
 import { AppFilterPipe } from './views/dashboard/app-filter.pipe';
