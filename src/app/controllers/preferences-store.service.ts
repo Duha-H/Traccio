@@ -112,7 +112,7 @@ export class PreferencesStoreService {
 }
 
 export const DEFAULT_PREFERENCES: PreferencesType = {
-  theme: THEMES.light,
+  theme: THEMES.dark,
   colorPalette: PALETTES['palette-3'],
   journeyInactive: 60,
   appStale: 90,

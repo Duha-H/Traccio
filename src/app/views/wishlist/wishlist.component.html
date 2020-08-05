@@ -9,7 +9,15 @@
     </button>
   </div>
 
+  <div class="blurb spanning-content">
+    <p>Your wishlist allows you to keep track of applications you'd like to send in the future &#10024;</p>
+  </div>
+
   <div class="wishlist-apps" *ngIf="applications.length != 0; else emptyWishlist">
+    <div class="header spanning-content">
+      <div class="spacer"></div>
+      <p>{{ applications.length }} applications</p>
+    </div>
     <mat-list style="height: 100%;" class="app-list-item">
       <mat-list-item class="clickable-item" *ngFor="let app of applications;" (click)="selectApplication(app)">
         <mat-icon matListIcon>star</mat-icon>

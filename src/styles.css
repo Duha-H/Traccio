@@ -251,6 +251,17 @@ button.add-btn:disabled {
   cursor: default;
 }
 
+div.blurb, div.blurb.spanning-content {
+  margin: 0 15px;
+  margin-bottom: 30px;
+}
+
+.blurb p {
+  color: var(--titles-secondary);
+  text-align: left;
+  margin: 0;
+}
+
 
 @media screen and (max-width: 575px) {
   input, select, textarea { /** primarily to prevent mobile browsers from zooming in onFocus*/
@@ -275,5 +286,10 @@ button.add-btn:disabled {
 
   .add-btn {
     padding: 0 5px;
+  }
+
+  div.blurb, div.blurb.spanning-content {
+    margin: 0;
+    margin-bottom: 30px;
   }
 }

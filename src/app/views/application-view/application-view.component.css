@@ -20,7 +20,7 @@ button.save-btn {
 
 .save-btn p {
   margin: 0;
-  margin-right: 8px;
+  /* margin-right: 8px; */
   text-align: center;
   color: var(--text);
   font-size: 1em;
@@ -32,6 +32,7 @@ button.save-btn {
   color: var(--text);
   font-weight: 500;
   font-size: 16pt;
+  margin-left: 8px;
 }
 
 button.save-btn:hover:not(:disabled) p, button.save-btn:hover:not(:disabled) mat-icon { /** hover while not disabled */
@@ -336,5 +337,9 @@ app-overlay button.submit-button {
 
   .save-btn p {
     margin: 0 8px;
+  }
+
+  .save-btn mat-icon {
+    margin: 0;
   }
 }

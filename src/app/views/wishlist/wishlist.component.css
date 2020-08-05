@@ -4,7 +4,7 @@
 }
 
 .spanning-content {
-  margin: 15px 20px;
+  margin: 15px;
 }
 
 .app-list-item .spanning-content {
@@ -34,6 +34,24 @@
   color: var(--text);
 }
 
+.wishlist-apps .header.spanning-content {
+  margin: 15px;
+  margin-bottom: 0;
+}
+
+.wishlist-apps .header.spanning-content p {
+  margin: 0;
+  color: var(--titles-secondary);
+}
+
+.app-list-item mat-list-item {
+  margin: 10px 0;
+}
+
+::ng-deep mat-list-item .mat-list-base .mat-list-item .mat-list-item-content {
+  padding: 0;
+}
+
 .clickable-item mat-icon {
   color: var(--titles-secondary);
 }
@@ -46,5 +64,10 @@
 @media screen and (max-width: 500px) {
   .spanning-content {
     margin: 15px 0;
+  }
+
+  .header.spanning-content {
+    margin: 0;
+    margin-top: 15px;
   }
 }

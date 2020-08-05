@@ -16,7 +16,7 @@
       <mat-icon [inline]="true" aria-hidden="false" aria-label="Add to journey icon">add</mat-icon>
     </button>
     <button *ngIf="newApp || wishlistApp" class="save-btn" (click)="cancelChanges()">
-      <p style="margin-right: 0;">Cancel</p>
+      <p>Cancel</p>
     </button>
   </div>
 
@@ -62,7 +62,7 @@
     </div>
     <div class="info-item">
       <div class="date-value">
-        <label for="">Date Applied</label>
+        <label for="">{{ this.wishlistApp ? 'Date Added' : 'Date Applied' }}</label>
         <mat-form-field class="form-element" color="accent">
           <input matInput [matDatepicker]="startPicker" (dateChange)="updateField(ATTRIBS.DATE, $event.value)"
             [value]="currApplicationDetails.appDate" [(ngModel)]="currApplicationDetails.appDate" name="stDate"
