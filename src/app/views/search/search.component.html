@@ -43,6 +43,23 @@
           </div>
         </mat-list>
       </div>
+
+      <div class="result-section" *ngIf="filteredWishlistApps.length != 0;">
+        <h3 class="result-title">Wishlist Applications</h3>
+        <mat-list style="height: 100%;" class="app-list-item">
+          <mat-list-item class="clickable-item" *ngFor="let app of filteredWishlistApps;" (click)="viewResult('wishlist', app, app.id)">
+            <mat-icon matListIcon>folder</mat-icon>
+            <div matLine>
+              <div class="spanning-content">
+                <h4 style="text-align: left; color: var(--text);">{{ app.positionTitle + '  ' }}</h4>
+                <span style="padding-left: 10px; color: var(--titles-secondary);"> @ {{ app.companyName }}</span>
+                <div class="spacer"></div>
+                <span>Date Added: {{ app.appDate | date }}</span>
+              </div>
+            </div>
+          </mat-list-item>
+        </mat-list>
+      </div>
   
       <div class="placeholder-text" 
         *ngIf="filteredJourneys.length == 0 && (filteredAppsMap | keys).length == 0 && query.length != 0">

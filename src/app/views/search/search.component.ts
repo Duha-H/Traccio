@@ -6,21 +6,26 @@ import { SearchPipe } from './search-pipe.pipe';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Router } from '@angular/router';
 import { KeysPipe } from './keys-pipe.pipe';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnDestroy {
 
   @Input() query = '';
   @Input() parentSearchSubject: BehaviorSubject<string>;
   @Output() clearEvent = new EventEmitter();
   journeys: Journey[] = [];
   applicationMap: {[journeyid: string]: Application[]} = {};
+  wishlistApps: Application[] = [];
   filteredJourneys: Journey[] = [];
   filteredAppsMap: {[journeyid: string]: Application[]} = {};
+  filteredWishlistApps: Application[] = [];
+  journeySub: Subscription = new Subscription();
+  wishlistSub: Subscription = new Subscription();
 
   constructor(
     private userStore: UserStoreService,
@@ -30,15 +35,23 @@ export class SearchComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userStore.journeys.subscribe(journeys => {
+    this.journeySub = this.userStore.journeys.subscribe(journeys => {
       this.journeys = journeys;
       journeys.forEach(journey => {
         this.applicationMap[journey.id] = journey.applications;
       });
     });
+    this.wishlistSub = this.userStore.wishlistApps.subscribe(apps => {
+      this.wishlistApps = apps;
+    });
     this.parentSearchSubject.subscribe(query => {
       this.search(query);
     });
+  }
+
+  ngOnDestroy() {
+    this.journeySub.unsubscribe();
+    this.wishlistSub.unsubscribe();
   }
 
   search(queryInput: string) {
@@ -51,17 +64,20 @@ export class SearchComponent implements OnInit {
         this.filteredAppsMap[journeyid] = apps;
       }
     }
+    this.filteredWishlistApps = this.searchPipe.transform(this.wishlistApps, 'application', queryInput) as Application[];
   }
 
   clear() {
     this.clearEvent.emit();
   }
 
-  viewResult(type: string, item: Journey | Application, journeyid: string) {
+  viewResult(type: string, item: Journey | Application, journeyid?: string) {
     if (type === 'journey') {
-      this.router.navigate(['/journeys', journeyid]);
-    } else if (type === 'application') {
+      this.router.navigate(['/journeys', item.id]);
+    } else if (type === 'application' && journeyid) {
       this.router.navigate(['/journeys', journeyid, item.id]);
+    } else if (type === 'wishlist') {
+      this.router.navigate(['/wishlist', item.id]);
     }
     this.clear();
   }

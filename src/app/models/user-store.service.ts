@@ -45,7 +45,7 @@ export class UserStoreService {
     Journey[]
   > = this._activeJourneys.asObservable();
 
-  private _wishlistApps: BehaviorSubject<Application[]> = new BehaviorSubject<Application[]>(mockApps.MOCK_APPS_1);
+  private _wishlistApps: BehaviorSubject<Application[]> = new BehaviorSubject<Application[]>([].concat(mockApps.MOCK_APPS_1));
   public readonly wishlistApps: Observable<Application[]> = this._wishlistApps.asObservable();
 
   private _user: BehaviorSubject<User> = new BehaviorSubject<User>(new User());
@@ -241,14 +241,14 @@ export class UserStoreService {
       console.log('UserStore: journey with id', journeyId, 'does not exist.');
       return;
     }
-    const appID = this._getNewAppID(journeyId);
-    appData.id = appID;
     let newApplication: Application;
     if (appData instanceof Application) {
-      newApplication = appData;
+      newApplication = Object.assign(new Application(), appData);
     } else {
       newApplication = new Application(appData);
     }
+    const appID = this._getNewAppID(journeyId);
+    newApplication.id = appID;
     this.dataManager.addApplication(journeyId, newApplication);
     journey.applications.push(newApplication); // wooowiiieee
     // TODO: should this maybe trigger a data reload??
@@ -302,6 +302,7 @@ export class UserStoreService {
     const updatedWishlist = this._wishlistApps.getValue();
     updatedWishlist.push(newApplication);
     this._wishlistApps.next(updatedWishlist);
+
     return newApplication;
   }
 

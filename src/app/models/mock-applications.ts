@@ -5,7 +5,7 @@ export const MOCK_APPS_1 = [
 	new Application({
 		id: 0,
 		company: 'Bob\'s Burgers',
-		title: 'Cook',
+		title: 'Mop',
 		date: "2019-01-01",
 		status: STATUS.IN_REVIEW.toString(),
 		timeline: [
@@ -54,7 +54,7 @@ export const MOCK_APPS_1 = [
 	new Application({
 		id: 4,
 		company: 'Bob\'s Burgers',
-		title: 'Cook',
+		title: 'Mop',
 		date: "2019-01-02",
 		status: STATUS.REJECTED.toString(),
 		timeline: [

@@ -139,6 +139,7 @@ export class ApplicationViewComponent implements OnInit {
     if (this.wishlistApp && this.newApp) { // new wishlist application
       this.currApplicationDetails = this.userStore.addNewWishlistApplication(this.currApplicationDetails);
       this.router.navigate(['/wishlist', this.currApplicationDetails.id]);
+      this.newApp = false; // it shouldn't matter because we're navigating away so the component is getting destroyed
     } else if (this.wishlistApp && !this.newApp) { // existing wishlist application
       this.userStore.updateWishlistApplication(this.currApplicationDetails);
     } else if (this.newApp && !this.wishlistApp) { // completely new application
@@ -178,7 +179,9 @@ export class ApplicationViewComponent implements OnInit {
       return;
     }
     // add appliaction to journey
+    console.log('app id before:', this.currApplicationDetails.id);
     const result = this.userStore.addNewApplication(journeyid, this.currApplicationDetails);
+    console.log('app id after:', this.currApplicationDetails.id);
     if (result) {
       // if successfully added, remove application from wishlist
       this.userStore.removeWishlistApplication(this.currApplicationDetails.id);
