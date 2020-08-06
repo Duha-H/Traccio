@@ -25,6 +25,7 @@ import { AppFilterPipe } from './views/dashboard/app-filter.pipe';
 import { RouterModule } from '@angular/router';
 import { ConfettiComponent } from './shared-components/confetti/confetti.component';
 import { ToastComponent } from './shared-components/notification/toast.component';
+import { ToastListComponent } from './shared-components/notification/toast-list.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { ToastComponent } from './shared-components/notification/toast.component
     TimelineTooltipComponent,
     ApplicationViewComponent,
     ConfettiComponent,
+    ToastListComponent,
     ToastComponent,
   ],
   imports: [
@@ -76,6 +78,7 @@ import { ToastComponent } from './shared-components/notification/toast.component
     TimelineComponent,
     TimelineTooltipComponent,
     ApplicationViewComponent,
+    ToastListComponent,
     ToastComponent
   ]
 })

@@ -30,11 +30,8 @@ export class ToastComponent implements OnInit {
     if (!this.message) {
       throw new TypeError('NotificationComponent: no input message specified');
     }
-    // tslint:disable-next-line: max-line-length
-    const test = 'this is a really really long message I just want to see what happens when I do this or try to make it super long and decide how I should handle that oh god the linter is already complaining about this long ass line and it\'s very annoying I hate that I have to skip apostrophes here ugh oh okay it looks like the height of the div just increases to accomodate additional text should I fix the height and truncate the text or just give it flexible height or an expandable layout';
-    // this.message.message = test;
-    if (this.message.message.length > 200) { // temp fix
-      this.displayMessage = this.message.message.substr(0, 200) + '...';
+    if (this.message.message.length > TRUNCATED_LENGTH) { // temp fix
+      this.displayMessage = this.message.message.substr(0, TRUNCATED_LENGTH) + '...';
     } else {
       this.displayMessage = this.message.message;
       this.displayExpansionIcon = false;
@@ -51,9 +48,11 @@ export class ToastComponent implements OnInit {
       this.container.nativeElement.style.height = 'auto';
       this.displayMessage = this.message.message;
     } else {
-      this.container.nativeElement.style.height = '90px';
-      this.displayMessage = this.message.message.substr(0, 200) + '...';
+      this.container.nativeElement.style.height = '85px';
+      this.displayMessage = this.message.message.substr(0, TRUNCATED_LENGTH) + '...';
     }
   }
 
 }
+
+const TRUNCATED_LENGTH = 175;

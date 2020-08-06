@@ -73,4 +73,4 @@
   </div>
 
 </div>
-<toast *ngFor="let notification of notificationService.messages | async" [message]="notification"></toast>
+<toast-list [notifications]="notificationService.messages | async"></toast-list>

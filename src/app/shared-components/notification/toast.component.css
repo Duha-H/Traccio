@@ -1,19 +1,24 @@
-.notif-container {
+.toast-list {
   position: fixed;
   bottom: 20px;
   right: 25px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+.notif-container {
   border-radius: 15px;
   background-color: var(--bg);
   box-shadow: var(--shadow-tooltip);
   width: 400px;
-  height: 90px;
+  height: 85px;
   padding: 15px;
 
   display: flex;
   flex-direction: column;
-  /* display: inline-block; */
-  /* white-space: nowrap; */
-  /* overflow: hidden; */
+  margin-top: 20px;
 }
 
 .notif-container .header {
