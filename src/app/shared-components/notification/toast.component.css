@@ -1,0 +1,36 @@
+.notif-container {
+  position: fixed;
+  bottom: 20px;
+  right: 25px;
+  border-radius: 15px;
+  background-color: var(--bg);
+  box-shadow: var(--shadow-tooltip);
+  width: 400px;
+  height: 90px;
+  padding: 15px;
+
+  display: flex;
+  flex-direction: column;
+  /* display: inline-block; */
+  /* white-space: nowrap; */
+  /* overflow: hidden; */
+}
+
+.notif-container .header {
+  display: flex;
+}
+
+.notif-container .header mat-icon {
+  color: var(--text);
+  font-size: 1.5em;
+  float: right;
+  cursor: pointer;
+}
+
+.notif-container p {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.5em;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

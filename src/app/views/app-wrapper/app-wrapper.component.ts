@@ -7,6 +7,8 @@ import { DropdownItem } from 'src/app/shared-components/types';
 import { TextFieldComponent } from 'src/app/shared-components/text-field/text-field.component';
 import { PreferencesStoreService } from 'src/app/controllers/preferences-store.service';
 import { ResizeService } from 'src/app/controllers/resize.service';
+import { NotificationService } from 'src/app/controllers/notification.service';
+import { Notification } from 'src/app/models/notification';
 
 @Component({
   selector: "app-wrapper",
@@ -28,6 +30,8 @@ export class AppWrapperComponent implements OnInit {
   ];
   searchQuery = '';
   searchSubject: BehaviorSubject<string> = new BehaviorSubject(this.searchQuery);
+  tempMessage = new Notification('Beep boop message!');
+
   @Output() submitSearch = new EventEmitter();
   @ViewChild("navHomeIcon", { read: ElementRef }) currNavIconRef: HTMLElement;
   @ViewChild("dropdownButton") dropdownRef: ElementRef;
@@ -39,7 +43,8 @@ export class AppWrapperComponent implements OnInit {
     private userStore: UserStoreService,
     private router: Router,
     private prefStore: PreferencesStoreService,
-    public resizeService: ResizeService
+    public resizeService: ResizeService,
+    public notificationService: NotificationService,
   ) {  }
 
   ngOnInit() {

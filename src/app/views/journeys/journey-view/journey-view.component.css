@@ -69,7 +69,7 @@ mat-icon {
   font-size: 12pt;
   font-weight: 500;
   padding: 0 30px;
-  line-height: 35px;
+  line-height: 25px;
   color: var(--titles-secondary);
   border: 1px solid var(--titles-secondary);
 }
@@ -167,7 +167,7 @@ button.add-btn:disabled mat-icon, button.add-btn:disabled p {
 }
 
 .status {
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
 .dates {

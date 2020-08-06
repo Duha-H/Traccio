@@ -24,6 +24,7 @@ import { TimelineTooltipComponent } from './shared-components/timeline/timeline-
 import { AppFilterPipe } from './views/dashboard/app-filter.pipe';
 import { RouterModule } from '@angular/router';
 import { ConfettiComponent } from './shared-components/confetti/confetti.component';
+import { ToastComponent } from './shared-components/notification/toast.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ConfettiComponent } from './shared-components/confetti/confetti.compone
     TimelineTooltipComponent,
     ApplicationViewComponent,
     ConfettiComponent,
+    ToastComponent,
   ],
   imports: [
     CommonModule,
@@ -74,6 +76,7 @@ import { ConfettiComponent } from './shared-components/confetti/confetti.compone
     TimelineComponent,
     TimelineTooltipComponent,
     ApplicationViewComponent,
+    ToastComponent
   ]
 })
 export class SharedModule { }
