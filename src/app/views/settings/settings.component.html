@@ -9,12 +9,6 @@
     </button>
   </div>
   <div class="tabs">
-    <div *ngIf="displayAlert"
-      class="{{alert.successful ? 'alert success spanning-content' : 'alert error spanning-content'}}">
-      <p>{{alert.message}}</p>
-      <div class="spacer"></div>
-      <mat-icon (click)="closeAlert()">clear</mat-icon>
-    </div>
     <mat-tab-group mat-align-tabs="center" animationDuration="0ms" (selectedIndexChange)="changes=tabChanges[$event]"
       color="accent" #tabGroup>
       <mat-tab label="Profile Settings">
@@ -27,8 +21,6 @@
         <settings-preferences (updates)="setChange(1, $event)" (showAlert)="showAlert($event)"
           (showTooltip)="showTooltip($event)" (hideTooltip)="hideTooltip($event)"></settings-preferences>
       </mat-tab>
-
-
     </mat-tab-group>
   </div>
 </div>

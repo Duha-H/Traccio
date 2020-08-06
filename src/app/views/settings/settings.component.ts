@@ -7,6 +7,7 @@ import { PreferenceSettingsComponent } from './preference-settings.component';
 import { DEFAULT_PROFILE_UPDATE_CHECK, DEFAULT_PREFERENCES_UPDATE_CHECK } from './constants';
 import { PreferencesStoreService } from 'src/app/controllers/preferences-store.service';
 import { ResizeService } from 'src/app/controllers/resize.service';
+import { NotificationService } from 'src/app/controllers/notification.service';
 
 @Component({
   selector: 'app-settings',
@@ -32,6 +33,7 @@ export class SettingsComponent implements OnInit {
   };
   visibleTooltip: ElementRef = undefined;
   clickedIcon: EventTarget = undefined;
+  mostRecentAlertId = -1;
 
   @ViewChild('tabGroup') tabGroup: MatTabGroup;
   @ViewChild(ProfileSettingsComponent) profileSettingsComp: ProfileSettingsComponent;
@@ -41,6 +43,7 @@ export class SettingsComponent implements OnInit {
     private userStore: UserStoreService,
     private preferencesStore: PreferencesStoreService,
     public rs: ResizeService,
+    private notificationService: NotificationService,
   ) { }
 
   ngOnInit() { }
@@ -110,14 +113,17 @@ export class SettingsComponent implements OnInit {
 
   showAlert(responseObject?: Response) {
     this.alert = responseObject ? responseObject : this.alert;
-    this.displayAlert = true;
-    if (this.alert.successful) { // if successful, hide alert after 5 seconds
-      setTimeout(() => {
-        if (this.alert.successful) { // basically check again if the displayed alert is still successful
-          this.closeAlert();
-        }
-      }, 5000);
+    const type = this.alert.successful ? 'success' : 'error';
+    const duration = this.alert.successful ? 5000 : -1;
+    const mostRecentAlert = this.notificationService.getMostRecent();
+    if (this.alert.successful ||
+        (mostRecentAlert && this.alert.message === mostRecentAlert.message)) {
+      // if current alert is successful (everything is fine/resolved)
+      // or the previous alert is exactly the same
+      // hide the previous alert
+      this.notificationService.removeNotification(this.mostRecentAlertId);
     }
+    this.mostRecentAlertId = this.notificationService.sendNotification(this.alert.message, type, duration);
   }
 
   closeAlert() {

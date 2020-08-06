@@ -11,6 +11,8 @@ import { ResizeService } from 'src/app/controllers/resize.service';
 import { PreferencesStoreService } from 'src/app/controllers/preferences-store.service';
 import { ConfettiComponent } from 'src/app/shared-components/confetti/confetti.component';
 import { Subscription } from 'rxjs';
+import { NotificationService } from 'src/app/controllers/notification.service';
+import { MESSAGES } from 'src/assets/template-messages';
 
 @Component({
   selector: 'app-application-view',
@@ -63,6 +65,7 @@ export class ApplicationViewComponent implements OnInit {
     private router: Router,
     public rs: ResizeService,
     public prefStore: PreferencesStoreService,
+    private notificationService: NotificationService,
   ) { }
 
   ngOnInit() {
@@ -149,6 +152,7 @@ export class ApplicationViewComponent implements OnInit {
     if (this.statusUpdated && this.currApplicationDetails.status === STATUS.OFFER) {
       setTimeout(() => {
         this.confetti.draw();
+        this.notificationService.sendNotification(MESSAGES.congratulatory_offer[Math.floor(Math.random() * 4)], 'standard', 10000);
       }, 800);
       this.statusUpdated = false;
     }
@@ -167,7 +171,8 @@ export class ApplicationViewComponent implements OnInit {
     this.displayAddOverlay = true;
   }
 
-  addApplicationToJourney(journeyid: string) {
+  addApplicationToJourney(journey: Journey) {
+    const journeyid = journey.id;
     if (!journeyid) {
       console.log('ApplicationView: trying to add to journey with invalid id:', journeyid);
       return;
@@ -178,7 +183,7 @@ export class ApplicationViewComponent implements OnInit {
       // if successfully added, remove application from wishlist
       this.userStore.removeWishlistApplication(this.currApplicationDetails.id);
       this.router.navigate(['/journeys', journeyid, result.id]);
-      // probably trigger some sort of success message later on
+      this.notificationService.sendNotification(`Application successfully added to ${journey.title}!`, 'success', 5000);
     }
   }
 
