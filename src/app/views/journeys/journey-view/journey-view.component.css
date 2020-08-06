@@ -198,6 +198,13 @@ button.add-btn:disabled mat-icon, button.add-btn:disabled p {
   margin: 0;
 }
 
+.app-header mat-icon {
+  font-size: 2em;
+  color: var(--titles-secondary);
+  cursor: pointer;
+  margin-left: 5px;
+}
+
 .mat-drawer-inner-container {
   position: relative;
 }

@@ -123,6 +123,7 @@ export class JourneyViewComponent implements OnInit {
   };
   displayEditOverlay = false;
   displayFilterOverlay = false;
+  visibleAppCount = 0;
 
   constructor(
     private route: ActivatedRoute,

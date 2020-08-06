@@ -18,7 +18,8 @@
         <div class="spanning-content app-header">
           <p>Applications</p>
           <div class="spacer"></div>
-          <mat-icon *ngIf="(rs.tabletSize$ | async)" style="font-size: 2em; color: var(--titles-secondary); cursor: pointer;" (click)="displayFilterOverlay=true">filter_list</mat-icon>    
+          <p style="font-weight: initial;">{{ visibleAppCount == 1 ? '1 application' : visibleAppCount + ' applications' }}</p>
+          <mat-icon *ngIf="(rs.tabletSize$ | async)" (click)="displayFilterOverlay=true">filter_list</mat-icon>    
         </div>
       </div>
   
@@ -26,6 +27,7 @@
         <application-list
           [journeyid]="journey.id"
           (applicationClick)="navigateToApplication($event)"
+          (countChange)="visibleAppCount=$event"
         ></application-list>
       </div>
 
@@ -33,7 +35,7 @@
         <div class="spanning-content app-header">
           <p>Details</p>
           <div class="spacer"></div>
-          <mat-icon [inline]="true" aria-hidden="false" aria-label="Edit journey icon" style="font-size: 2em; color: var(--titles-secondary); cursor: pointer;" (click)="showEditOverlay()">edit</mat-icon>
+          <mat-icon [inline]="true" aria-hidden="false" aria-label="Edit journey icon" (click)="showEditOverlay()">edit</mat-icon>
         </div>
 
         <div class="detail-item">

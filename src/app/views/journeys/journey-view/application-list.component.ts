@@ -26,6 +26,7 @@ export class ApplicationListComponent implements OnInit {
   @Input() journeyid = '';
   @Output() deleteButtonPress = new EventEmitter();
   @Output() applicationClick = new EventEmitter<object>();
+  @Output() countChange = new EventEmitter<number>();
   applications: Application[] = [];
   deleteButtonPressed = false;
   dataSource = new MatTableDataSource<Application>(this.applications);
@@ -73,6 +74,7 @@ export class ApplicationListComponent implements OnInit {
     this.dataSource.data = this.filterObjects.source.length !== 0 || this.filterObjects.status.length !== 0
       ? this._getFilteredData() // if any filters are selected, apply those
       : this.applications;
+    this.countChange.emit(this.dataSource.data.length);
   }
 
   onApplicationClick(application: Application) {
