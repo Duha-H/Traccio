@@ -19,7 +19,6 @@ const routes: Routes = [
       { path: "",
         loadChildren: () => import('src/app/views/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
-      // { path: "", component: DashboardComponent },
       {
         path: "journeys",
         loadChildren: () => import('src/app/views/journeys/journeys.module').then(m => m.JourneysModule)

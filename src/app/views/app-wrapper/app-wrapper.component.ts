@@ -30,7 +30,6 @@ export class AppWrapperComponent implements OnInit {
   ];
   searchQuery = '';
   searchSubject: BehaviorSubject<string> = new BehaviorSubject(this.searchQuery);
-  tempMessage = new Notification('Beep boop message!');
 
   @Output() submitSearch = new EventEmitter();
   @ViewChild("navHomeIcon", { read: ElementRef }) currNavIconRef: HTMLElement;
