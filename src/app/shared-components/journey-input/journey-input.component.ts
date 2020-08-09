@@ -25,7 +25,7 @@ export class JourneyInputComponent implements OnInit {
   maxDate: Date;
   today = new Date();
   title = '';
-  startDate = undefined;
+  startDate = new Date();
   endDate = undefined;
   active = true;
   errorStateMatcher = new OnDirtyErrorStateMatcher();
@@ -69,7 +69,7 @@ export class JourneyInputComponent implements OnInit {
 
   resetData() {
     this.title = "";
-    this.startDate = undefined;
+    this.startDate = new Date();
     this.endDate = undefined;
     this.active = true;
     this.journey = null;

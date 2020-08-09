@@ -25,15 +25,15 @@ export class AppStateStoreService {
     let currTheme = 'dark';
     let currPalette = 0;
     if (this.user.isDefined()) {
-      this.controller.fetchUserJourneys(this.user.userid)
-        .then((result: { theme: string, colorPalette: number }) => {
-          currTheme = result.theme;
-          currPalette = result.colorPalette;
-        })
-        .catch(error => {
-          currTheme = 'dark';
-          currPalette = 0;
-        });
+      // this.controller.fetchUserJourneys(this.user.userid)
+      //   .then((result: { theme: string, colorPalette: number }) => {
+      //     currTheme = result.theme;
+      //     currPalette = result.colorPalette;
+      //   })
+      //   .catch(error => {
+      //     currTheme = 'dark';
+      //     currPalette = 0;
+      //   });
     }
     this._state.next({
       given_name: this.user.firstName,

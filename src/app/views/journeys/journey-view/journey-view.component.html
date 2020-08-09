@@ -27,7 +27,7 @@
         <application-list
           [journeyid]="journey.id"
           (applicationClick)="navigateToApplication($event)"
-          (countChange)="visibleAppCount=$event"
+          (countChange)="updateApplicationCount($event)"
         ></application-list>
       </div>
 

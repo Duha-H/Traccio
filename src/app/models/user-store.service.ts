@@ -12,6 +12,7 @@ import { map } from "rxjs/operators/map";
 import { DataManagerService } from "src/app/controllers/data-manager.service";
 import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
 import { FormattedFrequencyData } from 'src/app/controllers/types';
+import { Response } from '../utils/response';
 
 @Injectable({
   providedIn: "root",
@@ -31,9 +32,7 @@ export class UserStoreService {
   // public readonly journeys: Observable<{[key: string]: Journey}> = this._journeys.asObservable();
   private _journeys: BehaviorSubject<{
     [key: string]: Journey;
-  }> = new BehaviorSubject<{ [key: string]: Journey }>(
-    this.placeholderJourneys
-  );
+  }> = new BehaviorSubject<{ [key: string]: Journey }>({});
   public readonly journeys: Observable<Journey[]> = this._journeys.pipe(
     map((entry) => Object.values(entry).reverse())
   );
@@ -118,11 +117,19 @@ export class UserStoreService {
     // Called on app init
     // Performs API calls to fetch user data
     let data = {};
-    // await this.controller.fetchUserJourneys(this.user.userid).then((value) => {
-    //   // this._journeys.next(value);
-    //   data = value;
-    // });
-    data = this.placeholderJourneys; // TEMP
+    await this.controller.fetchUserJourneys(this._user.getValue().userid)
+      .then(result => {
+        data = result;
+      });
+      // .then(value => {
+      //   // this._journeys.next(value);
+      //   data = value;
+      //   console.log(Object.keys(value).length);
+      //   this.updateJourneyData(value);
+      //   this.dataManager.collectData(value);
+      // });
+    // data = this.placeholderJourneys; // TEMP
+    // console.log(data);
     this.updateJourneyData(data);
     this.dataManager.collectData(data);
     this.loadData();
@@ -151,7 +158,7 @@ export class UserStoreService {
 
   clearData() {
     this._user.next(new User());
-    this.updateJourneyData(this.placeholderJourneys);
+    this.updateJourneyData({});
   }
 
   /**
@@ -213,26 +220,36 @@ export class UserStoreService {
    * User Data Updating Methods
    */
 
-  addNewJourney(journeyData: { [key: string]: any }) {
+  async addNewJourney(journeyData: { [key: string]: any }) {
     journeyData.id = journeyData.id // if ID is undefined, generate a new ID
       ? journeyData.id
       : this._getNewJourneyID();
     const newJourney = new Journey(journeyData);
-    // update current data
+    // make necessary api calls
+    const response = await this.controller.addNewJourney(newJourney, this._user.getValue().userid);
+    if (!response.successful) {
+      return response;
+    }
+    // update current "cached" data
     const updatedJourneys = this._journeys.getValue();
     updatedJourneys[journeyData.id] = newJourney;
     this.dataManager.addJourney(newJourney);
     this.updateJourneyData(updatedJourneys);
     this.dataUpdated = true;
-    // make necessary api calls
+    return response;
   }
 
-  removeJourney(journeyid: string) {
+  async removeJourney(journeyid: string) {
+    const response = await this.controller.removeJourney(this.getJourney(journeyid));
+    if (!response.successful) {
+      return response;
+    }
     const updatedJourneys = this._journeys.getValue();
     delete updatedJourneys[journeyid];
     this.dataManager.removeJourney(journeyid);
     this.updateJourneyData(updatedJourneys);
     this.dataUpdated = true;
+    return response;
   }
 
   addNewApplication(journeyId: string, appData: ApplicationInput | Application) {
@@ -249,11 +266,12 @@ export class UserStoreService {
     }
     const appID = this._getNewAppID(journeyId);
     newApplication.id = appID;
-    this.dataManager.addApplication(journeyId, newApplication);
     journey.applications.push(newApplication); // wooowiiieee
+    this.dataManager.addApplication(journeyId, newApplication);
     // TODO: should this maybe trigger a data reload??
     this.dataUpdated = true;
     this.updateJourneyData(); // data update, bubble .next() it to all observables
+
     return newApplication;
   }
 
@@ -324,10 +342,10 @@ export class UserStoreService {
 
   private _getNewJourneyID(): string {
     let maxID = 0;
-    Object.keys(this._journeys.getValue()).forEach((id) => {
+    Object.keys(this._journeys.getValue()).forEach(id => {
       // Note:
-      // IDs are in the format "cbsd2-nkbjkd-dn4jbks-01"
-      // where the last two digits represent the unique numerical ID of the journey
+      // IDs are in the format "cbsd2-nkbjkd-dn4jbks-1"
+      // where the last digit represent the unique numerical ID of the journey
       // and the initial string of characters is the owning-user's ID
       // so we're extracting the digits and incrementing to generate a new ID
       // while maintaining the user ID

@@ -250,6 +250,10 @@ export class JourneyViewComponent implements OnInit {
     this._applyFilter(property.toLowerCase(), value, false);
   }
 
+  updateApplicationCount(count: number) {
+    this.visibleAppCount = count;
+  }
+
   private _applyFilter(property: string, value: string, selected: boolean) {
     if (selected) {
       // filter was selected

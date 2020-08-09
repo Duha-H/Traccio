@@ -523,6 +523,15 @@ export type ListJourneysQuery = {
     applications: {
       __typename: "ModelApplicationConnection";
       nextToken: string | null;
+      items: Array<{
+        id: string;
+        company: string;
+        title: string;
+        date: string;
+        status: string;
+        source: string;
+        notes: string;
+      }>
     } | null;
   } | null> | null;
   nextToken: string | null;
@@ -1346,6 +1355,15 @@ export class APIService {
             applications {
               __typename
               nextToken
+              items {
+                id
+                company
+                title
+                date
+                status
+                source
+                notes
+              }
             }
           }
           nextToken

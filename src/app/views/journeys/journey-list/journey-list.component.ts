@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 import { Observable } from 'rxjs/Observable';
 import { ResizeService } from 'src/app/controllers/resize.service';
 import { SliderContainerComponent } from 'src/app/shared-components/slider-container/slider-container.component';
+import { NotificationService } from 'src/app/controllers/notification.service';
 
 @Component({
   selector: "app-journey-list",
@@ -37,6 +38,7 @@ export class JourneyListComponent implements OnInit, OnDestroy {
     public userStore: UserStoreService,
     private router: Router,
     public rs: ResizeService,
+    private notificationService: NotificationService
   ) { }
 
   ngOnInit() {
@@ -73,7 +75,14 @@ export class JourneyListComponent implements OnInit, OnDestroy {
 
   removeJourney(selectedJourney: Journey, idx?: number) {
     if (confirm(`Are you sure you'd like to remove ${selectedJourney.title}?`)) {
-      this.userStore.removeJourney(selectedJourney.id);
+      const response = this.userStore.removeJourney(selectedJourney.id);
+      response.then(value => {
+        if (value.successful) {
+          this.notificationService.sendNotification(`${selectedJourney.title} removed successfully!`, 'success');
+        } else {
+          this.notificationService.sendNotification(value.message, 'error');
+        }
+      });
       this.deleteButton = false;
       const journeysLength = this.userStore.getJourneys().length;
       if (journeysLength === 0) {
@@ -89,7 +98,12 @@ export class JourneyListComponent implements OnInit, OnDestroy {
   }
 
   onNewDataLogged(journeyData: { [key: string]: any }) {
-    this.userStore.addNewJourney(journeyData);
+    const response = this.userStore.addNewJourney(journeyData);
+    response.then(value => {
+      if (!value.successful) {
+        this.notificationService.sendNotification(value.message, 'error');
+      }
+    });
     this.displayDrawer = false;
   }
 
