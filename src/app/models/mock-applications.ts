@@ -3,7 +3,7 @@ import { STATUS, APP_SOURCE } from './constants';
 
 export const MOCK_APPS_1 = [
 	new Application({
-		id: 0,
+		id: '0',
 		company: 'Bob\'s Burgers',
 		title: 'Mop',
 		date: "2019-01-01",
@@ -15,7 +15,7 @@ export const MOCK_APPS_1 = [
 		notes: 'will likely be ghosted',
 	}),
 	new Application({
-		id: 1,
+		id: '1',
 		company: 'New Company',
 		title: 'Software Developer',
 		date: "2020-05-03",
@@ -24,7 +24,7 @@ export const MOCK_APPS_1 = [
 		notes: '',
 	}),
 	new Application({
-		id: 2,
+		id: '2',
 		company: 'NASA',
 		title: 'Engineer',
 		date: "2019-01-05",
@@ -37,7 +37,7 @@ export const MOCK_APPS_1 = [
 		notes: 'something something space simulation something',
 	}),
 	new Application({
-		id: 3,
+		id: '3',
 		company: 'Hooli',
 		title: 'Gavin Belson\'s Blood Boy',
 		date: "2019-03-12",
@@ -52,7 +52,7 @@ export const MOCK_APPS_1 = [
 		notes: 'Welp...',
 	}),
 	new Application({
-		id: 4,
+		id: '4',
 		company: 'Bob\'s Burgers',
 		title: 'Mop',
 		date: "2019-01-02",
@@ -66,7 +66,7 @@ export const MOCK_APPS_1 = [
 		notes: 'probably will be ghosted',
 	}),
 	new Application({
-		id: 5,
+		id: '5',
 		company: 'Pied Piper',
 		title: 'Gilfoyle\'s Intern/Little Bitch',
 		date: "2020-05-05",
@@ -80,7 +80,7 @@ export const MOCK_APPS_1 = [
 	}),
 
 	new Application({
-		id: 6,
+		id: '6',
 		company: 'Pied Piper',
 		title: 'Gilfoyle\'s Intern/Little Bitch',
 		date: "2020-07-20",
@@ -93,7 +93,7 @@ export const MOCK_APPS_1 = [
 		notes: 'probably getting ghosted',
 	}),
 	new Application({
-		id: 7,
+		id: '7',
 		company: 'Pied Piper',
 		title: 'Gilfoyle\'s Intern/Little Bitch',
 		date: "2020-07-19",
@@ -106,7 +106,7 @@ export const MOCK_APPS_1 = [
 		notes: 'probably getting ghosted',
 	}),
 	new Application({
-		id: 8,
+		id: '8',
 		company: 'Pied Piper',
 		title: 'Gilfoyle\'s Intern/Little Bitch',
 		date: "2020-07-19",
@@ -119,7 +119,7 @@ export const MOCK_APPS_1 = [
 		notes: 'probably getting ghosted',
 	}),
 	new Application({
-		id: 9,
+		id: '9',
 		company: 'Pied Piper',
 		title: 'Gilfoyle\'s Intern/Little Bitch',
 		date: "2020-07-19",
@@ -132,7 +132,7 @@ export const MOCK_APPS_1 = [
 		notes: 'probably getting ghosted',
 	}),
 	new Application({
-		id: 10,
+		id: '10',
 		company: 'Pied Piper',
 		title: 'Gilfoyle\'s Intern/Little Bitch',
 		date: "2020-07-18",
@@ -145,7 +145,7 @@ export const MOCK_APPS_1 = [
 		notes: 'probably getting ghosted',
 	}),
 	new Application({
-		id: 11,
+		id: '11',
 		company: 'Pied Piper',
 		title: 'Gilfoyle\'s Intern/Little Bitch',
 		date: "2020-07-18",
@@ -158,7 +158,7 @@ export const MOCK_APPS_1 = [
 		notes: 'probably getting ghosted',
 	}),
 	new Application({
-		id: 12,
+		id: '12',
 		company: 'Pied Piper',
 		title: 'Gilfoyle\'s Intern/Little Bitch',
 		date: "2020-07-18",
@@ -171,7 +171,7 @@ export const MOCK_APPS_1 = [
 		notes: 'probably getting ghosted',
 	}),
 	new Application({
-		id: 13,
+		id: '13',
 		company: 'Pied Piper',
 		title: 'Gilfoyle\'s Intern/Little Bitch',
 		date: "2020-07-17",
@@ -184,7 +184,7 @@ export const MOCK_APPS_1 = [
 		notes: 'probably getting ghosted',
 	}),
 	new Application({
-		id: 14,
+		id: '14',
 		company: 'Pied Piper',
 		title: 'Gilfoyle\'s Intern/Little Bitch',
 		date: "2020-07-16",
@@ -197,7 +197,7 @@ export const MOCK_APPS_1 = [
 		notes: 'probably getting ghosted',
 	}),
 	new Application({
-		id: 15,
+		id: '15',
 		company: 'Pied Piper',
 		title: 'Gilfoyle\'s Intern/Little Bitch',
 		date: "2020-07-16",
@@ -210,7 +210,7 @@ export const MOCK_APPS_1 = [
 		notes: 'probably getting ghosted',
 	}),
 	new Application({
-		id: 16,
+		id: '16',
 		company: 'Pied Piper',
 		title: 'Gilfoyle\'s Intern/Little Bitch',
 		date: "2020-07-16",
@@ -223,7 +223,7 @@ export const MOCK_APPS_1 = [
 		notes: 'probably getting ghosted',
 	}),
 	new Application({
-		id: 17,
+		id: '17',
 		company: 'Pied Piper',
 		title: 'Gilfoyle\'s Intern/Little Bitch',
 		date: "2020-07-16",
@@ -236,7 +236,7 @@ export const MOCK_APPS_1 = [
 		notes: 'probably getting ghosted',
 	}),
 	new Application({
-		id: 18,
+		id: '18',
 		company: 'Pied Piper',
 		title: 'Gilfoyle\'s Intern/Little Bitch',
 		date: "2020-07-15",
@@ -249,7 +249,7 @@ export const MOCK_APPS_1 = [
 		notes: 'probably getting ghosted',
 	}),
 	new Application({
-		id: 19,
+		id: '19',
 		company: 'Pied Piper',
 		title: 'Gilfoyle\'s Intern/Little Bitch',
 		date: "2020-07-14",
@@ -262,7 +262,7 @@ export const MOCK_APPS_1 = [
 		notes: 'probably getting ghosted',
 	}),
 	new Application({
-		id: 20,
+		id: '20',
 		company: 'Pied Piper',
 		title: 'Gilfoyle\'s Intern/Little Bitch',
 		date: "2020-07-26",
@@ -276,7 +276,7 @@ export const MOCK_APPS_1 = [
 		notes: 'probably getting ghosted',
 	}),
 	new Application({
-		id: 21,
+		id: '21',
 		company: 'Pied Piper',
 		title: 'Gilfoyle\'s Intern/Little Bitch',
 		date: "2020-07-26",
@@ -289,7 +289,7 @@ export const MOCK_APPS_1 = [
 		notes: 'probably getting ghosted',
 	}),
 	new Application({
-		id: 22,
+		id: '22',
 		company: 'Pied Piper',
 		title: 'Gilfoyle\'s Intern/Little Bitch',
 		date: "2020-07-14",
@@ -302,7 +302,7 @@ export const MOCK_APPS_1 = [
 		notes: 'probably getting ghosted',
 	}),
 	new Application({
-		id: 23,
+		id: '23',
 		company: 'Pied Piper',
 		title: 'Gilfoyle\'s Intern/Little Bitch',
 		date: "2020-07-27",
@@ -315,7 +315,7 @@ export const MOCK_APPS_1 = [
 		notes: 'probably getting ghosted',
 	}),
 	new Application({
-		id: 24,
+		id: '24',
 		company: 'Pied Piper',
 		title: 'Gilfoyle\'s Intern/Little Bitch',
 		date: "2020-07-24",
@@ -328,7 +328,7 @@ export const MOCK_APPS_1 = [
 		notes: 'probably getting ghosted',
 	}),
 	new Application({
-		id: 25,
+		id: '25',
 		company: 'Pied Piper',
 		title: 'Gilfoyle\'s Intern/Little Bitch',
 		date: "2020-07-24",
@@ -341,7 +341,7 @@ export const MOCK_APPS_1 = [
 		notes: 'probably getting ghosted',
 	}),
 	new Application({
-		id: 26,
+		id: '26',
 		company: 'Pied Piper',
 		title: 'Gilfoyle\'s Intern/Little Bitch',
 		date: "2020-07-14",
@@ -354,7 +354,7 @@ export const MOCK_APPS_1 = [
 		notes: 'probably getting ghosted',
 	}),
 	new Application({
-		id: 27,
+		id: '27',
 		company: 'Pied Piper',
 		title: 'Gilfoyle\'s Intern/Little Bitch',
 		date: "2020-07-14",
@@ -368,7 +368,7 @@ export const MOCK_APPS_1 = [
 		notes: 'probably getting ghosted',
 	}),
 	new Application({
-		id: 28,
+		id: '28',
 		company: 'Pied Piper',
 		title: 'Gilfoyle\'s Intern/Little Bitch',
 		date: "2020-07-25",
@@ -381,7 +381,7 @@ export const MOCK_APPS_1 = [
 		notes: 'probably getting ghosted',
 	}),
 	new Application({
-		id: 29,
+		id: '29',
 		company: 'Pied Piper',
 		title: 'Gilfoyle\'s Intern/Little Bitch',
 		date: "2020-07-25",
@@ -394,7 +394,7 @@ export const MOCK_APPS_1 = [
 		notes: 'probably getting ghosted',
 	}),
 	new Application({
-		id: 30,
+		id: '30',
 		company: 'Pied Piper',
 		title: 'Gilfoyle\'s Intern/Little Bitch',
 		date: "2020-07-25",
@@ -407,7 +407,7 @@ export const MOCK_APPS_1 = [
 		notes: 'probably getting ghosted',
 	}),
 	new Application({
-		id: 31,
+		id: '31',
 		company: 'Pied Piper',
 		title: 'Gilfoyle\'s Intern/Little Bitch',
 		date: "2020-07-14",
@@ -420,7 +420,7 @@ export const MOCK_APPS_1 = [
 		notes: 'probably getting ghosted',
 	}),
 	new Application({
-		id: 32,
+		id: '32',
 		company: 'Pied Piper',
 		title: 'Gilfoyle\'s Intern/Little Bitch',
 		date: "2020-07-14",
@@ -433,7 +433,7 @@ export const MOCK_APPS_1 = [
 		notes: 'probably getting ghosted',
 	}),
 	new Application({
-		id: 33,
+		id: '33',
 		company: 'Pied Piper',
 		title: 'Gilfoyle\'s Intern/Little Bitch',
 		date: "2020-07-14",
@@ -446,7 +446,7 @@ export const MOCK_APPS_1 = [
 		notes: 'probably getting ghosted',
 	}),
 	new Application({
-		id: 34,
+		id: '34',
 		company: 'Pied Piper',
 		title: 'Gilfoyle\'s Intern/Little Bitch',
 		date: "2020-07-14",
@@ -459,7 +459,7 @@ export const MOCK_APPS_1 = [
 		notes: 'probably getting ghosted',
 	}),
 	new Application({
-		id: 35,
+		id: '35',
 		company: 'Pied Piper',
 		title: 'Gilfoyle\'s Intern/Little Bitch',
 		date: "2020-07-14",
@@ -475,7 +475,7 @@ export const MOCK_APPS_1 = [
 
 export const MOCK_APPS_2 = [
 	new Application({
-		id: 0,
+		id: '0',
 		company: 'Bob\'s Burgers',
 		title: 'Cook',
 		date: "2020-01-01",
@@ -484,7 +484,7 @@ export const MOCK_APPS_2 = [
 		notes: 'will likely be ghosted',
 	}),
 	new Application({
-		id: 1,
+		id: '1',
 		company: 'New Company',
 		title: 'Software Developer',
 		date: "2020-03-12",
@@ -493,7 +493,7 @@ export const MOCK_APPS_2 = [
 		notes: '',
 	}),
 	new Application({
-		id: 2,
+		id: '2',
 		company: 'Bob\'s Burgers',
 		title: 'Cook',
 		date: "2020-01-01",
@@ -506,7 +506,7 @@ export const MOCK_APPS_2 = [
 		notes: 'probably will be ghosted',
 	}),
 	new Application({
-		id: 3,
+		id: '3',
 		company: 'Pied Piper',
 		title: 'Gilfoyle\'s Intern/Little Bitch',
 		date: "2020-05-05",
@@ -523,7 +523,7 @@ export const MOCK_APPS_2 = [
 
 export const MOCK_APPS_3 = [
 	new Application({
-		id: 0,
+		id: '0',
 		company: 'New Company',
 		title: 'Software Developer',
 		date: "2020-03-05",
@@ -536,7 +536,7 @@ export const MOCK_APPS_3 = [
 		notes: '',
 	}),
 	new Application({
-		id: 1,
+		id: '1',
 		company: 'NASA',
 		title: 'Engineer',
 		date: "2020-01-05",
@@ -552,7 +552,7 @@ export const MOCK_APPS_3 = [
 		notes: 'something something space simulation something',
 	}),
 	new Application({
-		id: 2,
+		id: '2',
 		company: 'Hooli',
 		title: 'Gavin Belson\'s Blood Boy',
 		date: "2019-03-12",
@@ -567,7 +567,7 @@ export const MOCK_APPS_3 = [
 		notes: 'Welp...',
 	}),
 	new Application({
-		id: 3,
+		id: '3',
 		company: 'Bob\'s Burgers',
 		title: 'Cook',
 		date: "2019-01-01",

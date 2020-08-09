@@ -24,7 +24,7 @@ export class ApplicationInputComponent implements OnChanges {
   SOURCES = Object.values(APP_SOURCE);
 
   appDetails: ApplicationInput = { // use to fill in input fields and retrieve data
-    id: -1,
+    id: '',
     company : '',
     title : '',
     date : new Date(),
@@ -89,7 +89,7 @@ export class ApplicationInputComponent implements OnChanges {
       // this.app.source = this.appDetails.source;
       // this.app.notes = this.appDetails.notes;
       const updatedApp = new Application();
-      updatedApp.id = +this.appDetails.id;
+      updatedApp.id = this.appDetails.id;
       updatedApp.positionTitle = this.appDetails.title;
       updatedApp.companyName = this.appDetails.company;
       updatedApp.appDate = this.appDetails.date as Date;

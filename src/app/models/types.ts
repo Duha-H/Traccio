@@ -3,7 +3,7 @@
  */
 
 export interface ApplicationInput {
-	id: number | string;
+	id: string;
 	company: string;
 	title: string;
 	date: string | Date;

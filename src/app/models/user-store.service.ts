@@ -117,10 +117,10 @@ export class UserStoreService {
     // Called on app init
     // Performs API calls to fetch user data
     let data = {};
-    await this.controller.fetchUserJourneys(this._user.getValue().userid)
-      .then(result => {
-        data = result;
-      });
+    // await this.controller.fetchUserJourneys(this._user.getValue().userid)
+    //   .then(result => {
+    //     data = result;
+    //   });
       // .then(value => {
       //   // this._journeys.next(value);
       //   data = value;
@@ -128,7 +128,7 @@ export class UserStoreService {
       //   this.updateJourneyData(value);
       //   this.dataManager.collectData(value);
       // });
-    // data = this.placeholderJourneys; // TEMP
+    data = this.placeholderJourneys; // TEMP
     // console.log(data);
     this.updateJourneyData(data);
     this.dataManager.collectData(data);
@@ -169,14 +169,14 @@ export class UserStoreService {
     return this._journeys.getValue()[id];
   }
 
-  getApplication(journeyId: string, appId: number): Application {
+  getApplication(journeyId: string, appId: string): Application {
     // tslint:disable-next-line: radix
     return this.getJourney(journeyId).applications.find(
       (element) => element.id === appId
     );
   }
 
-  getWishlistApplication(appId: number): Application {
+  getWishlistApplication(appId: string): Application {
     return this._wishlistApps.getValue().find(
       (element) => element.id === appId
     );
@@ -295,9 +295,9 @@ export class UserStoreService {
     this.updateJourneyData(); // data updated, bubble .next() it to all observables
   }
 
-  removeApplication(journeyid: string, appid: number) {
+  removeApplication(journeyid: string, appid: string) {
     const journey = this.getJourney(journeyid);
-    const remainingApps = journey.applications.filter((app) => {
+    const remainingApps = journey.applications.filter(app => {
       return app.id !== appid;
     });
     this.dataManager.removeApplication(
@@ -331,7 +331,7 @@ export class UserStoreService {
     this._wishlistApps.next(updatedWishlist);
   }
 
-  removeWishlistApplication(appid: number) {
+  removeWishlistApplication(appid: string) {
     const updatedWishlistApps = this._wishlistApps.getValue().filter(app => app.id !== appid);
     this._wishlistApps.next(updatedWishlistApps);
   }
@@ -358,15 +358,17 @@ export class UserStoreService {
     return newID;
   }
 
-  private _getNewAppID(journeyId?: string): number {
+  private _getNewAppID(journeyId?: string): string {
     const apps = journeyId ? this.getJourney(journeyId).applications : this._wishlistApps.getValue();
-    let maxID = apps.length;
-    apps.forEach((element) => {
-      if (element.id >= maxID) {
-        maxID = element.id + 1;
+    let maxID = 0;
+    apps.forEach(app => {
+      const currval = +app.id.split("-").pop(); // TODO: TEST THIS
+      if (currval >= maxID) {
+        maxID = currval + 1;
       }
     });
-    return maxID;
+    const newID = `${journeyId}-${maxID}`;
+    return newID;
   }
 
   private _getUserEntryInput() {

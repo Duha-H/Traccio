@@ -4,7 +4,7 @@ import * as utils from 'src/app/controllers/utils';
 
 export class Application {
 
-	private _id = 0;
+	private _id = '';
 	private _companyName = '';
 	private _positionTitle = '';
 	private _appDate: Date = new Date();
@@ -17,9 +17,7 @@ export class Application {
 
 	constructor(data?: ApplicationInput) {
 		if (data) {
-			this._id = typeof(data.id) === 'string'
-				? parseInt(data.id)
-				: data.id;
+			this._id = data.id;
 			this._companyName = data.company;
 			this._positionTitle = data.title;
 			this._appDate = typeof data.date === 'string'
@@ -41,7 +39,7 @@ export class Application {
 	}
 
 	get id() { return this._id; }
-	set id(id: number) { this._id = id; }
+	set id(id: string) { this._id = id; }
 
 	get companyName() { return this._companyName; }
 	set companyName(name: string) { this._companyName = name; }
