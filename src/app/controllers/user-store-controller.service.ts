@@ -53,8 +53,7 @@ export class UserStoreControllerService {
     await this.api.GetJourney(journeyid)
       .then(value => {
         apps = value.applications.items;
-      })
-      .catch(error => {
+      }).catch(error => {
         console.log(`Error fetching journey ${journeyid} apps:`, error);
         apps = [];
       });
@@ -70,38 +69,88 @@ export class UserStoreControllerService {
           id: value.id,
           journeyUseridId: userid
         });
-      })
-      .catch(error => {
+      }).catch(error => {
         console.log('Error creating and updating journey:', error); // TODO: figure out better error logging behaviour
         response.error('An error occured while trying to add your Journey, please try again');
+        response.payload = error;
       });
     return response;
   }
 
-  async updateJourney(updatedJourney: Journey) {
+  async updateJourney(updatedJourney: Journey): Promise<Response> {
     const response = new Response();
     await this.api.UpdateJourney(updatedJourney.getGQLInput())
       .then(value => {
         response.payload = value;
-      })
-      .catch(error => {
+      }).catch(error => {
         console.log('Error updating journey:', error); // TODO: figure out better error logging behaviour
         response.error('An error occured while trying to update Journey details, please try again');
+        response.payload = error;
       });
     return response;
   }
 
-  async removeJourney(journey: Journey) {
+  async removeJourney(journey: Journey): Promise<Response> {
     const response = new Response();
+    // remove all journey applications
+    journey.applications.forEach(app => {
+      this.removeApplication(app.id).then(value => {
+        if (!value.successful) {
+          console.log('Error removing application:', value); // TODO: figure out better error logging behaviour
+        }
+      });
+    });
+    // remove journey
     await this.api.DeleteJourney({
       id: journey.id
-      }).then(value => {
+    }).then(value => {
+      response.payload = value;
+    }).catch(error => {
+      console.log('Error removing journey:', error); // TODO: figure out better error logging behaviour
+      response.error('An error occured while trying to remove your Journey, please try again');
+    });
+    return response;
+  }
+
+  async addNewApplication(application: Application, journeyid: string): Promise<Response> {
+    const response = new Response();
+    await this.api.CreateApplication({
+      ...application.getGQLInput(),
+      applicationJourneyidId: journeyid
+    }).then(value => {
         response.payload = value;
-      })
-      .catch(error => {
-        console.log('Error removing journey:', error); // TODO: figure out better error logging behaviour
-        response.error('An error occured while trying to remove your Journey, please try again');
+    }).catch(error => {
+      console.log('Error adding application:', error); // TODO: figure out better error logging behaviour
+      response.error('An error occured while trying to add your application, please try again');
+      response.payload = error;
+    });
+    return response;
+  }
+
+  async updateApplication(updatedApplication: Application): Promise<Response> {
+    const response = new Response();
+    await this.api.UpdateApplication(updatedApplication.getGQLInput())
+      .then(value => {
+        response.payload = value;
+      }).catch(error => {
+        console.log('Error updating application:', error); // TODO: figure out better error logging behaviour
+        response.error('An error occured while trying to update application details, please try again');
+        response.payload = error;
       });
+    return response;
+  }
+
+  async removeApplication(appid: string): Promise<Response> {
+    const response = new Response();
+    await this.api.DeleteApplication({
+      id: appid
+    }).then(value => {
+      response.payload = value;
+    }).catch(error => {
+      console.log('Error removing application:', error);
+      response.error('An error occured while trying to remove an application, please try again');
+      response.payload = error;
+    });
     return response;
   }
 }

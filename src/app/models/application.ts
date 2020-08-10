@@ -66,7 +66,7 @@ export class Application {
 
 	get timeline() { return this._timeline; }
 
-	getGraphQLInput() {
+	getGQLInput() {
 		const input = {
 			id: this._id,
 			company: this._companyName,

@@ -83,11 +83,11 @@ export class ApplicationViewComponent implements OnInit {
       }
     });
     if (this.wishlistApp) {
-      this.inputApplication = appid === 'new-app' ? new Application() : this.userStore.getWishlistApplication(+appid);
+      this.inputApplication = appid === 'new-app' ? new Application() : this.userStore.getWishlistApplication(appid);
     } else if (this.newApp) {
       this.inputApplication = new Application();
     } else {
-      this.inputApplication = this.userStore.getApplication(this.journeyid, +appid);
+      this.inputApplication = this.userStore.getApplication(this.journeyid, appid);
     }
     this.currApplicationDetails = Object.assign(new Application(), this.inputApplication);
     if (!this.inputApplication) {
@@ -143,10 +143,20 @@ export class ApplicationViewComponent implements OnInit {
     } else if (this.wishlistApp && !this.newApp) { // existing wishlist application
       this.userStore.updateWishlistApplication(this.currApplicationDetails);
     } else if (this.newApp && !this.wishlistApp) { // completely new application
-      const newApp = this.userStore.addNewApplication(this.journeyid, this.currApplicationDetails);
-      this.router.navigate(['/journeys', this.journeyid, newApp.id]);
+      this.userStore.addNewApplication(this.journeyid, this.currApplicationDetails)
+        .then(response => {
+          if (response.successful) {
+            this.router.navigate(['/journeys', this.journeyid, response.payload.id]);
+          } else {
+            this.notificationService.sendNotification(response.message, 'error');
+          }
+        });
     } else { // existing application
-      this.userStore.updateExistingApplication(this.journeyid, this.currApplicationDetails);
+      this.userStore.updateExistingApplication(this.journeyid, this.currApplicationDetails).then(response => {
+        if (!response.successful) {
+          this.notificationService.sendNotification(response.message, 'error');
+        }
+      });
     }
 
     this.detailsUpdated = false;
@@ -180,14 +190,17 @@ export class ApplicationViewComponent implements OnInit {
     }
     // add appliaction to journey
     console.log('app id before:', this.currApplicationDetails.id);
-    const result = this.userStore.addNewApplication(journeyid, this.currApplicationDetails);
-    console.log('app id after:', this.currApplicationDetails.id);
-    if (result) {
-      // if successfully added, remove application from wishlist
-      this.userStore.removeWishlistApplication(this.currApplicationDetails.id);
-      this.router.navigate(['/journeys', journeyid, result.id]);
-      this.notificationService.sendNotification(`Application successfully added to ${journey.title}!`, 'success', 5000);
-    }
+    this.userStore.addNewApplication(journeyid, this.currApplicationDetails)
+      .then(response => {
+        if (response.successful) {
+          // if successfully added, remove application from wishlist
+          this.userStore.removeWishlistApplication(this.currApplicationDetails.id);
+          this.router.navigate(['/journeys', journeyid, response.payload.id]);
+          this.notificationService.sendNotification(`Application successfully added to ${journey.title}!`, 'success', 5000);
+        } else {
+          this.notificationService.sendNotification(response.message, 'error');
+        }
+      });
   }
 
   /**

@@ -6,6 +6,7 @@ import { UserStoreService } from 'src/app/models/user-store.service';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatSidenav } from '@angular/material/sidenav';
 import { OnDirtyErrorStateMatcher } from 'src/app/controllers/on-dirty-error-state-matcher';
+import { NotificationService } from 'src/app/controllers/notification.service';
 
 @Component({
   selector: 'application-input',
@@ -50,7 +51,7 @@ export class ApplicationInputComponent implements OnChanges {
 
   invalidTitle = true;
 
-  constructor(private userStore: UserStoreService) {
+  constructor(private userStore: UserStoreService, private notificationService: NotificationService) {
   }
 
   ngOnChanges() {
@@ -80,14 +81,13 @@ export class ApplicationInputComponent implements OnChanges {
   onDataLogged() {
     // this.appDetails.date = this.startDate;
     if (!this.app) {
-      this.userStore.addNewApplication(this.journeyId, this.appDetails);
+      this.userStore.addNewApplication(this.journeyId, this.appDetails)
+      .then(response => {
+        if (!response.successful) {
+          this.notificationService.sendNotification(response.message, 'error');
+        }
+      });
     } else {
-      // this.app.companyName = this.appDetails.company;
-      // this.app.positionTitle = this.appDetails.title;
-      // this.app.appDate = this.appDetails.date;
-      // this.app.status = this.appDetails.status;
-      // this.app.source = this.appDetails.source;
-      // this.app.notes = this.appDetails.notes;
       const updatedApp = new Application();
       updatedApp.id = this.appDetails.id;
       updatedApp.positionTitle = this.appDetails.title;
@@ -96,9 +96,13 @@ export class ApplicationInputComponent implements OnChanges {
       updatedApp.status = this.appDetails.status;
       updatedApp.source = this.appDetails.source;
       updatedApp.notes = this.appDetails.notes;
-      console.log(updatedApp);
-      this.userStore.updateExistingApplication(this.journeyId, updatedApp);
-      this.app = undefined;
+      this.userStore.updateExistingApplication(this.journeyId, updatedApp).then(response => {
+        if (!response.successful) {
+          this.notificationService.sendNotification(response.message, 'error');
+        } else {
+          this.app = undefined;
+        }
+      });
     }
     // TODO: check if everything is fine here
     this.sidenav.close();

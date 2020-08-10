@@ -5,6 +5,7 @@ import {
   ViewChildren,
   QueryList,
   ElementRef,
+  AfterViewInit,
 } from "@angular/core";
 import { Journey } from "src/app/models/journey";
 import { MatSidenav } from "@angular/material/sidenav";
@@ -29,7 +30,7 @@ const DRAWER_MODES = {
   templateUrl: "./journey-view.component.html",
   styleUrls: ["./journey-view.component.css"],
 })
-export class JourneyViewComponent implements OnInit {
+export class JourneyViewComponent implements OnInit, AfterViewInit {
   @ViewChild("editButton") editButton: ElementRef;
   @ViewChild("sidenav", { static: false }) sidenav: MatSidenav;
   @ViewChild("filterElement", { static: false }) dropdownElement: MatSelect;
@@ -123,7 +124,7 @@ export class JourneyViewComponent implements OnInit {
   };
   displayEditOverlay = false;
   displayFilterOverlay = false;
-  visibleAppCount = 0;
+  visibleAppCount: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -134,7 +135,7 @@ export class JourneyViewComponent implements OnInit {
 
   ngOnInit() {
     let id: string;
-    let appref: string | number;
+    let appref: string;
     // extract journey ID from URL, then get journey from UserStore
     this.route.params.subscribe((params) => {
       id = params.id;
@@ -154,12 +155,16 @@ export class JourneyViewComponent implements OnInit {
       this.breadcrumbsData.current.url = `/journeys/${this.journey.id}`;
       this.selectedApp = this.userStore.getApplication(
         this.journey.id,
-        +appref
+        appref
       );
       if (appref && this.selectedApp) {
         this.displayDrawer = true;
       }
     }
+  }
+
+  ngAfterViewInit() {
+    this.visibleAppCount = this.appList.dataSource.data.length;
   }
 
   toggleViewMode() {

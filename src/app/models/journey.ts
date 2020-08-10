@@ -66,7 +66,7 @@ export class Journey {
 	getGQLInput() {
 		// format null-able values
 		const endDateFormatted = this._endDate ? utils.getDateString(this._endDate) : '';
-		const applicationsFormatted = this._applications.map(app => app.getGraphQLInput());
+		const applicationsFormatted = this._applications.map(app => app.getGQLInput());
 
 		const input = {
 			id: this._id,

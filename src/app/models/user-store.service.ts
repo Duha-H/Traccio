@@ -117,19 +117,11 @@ export class UserStoreService {
     // Called on app init
     // Performs API calls to fetch user data
     let data = {};
-    // await this.controller.fetchUserJourneys(this._user.getValue().userid)
-    //   .then(result => {
-    //     data = result;
-    //   });
-      // .then(value => {
-      //   // this._journeys.next(value);
-      //   data = value;
-      //   console.log(Object.keys(value).length);
-      //   this.updateJourneyData(value);
-      //   this.dataManager.collectData(value);
-      // });
-    data = this.placeholderJourneys; // TEMP
-    // console.log(data);
+    await this.controller.fetchUserJourneys(this._user.getValue().userid)
+      .then(result => {
+        data = result;
+      });
+    // data = this.placeholderJourneys; // TEMP
     this.updateJourneyData(data);
     this.dataManager.collectData(data);
     this.loadData();
@@ -252,7 +244,7 @@ export class UserStoreService {
     return response;
   }
 
-  addNewApplication(journeyId: string, appData: ApplicationInput | Application) {
+  async addNewApplication(journeyId: string, appData: ApplicationInput | Application) {
     const journey = this.getJourney(journeyId);
     if (!journey) {
       console.log('UserStore: journey with id', journeyId, 'does not exist.');
@@ -266,37 +258,52 @@ export class UserStoreService {
     }
     const appID = this._getNewAppID(journeyId);
     newApplication.id = appID;
+    const response = await this.controller.addNewApplication(newApplication, journeyId);
+    if (!response.successful) {
+      return response;
+    }
+    response.payload = newApplication;
     journey.applications.push(newApplication); // wooowiiieee
     this.dataManager.addApplication(journeyId, newApplication);
     // TODO: should this maybe trigger a data reload??
     this.dataUpdated = true;
     this.updateJourneyData(); // data update, bubble .next() it to all observables
 
-    return newApplication;
+    return response;
   }
 
-  updateExistingApplication(
+  async updateExistingApplication(
     journeyid: string,
     updatedApplication: Application
   ) {
     const appID = updatedApplication.id;
     const journey = this.getJourney(journeyid);
     const existingApplication = this.getApplication(journeyid, appID);
+    const response = await this.controller.updateApplication(updatedApplication);
+    if (!response.successful) {
+      return response;
+    }
     this.dataManager.updateExistingApplication(
       journeyid,
       existingApplication,
       updatedApplication
     );
-    const updatedApps = journey.applications.map((app) => {
+    const updatedApps = journey.applications.map(app => {
       return app.id === updatedApplication.id ? updatedApplication : app;
     });
     // existingApplication = updatedApplication;
     journey.applications = updatedApps;
     this.updateJourneyData(); // data updated, bubble .next() it to all observables
+
+    return response;
   }
 
-  removeApplication(journeyid: string, appid: string) {
+  async removeApplication(journeyid: string, appid: string) {
     const journey = this.getJourney(journeyid);
+    const response = await this.controller.removeApplication(appid);
+    if (!response.successful) {
+      return response;
+    }
     const remainingApps = journey.applications.filter(app => {
       return app.id !== appid;
     });
@@ -306,6 +313,8 @@ export class UserStoreService {
     );
     journey.applications = remainingApps;
     this.updateJourneyData(); // data updated, bubble .next() it to all observables
+
+    return response;
   }
 
   addNewWishlistApplication(appData: Application | ApplicationInput) {
