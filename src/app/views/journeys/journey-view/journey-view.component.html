@@ -18,7 +18,7 @@
         <div class="spanning-content app-header">
           <p>Applications</p>
           <div class="spacer"></div>
-          <p style="font-weight: initial;">{{ visibleAppCount == 1 ? '1 application' : visibleAppCount + ' applications' }}</p>
+          <p style="font-weight: initial;">{{ visibleAppCount }}</p>
           <mat-icon *ngIf="(rs.tabletSize$ | async)" (click)="displayFilterOverlay=true">filter_list</mat-icon>    
         </div>
       </div>

@@ -61,18 +61,20 @@ export class ApplicationListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.journeyid !== undefined) {
-      this.applications = this.userStore.getJourney(this.journeyid).applications;
-      this.dataSource.data = this.applications;
-      this.dataSource.sort = this.sort;
-      this.updateView();
-    } else {
-      console.error("Journey ID not specified"); // this should not happen
-    }
+    this.userStore.journeys.subscribe(journeys => {
+      const journey = this.userStore.getJourney(this.journeyid);
+      if (journey) {
+        this.applications = journey.applications;
+      }
+    });
+    // this.applications = this.userStore.getJourney(this.journeyid).applications;
+    this.dataSource.data = this.applications;
+    this.dataSource.sort = this.sort;
+    this.updateView();
   }
 
   updateView() {
-    this.applications = this.userStore.getJourney(this.journeyid).applications;
+    // this.applications = this.userStore.getJourney(this.journeyid).applications;
     this.dataSource.data = this.filterObjects.source.length !== 0 || this.filterObjects.status.length !== 0
       ? this._getFilteredData() // if any filters are selected, apply those
       : this.applications;

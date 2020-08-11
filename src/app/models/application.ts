@@ -15,7 +15,7 @@ export class Application {
 	private _source = APP_SOURCE.JOB_BOARD.toString();
 	private _notes = '';
 
-	constructor(data?: ApplicationInput) {
+	constructor(data?: ApplicationInput, ) {
 		if (data) {
 			this._id = data.id;
 			this._companyName = data.company;
@@ -25,7 +25,7 @@ export class Application {
 				: new Date(data.date);
 			// this._appDate = data.date;
 			this._status = data.status;
-			if (data.timeline) {
+			if (data.timeline && data.timeline.length !== 0) {
 				this._timeline = this._modifyTimelineData(data.timeline);
 			} else {
 				this._timeline.push({

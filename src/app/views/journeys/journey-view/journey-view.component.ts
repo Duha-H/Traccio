@@ -124,7 +124,7 @@ export class JourneyViewComponent implements OnInit, AfterViewInit {
   };
   displayEditOverlay = false;
   displayFilterOverlay = false;
-  visibleAppCount: number;
+  visibleAppCount = '0 applications';
 
   constructor(
     private route: ActivatedRoute,
@@ -144,27 +144,27 @@ export class JourneyViewComponent implements OnInit, AfterViewInit {
       }
       return params.id;
     });
-    this.journey = this.userStore.getJourney(id);
-    this.currJourneyDetails = Object.assign(new Journey(), this.journey);
-    if (!this.journey) {
-      console.log("No journey loaded.");
-      this.router.navigate(["/journeys"]);
-      return;
-    } else {
-      this.breadcrumbsData.current.name = this.journey.title;
-      this.breadcrumbsData.current.url = `/journeys/${this.journey.id}`;
-      this.selectedApp = this.userStore.getApplication(
-        this.journey.id,
-        appref
-      );
-      if (appref && this.selectedApp) {
-        this.displayDrawer = true;
+    this.userStore.journeys.subscribe(journeys => {
+      const journey = this.userStore.getJourney(id);
+      if (journey) {
+        this.journey = journey;
+        this.breadcrumbsData.current.name = this.journey.title;
+        this.breadcrumbsData.current.url = `/journeys/${this.journey.id}`;
+        this.selectedApp = this.userStore.getApplication(
+          this.journey.id,
+          appref
+        );
+        if (appref && this.selectedApp) {
+          this.displayDrawer = true;
+        }
+        this.updateApplicationCount(this.journey.applications.length);
       }
-    }
+    });
+    this.currJourneyDetails = Object.assign(new Journey(), this.journey);
   }
 
   ngAfterViewInit() {
-    this.visibleAppCount = this.appList.dataSource.data.length;
+    this.updateApplicationCount(this.appList.dataSource.data.length);
   }
 
   toggleViewMode() {
@@ -188,7 +188,7 @@ export class JourneyViewComponent implements OnInit, AfterViewInit {
 
   saveJourneyUpdates() {
     this.journey = this.currJourneyDetails;
-    this.userStore.loadData();
+    this.userStore.updateExistingJourney(this.currJourneyDetails);
     this.displayEditOverlay = false;
   }
 
@@ -204,7 +204,6 @@ export class JourneyViewComponent implements OnInit, AfterViewInit {
 
   updateView() {
     if (this.journey) {
-      this.journey = this.userStore.getJourney(this.journey.id); // probably no longer necessary
       this.currJourneyDetails = Object.assign(new Journey(), this.journey);
       this.appList.updateView();
     }
@@ -255,8 +254,11 @@ export class JourneyViewComponent implements OnInit, AfterViewInit {
     this._applyFilter(property.toLowerCase(), value, false);
   }
 
-  updateApplicationCount(count: number) {
-    this.visibleAppCount = count;
+  updateApplicationCount(count?: number) {
+    if (count !== undefined) {
+      this.visibleAppCount = count === 1 ? '1 application' : count + ' applications';
+    }
+    return this.visibleAppCount;
   }
 
   private _applyFilter(property: string, value: string, selected: boolean) {

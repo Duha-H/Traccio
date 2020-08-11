@@ -41,7 +41,7 @@
           color="accent" name="statusSelection" title="update status" floatLabel="never"
           [ngModel]="currApplicationDetails.status" (selectionChange)="updateField(ATTRIBS.STATUS, $event.value)"
           #statusDropdown>
-          <mat-option *ngFor="let status of statuses;" [value]="status.value">{{status.viewValue}}</mat-option>
+          <mat-option *ngFor="let status of statuses;" [value]="status.value">{{ status.viewValue }}</mat-option>
         </mat-select>
         <p *ngIf="!(rs.tabletSize$ | async)">Since: {{currApplicationDetails.timeline[currApplicationDetails.timeline.length - 1].date | date}}</p>
       </div>
