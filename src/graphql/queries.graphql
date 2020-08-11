@@ -93,6 +93,10 @@ query GetApplication($id: ID!) {
     title
     date
     status
+    timeline {
+      status
+      date
+    }
     source
     notes
     journeyid {
@@ -124,6 +128,10 @@ query ListApplications(
       title
       date
       status
+      timeline {
+        status
+        date
+      }
       source
       notes
       journeyid {
@@ -133,6 +141,39 @@ query ListApplications(
         endDate
         active
       }
+    }
+    nextToken
+  }
+}
+query GetWishlistApplication($id: ID!) {
+  getWishlistApplication(id: $id) {
+    id
+    company
+    title
+    date
+    status
+    source
+    notes
+  }
+}
+query ListWishlistApplications(
+  $filter: ModelWishlistApplicationFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listWishlistApplications(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      company
+      title
+      date
+      status
+      source
+      notes
     }
     nextToken
   }

@@ -3,7 +3,7 @@
 //  This file was automatically generated and should not be edited.
 import { Injectable } from "@angular/core";
 import API, { graphqlOperation } from "@aws-amplify/api";
-// import { GraphQLResult } from "@aws-amplify/api/lib/types";
+import { GraphQLResult } from "@aws-amplify/api/lib/types";
 import * as Observable from "zen-observable";
 
 export type CreateUserEntryInput = {
@@ -114,9 +114,15 @@ export type CreateApplicationInput = {
   title: string;
   date: string;
   status?: string | null;
+  timeline?: Array<TimelineDatumInput | null> | null;
   source?: string | null;
   notes?: string | null;
   applicationJourneyidId?: string | null;
+};
+
+export type TimelineDatumInput = {
+  status: string;
+  date: string;
 };
 
 export type ModelApplicationConditionInput = {
@@ -137,12 +143,49 @@ export type UpdateApplicationInput = {
   title?: string | null;
   date?: string | null;
   status?: string | null;
+  timeline?: Array<TimelineDatumInput | null> | null;
   source?: string | null;
   notes?: string | null;
   applicationJourneyidId?: string | null;
 };
 
 export type DeleteApplicationInput = {
+  id?: string | null;
+};
+
+export type CreateWishlistApplicationInput = {
+  id?: string | null;
+  company: string;
+  title: string;
+  date: string;
+  status?: string | null;
+  source?: string | null;
+  notes?: string | null;
+};
+
+export type ModelWishlistApplicationConditionInput = {
+  company?: ModelStringInput | null;
+  title?: ModelStringInput | null;
+  date?: ModelStringInput | null;
+  status?: ModelStringInput | null;
+  source?: ModelStringInput | null;
+  notes?: ModelStringInput | null;
+  and?: Array<ModelWishlistApplicationConditionInput | null> | null;
+  or?: Array<ModelWishlistApplicationConditionInput | null> | null;
+  not?: ModelWishlistApplicationConditionInput | null;
+};
+
+export type UpdateWishlistApplicationInput = {
+  id: string;
+  company?: string | null;
+  title?: string | null;
+  date?: string | null;
+  status?: string | null;
+  source?: string | null;
+  notes?: string | null;
+};
+
+export type DeleteWishlistApplicationInput = {
   id?: string | null;
 };
 
@@ -193,6 +236,19 @@ export type ModelApplicationFilterInput = {
   and?: Array<ModelApplicationFilterInput | null> | null;
   or?: Array<ModelApplicationFilterInput | null> | null;
   not?: ModelApplicationFilterInput | null;
+};
+
+export type ModelWishlistApplicationFilterInput = {
+  id?: ModelIDInput | null;
+  company?: ModelStringInput | null;
+  title?: ModelStringInput | null;
+  date?: ModelStringInput | null;
+  status?: ModelStringInput | null;
+  source?: ModelStringInput | null;
+  notes?: ModelStringInput | null;
+  and?: Array<ModelWishlistApplicationFilterInput | null> | null;
+  or?: Array<ModelWishlistApplicationFilterInput | null> | null;
+  not?: ModelWishlistApplicationFilterInput | null;
 };
 
 export type CreateUserEntryMutation = {
@@ -358,6 +414,11 @@ export type CreateApplicationMutation = {
   title: string;
   date: string;
   status: string | null;
+  timeline: Array<{
+    __typename: "TimelineDatum";
+    status: string;
+    date: string;
+  } | null> | null;
   source: string | null;
   notes: string | null;
   journeyid: {
@@ -387,6 +448,11 @@ export type UpdateApplicationMutation = {
   title: string;
   date: string;
   status: string | null;
+  timeline: Array<{
+    __typename: "TimelineDatum";
+    status: string;
+    date: string;
+  } | null> | null;
   source: string | null;
   notes: string | null;
   journeyid: {
@@ -416,6 +482,11 @@ export type DeleteApplicationMutation = {
   title: string;
   date: string;
   status: string | null;
+  timeline: Array<{
+    __typename: "TimelineDatum";
+    status: string;
+    date: string;
+  } | null> | null;
   source: string | null;
   notes: string | null;
   journeyid: {
@@ -436,6 +507,39 @@ export type DeleteApplicationMutation = {
       nextToken: string | null;
     } | null;
   } | null;
+};
+
+export type CreateWishlistApplicationMutation = {
+  __typename: "WishlistApplication";
+  id: string;
+  company: string;
+  title: string;
+  date: string;
+  status: string | null;
+  source: string | null;
+  notes: string | null;
+};
+
+export type UpdateWishlistApplicationMutation = {
+  __typename: "WishlistApplication";
+  id: string;
+  company: string;
+  title: string;
+  date: string;
+  status: string | null;
+  source: string | null;
+  notes: string | null;
+};
+
+export type DeleteWishlistApplicationMutation = {
+  __typename: "WishlistApplication";
+  id: string;
+  company: string;
+  title: string;
+  date: string;
+  status: string | null;
+  source: string | null;
+  notes: string | null;
 };
 
 export type GetUserEntryQuery = {
@@ -529,6 +633,11 @@ export type ListJourneysQuery = {
         title: string;
         date: string;
         status: string;
+        timeline: Array<{
+          __typename: "TimelineDatum";
+          status: string;
+          date: string;
+        } | null> | null;
         source: string;
         notes: string;
       }>
@@ -544,6 +653,11 @@ export type GetApplicationQuery = {
   title: string;
   date: string;
   status: string | null;
+  timeline: Array<{
+    __typename: "TimelineDatum";
+    status: string;
+    date: string;
+  } | null> | null;
   source: string | null;
   notes: string | null;
   journeyid: {
@@ -575,6 +689,11 @@ export type ListApplicationsQuery = {
     title: string;
     date: string;
     status: string | null;
+    timeline: Array<{
+      __typename: "TimelineDatum";
+      status: string;
+      date: string;
+    } | null> | null;
     source: string | null;
     notes: string | null;
     journeyid: {
@@ -585,6 +704,32 @@ export type ListApplicationsQuery = {
       endDate: string | null;
       active: boolean;
     } | null;
+  } | null> | null;
+  nextToken: string | null;
+};
+
+export type GetWishlistApplicationQuery = {
+  __typename: "WishlistApplication";
+  id: string;
+  company: string;
+  title: string;
+  date: string;
+  status: string | null;
+  source: string | null;
+  notes: string | null;
+};
+
+export type ListWishlistApplicationsQuery = {
+  __typename: "ModelWishlistApplicationConnection";
+  items: Array<{
+    __typename: "WishlistApplication";
+    id: string;
+    company: string;
+    title: string;
+    date: string;
+    status: string | null;
+    source: string | null;
+    notes: string | null;
   } | null> | null;
   nextToken: string | null;
 };
@@ -752,6 +897,11 @@ export type OnCreateApplicationSubscription = {
   title: string;
   date: string;
   status: string | null;
+  timeline: Array<{
+    __typename: "TimelineDatum";
+    status: string;
+    date: string;
+  } | null> | null;
   source: string | null;
   notes: string | null;
   journeyid: {
@@ -781,6 +931,11 @@ export type OnUpdateApplicationSubscription = {
   title: string;
   date: string;
   status: string | null;
+  timeline: Array<{
+    __typename: "TimelineDatum";
+    status: string;
+    date: string;
+  } | null> | null;
   source: string | null;
   notes: string | null;
   journeyid: {
@@ -810,6 +965,11 @@ export type OnDeleteApplicationSubscription = {
   title: string;
   date: string;
   status: string | null;
+  timeline: Array<{
+    __typename: "TimelineDatum";
+    status: string;
+    date: string;
+  } | null> | null;
   source: string | null;
   notes: string | null;
   journeyid: {
@@ -830,6 +990,39 @@ export type OnDeleteApplicationSubscription = {
       nextToken: string | null;
     } | null;
   } | null;
+};
+
+export type OnCreateWishlistApplicationSubscription = {
+  __typename: "WishlistApplication";
+  id: string;
+  company: string;
+  title: string;
+  date: string;
+  status: string | null;
+  source: string | null;
+  notes: string | null;
+};
+
+export type OnUpdateWishlistApplicationSubscription = {
+  __typename: "WishlistApplication";
+  id: string;
+  company: string;
+  title: string;
+  date: string;
+  status: string | null;
+  source: string | null;
+  notes: string | null;
+};
+
+export type OnDeleteWishlistApplicationSubscription = {
+  __typename: "WishlistApplication";
+  id: string;
+  company: string;
+  title: string;
+  date: string;
+  status: string | null;
+  source: string | null;
+  notes: string | null;
 };
 
 @Injectable({
@@ -1100,6 +1293,11 @@ export class APIService {
           title
           date
           status
+          timeline {
+            __typename
+            status
+            date
+          }
           source
           notes
           journeyid {
@@ -1145,6 +1343,11 @@ export class APIService {
           title
           date
           status
+          timeline {
+            __typename
+            status
+            date
+          }
           source
           notes
           journeyid {
@@ -1190,6 +1393,11 @@ export class APIService {
           title
           date
           status
+          timeline {
+            __typename
+            status
+            date
+          }
           source
           notes
           journeyid {
@@ -1222,6 +1430,93 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <DeleteApplicationMutation>response.data.deleteApplication;
+  }
+  async CreateWishlistApplication(
+    input: CreateWishlistApplicationInput,
+    condition?: ModelWishlistApplicationConditionInput
+  ): Promise<CreateWishlistApplicationMutation> {
+    const statement = `mutation CreateWishlistApplication($input: CreateWishlistApplicationInput!, $condition: ModelWishlistApplicationConditionInput) {
+        createWishlistApplication(input: $input, condition: $condition) {
+          __typename
+          id
+          company
+          title
+          date
+          status
+          source
+          notes
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <CreateWishlistApplicationMutation>(
+      response.data.createWishlistApplication
+    );
+  }
+  async UpdateWishlistApplication(
+    input: UpdateWishlistApplicationInput,
+    condition?: ModelWishlistApplicationConditionInput
+  ): Promise<UpdateWishlistApplicationMutation> {
+    const statement = `mutation UpdateWishlistApplication($input: UpdateWishlistApplicationInput!, $condition: ModelWishlistApplicationConditionInput) {
+        updateWishlistApplication(input: $input, condition: $condition) {
+          __typename
+          id
+          company
+          title
+          date
+          status
+          source
+          notes
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <UpdateWishlistApplicationMutation>(
+      response.data.updateWishlistApplication
+    );
+  }
+  async DeleteWishlistApplication(
+    input: DeleteWishlistApplicationInput,
+    condition?: ModelWishlistApplicationConditionInput
+  ): Promise<DeleteWishlistApplicationMutation> {
+    const statement = `mutation DeleteWishlistApplication($input: DeleteWishlistApplicationInput!, $condition: ModelWishlistApplicationConditionInput) {
+        deleteWishlistApplication(input: $input, condition: $condition) {
+          __typename
+          id
+          company
+          title
+          date
+          status
+          source
+          notes
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      input
+    };
+    if (condition) {
+      gqlAPIServiceArguments.condition = condition;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <DeleteWishlistApplicationMutation>(
+      response.data.deleteWishlistApplication
+    );
   }
   async GetUserEntry(id: string): Promise<GetUserEntryQuery> {
     const statement = `query GetUserEntry($id: ID!) {
@@ -1361,6 +1656,10 @@ export class APIService {
                 title
                 date
                 status
+                timeline {
+                  status
+                  date
+                }
                 source
                 notes
               }
@@ -1393,6 +1692,11 @@ export class APIService {
           title
           date
           status
+          timeline {
+            __typename
+            status
+            date
+          }
           source
           notes
           journeyid {
@@ -1438,6 +1742,11 @@ export class APIService {
             title
             date
             status
+            timeline {
+              __typename
+              status
+              date
+            }
             source
             notes
             journeyid {
@@ -1466,6 +1775,67 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListApplicationsQuery>response.data.listApplications;
+  }
+  async GetWishlistApplication(
+    id: string
+  ): Promise<GetWishlistApplicationQuery> {
+    const statement = `query GetWishlistApplication($id: ID!) {
+        getWishlistApplication(id: $id) {
+          __typename
+          id
+          company
+          title
+          date
+          status
+          source
+          notes
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetWishlistApplicationQuery>response.data.getWishlistApplication;
+  }
+  async ListWishlistApplications(
+    filter?: ModelWishlistApplicationFilterInput,
+    limit?: number,
+    nextToken?: string
+  ): Promise<ListWishlistApplicationsQuery> {
+    const statement = `query ListWishlistApplications($filter: ModelWishlistApplicationFilterInput, $limit: Int, $nextToken: String) {
+        listWishlistApplications(filter: $filter, limit: $limit, nextToken: $nextToken) {
+          __typename
+          items {
+            __typename
+            id
+            company
+            title
+            date
+            status
+            source
+            notes
+          }
+          nextToken
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <ListWishlistApplicationsQuery>(
+      response.data.listWishlistApplications
+    );
   }
   OnCreateUserEntryListener: Observable<
     OnCreateUserEntrySubscription
@@ -1683,6 +2053,11 @@ export class APIService {
           title
           date
           status
+          timeline {
+            __typename
+            status
+            date
+          }
           source
           notes
           journeyid {
@@ -1720,6 +2095,11 @@ export class APIService {
           title
           date
           status
+          timeline {
+            __typename
+            status
+            date
+          }
           source
           notes
           journeyid {
@@ -1757,6 +2137,11 @@ export class APIService {
           title
           date
           status
+          timeline {
+            __typename
+            status
+            date
+          }
           source
           notes
           journeyid {
@@ -1781,4 +2166,61 @@ export class APIService {
       }`
     )
   ) as Observable<OnDeleteApplicationSubscription>;
+
+  OnCreateWishlistApplicationListener: Observable<
+    OnCreateWishlistApplicationSubscription
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnCreateWishlistApplication {
+        onCreateWishlistApplication {
+          __typename
+          id
+          company
+          title
+          date
+          status
+          source
+          notes
+        }
+      }`
+    )
+  ) as Observable<OnCreateWishlistApplicationSubscription>;
+
+  OnUpdateWishlistApplicationListener: Observable<
+    OnUpdateWishlistApplicationSubscription
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnUpdateWishlistApplication {
+        onUpdateWishlistApplication {
+          __typename
+          id
+          company
+          title
+          date
+          status
+          source
+          notes
+        }
+      }`
+    )
+  ) as Observable<OnUpdateWishlistApplicationSubscription>;
+
+  OnDeleteWishlistApplicationListener: Observable<
+    OnDeleteWishlistApplicationSubscription
+  > = API.graphql(
+    graphqlOperation(
+      `subscription OnDeleteWishlistApplication {
+        onDeleteWishlistApplication {
+          __typename
+          id
+          company
+          title
+          date
+          status
+          source
+          notes
+        }
+      }`
+    )
+  ) as Observable<OnDeleteWishlistApplicationSubscription>;
 }

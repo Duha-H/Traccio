@@ -21,7 +21,23 @@ type Application @model {
   title: String!
   date: String!
   status: String
+  timeline: [TimelineDatum]
   source: String
   notes: String
   journeyid: Journey @connection(name: "JourneyApps")
+}
+
+type WishlistApplication @model {
+  id: ID!
+  company: String!
+  title: String!
+  date: String!
+  status: String
+  source: String
+  notes: String
+}
+
+type TimelineDatum {
+  status: String!
+  date: String!
 }

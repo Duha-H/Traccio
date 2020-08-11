@@ -144,6 +144,10 @@ subscription OnCreateApplication {
     title
     date
     status
+    timeline {
+      status
+      date
+    }
     source
     notes
     journeyid {
@@ -170,6 +174,10 @@ subscription OnUpdateApplication {
     title
     date
     status
+    timeline {
+      status
+      date
+    }
     source
     notes
     journeyid {
@@ -196,6 +204,10 @@ subscription OnDeleteApplication {
     title
     date
     status
+    timeline {
+      status
+      date
+    }
     source
     notes
     journeyid {
@@ -213,5 +225,38 @@ subscription OnDeleteApplication {
         nextToken
       }
     }
+  }
+}
+subscription OnCreateWishlistApplication {
+  onCreateWishlistApplication {
+    id
+    company
+    title
+    date
+    status
+    source
+    notes
+  }
+}
+subscription OnUpdateWishlistApplication {
+  onUpdateWishlistApplication {
+    id
+    company
+    title
+    date
+    status
+    source
+    notes
+  }
+}
+subscription OnDeleteWishlistApplication {
+  onDeleteWishlistApplication {
+    id
+    company
+    title
+    date
+    status
+    source
+    notes
   }
 }
