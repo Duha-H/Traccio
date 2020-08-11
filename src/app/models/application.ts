@@ -66,7 +66,7 @@ export class Application {
 
 	get timeline() { return this._timeline; }
 
-	getGQLInput() {
+	getGQLInput(wishlist?: boolean) {
 		const input = {
 			id: this._id,
 			company: this._companyName,
@@ -76,6 +76,9 @@ export class Application {
 			source: this._source,
 			notes: this._notes
 		};
+		if (!wishlist) {
+			input['timeline'] = this._getFormattedTimeline();
+		}
 		return input;
 	}
 
@@ -108,5 +111,17 @@ export class Application {
 			const updatedDateStr = `${MONTH_VALS[+components[1]]} ${components[2]}, ${components[0]}`;
 			return new Date(updatedDateStr);
 		}
+	}
+
+	private _getFormattedTimeline(): {
+		status: string,
+		date: string
+	}[] {
+		return this._timeline.map(value => {
+			return {
+				status: value.status,
+				date: utils.getDateString(value.date)
+			};
+		});
 	}
 }

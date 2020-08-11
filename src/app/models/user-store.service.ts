@@ -44,7 +44,7 @@ export class UserStoreService {
     Journey[]
   > = this._activeJourneys.asObservable();
 
-  private _wishlistApps: BehaviorSubject<Application[]> = new BehaviorSubject<Application[]>([].concat(mockApps.MOCK_APPS_1));
+  private _wishlistApps: BehaviorSubject<Application[]> = new BehaviorSubject<Application[]>([]);
   public readonly wishlistApps: Observable<Application[]> = this._wishlistApps.asObservable();
 
   private _user: BehaviorSubject<User> = new BehaviorSubject<User>(new User());
@@ -118,13 +118,29 @@ export class UserStoreService {
     // Performs API calls to fetch user data
     let data = {};
     await this.controller.fetchUserJourneys(this._user.getValue().userid)
-      .then(result => {
-        data = result;
+      .then(response => {
+        if (response.successful) {
+          data = response.payload;
+        } else {
+          return response;
+        }
       });
     // data = this.placeholderJourneys; // TEMP
     this.updateJourneyData(data);
     this.dataManager.collectData(data);
     this.loadData();
+    this.fetchWishlistApps();
+  }
+
+  async fetchWishlistApps() {
+    await this.controller.fetchWishlistApps(this._user.getValue().userid)
+      .then(response => {
+        if (response.successful) {
+          this._wishlistApps.next(response.payload);
+        } else {
+          return response;
+        }
+      });
   }
 
   /**
@@ -228,6 +244,19 @@ export class UserStoreService {
     this.dataManager.addJourney(newJourney);
     this.updateJourneyData(updatedJourneys);
     this.dataUpdated = true;
+
+    return response;
+  }
+
+  async updateExistingJourney(updatedJourney: Journey) {
+    const response = await this.controller.updateJourney(updatedJourney);
+    if (!response.successful) {
+      return response;
+    }
+    const updatedJourneys = this._journeys.getValue();
+    updatedJourneys[updatedJourney.id] = updatedJourney;
+    this.updateJourneyData(updatedJourneys);
+
     return response;
   }
 
@@ -241,6 +270,7 @@ export class UserStoreService {
     this.dataManager.removeJourney(journeyid);
     this.updateJourneyData(updatedJourneys);
     this.dataUpdated = true;
+
     return response;
   }
 
@@ -317,32 +347,49 @@ export class UserStoreService {
     return response;
   }
 
-  addNewWishlistApplication(appData: Application | ApplicationInput) {
-    const appID = this._getNewAppID();
-    appData.id = appID;
+  async addNewWishlistApplication(appData: Application | ApplicationInput) {
     let newApplication: Application;
     if (appData instanceof Application) {
       newApplication = appData;
     } else {
       newApplication = new Application(appData);
     }
+    const appID = this._getNewAppID();
+    newApplication.id = appID;
+    const response = await this.controller.addNewWishlistApplication(newApplication);
+    if (!response.successful) {
+      return response;
+    }
+    response.payload = newApplication;
     const updatedWishlist = this._wishlistApps.getValue();
     updatedWishlist.push(newApplication);
     this._wishlistApps.next(updatedWishlist);
 
-    return newApplication;
+    return response;
   }
 
-  updateWishlistApplication(updatedApplication: Application) {
+  async updateWishlistApplication(updatedApplication: Application) {
+    const response = await this.controller.updateWishlistApplication(updatedApplication);
+    if (!response.successful) {
+      return response;
+    }
     const updatedWishlist = this._wishlistApps.getValue().map(app => {
       return app.id === updatedApplication.id ? updatedApplication : app;
     });
     this._wishlistApps.next(updatedWishlist);
+
+    return response;
   }
 
-  removeWishlistApplication(appid: string) {
+  async removeWishlistApplication(appid: string) {
+    const response = await this.controller.removeWishlistApplication(appid);
+    if (!response.successful) {
+      return response;
+    }
     const updatedWishlistApps = this._wishlistApps.getValue().filter(app => app.id !== appid);
     this._wishlistApps.next(updatedWishlistApps);
+
+    return response;
   }
 
   /**
@@ -376,7 +423,7 @@ export class UserStoreService {
         maxID = currval + 1;
       }
     });
-    const newID = `${journeyId}-${maxID}`;
+    const newID = journeyId ? `${journeyId}-${maxID}` : `${this._user.getValue().userid}-${maxID}`;
     return newID;
   }
 

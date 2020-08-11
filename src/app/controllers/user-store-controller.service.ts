@@ -26,26 +26,34 @@ export class UserStoreControllerService {
   }
 
   async fetchUserJourneys(userid: string) {
-    const result = await this.api.ListJourneys({
-      id: {contains: userid}
-    });
     const journeys: {[key: string]: Journey} = {};
-    result.items.forEach(item => {
-      const newJourney = new Journey({
-        id: item.id,
-        title: item.title,
-        startDate: item.startDate,
-        endDate: item.endDate,
-        active: item.active,
-        applications: [],
+    const response = new Response();
+    await this.api.ListJourneys({
+      id: {contains: userid}
+    }).then(result => {
+      result.items.forEach(item => {
+        const newJourney = new Journey({
+          id: item.id,
+          title: item.title,
+          startDate: item.startDate,
+          endDate: item.endDate,
+          active: item.active,
+          applications: [],
+        });
+        item.applications.items.forEach(app => {
+          const newApp = new Application(app);
+          newJourney.applications.push(newApp);
+        });
+        journeys[newJourney.id] = newJourney;
       });
-      item.applications.items.forEach(app => {
-        const newApp = new Application(app);
-        newJourney.applications.push(newApp);
-      });
-      journeys[newJourney.id] = newJourney;
+      response.payload = journeys;
+    }).catch(error => {
+      console.log('Error fetching journeys:', error);
+      response.error('Looks like an error occured while trying to fetch your journeys');
+      response.payload = error;
     });
-    return journeys;
+
+    return response;
   }
 
   async fetchJourneyApps(journeyid: string) {
@@ -57,7 +65,22 @@ export class UserStoreControllerService {
         console.log(`Error fetching journey ${journeyid} apps:`, error);
         apps = [];
       });
+
     return apps;
+  }
+
+  async fetchWishlistApps(userid: string): Promise<Response> {
+    const response = new Response();
+    await this.api.ListWishlistApplications({
+      id: { contains: userid }
+    }).then(value => {
+      response.payload = value.items.map(data => new Application(data));
+    }).catch(error => {
+      console.log('Error fetching wishlist apps:', error);
+      response.error('Looks like an error occured while trying to fetch your wishlist applications');
+      response.payload = [];
+    });
+    return response;
   }
 
   async addNewJourney(data: Journey, userid: string): Promise<Response> {
@@ -149,6 +172,46 @@ export class UserStoreControllerService {
     }).catch(error => {
       console.log('Error removing application:', error);
       response.error('An error occured while trying to remove an application, please try again');
+      response.payload = error;
+    });
+    return response;
+  }
+
+  async addNewWishlistApplication(application: Application): Promise<Response> {
+    const response = new Response();
+    await this.api.CreateWishlistApplication(application.getGQLInput(true))
+      .then(value => {
+        response.payload = value;
+      }).catch(error => {
+        console.log('Error adding wishlist application:', error); // TODO: figure out better error logging behaviour
+        response.error('An error occured while trying to add your application, please try again');
+        response.payload = error;
+      });
+    return response;
+  }
+
+  async updateWishlistApplication(updatedApplication: Application): Promise<Response> {
+    const response = new Response();
+    await this.api.UpdateWishlistApplication(updatedApplication.getGQLInput(true))
+      .then(value => {
+        response.payload = value;
+      }).catch(error => {
+        console.log('Error updating wishlist application:', error); // TODO: figure out better error logging behaviour
+        response.error('An error occured while trying to update wishlist application details, please try again');
+        response.payload = error;
+      });
+    return response;
+  }
+
+  async removeWishlistApplication(appid: string): Promise<Response> {
+    const response = new Response();
+    await this.api.DeleteWishlistApplication({
+      id: appid
+    }).then(value => {
+      response.payload = value;
+    }).catch(error => {
+      console.log('Error removing wishlist application:', error);
+      response.error('An error occured while trying to remove a wishlist application, please try again');
       response.payload = error;
     });
     return response;
