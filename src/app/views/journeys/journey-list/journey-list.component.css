@@ -12,7 +12,7 @@
 .spanning-content {
   /* margin: 15px 20px; */
   /* border-bottom: 1px solid var(--titles-secondary); */
-  padding-bottom: 10px;
+  /* padding-bottom: 10px; */
   height: var(--spanning-line-height);
 }
 
@@ -20,6 +20,11 @@
   color: var(--titles-primary);
   margin: 0;
   line-height: var(--spanning-line-height);
+}
+
+div.blurb, div.blurb.spanning-content {
+  margin: 0;
+  margin-bottom: 30px;
 }
 
 mat-drawer-container {

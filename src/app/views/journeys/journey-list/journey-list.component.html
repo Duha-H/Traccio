@@ -12,6 +12,11 @@
       <mat-icon [inline]="true" aria-hidden="false" aria-label="Add journey icon">add</mat-icon>
     </button>
   </div>
+
+  <div class="blurb spanning-content">
+    <p>Journeys help you keep track of different job search cycles &#x1F4BC;</p>
+  </div>
+
   <div *ngIf="(userStore.journeys | async).length != 0; else emptyJourneys" style="height: 94%;">
     <div class="journey-grid" *ngIf="!(rs.mobileSize$ | async); else mobileSlider">
       <a *ngFor="let journey of userStore.journeys | async;" href=""

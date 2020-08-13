@@ -20,6 +20,10 @@
   color: var(--text);
 }
 
+::ng-deep .tabs .mat-tab-label-container {
+  z-index: auto;
+}
+
 button.save-btn {
   cursor: pointer;
   border-radius: 5px;

@@ -24,7 +24,7 @@ export const PALETTES: {[key: string]: PaletteType}  = {
 export const THEMES: {[key: string]: ThemeType} = {
   dark: {
     name: 'dark',
-    emptyColor: '#494848',
+    emptyColor: '#494848', // #22232D #262732
     textColor: '#ffffff',
     background: '#262732',
     transparent: '#00000000',

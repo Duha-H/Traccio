@@ -26,7 +26,7 @@
             <h4 style="font-weight: 500;">Recent Stats</h4>
             <div class="spacer"></div>
             <p>past <b style="cursor: pointer; color: var(--accent);" (click)="toggleLineChartMode()">{{lineChartMode}}</b></p>
-            <mat-icon title="save info">save_alt</mat-icon>
+            <mat-icon title="save info">open_in_new</mat-icon>
           </div> 
           <div class="stats-container">
             <div class="stat-item">
@@ -48,9 +48,6 @@
               </div>
               <p style="color: var(--titles-secondary);">average application frequency</p>
             </div>
-            <!-- <p>Start Date: {{selectedJourney.value.startDate | date }}</p>
-            <p>Applications submitted: {{selectedJourney.value.applications.length}}</p>
-            <p>Application frequency: {{selectedJourney.frequency}} / day</p> -->
           </div>
           <line-chart-wrapper *ngIf="(selectedJourney.frequencyAxes[lineChartMode].y | arrayFilter) > 0; else noChart" style="width: 100%; height: 40%; display: block; margin: 0 auto;"
             [data]="selectedJourney.frequencyData[lineChartMode]"
@@ -93,7 +90,7 @@
               Status Breakdown
             </h4>
             <div class="spacer"></div>
-            <mat-icon title="save info">save_alt</mat-icon>
+            <mat-icon title="save info">open_in_new</mat-icon>
           </div>
           
           <div *ngIf="!isEmpty(selectedJourney.statusData); else statusPlaceholder;" class="status-container" style="width: 90%; height: 80%; margin: 0 auto;" #statusContainer>
@@ -135,7 +132,7 @@
               Productivity Calendar
             </h4>
             <div class="spacer"></div>
-            <mat-icon title="save info">save_alt</mat-icon>
+            <mat-icon title="save info">open_in_new</mat-icon>
           </div>
           <div class="calendar-container" style="width: 90%; height: 50%; margin: 0 auto;">
             <calendar-wrapper [data]="selectedJourney.calendarData" [from]="currentYear+'-02-01'"
@@ -236,7 +233,7 @@
 
   <ng-template class="dashboard-content" #elseContent>
     <div class="placeholder-text">
-      <h4>Start adding journeys to track them here!</h4>
+      <h4>Get started by adding journeys to track them here!</h4>
       <button class="add-btn" title="Add journey">
         <p *ngIf="!(resizeService.mobileSize$ | async)">Add</p>
         <mat-icon [inline]="true" aria-hidden="false" aria-label="Add journey icon">add</mat-icon>
