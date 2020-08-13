@@ -14,15 +14,50 @@ export class UserStoreControllerService {
 
   async fetchTheme(userid: string): Promise<{
     theme: string,
-    colorPalette: number
+    colorPalette: string
   }> {
-    const theme = 'dark';
-    const colorPalette = 0;
+    let theme = 'dark';
+    let colorPalette = 'palette-0';
     // retrieve theme details from user entry in DB
+    await this.api.GetThemeData(userid)
+      .then(value => {
+        theme = value.theme;
+        colorPalette = value.palette;
+      }).catch(error => {
+        console.log('Error retrieving theme data:', error);
+      });
     return {
       theme,
       colorPalette
     };
+  }
+
+  async updateTheme(userid: string, updatedTheme: string) {
+    const response = new Response();
+    await this.api.UpdateUserEntry({
+      id: userid,
+      theme: updatedTheme
+    }).then(value => {
+      response.payload = value;
+    }).catch(error => {
+      console.log('Error updating theme:', error);
+      response.error('An error occured while updating your theme preference, please try again');
+    });
+    return response;
+  }
+
+  async updatePalette(userid: string, updatedPalette: string) {
+    const response = new Response();
+    await this.api.UpdateUserEntry({
+      id: userid,
+      palette: updatedPalette
+    }).then(value => {
+      response.payload = value;
+    }).catch(error => {
+      console.log('Error updating palette:', error);
+      response.error('An error occured while updating your color palette preference, please try again');
+    });
+    return response;
   }
 
   async fetchUserJourneys(userid: string) {

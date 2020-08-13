@@ -10,11 +10,15 @@ export type CreateUserEntryInput = {
   id?: string | null;
   firstName?: string | null;
   lastName?: string | null;
+  theme?: string | null;
+  palette?: string | null;
 };
 
 export type ModelUserEntryConditionInput = {
   firstName?: ModelStringInput | null;
   lastName?: ModelStringInput | null;
+  theme?: ModelStringInput | null;
+  palette?: ModelStringInput | null;
   and?: Array<ModelUserEntryConditionInput | null> | null;
   or?: Array<ModelUserEntryConditionInput | null> | null;
   not?: ModelUserEntryConditionInput | null;
@@ -63,6 +67,8 @@ export type UpdateUserEntryInput = {
   id: string;
   firstName?: string | null;
   lastName?: string | null;
+  theme?: string | null;
+  palette?: string | null;
 };
 
 export type DeleteUserEntryInput = {
@@ -193,6 +199,8 @@ export type ModelUserEntryFilterInput = {
   id?: ModelIDInput | null;
   firstName?: ModelStringInput | null;
   lastName?: ModelStringInput | null;
+  theme?: ModelStringInput | null;
+  palette?: ModelStringInput | null;
   and?: Array<ModelUserEntryFilterInput | null> | null;
   or?: Array<ModelUserEntryFilterInput | null> | null;
   not?: ModelUserEntryFilterInput | null;
@@ -256,6 +264,8 @@ export type CreateUserEntryMutation = {
   id: string;
   firstName: string | null;
   lastName: string | null;
+  theme: string | null;
+  palette: string | null;
   journeys: {
     __typename: "ModelJourneyConnection";
     items: Array<{
@@ -275,6 +285,8 @@ export type UpdateUserEntryMutation = {
   id: string;
   firstName: string | null;
   lastName: string | null;
+  theme: string | null;
+  palette: string | null;
   journeys: {
     __typename: "ModelJourneyConnection";
     items: Array<{
@@ -294,6 +306,8 @@ export type DeleteUserEntryMutation = {
   id: string;
   firstName: string | null;
   lastName: string | null;
+  theme: string | null;
+  palette: string | null;
   journeys: {
     __typename: "ModelJourneyConnection";
     items: Array<{
@@ -320,6 +334,8 @@ export type CreateJourneyMutation = {
     id: string;
     firstName: string | null;
     lastName: string | null;
+    theme: string | null;
+    palette: string | null;
     journeys: {
       __typename: "ModelJourneyConnection";
       nextToken: string | null;
@@ -353,6 +369,8 @@ export type UpdateJourneyMutation = {
     id: string;
     firstName: string | null;
     lastName: string | null;
+    theme: string | null;
+    palette: string | null;
     journeys: {
       __typename: "ModelJourneyConnection";
       nextToken: string | null;
@@ -386,6 +404,8 @@ export type DeleteJourneyMutation = {
     id: string;
     firstName: string | null;
     lastName: string | null;
+    theme: string | null;
+    palette: string | null;
     journeys: {
       __typename: "ModelJourneyConnection";
       nextToken: string | null;
@@ -433,6 +453,8 @@ export type CreateApplicationMutation = {
       id: string;
       firstName: string | null;
       lastName: string | null;
+      theme: string | null;
+      palette: string | null;
     } | null;
     applications: {
       __typename: "ModelApplicationConnection";
@@ -467,6 +489,8 @@ export type UpdateApplicationMutation = {
       id: string;
       firstName: string | null;
       lastName: string | null;
+      theme: string | null;
+      palette: string | null;
     } | null;
     applications: {
       __typename: "ModelApplicationConnection";
@@ -501,6 +525,8 @@ export type DeleteApplicationMutation = {
       id: string;
       firstName: string | null;
       lastName: string | null;
+      theme: string | null;
+      palette: string | null;
     } | null;
     applications: {
       __typename: "ModelApplicationConnection";
@@ -547,6 +573,8 @@ export type GetUserEntryQuery = {
   id: string;
   firstName: string | null;
   lastName: string | null;
+  theme: string | null;
+  palette: string | null;
   journeys: {
     __typename: "ModelJourneyConnection";
     items: Array<{
@@ -568,6 +596,8 @@ export type ListUserEntrysQuery = {
     id: string;
     firstName: string | null;
     lastName: string | null;
+    theme: string | null;
+    palette: string | null;
     journeys: {
       __typename: "ModelJourneyConnection";
       nextToken: string | null;
@@ -588,6 +618,8 @@ export type GetJourneyQuery = {
     id: string;
     firstName: string | null;
     lastName: string | null;
+    theme: string | null;
+    palette: string | null;
     journeys: {
       __typename: "ModelJourneyConnection";
       nextToken: string | null;
@@ -623,6 +655,8 @@ export type ListJourneysQuery = {
       id: string;
       firstName: string | null;
       lastName: string | null;
+      theme: string | null;
+      palette: string | null;
     } | null;
     applications: {
       __typename: "ModelApplicationConnection";
@@ -672,6 +706,8 @@ export type GetApplicationQuery = {
       id: string;
       firstName: string | null;
       lastName: string | null;
+      theme: string | null;
+      palette: string | null;
     } | null;
     applications: {
       __typename: "ModelApplicationConnection";
@@ -739,6 +775,8 @@ export type OnCreateUserEntrySubscription = {
   id: string;
   firstName: string | null;
   lastName: string | null;
+  theme: string | null;
+  palette: string | null;
   journeys: {
     __typename: "ModelJourneyConnection";
     items: Array<{
@@ -758,6 +796,8 @@ export type OnUpdateUserEntrySubscription = {
   id: string;
   firstName: string | null;
   lastName: string | null;
+  theme: string | null;
+  palette: string | null;
   journeys: {
     __typename: "ModelJourneyConnection";
     items: Array<{
@@ -777,6 +817,8 @@ export type OnDeleteUserEntrySubscription = {
   id: string;
   firstName: string | null;
   lastName: string | null;
+  theme: string | null;
+  palette: string | null;
   journeys: {
     __typename: "ModelJourneyConnection";
     items: Array<{
@@ -803,6 +845,8 @@ export type OnCreateJourneySubscription = {
     id: string;
     firstName: string | null;
     lastName: string | null;
+    theme: string | null;
+    palette: string | null;
     journeys: {
       __typename: "ModelJourneyConnection";
       nextToken: string | null;
@@ -836,6 +880,8 @@ export type OnUpdateJourneySubscription = {
     id: string;
     firstName: string | null;
     lastName: string | null;
+    theme: string | null;
+    palette: string | null;
     journeys: {
       __typename: "ModelJourneyConnection";
       nextToken: string | null;
@@ -869,6 +915,8 @@ export type OnDeleteJourneySubscription = {
     id: string;
     firstName: string | null;
     lastName: string | null;
+    theme: string | null;
+    palette: string | null;
     journeys: {
       __typename: "ModelJourneyConnection";
       nextToken: string | null;
@@ -916,6 +964,8 @@ export type OnCreateApplicationSubscription = {
       id: string;
       firstName: string | null;
       lastName: string | null;
+      theme: string | null;
+      palette: string | null;
     } | null;
     applications: {
       __typename: "ModelApplicationConnection";
@@ -950,6 +1000,8 @@ export type OnUpdateApplicationSubscription = {
       id: string;
       firstName: string | null;
       lastName: string | null;
+      theme: string | null;
+      palette: string | null;
     } | null;
     applications: {
       __typename: "ModelApplicationConnection";
@@ -984,6 +1036,8 @@ export type OnDeleteApplicationSubscription = {
       id: string;
       firstName: string | null;
       lastName: string | null;
+      theme: string | null;
+      palette: string | null;
     } | null;
     applications: {
       __typename: "ModelApplicationConnection";
@@ -1039,6 +1093,8 @@ export class APIService {
           id
           firstName
           lastName
+          theme
+          palette
           journeys {
             __typename
             items {
@@ -1074,6 +1130,8 @@ export class APIService {
           id
           firstName
           lastName
+          theme
+          palette
           journeys {
             __typename
             items {
@@ -1109,6 +1167,8 @@ export class APIService {
           id
           firstName
           lastName
+          theme
+          palette
           journeys {
             __typename
             items {
@@ -1151,6 +1211,8 @@ export class APIService {
             id
             firstName
             lastName
+            theme
+            palette
             journeys {
               __typename
               nextToken
@@ -1200,6 +1262,8 @@ export class APIService {
             id
             firstName
             lastName
+            theme
+            palette
             journeys {
               __typename
               nextToken
@@ -1249,6 +1313,8 @@ export class APIService {
             id
             firstName
             lastName
+            theme
+            palette
             journeys {
               __typename
               nextToken
@@ -1312,6 +1378,8 @@ export class APIService {
               id
               firstName
               lastName
+              theme
+              palette
             }
             applications {
               __typename
@@ -1362,6 +1430,8 @@ export class APIService {
               id
               firstName
               lastName
+              theme
+              palette
             }
             applications {
               __typename
@@ -1412,6 +1482,8 @@ export class APIService {
               id
               firstName
               lastName
+              theme
+              palette
             }
             applications {
               __typename
@@ -1525,6 +1597,8 @@ export class APIService {
           id
           firstName
           lastName
+          theme
+          palette
           journeys {
             __typename
             items {
@@ -1547,6 +1621,21 @@ export class APIService {
     )) as any;
     return <GetUserEntryQuery>response.data.getUserEntry;
   }
+  async GetThemeData(id: string): Promise<GetUserEntryQuery> {
+    const statement = `query GetUserEntry($id: ID!) {
+      getUserEntry(id: $id) {
+        theme
+        palette
+      }
+    }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetUserEntryQuery>response.data.getUserEntry;
+  }
   async ListUserEntrys(
     filter?: ModelUserEntryFilterInput,
     limit?: number,
@@ -1560,6 +1649,8 @@ export class APIService {
             id
             firstName
             lastName
+            theme
+            palette
             journeys {
               __typename
               nextToken
@@ -1597,6 +1688,8 @@ export class APIService {
             id
             firstName
             lastName
+            theme
+            palette
             journeys {
               __typename
               nextToken
@@ -1646,6 +1739,8 @@ export class APIService {
               id
               firstName
               lastName
+              theme
+              palette
             }
             applications {
               __typename
@@ -1711,6 +1806,8 @@ export class APIService {
               id
               firstName
               lastName
+              theme
+              palette
             }
             applications {
               __typename
@@ -1847,6 +1944,8 @@ export class APIService {
           id
           firstName
           lastName
+          theme
+          palette
           journeys {
             __typename
             items {
@@ -1874,6 +1973,8 @@ export class APIService {
           id
           firstName
           lastName
+          theme
+          palette
           journeys {
             __typename
             items {
@@ -1901,6 +2002,8 @@ export class APIService {
           id
           firstName
           lastName
+          theme
+          palette
           journeys {
             __typename
             items {
@@ -1935,6 +2038,8 @@ export class APIService {
             id
             firstName
             lastName
+            theme
+            palette
             journeys {
               __typename
               nextToken
@@ -1976,6 +2081,8 @@ export class APIService {
             id
             firstName
             lastName
+            theme
+            palette
             journeys {
               __typename
               nextToken
@@ -2017,6 +2124,8 @@ export class APIService {
             id
             firstName
             lastName
+            theme
+            palette
             journeys {
               __typename
               nextToken
@@ -2072,6 +2181,8 @@ export class APIService {
               id
               firstName
               lastName
+              theme
+              palette
             }
             applications {
               __typename
@@ -2114,6 +2225,8 @@ export class APIService {
               id
               firstName
               lastName
+              theme
+              palette
             }
             applications {
               __typename
@@ -2156,6 +2269,8 @@ export class APIService {
               id
               firstName
               lastName
+              theme
+              palette
             }
             applications {
               __typename

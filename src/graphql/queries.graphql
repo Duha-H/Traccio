@@ -4,6 +4,8 @@ query GetUserEntry($id: ID!) {
     id
     firstName
     lastName
+    theme
+    palette
     journeys {
       items {
         id
@@ -26,6 +28,8 @@ query ListUserEntrys(
       id
       firstName
       lastName
+      theme
+      palette
       journeys {
         nextToken
       }
@@ -44,6 +48,8 @@ query GetJourney($id: ID!) {
       id
       firstName
       lastName
+      theme
+      palette
       journeys {
         nextToken
       }
@@ -78,6 +84,8 @@ query ListJourneys(
         id
         firstName
         lastName
+        theme
+        palette
       }
       applications {
         nextToken
@@ -109,6 +117,8 @@ query GetApplication($id: ID!) {
         id
         firstName
         lastName
+        theme
+        palette
       }
       applications {
         nextToken
