@@ -7,7 +7,7 @@ export const PALETTES: {[key: string]: PaletteType}  = {
   'palette-1': {
     id: 'palette-1',
     name: 'Superbubbles',
-    colors: ['#EB4559', '#F78259', '#66E4D7', '#AEEFEC', '#EBCD86', '#F7B801']
+    colors: ['#EB4559', '#F78259', '#F7B801', '#EBCD86', '#AEEFEC', '#66E4D7']
   },
   'palette-2': {
     id: 'palette-2',

@@ -4,7 +4,7 @@
     <div class="spacer"></div>
     <!-- <button class="submit-button">Add Application</button> -->
     <button class="add-btn" title="Add application" (click)="addApplication()">
-      <p *ngIf="!(rs.mobileSize$ | async)">Add Application</p>
+      <p *ngIf="!(rs.mobileSize$ | async)">Add</p>
       <mat-icon [inline]="true" aria-hidden="false" aria-label="Add application icon">add</mat-icon>
     </button>
   </div>
