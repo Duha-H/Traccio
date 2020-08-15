@@ -12,23 +12,31 @@ export class UserStoreControllerService {
 
   constructor(private api: APIService) { }
 
-  async fetchTheme(userid: string): Promise<{
+  async fetchPrefData(userid: string): Promise<{
     theme: string,
-    colorPalette: string
+    colorPalette: string,
+    journeyInactive: number,
+    appStale: number
   }> {
     let theme = 'dark';
     let colorPalette = 'palette-0';
+    let journeyInactive = 90;
+    let appStale = 60;
     // retrieve theme details from user entry in DB
-    await this.api.GetThemeData(userid)
+    await this.api.GetPrefData(userid)
       .then(value => {
         theme = value.theme;
         colorPalette = value.palette;
+        journeyInactive = value.journeyInactive;
+        appStale = value.appStale;
       }).catch(error => {
         console.log('Error retrieving theme data:', error);
       });
     return {
       theme,
-      colorPalette
+      colorPalette,
+      journeyInactive,
+      appStale
     };
   }
 
@@ -56,6 +64,34 @@ export class UserStoreControllerService {
     }).catch(error => {
       console.log('Error updating palette:', error);
       response.error('An error occured while updating your color palette preference, please try again');
+    });
+    return response;
+  }
+
+  async updateJourneyInactive(userid: string, newValue: number) {
+    const response = new Response();
+    await this.api.UpdateUserEntry({
+      id: userid,
+      journeyInactive: newValue
+    }).then(value => {
+      response.payload = value;
+    }).catch(error => {
+      console.log('Error updating journeyInactivity:', error);
+      response.error('An error occured while updating journey inactivity preference, please try again');
+    });
+    return response;
+  }
+
+  async updateAppStale(userid: string, newValue: number) {
+    const response = new Response();
+    await this.api.UpdateUserEntry({
+      id: userid,
+      appStale: newValue
+    }).then(value => {
+      response.payload = value;
+    }).catch(error => {
+      console.log('Error updating appStale:', error);
+      response.error('An error occured while updating stale application preference, please try again');
     });
     return response;
   }

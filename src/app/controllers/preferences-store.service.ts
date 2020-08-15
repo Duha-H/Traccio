@@ -27,12 +27,12 @@ export class PreferencesStoreService {
     let journeyInactive;
     let appStale;
     this.userid = userid;
-    await this.controller.fetchTheme(userid)
+    await this.controller.fetchPrefData(userid)
       .then(value => {
         currTheme = value.theme;
         currPalette = value.colorPalette;
-        journeyInactive = DEFAULT_PREFERENCES.journeyInactive;
-        appStale = DEFAULT_PREFERENCES.appStale;
+        journeyInactive = value.journeyInactive;
+        appStale = value.appStale;
       });
 
     if (!currTheme || !THEMES[currTheme]) {
@@ -68,12 +68,25 @@ export class PreferencesStoreService {
     for (const attribute of Object.keys(updates)) {
       if (updatedPreferences[attribute]) {
         // apply changes
-        if (attribute === 'theme') {
-          this.updateTheme(updates[attribute]);
-          updatedPreferences[attribute] = THEMES[updates[attribute]];
-        } else if (attribute === 'colorPalette') {
-          this.updatePalette(updates[attribute]);
-          updatedPreferences[attribute] = PALETTES[updates[attribute]];
+        switch (attribute) {
+          case 'theme':
+            this.updateTheme(updates[attribute]);
+            updatedPreferences[attribute] = THEMES[updates[attribute]];
+            break;
+          case 'colorPalette':
+            this.updateTheme(updates[attribute]);
+            updatedPreferences[attribute] = PALETTES[updates[attribute]];
+            break;
+          case 'journeyInactive':
+            this.updateJourneyInactive(+updates[attribute]);
+            updatedPreferences[attribute] = +updates[attribute];
+            break;
+          case 'appStale':
+            this.updateAppStale(+updates[attribute]);
+            updatedPreferences[attribute] = +updates[attribute];
+            break;
+          default:
+            break;
         }
       }
     }
@@ -117,6 +130,14 @@ export class PreferencesStoreService {
           this.themeManager.setPalette(paletteObject);
         }
       });
+  }
+
+  async updateJourneyInactive(value: number) {
+    await this.controller.updateJourneyInactive(this.userid, value);
+  }
+
+  async updateAppStale(value: number) {
+    await this.controller.updateAppStale(this.userid, value);
   }
 
 }

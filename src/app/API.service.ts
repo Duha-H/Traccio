@@ -12,6 +12,8 @@ export type CreateUserEntryInput = {
   lastName?: string | null;
   theme?: string | null;
   palette?: string | null;
+  journeyInactive?: number | null;
+  appStale?: number | null;
 };
 
 export type ModelUserEntryConditionInput = {
@@ -19,6 +21,8 @@ export type ModelUserEntryConditionInput = {
   lastName?: ModelStringInput | null;
   theme?: ModelStringInput | null;
   palette?: ModelStringInput | null;
+  journeyInactive?: ModelIntInput | null;
+  appStale?: ModelIntInput | null;
   and?: Array<ModelUserEntryConditionInput | null> | null;
   or?: Array<ModelUserEntryConditionInput | null> | null;
   not?: ModelUserEntryConditionInput | null;
@@ -63,12 +67,26 @@ export type ModelSizeInput = {
   between?: Array<number | null> | null;
 };
 
+export type ModelIntInput = {
+  ne?: number | null;
+  eq?: number | null;
+  le?: number | null;
+  lt?: number | null;
+  ge?: number | null;
+  gt?: number | null;
+  between?: Array<number | null> | null;
+  attributeExists?: boolean | null;
+  attributeType?: ModelAttributeTypes | null;
+};
+
 export type UpdateUserEntryInput = {
   id: string;
   firstName?: string | null;
   lastName?: string | null;
   theme?: string | null;
   palette?: string | null;
+  journeyInactive?: number | null;
+  appStale?: number | null;
 };
 
 export type DeleteUserEntryInput = {
@@ -201,6 +219,8 @@ export type ModelUserEntryFilterInput = {
   lastName?: ModelStringInput | null;
   theme?: ModelStringInput | null;
   palette?: ModelStringInput | null;
+  journeyInactive?: ModelIntInput | null;
+  appStale?: ModelIntInput | null;
   and?: Array<ModelUserEntryFilterInput | null> | null;
   or?: Array<ModelUserEntryFilterInput | null> | null;
   not?: ModelUserEntryFilterInput | null;
@@ -266,6 +286,8 @@ export type CreateUserEntryMutation = {
   lastName: string | null;
   theme: string | null;
   palette: string | null;
+  journeyInactive: number | null;
+  appStale: number | null;
   journeys: {
     __typename: "ModelJourneyConnection";
     items: Array<{
@@ -287,6 +309,8 @@ export type UpdateUserEntryMutation = {
   lastName: string | null;
   theme: string | null;
   palette: string | null;
+  journeyInactive: number | null;
+  appStale: number | null;
   journeys: {
     __typename: "ModelJourneyConnection";
     items: Array<{
@@ -308,6 +332,8 @@ export type DeleteUserEntryMutation = {
   lastName: string | null;
   theme: string | null;
   palette: string | null;
+  journeyInactive: number | null;
+  appStale: number | null;
   journeys: {
     __typename: "ModelJourneyConnection";
     items: Array<{
@@ -336,6 +362,8 @@ export type CreateJourneyMutation = {
     lastName: string | null;
     theme: string | null;
     palette: string | null;
+    journeyInactive: number | null;
+    appStale: number | null;
     journeys: {
       __typename: "ModelJourneyConnection";
       nextToken: string | null;
@@ -371,6 +399,8 @@ export type UpdateJourneyMutation = {
     lastName: string | null;
     theme: string | null;
     palette: string | null;
+    journeyInactive: number | null;
+    appStale: number | null;
     journeys: {
       __typename: "ModelJourneyConnection";
       nextToken: string | null;
@@ -406,6 +436,8 @@ export type DeleteJourneyMutation = {
     lastName: string | null;
     theme: string | null;
     palette: string | null;
+    journeyInactive: number | null;
+    appStale: number | null;
     journeys: {
       __typename: "ModelJourneyConnection";
       nextToken: string | null;
@@ -455,6 +487,8 @@ export type CreateApplicationMutation = {
       lastName: string | null;
       theme: string | null;
       palette: string | null;
+      journeyInactive: number | null;
+      appStale: number | null;
     } | null;
     applications: {
       __typename: "ModelApplicationConnection";
@@ -491,6 +525,8 @@ export type UpdateApplicationMutation = {
       lastName: string | null;
       theme: string | null;
       palette: string | null;
+      journeyInactive: number | null;
+      appStale: number | null;
     } | null;
     applications: {
       __typename: "ModelApplicationConnection";
@@ -527,6 +563,8 @@ export type DeleteApplicationMutation = {
       lastName: string | null;
       theme: string | null;
       palette: string | null;
+      journeyInactive: number | null;
+      appStale: number | null;
     } | null;
     applications: {
       __typename: "ModelApplicationConnection";
@@ -575,6 +613,8 @@ export type GetUserEntryQuery = {
   lastName: string | null;
   theme: string | null;
   palette: string | null;
+  journeyInactive: number | null;
+  appStale: number | null;
   journeys: {
     __typename: "ModelJourneyConnection";
     items: Array<{
@@ -598,6 +638,8 @@ export type ListUserEntrysQuery = {
     lastName: string | null;
     theme: string | null;
     palette: string | null;
+    journeyInactive: number | null;
+    appStale: number | null;
     journeys: {
       __typename: "ModelJourneyConnection";
       nextToken: string | null;
@@ -620,6 +662,8 @@ export type GetJourneyQuery = {
     lastName: string | null;
     theme: string | null;
     palette: string | null;
+    journeyInactive: number | null;
+    appStale: number | null;
     journeys: {
       __typename: "ModelJourneyConnection";
       nextToken: string | null;
@@ -657,6 +701,8 @@ export type ListJourneysQuery = {
       lastName: string | null;
       theme: string | null;
       palette: string | null;
+      journeyInactive: number | null;
+      appStale: number | null;
     } | null;
     applications: {
       __typename: "ModelApplicationConnection";
@@ -708,6 +754,8 @@ export type GetApplicationQuery = {
       lastName: string | null;
       theme: string | null;
       palette: string | null;
+      journeyInactive: number | null;
+      appStale: number | null;
     } | null;
     applications: {
       __typename: "ModelApplicationConnection";
@@ -777,6 +825,8 @@ export type OnCreateUserEntrySubscription = {
   lastName: string | null;
   theme: string | null;
   palette: string | null;
+  journeyInactive: number | null;
+  appStale: number | null;
   journeys: {
     __typename: "ModelJourneyConnection";
     items: Array<{
@@ -798,6 +848,8 @@ export type OnUpdateUserEntrySubscription = {
   lastName: string | null;
   theme: string | null;
   palette: string | null;
+  journeyInactive: number | null;
+  appStale: number | null;
   journeys: {
     __typename: "ModelJourneyConnection";
     items: Array<{
@@ -819,6 +871,8 @@ export type OnDeleteUserEntrySubscription = {
   lastName: string | null;
   theme: string | null;
   palette: string | null;
+  journeyInactive: number | null;
+  appStale: number | null;
   journeys: {
     __typename: "ModelJourneyConnection";
     items: Array<{
@@ -847,6 +901,8 @@ export type OnCreateJourneySubscription = {
     lastName: string | null;
     theme: string | null;
     palette: string | null;
+    journeyInactive: number | null;
+    appStale: number | null;
     journeys: {
       __typename: "ModelJourneyConnection";
       nextToken: string | null;
@@ -882,6 +938,8 @@ export type OnUpdateJourneySubscription = {
     lastName: string | null;
     theme: string | null;
     palette: string | null;
+    journeyInactive: number | null;
+    appStale: number | null;
     journeys: {
       __typename: "ModelJourneyConnection";
       nextToken: string | null;
@@ -917,6 +975,8 @@ export type OnDeleteJourneySubscription = {
     lastName: string | null;
     theme: string | null;
     palette: string | null;
+    journeyInactive: number | null;
+    appStale: number | null;
     journeys: {
       __typename: "ModelJourneyConnection";
       nextToken: string | null;
@@ -966,6 +1026,8 @@ export type OnCreateApplicationSubscription = {
       lastName: string | null;
       theme: string | null;
       palette: string | null;
+      journeyInactive: number | null;
+      appStale: number | null;
     } | null;
     applications: {
       __typename: "ModelApplicationConnection";
@@ -1002,6 +1064,8 @@ export type OnUpdateApplicationSubscription = {
       lastName: string | null;
       theme: string | null;
       palette: string | null;
+      journeyInactive: number | null;
+      appStale: number | null;
     } | null;
     applications: {
       __typename: "ModelApplicationConnection";
@@ -1038,6 +1102,8 @@ export type OnDeleteApplicationSubscription = {
       lastName: string | null;
       theme: string | null;
       palette: string | null;
+      journeyInactive: number | null;
+      appStale: number | null;
     } | null;
     applications: {
       __typename: "ModelApplicationConnection";
@@ -1095,6 +1161,8 @@ export class APIService {
           lastName
           theme
           palette
+          journeyInactive
+          appStale
           journeys {
             __typename
             items {
@@ -1132,6 +1200,8 @@ export class APIService {
           lastName
           theme
           palette
+          journeyInactive
+          appStale
           journeys {
             __typename
             items {
@@ -1169,6 +1239,8 @@ export class APIService {
           lastName
           theme
           palette
+          journeyInactive
+          appStale
           journeys {
             __typename
             items {
@@ -1213,6 +1285,8 @@ export class APIService {
             lastName
             theme
             palette
+            journeyInactive
+            appStale
             journeys {
               __typename
               nextToken
@@ -1264,6 +1338,8 @@ export class APIService {
             lastName
             theme
             palette
+            journeyInactive
+            appStale
             journeys {
               __typename
               nextToken
@@ -1315,6 +1391,8 @@ export class APIService {
             lastName
             theme
             palette
+            journeyInactive
+            appStale
             journeys {
               __typename
               nextToken
@@ -1380,6 +1458,8 @@ export class APIService {
               lastName
               theme
               palette
+              journeyInactive
+              appStale
             }
             applications {
               __typename
@@ -1432,6 +1512,8 @@ export class APIService {
               lastName
               theme
               palette
+              journeyInactive
+              appStale
             }
             applications {
               __typename
@@ -1484,6 +1566,8 @@ export class APIService {
               lastName
               theme
               palette
+              journeyInactive
+              appStale
             }
             applications {
               __typename
@@ -1599,6 +1683,8 @@ export class APIService {
           lastName
           theme
           palette
+          journeyInactive
+          appStale
           journeys {
             __typename
             items {
@@ -1621,11 +1707,13 @@ export class APIService {
     )) as any;
     return <GetUserEntryQuery>response.data.getUserEntry;
   }
-  async GetThemeData(id: string): Promise<GetUserEntryQuery> {
+  async GetPrefData(id: string): Promise<GetUserEntryQuery> {
     const statement = `query GetUserEntry($id: ID!) {
       getUserEntry(id: $id) {
         theme
         palette
+        appStale
+        journeyInactive
       }
     }`;
     const gqlAPIServiceArguments: any = {
@@ -1651,6 +1739,8 @@ export class APIService {
             lastName
             theme
             palette
+            journeyInactive
+            appStale
             journeys {
               __typename
               nextToken
@@ -1690,6 +1780,8 @@ export class APIService {
             lastName
             theme
             palette
+            journeyInactive
+            appStale
             journeys {
               __typename
               nextToken
@@ -1741,6 +1833,8 @@ export class APIService {
               lastName
               theme
               palette
+              journeyInactive
+              appStale
             }
             applications {
               __typename
@@ -1808,6 +1902,8 @@ export class APIService {
               lastName
               theme
               palette
+              journeyInactive
+              appStale
             }
             applications {
               __typename
@@ -1946,6 +2042,8 @@ export class APIService {
           lastName
           theme
           palette
+          journeyInactive
+          appStale
           journeys {
             __typename
             items {
@@ -1975,6 +2073,8 @@ export class APIService {
           lastName
           theme
           palette
+          journeyInactive
+          appStale
           journeys {
             __typename
             items {
@@ -2004,6 +2104,8 @@ export class APIService {
           lastName
           theme
           palette
+          journeyInactive
+          appStale
           journeys {
             __typename
             items {
@@ -2040,6 +2142,8 @@ export class APIService {
             lastName
             theme
             palette
+            journeyInactive
+            appStale
             journeys {
               __typename
               nextToken
@@ -2083,6 +2187,8 @@ export class APIService {
             lastName
             theme
             palette
+            journeyInactive
+            appStale
             journeys {
               __typename
               nextToken
@@ -2126,6 +2232,8 @@ export class APIService {
             lastName
             theme
             palette
+            journeyInactive
+            appStale
             journeys {
               __typename
               nextToken
@@ -2183,6 +2291,8 @@ export class APIService {
               lastName
               theme
               palette
+              journeyInactive
+              appStale
             }
             applications {
               __typename
@@ -2227,6 +2337,8 @@ export class APIService {
               lastName
               theme
               palette
+              journeyInactive
+              appStale
             }
             applications {
               __typename
@@ -2271,6 +2383,8 @@ export class APIService {
               lastName
               theme
               palette
+              journeyInactive
+              appStale
             }
             applications {
               __typename

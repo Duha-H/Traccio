@@ -4,6 +4,8 @@ type UserEntry @model {
   lastName: String
   theme: String
   palette: String
+  journeyInactive: Int
+  appStale: Int
   journeys: [Journey] @connection(name: "UserJourneys")
 }
 

@@ -6,6 +6,8 @@ subscription OnCreateUserEntry {
     lastName
     theme
     palette
+    journeyInactive
+    appStale
     journeys {
       items {
         id
@@ -25,6 +27,8 @@ subscription OnUpdateUserEntry {
     lastName
     theme
     palette
+    journeyInactive
+    appStale
     journeys {
       items {
         id
@@ -44,6 +48,8 @@ subscription OnDeleteUserEntry {
     lastName
     theme
     palette
+    journeyInactive
+    appStale
     journeys {
       items {
         id
@@ -69,6 +75,8 @@ subscription OnCreateJourney {
       lastName
       theme
       palette
+      journeyInactive
+      appStale
       journeys {
         nextToken
       }
@@ -100,6 +108,8 @@ subscription OnUpdateJourney {
       lastName
       theme
       palette
+      journeyInactive
+      appStale
       journeys {
         nextToken
       }
@@ -131,6 +141,8 @@ subscription OnDeleteJourney {
       lastName
       theme
       palette
+      journeyInactive
+      appStale
       journeys {
         nextToken
       }
@@ -174,6 +186,8 @@ subscription OnCreateApplication {
         lastName
         theme
         palette
+        journeyInactive
+        appStale
       }
       applications {
         nextToken
@@ -206,6 +220,8 @@ subscription OnUpdateApplication {
         lastName
         theme
         palette
+        journeyInactive
+        appStale
       }
       applications {
         nextToken
@@ -238,6 +254,8 @@ subscription OnDeleteApplication {
         lastName
         theme
         palette
+        journeyInactive
+        appStale
       }
       applications {
         nextToken
