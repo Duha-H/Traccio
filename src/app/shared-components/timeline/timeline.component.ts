@@ -5,13 +5,15 @@ import { TimelinePropType, TimelineTooltipPropType } from '../types';
 import { TimelineMarker } from './timeline-marker';
 import { msToDays, collision } from './utils';
 import * as utils from 'src/app/controllers/utils';
+import { TimelineTooltipComponent } from './timeline-tooltip.component';
 
 @Component({
   selector: "timeline",
   template: '\
   <div id="timeline-parent" #parent>\
-    <timeline-tooltip *ngIf="displayTooltip" [props]="tooltipProps" style="position: absolute;\
-      z-index: 15; top: {{tooltipProps.y}}px; left: {{tooltipProps.x}}px;"></timeline-tooltip>\
+    <timeline-tooltip *ngIf="displayTooltip" [props]="tooltipProps" style="position: fixed;\
+      z-index: 15; top: {{tooltipProps.y}}px; left: {{tooltipProps.x}}px;" \
+      (tooltipAdjustment)="tooltipProps.x=$event" #tooltip></timeline-tooltip>\
     <canvas (mousemove)="onMouseHover($event)" (mouseleave)="onMouseLeave()" (click)="onMouseClick($event)" #canvas></canvas>\
   </div>\
   ',
@@ -26,13 +28,14 @@ export class TimelineComponent implements OnInit, AfterViewInit {
   canvasY: number;
   markers: TimelineMarker[] = [];
   displayTooltip = false;
-  tooltipProps: TimelineTooltipPropType;
+  tooltipProps: TimelineTooltipPropType = { x: 0, y: 0 };
   pixelRatio: number;
   markerOnHover: TimelineMarker;
 
   @Input() props: TimelinePropType;
   @ViewChild('canvas', { static: true }) canvas: ElementRef<HTMLCanvasElement>;
   @ViewChild('parent', { static: true }) parentDiv: ElementRef<HTMLDivElement>;
+  @ViewChild('tooltip', { static: false, read: ElementRef }) tooltip: ElementRef<HTMLElement>;
 
   ngOnInit() {
     if (!this.props) {
@@ -99,9 +102,7 @@ export class TimelineComponent implements OnInit, AfterViewInit {
       this.markerOnHover = markerOnHover;
       this.displayTooltip = true;
       this.tooltipProps = {
-        // x: (markerOnHover.x + this.canvasX) / this.pixelRatio,
-        // y: (markerOnHover.y / this.pixelRatio) + 30 + this.canvasY,
-        x: (event.x - this.canvasX),
+        x: event.x,
         y: event.y + 30,
         // text: `${markerOnHover.payload.status}: ${markerOnHover.payload.duration} day${markerOnHover.payload.duration === 1 ? '' : 's'}`,
         text: `${markerOnHover.payload.status}: ${utils.getDateString(markerOnHover.payload.date)}`,
@@ -111,6 +112,16 @@ export class TimelineComponent implements OnInit, AfterViewInit {
       this.markerOnHover = undefined;
       this.displayTooltip = false;
     }
+  }
+
+  adjustMarkerPosition(posX: number): number {
+    const rect = this.tooltip.nativeElement.getBoundingClientRect();
+    const width = rect.right - rect.left;
+    let markerPosition = posX;
+    if (window.innerWidth - rect.left < width + 20) { // if tooltip is extending beyond window width
+      markerPosition = rect.left - width;
+    }
+    return markerPosition;
   }
 
   onMouseLeave() {

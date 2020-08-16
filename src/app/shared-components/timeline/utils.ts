@@ -19,7 +19,7 @@ export function msToDays(time: number): number {
  * @param thresholdX collision x bounds/threshold
  * @param thresholdY collision y bounds/threshold
  */
-export function collision(posX: number, posY: number, objX: number, objY, thresholdX: number, thresholdY): boolean {
+export function collision(posX: number, posY: number, objX: number, objY: number, thresholdX: number, thresholdY: number): boolean {
   let inCollision = false;
   const xBounds = {
     min: objX - thresholdX,
