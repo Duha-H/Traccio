@@ -116,7 +116,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   selectApplication(app: Application) {
-    this.router.navigate(['/journeys', this.selectedJourney.value.id, app.id]);
+    this.router.navigate(['/home/journeys', this.selectedJourney.value.id, app.id]);
   }
 
   isEmpty(obj: {[key: string]: any}) {

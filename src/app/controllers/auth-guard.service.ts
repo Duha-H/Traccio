@@ -13,7 +13,7 @@ export class AuthGuardService implements CanActivate {
     if (await this.authWrapper.currentAuthenticatedUser()) {
       return true;
     } else {
-      this.router.navigate(['signin']);
+      this.router.navigate(['']);
       return false;
     }
   }

@@ -24,7 +24,7 @@ export class AppWrapperComponent implements OnInit {
   displayDropdown = false;
   dropdownItems: DropdownItem[] = [
     { text: "Signed in as: user@email.com", type: "item"},
-    { text: "Account settings", type: "link", link: "/settings"},
+    { text: "Account settings", type: "link", link: "/home/settings"},
     { text: "Theme: dark", type: "toggle", callback: this.toggleTheme.bind(this) },
     { text: "Sign out", type: "button", callback: this.signOut.bind(this) },
   ];

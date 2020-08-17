@@ -111,7 +111,7 @@ export class JourneyListComponent implements OnInit, OnDestroy {
     // Used when a click is detected on rect-item
     // to discern whether the edit button was pressed
     if (!this.editButton) {
-      this.router.navigate(["/journeys", id]);
+      this.router.navigate(['/home/journeys', id]);
     } else {
       console.log("edit button was pressed");
       this.editButton = false;

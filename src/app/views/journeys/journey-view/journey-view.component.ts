@@ -119,7 +119,7 @@ export class JourneyViewComponent implements OnInit, AfterViewInit {
       url: ''
     },
     paths: [
-      { name: 'Journeys', url: '/journeys' },
+      { name: 'Journeys', url: '/home/journeys' },
     ]
   };
   displayEditOverlay = false;
@@ -149,7 +149,7 @@ export class JourneyViewComponent implements OnInit, AfterViewInit {
       if (journey) {
         this.journey = journey;
         this.breadcrumbsData.current.name = this.journey.title;
-        this.breadcrumbsData.current.url = `/journeys/${this.journey.id}`;
+        this.breadcrumbsData.current.url = `/home/journeys/${this.journey.id}`;
         this.selectedApp = this.userStore.getApplication(
           this.journey.id,
           appref
@@ -210,7 +210,7 @@ export class JourneyViewComponent implements OnInit, AfterViewInit {
   }
 
   addApplication() {
-    this.router.navigate(['/journeys', this.journey.id, 'new-app']);
+    this.router.navigate(['/home/journeys', this.journey.id, 'new-app']);
   }
 
   openDrawer(mode: string, application: Application) {
@@ -232,7 +232,7 @@ export class JourneyViewComponent implements OnInit, AfterViewInit {
   }
 
   navigateToApplication(application: Application) {
-    this.router.navigate(['/journeys', this.journey.id, application.id]);
+    this.router.navigate(['/home/journeys', this.journey.id, application.id]);
   }
 
   addFilter(event: MatOptionSelectionChange, group: string) {

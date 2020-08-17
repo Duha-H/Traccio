@@ -17,10 +17,10 @@
     <p>Journeys help you keep track of different job search cycles &#x1F4BC;</p>
   </div>
 
-  <div *ngIf="(userStore.journeys | async).length != 0; else emptyJourneys" style="height: 94%;">
+  <div *ngIf="(userStore.journeys | async).length != 0; else emptyJourneys" style="height: 70%;">
     <div class="journey-grid" *ngIf="!(rs.mobileSize$ | async); else mobileSlider">
       <a *ngFor="let journey of userStore.journeys | async;" href=""
-        [routerLink]="selectionMode ? [] : ['/journeys', journey.id]"
+        [routerLink]="selectionMode ? [] : ['/home/journeys', journey.id]"
         (click)="deleteButton ? removeJourney(journey) : ''" style="text-decoration: none;">
         <app-rect-item class="journey-item" [linkedJourney]="journey"
           (deleteButtonPressed)="onDeleteButtonPressed($event)" title="{{!selectionMode ? 'View journey' : ''}}"
@@ -31,7 +31,7 @@
     <ng-template #mobileSlider>
       <slider-container [content]="(userStore.journeys | async)" (idxChange)="onSwipe($event)" [idx]="sliderIdx">
         <a *ngFor="let journey of userStore.journeys | async; let i = index;" href=""
-          [routerLink]="selectionMode || sliderIdx != i ? [] : ['/journeys', journey.id]"
+          [routerLink]="selectionMode || sliderIdx != i ? [] : ['/home/journeys', journey.id]"
           (click)="deleteButton ? removeJourney(journey, i) : journeyItemClick(i)"
           style="text-decoration: none; margin: auto 0px; transform: {{ i == sliderIdx ? 'scale(1.15)' : ( i > sliderIdx ? 'rotateY(-50deg)' : 'rotateY(50deg)' ) }};"
           class="{{ sliderIdx == i ? 'journey-item current' : 'journey-item'}}" #journeyItem>

@@ -17,6 +17,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { SettingsComponent } from './views/settings/settings.component';
+import { LandingComponent } from './views/landing/landing.component';
 import { ApplicationInputComponent } from './shared-components/application-input/application-input.component';
 import { SearchComponent } from './views/search/search.component';
 import { ConfirmSignupComponent } from './auth/confirm-signup/confirm-signup.component';
@@ -39,6 +40,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
+    LandingComponent,
     SignInComponent,
     SignUpComponent,
     SettingsComponent,

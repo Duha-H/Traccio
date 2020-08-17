@@ -19,10 +19,15 @@ export class SignInComponent implements OnInit {
   ngOnInit() {
   }
 
-  async signIn() {
-    const response = await this.authWrapper.signIn(this.email, this.password);
+  async signIn(identityProvider?: string) {
+    let response;
+    if (identityProvider === 'Google') {
+      response = await this.authWrapper.googleSignIn();
+    } else {
+      response = await this.authWrapper.signIn(this.email, this.password);
+    }
     if (response.successful) {
-      this.router.navigate(['']);
+      this.router.navigate(['home']);
     } else {
       this.signInError = true;
       this.error = response.message;

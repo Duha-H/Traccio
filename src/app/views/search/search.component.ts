@@ -73,11 +73,11 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   viewResult(type: string, item: Journey | Application, journeyid?: string) {
     if (type === 'journey') {
-      this.router.navigate(['/journeys', item.id]);
+      this.router.navigate(['/home/journeys', item.id]);
     } else if (type === 'application' && journeyid) {
-      this.router.navigate(['/journeys', journeyid, item.id]);
+      this.router.navigate(['/home/journeys', journeyid, item.id]);
     } else if (type === 'wishlist') {
-      this.router.navigate(['/wishlist', item.id]);
+      this.router.navigate(['/home/wishlist', item.id]);
     }
     this.clear();
   }

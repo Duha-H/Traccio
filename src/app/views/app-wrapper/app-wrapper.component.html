@@ -2,15 +2,15 @@
   <!-- Nav -->
   <div class="sidenav" mode="side" role="navigation" *ngIf="!(resizeService.mobileSize$ | async)">
     <ul class="sidenav">
-      <li title="Dashboard"><a href="#" routerLink="" (click)="clearSearch()" routerLinkActive="active"
+      <li title="Dashboard"><a href="#" routerLink="/home" (click)="clearSearch()" routerLinkActive="active"
           [routerLinkActiveOptions]="{exact: true}" #navHomeIcon>
           <mat-icon [inline]="true" aria-hidden="false" aria-label="Dashboard icon">home</mat-icon>
         </a></li>
-      <li title="Journeys"><a href="#" routerLink="/journeys" (click)="clearSearch()" routerLinkActive="active"
+      <li title="Journeys"><a href="#" routerLink="/home/journeys" (click)="clearSearch()" routerLinkActive="active"
           #navJourneysIcon>
           <mat-icon [inline]="true" aria-hidden="false" aria-label="Journeys icon">list</mat-icon>
         </a></li>
-      <li title="Wishlist"><a href="#" routerLink="/wishlist" (click)="clearSearch()" routerLinkActive="active"
+      <li title="Wishlist"><a href="#" routerLink="/home/wishlist" (click)="clearSearch()" routerLinkActive="active"
           #navWishlistIcon>
           <mat-icon [inline]="true" aria-hidden="false" aria-label="Search icon">star_border</mat-icon>
         </a></li>
@@ -24,7 +24,7 @@
     <div class="toolbar" role="banner">
 
       <!-- <span></span> -->
-      <a href="#" routerLink="" style="width: auto; height: auto;">
+      <a href="#" routerLink="/home" style="width: auto; height: auto;">
         <img src="{{(resizeService.mobileSize$ | async) ? '/assets/logo_1.svg' : '/assets/logo_2.svg'}}" alt="Logo" class="logo">
       </a>
       <!-- <p style="font-family: ArialRoundedMTBold, Arial Rounded MT Bold; font-size: 1.5em; font-weight: 600; color: var(--titles-secondary);">
@@ -57,15 +57,15 @@
   <!-- Conditionally-visible Bottom Nav -->
   <div *ngIf="resizeService.mobileSize$ | async" class="bottomnav">
     <ul>
-      <li title="Journeys"><a href="#" routerLink="/journeys" (click)="clearSearch()" routerLinkActive="active"
+      <li title="Journeys"><a href="#" routerLink="/home/journeys" (click)="clearSearch()" routerLinkActive="active"
           #navJourneysIcon>
           <mat-icon [inline]="true" aria-hidden="false" aria-label="Journeys icon">list</mat-icon>
         </a></li>
-      <li title="Dashboard"><a href="#" routerLink="" (click)="clearSearch()" routerLinkActive="active"
+      <li title="Dashboard"><a href="#" routerLink="/home" (click)="clearSearch()" routerLinkActive="active"
           [routerLinkActiveOptions]="{exact: true}" #navHomeIcon>
           <mat-icon [inline]="true" aria-hidden="false" aria-label="Dashboard icon">home</mat-icon>
         </a></li>
-      <li title="Wishlist"><a href="#" routerLink="/wishlist" (click)="clearSearch()" routerLinkActive="active"
+      <li title="Wishlist"><a href="#" routerLink="/home/wishlist" (click)="clearSearch()" routerLinkActive="active"
           #navWishlistIcon>
           <mat-icon [inline]="true" aria-hidden="false" aria-label="Search icon">star_border</mat-icon>
         </a></li>

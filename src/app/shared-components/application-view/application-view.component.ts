@@ -92,24 +92,24 @@ export class ApplicationViewComponent implements OnInit {
     this.currApplicationDetails = Object.assign(new Application(), this.inputApplication);
     if (!this.inputApplication) {
       console.log('ApplicationViewComponent: no application retrieved with id:', appid);
-      this.router.navigate(['/journeys']);
+      this.router.navigate(['/home/journeys']);
       return;
     } else {
       if (!this.wishlistApp) {
         this.breadcrumbsData.current.name = 'Application';
-        this.breadcrumbsData.current.url = `/journeys/${this.journeyid}/${appid}`;
+        this.breadcrumbsData.current.url = `/home/journeys/${this.journeyid}/${appid}`;
         this.breadcrumbsData.paths.push(
-          { name: 'Journeys', url: '/journeys' },
+          { name: 'Journeys', url: '/home/journeys' },
           {
             name: this.userStore.getJourney(this.journeyid).title,
-            url: `/journeys/${this.journeyid}`
+            url: `/home/journeys/${this.journeyid}`
           }
         );
       } else {
         this.breadcrumbsData.current.name = 'Wishlist Application';
-        this.breadcrumbsData.current.url = `/wishlist/${appid}`;
+        this.breadcrumbsData.current.url = `/home/wishlist/${appid}`;
         this.breadcrumbsData.paths.push(
-          { name: 'Wishlist', url: '/wishlist' }
+          { name: 'Wishlist', url: '/home/wishlist' }
         );
       }
       this.timelineProps = {
@@ -141,7 +141,7 @@ export class ApplicationViewComponent implements OnInit {
         .then(response => {
           if (response.successful) {
             this.currApplicationDetails = response.payload;
-            this.router.navigate(['/wishlist', this.currApplicationDetails.id]);
+            this.router.navigate(['/home/wishlist', this.currApplicationDetails.id]);
             this.newApp = false; // it shouldn't matter because we're navigating away so the component is getting destroyed
           } else {
             this.notificationService.sendNotification(response.message, 'error');
@@ -158,7 +158,7 @@ export class ApplicationViewComponent implements OnInit {
       this.userStore.addNewApplication(this.journeyid, this.currApplicationDetails)
         .then(response => {
           if (response.successful) {
-            this.router.navigate(['/journeys', this.journeyid, response.payload.id]);
+            this.router.navigate(['/home/journeys', this.journeyid, response.payload.id]);
           } else {
             this.notificationService.sendNotification(response.message, 'error');
           }
@@ -184,9 +184,9 @@ export class ApplicationViewComponent implements OnInit {
   cancelChanges() {
     // navigates away from new-app view
     if (this.wishlistApp) {
-      this.router.navigate(['/wishlist']);
+      this.router.navigate(['/home/wishlist']);
     } else if (this.newApp) {
-      this.router.navigate(['/journeys', this.journeyid]);
+      this.router.navigate(['/home/journeys', this.journeyid]);
     }
   }
 
@@ -206,7 +206,7 @@ export class ApplicationViewComponent implements OnInit {
         if (response.successful) {
           // if successfully added, remove application from wishlist
           this.userStore.removeWishlistApplication(this.currApplicationDetails.id);
-          this.router.navigate(['/journeys', journeyid, response.payload.id]);
+          this.router.navigate(['/home/journeys', journeyid, response.payload.id]);
           this.notificationService.sendNotification(`Application successfully added to ${journey.title}!`, 'success', 5000);
         } else {
           this.notificationService.sendNotification(response.message, 'error');
