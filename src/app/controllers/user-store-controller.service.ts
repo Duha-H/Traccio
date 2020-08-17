@@ -212,7 +212,7 @@ export class UserStoreControllerService {
       ...application.getGQLInput(),
       applicationJourneyidId: journeyid
     }).then(value => {
-        response.payload = value;
+        response.payload = new Application(value);
     }).catch(error => {
       console.log('Error adding application:', error); // TODO: figure out better error logging behaviour
       response.error('An error occured while trying to add your application, please try again');
@@ -225,7 +225,7 @@ export class UserStoreControllerService {
     const response = new Response();
     await this.api.UpdateApplication(updatedApplication.getGQLInput())
       .then(value => {
-        response.payload = value;
+        response.payload = new Application(value);
       }).catch(error => {
         console.log('Error updating application:', error); // TODO: figure out better error logging behaviour
         response.error('An error occured while trying to update application details, please try again');

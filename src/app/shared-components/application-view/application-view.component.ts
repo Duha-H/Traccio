@@ -90,7 +90,7 @@ export class ApplicationViewComponent implements OnInit {
       this.inputApplication = this.userStore.getApplication(this.journeyid, appid);
     }
     this.currApplicationDetails = Object.assign(new Application(), this.inputApplication);
-    if (!this.inputApplication) {
+    if (!this.inputApplication || !this.currApplicationDetails) {
       console.log('ApplicationViewComponent: no application retrieved with id:', appid);
       this.router.navigate(['/home/journeys']);
       return;
@@ -143,6 +143,7 @@ export class ApplicationViewComponent implements OnInit {
             this.currApplicationDetails = response.payload;
             this.router.navigate(['/home/wishlist', this.currApplicationDetails.id]);
             this.newApp = false; // it shouldn't matter because we're navigating away so the component is getting destroyed
+            this.detailsUpdated = false;
           } else {
             this.notificationService.sendNotification(response.message, 'error');
           }
@@ -152,12 +153,15 @@ export class ApplicationViewComponent implements OnInit {
         .then(response => {
           if (!response.successful) {
             this.notificationService.sendNotification(response.message, 'error');
+          } else {
+            this.detailsUpdated = false;
           }
         });
     } else if (this.newApp && !this.wishlistApp) { // completely new application
       this.userStore.addNewApplication(this.journeyid, this.currApplicationDetails)
         .then(response => {
           if (response.successful) {
+            this.currApplicationDetails = response.payload;
             this.router.navigate(['/home/journeys', this.journeyid, response.payload.id]);
           } else {
             this.notificationService.sendNotification(response.message, 'error');
@@ -167,11 +171,14 @@ export class ApplicationViewComponent implements OnInit {
       this.userStore.updateExistingApplication(this.journeyid, this.currApplicationDetails).then(response => {
         if (!response.successful) {
           this.notificationService.sendNotification(response.message, 'error');
+        } else {
+          this.detailsUpdated = false;
         }
       });
     }
 
-    this.detailsUpdated = false;
+    // if details were successfully updated and app.status was set to 'OFFER'
+    // deploy confetti!
     if (this.statusUpdated && this.currApplicationDetails.status === STATUS.OFFER) {
       setTimeout(() => {
         this.confetti.draw();
