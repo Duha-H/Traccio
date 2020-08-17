@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthModule } from './auth.module';
 import { Auth } from 'aws-amplify';
+import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth';
 import { Response } from 'src/app/utils/response';
 
 @Injectable({
@@ -65,6 +66,20 @@ export class AuthWrapperService {
           break;
       }
     }
+
+    return response;
+  }
+
+  async googleSignIn(): Promise<Response> {
+    const response = new Response();
+
+    try {
+      response.payload = await Auth.federatedSignIn({ provider: CognitoHostedUIIdentityProvider.Google });
+    } catch (error) {
+      console.log('AuthWrapper: google sign in error:', error);
+      response.error('Error in federated sign in');
+    }
+    console.log(response);
 
     return response;
   }

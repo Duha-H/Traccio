@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="375" height="812" viewBox="0 0 375 812">
+  <defs>
+    <filter id="Rectangle_3" x="17" y="141" width="351" height="498" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-color="#aeaeae" flood-opacity="0.149"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_4" x="11" y="135" width="351" height="498" filterUnits="userSpaceOnUse">
+      <feOffset dx="-3" dy="-3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-color="#fff" flood-opacity="0.71"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_3-2" x="15" y="651" width="351" height="357" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-3"/>
+      <feFlood flood-color="#aeaeae" flood-opacity="0.149"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_4-2" x="9" y="645" width="351" height="357" filterUnits="userSpaceOnUse">
+      <feOffset dx="-3" dy="-3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-4"/>
+      <feFlood flood-color="#fff" flood-opacity="0.71"/>
+      <feComposite operator="in" in2="blur-4"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_2" data-name="Rectangle 2" width="54" height="33" fill="#f6f6f6"/>
+    </clipPath>
+    <clipPath id="clip-iPhone_X_XS_11_Pro_1">
+      <rect width="375" height="812"/>
+    </clipPath>
+  </defs>
+  <g id="iPhone_X_XS_11_Pro_1" data-name="iPhone X/XS/11 Pro – 1" clip-path="url(#clip-iPhone_X_XS_11_Pro_1)">
+    <rect width="375" height="812" fill="#f6f6f6"/>
+    <rect id="Rectangle_19" data-name="Rectangle 19" width="32" height="32" rx="10" transform="translate(324 17)" fill="#9f9dea"/>
+    <g id="Group_5" data-name="Group 5" transform="translate(60 -102)">
+      <g id="Ellipse_19" data-name="Ellipse 19" transform="translate(220 124)" fill="none" stroke="#9f9dea" stroke-width="2">
+        <circle cx="9" cy="9" r="9" stroke="none"/>
+        <circle cx="9" cy="9" r="8" fill="none"/>
+      </g>
+      <line id="Line_5" data-name="Line 5" x2="6" y2="6" transform="translate(234.5 139.5)" fill="none" stroke="#9f9dea" stroke-linecap="round" stroke-width="2"/>
+    </g>
+    <g id="Component_dashboard_light" transform="translate(23 147)">
+      <g transform="matrix(1, 0, 0, 1, -23, -147)" filter="url(#Rectangle_3)">
+        <rect id="Rectangle_3-3" data-name="Rectangle 3" width="333" height="480" rx="15" transform="translate(23 147)" fill="#f6f6f6"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, -23, -147)" filter="url(#Rectangle_4)">
+        <rect id="Rectangle_4-3" data-name="Rectangle 4" width="333" height="480" rx="15" transform="translate(23 147)" fill="#f6f6f6"/>
+      </g>
+    </g>
+    <g id="Component_dashboard_light-2" data-name="Component_dashboard_light" transform="translate(21 657)">
+      <g transform="matrix(1, 0, 0, 1, -21, -657)" filter="url(#Rectangle_3-2)">
+        <rect id="Rectangle_3-4" data-name="Rectangle 3" width="333" height="339" rx="15" transform="translate(21 657)" fill="#f6f6f6"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, -21, -657)" filter="url(#Rectangle_4-2)">
+        <rect id="Rectangle_4-4" data-name="Rectangle 4" width="333" height="339" rx="15" transform="translate(21 657)" fill="#f6f6f6"/>
+      </g>
+    </g>
+    <g id="Group_7" data-name="Group 7" transform="translate(0 151)">
+      <path id="Subtraction_14" data-name="Subtraction 14" d="M75.223,174.914l-45.5-42.894A40.18,40.18,0,0,0,42,103,40.545,40.545,0,0,0,1.5,62.5c-.167,0-.334,0-.5,0V.5A102.334,102.334,0,0,1,41.092,8.594a103,103,0,0,1,17.5,9.5A103.819,103.819,0,0,1,73.832,30.668,103.776,103.776,0,0,1,86.41,45.912a103.083,103.083,0,0,1,9.5,17.5,103.346,103.346,0,0,1,0,80.185,103.1,103.1,0,0,1-9.5,17.5,103.8,103.8,0,0,1-11.186,13.825Z" transform="translate(186.5 587)" fill="#ac98fb" stroke="#fefefe" stroke-width="1"/>
+      <g id="Subtraction_6" data-name="Subtraction 6" transform="translate(48 587)" fill="#d1c3eb">
+        <path d="M 98.50307464599609 103.4995269775391 L 36.49999237060547 103.4995269775391 C 36.49999237060547 89.59629821777344 39.22315216064453 76.10740661621094 44.59380722045898 63.40804672241211 C 47.17279434204102 57.30894088745117 50.36787414550781 51.42232894897461 54.09032440185547 45.91168594360352 C 57.77549743652344 40.45690155029297 62.00732421875 35.32827377319336 66.66823577880859 30.66828727722168 C 71.33095550537109 26.00555419921875 76.4595947265625 21.77371406555176 81.91171264648438 18.09030151367188 C 87.42291259765625 14.3677806854248 93.30953979492188 11.17268753051758 99.40803527832031 8.593820571899414 C 112.1035690307617 3.223154067993164 125.5924224853516 0.5000073313713074 139.5 0.5000073313713074 C 139.5001373291016 0.5000073313713074 139.5002593994141 0.5000073313713074 139.5003967285156 0.5000073313713074 L 139.5004119873047 62.50313568115234 C 139.3328704833984 62.50104522705078 139.1655578613281 62.49999237060547 138.9996032714844 62.49999237060547 C 116.6680450439453 62.49999237060547 98.49999237060547 80.66804504394531 98.49999237060547 102.9996109008789 C 98.49999237060547 103.1650619506836 98.50102233886719 103.3320999145508 98.50307464599609 103.4995269775391 Z" stroke="none"/>
+        <path d="M 97.99999237060547 102.9995269775391 L 97.99999237060547 102.9996109008789 C 97.99999237060547 80.39234924316406 116.3923492431641 61.99999618530273 138.9996032714844 61.99999618530273 C 138.9998779296875 61.99999618530273 139.0001525878906 61.99999618530273 139.0004272460938 61.99999618530273 L 139.0003967285156 1.001188516616821 C 125.3364562988281 1.065560460090637 112.0844573974609 3.774128913879395 99.60277557373047 9.054352760314941 C 93.53408050537109 11.62061023712158 87.67609405517578 14.80015277862549 82.19161987304688 18.50461006164551 C 76.76589202880859 22.17019653320313 71.66203308105469 26.38158226013184 67.02176666259766 31.0218677520752 C 62.38331985473633 35.65939712524414 58.17194747924805 40.76322555541992 54.5046501159668 46.19156646728516 C 50.80027770996094 51.67546844482422 47.62073516845703 57.53343963623047 45.0543327331543 63.60280990600586 C 39.77412414550781 76.08824157714844 37.06554412841797 89.33993530273438 37.00117111206055 102.9995269775391 L 97.99999237060547 102.9995269775391 M 99.01235198974609 103.9995269775391 L 99.01133728027344 103.9995269775391 L 99.01235198974609 103.9995269775391 Z M 99.01235198974609 103.9995269775391 L 36.00116348266602 103.9995269775391 C 36.00030517578125 103.8977355957031 36.00020599365234 103.7962417602539 36.0001220703125 103.6946640014648 L 35.99999237060547 103.5000076293945 C 35.99999237060547 89.52900695800781 38.73643493652344 75.97459411621094 44.13330459594727 63.21329498291016 C 46.72484970092773 57.08448028564453 49.93547821044922 51.16920852661133 53.67599105834961 45.63180923461914 C 57.37899017333984 40.1506233215332 61.63127899169922 34.99721145629883 66.31472015380859 30.31469535827637 C 70.99989318847656 25.6295108795166 76.15330505371094 21.37722396850586 81.63180541992188 17.67599678039551 C 87.16984558105469 13.93535327911377 93.08512115478516 10.72472476959229 99.21330261230469 8.133310317993164 C 111.9706954956055 2.736453056335449 125.5250930786133 1.016060923575424e-05 139.5 1.016060923575424e-05 C 139.6674041748047 1.016060923575424e-05 139.8330078125 1.016060923575424e-05 140.0003967285156 0.0009101605974137783 L 140.0004272460938 63.01259613037109 C 139.6813354492188 63.00456619262695 139.344970703125 62.99999618530273 138.9996032714844 62.99999618530273 C 116.9437484741211 62.99999618530273 98.99999237060547 80.94375610351563 98.99999237060547 102.9996109008789 C 98.99999237060547 103.3292388916016 99.004150390625 103.6653213500977 99.01233673095703 103.9984970092773 L 99.01235198974609 103.9995269775391 Z" stroke="none" fill="#fefefe"/>
+      </g>
+      <g id="Subtraction_9" data-name="Subtraction 9" transform="translate(84 690)" fill="#c1e0f8">
+        <path d="M 103.4999542236328 103.49951171875 C 89.59235382080078 103.49951171875 76.10350036621094 100.7763671875 63.40808868408203 95.40572357177734 C 57.3095703125 92.82685852050781 51.42294311523438 89.63177490234375 45.91166305541992 85.90919494628906 C 40.4595947265625 82.22582244873047 35.33095550537109 77.99399566650391 30.66826248168945 73.33128356933594 C 26.00730323791504 68.67124176025391 21.77547645568848 63.54260635375977 18.09030342102051 58.08780670166016 C 14.36787605285645 52.57719039916992 11.17279624938965 46.69057846069336 8.593823432922363 40.59149932861328 C 3.223156452178955 27.89211273193359 0.4999964535236359 14.40321826934814 0.4999964535236359 0.499498724937439 L 62.5030517578125 0.4999920427799225 C 62.50100708007813 0.6671281456947327 62.49996948242188 0.8343525528907776 62.49996948242188 0.9999120235443115 C 62.49996948242188 23.33147239685059 80.66800689697266 41.49952697753906 102.9995574951172 41.49952697753906 C 103.165641784668 41.49952697753906 103.3329620361328 41.49847412109375 103.5003662109375 41.49639129638672 L 103.500358581543 103.49951171875 C 103.5002212524414 103.49951171875 103.5000915527344 103.49951171875 103.4999542236328 103.49951171875 Z" stroke="none"/>
+        <path d="M 1.001182556152344 0.9999923706054688 C 1.065872192382813 14.65932464599609 3.774459838867188 27.91204833984375 9.054336547851563 40.39676666259766 C 11.62076568603516 46.46616744995117 14.80030822753906 52.32413864135742 18.50462341308594 57.80791091918945 C 22.17192840576172 63.23626708984375 26.38328552246094 68.34009552001953 31.02181243896484 72.97772216796875 C 35.66197967529297 77.61790466308594 40.76583862304688 81.82930755615234 46.19152450561523 85.49485015869141 C 51.67598342895508 89.19932556152344 57.53396987915039 92.37888336181641 63.60289764404297 94.94523620605469 C 76.08441162109375 100.2254028320313 89.33640289306641 102.9339599609375 103.0003509521484 102.9983291625977 L 103.0003662109375 41.9995231628418 C 103.0000991821289 41.9995231628418 102.9998245239258 41.9995231628418 102.9995574951172 41.9995231628418 C 80.39231109619141 41.9995231628418 61.99996948242188 23.60717010498047 61.99996948242188 0.9999923706054688 L 1.001182556152344 0.9999923706054688 M 0.00116729736328125 -7.62939453125e-06 L 63.01232528686523 -7.62939453125e-06 L 63.01231002807617 0.0010223388671875 C 63.00412750244141 0.334197998046875 62.99996948242188 0.6702651977539063 62.99996948242188 0.999908447265625 C 62.99996948242188 23.05576324462891 80.94371032714844 40.9995231628418 102.9995574951172 40.9995231628418 C 103.3449096679688 40.9995231628418 103.681282043457 40.99495315551758 104.0003662109375 40.98692321777344 L 104.0003509521484 103.9986267089844 C 103.8329544067383 103.99951171875 103.667350769043 103.99951171875 103.4999542236328 103.99951171875 C 89.52505493164063 103.99951171875 75.97065734863281 101.2630767822266 63.21328353881836 95.86622619628906 C 57.08509826660156 93.27479553222656 51.16982650756836 90.06417846679688 45.63179779052734 86.32352447509766 C 40.15329742431641 82.62229919433594 34.99988555908203 78.37002563476563 30.314697265625 73.68482208251953 C 25.63127136230469 69.00230407714844 21.37898254394531 63.84889602661133 17.67599487304688 58.36771011352539 C 13.93547058105469 52.8303108215332 10.724853515625 46.9150390625 8.13330078125 40.78622436523438 C 2.736442565917969 28.02492523193359 0 14.47051239013672 0 0.4994964599609375 L 0.00012969970703125 0.3048553466796875 C 0.000213623046875 0.2032699584960938 0.00029754638671875 0.1017837524414063 0.00116729736328125 -7.62939453125e-06 Z M 63.01131057739258 -7.62939453125e-06 L 63.01232528686523 -7.62939453125e-06 L 63.01131057739258 -7.62939453125e-06 Z" stroke="none" fill="#fefefe"/>
+      </g>
+      <path id="Subtraction_13" data-name="Subtraction 13" d="M137.25,103.5a102.329,102.329,0,0,1-40.092-8.094,103.017,103.017,0,0,1-17.5-9.5A103.761,103.761,0,0,1,64.418,73.331c-1.58-1.579-3.131-3.236-4.611-4.922l46.475-40.753A40.519,40.519,0,0,0,136.75,41.5c.166,0,.333,0,.5,0v62Z" transform="translate(50.25 690)" fill="#81befa" stroke="#fefefe" stroke-width="1"/>
+      <path id="Subtraction_18" data-name="Subtraction 18" d="M77.443,0A102.523,102.523,0,0,0,19.855,17.59,103.761,103.761,0,0,0,4.611,30.168C3.032,31.747,1.48,33.4,0,35.09L46.475,75.844A40.519,40.519,0,0,1,76.942,62c.166,0,.333,0,.5,0V0Z" transform="translate(264.5 793.499) rotate(180)" fill="#6e89f8" stroke="#fefefe" stroke-width="1"/>
+    </g>
+    <rect id="Rectangle_26" data-name="Rectangle 26" width="23" height="21" rx="4" transform="translate(333 107)" fill="rgba(164,164,164,0.32)"/>
+    <rect id="Rectangle_27" data-name="Rectangle 27" width="375" height="46" transform="translate(0 766)" fill="#e8e8f3"/>
+    <path id="Polygon_3" data-name="Polygon 3" d="M14,0,28,24H0Z" transform="translate(174 777)" fill="#9f9dea"/>
+    <path id="Polygon_5" data-name="Polygon 5" d="M14,0,28,24H0Z" transform="translate(49 777)" fill="#909ca8"/>
+    <path id="Polygon_4" data-name="Polygon 4" d="M14,0,28,24H0Z" transform="translate(299 777)" fill="#909ca8"/>
+    <text id="Hi_there_Barbara_" data-name="Hi there, Barbara!" transform="translate(23 87)" fill="#9f9dea" font-size="20" font-family="FranklinGothic-Heavy, Franklin Gothic" font-weight="800"><tspan x="0" y="0">Hi there, Barbara!</tspan></text>
+    <text id="Spring_Job_Search" data-name="Spring Job Search" transform="translate(23 124)" fill="#909ca8" font-size="16" font-family="FranklinGothic-Medium, Franklin Gothic" font-weight="500"><tspan x="0" y="0">Spring Job Search</tspan></text>
+    <text id="Recent_Stats" data-name="Recent Stats" transform="translate(35 171)" fill="#9f9dea" font-size="14" font-family="ArialMT, Arial"><tspan x="0" y="0">Recent Stats</tspan></text>
+    <text id="Status_Breakdown" data-name="Status Breakdown" transform="translate(33 681)" fill="#9f9dea" font-size="14" font-family="ArialMT, Arial"><tspan x="0" y="0">Status Breakdown</tspan></text>
+    <text id="_34" data-name="34" transform="translate(132 310)" fill="#909ca8" font-size="111" font-family="Impact"><tspan x="0" y="0">34</tspan></text>
+    <text id="_4" data-name="4" transform="translate(142 464)" fill="#909ca8" font-size="111" font-family="Impact"><tspan x="0" y="0">4</tspan></text>
+    <text id="applications_submitted_this_week" data-name="applications submitted this week" transform="translate(110 337)" fill="#909ca8" font-size="11" font-family="ArialMT, Arial"><tspan x="0" y="0">applications submitted this week</tspan></text>
+    <text id="average_application_frequency" data-name="average application frequency" transform="translate(124 491)" fill="#909ca8" font-size="11" font-family="ArialMT, Arial"><tspan x="0" y="0">average application frequency</tspan></text>
+    <text id="_day" data-name="/day" transform="translate(206 465)" fill="#909ca8" font-size="18" font-family="Impact"><tspan x="0" y="0">/day</tspan></text>
+    <g id="Group_9" data-name="Group 9" transform="translate(0 155)">
+      <line id="Line_6" data-name="Line 6" y2="16" transform="translate(35.5 431.5)" fill="none" stroke="rgba(112,112,112,0.31)" stroke-width="0.5"/>
+      <line id="Line_7" data-name="Line 7" y2="32" transform="translate(72.5 415.5)" fill="none" stroke="rgba(112,112,112,0.31)" stroke-width="0.5"/>
+      <line id="Line_9" data-name="Line 9" y2="66" transform="translate(111.5 381.5)" fill="none" stroke="rgba(112,112,112,0.31)" stroke-width="0.5"/>
+      <line id="Line_10" data-name="Line 10" y2="74" transform="translate(152.5 373.5)" fill="none" stroke="rgba(112,112,112,0.31)" stroke-width="0.5"/>
+      <line id="Line_11" data-name="Line 11" y2="74" transform="translate(187.5 373.5)" fill="none" stroke="rgba(112,112,112,0.31)" stroke-width="0.5"/>
+      <line id="Line_12" data-name="Line 12" y2="82" transform="translate(229.5 365.5)" fill="none" stroke="rgba(112,112,112,0.31)" stroke-width="0.5"/>
+      <line id="Line_13" data-name="Line 13" y2="58" transform="translate(271.5 389.5)" fill="none" stroke="rgba(112,112,112,0.31)" stroke-width="0.5"/>
+      <line id="Line_14" data-name="Line 14" y2="66" transform="translate(312.5 381.5)" fill="none" stroke="rgba(112,112,112,0.31)" stroke-width="0.5"/>
+      <line id="Line_15" data-name="Line 15" y2="66" transform="translate(344.5 381.5)" fill="none" stroke="rgba(112,112,112,0.31)" stroke-width="0.5"/>
+    </g>
+    <g id="Group_6" data-name="Group 6" transform="translate(0 81)">
+      <path id="Path_5" data-name="Path 5" d="M4012,504a140.775,140.775,0,0,0,40-16c20-12,20-22,40-32a80.952,80.952,0,0,1,40-8,229.664,229.664,0,0,0,40,0c20-2,27.833-9,40-8s27.667,21.667,40,24,22-6,40-8a140.829,140.829,0,0,1,32,0" transform="translate(-3980)" fill="none" stroke="#707070" stroke-width="1"/>
+      <g id="Ellipse_20" data-name="Ellipse 20" transform="translate(69 485)" fill="#f6f6f6" stroke="#9f9dea" stroke-width="1">
+        <circle cx="3" cy="3" r="3" stroke="none"/>
+        <circle cx="3" cy="3" r="2.5" fill="none"/>
+      </g>
+      <g id="Ellipse_27" data-name="Ellipse 27" transform="translate(32 501)" fill="#f6f6f6" stroke="#9f9dea" stroke-width="1">
+        <circle cx="3" cy="3" r="3" stroke="none"/>
+        <circle cx="3" cy="3" r="2.5" fill="none"/>
+      </g>
+      <g id="Ellipse_21" data-name="Ellipse 21" transform="translate(109 453)" fill="#f6f6f6" stroke="#9f9dea" stroke-width="1">
+        <circle cx="3" cy="3" r="3" stroke="none"/>
+        <circle cx="3" cy="3" r="2.5" fill="none"/>
+      </g>
+      <g id="Ellipse_22" data-name="Ellipse 22" transform="translate(149 445)" fill="#f6f6f6" stroke="#9f9dea" stroke-width="1">
+        <circle cx="3" cy="3" r="3" stroke="none"/>
+        <circle cx="3" cy="3" r="2.5" fill="none"/>
+      </g>
+      <g id="Ellipse_23" data-name="Ellipse 23" transform="translate(184.5 445)" fill="#f6f6f6" stroke="#9f9dea" stroke-width="1">
+        <circle cx="3" cy="3" r="3" stroke="none"/>
+        <circle cx="3" cy="3" r="2.5" fill="none"/>
+      </g>
+      <g id="Ellipse_24" data-name="Ellipse 24" transform="translate(226 437)" fill="#f6f6f6" stroke="#9f9dea" stroke-width="1">
+        <circle cx="3" cy="3" r="3" stroke="none"/>
+        <circle cx="3" cy="3" r="2.5" fill="none"/>
+      </g>
+      <g id="Ellipse_25" data-name="Ellipse 25" transform="translate(269 461)" fill="#f6f6f6" stroke="#9f9dea" stroke-width="1">
+        <circle cx="3" cy="3" r="3" stroke="none"/>
+        <circle cx="3" cy="3" r="2.5" fill="none"/>
+      </g>
+      <g id="Ellipse_26" data-name="Ellipse 26" transform="translate(309 453)" fill="#f6f6f6" stroke="#9f9dea" stroke-width="1">
+        <circle cx="3" cy="3" r="3" stroke="none"/>
+        <circle cx="3" cy="3" r="2.5" fill="none"/>
+      </g>
+      <g id="Ellipse_28" data-name="Ellipse 28" transform="translate(341 453)" fill="#f6f6f6" stroke="#9f9dea" stroke-width="1">
+        <circle cx="3" cy="3" r="3" stroke="none"/>
+        <circle cx="3" cy="3" r="2.5" fill="none"/>
+      </g>
+    </g>
+    <line id="Line_8" data-name="Line 8" x2="309" transform="translate(35.5 602.5)" fill="none" stroke="rgba(112,112,112,0.31)" stroke-width="0.5"/>
+    <text id="past_week" data-name="past week" transform="translate(285 170)" fill="#909ca8" font-size="12" font-family="ArialMT, Arial"><tspan x="0" y="0">past </tspan><tspan y="0" fill="#9f9dea" font-family="Arial-BoldMT, Arial" font-weight="700">week</tspan></text>
+    <g id="Mask_Group_1" data-name="Mask Group 1" transform="translate(0 18)" clip-path="url(#clip-path)">
+      <g id="Layer_2" data-name="Layer 2" transform="translate(16.94 1.237)">
+        <g id="Layer_1" data-name="Layer 1" transform="translate(0)">
+          <ellipse id="Ellipse_29" data-name="Ellipse 29" cx="3.59" cy="3.837" rx="3.59" ry="3.837" transform="translate(13.621)" fill="none" stroke="#b7c1cb" stroke-miterlimit="10" stroke-width="2"/>
+          <line id="Line_18" data-name="Line 18" x1="8.306" y2="8.878" transform="translate(6.015 6.393)" fill="none" stroke="#b7c1cb" stroke-miterlimit="10" stroke-width="2"/>
+          <ellipse id="Ellipse_30" data-name="Ellipse 30" cx="3.59" cy="3.837" rx="3.59" ry="3.837" transform="translate(0 13.85)" fill="none" stroke="#b7c1cb" stroke-miterlimit="10" stroke-width="2"/>
+          <ellipse id="Ellipse_31" data-name="Ellipse 31" cx="3.59" cy="3.837" rx="3.59" ry="3.837" transform="translate(8.969 22.729)" fill="none" stroke="#b7c1cb" stroke-miterlimit="10" stroke-width="2"/>
+          <line id="Line_19" data-name="Line 19" x2="3.654" y2="3.889" transform="translate(6.346 19.887)" fill="none" stroke="#b7c1cb" stroke-miterlimit="10" stroke-width="2"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

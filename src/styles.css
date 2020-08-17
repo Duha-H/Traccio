@@ -72,11 +72,18 @@ button {
 }
 
 app-root,
-app-wrapper {
+app-wrapper,
+app-landing {
   display: inline-block;
   min-height: 100%;
   min-width: 100%;
   overflow: hidden;
+}
+
+app-landing {
+  overflow-y: scroll;
+  width: 100vw;
+  height: 100vh;
 }
 
 div.content {
