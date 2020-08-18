@@ -1,45 +1,56 @@
 <div class="container">
-  <!-- <svg xmlns="http://www.w3.org/2000/svg" width="1939.387" height="3696.678" viewBox="0 0 1939.387 3696.678" style="width: 100%; height: auto; min-width: 1700px; position: fixed; z-index: -1; top: 0;">
-    <path id="Path_1" data-name="Path 1"
-      d="M628.129,1144.917C624.39,976.062,819.824,909.632,782.535,698.5S610.01,369.735,563.005,215.329,533.229-.7,533.229-.7H0L-1.4,1081.833s30.75,382.276,239.266,657.8,629.218,233.5,804,299.042,294.154,224.743,327.718,307.235,61.328,307.866,13.176,472.308-178.617,269.9-284.366,485.148-93.4,392.611-93.4,392.611h932.995V2318.987s-135.749-438.747-441-660S925.969,1447.366,821.718,1409.93,631.868,1313.773,628.129,1144.917Z"
-      transform="translate(1.398 0.699)" fill="#c5d2fe" />
-  </svg> -->
+  <img *ngIf="resizeService.mobileSize$ | async" src="/assets/Path 1.svg" alt="" style="z-index: -1; width: 150%; position: fixed; top: 0; left: 0;">
+
   <div class="header">
     <img src="{{(resizeService.mobileSize$ | async) ? '/assets/logo_no_text@2x.png' : '/assets/logo_traccio@2x.png'}}" alt="Logo" class="logo">
     <div class="spacer"></div>
     <a>About</a>
+    <a *ngIf="!(resizeService.mobileSize$ | async)" class="header-btn alt" routerLink="/signup">Sign up</a>
+    <a *ngIf="!(resizeService.mobileSize$ | async)" class="header-btn" routerLink="/signin">Sign in</a>
+  </div>
+
+  <div class="card-parent">
+    <div class="landing-card card-1">
+      <div class="landing-content">
+        <img src="/assets/logo_traccio@2x.png" alt="traccio logo" style="max-width: 70%">
+        <p>Say goodbye to dull text files and spreadsheets, track your job search the right way.</p>
+        <a class="header-btn" routerLink="/signup" style="margin-left: 0;">Join now</a>
+        <a href="" routerLink="/about">Learn more <mat-icon [inline]="true" aria-hidden="false">keyboard_arrow_right</mat-icon></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-parent">
+    <div class="landing-card card-2">
+      <div class="landing-content">
+        <!-- <img src="/assets/logo_traccio@2x.png" alt="traccio logo" style="max-width: 22.5em"> -->
+        <p>traccio allows you to efficiently analyze and track your job search journey.</p>
+      </div>
+      <div class="card-img-group">
+        <img src="{{(resizeService.mobileSize$ | async) ? '/assets/mobile_journey_list.png' : '/assets/dashboard_light_desktop.svg'}}" alt="" class="{{(resizeService.mobileSize$ | async) ? 'card-img mobile' : 'card-img desktop'}}" style="left: 40%; bottom: 0;">
+        <img src="/assets/dashboard_light_mobile.svg" alt="" class="card-img mobile" style="left: 100%; bottom: 0;">
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="card-parent">
+    <div class="landing-card card-3">
+      <img src="/assets/card3_app_list.png" alt="" class="card-img desktop-alt" style="left: -15%; top: -10%;">
+      <img src="/assets/card3_app_details.png" alt="" class="card-img desktop-alt" style="left: -5%; top: 35%;">
+      <div class="landing-content">
+        <p>Keep track of applications you submitted. Never apply to the same position twice again!<br>Oh, did we mention it's free?</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="fixed-footer" *ngIf="resizeService.mobileSize$ | async">
     <a class="header-btn alt" routerLink="/signup">Sign up</a>
     <a class="header-btn" routerLink="/signin">Sign in</a>
   </div>
 
-  <div class="landing-card card-1">
-    <div class="landing-content" style="position: absolute; left: 50%; top: 30%; padding: 15px;">
-      <img src="/assets/logo_traccio@2x.png" alt="traccio logo" style="max-width: 22.5em">
-      <p style="font-family: Rockwell, Courier Bold, Courier, Georgia, Times, Times New Roman, serif; font-size: 1.5em;">Say goodbye to dull text files and spreadsheets, track your job search the right way.</p>
-      <a class="header-btn" routerLink="/signup" style="margin-left: 0;">Join now</a>
-      <a href="" routerLink="/about">Learn more <mat-icon [inline]="true" aria-hidden="false">keyboard_arrow_right</mat-icon></a>
-    </div>
+  <div class="footer">
+    <p>This is a footer and stuff</p>
   </div>
-
-  <div class="landing-card card-2">
-    <div class="landing-content" style="width: 35%; position: absolute; top: 75%;">
-      <!-- <img src="/assets/logo_traccio@2x.png" alt="traccio logo" style="max-width: 22.5em"> -->
-      <p style="font-family: Rockwell, Courier Bold, Courier, Georgia, Times, Times New Roman, serif; font-size: 1.5em;">traccio allows you to efficiently analyze and track your job search journey.</p>
-    </div>
-    <img src="/assets/dashboard_light_desktop.svg" alt="" style="position: absolute; left: 40%; max-width: 60em; bottom: 0; box-shadow: -3px 3px 10px rgba(0, 0, 0, 0.4);">
-    <img src="/assets/dashboard_light_mobile.svg" alt="" style="position: absolute; left: 100%; max-width: 12em; bottom: 0; box-shadow: -3px 3px 10px rgba(0, 0, 0, 0.4);">
-  </div>
-
-  <div class="landing-card card-3">
-    <img src="/assets/card3_app_list.png" alt="" style="position: absolute; left: -15%; max-width: 40em; top: -10%; box-shadow: -3px 3px 10px rgba(0, 0, 0, 0.4);">
-    <img src="/assets/card3_app_details.png" alt="" style="position: absolute; left: -5%; max-width: 40em; top: 35%; box-shadow: -3px 3px 10px rgba(0, 0, 0, 0.4);">
-    <div class="landing-content" style="width: 45%; position: absolute; left: 50%; top: 50%;">
-      <p style="font-family: Rockwell, Courier Bold, Courier, Georgia, Times, Times New Roman, serif; font-size: 1.5em;">Keep track of applications you submitted. Never apply to the same position twice again!<br>Oh, did we mention it's free?</p>
-    </div>
-  </div>
-
   
-</div>
-<div class="footer" style="width: 100%; height: 200px; background-color: var(--bg); z-index: 2; box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2); text-align: center;">
-  <p style="margin: auto;">This is a footer and stuff</p>
 </div>
