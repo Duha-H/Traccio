@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" (scroll)="checkView()">
   <img *ngIf="resizeService.mobileSize$ | async" src="/assets/Path 1.svg" alt="" style="z-index: -1; width: 150%; position: fixed; top: 0; left: 0;">
 
   <div class="header">
@@ -9,7 +9,7 @@
     <a *ngIf="!(resizeService.mobileSize$ | async)" class="header-btn" routerLink="/signin">Sign in</a>
   </div>
 
-  <div class="card-parent">
+  <div class="card-parent" #card>
     <div class="landing-card card-1">
       <div class="landing-content">
         <img src="/assets/logo_traccio@2x.png" alt="traccio logo" style="max-width: 70%">
@@ -20,26 +20,26 @@
     </div>
   </div>
 
-  <div class="card-parent">
+  <div class="card-parent" #card>
     <div class="landing-card card-2">
       <div class="landing-content">
         <!-- <img src="/assets/logo_traccio@2x.png" alt="traccio logo" style="max-width: 22.5em"> -->
         <p>traccio allows you to efficiently analyze and track your job search journey.</p>
       </div>
       <div class="card-img-group">
-        <img src="{{(resizeService.mobileSize$ | async) ? '/assets/mobile_journey_list.png' : '/assets/dashboard_light_desktop.svg'}}" alt="" class="{{(resizeService.mobileSize$ | async) ? 'card-img mobile' : 'card-img desktop'}}" style="left: 40%; bottom: 0;">
-        <img src="/assets/dashboard_light_mobile.svg" alt="" class="card-img mobile" style="left: 100%; bottom: 0;">
+        <img src="{{(resizeService.mobileSize$ | async) ? '/assets/mobile_journey_list.png' : '/assets/dashboard_light_desktop.svg'}}" alt="" class="{{(resizeService.mobileSize$ | async) ? 'card-img mobile' : 'card-img desktop'}}">
+        <img src="/assets/dashboard_light_mobile.svg" alt="" class="card-img mobile" >
       </div>
       
     </div>
   </div>
   
-  <div class="card-parent">
+  <div class="card-parent" #card>
     <div class="landing-card card-3">
-      <img src="/assets/card3_app_list.png" alt="" class="card-img desktop-alt" style="left: -15%; top: -10%;">
-      <img src="/assets/card3_app_details.png" alt="" class="card-img desktop-alt" style="left: -5%; top: 35%;">
+      <img src="/assets/card3_app_list.png" alt="" class="card-img desktop-alt" id="desktop-alt-1">
+      <img src="/assets/card3_app_details.png" alt="" class="card-img desktop-alt" id="desktop-alt-2">
       <div class="landing-content">
-        <p>Keep track of applications you submitted. Never apply to the same position twice again!<br>Oh, did we mention it's free?</p>
+        <p>Keep track of applications you submitted.<br>Never apply to the same position twice again!<br>Oh, did we mention it's free?</p>
       </div>
     </div>
   </div>
