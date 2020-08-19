@@ -66,16 +66,13 @@ button.header-btn.alt, a.header-btn.alt {
 
 div.card-parent {
   padding: 0 100px;
+  visibility: hidden;
 }
 
 div.landing-card {
   border: 5px solid #88A3FB;
-  /* position: fixed; */
-  /* width: 900px; */
   max-width: 970px;
   height: 500px;
-  /* left: 50%; */
-  /* transform: translateX(-50%); */
   margin: 0 auto;
   position: sticky;
   padding: 15px;
@@ -122,7 +119,6 @@ div.landing-content {
 .card-3 div.landing-content {
   width: 40%;
   right: 0;
-  /* top: 50%; */
   bottom: 5%;
 }
 
@@ -180,8 +176,9 @@ div.fixed-footer {
   animation: slide-up 0.5s linear;
 }
 
-.card-visible {
-  animation: card-appear 1s linear;
+div.card-parent.card-visible {
+  animation: card-appear 1.15s linear;
+  visibility: visible;
 }
 
 @keyframes card-appear {

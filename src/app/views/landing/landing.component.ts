@@ -7,48 +7,33 @@ import { ResizeService } from 'src/app/controllers/resize.service';
   styleUrls: ['./landing.component.css'],
   // tslint:disable-next-line: no-host-metadata-property
   host: {
-    "(window:scroll)": "checkView()",
+    "(window:scroll)": "checkView($event)",
   },
 })
-export class LandingComponent implements OnInit, AfterViewInit {
+export class LandingComponent implements OnInit {
 
   @ViewChildren('card') cards: QueryList<ElementRef>;
-  @HostListener('window:scroll', ['$event']) // for window scroll events
-  onScroll(event) {
-    console.log('checking?');
-    for (const card of this.cards) {
-      // const card = this.cards[i];
-      const cardPos = card.nativeElement.getBoundingClientRect().top;
-      if (cardPos - window.innerHeight <= 0) {
-        card.nativeElement.classList.add('card-visible');
-        console.log('card visible:', card);
-      }
-    }
+  @HostListener('scroll', ['$event'])
+  onScroll(event: Event) {
+    this.checkView();
   }
 
   constructor(public resizeService: ResizeService) { }
 
   ngOnInit() {
-    window.addEventListener('scroll', () => {
-      this.checkView();
-      console.log('scroll?');
-    });
-    console.log('something???');
+    // scroll to top
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   }
 
-  ngAfterViewInit() {
-    console.log(this.cards.length);
-  }
-
-  checkView() {
-    console.log('checking???');
-    console.log(this.cards.length);
+  checkView(event?: any) {
     for (const card of this.cards) {
-      // const card = this.cards[i];
-      const cardPos = card.nativeElement.getBoundingClientRect().top;
-      if (cardPos - window.innerHeight <= 0) {
+      const cardTop = card.nativeElement.getBoundingClientRect().top;
+      const cardBottom  = card.nativeElement.getBoundingClientRect().bottom;
+      if (cardTop - window.innerHeight <= 0) {
         card.nativeElement.classList.add('card-visible');
-        console.log('card visible:', card);
+      } else {
+        card.nativeElement.className = 'card-parent';
       }
     }
   }

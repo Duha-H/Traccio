@@ -1,4 +1,4 @@
-<div class="container" (scroll)="checkView()">
+<div class="container">
   <img *ngIf="resizeService.mobileSize$ | async" src="/assets/Path 1.svg" alt="" style="z-index: -1; width: 150%; position: fixed; top: 0; left: 0;">
 
   <div class="header">
@@ -9,7 +9,7 @@
     <a *ngIf="!(resizeService.mobileSize$ | async)" class="header-btn" routerLink="/signin">Sign in</a>
   </div>
 
-  <div class="card-parent" #card>
+  <div class="card-parent card-visible" #card>
     <div class="landing-card card-1">
       <div class="landing-content">
         <img src="/assets/logo_traccio@2x.png" alt="traccio logo" style="max-width: 70%">
