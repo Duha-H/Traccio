@@ -92,6 +92,8 @@ div.landing-card.card-2 {
 
 div.landing-card.card-3 {
   margin-top: 380px;
+  border: none;
+  height: auto;
 }
 
 div.landing-content {
@@ -151,6 +153,37 @@ img.card-img.mobile {
   max-width: 12em;
   left: 100%;
   bottom: 0;
+}
+
+div.graphic-component {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 80px auto;
+  /* flex-wrap: wrap; */
+}
+
+div.graphic-component:nth-child(even) {
+  flex-direction: row-reverse;
+  display: flex;
+  align-items: center;
+  margin: 80px auto;
+  /* flex-wrap: wrap-reverse; */
+}
+
+div.graphic-component p {
+  width: 35em;
+  box-sizing: border-box;
+  margin: 20px;
+  padding: 0 40px;
+  font-weight: 600;
+}
+
+div.graphic-component graphic-dashboard,
+div.graphic-component graphic-journeys,
+div.graphic-component graphic-application,
+div.graphic-component graphic-search {
+  width: 40em;
 }
 
 div.footer {
@@ -254,10 +287,15 @@ div.card-parent.card-visible {
     top: 0;
   }
 
-
-
+  div.graphic-component {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
   
-  
+  div.graphic-component:nth-child(even) {
+    flex-direction: column;
+  }
 }
 
 @media screen and (max-width: 500px) {
@@ -270,7 +308,7 @@ div.card-parent.card-visible {
   }
 
   div.card-parent {
-    padding: 0 50px;
+    padding: 0 30px;
   }
 
   div.landing-card {
@@ -287,8 +325,8 @@ div.card-parent.card-visible {
   }
 
   .card-1 div.landing-content {
-    right: 0;
-    bottom: 15%;
+    left: 0;
+    bottom: 20%;
     width: 100%;
   }
 
@@ -308,6 +346,10 @@ div.card-parent.card-visible {
     transform: none;
     align-items: center;
   }
+
+  div.landing-card.card-3 {
+    padding: 0;
+  }
   
   .card-3 div.landing-content {
     width: 100%;
@@ -316,5 +358,20 @@ div.card-parent.card-visible {
 
   img.card-img.desktop-alt {
     width: 120%;
+  }
+
+  div.graphic-component {
+    margin: 60px auto;
+  }
+
+  div.graphic-component graphic-dashboard,
+  div.graphic-component graphic-journeys,
+  div.graphic-component graphic-application,
+  div.graphic-component graphic-search {
+    width: 100%;
+  }
+
+  div.graphic-component p {
+    width: 100%;
   }
 }

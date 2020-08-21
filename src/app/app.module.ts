@@ -36,6 +36,10 @@ import { PreferenceSettingsComponent } from './views/settings/preference-setting
 import { WishlistWrapperComponent } from './views/wishlist/wishlist-wrapper.component';
 import { OverflowWrapperComponent } from './shared-components/overflow-wrapper/overflow-wrapper.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DashboardGraphicComponent } from './views/landing/graphics/dashboard-graphic.component';
+import { JourneysGraphicComponent } from './views/landing/graphics/journeys-graphic.component';
+import { ApplicationGraphicComponent } from './views/landing/graphics/application-graphic.component';
+import { SearchGraphicComponent } from './views/landing/graphics/search-graphic.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +65,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PreferenceSettingsComponent,
     // WishlistWrapperComponent,
     OverflowWrapperComponent,
+    DashboardGraphicComponent,
+    JourneysGraphicComponent,
+    ApplicationGraphicComponent,
+    SearchGraphicComponent,
   ],
   imports: [
     SharedModule,

@@ -1,0 +1,41 @@
+tspan {
+  font-size: 0.8em;
+}
+
+/* Dashboard Animations */
+#dashboard {
+  --press-duration: 2s;
+}
+
+#dashboard #toggle-week {
+  animation: var(--press-duration) toggle-press alternate;
+}
+
+#dashboard #toggle-month {
+  /* opacity: 0; */
+  animation: 0.5s toggle-appear;
+  animation-delay: var(--press-duration);
+}
+
+#dashboard #graph-month {
+  opacity: 0;
+}
+
+@keyframes toggle-press {
+  from {
+    transform: scale(5);
+  }
+
+  to {
+    transform: scale(0.5);
+  }
+}
+
+@keyframes toggle-appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

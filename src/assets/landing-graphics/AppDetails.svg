@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 403 259">
+  <defs>
+    <filter id="Rectangle_22" x="343" y="23" width="40" height="32" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_23" x="0" y="0" width="403" height="259" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-path">
+      <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Rectangle_22)">
+        <rect id="Rectangle_22-2" data-name="Rectangle 22" width="22" height="14" rx="7" transform="translate(1024.91 428)" fill="#fff"/>
+      </g>
+    </clipPath>
+    <filter id="Path_9" x="174" y="110" width="107" height="37" filterUnits="userSpaceOnUse">
+      <feOffset dy="2" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-3"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="AppDetails" transform="translate(-1017 -423)">
+    <g transform="matrix(1, 0, 0, 1, 1017, 423)" filter="url(#Rectangle_23)">
+      <rect id="Rectangle_23-2" data-name="Rectangle 23" width="385" height="241" rx="10" transform="translate(9 6)" fill="#fafafa"/>
+    </g>
+    <text id="Application_details" data-name="Application details" transform="translate(1047 465)" fill="#88a3fb" font-size="20" font-family="Bahnschrift" letter-spacing="0.05em"><tspan x="0" y="0">Application details</tspan></text>
+    <g id="button" transform="translate(571 152)">
+      <rect id="Rectangle_18" data-name="Rectangle 18" width="20" height="20" rx="5" transform="translate(799 297)" fill="#88a3fb"/>
+      <g id="Mask_Group_1" data-name="Mask Group 1" transform="translate(-226.909 -128)" clip-path="url(#clip-path)">
+        <g id="save-24px" transform="translate(1029.08 428)">
+          <path id="Path_7" data-name="Path 7" d="M0,0H13.738V13.738H0Z" fill="none"/>
+          <path id="Path_8" data-name="Path 8" d="M38.139,30.125H31.27a1.145,1.145,0,0,0-1.145,1.145v8.014a1.145,1.145,0,0,0,1.145,1.145h8.014a1.148,1.148,0,0,0,1.145-1.145V32.415Zm-2.862,9.159a1.717,1.717,0,1,1,1.717-1.717A1.715,1.715,0,0,1,35.277,39.284Zm1.717-5.724H31.27V31.27h5.724Z" transform="translate(-28.408 -28.408)" fill="#fff"/>
+        </g>
+      </g>
+    </g>
+    <g id="timeline">
+      <rect id="Rectangle_6" data-name="Rectangle 6" width="5" height="16" rx="2.5" transform="translate(1047 511)" fill="#e76f51"/>
+      <rect id="Rectangle_24" data-name="Rectangle 24" width="98" height="5" transform="translate(1050 517)" fill="#e76f51"/>
+      <rect id="Rectangle_25" data-name="Rectangle 25" width="5" height="16" rx="2.5" transform="translate(1145 511)" fill="#f4a261"/>
+      <rect id="Rectangle_26" data-name="Rectangle 26" width="57" height="5" transform="translate(1148 517)" fill="#f4a261"/>
+      <rect id="Rectangle_27" data-name="Rectangle 27" width="5" height="16" rx="2.5" transform="translate(1202 512)" fill="#e9c46a"/>
+      <rect id="Rectangle_28" data-name="Rectangle 28" width="82" height="5" transform="translate(1205 517)" fill="#e9c46a"/>
+      <g id="timeline-update" transform="translate(99 -3)">
+        <g transform="matrix(1, 0, 0, 1, 918, 426)" filter="url(#Path_9)">
+          <path id="Path_9-2" data-name="Path 9" d="M2.5,0h84A2.5,2.5,0,0,1,89,2.5v14A2.5,2.5,0,0,1,86.5,19H2.5A2.5,2.5,0,0,1,0,16.5V2.5A2.5,2.5,0,0,1,2.5,0Z" transform="translate(183 117)" fill="#fafafa"/>
+        </g>
+        <text id="Offer:_2020-04-13" data-name="Offer: 2020-04-13" transform="translate(1123 556)" fill="#707070" font-size="4" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">Offer: 2025-04-13</tspan></text>
+        <rect id="Rectangle_17" data-name="Rectangle 17" width="11" height="11" transform="translate(1107 547)" fill="#2a9d8f"/>
+        <line id="Line_9" data-name="Line 9" y2="20" transform="translate(1187.5 530.5)" fill="none" stroke="#707070" stroke-width="1" stroke-dasharray="5 2"/>
+        <rect id="Rectangle_29" data-name="Rectangle 29" width="5" height="16" rx="2.5" transform="translate(1185 515)" fill="#2a9d8f"/>
+      </g>
+    </g>
+    <g id="status-toggle">
+      <g id="Rectangle_31" data-name="Rectangle 31" transform="translate(1303 511)" fill="none" stroke="#2a9d8f" stroke-width="1">
+        <rect width="88" height="16" rx="2.5" stroke="none"/>
+        <rect x="0.5" y="0.5" width="87" height="15" rx="2" fill="none"/>
+      </g>
+      <text id="Offer" transform="translate(1335 523)" fill="#2a9d8f" font-size="9.5" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">Offer</tspan></text>
+    </g>
+    <g id="info-1">
+      <rect id="Rectangle_32" data-name="Rectangle 32" width="164" height="19" transform="translate(1047 584)" fill="#ecf1ff"/>
+      <rect id="Rectangle_36" data-name="Rectangle 36" width="79" height="7" transform="translate(1047 569)" fill="#9ea8c9"/>
+    </g>
+    <g id="info-3">
+      <rect id="Rectangle_34" data-name="Rectangle 34" width="164" height="19" transform="translate(1047 632)" fill="#ecf1ff"/>
+      <rect id="Rectangle_37" data-name="Rectangle 37" width="79" height="7" transform="translate(1047 617)" fill="#9ea8c9"/>
+    </g>
+    <g id="info-2">
+      <rect id="Rectangle_33" data-name="Rectangle 33" width="164" height="19" transform="translate(1227 584)" fill="#ecf1ff"/>
+      <rect id="Rectangle_38" data-name="Rectangle 38" width="79" height="7" transform="translate(1227 569)" fill="#9ea8c9"/>
+    </g>
+    <g id="info-4">
+      <rect id="Rectangle_35" data-name="Rectangle 35" width="164" height="19" transform="translate(1227 632)" fill="#ecf1ff"/>
+      <rect id="Rectangle_39" data-name="Rectangle 39" width="79" height="7" transform="translate(1227 617)" fill="#9ea8c9"/>
+    </g>
+  </g>
+</svg>
