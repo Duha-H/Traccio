@@ -3,21 +3,21 @@ tspan {
 }
 
 /* Dashboard Animations */
-#dashboard {
+#Dashboard {
   --press-duration: 2s;
 }
 
-#dashboard #toggle-week {
-  animation: var(--press-duration) toggle-press alternate;
+#Dashboard #toggle-week {
+  /* animation: var(--press-duration) toggle-press alternate; */
 }
 
-#dashboard #toggle-month {
+#Dashboard #toggle-month {
   /* opacity: 0; */
-  animation: 0.5s toggle-appear;
+  /* animation: 0.5s toggle-appear; */
   animation-delay: var(--press-duration);
 }
 
-#dashboard #graph-month {
+#Dashboard #graph-week, #Dashboard #graph-month {
   opacity: 0;
 }
 

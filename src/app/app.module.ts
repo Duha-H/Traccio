@@ -74,6 +74,7 @@ import { SearchGraphicComponent } from './views/landing/graphics/search-graphic.
     SharedModule,
     CommonModule,
     AppRoutingModule,
+    BrowserModule,
     BrowserAnimationsModule,
     MatGridListModule,
     MatDatepickerModule,
