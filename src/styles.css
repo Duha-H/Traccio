@@ -83,7 +83,7 @@ app-landing {
 app-landing {
   overflow-y: scroll;
   width: 100vw;
-  height: 100vh;
+  height: calc(95vh - 20px);
 }
 
 div.content {
