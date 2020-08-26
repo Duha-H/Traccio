@@ -1,65 +1,30 @@
 {
+	"function": {
+		"traccio87945b44CustomMessage": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true
+		}
+	},
 	"auth": {
-		"tracker55154f11": {
+		"traccio87945b44": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
-			"dependsOn": []
-		}
-	},
-	"storage": {
-		"dynamo5b5bd19c": {
-			"service": "DynamoDB",
-			"providerPlugin": "awscloudformation"
-		}
-	},
-	"function": {
-		"trackerc4ca4424": {
-			"service": "Lambda",
-			"providerPlugin": "awscloudformation",
-			"build": true,
 			"dependsOn": [
 				{
-					"category": "storage",
-					"resourceName": "dynamo5b5bd19c",
+					"category": "function",
+					"resourceName": "traccio87945b44CustomMessage",
+					"triggerProvider": "Cognito",
 					"attributes": [
-						"Name",
-						"Arn"
-					]
-				}
-			]
-		},
-		"tempLambda": {
-			"service": "Lambda",
-			"providerPlugin": "awscloudformation",
-			"build": true,
-			"dependsOn": [
-				{
-					"category": "storage",
-					"resourceName": "dynamo5b5bd19c",
-					"attributes": [
-						"Name",
-						"Arn"
+						"Arn",
+						"Name"
 					]
 				}
 			]
 		}
 	},
 	"api": {
-		"apicef3c0a9": {
-			"service": "API Gateway",
-			"providerPlugin": "awscloudformation",
-			"dependsOn": [
-				{
-					"category": "function",
-					"resourceName": "trackerc4ca4424",
-					"attributes": [
-						"Name",
-						"Arn"
-					]
-				}
-			]
-		},
-		"tracker": {
+		"traccio": {
 			"service": "AppSync",
 			"providerPlugin": "awscloudformation",
 			"output": {
@@ -68,7 +33,7 @@
 					"defaultAuthentication": {
 						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
 						"userPoolConfig": {
-							"userPoolId": "authtracker55154f11"
+							"userPoolId": "authtraccio87945b44"
 						}
 					}
 				}

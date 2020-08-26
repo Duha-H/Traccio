@@ -45,6 +45,12 @@ testem.log
 .DS_Store
 Thumbs.db
 
+# asset creation files
+*.ai
+
+# source maps
+source-map-test.html
+
 #amplify
 amplify/\#current-cloud-backend
 amplify/.config/local-*
@@ -59,9 +65,3 @@ awsconfiguration.json
 amplifyconfiguration.json
 amplify-gradle-config.json
 amplifyxc.config
-
-# asset creation files
-*.ai
-
-# source maps
-source-map-test.html

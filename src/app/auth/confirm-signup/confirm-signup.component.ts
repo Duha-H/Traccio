@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthStoreService } from 'src/app/controllers/auth-store.service';
 import { Router } from '@angular/router';
-import { APIService } from 'src/app/API.service';
 import { UserStoreService } from 'src/app/models/user-store.service';
 import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
 
@@ -20,7 +19,6 @@ export class ConfirmSignupComponent implements OnInit {
   constructor(
     private router: Router,
     private authStore: AuthStoreService,
-    private api: APIService,
     private userStore: UserStoreService,
     private authWrapper: AuthWrapperService
   ) { }

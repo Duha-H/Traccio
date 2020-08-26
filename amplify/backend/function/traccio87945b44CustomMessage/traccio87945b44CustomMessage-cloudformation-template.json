@@ -2,16 +2,49 @@
 	"AWSTemplateFormatVersion": "2010-09-09",
 	"Description": "Lambda resource stack creation using Amplify CLI",
 	"Parameters": {
+		"REDIRECTURL": {
+			"Type": "String",
+			"Default": ""
+		},
+		"EMAILMESSAGE": {
+			"Type": "String",
+			"Default": ""
+		},
+		"EMAILSUBJECT": {
+			"Type": "String",
+			"Default": ""
+		},
+		"modules": {
+			"Type": "String",
+			"Default": "",
+			"Description": "Comma-delimmited list of modules to be executed by a lambda trigger. Sent to resource as an env variable."
+		},
+		"resourceName": {
+			"Type": "String",
+			"Default": ""
+		},
+		"trigger": {
+			"Type": "String",
+			"Default": "true"
+		},
+		"functionName": {
+			"Type": "String",
+			"Default": ""
+		},
+		"roleName": {
+			"Type": "String",
+			"Default": ""
+		},
+		"parentResource": {
+			"Type": "String",
+			"Default": ""
+		},
+		"parentStack": {
+			"Type": "String",
+			"Default": ""
+		},
 		"env": {
 			"Type": "String"
-		},
-		"storagedynamo5b5bd19cName": {
-			"Type": "String",
-			"Default": "storagedynamo5b5bd19cName"
-		},
-		"storagedynamo5b5bd19cArn": {
-			"Type": "String",
-			"Default": "storagedynamo5b5bd19cArn"
 		}
 	},
 	"Conditions": {
@@ -36,12 +69,12 @@
 				"FunctionName": {
 					"Fn::If": [
 						"ShouldNotCreateEnvResources",
-						"tempLambda",
+						"traccio87945b44CustomMessage",
 						{
 							"Fn::Join": [
 								"",
 								[
-									"tempLambda",
+									"traccio87945b44CustomMessage",
 									"-",
 									{
 										"Ref": "env"
@@ -56,8 +89,23 @@
 						"ENV": {
 							"Ref": "env"
 						},
+						"MODULES": {
+							"Ref": "modules"
+						},
 						"REGION": {
 							"Ref": "AWS::Region"
+						},
+						"REDIRECTURL": {
+							"Ref": "REDIRECTURL"
+						},
+						"EMAILSUBJECT": {
+							"Ref": "EMAILSUBJECT"
+						},
+						"EMAILMESSAGE": {
+							"Ref": "EMAILMESSAGE"
+						},
+						"RESOURCENAME": {
+							"Ref": "resourceName"
 						}
 					}
 				},
@@ -70,8 +118,8 @@
 				"Runtime": "nodejs10.x",
 				"Timeout": "25",
 				"Code": {
-					"S3Bucket": "amplify-tracker-trackerenv-40730-deployment",
-					"S3Key": "amplify-builds/tempLambda-4e655a525235355a2b77-build.zip"
+					"S3Bucket": "amplify-traccio-traccioenv-213120-deployment",
+					"S3Key": "amplify-builds/traccio87945b44CustomMessage-524c464d674970317331-build.zip"
 				}
 			}
 		},
@@ -81,12 +129,12 @@
 				"RoleName": {
 					"Fn::If": [
 						"ShouldNotCreateEnvResources",
-						"trackerLambdaRole7c27c218",
+						"traccio87945b44CustomMessage",
 						{
 							"Fn::Join": [
 								"",
 								[
-									"trackerLambdaRole7c27c218",
+									"traccio87945b44CustomMessage",
 									"-",
 									{
 										"Ref": "env"
@@ -152,33 +200,6 @@
 									}
 								]
 							}
-						},
-						{
-							"Effect": "Allow",
-							"Action": [
-								"dynamodb:GetItem",
-								"dynamodb:Query",
-								"dynamodb:Scan",
-								"dynamodb:PutItem",
-								"dynamodb:UpdateItem",
-								"dynamodb:DeleteItem"
-							],
-							"Resource": [
-								{
-									"Ref": "storagedynamo5b5bd19cArn"
-								},
-								{
-									"Fn::Join": [
-										"/",
-										[
-											{
-												"Ref": "storagedynamo5b5bd19cArn"
-											},
-											"index/*"
-										]
-									]
-								}
-							]
 						}
 					]
 				}
@@ -199,14 +220,14 @@
 				]
 			}
 		},
-		"Region": {
-			"Value": {
-				"Ref": "AWS::Region"
-			}
-		},
 		"LambdaExecutionRole": {
 			"Value": {
 				"Ref": "LambdaExecutionRole"
+			}
+		},
+		"Region": {
+			"Value": {
+				"Ref": "AWS::Region"
 			}
 		}
 	}

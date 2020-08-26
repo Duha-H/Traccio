@@ -1,12 +1,12 @@
 {
-    "projectName": "Tracker",
+    "projectName": "Traccio",
     "version": "3.0",
     "frontend": "javascript",
     "javascript": {
         "framework": "angular",
         "config": {
             "SourceDir": "src",
-            "DistributionDir": "dist",
+            "DistributionDir": "dist/Tracker",
             "BuildCommand": "npm run-script build",
             "StartCommand": "ng serve"
         }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { APIService } from 'src/app/API.service';
+import { APIService } from 'src/app/traccio-api.service';
 import { Journey } from 'src/app/models/journey';
 import { Application } from 'src/app/models/application';
 import { ApplicationInput } from 'src/app/models/types';
