@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { ResizeService } from 'src/app/controllers/resize.service';
 
 @Component({
   selector: 'app-about',
@@ -9,6 +10,9 @@ export class AboutComponent implements OnInit {
 
   now = new Date();
   timeOfDay = 'morning';
+  displayMobileNav = false;
+
+  constructor(public resizeService: ResizeService) { }
 
   ngOnInit() {
     const hour = this.now.getHours();
@@ -19,5 +23,16 @@ export class AboutComponent implements OnInit {
     } else {
       this.timeOfDay = 'evening';
     }
+  }
+
+  scroll(id: string) {
+    const element = document.querySelector(id);
+    console.log(element);
+    element.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+    element.classList.add('pulse');
+    setTimeout(() => {
+      element.classList.remove('pulse');
+    }, 500);
+    this.displayMobileNav = false;
   }
 }

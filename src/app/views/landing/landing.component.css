@@ -16,7 +16,7 @@ a {
 
 .landing-container {
   text-align: left;
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
@@ -74,7 +74,7 @@ button.header-btn.alt, a.header-btn.alt {
 }
 
 div.card-parent {
-  padding: 0 100px;
+  padding: 0 60px;
   visibility: hidden;
 }
 
