@@ -1,3 +1,17 @@
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul ul {
+  padding-left: 15px;
+}
+
+li {
+  padding: 5px 0;
+  font-weight: 500;
+}
+
 .landing-container {
   padding: 40px 20px;
   display: flex;
@@ -5,15 +19,35 @@
 }
 
 .landing-container h2 {
-  color: var(--titles-secondary);
+  color: #88A3FB;
   font-size: 2em;
+  font-weight: 600;
   margin: 0;
+}
+
+.landing-container h4 {
+  color: #88A3FB;
+  font-size: 1.25em;
+  font-weight: 600;
 }
 
 .landing-container a {
   text-decoration: none;
-  color: var(--titles-primary);
-  font-weight: 500;
+  color: #88A3FB;
+  font-weight: 600;
+}
+
+.landing-container a:hover {
+  text-decoration: underline;
+}
+
+.landing-container a.content-link {
+  font-size: 1em;
+  font-weight: 700;
+}
+
+p.greeting {
+  font-weight: 600;
 }
 
 .pulse {
@@ -25,6 +59,9 @@
 .spanning-content {
   align-items: center;
   margin-bottom: 10px;
+  padding: 0 20px;
+  position: sticky;
+  top: 0;
 }
 
 .sidenav {
@@ -43,6 +80,16 @@
   cursor: pointer;
   font-weight: 500;
   padding: 5px 0;
+}
+
+.sidenav li:hover {
+  color: #88A3FB;
+}
+
+.sidenav li mat-icon, .content-section li mat-icon {
+  font-size: 1em;
+  width: 15px;
+  height: 15px;
 }
 
 mat-icon.nav-toggle {
@@ -64,6 +111,20 @@ div.content-section {
   padding: 20px 0;
 }
 
+#features li {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  padding: 15px 0;
+}
+
+#features li img {
+  min-width: 8em;
+  max-width: 8em;
+  margin-right: 25px;
+  margin-bottom: 10px;
+}
+
 
 @media screen and (max-width: 768px) {
   .sidenav {
@@ -72,8 +133,14 @@ div.content-section {
 }
 
 @media screen and (max-width: 500px) {
+  ul ul {
+    padding-left: 10px;
+  }
+
   .mobile-nav {
-    width: 100%;
+    width: 60%;
+    position: absolute;
+    right: 40px;
   }
 
   .mobile-nav ul {
@@ -81,10 +148,10 @@ div.content-section {
     text-align: center;
     width: 100%;
     padding: 0;
-    background-color: var(--bg-backdrop);
+    background-color: var(--bg);
     margin-top: 0;
     border-radius: 5px;
-    box-shadow: var(--shadow-neumorphic-nav);
+    box-shadow: 3px 3px 20px #bdb8b891;
     animation: 0.35s slide-down ease-in-out;
     transform-origin: top;
   }
@@ -100,12 +167,21 @@ div.content-section {
     background-color: var(--titles-secondary);
     color: white;
   }
+
+  #features li {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #features li p {
+    text-align: justify;
+  }
 }
 
 
 @keyframes pulse-title {
   from {
-    transform: scale(1.5);
+    transform: scale(1.35);
   }
   to {
     transform: scale(1);

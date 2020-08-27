@@ -1,1 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.38 99.5"><defs><style>.cls-1{fill:none;stroke:#828282;stroke-miterlimit:10;stroke-width:3px;}</style></defs><title>graphic_list_1</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M102.34,12.11h16.89a9.66,9.66,0,0,1,9.65,9.65V78.7a9.65,9.65,0,0,1-9.65,9.65H102.34"/><rect class="cls-1" x="33.34" y="1.5" width="63.69" height="96.5" rx="9"/><path class="cls-1" d="M28,12.11H11.15A9.66,9.66,0,0,0,1.5,21.77V78.7a9.65,9.65,0,0,0,9.65,9.65H28"/></g></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.38 99.5">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #88A3FB;
+        stroke-miterlimit: 10;
+        stroke-width: 3px;
+      }
+
+    </style>
+  </defs>
+  <title>graphic_list_1</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <path class="cls-1" d="M102.34,12.11h16.89a9.66,9.66,0,0,1,9.65,9.65V78.7a9.65,9.65,0,0,1-9.65,9.65H102.34" />
+      <rect class="cls-1" x="33.34" y="1.5" width="63.69" height="96.5" rx="9" />
+      <path class="cls-1" d="M28,12.11H11.15A9.66,9.66,0,0,0,1.5,21.77V78.7a9.65,9.65,0,0,0,9.65,9.65H28" />
+    </g>
+  </g>
+</svg>

@@ -1,90 +1,134 @@
+<div class="spanning-content" *ngIf="(resizeService.mobileSize$ | async)">
+  <div class="spacer"></div>
+  <mat-icon class="nav-toggle" *ngIf="(resizeService.mobileSize$ | async)" (click)="displayMobileNav=!displayMobileNav">arrow_drop_down</mat-icon>
+</div>
+<div class="mobile-nav" *ngIf="(resizeService.mobileSize$ | async) && displayMobileNav">
+  <ul #mobileNav>
+    <li (click)="scroll('what-is')">What is <b><i>traccio</i></b>?</li>
+    <li (click)="scroll('features')">Features</li>
+    <li (click)="scroll('get-started')">Get Started</li>
+    <li (click)="scroll('support')">Support & Feature Requests</li>
+    <li (click)="scroll('tips')">Tips</li>
+  </ul>
+</div>
 <div class="landing-container">
-  <div class="sidenav" *ngIf="!(resizeService.mobileSize$ | async)">
-    <ul>
-      <li (click)="scroll('#what-is')">What is <b><i>traccio</i></b>?</li>
-      <li (click)="scroll('#features')">Features</li>
-      <li (click)="scroll('#get-started')">Get Started</li>
-      <li (click)="scroll('#support')">Support & Feature Requests</li>
-      <li (click)="scroll('#tips')">Tips</li>
-    </ul>
-  </div>
+  
   <div class="content">
-    <div class="spanning-content">
-      <h2 class="pulse">What's Up!</h2>
-      <div class="spacer"></div>
-      <mat-icon class="nav-toggle" *ngIf="(resizeService.mobileSize$ | async)" (click)="displayMobileNav=!displayMobileNav">arrow_drop_down</mat-icon>
-    </div>
-    <div class="mobile-nav" *ngIf="(resizeService.mobileSize$ | async) && displayMobileNav">
-      <ul>
-        <li (click)="scroll('#what-is')">What is <b><i>traccio</i></b>?</li>
-        <li (click)="scroll('#features')">Features</li>
-        <li (click)="scroll('#get-started')">Get Started</li>
-        <li (click)="scroll('#support')">Support & Feature Requests</li>
-        <li (click)="scroll('#tips')">Tips</li>
-      </ul>
-    </div>
-    <p>Hope you're having a swell {{ timeOfDay }}&#10024;! Let's help you learn a bit more about <i>traccio</i>.</p>
+    
+    <h2 class="pulse">What's Up!</h2>
+    <p class="greeting">Hope you're having a swell {{ timeOfDay }}! Let's help you learn a bit more about <i>traccio</i> &#10024;</p>
     <div id="what-is" class="content-section">
-      <h4>What is <b><i>traccio</i></b>?</h4>
+      <h4><a class="content-link" (click)="scroll('what-is')">#</a> What is <i>traccio</i>?</h4>
       <p><i>traccio</i> is a job-hunt tracking application. It allows you to organize your job search, and keep track of applications you submitted using a simple and effective platform. No more lifeless text-files and spreadsheets. A job search can be soul-draining as it is, maybe <i>traccio</i> can help make it just a bit more bareable?</p>
-      <p><i>traccio</i> also allows you to keep track of your job-hunt progress. Take note of when you're applying less frequently than you'd like, or how often have you heard back from companies! <i>traccio</i> is meant to help you apply smart! No more applying to the same position twice (or 15 times), always have a clear vision of where you are in the process. Log in your application, and let <i>traccio</i> handle the rest. </p>
+      <p><i>traccio</i> also allows you to keep track of your job-hunt progress. Take note of when you're applying less frequently than you'd like, or how often have you heard back from companies! <i>traccio</i> is meant to help you apply smart! No more applying to the same position twice (or 15 times), always have a clear vision of where you are in the process. Log in your application, and let <i>traccio</i> handle the rest.</p>
     </div>
     
     <div id="features" class="content-section">
-      <h4>Features</h4>
+      <h4><a class="content-link" (click)="scroll('features')">#</a> Features</h4>
       <ul>
-        <li><b>Organize</b> job hunts using <b>Journeys</b>. Separate them however convenient, and better visualize trends in your application processes.</li>
-        <li><b>Log</b> different details about a job application. Is your application still in review? Have you completed an online assessment? What documents did you submit? Log in and modify all these details, so they're easily available when, say, you're called in for an interview!</li>
-        <li><b>Visualize</b> your application progress in a given Journey. Your dashboard is the heart and soul of <i>traccio</i>, use it to keep yourself motivated and constantly re-asses where you are in the process.</li>
+        <li>
+          <img src="/assets/landing-graphics/graphic_list_1.svg" alt="Organize">
+          <p><b>Organize</b> job hunts using Journeys. Separate them however convenient, and better visualize trends in your application processes.</p>
+        </li>
+        <li>
+          <img src="/assets/landing-graphics/graphic_list_2.svg" alt="Organize">
+          <p><b>Log</b> different details about a job application. Is your application still in review? Have you completed an online assessment? What documents did you submit? Log in and modify all these details, so they're easily available when, say, you're called in for an interview!</p>
+        </li>
+        <li>
+          <img src="/assets/landing-graphics/graphic_data.svg" alt="Organize">
+          <p><b>Visualize</b> your application progress in a given Journey. Your dashboard is the heart and soul of <i>traccio</i>, use it to keep yourself motivated and constantly re-asses where you are in the process.</p>
+        </li>
       </ul>
     </div>
     
     <div id="get-started" class="content-section">
-      <h4>Get Started</h4>
+      <h4><a class="content-link" (click)="scroll('get-started')">#</a> Get Started</h4>
       <ul>
         <li><a href="" routerLink="/signup">Sign up</a> for a <i>traccio</i> account today!</li>
         <li>
-          Use <i>traccio</i> conveniently on mobile by adding it to your homescreen
+          Use <i>traccio</i> conveniently on mobile by adding it to your homescreen:
           <ul>
-            <li><div>
-              <p>On <b>iOS</b></p>
-            </div></li>
-            <li><div>
-              <p>On <b>Android</b></p>
-            </div></li>
+            <li>
+              <mat-icon>keyboard_arrow_right</mat-icon>
+              On <b>iOS</b>:
+            </li>
+            <li>
+              <mat-icon>keyboard_arrow_right</mat-icon>
+              On <b>Android</b>:
+            </li>
           </ul>
         </li>
       </ul>
     </div>
     
     <div id="support" class="content-section">
-      <h4>Support & Feature Requests</h4>
-      <p><i>traccio</i> is an <a href="https://github.com/Duha-H/Tracker-App">open source</a> web application.</p>
+      <h4><a class="content-link" (click)="scroll('support')">#</a> Support & Feature Requests</h4>
+      <p><i>traccio</i> is an <a href="https://github.com/Duha-H/Tracker-App">open source</a> web application. For feature requests, bug reporting, or support, feel free to use any of the options provided below.</p>
       <ul>
-        <li>For feature requests, feel free to use either of the two options below:
+        <li><b>Feature requests</b>:
           <ul>
-            <li>Email your feature request to <b><i>support@traccio.app</i></b>. Do try to use "Feature Request" in your subject line.</li>
-            <li>Open an issue in the project <a href="https://github.com/Duha-H/Tracker-App">repository</a>. However, be sure to check the <a href="https://github.com/Duha-H/Tracker-App/wiki/Roadmap">app roadmap</a> first for planned features, your request might already be a planned development!</li>
+            <li>
+              <mat-icon>keyboard_arrow_right</mat-icon>
+              Email your feature request to <b><i>support@traccio.app</i></b>. Do try to use "Feature Request" in your subject line.
+            </li>
+            <li>
+              <mat-icon>keyboard_arrow_right</mat-icon>
+              Open an issue in the project <a href="https://github.com/Duha-H/Tracker-App">repository</a>. However, be sure to check the <a href="https://github.com/Duha-H/Tracker-App/wiki/Roadmap">app roadmap</a> first for planned features, your request might already be a planned development!
+            </li>
           </ul>
         </li>
-        <li>For support:
+        <li><b>Support</b>:
           <ul>
-            <li>Email your support requests or bug reports to <i>support@traccio.app</i>. Be sure to include any screenshots that might aid in resolving your issue. Add "Support" to your subject line.</li>
+            <li>
+              <mat-icon>keyboard_arrow_right</mat-icon>
+              If you're facing a specific issue with the app, email your support requests to <i>support@traccio.app</i>. Be sure to include any screenshots that might aid in resolving your issue. Add "Support" to your subject line.
+            </li>
           </ul>
         </li>
-        <li>For bug reports:
+        <li><b>Bug reports</b>:
           <ul>
-            <li>Email your bug reports to <i>support@traccio.app</i>. Be sure to include any screenshots that might aid in resolving your issue. Add "Bug Report" to your subject line.</li>
-            <li>Open an issue in the project <a href="https://github.com/Duha-H/Tracker-App">repository</a>. Be sure to include any screenshots or reproduction steps to help with the bug squashing!</li>
+            <li>
+              <mat-icon>keyboard_arrow_right</mat-icon>
+              Email your bug reports to <i>support@traccio.app</i>. Be sure to include any screenshots that might aid in resolving your issue. Add "Bug Report" to your subject line.
+            </li>
+            <li>
+              <mat-icon>keyboard_arrow_right</mat-icon>
+              Open an issue in the project <a href="https://github.com/Duha-H/Tracker-App">repository</a>. Be sure to include any screenshots or reproduction steps to help with the bug squashing!
+            </li>
           </ul>
         </li>
       </ul>
     </div>
     
     <div id="tips" class="content-section">
-      <h4>Tips</h4>
+      <h4><a class="content-link" (click)="scroll('tips')">#</a> Tips</h4>
       <p>Enjoying your <i>traccio</i> experience and would like to show some support? GIVE ME MONEY!</p>
     </div>
+  </div>
+
+  <div class="sidenav" *ngIf="!(resizeService.mobileSize$ | async)">
+    <ul>
+      <li (click)="scroll('what-is')">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+        What is <b><i>traccio</i></b>?
+      </li>
+      <li (click)="scroll('features')">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+        Features
+      </li>
+      <li (click)="scroll('get-started')">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+        Get Started
+      </li>
+      <li (click)="scroll('support')">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+        Support & Feature Requests
+      </li>
+      <li (click)="scroll('tips')">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+        Tips
+      </li>
+    </ul>
   </div>
   
   
