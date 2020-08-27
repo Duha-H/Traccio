@@ -1,14 +1,19 @@
+.container {
+  height: 100%;
+  display: flex;
+  overflow: auto;
+}
+
 .signin-container {
   margin: auto;
-  margin-top: 20vh;
   display: flex;
   flex-direction: column;
-  max-width: 360px;
+  width: 340px;
   padding: 0 20px;
 }
 
 .signin-container h2 {
-  text-align: center;
+  text-align: left;
   color: var(--accent);
   margin: 20px 0;
   margin-bottom: 70px;
@@ -16,13 +21,13 @@
 
 p.warning-text {
   text-align: center;
-  font-size: 10pt;
   height: 10pt;
 }
 
-.signin-container text-field {
+.signin-container form text-field {
+  display: inline-block;
   width: 100%;
-  /* margin-bottom: 60px; */
+  margin-bottom: 20px;
 }
 
 form {
@@ -32,4 +37,15 @@ form {
 .submit-button {
   margin: 90px 0;
   margin-bottom: 0;
+}
+
+
+@media screen and (max-width: 500px) {
+  div.signin-container {
+    width: 300px;
+  }
+
+  .signin-container h2 {
+    margin-bottom: 50px;
+  }
 }

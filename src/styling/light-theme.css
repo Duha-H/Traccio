@@ -38,10 +38,10 @@ body[theme='light'][palette='palette-0'] {
   --element-bg-primary: #E8E8F3;
   --element-bg-secondary: #E8E8F3;
   /** accent colors */
-  --accent: #9f9dea;
+  --accent: #88A3FB;
   --accent-hover: #CFCFEE;
   /** text */
-  --titles-primary: #9f9dea;
+  --titles-primary: #88A3FB;
 }
 
 body[theme='light'][palette='palette-1'] {

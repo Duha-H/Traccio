@@ -7,7 +7,7 @@
     <text-field [width]="400" [height]="8" (inputChange)="password=$event" [label]="'Password'" [type]="'password'" ></text-field>
     <text-field [width]="400" [height]="8" (inputChange)="confirmPassword=$event" [label]="'Re-enter Password'" [type]="'password'" ></text-field>
 		<p class="warning-text">{{error}}<br></p>
-		<button (click)="signUp()" class="submit-button">Sign up</button>
+		<button (click)="signUp()" class="submit-button" #submitButton>Sign up</button>
 		<p class="login-link">Already have an account? <a href="#" routerLink="/signin" class="login-link">Sign in</a></p>
   </div>
 </div>

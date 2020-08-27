@@ -35,9 +35,9 @@ body[theme='dark'] {
 
 body[theme='dark'][palette='palette-0'] {
   /** accent colors */
-  --accent: #9f9dea;
+  --accent: #88A3FB;
   /** text */
-  --titles-primary: #9f9dea;
+  --titles-primary: #88A3FB;
 }
 
 body[theme='dark'][palette='palette-1'] {

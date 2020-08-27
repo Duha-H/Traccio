@@ -24,6 +24,18 @@ const routes: Routes = [
     children: [
       { path: "", component: LandingComponent },
       { path: "about", component: AboutComponent },
+      { path: "signin", component: SignInComponent, canActivate: [SignInGuard] },
+      { path: "signup", component: SignUpComponent, canActivate: [SignInGuard] },
+      {
+        path: "confirmsignup",
+        component: ConfirmSignupComponent,
+        canActivate: [ConfirmSignUpGuard],
+      },
+      {
+        path: "accountrecovery",
+        component: AccountRecoveryComponent,
+        canActivate: [AccountRecoveryGuard],
+      },
     ],
   },
   {
@@ -58,18 +70,6 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
     ],
-  },
-  { path: "signin", component: SignInComponent, canActivate: [SignInGuard] },
-  { path: "signup", component: SignUpComponent, canActivate: [SignInGuard] },
-  {
-    path: "confirmsignup",
-    component: ConfirmSignupComponent,
-    canActivate: [ConfirmSignUpGuard],
-  },
-  {
-    path: "accountrecovery",
-    component: AccountRecoveryComponent,
-    canActivate: [AccountRecoveryGuard],
   },
   { path: "**", redirectTo: "home" },
 ];

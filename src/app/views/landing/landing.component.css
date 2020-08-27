@@ -314,6 +314,10 @@ div.card-parent.card-visible {
     max-height: 3vh;
   }
 
+  .header a:not(.header-btn) {
+    margin-right: 15px;
+  }
+
   div.card-parent {
     padding: 0 30px;
   }

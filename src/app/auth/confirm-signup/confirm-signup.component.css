@@ -1,3 +1,9 @@
+.container {
+  height: 100%;
+  display: flex;
+  overflow: auto;
+}
+
 .confirm-signup-container {
   margin: 0 auto;
   position: absolute;

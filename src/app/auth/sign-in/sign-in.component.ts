@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
 
@@ -13,13 +13,25 @@ export class SignInComponent implements OnInit {
   password = '';
   error = '\n\n';
   signInError = false;
+  @ViewChild('submitButton') submitButton: ElementRef;
 
   constructor(private router: Router, private authWrapper: AuthWrapperService) { }
 
   ngOnInit() {
+    document.addEventListener('keyup', (event) => {
+      if (event.keyCode === 13) {
+        this.submitButton.nativeElement.click();
+      }
+    });
   }
 
   async signIn(identityProvider?: string) {
+    // animate button press
+    this.submitButton.nativeElement.classList.add('pulse');
+    setTimeout(() => {
+      this.submitButton.nativeElement.classList.remove('pulse');
+    }, 200);
+    // execure sign in
     let response;
     if (identityProvider === 'Google') {
       response = await this.authWrapper.googleSignIn();

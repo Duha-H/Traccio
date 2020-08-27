@@ -7,13 +7,13 @@
     </a>
     <div class="spacer"></div>
     <a routerLink="/about">About</a>
-    <a *ngIf="!(resizeService.mobileSize$ | async)" class="header-btn alt" routerLink="/signup">Sign up</a>
-    <a *ngIf="!(resizeService.mobileSize$ | async)" class="header-btn" routerLink="/signin">Sign in</a>
+    <a *ngIf="!(resizeService.mobileSize$ | async) && router.url != '/signup'" class="header-btn alt" routerLink="/signup">Sign up</a>
+    <a *ngIf="!(resizeService.mobileSize$ | async) && router.url != '/signin'" class="header-btn" routerLink="/signin">Sign in</a>
   </div>
 
   <router-outlet></router-outlet>
 
-  <div class="fixed-footer" *ngIf="resizeService.mobileSize$ | async">
+  <div class="fixed-footer" *ngIf="(resizeService.mobileSize$ | async) && router.url != '/signin' && router.url != '/signup'">
     <a class="header-btn alt" routerLink="/signup">Sign up</a>
     <a class="header-btn" routerLink="/signin">Sign in</a>
   </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AuthStoreService } from 'src/app/controllers/auth-store.service';
 import { Router } from '@angular/router';
 import { UserStoreService } from 'src/app/models/user-store.service';
@@ -15,10 +15,10 @@ export class ConfirmSignupComponent implements OnInit {
   email = '';
   error = '';
   success = false;
+  @ViewChild('submitButton') submitButton: ElementRef;
 
   constructor(
     private router: Router,
-    private authStore: AuthStoreService,
     private userStore: UserStoreService,
     private authWrapper: AuthWrapperService
   ) { }
@@ -27,9 +27,21 @@ export class ConfirmSignupComponent implements OnInit {
     this.userStore.user.subscribe(user => {
       this.email = user.email;
     });
+    document.addEventListener('keyup', (event) => {
+      if (event.keyCode === 13) {
+        this.submitButton.nativeElement.click();
+      }
+    });
   }
 
   async confirmSignup() {
+    // animate button press
+    this.submitButton.nativeElement.classList.add('pulse');
+    setTimeout(() => {
+      this.submitButton.nativeElement.classList.remove('pulse');
+    }, 200);
+    // execure confirmation
+
     if (!this.email) {
       this.router.navigate(['signin']);
       return;
