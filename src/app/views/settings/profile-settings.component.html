@@ -36,7 +36,7 @@
     <p>Your last name is only used to personalize your experience</p>
   </div>
 
-  <div class="setting">
+  <div class="{{ (userStore.user | async).identityProvider == 'GOOGLE' ? 'setting disabled' : 'setting' }}">
     <div class="label">
       <p class="label">
         Change email
@@ -44,7 +44,11 @@
       </p>
       
       <div class="info" style="padding: 5px 0;" id="email">
-        <p id="alt-info">Your email address is used as a login credential, so make sure you provide a valid address.</p>
+        <p id="alt-info">{{
+          (userStore.user | async).identityProvider == 'GOOGLE'
+          ? 'Your email address is provided by an external provider (Google) and cannot be changed.'
+          : 'Your email address is used as a login credential, so make sure you provide a valid address.'
+        }}</p>
       </div>
     </div>
     <div class="setting-textfield" style="align-items: flex-start;">

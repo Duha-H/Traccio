@@ -122,6 +122,11 @@ button.save-btn:hover:not(:disabled) mat-icon {
   margin-top: 1em;
 }
 
+.setting.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
 .setting p.label, .setting div.label {
   width: 40%;
 }
@@ -309,6 +314,10 @@ div.overlay-content p {
   font-size: 10pt;
   font-weight: 400;
   margin: 10px auto;
+}
+
+a.login-link {
+  cursor: pointer;
 }
 
 p#alt-info {

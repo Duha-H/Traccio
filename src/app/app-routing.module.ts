@@ -69,6 +69,7 @@ const routes: Routes = [
         component: SettingsComponent,
         canActivate: [AuthGuard],
       },
+      { path: "**", redirectTo: "" },
     ],
   },
   { path: "**", redirectTo: "home" },

@@ -5,6 +5,7 @@ export class User {
 	private _userid = '';
 	private _email = '';
 	private _verified = false;
+	private _identityProvider: 'DEFAULT' | 'GOOGLE' = 'DEFAULT';
 
   constructor(userparams?: { [key: string]: any }) {
 		if (userparams) {
@@ -13,6 +14,9 @@ export class User {
 			this._userid = userparams.id;
 			this._email = userparams.email;
 			this._verified = userparams.email_verified;
+			if (userparams.identityProvider) {
+				this._identityProvider = userparams.identityProvider;
+			}
 		}
 	}
 
@@ -30,6 +34,9 @@ export class User {
 
 	get verified() { return this._verified; }
 	set verified(status: boolean) { this._verified = status; }
+
+	get identityProvider() { return this._identityProvider; }
+	set identityProvider(provider: 'DEFAULT' | 'GOOGLE') { this._identityProvider = provider; }
 
 	isDefined() {
 		return (this._firstName && this._lastName && this._userid);

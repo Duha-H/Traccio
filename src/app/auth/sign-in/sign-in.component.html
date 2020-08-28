@@ -6,7 +6,7 @@
 			<text-field [width]="360" height="8" (inputChange)="setInput($event, 'password')" [label]="'Password'" [type]="'password'"></text-field>
 			<p class="warning-text">{{error}}</p>
 			<button type="submit" class="submit-button" #submitButton>Sign in</button>
-			<!-- <button (click)="signIn('Google')" type="submit" class="submit-button">Sign in with Google</button> -->
+			<button (click)="signIn('Google')" type="submit" class="submit-button">Sign in with Google</button>
 		</form>
 		<a href="#" routerLink="/accountrecovery" class="login-link">Forgot password?</a>
 		<p class="login-link">Don't have an account? <a href="#" routerLink="/signup" class="login-link">Sign up</a></p>

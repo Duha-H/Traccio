@@ -60,13 +60,16 @@ export class UserStoreService {
    * Initial Setup Methods
    */
 
-  setUser(firstName: string, lastName: string, id: string, email: string, verified: boolean) {
+  setUser(firstName: string, lastName: string, id: string, email: string, verified: boolean, identityProvider?: 'DEFAULT' | 'GOOGLE') {
     const newUser = new User();
     newUser.firstName = firstName;
     newUser.lastName = lastName;
     newUser.userid = id;
     newUser.email = email;
     newUser.verified = verified;
+    if (identityProvider) {
+      newUser.identityProvider = identityProvider;
+    }
     this._user.next(newUser);
     console.log('UserStore: user verified:', verified);
     this.fetchData();

@@ -37,12 +37,21 @@ export class AppComponent implements OnInit {
           this.user = authState.user;
           this.authWrapper.authState.signedIn = true;
           // set user attributes and navigate to dashboard
+          let verified;
+          let identityProvder: 'DEFAULT' | 'GOOGLE' = 'DEFAULT';
+          if (this.user.attributes.identities) {
+            verified = true; // if user is provided by a federated identity, we don't care if they're verified
+            identityProvder = 'GOOGLE';
+          } else {
+            verified = this.user.attributes.email_verified;
+          }
           await this.userStore.setUser(
             this.user.attributes.given_name,
             this.user.attributes.family_name,
             this.user.attributes.sub,
             this.user.attributes.email,
-            this.user.attributes.email_verified,
+            verified,
+            identityProvder,
           );
           this.userStore.loadData();
           // retrieve and set user preferences
