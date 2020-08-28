@@ -41,6 +41,9 @@ export class SignInComponent implements OnInit {
     if (response.successful) {
       this.router.navigate(['home']);
     } else {
+      if (response.payload === 'UserNotConfirmedException') {
+        this.router.navigate(['confirmsignup']);
+      }
       this.signInError = true;
       this.error = response.message;
     }

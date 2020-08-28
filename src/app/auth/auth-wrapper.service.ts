@@ -60,6 +60,12 @@ export class AuthWrapperService {
         case 'NotAuthorizedException':
           response.error('Incorrect password');
           break;
+        case 'UserNotConfirmedException':
+          response.error('Looks like your email address was never verified, please verify it.');
+          response.payload = error.code;
+          this.authState.signedUp = true;
+          this.authState.signedIn = false;
+          break;
         default:
           response.error('An unexpected error occured, please try again');
           console.error('AuthWrapper: unexpected signIn error:', error.message);
