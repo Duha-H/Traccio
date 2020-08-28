@@ -219,16 +219,13 @@ a.login-link.forgot-password {
 }
 
 .placeholder-text {
-  margin: auto;
-  text-align: center;
-  margin: auto;
+  margin-top: 150px;
+  padding: 20px;
+  max-height: 350px;
   display: flex;
   flex-direction: column;
-  vertical-align: middle;
-  /* height: 200px; */
-  margin-top: 150px;
-  height: 40%;
-  padding: 20px;
+  justify-content: center;
+  align-items: center;
 }
 
 .add-btn {

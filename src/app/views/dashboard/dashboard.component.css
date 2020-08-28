@@ -262,7 +262,81 @@ calendar-wrapper {
 }
 
 .placeholder-text {
-  margin-top: 150px;
+  max-height: 400px;
+}
+
+svg {
+  --animation-duration: 8s;
+}
+
+svg #tumbleweed-1 {
+  animation: roll var(--animation-duration) infinite linear;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+svg #tumbleweed-2 {
+  animation: roll-reverse var(--animation-duration) infinite linear;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+@keyframes roll {
+  0% {
+    opacity: 0;
+  }
+  5% {
+    transform: translateX(0%) rotateZ(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  45% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(1000%) rotateZ(360deg);
+    opacity: 0;
+  }
+  95% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(1000%) rotateZ(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes roll-reverse {
+  0% {
+    transform: translateX(0%) rotateZ(360deg);
+    opacity: 0;
+  }
+  40% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  60% {
+    transform: translateX(0%) rotateZ(360deg);
+    opacity: 0;
+  }
+  65% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  95% {
+    transform: translateX(-500%) rotateZ(0deg);
+    opacity: 0;
+  }
+  100% {
+    /* transform: translateX(-500%) rotateZ(0deg); */
+    opacity: 0;
+  }
 }
 
 @media screen and (max-width: 500px) {

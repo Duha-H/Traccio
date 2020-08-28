@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, ViewChild, QueryList, ViewChildren, ElementRef, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnChanges, ViewChild, QueryList, ViewChildren, ElementRef, OnDestroy, Input } from "@angular/core";
 import { UserStoreService } from "src/app/models/user-store.service";
 import { Journey } from "src/app/models/journey";
 import { Router } from "@angular/router";
@@ -14,7 +14,6 @@ import { NotificationService } from 'src/app/controllers/notification.service';
 })
 export class JourneyListComponent implements OnInit, OnDestroy {
 
-  displayDrawer = false;
   currJourney: Journey = null;
   journeys: Observable<Journey[]>;
   editButton = false;
@@ -22,6 +21,7 @@ export class JourneyListComponent implements OnInit, OnDestroy {
   selectionMode = false;
   sliderIdx = 0;
   swipeOffset = 0;
+  @Input() displayDrawer = false;
   @ViewChild(SliderContainerComponent) sliderContainer: SliderContainerComponent;
   // @ViewChildren('journeyItem', { read: ElementRef }) journeyList!: QueryList<ElementRef>;
   journeyList: QueryList<ElementRef>;

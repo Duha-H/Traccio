@@ -35,7 +35,7 @@ export class ProfileSettingsComponent implements OnInit {
   @Output() showTooltip: EventEmitter<object> = new EventEmitter<object>();
   @Output() hideTooltip: EventEmitter<ElementRef> = new EventEmitter<ElementRef>();
 
-  constructor(private userStore: UserStoreService, public rs: ResizeService) { }
+  constructor(public userStore: UserStoreService, public rs: ResizeService) { }
 
   ngOnInit() {
     this.userStore.user.subscribe(user => {
