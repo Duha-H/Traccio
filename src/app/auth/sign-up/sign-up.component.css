@@ -10,6 +10,10 @@ div.signup-container {
   flex-direction: column;
   width: 340px;
   padding: 0 20px;
+  
+  background: var(--bg);
+  border-radius: 15px;
+  box-shadow: var(--shadow-auth-element);
 }
 
 .signup-container * {
@@ -37,6 +41,8 @@ p.warning-text {
 @media screen and (max-width: 500px) {
   div.signup-container {
     width: 300px;
+    background: none;
+    box-shadow: none;
   }
 
   .signup-container h2 {

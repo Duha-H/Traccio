@@ -214,6 +214,7 @@ div.fixed-footer {
   justify-content: center;
   background: var(--bg);
   animation: slide-up 0.5s linear;
+  box-shadow: var(--shadow-auth-element);
 }
 
 div.card-parent.card-visible {

@@ -8,6 +8,7 @@ body[theme='light'] {
   /** accent colors */
   --accent: #9f9dea;
   --accent-hover: #CFCFEE;
+  --submit-btn: #c1cace;
   /** text */
   --titles-primary: #9f9dea;
   --titles-secondary: #7e8992;
@@ -31,6 +32,7 @@ body[theme='light'] {
   --shadow-clickable: 0 0 10px rgba(0, 0, 0, 0.4);
   --shadow-tooltip: 0 0 8px rgba(0, 0, 0, 0.4);
   --shadow-overlay: 0 0 30px rgba(0, 0, 0, 0.6);
+  --shadow-auth-element: 0px 0px 20px #a2a1a1bf;
 }
 
 body[theme='light'][palette='palette-0'] {

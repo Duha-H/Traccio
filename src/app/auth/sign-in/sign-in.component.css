@@ -1,11 +1,22 @@
 .container {
   height: 100%;
   display: flex;
+  flex-direction: row;
   overflow: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.inner-container {
+  height: auto;
+  padding: 20px;
+  background: var(--bg);
+  border-radius: 15px;
+  box-shadow: var(--shadow-auth-element);
 }
 
 .signin-container {
-  margin: auto;
+  /* margin: auto; */
   display: flex;
   flex-direction: column;
   width: 340px;
@@ -39,13 +50,48 @@ form {
   margin-bottom: 0;
 }
 
+.submit-button.social-signin {
+  margin-top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.social-signin img {
+  width: 20px;
+  margin-left: 10px;
+}
+
+.divider p {
+  padding: 10px;
+  border-radius: 100%;
+  border: 1.5px solid var(--accent);
+  margin: 30px 0;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+@media screen and (max-width: 768px) {
+  .inner-container {
+    flex-direction: column;
+  }
+
+  .submit-button {
+    margin-top: 45px;
+  }
+}
 
 @media screen and (max-width: 500px) {
+  .inner-container {
+    background: none;
+    box-shadow: none;
+  }
+
   div.signin-container {
     width: 300px;
   }
 
   .signin-container h2 {
-    margin-bottom: 50px;
+    margin-bottom: 20px;
   }
 }

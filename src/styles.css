@@ -143,12 +143,13 @@ app-wishlist-wrapper {
 
 app-sign-in,
 app-sign-up,
-app-account-recovery {
+app-account-recovery,
+app-confirm-signup {
   height: calc(95vh - 20px);
   display: inline-block;
 }
 
-app-account-recovery {
+app-account-recovery, app-confirm-signup {
   display: flex;
 }
 
@@ -157,7 +158,7 @@ app-dashboard {
 }
 
 .submit-button {
-  background-color: var(--titles-secondary);
+  background-color: #c1cace;
   color: var(--text);
   font-size: 10pt;
   padding: 12px;
@@ -323,7 +324,8 @@ div.blurb, div.blurb.spanning-content {
 
   app-sign-in,
   app-sign-up,
-  app-account-recovery {
+  app-account-recovery,
+  app-confirm-signup {
     /* height: calc(95vh - 100px); */
     overflow: auto;
   }
