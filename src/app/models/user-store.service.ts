@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, ElementRef } from "@angular/core";
 import { User } from "./user";
 import { Journey } from "./journey";
 import * as mock from "./mock-journeys";
@@ -263,16 +263,25 @@ export class UserStoreService {
     return response;
   }
 
-  async removeJourney(journeyid: string) {
+  async removeJourney(journeyid: string, itemRef?: ElementRef) {
     const response = await this.controller.removeJourney(this.getJourney(journeyid));
     if (!response.successful) {
       return response;
     }
-    const updatedJourneys = this._journeys.getValue();
-    delete updatedJourneys[journeyid];
-    this.dataManager.removeJourney(journeyid);
-    this.updateJourneyData(updatedJourneys);
-    this.dataUpdated = true;
+    if (itemRef) {
+      // this is stupid, but update UI before losing reference :)
+      itemRef.nativeElement.classList.add('remove');
+    }
+    setTimeout(() => {
+      if (itemRef) {
+        itemRef.nativeElement.classList.remove('remove');
+      }
+      const updatedJourneys = this._journeys.getValue();
+      delete updatedJourneys[journeyid];
+      this.dataManager.removeJourney(journeyid);
+      this.updateJourneyData(updatedJourneys);
+      this.dataUpdated = true;
+    }, 500);
 
     return response;
   }

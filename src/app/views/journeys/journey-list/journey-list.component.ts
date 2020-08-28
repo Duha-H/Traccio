@@ -23,13 +23,13 @@ export class JourneyListComponent implements OnInit, OnDestroy {
   swipeOffset = 0;
   @Input() displayDrawer = false;
   @ViewChild(SliderContainerComponent) sliderContainer: SliderContainerComponent;
+  // @ViewChildren('journeyItem') journeyItems: QueryList<ElementRef>;
   // @ViewChildren('journeyItem', { read: ElementRef }) journeyList!: QueryList<ElementRef>;
   journeyList: QueryList<ElementRef>;
   @ViewChildren('journeyItem')
   set journeyItems(items: QueryList<ElementRef>) {
     this.journeyList = items;
     if (this.sliderIdx < this.journeyList.length && !this.selectionMode) {
-      console.log('TRIGGERED HERE');
       this.onSwipe();
     }
   }
@@ -75,7 +75,7 @@ export class JourneyListComponent implements OnInit, OnDestroy {
 
   removeJourney(selectedJourney: Journey, idx?: number) {
     if (confirm(`Are you sure you'd like to remove ${selectedJourney.title}?`)) {
-      const response = this.userStore.removeJourney(selectedJourney.id);
+      const response = this.userStore.removeJourney(selectedJourney.id, this.journeyList.toArray()[idx]);
       response.then(value => {
         if (value.successful) {
           this.notificationService.sendNotification(`${selectedJourney.title} removed successfully!`, 'success');

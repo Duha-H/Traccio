@@ -5,14 +5,10 @@
 .view-container {
   max-width: 1200px;
   margin: 0 auto;
-  /* height: 100%; */
   padding: 0 20px;
 }
 
 .spanning-content {
-  /* margin: 15px 20px; */
-  /* border-bottom: 1px solid var(--titles-secondary); */
-  /* padding-bottom: 10px; */
   height: var(--spanning-line-height);
 }
 
@@ -68,6 +64,10 @@ mat-drawer {
   margin: 20px;
 }
 
+.remove {
+  animation: delete 0.5s ease-in-out;
+}
+
 slider-container {
   height: 94%;
   display: flex;
@@ -104,5 +104,14 @@ slider-container .journey-item.current {
 
   .add-btn {
     padding: 0 5px;
+  }
+}
+
+@keyframes delete {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0);
   }
 }
