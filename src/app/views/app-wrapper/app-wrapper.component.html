@@ -15,7 +15,7 @@
           <mat-icon [inline]="true" aria-hidden="false" aria-label="Search icon">star_border</mat-icon>
         </a></li>
     </ul>
-    <a href="#" routerLink="/home/info" class="info" title="Info">
+    <a href="#" routerLink="/home/info" class="info" title="About Traccio">
       <img src="/assets/icons/info_icon.svg" alt="Info icon" class="info">
     </a>
   </div>
@@ -51,7 +51,7 @@
       </ng-template>
       
       <!-- Footer -->
-      <footer>
+      <footer *ngIf="!(resizeService.mobileSize$ | async) || router.url == '/home/info'">
         <small>&copy; Traccio 2020</small>
       </footer>
     </div>

@@ -24,9 +24,9 @@ export class AppWrapperComponent implements OnInit {
   displayDropdown = false;
   dropdownItems: DropdownItem[] = [
     { text: "Signed in as: user@email.com", type: "item"},
-    { text: "Account settings", type: "link", link: "/home/settings"},
-    { text: "Theme: dark", type: "toggle", callback: this.toggleTheme.bind(this) },
-    { text: "About traccio", type: "link", link: "/home/info"},
+    { text: "Account Settings", type: "link", link: "/home/settings"},
+    { text: "Theme: dark", type: "theme-toggle", callback: this.toggleTheme.bind(this) },
+    { text: "About Traccio", type: "link", link: "/home/info"},
     { text: "Sign out", type: "button", callback: this.signOut.bind(this) },
   ];
   searchQuery = '';
@@ -41,7 +41,7 @@ export class AppWrapperComponent implements OnInit {
 
   constructor(
     private userStore: UserStoreService,
-    private router: Router,
+    public router: Router,
     private prefStore: PreferencesStoreService,
     public resizeService: ResizeService,
     public notificationService: NotificationService,

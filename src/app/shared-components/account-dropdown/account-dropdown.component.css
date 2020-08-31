@@ -17,14 +17,11 @@
 .dropdown-container.hidden {
 	height: 0;
 	opacity: 0;
-	/* display: none; */
 }
 
 .dropdown-container.visible {
-	/* height: 130px; */
 	opacity: 1;
   transform: translateY(0);
-	/* display: inline-block; */
 }
 
 ul {
@@ -40,12 +37,14 @@ li {
 	font-size: 11pt;
 	font-weight: 300;
 	display: flex;
+	justify-content: center;
 }
 
 li:hover:not(.item) {
 	background-color: var(--titles-secondary);
 	color: var(--bg);
 	cursor: pointer;
+	font-weight: 500;
 }
 
 li.item:hover {
@@ -61,7 +60,7 @@ ul a {
 
 li:hover a {
 	color: var(--element-bg-primary);
-	font-weight: 400;
+	font-weight: 500;
 }
 
 .signout-button {
@@ -70,58 +69,11 @@ li:hover a {
 
 /** Toggle Styling */
 
-.slider {
-	/* position: absolute;
-	top: 15px;
-	right: 30px; */
-	/* display: inline-block; */
-	/* width: 60px;
-	height: 25px; */
-	width: 50px;
-	height: 20px;
-	border-radius: 34px;
-	background-color: var(--theme-light);
-	position: relative;
+.theme-toggle mat-icon {
+	font-size: 20px;
 }
 
-.slider input { 
-	opacity: 0;
-	width: 0;
-	height: 0;
-}
-
-.toggle-span {
-	position: absolute;
-	cursor: pointer;
-	top: 0;
-	left: 0;
-	/* right: 0;
-	bottom: 0; */
-	background-color: rgb(138, 230, 236);
-	-webkit-transition: .3s;
-	transition: .3s;
-	border-radius: 34px;   
-}
-
-.toggle-span:before {
-	position: absolute;
-	content: "";
-	height: 14px;
-	width: 14px;
-	left: -2px;
-	bottom: -17px;
-	background-color: var(--titles-secondary);
-	-webkit-transition: .4s;
-	transition: .4s;
-	border-radius: 50%;
-}
-
-input:checked + .toggle-span {
-	background-color: rgb(94, 157, 161);
-}
-
-input:checked + .toggle-span:before {
-	-webkit-transform: translateX(34px);
-	-ms-transform: translateX(34px);
-	transform: translateX(34px);
+.theme-toggle mat-icon:hover {
+	color: var(--accent);
+	transform: scale(1.15);
 }

@@ -5,9 +5,11 @@
         (click)="onItemClick(item)">
         {{item.text}}
         <div class="spacer"></div>
-        <div *ngIf="item.type == 'toggle'" class="slider theme-toggle">
-          <input type="checkbox" class="theme-toggle" (change)="onItemClick(item)" [checked]="!toggleClick">
-          <span class="toggle-span theme-toggle"></span>
+        <div *ngIf="item.type == 'theme-toggle'" class="theme-toggle">
+          <mat-icon *ngIf="(prefStore.preferences | async).theme.name == 'dark'; else lightToggle" (change)="onItemClick(item)">brightness_2</mat-icon>
+          <ng-template #lightToggle>
+            <mat-icon (change)="onItemClick(item)">brightness_5</mat-icon>
+          </ng-template>
         </div>
       </li>
     </a>

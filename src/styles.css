@@ -237,6 +237,10 @@ a.login-link.forgot-password {
   align-items: center;
 }
 
+.placeholder-text p {
+  color: var(--titles-secondary);
+}
+
 .add-btn {
   /* line-height: var(--spanning-line-height); */
   border-radius: 5px;
@@ -287,12 +291,21 @@ div.blurb, div.blurb.spanning-content {
   margin-bottom: 30px;
 }
 
-.blurb p {
+.blurb p, .blurb.spanning-content p {
   color: var(--titles-secondary);
   text-align: left;
   margin: 0;
 }
 
+p.answer a {
+  text-decoration: none;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+p.answer a:hover {
+  text-decoration: underline;
+}
 
 @media screen and (max-width: 575px) {
   div.content {
