@@ -2,7 +2,7 @@ import { TimelineDatum } from '../models/types';
 
 export interface DropdownItem {
   text: string;
-  readonly type: "button" | "link" | "item" | "toggle";
+  readonly type: "button" | "link" | "item" | "theme-toggle";
   readonly callback?: () => void;
   readonly link?: string;
 }

@@ -4,26 +4,27 @@
     <div id="about" class="spanning-content">
       <h2>About Traccio</h2>
     </div>
-    <p class="blurb spanning-content">Hope you're having a swell {{ timeOfDay }}! Let's help you learn a bit more about <i>traccio</i> &#10024;</p>
-    <p>Traccio is an open source web application that helps you</p>
+    <p class="blurb spanning-content">Hope you're having a swell {{ timeOfDay }}! Let's help you learn a bit more about Traccio &#10024;</p>
+    <p>Traccio is a web application that helps you monitor and track your job search. It lets you organize your search, monitor your productivity, and keep all your necessary details under one (internet) roof! Traccio is an <a href="https://github.com/Duha-H/Traccio">open source</a> web application, feel free to read the application wiki <a href="https://github.com/Duha-H/Traccio/wiki">here</a>.</p>
     
     <div id="faq">
-      <h2>FAQ</h2>
+      <h2>Frequently Asked Questions</h2>
       <ul>
-        <li *ngFor="let item of faqItems; let i = index;" id="faq{{ i }}">
+        <li *ngFor="let item of faqItems; let i = index;" id="faq{{ i }}" class="faq-item">
           <p class="question">
             <a href="/home/info#faq{{ i }}"><mat-icon>help_outline</mat-icon></a>
             {{ item.question }}
           </p>
-          <p class="answer">{{ item.answer }}</p>
+          <p class="answer" [innerHTML]="(item.answer | safeHTML)"></p>
         </li>
       </ul>
     </div>
     
   </div>
 
-  <div class="sidenav" *ngIf="!(rs.mobileSize$ | async)">
-    <mat-icon class="nav-toggle" (click)="displayMobileNav=!displayMobileNav">keyboard_arrow_left</mat-icon>
+  <div class="sidenav" title="FAQ navigation" #sidenav>
+    <mat-icon class="nav-toggle" (click)="displayNav()" *ngIf="!(rs.mobileSize$ | async) || !displayMobileNav">keyboard_arrow_left</mat-icon>
+    <mat-icon class="nav-toggle" (click)="displayNav()" *ngIf="(rs.mobileSize$ | async) && displayMobileNav">clear</mat-icon>
     <ul *ngIf="displayMobileNav">
       FAQs
       <li *ngFor="let item of faqItems; let i = index;" (click)="scroll('faq' + i)">

@@ -1,6 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef } from "@angular/core";
 import { ResizeService } from 'src/app/controllers/resize.service';
 import { FAQItem, faqs } from './faq';
+import { SafeHTMLPipe } from './safe-html.pipe';
 
 @Component({
   selector: 'app-info',
@@ -13,8 +14,9 @@ export class InfoComponent implements OnInit {
   timeOfDay = 'morning';
   displayMobileNav = false;
   faqItems: FAQItem[] = faqs;
+  @ViewChild('sidenav') nav: ElementRef<HTMLDivElement>;
 
-  constructor(public rs: ResizeService) { }
+  constructor(public rs: ResizeService, public safeHTML: SafeHTMLPipe) { }
 
   ngOnInit() {
     const hour = this.now.getHours();
@@ -27,6 +29,15 @@ export class InfoComponent implements OnInit {
     }
   }
 
+  displayNav() {
+    this.displayMobileNav = !this.displayMobileNav;
+    if (this.rs.mobileSize$.value && this.displayMobileNav) {
+      this.nav.nativeElement.classList.add('expanded');
+    } else if (this.rs.mobileSize$.value && !this.displayMobileNav) {
+      this.nav.nativeElement.classList.remove('expanded');
+    }
+  }
+
   scroll(id: string) {
     const element = document.querySelector(`#${id}`);
     element.scrollIntoView({ behavior: 'smooth', block: 'nearest', });
@@ -35,7 +46,7 @@ export class InfoComponent implements OnInit {
     setTimeout(() => {
       element.classList.remove('pulse');
     }, 500);
-    this.displayMobileNav = false;
+    this.displayNav();
   }
 
 }
