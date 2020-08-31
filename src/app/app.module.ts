@@ -42,6 +42,7 @@ import { DashboardGraphicComponent } from './views/landing/graphics/dashboard-gr
 import { JourneysGraphicComponent } from './views/landing/graphics/journeys-graphic.component';
 import { ApplicationGraphicComponent } from './views/landing/graphics/application-graphic.component';
 import { SearchGraphicComponent } from './views/landing/graphics/search-graphic.component';
+import { InfoComponent } from './views/info/info.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { SearchGraphicComponent } from './views/landing/graphics/search-graphic.
     LandingWrapperComponent,
     LandingComponent,
     AboutComponent,
+    InfoComponent,
     SignInComponent,
     SignUpComponent,
     SettingsComponent,

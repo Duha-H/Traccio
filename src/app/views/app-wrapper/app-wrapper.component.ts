@@ -26,6 +26,7 @@ export class AppWrapperComponent implements OnInit {
     { text: "Signed in as: user@email.com", type: "item"},
     { text: "Account settings", type: "link", link: "/home/settings"},
     { text: "Theme: dark", type: "toggle", callback: this.toggleTheme.bind(this) },
+    { text: "About traccio", type: "link", link: "/home/info"},
     { text: "Sign out", type: "button", callback: this.signOut.bind(this) },
   ];
   searchQuery = '';
@@ -61,7 +62,7 @@ export class AppWrapperComponent implements OnInit {
       await Auth.signOut();
       this.signedIn = false;
       this.userStore.clearData();
-      this.router.navigate(["signin"]);
+      this.router.navigate(['signin']);
     } catch (error) {
       console.log("error signing out: ", error);
     }

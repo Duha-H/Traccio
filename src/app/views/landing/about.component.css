@@ -10,6 +10,7 @@ ul ul {
 li {
   padding: 5px 0;
   font-weight: 500;
+  color: var(--text);
 }
 
 .landing-container {
@@ -19,21 +20,21 @@ li {
 }
 
 .landing-container h2 {
-  color: #88A3FB;
+  color: var(--accent);
   font-size: 2em;
   font-weight: 600;
   margin: 0;
 }
 
 .landing-container h4 {
-  color: #88A3FB;
+  color: var(--accent);
   font-size: 1.25em;
   font-weight: 600;
 }
 
 .landing-container a {
   text-decoration: none;
-  color: #88A3FB;
+  color: var(--accent);
   font-weight: 600;
 }
 
@@ -83,7 +84,7 @@ p.greeting {
 }
 
 .sidenav li:hover {
-  color: #88A3FB;
+  color: var(--accent);
 }
 
 .sidenav li mat-icon, .content-section li mat-icon {
@@ -151,7 +152,8 @@ div.content-section {
     background-color: var(--bg);
     margin-top: 0;
     border-radius: 5px;
-    box-shadow: 3px 3px 20px #bdb8b891;
+    /* box-shadow: 3px 3px 20px #bdb8b891; */
+    box-shadow: var(--shadow-auth-element);
     animation: 0.35s slide-down ease-in-out;
     transform-origin: top;
   }
@@ -165,7 +167,7 @@ div.content-section {
 
   .mobile-nav li:hover {
     background-color: var(--titles-secondary);
-    color: white;
+    color: var(--bg);
   }
 
   #features li {

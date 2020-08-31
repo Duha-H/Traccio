@@ -1,13 +1,13 @@
 <div class="dropdown-container hidden" #dropdownContainer>
   <ul *ngIf="displayDropdown">
     <a *ngFor="let item of dropdownItems;" href="" [routerLink]="item.link">
-      <li class="{{item.type == 'button'? 'signout-button' : ''}}"
+      <li class="{{item.type == 'button'? 'signout-button' : item.type }}"
         (click)="onItemClick(item)">
         {{item.text}}
         <div class="spacer"></div>
         <div *ngIf="item.type == 'toggle'" class="slider theme-toggle">
           <input type="checkbox" class="theme-toggle" (change)="onItemClick(item)" [checked]="!toggleClick">
-          <span class="toggle theme-toggle"></span>
+          <span class="toggle-span theme-toggle"></span>
         </div>
       </li>
     </a>

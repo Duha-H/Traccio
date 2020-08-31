@@ -15,6 +15,9 @@
           <mat-icon [inline]="true" aria-hidden="false" aria-label="Search icon">star_border</mat-icon>
         </a></li>
     </ul>
+    <a href="#" routerLink="/home/info" class="info" title="Info">
+      <img src="/assets/icons/info_icon.svg" alt="Info icon" class="info">
+    </a>
   </div>
 
   <!-- Content -->
@@ -22,8 +25,6 @@
 
     <!-- Toolbar -->
     <div class="toolbar" role="banner">
-
-      <!-- <span></span> -->
       <a href="#" routerLink="/home" style="width: auto; height: auto;">
         <img src="{{(resizeService.mobileSize$ | async) ? '/assets/logo_no_text@2x.png' : '/assets/logo_traccio@2x.png'}}" alt="Logo" class="logo">
       </a>
@@ -48,8 +49,11 @@
       <ng-template #appContent>
         <router-outlet></router-outlet>
       </ng-template>
+      
       <!-- Footer -->
-      <footer></footer>
+      <footer>
+        <small>&copy; Traccio 2020</small>
+      </footer>
     </div>
 
   </div>

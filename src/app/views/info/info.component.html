@@ -1,0 +1,35 @@
+<div class="landing-container">
+  <div class="content">
+
+    <div id="about" class="spanning-content">
+      <h2>About Traccio</h2>
+    </div>
+    <p class="blurb spanning-content">Hope you're having a swell {{ timeOfDay }}! Let's help you learn a bit more about <i>traccio</i> &#10024;</p>
+    <p>Traccio is an open source web application that helps you</p>
+    
+    <div id="faq">
+      <h2>FAQ</h2>
+      <ul>
+        <li *ngFor="let item of faqItems; let i = index;" id="faq{{ i }}">
+          <p class="question">
+            <a href="/home/info#faq{{ i }}"><mat-icon>help_outline</mat-icon></a>
+            {{ item.question }}
+          </p>
+          <p class="answer">{{ item.answer }}</p>
+        </li>
+      </ul>
+    </div>
+    
+  </div>
+
+  <div class="sidenav" *ngIf="!(rs.mobileSize$ | async)">
+    <mat-icon class="nav-toggle" (click)="displayMobileNav=!displayMobileNav">keyboard_arrow_left</mat-icon>
+    <ul *ngIf="displayMobileNav">
+      FAQs
+      <li *ngFor="let item of faqItems; let i = index;" (click)="scroll('faq' + i)">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+        {{ item.question }}
+      </li>
+    </ul>
+  </div>
+</div>

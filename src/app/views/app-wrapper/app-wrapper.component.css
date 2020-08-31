@@ -100,9 +100,12 @@ mat-sidenav, div.sidenav {
   background-color: var(--element-bg-secondary);
   /* width: 10vw; */
   /* min-height: 100%; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.sidenav mat-icon {
+.sidenav mat-icon, .sidenav img {
   color: var(--titles-secondary);
   margin: auto;
   line-height: 37pt;
@@ -114,6 +117,19 @@ mat-sidenav, div.sidenav {
   align-self: center;
   align-content: center;
   text-align: center;
+}
+
+.sidenav a.info, .sidenav img.info {
+  position: absolute;
+  bottom: 15px;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+.sidenav a img.info {
+  bottom: 0;
+  left: 0;
 }
 
 .sidenav a.active mat-icon, .bottomnav a.active mat-icon {
@@ -189,6 +205,8 @@ footer {
   display: flex;
   align-items: center;
   line-height: 20px;
+  color: var(--text);
+  padding: 30px;
 }
 
 footer a {

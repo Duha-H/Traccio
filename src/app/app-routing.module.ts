@@ -15,6 +15,7 @@ import { AppWrapperComponent } from "./views/app-wrapper/app-wrapper.component";
 import { AccountRecoveryComponent } from "./auth/account-recovery/account-recovery.component";
 import { AboutComponent } from "./views/landing/about.component";
 import { LandingWrapperComponent } from './views/landing/landing-wrapper.component';
+import { InfoComponent } from './views/info/info.component';
 
 const routes: Routes = [
   {
@@ -40,7 +41,7 @@ const routes: Routes = [
   },
   {
     path: "home",
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     component: AppWrapperComponent,
     children: [
       {
@@ -64,11 +65,8 @@ const routes: Routes = [
             (m) => m.WishlistModule
           ),
       },
-      {
-        path: "settings",
-        component: SettingsComponent,
-        canActivate: [AuthGuard],
-      },
+      { path: "settings", component: SettingsComponent },
+      { path: "info", component: InfoComponent },
       { path: "**", redirectTo: "" },
     ],
   },
