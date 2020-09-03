@@ -27,7 +27,11 @@ export const faqs: FAQItem[] = [
   {
     question: 'What can I learn from my Dashboard?',
     // tslint:disable-next-line: max-line-length
-    answer: 'Your Dashboard is Traccio\'s heart and soul. It\'s a stats-hub for any given Journey: it provides you with details about how often you\'re applying. Say you want to set an application quota for a given week, and keep track of whether or not you met that quota? Your Dashboard is here to save the day! It also helps you visualize a breakdown of how effective your job-hunt potentially is, by distilling the status of different applications you sent out. And finally, your Dashboard gives you a productivity calendar; hopefully a more colorful Calendar is a decent motivator for you to keep going! <br>(p.s. all those neat-o data-visualization components? They\'re courtesy of <a href="https://nivo.rocks/">nivo</a> and you should check it out)'
+    answer: 'Your Dashboard is Traccio\'s heart and soul:<br>\
+      &#8226; &nbsp; It\'s a stats-hub for any given Journey: it provides you with details about how often you\'re applying. Say you want to set an application quota for a given week, and keep track of whether or not you met that quota? Your Dashboard is here to save the day! <br>\
+      &#8226; &nbsp; It also helps you visualize a breakdown of how effective your job-hunt potentially is, by distilling the status of different applications you sent out. <br>\
+      &#8226; &nbsp; It gives you a productivity calendar; hopefully a more colorful Calendar is a decent motivator for you to keep going! <br>\
+      (p.s. all those neat-o data-visualization components? They\'re courtesy of <a href="https://nivo.rocks/">nivo</a> and you should check it out)'
   },
   {
     question: 'What exactly does the "Search" functionality search through?',
@@ -39,13 +43,13 @@ export const faqs: FAQItem[] = [
     // tslint:disable-next-line: max-line-length
     answer: 'Traccio was built with responsiveness in mind, and it has a few neat mobile quirks! You can simply add it to your Home Screen so it\'s easier to reach. <br>\
       On iOS: <br>\
-      - Launch Safari, and go to <a href="https://www.traccio.app">traccio.app</a> <br>\
-      - Tap the Share icon (a square with an arrow pointing out) at the bottom of the screen <br>\
-      - Select \'Add to Home Screen\' from the list of actions <br>\
+      &#8226; &nbsp; Launch Safari, and go to <a href="https://www.traccio.app">traccio.app</a> <br>\
+      &#8226; &nbsp; Tap the Share icon (a square with an arrow pointing out) at the bottom of the screen <br>\
+      &#8226; &nbsp; Select \'Add to Home Screen\' from the list of actions <br>\
       On Android: <br>\
-      - Launch the Chrome app, and go to <a href="https://www.traccio.app">traccio.app</a> <br>\
-      - Tap the menu icon (three vertical dots icon) at the upper right-hand corner <br>\
-      - Select \'Add to homescreen\' <br>\
+      &#8226; &nbsp; Launch the Chrome app, and go to <a href="https://www.traccio.app">traccio.app</a> <br>\
+      &#8226; &nbsp; Tap the menu icon (three vertical dots icon) at the upper right-hand corner <br>\
+      &#8226; &nbsp; Select \'Add to homescreen\' <br>\
       And you\'re all set!'
   },
   {
@@ -68,20 +72,20 @@ export const faqs: FAQItem[] = [
     // tslint:disable-next-line: max-line-length
     answer: 'Bugs are no fun. If you think you\'ve found a bug in the application, you can choose one of the following options: <br>\
       Option 1: <br>\
-      - Email your bug report to <a href="mailto: support@traccio.app">support@traccio.app</a> with the subject line "Bug Report" <br>\
-      - Be sure to include any screenshots or info that might help in squashing it! <br>\
+      &#8226; &nbsp; Email your bug report to <a href="mailto: support@traccio.app">support@traccio.app</a> with the subject line "Bug Report" <br>\
+      &#8226; &nbsp; Be sure to include any screenshots or info that might help in squashing it! <br>\
       Option 2: <br>\
-      - Open an issue in the app <a href="https://github.com/Duha-H/Tracker-App">repository</a> <br>\
-      - Be sure to include any screenshots or info that might help'
+      &#8226; &nbsp; Open an issue in the app <a href="https://github.com/Duha-H/Tracker-App">repository</a> <br>\
+      &#8226; &nbsp; Be sure to include any screenshots or info that might help'
   },
   {
     question: 'I have a cool feature/functionality idea, how can I request that?',
     // tslint:disable-next-line: max-line-length
     answer: 'Sick! You can choose one of the following options to send out your idea/feature request: <br>\
       Option 1: <br>\
-      - Email your feature request to <a href="mailto: support@traccio.app">support@traccio.app</a> with the subject line "Feature Request" <br>\
+      &#8226; &nbsp; Email your feature request to <a href="mailto: support@traccio.app">support@traccio.app</a> with the subject line "Feature Request" <br>\
       Option 2: <br>\
-      - Open an issue in the app <a href="https://github.com/Duha-H/Tracker-App">repository</a> <br> with your feature request'
+      &#8226; &nbsp; Open an issue in the app <a href="https://github.com/Duha-H/Tracker-App">repository</a> <br> with your feature request'
   },
   {
     question: 'I have some general feedback about the application that I\'d like to give, where can I do that?',

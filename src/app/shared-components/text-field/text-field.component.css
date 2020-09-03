@@ -1,13 +1,32 @@
+* {
+  position: relative;
+}
+
 ::placeholder {
 	color: var(--titles-secondary);
+}
+
+form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+mat-icon.feedback {
+  height: 40px;
+  line-height: 40px;
+  margin-left: 10px;
+  color: var(--warn);
+  cursor: default;
 }
 
 .input-container {
   display: flex;
   flex-direction: column-reverse;
   max-width: 350px;
-  /* min-width: 50px; */
   margin: auto 0;
+  width: 100%;
 }
 
 .input-container.center {
@@ -42,8 +61,12 @@
   padding: 8px 10px;
 }
 
-.input-container div.updated {
+.input-container div.updated, .input-container div.valid {
   border: 1.5px solid var(--valid);
+}
+
+.input-container div.invalid {
+  border: 1.5px solid var(--warn);
 }
 
 .input-container mat-icon {
@@ -52,7 +75,7 @@
   margin-right: 14px;
 }
 
-.input-container div:focus-within {
+.input-container div:focus-within:not(.invalid) {
   border: 1.5px solid var(--accent);
 }
 
@@ -73,8 +96,16 @@
   color: var(--accent);
 }
 
-.input-container input:focus::placeholder {
+.input-container div.invalid + label {
+  color: var(--warn);
+}
+
+.input-container div:not(.invalid) input:focus::placeholder {
 	color: var(--accent);
+}
+
+.input-container div.invalid input:focus::placeholder {
+	color: var(--warn);
 }
 
 p.warning-text {
@@ -83,4 +114,55 @@ p.warning-text {
   padding-left: 10px;
   font-size: 10pt;
   text-align: left;
+}
+
+.password-requirements {
+  position: absolute;
+  background: var(--bg-secondary);
+  top: 35%;
+  right: -95%;
+  border-radius: 10px;
+  box-shadow: var(--shadow-auth-element);
+  text-align: left;
+  padding: 15px 20px;
+}
+
+.password-requirements p {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.password-requirements ul {
+  padding-left: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.password-requirements li {
+  display: flex;
+  align-items: center;
+  padding-top: 5px;
+}
+
+.password-requirements li mat-icon {
+  margin-right: 5px;
+}
+
+.password-requirements li mat-icon.valid {
+  color: var(--valid);
+  animation: 0.5s icon-pulse ease-in;
+}
+
+@keyframes icon-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.10);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
 }

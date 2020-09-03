@@ -1,11 +1,46 @@
 <div class="container">
   <div class="signup-container">
     <h2>Sign up</h2>
-    <text-field [width]="400" [height]="8" (inputChange)="firstName=$event" [label]="'First Name'" ></text-field>
-    <text-field [width]="400" [height]="8" (inputChange)="lastName=$event" [label]="'Last Name'" ></text-field>
-    <text-field [width]="400" [height]="8" (inputChange)="email=$event" [label]="'Email'" [type]="'email'" ></text-field>
-    <text-field [width]="400" [height]="8" (inputChange)="password=$event" [label]="'Password'" [type]="'password'" ></text-field>
-    <text-field [width]="400" [height]="8" (inputChange)="confirmPassword=$event" [label]="'Re-enter Password'" [type]="'password'" ></text-field>
+    <text-field [width]="400" [height]="8" [displayFeedback]="true" [control]="firstName" [label]="'First Name'" ></text-field>
+    <text-field [width]="400" [height]="8" [displayFeedback]="true" [control]="lastName" [label]="'Last Name'" ></text-field>
+    <text-field [width]="400" [height]="8" [displayFeedback]="true" [control]="email" [label]="'Email'" [type]="'email'" ></text-field>
+    <text-field [width]="400" [height]="8" [displayFeedback]="true" [control]="password" [label]="'Password'" [type]="'password'" (inputFocus)="passwordFocus=$event"></text-field>
+    <text-field [width]="400" [height]="8" [displayFeedback]="true" [control]="confirmPassword" [label]="'Re-enter Password'" [type]="'password'" ></text-field>
+
+    <div *ngIf="(rs.tabletSize$ | async) && passwordFocus" class="password-requirements">
+      <p>Password requirements</p>
+      <ul>
+        <li>
+          <mat-icon *ngIf="!password.value || password.value.length == 0 || password.getError('minlength'); else validLength;">radio_button_unchecked</mat-icon>
+          <ng-template #validLength>
+            <mat-icon class="valid">check_circle_outline</mat-icon>
+          </ng-template>
+          Minimum length of 8 characters
+        </li>
+        <li>
+          <mat-icon *ngIf="!password.value || password.value.length == 0 || password.getError('upperCase'); else validUpper;">radio_button_unchecked</mat-icon>
+          <ng-template #validUpper>
+            <mat-icon class="valid">check_circle_outline</mat-icon>
+          </ng-template>
+          Contains an upper-case letter
+        </li>
+        <li>
+          <mat-icon *ngIf="!password.value || password.value.length == 0 || password.getError('lowerCase'); else validLower;">radio_button_unchecked</mat-icon>
+          <ng-template #validLower>
+            <mat-icon class="valid">check_circle_outline</mat-icon>
+          </ng-template>
+          Contains a lower-case letter
+        </li>
+        <li>
+          <mat-icon *ngIf="!password.value || password.value.length == 0 || password.getError('number'); else validNumber;">radio_button_unchecked</mat-icon>
+          <ng-template #validNumber>
+            <mat-icon class="valid">check_circle_outline</mat-icon>
+          </ng-template>
+          Contains a number
+        </li>
+      </ul>
+    </div>
+
 		<p class="warning-text">{{error}}<br></p>
 		<button (click)="signUp()" class="submit-button" #submitButton>Sign up</button>
 		<p class="login-link">Already have an account? <a href="#" routerLink="/signin" class="login-link">Sign in</a></p>

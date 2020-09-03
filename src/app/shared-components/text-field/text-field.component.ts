@@ -7,35 +7,18 @@ import {
   ViewChild,
   ElementRef,
 } from "@angular/core";
+import { FormControl, Validators } from '@angular/forms';
+import { ResizeService } from 'src/app/controllers/resize.service';
 
 @Component({
   selector: "text-field",
-  template:
-    '\
-  <form>\
-    <div class="{{center ? \'input-container center\' : \'input-container\'}}" style="max-width: {{width}}px;">\
-      <p *ngIf="type == \'email\' && field.invalid && displayError; else genericError" class="warning-text">{{label}} is not valid</p>\
-      <ng-template #genericError>\
-        <p *ngIf="displayError && field.dirty && value == \'\'" class="warning-text">{{label}} cannot be empty</p>\
-      </ng-template>\
-      <div class="{{showUpdatedBorder ? \'updated\' : \'\'}}">\
-        <input type="{{currType}}" [(ngModel)]="value" [value]="value" (input)="onInput()" maxLength="60" \
-          style="font-size: {{fontSize}}pt; color: {{fontColor}};" \
-          name="field" #field="ngModel" placeholder="{{ displayPlaceholder ? label : \'\'}}"\
-          maxLength="{{maxLength}}"\
-          email="{{type == \'email\'}}" #input/>\
-        <mat-icon *ngIf="type == \'password\'" (click)="togglePasswordVisibility()">{{visibilityIconName}}</mat-icon>\
-        <mat-icon *ngIf="suffixIcon && type != \'password\'">{{suffixIcon}}</mat-icon>\
-      </div>\
-      <label *ngIf="displayLabel" for="field" >{{fieldLabel}}</label>\
-    </div>\
-  </form>',
+  templateUrl: './text-field.component.html',
   styleUrls: ["./text-field.component.css"],
 })
 export class TextFieldComponent implements OnInit {
   @Input() text: string;
-  @Input() label = "";
-  @Input() type = "text";
+  @Input() label = '';
+  @Input() type = 'text';
   @Input() required = false;
   @Input() displayLabel = true;
   @Input() displayPlaceholder = true;
@@ -46,18 +29,25 @@ export class TextFieldComponent implements OnInit {
   @Input() fontColor = 'var(--text)';
   @Input() center = true;
   @Input() showUpdatedBorder = false; // unique border color if field value has been changed
-  @Input() displayError = false;
+  @Input() displayErrorMessage = false;
+  @Input() displayFeedback = false;
   @Input() maxLength = 60;
+  @Input() control = new FormControl('', [
+    Validators.required,
+  ]);
   @Output() inputChange = new EventEmitter();
-  @ViewChild('input', { static: true }) input: ElementRef;
+  @Output() inputFocus = new EventEmitter();
+  @ViewChild('textfield', { static: true }) input: ElementRef;
   fieldEmpty = true;
   fieldLabel = this.label;
   valueUpdated = false;
   visibilityIconName = "visibility_off";
   currType = this.type; // using a second type property because it might change (e.g. password visibility)
   value = this.text;
+  inFocus = false;
+  // invalid = false;
 
-  constructor() {}
+  constructor(public rs: ResizeService) {}
 
   ngOnInit() {
     this.currType = this.type;
@@ -87,6 +77,17 @@ export class TextFieldComponent implements OnInit {
 
   focus() {
     this.input.nativeElement.focus();
+  }
+
+  onFocus() {
+    this.inputFocus.emit(true);
+    this.inFocus = true;
+  }
+
+  onFocusOut() {
+    this.inFocus = false;
+    this.inputFocus.emit(false);
+    // this.invalid = this.control.invalid;
   }
 
   private _setLabel() {

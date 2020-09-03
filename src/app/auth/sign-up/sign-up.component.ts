@@ -3,6 +3,8 @@ import { Router } from "@angular/router";
 import { AuthStoreService } from "src/app/controllers/auth-store.service";
 import { UserStoreService } from "src/app/models/user-store.service";
 import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
+import { FormControl, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+import { ResizeService } from 'src/app/controllers/resize.service';
 
 @Component({
   selector: "app-sign-up",
@@ -10,12 +12,30 @@ import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
   styleUrls: ["./sign-up.component.css"],
 })
 export class SignUpComponent implements OnInit {
-  firstName = "";
-  lastName = "";
-  email = "";
-  password = "";
-  confirmPassword = "";
+  // firstName = "";
+  firstName = new FormControl('', [
+    Validators.required,
+  ]);
+  lastName = new FormControl('', [
+    Validators.required,
+  ]);
+  email = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
+  password = new FormControl('', [
+    Validators.required,
+    Validators.minLength(8),
+    this.containsUppercaseValidator(), // atleast one upper-case letter
+    this.containsLowercaseValidator(), // atleast one lower-case letter
+    this.containsNumberValidator(), // atleast one number
+  ]);
+  confirmPassword = new FormControl('', [
+    Validators.required,
+    Validators.pattern(this.password.value)
+  ]);
   error = "";
+  passwordFocus = false;
   @ViewChild('submitButton') submitButton: ElementRef;
 
   constructor(
@@ -23,6 +43,7 @@ export class SignUpComponent implements OnInit {
     private authStore: AuthStoreService,
     private userStore: UserStoreService,
     private authWrapper: AuthWrapperService,
+    public rs: ResizeService,
   ) {}
 
   ngOnInit() {
@@ -34,19 +55,71 @@ export class SignUpComponent implements OnInit {
   }
 
   async signUp() {
+    this.passwordFocus = false;
     // animate button press
     this.submitButton.nativeElement.classList.add('pulse');
     setTimeout(() => {
       this.submitButton.nativeElement.classList.remove('pulse');
     }, 200);
     // execure sign up
-    const response = await this.authWrapper.signUp(this.firstName, this.lastName, this.email, this.password, this.confirmPassword);
+    const response = await this.authWrapper.signUp(
+      this.firstName.value,
+      this.lastName.value,
+      this.email.value,
+      this.password.value,
+      this.confirmPassword.value
+    );
     if (response.successful && response.payload) {
       const user = response.payload;
-      this.userStore.setUser(this.firstName, this.lastName, this.email, user.userSub, user.userConfirmed);
+      this.userStore.setUser(
+        this.firstName.value,
+        this.lastName.value,
+        this.email.value,
+        user.userSub,
+        user.userConfirmed
+      );
       this.router.navigate(['confirmsignup']);
     } else {
       this.error = response.message;
     }
+  }
+
+  containsCharacterValidator(regex: RegExp): ValidatorFn {
+    return (control: AbstractControl): {[key: string]: any} | null => {
+      const forbidden = regex.test(control.value);
+      return forbidden ? {forbiddenName: {value: control.value}} : null;
+    };
+  }
+
+  containsUppercaseValidator(): ValidatorFn {
+    const regex = new RegExp('^(.*[A-Z]+.*)*$');
+    return (control: AbstractControl): {[key: string]: any} | null => {
+      const match = regex.test(control.value);
+      return match ? null : { upperCase: { value: control.value } };
+    };
+  }
+
+  containsLowercaseValidator(): ValidatorFn {
+    const regex = new RegExp('^(.*[a-z]+.*)*$');
+    return (control: AbstractControl): {[key: string]: any} | null => {
+      const match = regex.test(control.value);
+      return match ? null : { lowerCase: { value: control.value } };
+    };
+  }
+
+  containsNumberValidator(): ValidatorFn {
+    const regex = new RegExp('^(.*[0-9]+.*)*$');
+    return (control: AbstractControl): {[key: string]: any} | null => {
+      const match = regex.test(control.value);
+      return match ? null : { number: { value: control.value } };
+    };
+  }
+
+  containsSpecialCharValidator(): ValidatorFn {
+    const regex = new RegExp('^(.*[#?!@$%^&*-]+.*)*$');
+    return (control: AbstractControl): {[key: string]: any} | null => {
+      const match = regex.test(control.value);
+      return match ? null : { specialChar: { value: control.value } };
+    };
   }
 }

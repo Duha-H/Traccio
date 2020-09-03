@@ -5,7 +5,7 @@ import { OnInit, Component, Output, Input, EventEmitter, ViewChild, ElementRef }
 	template: '\
 	<div class="recovery-component">\
 		<p class="secondary-label">Enter the email address used to create your account:</p>\
-		<text-field [width]="360" [height]="10" [displayError]="false"\
+		<text-field [width]="360" [height]="10" [displayErrorMessage]="false"\
 			(inputChange)="email=$event" [displayLabel]="false" [type]="\'email\'"></text-field>\
 		<p class="warning-text">{{error}}<br></p>\
 		<button (click)="handleSubmit()" class="submit-button" #submitButton>email me a recovery code</button>\

@@ -7,6 +7,7 @@ import { SharedModule } from './shared.module';
 
 import { AmplifyService } from 'aws-amplify-angular';
 import { AuthModule } from './auth/auth.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 /** Material imports */
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -43,6 +44,7 @@ import { JourneysGraphicComponent } from './views/landing/graphics/journeys-grap
 import { ApplicationGraphicComponent } from './views/landing/graphics/application-graphic.component';
 import { SearchGraphicComponent } from './views/landing/graphics/search-graphic.component';
 import { InfoComponent } from './views/info/info.component';
+import { SafeHTMLPipe } from './views/info/safe-html.pipe';
 
 @NgModule({
   declarations: [
@@ -66,6 +68,7 @@ import { InfoComponent } from './views/info/info.component';
     SignupSuccessfulComponent,
     SearchPipe,
     KeysPipe,
+    SafeHTMLPipe,
     // WishlistComponent,
     ProfileSettingsComponent,
     PreferenceSettingsComponent,
@@ -82,6 +85,7 @@ import { InfoComponent } from './views/info/info.component';
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     MatGridListModule,
     MatDatepickerModule,
     MatTabsModule,
@@ -91,6 +95,7 @@ import { InfoComponent } from './views/info/info.component';
     AmplifyService,
     SearchPipe,
     KeysPipe,
+    SafeHTMLPipe,
   ],
   bootstrap: [AppComponent],
   schemas: [

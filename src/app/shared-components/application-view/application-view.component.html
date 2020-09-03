@@ -54,11 +54,11 @@
     <div class="info-item">
       <text-field class="value" [width]="600" [height]="10" [center]="false" [displayLabel]="true"
         [label]="'Position Title'" [text]="currApplicationDetails.positionTitle" [showUpdatedBorder]="false"
-        style="margin-right: 25px;" (inputChange)="updateField(ATTRIBS.POSITION, $event)" [displayError]="true"
+        style="margin-right: 25px;" (inputChange)="updateField(ATTRIBS.POSITION, $event)" [displayErrorMessage]="true"
         #titleField></text-field>
       <text-field class="value" [width]="600" [height]="10" [center]="false" [displayLabel]="true" [label]="'Company'"
         [text]="currApplicationDetails.companyName" [showUpdatedBorder]="false"
-        (inputChange)="updateField(ATTRIBS.COMPANY, $event)" [displayError]="true" #titleField></text-field>
+        (inputChange)="updateField(ATTRIBS.COMPANY, $event)" [displayErrorMessage]="true" #titleField></text-field>
     </div>
     <div class="info-item">
       <div class="date-value">
