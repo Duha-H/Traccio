@@ -9,6 +9,7 @@ import { PreferencesStoreService } from 'src/app/controllers/preferences-store.s
 import { ResizeService } from 'src/app/controllers/resize.service';
 import { NotificationService } from 'src/app/controllers/notification.service';
 import { Notification } from 'src/app/models/notification';
+import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
 
 @Component({
   selector: "app-wrapper",
@@ -45,6 +46,7 @@ export class AppWrapperComponent implements OnInit {
     private prefStore: PreferencesStoreService,
     public resizeService: ResizeService,
     public notificationService: NotificationService,
+    private authWrapper: AuthWrapperService,
   ) {  }
 
   ngOnInit() {
@@ -58,14 +60,15 @@ export class AppWrapperComponent implements OnInit {
   }
 
   async signOut() {
-    try {
-      await Auth.signOut();
-      this.signedIn = false;
-      this.userStore.clearData();
-      this.router.navigate(['signin']);
-    } catch (error) {
-      console.log("error signing out: ", error);
+    const response = await this.authWrapper.signOut();
+    if (!response.successful) {
+      console.log("error signing out: ", response.error, response.payload);
+      return;
     }
+    this.signedIn = false;
+    this.userStore.clearData();
+    console.log('signed out??');
+    this.router.navigate(['signin']);
   }
 
   onNavIconClick(ref: HTMLElement) {  }

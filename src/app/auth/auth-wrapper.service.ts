@@ -80,12 +80,14 @@ export class AuthWrapperService {
     const response = new Response();
 
     try {
-      response.payload = await Auth.federatedSignIn({ provider: CognitoHostedUIIdentityProvider.Google });
+      await Auth.federatedSignIn({ provider: CognitoHostedUIIdentityProvider.Google });
+      this.authState.signedIn = true;
+      this.authState.signedUp = false;
     } catch (error) {
       console.log('AuthWrapper: google sign in error:', error);
       response.error('Error in federated sign in');
     }
-    console.log(response);
+    console.log(response, this.authState.signedIn);
 
     return response;
   }
@@ -130,8 +132,10 @@ export class AuthWrapperService {
       this.authState.signedIn = false;
     } catch (error) {
       switch (error.code) {
-        case 'InvalidPasswordException':
         case 'InvalidParameterException':
+          response.error('A value you provided is either empty or invalid.\nMake sure that you\'ve provided valid values.');
+          break;
+        case 'InvalidPasswordException':
           response.error('The password you provided is invalid.\nMake sure that you provide a compliant password.');
           break;
         case 'UsernameExistsException':

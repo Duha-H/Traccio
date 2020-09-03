@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
     try {
       this.amplifyService.authStateChange$.subscribe(async (authState) => {
         this.signedIn = authState.state === "signedIn";
-        console.log("state changed");
+        console.log("state changed", this.signedIn);
         if (!this.signedIn) {
           this.user = null;
           this.authWrapper.authState.signedIn = false;
@@ -57,6 +57,7 @@ export class AppComponent implements OnInit {
           // retrieve and set user preferences
           this.prefStore.init(this.user.attributes.sub);
           console.log("App init: user authenticated and data fetched");
+          // this.router.navigate(['home']);
         }
       });
     } catch (error) {

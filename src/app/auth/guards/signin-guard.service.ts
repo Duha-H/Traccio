@@ -17,7 +17,7 @@ export class SignInGuard implements CanActivate {
 
   async canActivate(): Promise<boolean> {
     const authedUser = await this.authWrapper.currentAuthenticatedUser();
-    if (this.authWrapper.authState.signedIn || authedUser) {
+    if (authedUser || this.authWrapper.authState.signedIn) {
       this.router.navigate(['home']);
       return false;
     }
