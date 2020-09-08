@@ -1,15 +1,4 @@
 <div class="landing-container">
-  <!-- <img *ngIf="resizeService.mobileSize$ | async" src="/assets/Path 1.svg" alt="" style="z-index: -1; width: 150%; position: fixed; top: 0; left: 0;">
-
-  <div class="header">
-    <img src="{{(resizeService.mobileSize$ | async) ? '/assets/logo_no_text@2x.png' : '/assets/logo_traccio@2x.png'}}" alt="Logo" class="logo">
-    <div class="spacer"></div>
-    <a routerLink="/about">About</a>
-    <a *ngIf="!(resizeService.mobileSize$ | async)" class="header-btn alt" routerLink="/signup">Sign up</a>
-    <a *ngIf="!(resizeService.mobileSize$ | async)" class="header-btn" routerLink="/signin">Sign in</a>
-  </div> -->
-
-  <!-- <router-outlet></router-outlet> -->
 
   <div class="card-parent card-visible" #card>
     <div class="landing-card card-1">
@@ -22,7 +11,7 @@
     </div>
   </div>
 
-  <div class="card-parent" #card>
+  <div class="card-parent card-visible" #card>
     <div class="landing-card card-2">
       <div class="landing-content">
         <!-- <img src="/assets/logo_traccio@2x.png" alt="traccio logo" style="max-width: 22.5em"> -->
@@ -36,7 +25,7 @@
     </div>
   </div>
   
-  <div class="card-parent" #card>
+  <div class="card-parent card-visible" #card>
     <div class="landing-card card-3">
 
       <div class="graphic-component">
@@ -61,14 +50,5 @@
 
     </div>
   </div>
-  
-  <!-- <div class="fixed-footer" *ngIf="resizeService.mobileSize$ | async">
-    <a class="header-btn alt" routerLink="/signup">Sign up</a>
-    <a class="header-btn" routerLink="/signin">Sign in</a>
-  </div>
-
-  <div class="footer">
-    <p>This is a footer and stuff</p>
-  </div> -->
   
 </div>

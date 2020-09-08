@@ -17,14 +17,14 @@ export class LandingComponent implements OnInit {
   @ViewChildren('card') cards: QueryList<ElementRef>;
   // graphicVisible = false;
   cardVisible = {
-    0: false,
-    1: false,
-    2: false,
+    0: true,
+    1: true,
+    2: true,
   };
-  @HostListener('scroll', ['$event'])
-  onScroll(event: Event) {
-    this.checkView();
-  }
+  // @HostListener('scroll', ['$event'])
+  // onScroll(event: Event) {
+  //   this.checkView();
+  // }
 
 
   ngOnInit() {
