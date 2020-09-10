@@ -1,11 +1,16 @@
 div.container.spanning-content {
   width: 100%;
   font-size: 10pt;
-  height: 1.5em;
+  /* height: 1.5em; */
   display: flex;
   flex-direction: row;
   margin-left: 25px;
   margin-bottom: 15px;
+  padding: 0;
+  background: var(--bg);
+  position: sticky;
+  top: 0;
+  padding-bottom: 15px;
 }
 
 div.breadcrumb-item {

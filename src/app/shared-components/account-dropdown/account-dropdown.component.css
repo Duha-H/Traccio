@@ -74,6 +74,6 @@ li:hover a {
 }
 
 .theme-toggle mat-icon:hover {
-	color: var(--accent);
+	color: var(--text);
 	transform: scale(1.15);
 }

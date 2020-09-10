@@ -14,7 +14,7 @@
   </div>
 
   <div class="blurb spanning-content">
-    <p>Journeys help you keep track of different job search cycles &#x1F4BC;</p>
+    <p>Journeys help you keep track of different job search cycles &#9889;</p>
   </div>
 
   <div *ngIf="(userStore.journeys | async).length != 0; else emptyJourneys" style="height: 70%;">
@@ -47,7 +47,7 @@
   <ng-template #emptyJourneys>
     <div class="placeholder-text">
       <p>Add journeys to track them here.</p>
-      <img src="/assets/placeholder_tumble.svg" alt="no journeys">
+      <img src="/assets/placeholder_tumble.svg" alt="no journeys" title="tumbling weeds of nothingness">
     </div>
   </ng-template>
 

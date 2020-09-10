@@ -13,6 +13,8 @@
   --disabled-bg: #797f85;
   --success-bg: #94f4c24f;
   --error-bg: #f9769685;
+
+  --header-height: 65px;
 }
 
 * {
@@ -68,11 +70,11 @@ button {
 }
 
 ::placeholder {
-  color: #d1d1d1;
+  color: #a7a6a6;
 }
 
 app-root,
-app-wrapper,
+/* app-wrapper, */
 app-landing,
 app-about,
 app-info {
@@ -82,10 +84,12 @@ app-info {
   overflow: hidden;
 }
 
-app-landing, app-about, app-info {
+app-landing, app-about {
   overflow-y: scroll;
   width: 100vw;
-  height: calc(95vh - 20px);
+  height: 100vh;
+  padding-top: var(--header-height);
+  box-sizing: border-box;
 }
 
 app-wrapper app-about, app-wrapper app-info {
@@ -134,7 +138,7 @@ p.warning-text {
   white-space: pre-wrap;
 }
 
-app-sign-in,
+/* app-sign-in, */
 app-journeys,
 app-journey-list,
 app-journey-view,
@@ -142,7 +146,7 @@ app-application-view,
 app-search,
 app-wishlist,
 app-settings,
-app-sign-up,
+/* app-sign-up, */
 app-wishlist-wrapper {
   width: 100%;
   height: 100%;
@@ -158,12 +162,19 @@ app-sign-in,
 app-sign-up,
 app-account-recovery,
 app-confirm-signup {
-  height: calc(95vh - 20px);
+  height: 100vh;
+  width: 100%;
   display: inline-block;
+  overflow: auto;
 }
 
 app-account-recovery, app-confirm-signup {
   display: flex;
+}
+
+.container {
+  box-sizing: border-box;
+  padding: var(--header-height) 0px;
 }
 
 .submit-button {
@@ -337,13 +348,6 @@ p.answer a:hover {
     margin-bottom: 30px;
   }
 
-  app-sign-in,
-  app-sign-up,
-  app-account-recovery,
-  app-confirm-signup {
-    /* height: calc(95vh - 100px); */
-    overflow: auto;
-  }
 }
 
 @keyframes button-pulse {

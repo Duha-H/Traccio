@@ -13,6 +13,7 @@ export class AboutComponent implements OnInit {
   timeOfDay = 'morning';
   displayMobileNav = false;
   @ViewChild('mobileNav') mobileNav: ElementRef;
+  @ViewChild('sidenav') nav: ElementRef<HTMLDivElement>;
 
   constructor(public resizeService: ResizeService, private router: Router) { }
 
@@ -29,13 +30,22 @@ export class AboutComponent implements OnInit {
 
   scroll(id: string) {
     const element = document.querySelector(`#${id}`);
-    element.scrollIntoView({ behavior: 'smooth', block: 'nearest', });
-    // this.router.navigate(['about'], { fragment: id }); // fragment scrolling is messy
+    element.scrollIntoView(false);
     element.classList.add('pulse');
     setTimeout(() => {
       element.classList.remove('pulse');
     }, 500);
-    this.displayMobileNav = false;
+    this.displayNav();
+  }
+
+  displayNav() {
+    this.displayMobileNav = !this.displayMobileNav;
+    console.log('nav click', this.displayMobileNav, this.resizeService.mobileSize$.value, this.nav);
+    if (this.resizeService.mobileSize$.value && this.displayMobileNav) {
+      this.nav.nativeElement.classList.add('expanded');
+    } else if (this.resizeService.mobileSize$.value && !this.displayMobileNav) {
+      this.nav.nativeElement.classList.remove('expanded');
+    }
   }
 
   onWrapperClick(event: Event) {

@@ -76,3 +76,10 @@
 .recovery-container text-field {
 	margin-bottom: 15px;
 }
+
+@media screen and (max-width: 500px) {
+	.recovery-container {
+		background: none;
+		box-shadow: none;
+	}
+}

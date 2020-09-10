@@ -170,7 +170,7 @@
         <ng-template #calendarPlaceholder>
           <div class="status-container">
             <!-- <p>The status breakdown of added applications will appear here.</p> -->
-            <img src="assets/placeholder_calendar.svg" alt="" style="filter: grayscale(); padding: 20px; margin: auto; opacity: 0.2; height: 130px;">
+            <img src="assets/placeholder_calendar.svg" alt="" style="filter: grayscale(); padding: 20px; margin: auto; opacity: 0.2; max-height: 130px;">
           </div>
         </ng-template>
       </div>
@@ -243,7 +243,7 @@
         <p *ngIf="!(resizeService.mobileSize$ | async)">Add</p>
         <mat-icon [inline]="true" aria-hidden="false" aria-label="Add journey icon">add</mat-icon>
       </button>
-      <img src="/assets/placeholder_tumble.svg" alt="no journeys">
+      <img src="/assets/placeholder_tumble.svg" alt="no journeys" title="tumbling weeds of nothingness">
     </div>
   </ng-template>
 

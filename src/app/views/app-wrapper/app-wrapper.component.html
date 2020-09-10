@@ -28,8 +28,6 @@
       <a href="#" routerLink="/home" style="width: auto; height: auto;">
         <img src="{{(resizeService.mobileSize$ | async) ? '/assets/logo_no_text@2x.png' : '/assets/logo_traccio@2x.png'}}" alt="Logo" class="logo">
       </a>
-      <!-- <p style="font-family: ArialRoundedMTBold, Arial Rounded MT Bold; font-size: 1.5em; font-weight: 600; color: var(--titles-secondary);">
-        TRACKER</p> -->
       <div class="spacer"></div>
       <mat-icon *ngIf="resizeService.mobileSize$ | async" (click)="displaySearchField()" #activateSearchButton>search
       </mat-icon>

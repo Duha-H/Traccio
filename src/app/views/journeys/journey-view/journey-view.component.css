@@ -65,11 +65,11 @@ mat-icon {
 }
 
 .status-toggle {
-  border-radius: 25px;
+  border-radius: 5px;
   font-size: 12pt;
   font-weight: 500;
   padding: 0 30px;
-  line-height: 25px;
+  line-height: 30px;
   color: var(--titles-secondary);
   border: 1px solid var(--titles-secondary);
 }

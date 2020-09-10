@@ -3,7 +3,7 @@ a {
 }
 
 .container {
-  background-image: url('/assets/Path 1.svg');
+  background-image: url('/assets/bg-60.svg');
   background-attachment: scroll;
   background-repeat: no-repeat;
   width: 100%;
@@ -19,14 +19,19 @@ a {
 }
 
 .header {
-  height: 5vh;
-  width: calc(100% - 40px);
+  box-sizing: border-box;
+  height: var(--header-height);
+  width: 100%;
   display: flex;
   align-items: center;
   font-weight: 600;
   padding: 10px 20px;
+  padding-bottom: 10px;
   z-index: 2;
-  position: sticky;
+  /* position: sticky; */
+  position: fixed;
+  background-image: url('/assets/bg-100.svg');
+  background-color: var(--bg);
 }
 
 a#logo {
@@ -34,7 +39,7 @@ a#logo {
 }
 
 img.logo {
-  max-width: 150px;
+  max-height: 45px;
 }
 
 button.header-btn, a.header-btn {
@@ -87,7 +92,7 @@ div.landing-card {
 }
 
 div.landing-card.card-1 {
-  margin-top: 200px;
+  margin-top: 20%;
   /* top: 280px; */
 }
 
@@ -207,14 +212,15 @@ div.fixed-footer {
   position: fixed;
   z-index: 2;
   bottom: 0;
-  width: calc(100% - 80px);
-  padding: 40px;
+  width: 100%;
+  padding: 25px;
   padding-top: 20px;
   display: flex;
   justify-content: center;
   background: var(--bg);
   animation: slide-up 0.5s linear;
   box-shadow: var(--shadow-auth-element);
+  box-sizing: border-box;
 }
 
 div.card-parent.card-visible {
@@ -385,5 +391,11 @@ div.card-parent.card-visible {
 
   div.graphic-component p {
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 350) {
+  div.landing-card.card-1 {
+    margin-top: 0;
   }
 }

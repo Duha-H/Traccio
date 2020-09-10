@@ -40,8 +40,7 @@ export class InfoComponent implements OnInit {
 
   scroll(id: string) {
     const element = document.querySelector(`#${id}`);
-    element.scrollIntoView({ behavior: 'smooth', block: 'nearest', });
-    // this.router.navigate(['about'], { fragment: id }); // fragment scrolling is messy
+    element.scrollIntoView(false);
     element.classList.add('pulse');
     setTimeout(() => {
       element.classList.remove('pulse');

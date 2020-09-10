@@ -29,7 +29,10 @@ export class JourneyListComponent implements OnInit, OnDestroy {
   @ViewChildren('journeyItem')
   set journeyItems(items: QueryList<ElementRef>) {
     this.journeyList = items;
-    if (this.sliderIdx < this.journeyList.length && !this.selectionMode) {
+    if (this.sliderIdx < this.journeyList.length &&
+        !this.selectionMode &&
+        this.rs.mobileSize$.value
+        ) {
       this.onSwipe();
     }
   }
@@ -119,6 +122,7 @@ export class JourneyListComponent implements OnInit, OnDestroy {
   }
 
   onSwipe(idx?: number) {
+    console.log('swiping');
     if (idx >= this.journeyList.toArray().length || idx < 0) {
       return;
     }

@@ -76,15 +76,17 @@ button.save-btn:disabled {
 .status {
   margin: auto 0;
   margin-left: 15px;
-  border-radius: 20px;
+  border-radius: 10px;
   height: 30px;
   line-height: 30px;
-  /* border: 1.5px solid var(--accent); */
-  /* cursor: pointer; */
 }
 
 .status mat-select {
   margin-left: 0;
+}
+
+.status mat-select:hover {
+  transform: scale(1.025);
 }
 
 .status p {
@@ -176,7 +178,7 @@ div.info-item {
   border: none;
   color: var(--text);
   margin: 20px 0;
-  resize: vertical;
+  resize: none;
 }
 
 .date-value, .source-value {
@@ -196,7 +198,7 @@ div.info-item {
   height: 11pt;
   text-align: left;
   margin-bottom: 10px;
-  font-weight: 300;
+  font-weight: 500;
 }
 
 ::ng-deep .source-value .mat-select {
@@ -282,7 +284,8 @@ app-overlay button.submit-button {
   }
 
   .timeline timeline {
-    width: 100%;
+    width: 98%;
+    height: auto;
   }
 
   .timeline div.status {

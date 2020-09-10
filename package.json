@@ -4,11 +4,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "node --max-old-space-size=3072 ./node_modules/@angular/cli/bin/ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "stats": "npx webpack-bundle-analyzer dist/Tracker/stats-es2015.json"
+    "stats": "npx webpack-bundle-analyzer dist/Tracker/stats-es2015.json",
+    "build --prod": "node --max-old-space-size=3072 ./node_modules/@angular/cli/bin/ng build --prod",
   },
   "private": true,
   "dependencies": {

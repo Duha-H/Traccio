@@ -89,12 +89,18 @@ p.warning-text {
 
 @media screen and (max-width: 500px) {
   div.signup-container {
-    width: 300px;
+    width: 90%;
     background: none;
     box-shadow: none;
   }
 
   .signup-container h2 {
     margin-bottom: 50px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  div.signup-container {
+    width: 100%;
   }
 }

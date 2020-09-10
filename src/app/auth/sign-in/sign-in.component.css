@@ -13,6 +13,7 @@
   background: var(--bg);
   border-radius: 15px;
   box-shadow: var(--shadow-auth-element);
+  margin: auto;
 }
 
 .signin-container {
@@ -88,10 +89,16 @@ form {
   }
 
   div.signin-container {
-    width: 300px;
+    width: 90%;
   }
 
   .signin-container h2 {
     margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  div.signin-container {
+    width: 100%;
   }
 }

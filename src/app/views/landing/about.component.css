@@ -14,7 +14,7 @@ li {
 }
 
 .landing-container {
-  padding: 40px 20px;
+  padding: 40px;
   display: flex;
   flex-direction: row;
 }
@@ -45,6 +45,7 @@ li {
 .landing-container a.content-link {
   font-size: 1em;
   font-weight: 700;
+  cursor: pointer;
 }
 
 p.greeting {
@@ -65,17 +66,6 @@ p.greeting {
   top: 0;
 }
 
-.sidenav {
-  min-width: 250px;
-}
-
-.sidenav ul {
-  list-style: none;
-  position: sticky;
-  top: 20px;
-  padding: 0;
-}
-
 .sidenav li {
   color: var(--titles-secondary);
   cursor: pointer;
@@ -93,9 +83,37 @@ p.greeting {
   height: 15px;
 }
 
+.sidenav {
+  min-width: auto;
+  height: max-content;
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  margin-left: 20px;
+  align-items: flex-start;
+  position: sticky;
+  top: 20px;
+}
+
+.sidenav ul {
+  background: var(--element-bg-primary);
+  border-radius: 0px 15px 15px;
+  padding: 15px;
+  margin: 0;
+  position: static;
+  font-weight: 600;
+}
+
 mat-icon.nav-toggle {
   cursor: pointer;
   color: var(--titles-secondary);
+  background-color: var(--element-bg-primary);
+  border-radius: 10px 0px 0px 10px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 35px;
+  font-weight: lighter;
 }
 
 mat-icon.nav-toggle:hover {
@@ -103,10 +121,16 @@ mat-icon.nav-toggle:hover {
 }
 
 .content {
-  height: auto;
+  /* height: auto;
   overflow-y: hidden;
-  padding: 20px;
+  padding: 20px; */
+  width: 100%;
+  height: auto;
+  padding: 0;
+  margin: 20px 0;
+  overflow: inherit;
 }
+
 
 div.content-section {
   padding: 20px 0;
@@ -128,9 +152,9 @@ div.content-section {
 
 
 @media screen and (max-width: 768px) {
-  .sidenav {
+  /* .sidenav {
     min-width: 150px;
-  }
+  } */
 }
 
 @media screen and (max-width: 500px) {
@@ -178,8 +202,45 @@ div.content-section {
   #features li p {
     text-align: justify;
   }
+
+  .sidenav {
+    min-width: 0;
+    position: absolute;
+    top: var(--header-height);
+    right: 0;
+  }
+  
+  .sidenav.expanded {
+    width: 80%;
+    background-color: var(--element-bg-primary);
+    flex-direction: column;
+    left: 0;
+    right: 0;
+    margin: 0px auto 30px auto;
+    box-shadow: var(--shadow-auth-element);
+    border-radius: 15px;
+    padding: 15px;
+    overflow: auto;
+  }
+
+  .sidenav.expanded ul {
+    padding: 15px 5px;
+  }
+
+  .sidenav.expanded mat-icon.nav-toggle {
+    width: 100%;
+    height: 25px;
+    font-size: 25px;
+    line-height: 25px;
+    text-align: right;
+  }
 }
 
+@media screen and (max-width: 350px) {
+  .landing-container {
+    padding: 25px;
+  }
+}
 
 @keyframes pulse-title {
   from {

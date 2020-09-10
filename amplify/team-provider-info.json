@@ -23,6 +23,12 @@
                 "traccio87945b44": {
                     "hostedUIProviderCreds": "[{\"ProviderName\":\"Google\",\"client_id\":\"112166664394-grrjcj8r42k8n20qlu41sr96v67itv5s.apps.googleusercontent.com\",\"client_secret\":\"OJ1CIXfW3rfIxfQX3wV3mxRJ\"}]"
                 }
+            },
+            "hosting": {
+                "amplifyhosting": {
+                    "appId": "d39039tbl21myg",
+                    "type": "manual"
+                }
             }
         }
     }
