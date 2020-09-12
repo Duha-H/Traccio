@@ -20,7 +20,6 @@ export class SliderContainerComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.sliderInit.emit();
-    console.log(this.contentType);
   }
 
   ngAfterViewInit() {
@@ -29,12 +28,6 @@ export class SliderContainerComponent implements OnInit, AfterViewInit {
     }
     // this.idxChange.emit(0);
   }
-
-  // setContent(content: QueryList<ElementRef>) {
-  //   this.content = content;
-  //   console.log("SliderContainer: content set");
-  //   this.content.toArray()[this.idx].nativeElement.scrollIntoView({behavior: "smooth", block: "end", inline: "center"});
-  // }
 
   onSwipe(direction: string, event?: any) {
     console.log('swipe?');

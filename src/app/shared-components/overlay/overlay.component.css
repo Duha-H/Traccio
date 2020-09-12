@@ -27,6 +27,7 @@ div.overlay-inner-container {
   border-radius: 5px;
 	box-shadow: var(--shadow-overlay);
   width: 350px;
+  box-sizing: border-box;
 }
 
 .header {
@@ -57,12 +58,18 @@ p.title {
 
 @media screen and (max-width: 500px) {
   .overlay-container {
-    background-color: var(--bg);
+    /* background-color: var(--bg); */
     overflow: scroll;
   }
 
   div.overlay-inner-container {
-    box-shadow: none;
-    border-radius: 0;
+    /* box-shadow: none; */
+    /* border-radius: 0; */
+  }
+}
+
+@media screen and (max-width: 360px) {
+  div.overlay-inner-container {
+    width: 100%;
   }
 }

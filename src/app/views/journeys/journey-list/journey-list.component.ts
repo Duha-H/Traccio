@@ -122,7 +122,6 @@ export class JourneyListComponent implements OnInit, OnDestroy {
   }
 
   onSwipe(idx?: number) {
-    console.log('swiping');
     if (idx >= this.journeyList.toArray().length || idx < 0) {
       return;
     }

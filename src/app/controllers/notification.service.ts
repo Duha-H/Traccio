@@ -19,9 +19,6 @@ export class NotificationService {
   nextAvailableKey = 0;
 
   constructor() {
-    // this.sendNotification(MESSAGES.test_messages[0]);
-    // this.sendNotification(MESSAGES.test_messages[1], 'success');
-    // this.sendNotification(MESSAGES.test_messages[2], 'error');
     window.addEventListener('keydown', (event) => this.keyboardHandler(event));
   }
 
@@ -33,7 +30,7 @@ export class NotificationService {
       [this.nextAvailableKey]: newNotification,
     });
     if (type !== 'error') {
-      if (!duration) { duration = 15000; }
+      if (!duration) { duration = 5000; }
       setTimeout(() => this.removeNotification(key), duration); // remove notification in a 10 seconds?
     }
     this.nextAvailableKey++;
@@ -53,7 +50,7 @@ export class NotificationService {
   }
 
   keyboardHandler(event: KeyboardEvent) {
-    if (event.keyCode === 77) {
+    if (event.keyCode === 77) { // 'm'
       const message = Math.random() * 30 + ' NEW MESSAGE';
       this.sendNotification(message);
     }

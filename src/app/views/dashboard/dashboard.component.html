@@ -124,7 +124,7 @@
 
       </div>
 
-      <div class="dashboard-component" style="width: 100%;">
+      <div class="dashboard-component">
         <div class="data-container-title spanning-content">
           <h4>
             Productivity Calendar
@@ -132,8 +132,9 @@
           <div class="spacer"></div>
           <mat-icon title="save info">open_in_new</mat-icon>
         </div>
-        <div *ngIf="!isEmpty(selectedJourney.calendarData); else calendarPlaceholder;" class="calendar-container" style="width: 90%; height: 50%; margin: 0 auto;">
-          <calendar-wrapper [data]="selectedJourney.calendarData" [from]="currentYear+'-02-01'"
+        <div *ngIf="!isEmpty(selectedJourney.calendarData); else calendarPlaceholder;" class="calendar-container">
+          <calendar-wrapper
+            [data]="selectedJourney.calendarData" [from]="currentYear+'-02-01'"
             [to]="currentYear+'-11-01'" [emptyColor]="theme.emptyColor"
             [margin]="{ top: 0, right: 0, bottom: 0, left: 0 }" [colors]="calendarPalette" [yearSpacing]="40"
             [direction]="(resizeService.mobileSize$ | async) ? 'horizontal' : 'horizontal'"
@@ -145,7 +146,7 @@
                   itemCount: 4,
                   itemWidth: 42,
                   itemHeight: 36,
-                  itemsSpacing: 14,
+                  itemsSpacing: 10,
                   itemDirection: 'left-to-right',
                   textColor: theme.textColor,
                   itemTextColor: theme.textColor
