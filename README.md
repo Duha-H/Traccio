@@ -1,31 +1,31 @@
-<a href="https://traccio.app" style="display: block; text-align: center;" alt="traccio logo"><img src="./src/assets/logo_traccio@2x.png"/></a>
-====================
+<a href="https://traccio.app" style="display: block; text-align: center;" alt="traccio logo"><img width="350px" src="./src/assets/logo_traccio@2x.png"/></a>
 
-An app to help you track your job-search journey. Onward!<br><br>
-**[What is *traccio*?](#what-is-traccio)**<br>
-**[Sneak Peeks!](#sneak-peeks)**<br>
-**[Libraries/Frameworks Used](#libraries/frameworks-used)**<br>
-**[Credits](#credits)**<br>
-**[License](#license)**<br>
+<p align="center">It's job-search tracking, but better!</p><br><br>
+
+- **[What is *traccio*?](#what-is-traccio)**<br>
+- **[Sneak Peeks!](#sneak-peeks)**<br>
+- **[Libraries/Frameworks](#libraries/frameworks)**<br>
+- **[Credits](#credit)**<br>
+- **[License](#license)**<br>
+- **[Support](#support)**<br>
 <br>
 
-### What is *traccio*?
-___
+What is *Traccio*?
+===
 
-*traccio* is a simple job hunt tracking application. It allows users to organize their job search endeavors, log in job applications they've submitted, and conveniently track them. It also helps users better monitor their progress, and distill different trends in their job hunt process.
+*Traccio* is a simple job hunt tracking application. It allows users to organize their job search endeavors, log in job applications they've submitted, and conveniently track them. It also helps users better monitor their progress, and distill different trends in their job hunts.
 <br>
 <br>
 
-### Sneak Peeks!
-___
+Sneak Peeks!
+===
 [add screenshots here later]
 <br>
 <br>
 
-
-### Libraries/Frameworks Used
-___
-*traccio* is a serverless **Angular 9** web app, with an **AWS** backend setup for authentication and storage.<br>
+Libraries/Frameworks
+===
+*Traccio* is a serverless **Angular 9** web app, with an **AWS** backend setup for authentication and storage.<br>
 Libraries used:
 - [Angular Material](https://material.angular.io/) (specific usage details can be found [here](link-to-wiki))
 - [nivo charts](https://nivo.rocks/) <br>
@@ -40,6 +40,29 @@ Backend setup (serverless **AWS** architecture):
 - [DynamoDB](https://aws.amazon.com/dynamodb/) database storage
 - [GraphQL](https://aws.amazon.com/dynamodb/) API endpoint, created and managed using [AWS Lambda](https://aws.amazon.com/lambda/)<br>
 Additional setup details can be found [here](link-to-wiki)
+<br>
+<br>
 
+Credit
+===
+Just some specific thanks to cool open-source packages used in the app :star2:
+- [nivo](https://nivo.rocks/)
+- [hammerjs](https://hammerjs.github.io/)
 <br>
 <br>
+
+License
+===
+Licensed under the MIT License.
+
+Copyright (c) 2020 Duha Hassan
+<br>
+<br>
+
+Support
+===
+Enjoying using *Traccio* and feeling generous?
+
+Tips are more than welcome, and help [me](https://github.com/Duha-h) continue to host and maintain Traccio :)
+
+<a href="https://paypal.me/traccioapp"><img src="./src/assets/tip_button.png" width="150px"></a>
