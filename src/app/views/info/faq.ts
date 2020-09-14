@@ -85,7 +85,7 @@ export const faqs: FAQItem[] = [
       Option 1: <br>\
       &#8226; &nbsp; Email your feature request to <a href="mailto: support@traccio.app">support@traccio.app</a> with the subject line "Feature Request" <br>\
       Option 2: <br>\
-      &#8226; &nbsp; Open an issue in the app <a href="https://github.com/Duha-H/Tracker-App">repository</a> <br> with your feature request'
+      &#8226; &nbsp; Open an issue in the app <a href="https://github.com/Duha-H/Tracker-App">repository</a> with your feature request'
   },
   {
     question: 'I have some general feedback about the application that I\'d like to give, where can I do that?',
@@ -95,7 +95,13 @@ export const faqs: FAQItem[] = [
   {
     question: 'Is Traccio going to include paid features at any point?',
     // tslint:disable-next-line: max-line-length
-    answer: 'Traccio is currently a one (wo)man shop, so as the user-base grows some cool new (potentially) paid features might be added to offset the costs of application-hosting and user-storage. Not to worry though, for users joining now (as in if you can read this message with no indicated updates to it, and you\'re currently signed up, you are one of those users), Traccio will continue to provide its core set of features for free (no switching to a subscription-based model or anything like that). However, tips are most appreciated and welcome! :)'
+    answer: 'Traccio is currently a one (wo)man shop, so as the user-base grows some cool new (potentially) paid features might be added to offset the costs of application-hosting and user-storage. Not to worry though, for users joining now (as in if you can read this message with no indicated updates to it, and you\'re currently signed up, you are one of those users), Traccio will continue to provide its core set of features for free (no switching to a subscription-based model or anything like that). That being said, <a href="https://paypal.me/traccioapp">tips</a> are most appreciated and welcome! :)'
+  },
+  {
+    question: 'I\'m enjoying using Traccio and would like to support it somehow, how can I do that?',
+    // tslint:disable-next-line: max-line-length
+    answer: 'That\'s super awesome of you! Since Traccio is developed and maintained by a lone developer, tips are really appreciated and welcome :). Currently, tips are accepted through <a href="https://paypal.me/traccioapp">PayPal</a>.\
+    <br><a href="https://paypal.me/traccioapp"><img src="/assets/tip_button.png" style="width: 180px; padding-top: 20px;"></a>',
   },
   {
     question: '"Traccio" is a silly name, why is it called that :)?',
