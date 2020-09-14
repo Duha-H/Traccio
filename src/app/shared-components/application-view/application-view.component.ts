@@ -141,6 +141,7 @@ export class ApplicationViewComponent implements OnInit {
         .then(response => {
           if (response.successful) {
             this.currApplicationDetails = response.payload;
+            this.notificationService.sendNotification('Wishlist application created!', 'success');
             this.router.navigate(['/home/wishlist', this.currApplicationDetails.id]);
             this.newApp = false; // it shouldn't matter because we're navigating away so the component is getting destroyed
             this.detailsUpdated = false;
@@ -182,7 +183,7 @@ export class ApplicationViewComponent implements OnInit {
     if (this.statusUpdated && this.currApplicationDetails.status === STATUS.OFFER) {
       setTimeout(() => {
         this.confetti.draw();
-        this.notificationService.sendNotification(MESSAGES.congratulatory_offer[Math.floor(Math.random() * 4)], 'standard', 10000);
+        this.notificationService.sendNotification(MESSAGES.congratulatory_offer[Math.floor(Math.random() * 4)], 'standard', 8000);
       }, 800);
       this.statusUpdated = false;
     }

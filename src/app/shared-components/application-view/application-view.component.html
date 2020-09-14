@@ -10,12 +10,15 @@
       <div class="spacer"></div>
       <mat-icon [inline]="true" aria-hidden="false" aria-label="Save changes icon">save</mat-icon>
     </button>
-    <button *ngIf="wishlistApp" class="save-btn" (click)="displayAddToJourneyOverlay()">
-      <p *ngIf="!(rs.mobileSize$ | async)">Add to Journey</p>
+    <button *ngIf="wishlistApp && !newApp" class="save-btn" (click)="displayAddToJourneyOverlay()">
+      <p *ngIf="!(rs.tabletSize$ | async); else mobileButton">Add to Journey</p>
+      <ng-template #mobileButton>
+        <p *ngIf="!(rs.mobileSize$ | async)">Journey</p>
+      </ng-template>
       <div class="spacer"></div>
-      <mat-icon [inline]="true" aria-hidden="false" aria-label="Add to journey icon">add</mat-icon>
+      <mat-icon [inline]="true" aria-hidden="false" aria-label="Add to journey icon">exit_to_app</mat-icon>
     </button>
-    <button *ngIf="newApp || wishlistApp" class="save-btn" (click)="cancelChanges()">
+    <button *ngIf="newApp && wishlistApp" class="save-btn" (click)="cancelChanges()">
       <p>Cancel</p>
     </button>
   </div>
@@ -76,7 +79,7 @@
       <div class="source-value">
         <label for="">Application Source</label>
         <mat-form-field class="form-element" color="accent">
-          <mat-select color="accent" name="filterSelection" title="application filters" panelClass="cat-select-panel"
+          <mat-select color="accent" name="filterSelection" title="update application source" panelClass="cat-select-panel"
             floatLabel="never" [(ngModel)]="currApplicationDetails.source" #statusDropdown>
             <mat-option *ngFor="let source of sources;" [value]="source.value">{{source.viewValue}}</mat-option>
           </mat-select>

@@ -14,7 +14,7 @@
 
 ::ng-deep .tabs .mat-tab-body.mat-tab-body-active {
   overflow-y: hidden;
-  z-index: 0;
+  z-index: 1;
 }
 
 ::ng-deep .tabs .mat-tab-label, ::ng-deep .tabs .mat-tab-label-content {
@@ -464,5 +464,9 @@ div#alert-div p.warning-text {
 
   button.save-btn {
     padding: 0 5px;
+  }
+
+  .setting .value.password-change, .setting .value-div.password-change {
+    text-align: center;
   }
 }

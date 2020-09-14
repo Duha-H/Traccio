@@ -14,7 +14,7 @@ import * as invariant from "invariant";
   selector: 'react-wrapper',
   template: '',
 })
-export class ReactWrapper implements OnInit, OnDestroy, OnChanges, AfterViewInit {
+export class ReactWrapper implements OnInit, OnChanges, AfterViewInit {
 	// source: https://sdk.gooddata.com/gooddata-ui/docs/4.1.1/ht_use_react_component_in_angular_2.x.html
 
   public rootDomID: string;
@@ -38,11 +38,6 @@ export class ReactWrapper implements OnInit, OnDestroy, OnChanges, AfterViewInit
     // this.rootDomID = uuid.v1();
     this.render();
   }
-
-  ngOnDestroy() {
-    // Uncomment if Angular 4 issue that ngOnDestroy is called AFTER DOM node removal is resolved
-    // ReactDOM.unmountComponentAtNode(this.getRootDomNode())
-	}
 
 	protected render() { }
 

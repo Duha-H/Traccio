@@ -31,7 +31,7 @@ export class NotificationService {
     });
     if (type !== 'error') {
       if (!duration) { duration = 5000; }
-      setTimeout(() => this.removeNotification(key), duration); // remove notification in a 10 seconds?
+      setTimeout(() => this.removeNotification(key), duration); // remove notification in {duration} seconds
     }
     this.nextAvailableKey++;
     return key; // return message id for sender's reference
@@ -50,10 +50,10 @@ export class NotificationService {
   }
 
   keyboardHandler(event: KeyboardEvent) {
-    if (event.keyCode === 77) { // 'm'
-      const message = Math.random() * 30 + ' NEW MESSAGE';
-      this.sendNotification(message);
-    }
+    // if (event.key === 'm') { // just for testing
+    //   const message = Math.random() * 30 + ' NEW MESSAGE';
+    //   this.sendNotification(message);
+    // }
   }
 
 }
