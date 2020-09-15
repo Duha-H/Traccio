@@ -292,12 +292,14 @@ export class UserStoreService {
       console.log('UserStore: journey with id', journeyId, 'does not exist.');
       return;
     }
+    console.log(appData);
     let newApplication: Application;
     if (appData instanceof Application) {
       newApplication = Object.assign(new Application(), appData);
     } else {
       newApplication = new Application(appData);
     }
+    console.log(newApplication);
     const appID = this._getNewAppID(journeyId);
     newApplication.id = appID;
     const response = await this.controller.addNewApplication(newApplication, journeyId);
@@ -431,10 +433,12 @@ export class UserStoreService {
     let maxID = 0;
     apps.forEach(app => {
       const currval = +app.id.split("-").pop(); // TODO: TEST THIS
+      console.log(currval);
       if (currval >= maxID) {
         maxID = currval + 1;
       }
     });
+    console.log(maxID);
     const newID = journeyId ? `${journeyId}-${maxID}` : `${this._user.getValue().userid}-${maxID}`;
     return newID;
   }

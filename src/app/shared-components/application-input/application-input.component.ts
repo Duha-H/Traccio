@@ -93,7 +93,7 @@ export class ApplicationInputComponent implements OnChanges {
       updatedApp.positionTitle = this.appDetails.title;
       updatedApp.companyName = this.appDetails.company;
       updatedApp.appDate = this.appDetails.date as Date;
-      updatedApp.status = this.appDetails.status;
+      updatedApp.setStatus(this.appDetails.status);
       updatedApp.source = this.appDetails.source;
       updatedApp.notes = this.appDetails.notes;
       this.userStore.updateExistingApplication(this.journeyId, updatedApp).then(response => {

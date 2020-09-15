@@ -9,13 +9,11 @@ export class Application {
 	private _positionTitle = '';
 	private _appDate: Date = new Date();
 	private _status = STATUS.IN_REVIEW.toString();
-	private _timeline: TimelineDatum[] = [
-		{ status: this._status, date: this._appDate }
-	];
+	private _timeline: TimelineDatum[] = [];
 	private _source = APP_SOURCE.JOB_BOARD.toString();
 	private _notes = '';
 
-	constructor(data?: ApplicationInput, ) {
+	constructor(data?: ApplicationInput) {
 		if (data) {
 			this._id = data.id;
 			this._companyName = data.company;
@@ -51,12 +49,6 @@ export class Application {
 	set appDate(date: Date) { this._appDate = date; }
 
 	get status() { return this._status; }
-	set status(status: string) {
-		this._status = status;
-		this._timeline.push({
-			status, date: new Date()
-		});
-	}
 
 	get source() { return this._source; }
 	set source(source: string) { this._source = source; }
@@ -65,6 +57,26 @@ export class Application {
 	set notes(notes: string) { this._notes = notes; }
 
 	get timeline() { return this._timeline; }
+
+	setStatus(status: string, date?: string | Date) {
+		this._status = status;
+		let statusDate;
+		console.log('set status called:', date);
+		if (date && typeof date !== 'string') {
+			statusDate = date;
+		} else if (date && typeof date === 'string') {
+			const computedDate = new Date(date);
+			statusDate = isNaN(computedDate.getTime())
+				? new Date()
+				: computedDate;
+		} else {
+			statusDate = new Date();
+		}
+		this._timeline.push({
+			status,
+			date: statusDate
+		});
+	}
 
 	getGQLInput(wishlist?: boolean) {
 		const input = {
@@ -88,6 +100,7 @@ export class Application {
 	}
 
 	private _modifyTimelineData(data: TimelineDatum[] | { status: string, date: string }[]): TimelineDatum[] {
+		// basically meant to convert date strings to date objects (if necessary)
 		const modifiedData: TimelineDatum[] = [];
 		data.forEach(item => {
 			let storedDate = item.date;

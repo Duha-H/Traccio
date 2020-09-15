@@ -54,6 +54,9 @@ export class ApplicationViewComponent implements OnInit {
   displayAddOverlay = false;
   statusUpdated = false;
   selectedJourney: Journey;
+  displayStatusUpdateOverlay = false;
+  statusUpdateDate = new Date();
+  statusUpdateValue = STATUS.IN_REVIEW.toString();
 
   @ViewChild('timeline', { static: false }) timeline: TimelineComponent;
   @ViewChild('notesTextArea', { static: true }) notesTextArea: ElementRef<any>;
@@ -82,6 +85,7 @@ export class ApplicationViewComponent implements OnInit {
         this.newApp = false;
       }
     });
+    // Set current application
     if (this.wishlistApp) {
       this.inputApplication = appid === 'new-app' ? new Application() : this.userStore.getWishlistApplication(appid);
     } else if (this.newApp) {
@@ -95,6 +99,7 @@ export class ApplicationViewComponent implements OnInit {
       this.router.navigate(['/home/journeys']);
       return;
     } else {
+      // Set breadcrumbs
       if (!this.wishlistApp) {
         this.breadcrumbsData.current.name = 'Application';
         this.breadcrumbsData.current.url = `/home/journeys/${this.journeyid}/${appid}`;
@@ -112,11 +117,11 @@ export class ApplicationViewComponent implements OnInit {
           { name: 'Wishlist', url: '/home/wishlist' }
         );
       }
+      // Set timeline props
       this.timelineProps = {
-        data: this.inputApplication.timeline,
+        data: this.currApplicationDetails.timeline,
         colorMappings: STATUS_COLORS
       };
-      // this.timeline.draw();
     }
     // make textarea responsive to tab key press
     this.notesTextArea.nativeElement.addEventListener('keydown', (event) => this.keyboardHandler(event));
@@ -125,7 +130,12 @@ export class ApplicationViewComponent implements OnInit {
   updateField(attrib: string, value: string) {
     if (this.currApplicationDetails[attrib] !== undefined) { // value can be empty string
       if (attrib === this.ATTRIBS.STATUS) {
-        this.currApplicationDetails.status = value; // handles adding the new status to the application's timeline
+        console.log('status update:', value);
+        if (this.newApp) {
+          this.statusUpdateDate = this.currApplicationDetails.appDate;
+        }
+        this.currApplicationDetails.setStatus(value, this.statusUpdateDate); // handles adding the new status to the application's timeline
+        console.log(this.timeline.props);
         this.timeline.draw(); // trigger timeline re-draw
         this.statusUpdated = true;
       } else {
@@ -133,9 +143,11 @@ export class ApplicationViewComponent implements OnInit {
       }
     }
     this.detailsUpdated = this._allDetailsValid();
+    this.displayStatusUpdateOverlay = false;
   }
 
   saveChanges() {
+    console.log('current details:', this.currApplicationDetails);
     if (this.wishlistApp && this.newApp) { // new wishlist application
       this.userStore.addNewWishlistApplication(this.currApplicationDetails)
         .then(response => {
@@ -159,11 +171,13 @@ export class ApplicationViewComponent implements OnInit {
           }
         });
     } else if (this.newApp && !this.wishlistApp) { // completely new application
+      this.currApplicationDetails.setStatus(STATUS.IN_REVIEW, this.currApplicationDetails.appDate);
       this.userStore.addNewApplication(this.journeyid, this.currApplicationDetails)
         .then(response => {
           if (response.successful) {
             this.currApplicationDetails = response.payload;
             this.router.navigate(['/home/journeys', this.journeyid, response.payload.id]);
+            this.detailsUpdated = false;
           } else {
             this.notificationService.sendNotification(response.message, 'error');
           }
@@ -187,6 +201,11 @@ export class ApplicationViewComponent implements OnInit {
       }, 800);
       this.statusUpdated = false;
     }
+  }
+
+  updateStatus(value: string) {
+    this.statusUpdateValue = value;
+    this.displayStatusUpdateOverlay = true;
   }
 
   cancelChanges() {

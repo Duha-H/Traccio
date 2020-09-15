@@ -39,13 +39,10 @@
       <div class="status">
         <p class="label" *ngIf="(rs.tabletSize$ | async)">Status</p>
         <div class="spacer"></div>
-        <mat-select class="status"
-          style="color: {{STATUS_COLORS[currApplicationDetails.status]}}; border: 1.5px solid {{STATUS_COLORS[currApplicationDetails.status]}};"
-          color="accent" name="statusSelection" title="update status" floatLabel="never"
-          [ngModel]="currApplicationDetails.status" (selectionChange)="updateField(ATTRIBS.STATUS, $event.value)"
-          #statusDropdown>
-          <mat-option *ngFor="let status of statuses;" [value]="status.value">{{ status.viewValue }}</mat-option>
-        </mat-select>
+        <div class="status-update" (click)="displayStatusUpdateOverlay=true"
+          style="color: {{STATUS_COLORS[currApplicationDetails.status]}}; border: 1.5px solid {{STATUS_COLORS[currApplicationDetails.status]}};">
+          <p>{{ currApplicationDetails.status }}</p>
+        </div>
         <p *ngIf="!(rs.tabletSize$ | async)">Since: {{currApplicationDetails.timeline[currApplicationDetails.timeline.length - 1].date | date}}</p>
       </div>
 
@@ -106,5 +103,28 @@
       </li>
     </ul>
     <button class="submit-button" (click)="addApplicationToJourney(selectedJourney)">Add</button>
+  </div>
+</app-overlay>
+
+<app-overlay *ngIf="displayStatusUpdateOverlay" (closeOverlay)="displayStatusUpdateOverlay=false" [title]="'Update Status'">
+  <div class="overlay-content">
+    <label for="statusDropdown">New Status:</label>
+    <mat-select class="status"
+      color="accent" name="statusSelection" title="update status" floatLabel="never"
+      [ngModel]="currApplicationDetails.status" (selectionChange)="updateStatus($event.value)"
+      #statusDropdown>
+      <mat-option *ngFor="let status of statuses;" [value]="status.value">{{ status.viewValue }}</mat-option>
+    </mat-select>
+    <label for="statusPicker">Status Date:</label>
+    <mat-form-field class="form-element" color="accent">
+      <input matInput [matDatepicker]="statusPicker"
+        [(ngModel)]="statusUpdateDate" name="statusDate"
+        #statusDate="ngModel" />
+      <mat-datepicker-toggle matSuffix [for]="statusPicker">
+        <mat-icon matDatepickerToggleIcon>arrow_drop_down</mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker color="accent" disabled="false" #statusPicker></mat-datepicker>
+    </mat-form-field>
+    <button class="submit-button" (click)="updateField(ATTRIBS.STATUS, statusUpdateValue)">Update Status</button>
   </div>
 </app-overlay>
