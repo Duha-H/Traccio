@@ -19,7 +19,11 @@ What is *Traccio*?
 
 Sneak Peeks!
 ===
-[add screenshots here later]
+![traccio-dashboard](https://user-images.githubusercontent.com/30023950/93153624-ada29d00-f6cf-11ea-9950-9e3a6a3264bc.gif)
+
+<br>
+
+![traccio-application](https://user-images.githubusercontent.com/30023950/93153630-b1362400-f6cf-11ea-924c-a20a2d6cad04.gif)
 
 <br>
 
