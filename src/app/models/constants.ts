@@ -36,7 +36,7 @@ export const APP_ATTRIBS = {
 
 export const REQUIRED_APP_ATTRIBS = {
 	_id: false,
-	_position: true,
+	_positionTitle: true,
 	_companyName: true,
 	_appDate: true,
 	_status: true,

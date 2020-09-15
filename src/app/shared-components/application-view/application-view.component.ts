@@ -147,7 +147,6 @@ export class ApplicationViewComponent implements OnInit {
   }
 
   saveChanges() {
-    console.log('current details:', this.currApplicationDetails);
     if (this.wishlistApp && this.newApp) { // new wishlist application
       this.userStore.addNewWishlistApplication(this.currApplicationDetails)
         .then(response => {
@@ -249,7 +248,7 @@ export class ApplicationViewComponent implements OnInit {
   }
 
   keyboardHandler(event: KeyboardEvent) {
-    if (event.keyCode === 9) { // handles tab click within textarea
+    if (event.key === '\t') { // handles tab click within textarea
       this.notesTextArea.nativeElement.value += '\t';
       event.preventDefault();
     }
