@@ -1345,7 +1345,7 @@ export class APIService {
               nextToken
             }
           }
-          applications {
+          applications (limit: 1000) {
             __typename
             items {
               __typename
@@ -1787,7 +1787,7 @@ export class APIService {
               nextToken
             }
           }
-          applications {
+          applications (limit: 1000) {
             __typename
             items {
               __typename
@@ -1836,7 +1836,7 @@ export class APIService {
               journeyInactive
               appStale
             }
-            applications {
+            applications (limit: 1000) {
               __typename
               nextToken
               items {
