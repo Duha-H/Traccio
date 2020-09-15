@@ -32,8 +32,7 @@
       <mat-icon *ngIf="resizeService.mobileSize$ | async" (click)="displaySearchField()" #activateSearchButton>search
       </mat-icon>
       <text-field class="toolbar-search" (inputChange)="onSearch($event)" [text]="searchQuery" [label]="'Search'"
-        [displayLabel]="false" [suffixIcon]="'search'" [height]="1" #searchField></text-field>
-      <!-- <div class="spacer" *ngIf="(resizeService.mobileSize$ | async) ? true : false"></div> -->
+        [displayLabel]="false" [suffixIcon]="'search'" [height]="1" [verticalPadding]="'5px'" #searchField></text-field>
       <div #dropdownButton>
         <mat-icon (click)="toggleAccountDropdown()">account_box</mat-icon>
       </div>

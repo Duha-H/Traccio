@@ -7,7 +7,7 @@
   height: var(--header-height);
   box-sizing: border-box;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   background-color: var(--bg);
   font-weight: 600;
   padding: 10px 20px;

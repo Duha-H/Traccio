@@ -27,6 +27,8 @@ export class TextFieldComponent implements OnInit {
   @Input() height = 18;
   @Input() fontSize = 10;
   @Input() fontColor = 'var(--text)';
+  @Input() verticalPadding = '8px';
+  @Input() horizontalPadding = '10px';
   @Input() center = true;
   @Input() showUpdatedBorder = false; // unique border color if field value has been changed
   @Input() displayErrorMessage = false;
@@ -43,7 +45,7 @@ export class TextFieldComponent implements OnInit {
   valueUpdated = false;
   visibilityIconName = "visibility_off";
   currType = this.type; // using a second type property because it might change (e.g. password visibility)
-  value = this.text;
+  value: string;
   inFocus = false;
   // invalid = false;
 

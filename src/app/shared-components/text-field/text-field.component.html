@@ -21,6 +21,7 @@
         type="{{currType}}"
         placeholder="{{ displayPlaceholder ? label : ''}}"
         maxLength="{{maxLength}}"
+        style="padding: {{ verticalPadding }} {{ horizontalPadding }};"
         #input #textfield />
       <mat-icon *ngIf="type == 'password'" (click)="togglePasswordVisibility()">{{visibilityIconName}}</mat-icon>
       <mat-icon *ngIf="suffixIcon && type != 'password'">{{suffixIcon}}</mat-icon>

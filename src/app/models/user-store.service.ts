@@ -292,14 +292,12 @@ export class UserStoreService {
       console.log('UserStore: journey with id', journeyId, 'does not exist.');
       return;
     }
-    console.log(appData);
     let newApplication: Application;
     if (appData instanceof Application) {
       newApplication = Object.assign(new Application(), appData);
     } else {
       newApplication = new Application(appData);
     }
-    console.log(newApplication);
     const appID = this._getNewAppID(journeyId);
     newApplication.id = appID;
     const response = await this.controller.addNewApplication(newApplication, journeyId);

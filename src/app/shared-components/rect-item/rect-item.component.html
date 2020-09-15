@@ -14,7 +14,7 @@
   
   <div class="journey-content" *ngIf="type === 'item'">
     <h2>{{ linkedJourney.title }}</h2>
-    <p>Date Started: {{ linkedJourney.startDate | date }}</p>
+    <p>Started: {{ linkedJourney.startDate | date }}</p>
     <p>Status: {{ linkedJourney.active ? 'Active' : 'Inactive' }}</p>
   </div>
   <div class="journey-content" *ngIf="type === 'add'">

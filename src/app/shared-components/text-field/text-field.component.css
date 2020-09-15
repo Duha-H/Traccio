@@ -58,7 +58,7 @@ mat-icon.feedback {
   outline: none;
   color: var(--text);
   
-  padding: 8px 10px;
+  padding: 5px 10px;
 }
 
 .input-container div.updated, .input-container div.valid {
