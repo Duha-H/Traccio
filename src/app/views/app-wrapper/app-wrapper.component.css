@@ -199,29 +199,6 @@ a:hover {
   color: #125699;
 }
 
-footer {
-  margin-top: 8px;
-  display: flex;
-  align-items: center;
-  line-height: 20px;
-  color: var(--text);
-  padding: 30px;
-  opacity: 0.5;
-}
-
-footer a {
-  display: flex;
-  align-items: center;
-}
-
-svg#clouds {
-  position: fixed;
-  bottom: -160px;
-  left: -230px;
-  z-index: -10;
-  width: 1920px;
-}
-
 /* Responsive Styles */
 @media screen and (max-width: 767px) {
 }

@@ -64,7 +64,7 @@ li:hover a {
 }
 
 .signout-button {
-	border-top: 0.4px solid var(--text);
+	border-top: 0.5px solid var(--text);
 }
 
 /** Toggle Styling */

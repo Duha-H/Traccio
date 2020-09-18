@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'graphic-application',
@@ -6,5 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['../landing-cards.css']
 })
 export class ApplicationGraphicComponent implements OnInit {
+
+  @Input() visible = false;
+
   ngOnInit() {  }
 }

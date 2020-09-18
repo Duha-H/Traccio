@@ -2,6 +2,7 @@
 
   <div class="card-parent card-visible" #card>
     <div class="landing-card card-1">
+      <img src="/assets/landing-1.svg" alt="" style="max-width: 1000px; width: -webkit-fill-available;">
       <div class="landing-content">
         <img src="/assets/logo_traccio@2x.png" alt="traccio logo" style="max-width: 70%">
         <p>Say goodbye to dull text files and spreadsheets, track your job search the right way.</p>
@@ -28,27 +29,63 @@
   <div class="card-parent card-visible" #card>
     <div class="landing-card card-3">
 
-      <div class="graphic-component">
-        <graphic-dashboard [visible]="cardVisible[2]"></graphic-dashboard>
-        <p>Monitor your application frequency, and keep track of trends in your job hunt</p>
+      <div class="graphic-component" *ngIf="!(resizeService.mobileSize$ | async); else mobileComponent;">
+        <ul>
+          <li class="{{ cardVisible[0] ? 'visible' : '' }}" (click)="selectGraphic(0)">
+            <p><b>Monitor</b> your application frequency, and keep track of trends in your job hunt</p>
+          </li>
+          <li class="{{ cardVisible[1] ? 'visible' : '' }}" (click)="selectGraphic(1)">
+            <p><b>Organize</b> your job hunts using Journeys, and track your productivity different application statuses during them</p>
+          </li>
+          <li class="{{ cardVisible[2] ? 'visible' : '' }}" (click)="selectGraphic(2)">
+            <p><b>Track</b> and update applications you submitted, and keep all your records in one place</p>
+          </li>
+          <li class="{{ cardVisible[3] ? 'visible' : '' }}" (click)="selectGraphic(3)">
+            <p><b>Filter</b> your submitted applications, and say goodbye to submitting the same application twice (or 7 times)!</p>
+          </li>
+        </ul>
+        <graphic-dashboard style="display: {{ cardVisible[0] ? 'inline' : 'none' }};"></graphic-dashboard>
+        <graphic-journeys style="display: {{ cardVisible[1] ? 'inline' : 'none' }};"></graphic-journeys>
+        <graphic-application style="display: {{ cardVisible[2] ? 'inline' : 'none' }};"></graphic-application>
+        <graphic-search style="display: {{ cardVisible[3] ? 'inline' : 'none' }};"></graphic-search>
       </div>
 
-      <div class="graphic-component">
-        <graphic-journeys></graphic-journeys>
-        <p>Organize your job hunts using Journeys, and track your productivity different application statuses during them</p>
-      </div>
+      <ng-template #mobileComponent>
+        <div class="graphic-component">
+          <p><b>Monitor</b> your application frequency, and keep track of trends in your job hunt</p>
+          <graphic-dashboard></graphic-dashboard>
+        </div>
 
-      <div class="graphic-component">
-        <graphic-application></graphic-application>
-        <p>Track and update applications you submitted, and keep all your records in one place</p>
-      </div>
+        <div class="graphic-component">
+          <p><b>Organize</b> your job hunts using Journeys, and track your productivity different application statuses during them</p>
+          <graphic-journeys></graphic-journeys>
+        </div>
 
-      <div class="graphic-component">
-        <graphic-search></graphic-search>
-        <p>Not sure if you've already applied to a position? Well thank your past self, because you can conveniently search previously tracked applications</p>
-      </div>
+        <div class="graphic-component">
+          <p><b>Track</b> and update applications you submitted, and keep all your records in one place</p>
+          <graphic-application></graphic-application>
+        </div>
+
+        <div class="graphic-component">
+          <p><b>Filter</b> your submitted applications, and say goodbye to submitting the same application twice (or 7 times)!</p>
+          <graphic-search></graphic-search>
+        </div>
+      </ng-template>
 
     </div>
+  </div>
+
+  <div class="card-parent card-visible">
+    <div class="landing-card card-4">
+      <div class="landing-content">
+        <p style="font-size: 2em; font-weight: 700;">Ready to give Traccio a try?</p>
+        <a class="header-btn" routerLink="/signup">Join now</a>
+        <p>(it's free!)</p>
+        <a href="" routerLink="/about">Click here to learn more<img class="link-icon" src="/assets/icons/right_arrow.png" alt="arrow"></a>
+        <a href="https://github.com/Duha-H/Traccio">Or check out the app's open source repository<img class="link-icon" src="/assets/icons/github_icon.png" alt="github logo"></a>
+      </div>
+    </div>
+    
   </div>
   
 </div>

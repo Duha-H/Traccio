@@ -13,13 +13,9 @@
 
   <router-outlet></router-outlet>
 
-  <div class="fixed-footer" *ngIf="(resizeService.mobileSize$ | async) && router.url != '/signin' && router.url != '/signup'">
-    <a class="header-btn alt" routerLink="/signup">Sign up</a>
-    <a class="header-btn" routerLink="/signin">Sign in</a>
-  </div>
-
-  <div class="footer">
-    <p>This is a footer and stuff</p>
-  </div>
+  <footer *ngIf="!(resizeService.mobileSize$ | async)">
+    <small>&copy; Traccio 2020</small>
+  </footer>
+   
 
 </div>

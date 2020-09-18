@@ -10,7 +10,7 @@
   </defs>
   <g id="Journeys" transform="translate(-463 -263)">
     <g transform="matrix(1, 0, 0, 1, 463, 263)" filter="url(#Rectangle_14)">
-      <rect id="Rectangle_14-2" data-name="Rectangle 14" width="385" height="241" rx="10" transform="translate(9 6)" fill="#fafafa"/>
+      <rect id="Rectangle_14-2" data-name="Rectangle 14" width="385" height="241" rx="10" transform="translate(9 6)" fill="#fafafa" style="box-shadow: var(--shadow-clickable);"/>
     </g>
     <text id="Journeys-2" data-name="Journeys" transform="translate(494 303)" fill="#88a3fb" font-size="20" font-family="Bahnschrift" letter-spacing="0.05em"><tspan x="0" y="0">Journeys</tspan></text>
     <g id="button" transform="translate(18 -10)">

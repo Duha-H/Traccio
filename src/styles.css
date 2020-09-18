@@ -75,8 +75,8 @@ button {
 
 app-root,
 /* app-wrapper, */
-app-landing,
-app-about,
+/* app-landing,
+app-about, */
 app-info {
   display: inline-block;
   min-height: 100%;
@@ -84,12 +84,17 @@ app-info {
   overflow: hidden;
 }
 
-app-landing, app-about {
+app-landing-wrapper {
   overflow-y: scroll;
   width: 100vw;
   height: 100vh;
-  padding-top: var(--header-height);
   box-sizing: border-box;
+  display: inline-block;
+}
+
+app-landing, app-about {
+  overflow: auto;
+  max-width: 100%;
 }
 
 app-wrapper app-about, app-wrapper app-info {
@@ -225,6 +230,17 @@ a:hover {
 a.login-link.forgot-password {
   text-align: left;
   margin: 0;
+}
+
+footer {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 20px;
+  color: var(--text);
+  padding: 30px;
+  opacity: 0.5;
 }
 
 .spacer {

@@ -10,7 +10,7 @@
   </defs>
   <g id="Search" transform="translate(-1281 -135)">
     <g transform="matrix(1, 0, 0, 1, 1281, 135)" filter="url(#Rectangle_41)">
-      <rect id="Rectangle_41-2" data-name="Rectangle 41" width="385" height="241" rx="10" transform="translate(9 6)" fill="#fafafa"/>
+      <rect id="Rectangle_41-2" data-name="Rectangle 41" width="385" height="241" rx="10" transform="translate(9 6)" fill="#fafafa" style="box-shadow: var(--shadow-clickable);"/>
     </g>
     <text id="Search-2" data-name="Search" transform="translate(1310 175)" fill="#88a3fb" font-size="20" font-family="Bahnschrift" letter-spacing="0.05em"><tspan x="0" y="0">Search</tspan></text>
     <g id="button" transform="translate(36 -12)">
