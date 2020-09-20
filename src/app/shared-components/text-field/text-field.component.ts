@@ -53,7 +53,11 @@ export class TextFieldComponent implements OnInit {
 
   ngOnInit() {
     this.currType = this.type;
-    this.value = this.text;
+    if (this.text !== '') {
+      this.value = this.text;
+    } else {
+      this.value = this.control.value;
+    }
     this._setLabel();
   }
 

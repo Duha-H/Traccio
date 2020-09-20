@@ -13,6 +13,7 @@ import { ConfettiComponent } from 'src/app/shared-components/confetti/confetti.c
 import { Subscription } from 'rxjs';
 import { NotificationService } from 'src/app/controllers/notification.service';
 import { MESSAGES } from 'src/assets/template-messages';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-application-view',
@@ -22,15 +23,20 @@ import { MESSAGES } from 'src/assets/template-messages';
 export class ApplicationViewComponent implements OnInit {
 
   breadcrumbsData: BreadcrumbsData = {
-    current: {
-      name: '',
-      url: ''
-    },
+    current: { name: '', url: '' },
     paths: []
   };
   journeyid: string;
-  inputApplication: Application;
   currApplicationDetails: Application;
+  appFormGroup: FormGroup = new FormGroup({
+    positionTitle: new FormControl('', [Validators.required]),
+    companyName: new FormControl('', [Validators.required]),
+    appDate: new FormControl(new Date(), [Validators.required]),
+    status: new FormControl(STATUS.IN_REVIEW.toString()),
+    source: new FormControl(APP_SOURCE.JOB_BOARD.toString(), [Validators.required]),
+    timeline: new FormControl([]),
+    notes: new FormControl(''),
+  });
   detailsUpdated = false;
   timelineProps: TimelinePropType;
   STATUS_COLORS = STATUS_COLORS;
@@ -53,6 +59,7 @@ export class ApplicationViewComponent implements OnInit {
   newApp = true; // true if application in current view is being added
   displayAddOverlay = false;
   statusUpdated = false;
+  dateUpdated = false;
   selectedJourney: Journey;
   displayStatusUpdateOverlay = false;
   statusUpdateDate = new Date();
@@ -87,18 +94,32 @@ export class ApplicationViewComponent implements OnInit {
     });
     // Set current application
     if (this.wishlistApp) {
-      this.inputApplication = appid === 'new-app' ? new Application() : this.userStore.getWishlistApplication(appid);
+      this.currApplicationDetails = appid === 'new-app'
+        ? new Application()
+        : Object.assign(new Application(), this.userStore.getWishlistApplication(appid));
     } else if (this.newApp) {
-      this.inputApplication = new Application();
+      this.currApplicationDetails = new Application();
     } else {
-      this.inputApplication = this.userStore.getApplication(this.journeyid, appid);
+      this.currApplicationDetails = Object.assign(new Application(), this.userStore.getApplication(this.journeyid, appid));
     }
-    this.currApplicationDetails = Object.assign(new Application(), this.inputApplication);
-    if (!this.inputApplication || !this.currApplicationDetails) {
+
+    // make sure application is defined
+    if (!this.currApplicationDetails) {
       console.log('ApplicationViewComponent: no application retrieved with id:', appid);
       this.router.navigate(['/home/journeys']);
       return;
     } else {
+      // specify details in formGroup
+      this.appFormGroup.setValue({
+        positionTitle: this.currApplicationDetails.positionTitle,
+        companyName: this.currApplicationDetails.companyName,
+        appDate: this.currApplicationDetails.appDate,
+        status: this.currApplicationDetails.status,
+        source: this.currApplicationDetails.source,
+        timeline: this.currApplicationDetails.timeline,
+        notes: this.currApplicationDetails.notes,
+      });
+
       // Set breadcrumbs
       if (!this.wishlistApp) {
         this.breadcrumbsData.current.name = 'Application';
@@ -117,37 +138,45 @@ export class ApplicationViewComponent implements OnInit {
           { name: 'Wishlist', url: '/home/wishlist' }
         );
       }
+
       // Set timeline props
       this.timelineProps = {
-        data: this.currApplicationDetails.timeline,
+        data: this.appFormGroup.controls.timeline.value,
         colorMappings: STATUS_COLORS
       };
     }
+
     // make textarea responsive to tab key press
     this.notesTextArea.nativeElement.addEventListener('keydown', (event) => this.keyboardHandler(event));
   }
 
   updateField(attrib: string, value: string) {
-    if (this.currApplicationDetails[attrib] !== undefined) { // value can be empty string
-      if (attrib === this.ATTRIBS.STATUS) {
-        console.log('status update:', value);
-        if (this.newApp) {
-          this.statusUpdateDate = this.currApplicationDetails.appDate;
-        }
-        this.currApplicationDetails.setStatus(value, this.statusUpdateDate); // handles adding the new status to the application's timeline
-        console.log(this.timeline.props);
-        this.timeline.draw(); // trigger timeline re-draw
-        this.statusUpdated = true;
-      } else {
-        this.currApplicationDetails[attrib] = value;
+    if (attrib === this.ATTRIBS.STATUS) {
+      if (this.newApp) {
+        this.statusUpdateDate = this.appFormGroup.controls.appDate.value;
       }
+      this.appFormGroup.patchValue({
+        [attrib]: value,
+        timeline: this.appFormGroup.controls.timeline.value.push({
+          status: value,
+          date: this.statusUpdateDate,
+        }),
+      });
+      this.statusUpdated = true;
+      this.timeline.draw(); // trigger timeline re-draw
+    } else if (attrib === this.ATTRIBS.DATE) {
+      this.appFormGroup.patchValue({ appDate: value });
+      this.dateUpdated = true;
+    } else {
+      this.appFormGroup.patchValue({ [attrib]: value });
     }
-    this.detailsUpdated = this._allDetailsValid();
+    this.detailsUpdated = this.appFormGroup.valid;
     this.displayStatusUpdateOverlay = false;
   }
 
   saveChanges() {
     if (this.wishlistApp && this.newApp) { // new wishlist application
+      this._setAppDetails('new-wishlist');
       this.userStore.addNewWishlistApplication(this.currApplicationDetails)
         .then(response => {
           if (response.successful) {
@@ -161,6 +190,7 @@ export class ApplicationViewComponent implements OnInit {
           }
         });
     } else if (this.wishlistApp && !this.newApp) { // existing wishlist application
+      this._setAppDetails('existing-wishlist');
       this.userStore.updateWishlistApplication(this.currApplicationDetails)
         .then(response => {
           if (!response.successful) {
@@ -170,7 +200,8 @@ export class ApplicationViewComponent implements OnInit {
           }
         });
     } else if (this.newApp && !this.wishlistApp) { // completely new application
-      this.currApplicationDetails.setStatus(STATUS.IN_REVIEW, this.currApplicationDetails.appDate);
+      // this.currApplicationDetails.setStatus(STATUS.IN_REVIEW, this.currApplicationDetails.appDate);
+      this._setAppDetails('new-app');
       this.userStore.addNewApplication(this.journeyid, this.currApplicationDetails)
         .then(response => {
           if (response.successful) {
@@ -182,6 +213,7 @@ export class ApplicationViewComponent implements OnInit {
           }
         });
     } else { // existing application
+      this._setAppDetails('existing-app');
       this.userStore.updateExistingApplication(this.journeyid, this.currApplicationDetails).then(response => {
         if (!response.successful) {
           this.notificationService.sendNotification(response.message, 'error');
@@ -200,6 +232,7 @@ export class ApplicationViewComponent implements OnInit {
       }, 800);
       this.statusUpdated = false;
     }
+    this.dateUpdated = false;
   }
 
   updateStatus(value: string) {
@@ -254,13 +287,23 @@ export class ApplicationViewComponent implements OnInit {
     }
   }
 
-  private _allDetailsValid(): boolean {
-    for (const key of Object.keys(this.currApplicationDetails)) {
-      if (REQUIRED_APP_ATTRIBS[key] && this.currApplicationDetails[key] === '') {
-        return false;
-      }
+  private _setAppDetails(mode?: 'new-wishlist' | 'new-app' | 'existing-wishlist' | 'existing-app') {
+    if (!mode) {
+      mode = 'new-app';
     }
-    return true;
+    this.currApplicationDetails.positionTitle = this.appFormGroup.controls.positionTitle.value;
+    this.currApplicationDetails.companyName = this.appFormGroup.controls.companyName.value;
+    this.currApplicationDetails.appDate = this.appFormGroup.controls.appDate.value;
+    this.currApplicationDetails.source = this.appFormGroup.controls.source.value;
+    this.currApplicationDetails.notes = this.appFormGroup.controls.notes.value;
+    // add status and timeline updates via Application (as necessary)
+    if (mode === 'new-app') {
+      this.currApplicationDetails.setStatus(STATUS.IN_REVIEW, this.currApplicationDetails.appDate);
+    } else if (mode === 'existing-app' && this.statusUpdated) {
+      this.currApplicationDetails.setStatus(this.appFormGroup.controls.status.value, this.statusUpdateDate);
+    } else if (mode === 'existing-app' && this.dateUpdated) {
+      this.currApplicationDetails.updateAppDate(this.appFormGroup.controls.appDate.value);
+    }
   }
 
 }

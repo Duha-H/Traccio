@@ -40,10 +40,12 @@
         <p class="label" *ngIf="(rs.tabletSize$ | async)">Status</p>
         <div class="spacer"></div>
         <div class="status-update" (click)="displayStatusUpdateOverlay=true"
-          style="color: {{STATUS_COLORS[currApplicationDetails.status]}}; border: 1.5px solid {{STATUS_COLORS[currApplicationDetails.status]}};">
-          <p>{{ currApplicationDetails.status }}</p>
+          style="color: {{STATUS_COLORS[appFormGroup.controls.status.value]}}; border: 1.5px solid {{STATUS_COLORS[appFormGroup.controls.status.value]}};">
+          <p>{{ appFormGroup.controls.status.value }}</p>
         </div>
-        <p *ngIf="!(rs.tabletSize$ | async)">Since: {{currApplicationDetails.timeline[currApplicationDetails.timeline.length - 1].date | date}}</p>
+        <p *ngIf="!(rs.tabletSize$ | async)">
+          Since: {{appFormGroup.controls.timeline.value[appFormGroup.controls.timeline.value.length - 1].date | date}}
+        </p>
       </div>
 
     </div>
@@ -53,31 +55,32 @@
     <p class="block-title">General Info</p>
     <div class="info-item">
       <text-field class="value" [width]="600" [height]="10" [center]="false" [displayLabel]="true"
-        [label]="'Position Title'" [text]="currApplicationDetails.positionTitle" [showUpdatedBorder]="false"
+        [label]="'Position Title'" [text]="appFormGroup.controls.positionTitle.value" [displayFeedback]="true"
         style="margin-right: 25px;" (inputChange)="updateField(ATTRIBS.POSITION, $event)" [displayErrorMessage]="true"
         #titleField></text-field>
       <text-field class="value" [width]="600" [height]="10" [center]="false" [displayLabel]="true" [label]="'Company'"
-        [text]="currApplicationDetails.companyName" [showUpdatedBorder]="false"
-        (inputChange)="updateField(ATTRIBS.COMPANY, $event)" [displayErrorMessage]="true" #titleField></text-field>
+        [text]="appFormGroup.controls.companyName.value" [displayFeedback]="true"
+        (inputChange)="updateField(ATTRIBS.COMPANY, $event)" [displayErrorMessage]="true"
+        #titleField></text-field>
     </div>
     <div class="info-item">
-      <div class="date-value">
+      <div class="date-value {{ appFormGroup.controls.appDate.invalid ? 'invalid' : '' }}">
         <label for="">{{ this.wishlistApp ? 'Date Added' : 'Date Applied' }}</label>
         <mat-form-field class="form-element" color="accent">
           <input matInput [matDatepicker]="startPicker" (dateChange)="updateField(ATTRIBS.DATE, $event.value)"
-            [value]="currApplicationDetails.appDate" [(ngModel)]="currApplicationDetails.appDate" name="stDate"
-            #stDate="ngModel" disabled />
+            [value]="appFormGroup.controls.appDate.value" [(ngModel)]="appFormGroup.controls.appDate.value" name="stDate"
+            #stDate="ngModel" />
           <mat-datepicker-toggle matSuffix [for]="startPicker">
             <mat-icon matDatepickerToggleIcon>arrow_drop_down</mat-icon>
           </mat-datepicker-toggle>
           <mat-datepicker color="accent" disabled="false" #startPicker></mat-datepicker>
         </mat-form-field>
       </div>
-      <div class="source-value">
+      <div class="source-value {{ appFormGroup.controls.source.invalid ? 'invalid' : '' }}">
         <label for="">Application Source</label>
         <mat-form-field class="form-element" color="accent">
           <mat-select color="accent" name="filterSelection" title="update application source" panelClass="cat-select-panel"
-            floatLabel="never" [(ngModel)]="currApplicationDetails.source" #statusDropdown>
+            floatLabel="never" [(ngModel)]="appFormGroup.controls.source.value" #statusDropdown>
             <mat-option *ngFor="let source of sources;" [value]="source.value">{{source.viewValue}}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -88,8 +91,8 @@
   <div class="additional-info">
     <p class="block-title">Additional Notes</p>
     <textarea name="additional-info" id="additional-info" rows="10"
-      [(ngModel)]="currApplicationDetails.notes" (ngModelChange)="detailsUpdated=true"
-      #notesTextArea>{{currApplicationDetails.notes}}</textarea>
+      [(ngModel)]="appFormGroup.controls.notes.value" (ngModelChange)="detailsUpdated=true"
+      #notesTextArea>{{appFormGroup.controls.notes.value}}</textarea>
   </div>
 
 </div>
@@ -111,7 +114,7 @@
     <label for="statusDropdown">New Status:</label>
     <mat-select class="status"
       color="accent" name="statusSelection" title="update status" floatLabel="never"
-      [ngModel]="currApplicationDetails.status" (selectionChange)="updateStatus($event.value)"
+      [ngModel]="appFormGroup.controls.status.value" (selectionChange)="updateStatus($event.value)"
       #statusDropdown>
       <mat-option *ngFor="let status of statuses;" [value]="status.value">{{ status.viewValue }}</mat-option>
     </mat-select>

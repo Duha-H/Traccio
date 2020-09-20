@@ -179,6 +179,10 @@ div.info-item {
   width: 100%;
 }
 
+.invalid .form-element {
+  border: 1.5px solid var(--warn);
+}
+
 .additional-info textarea#additional-info {
   background-color: var(--element-bg-secondary);
   border-radius: 5px;
@@ -212,6 +216,10 @@ div.info-item {
   font-weight: 500;
 }
 
+.date-value.invalid label, .source-value.invalid label {
+  color: var(--warn);
+}
+
 ::ng-deep .source-value .mat-select {
   line-height: 20px;
 }
@@ -222,7 +230,9 @@ div.info-item {
   padding-bottom: 0;
 }
 
-::ng-deep .position-info .mat-form-field-appearance-legacy .mat-form-field-underline, ::ng-deep .position-info .mat-form-field-appearance-legacy .mat-form-field-underline .mat-form-field-ripple {
+::ng-deep .position-info .mat-form-field-appearance-legacy .mat-form-field-underline,
+::ng-deep .position-info .mat-form-field-appearance-legacy .mat-form-field-underline .mat-form-field-ripple,
+  ::ng-deep .position-info .mat-form-field-appearance-legacy .mat-form-field.mat-form-field-invalid .mat-form-field-ripple.mat-accent {
   background-color: transparent;
   height: 0;
 }

@@ -61,7 +61,6 @@ export class Application {
 	setStatus(status: string, date?: string | Date) {
 		this._status = status;
 		let statusDate;
-		console.log('set status called:', date);
 		if (date && typeof date !== 'string') {
 			statusDate = date;
 		} else if (date && typeof date === 'string') {
@@ -75,6 +74,16 @@ export class Application {
 		this._timeline.push({
 			status,
 			date: statusDate
+		});
+	}
+
+	updateAppDate(newDate: Date) {
+		this._appDate = newDate;
+		this._timeline.map(value => {
+			if (value.status === STATUS.IN_REVIEW) {
+				value.date = newDate;
+			}
+			return value;
 		});
 	}
 
