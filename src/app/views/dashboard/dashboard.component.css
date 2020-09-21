@@ -59,6 +59,10 @@ mat-select {
   border-radius: 5px;
 }
 
+mat-select.pulse {
+  animation: 0.7s pulse-selector linear;
+}
+
 .dashboard-header mat-select {
   text-align: left;
   border-radius: 5px;
@@ -349,6 +353,17 @@ svg #tumbleweed-2 {
   100% {
     /* transform: translateX(-500%) rotateZ(0deg); */
     opacity: 0;
+  }
+}
+
+@keyframes pulse-selector {
+  from {
+    transform: scale(1.1);
+    background-color: var(--accent);
+  }
+  to {
+    transform: scale(1);
+    background-color: var(--element-bg-secondary);
   }
 }
 

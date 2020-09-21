@@ -1,9 +1,9 @@
 import { createElement } from "react";
 import { render } from "react-dom";
 
-import { Component, Input } from "@angular/core";
+import { Component, Input, OnInit, Output, EventEmitter } from "@angular/core";
 import { ReactWrapper } from "./react-wrapper.component";
-import { ResponsivePieCanvas, PieCanvasProps, AccessorFunc } from "@nivo/pie";
+import { ResponsivePieCanvas, PieCanvasProps, AccessorFunc, PieDatum } from "@nivo/pie";
 
 interface PieChartProps {
   data: {
@@ -87,6 +87,8 @@ export class ResponsivePieComponent extends ReactWrapper {
   @Input() defs: object[];
   @Input() fill: object[];
   @Input() legends: any;
+  @Output() sliceClick = new EventEmitter();
+  @Input() onClick: (datum: PieDatum, event: any) => void;
 
   protected getProps(): PieCanvasProps {
     const {
@@ -116,6 +118,7 @@ export class ResponsivePieComponent extends ReactWrapper {
       motionStiffness,
       motionDamping,
       legends,
+      onClick,
     } = this;
     return {
       data,
@@ -144,6 +147,7 @@ export class ResponsivePieComponent extends ReactWrapper {
       motionStiffness,
       motionDamping,
       legends,
+      onClick,
     };
   }
 

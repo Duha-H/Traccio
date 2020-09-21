@@ -13,6 +13,7 @@ import { ArrayFilterPipe } from 'src/app/utils/array-filter.pipe';
 import { Subscription } from 'rxjs';
 import { ArrayFormatterPipe } from 'src/app/utils/array-formatter.pipe';
 import { DatumValue } from '@nivo/line';
+import { PieDatum } from '@nivo/pie';
 
 @Component({
   selector: "app-dashboard",
@@ -141,6 +142,21 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   setCustomTooltip(value?: DatumValue): string {
     return 'string';
+  }
+
+  selectPieSlice(slice?: PieDatum, event?: any) {
+    const container = document.querySelector('#appListContainer');
+    const selector = document.querySelector('#statusSelect');
+    if (slice) {
+      this.selectedStatus = this.statuses.filter(entry => {
+        return entry.value === slice.id;
+      })[0];
+      container.scrollIntoView({behavior: "smooth", block: "end", inline: "center"});
+      selector.classList.add('pulse');
+      setTimeout(() => {
+        selector.classList.remove('pulse');
+      }, 700);
+    }
   }
 
   private _setLineChartAxes(frequencyData: FormattedFrequencyData): {
