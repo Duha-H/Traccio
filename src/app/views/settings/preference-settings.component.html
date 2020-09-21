@@ -56,7 +56,9 @@
       <mat-icon class="info-icon" (click)="displayTooltip('journey-inactive', $event)">info</mat-icon>
     </p>
     <div class="setting-textfield">
-      <text-field class="value" [width]="800" [height]="10" [center]="false" [displayLabel]="false" [text]="preferences.journeyInactive" [showUpdatedBorder]="updateCheck['journeyInactive']" (inputChange)="addUpdate('journeyInactive', $event)" #journeyInactive></text-field>
+      <text-field class="value" [width]="800" [height]="10" [center]="false" [type]="'number'"
+        [displayLabel]="false" [text]="preferences.journeyInactive" [showUpdatedBorder]="updateCheck['journeyInactive']"
+        (inputChange)="addUpdate('journeyInactive', $event)" #journeyInactive></text-field>
       <div class="undo-button">
         <button title="undo changes" [disabled]="!updateCheck['journeyInactive']" (click)="undoChange('journeyInactive', journeyInactive)">
           <mat-icon>replay</mat-icon>
@@ -75,7 +77,9 @@
       <mat-icon class="info-icon" (click)="displayTooltip('app-stale', $event)">info</mat-icon>
     </p>
     <div class="setting-textfield">
-      <text-field class="value" [width]="800" [height]="10" [center]="false" [displayLabel]="false" [text]="preferences.appStale" [showUpdatedBorder]="updateCheck['appStale']" (inputChange)="addUpdate('appStale', $event)" #appStale></text-field>
+      <text-field class="value" [width]="800" [height]="10" [center]="false" [type]="'number'"
+        [displayLabel]="false" [text]="preferences.appStale" [showUpdatedBorder]="updateCheck['appStale']"
+        (inputChange)="addUpdate('appStale', $event)" #appStale></text-field>
       <div class="undo-button">
         <button title="undo changes" [disabled]="!updateCheck['appStale']" (click)="undoChange('journeyInactive', appStale)">
           <mat-icon>replay</mat-icon>

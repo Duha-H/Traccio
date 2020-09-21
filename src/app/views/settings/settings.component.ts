@@ -114,7 +114,7 @@ export class SettingsComponent implements OnInit {
   showAlert(responseObject?: Response) {
     this.alert = responseObject ? responseObject : this.alert;
     const type = this.alert.successful ? 'success' : 'error';
-    const duration = this.alert.successful ? 5000 : -1;
+    const duration = this.alert.successful ? 5000 : 15000;
     const mostRecentAlert = this.notificationService.getMostRecent();
     if (this.alert.successful ||
         (mostRecentAlert && this.alert.message === mostRecentAlert.message)) {

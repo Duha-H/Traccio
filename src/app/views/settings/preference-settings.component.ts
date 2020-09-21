@@ -81,7 +81,7 @@ export class PreferenceSettingsComponent implements OnInit, OnDestroy {
       this.preferences[attribute] = PALETTES[value];
     }
     const response = new Response();
-    response.error('Applied changes are not saved yet.');
+    response.error('Applied changes are not saved yet');
     this.showAlert.emit(response);
   }
 

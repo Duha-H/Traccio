@@ -6,7 +6,7 @@ import { ResizeService } from 'src/app/controllers/resize.service';
   selector: 'toast',
   template:
   '<div class="notif-container"\
-    style="top: {{ (rs.mobileSize$ | async) ? (index * 15) : 0 }}px;"\
+    style="bottom: {{ (rs.mobileSize$ | async) ? (index * 15) : 0 }}px;"\
     #container>\
     <div class="header">\
       <div class="spacer"></div>\

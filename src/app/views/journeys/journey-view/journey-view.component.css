@@ -181,10 +181,11 @@ button.add-btn:disabled mat-icon, button.add-btn:disabled p {
 }
 
 .spanning-content.app-header {
-  padding: 10px 20px;
+  padding: 8px 20px;
   background-color: var(--element-bg-secondary);
   border-bottom: none;
   margin-top: 0;
+  height: auto;
 }
 
 .app-header {
@@ -407,14 +408,14 @@ td.mat-cell:first-of-type {
   padding-left: 15px;
 }
 
-td.mat-cell:last-of-type {
+td.mat-cell:last-of-type, th.mat-header-cell:last-of-type {
   padding-right: 10px;
 }
 
 .app-tr {
   color: var(--text);
   font-size: 11pt;
-  height: 70px;
+  height: 50px;
   padding-bottom: 0;
 }
 
