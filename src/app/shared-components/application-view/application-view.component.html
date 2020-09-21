@@ -80,7 +80,8 @@
         <label for="">Application Source</label>
         <mat-form-field class="form-element" color="accent">
           <mat-select color="accent" name="filterSelection" title="update application source" panelClass="cat-select-panel"
-            floatLabel="never" [(ngModel)]="appFormGroup.controls.source.value" #statusDropdown>
+            floatLabel="never" (selectionChange)="updateField(ATTRIBS.SOURCE, $event.value)"
+            [(ngModel)]="appFormGroup.controls.source.value" #statusDropdown>
             <mat-option *ngFor="let source of sources;" [value]="source.value">{{source.viewValue}}</mat-option>
           </mat-select>
         </mat-form-field>

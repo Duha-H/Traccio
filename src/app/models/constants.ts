@@ -9,6 +9,7 @@ export const STATUS = {
 
 export const APP_SOURCE = {
 	JOB_BOARD: 'Job Board',
+	COMPANY: 'Company Website/Careers Portal',
 	REFERRAL: 'Referral',
 	FAIR: 'Career Fair',
 	OTHER: 'Other'

@@ -51,6 +51,7 @@ export class ApplicationViewComponent implements OnInit {
   ];
   sources = [
     {value: APP_SOURCE.JOB_BOARD.toString(), viewValue: APP_SOURCE.JOB_BOARD.toString()},
+    {value: APP_SOURCE.COMPANY.toString(), viewValue: APP_SOURCE.COMPANY.toString()},
     {value: APP_SOURCE.REFERRAL.toString(), viewValue: APP_SOURCE.REFERRAL.toString()},
     {value: APP_SOURCE.FAIR.toString(), viewValue: APP_SOURCE.FAIR.toString()},
     {value: APP_SOURCE.OTHER.toString(), viewValue: APP_SOURCE.OTHER.toString()},
