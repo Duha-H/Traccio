@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { AuthStoreService } from 'src/app/controllers/auth-store.service';
 import { Router } from '@angular/router';
 import { UserStoreService } from 'src/app/models/user-store.service';
 import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
@@ -15,7 +14,14 @@ export class ConfirmSignupComponent implements OnInit {
   email = '';
   error = '';
   success = false;
-  @ViewChild('submitButton') submitButton: ElementRef;
+  resendCode = false;
+  resendLimit = 5;
+  submitButton: ElementRef;
+  @ViewChild('submitButton') set button(element: ElementRef) {
+    if (element) {
+      this.submitButton = element;
+    }
+  }
 
   constructor(
     private router: Router,
@@ -57,6 +63,8 @@ export class ConfirmSignupComponent implements OnInit {
 
   async handleResend() {
     await this.authWrapper.resendSignUp(this.email);
+    this.resendCode = true;
+    this.resendLimit -= 1;
   }
 
 }

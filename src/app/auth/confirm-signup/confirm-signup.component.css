@@ -53,5 +53,16 @@ p.warning-text {
   .confirm-signup-container {
     background: none;
     box-shadow: none;
+    width: 80%;
+  }
+
+  .confirm-signup-container p:not(.warning-text) {
+    color: var(--text);
+  }
+}
+
+@media screen and (max-width: 360px) {
+  div.signin-container {
+    width: 90%;
   }
 }
