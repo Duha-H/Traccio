@@ -141,7 +141,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   setCustomTooltip(value?: DatumValue): string {
-    return 'string';
+    return value ? value.toString() : '';
   }
 
   selectPieSlice(slice?: PieDatum, event?: any) {
@@ -174,12 +174,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
       return accumulator;
     }, []);
     const monthYVals = frequencyData.month[0].data.map(value => value.y);
-    // this.axisValues.month = frequencyData.month[0].data.filter((value, index) => {
-    //   return (index % 2 === 0)
-    // });
+
     const yearXVals = frequencyData.year[0].data.map(value => value.x);
     const yearYVals = frequencyData.year[0].data.map(value => value.y);
-    // console.log(this.axisValues);
+
     return {
       week: { x: weekXVals, y: weekYVals },
       month: { x: monthXVals, y: monthYVals },

@@ -56,21 +56,21 @@
               type: 'point'
             }" [yScale]="{
               type: 'linear'
-            }" [tooltipFormat]="setCustomTooltip()" [axisBottom]="{
+            }" [axisBottom]="{
               tickValues: selectedJourney.frequencyAxes[lineChartMode].x
             }" [axisLeft]="{
               tickValues: (selectedJourney.frequencyAxes[lineChartMode].y | arrayFormatter:['fill', 'reduce'])
             }" [isInteractive]="true" [margin]="{ top: 10, bottom: 40, right: 40, left: 40 }" [enableGridX]="false"
           [enableGridY]="false" [colors]="pieChartPalette.slice(0, 1)" [pointSize]="8" [pointColor]="theme.background"
           [pointBorderColor]="pieChartPalette[0]" [pointBorderWidth]="2" [theme]="{
-              axis: {
-                textColor: theme.textColor
-              },
-              textColor: theme.textColor,
-              markers: {
-                textColor: theme.textColor
-              }
-            }">
+            axis: {
+              textColor: theme.textColor
+            },
+            textColor: theme.textColor,
+            markers: {
+              textColor: theme.textColor
+            }
+          }">
         </line-chart-wrapper>
         <ng-template #noChart>
           <!-- <div>Nope. No Chart.</div> -->

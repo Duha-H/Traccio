@@ -431,12 +431,10 @@ export class UserStoreService {
     let maxID = 0;
     apps.forEach(app => {
       const currval = +app.id.split("-").pop(); // TODO: TEST THIS
-      console.log(currval);
       if (currval >= maxID) {
         maxID = currval + 1;
       }
     });
-    console.log(maxID);
     const newID = journeyId ? `${journeyId}-${maxID}` : `${this._user.getValue().userid}-${maxID}`;
     return newID;
   }

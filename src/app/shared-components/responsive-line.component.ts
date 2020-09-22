@@ -3,12 +3,13 @@ import { render } from "react-dom";
 
 import { Component, Input } from "@angular/core";
 import { ReactWrapper } from "./react-wrapper.component";
-import { ResponsiveLineCanvas, LineCanvasProps, Serie, DatumValue, Layer, PointMouseHandler, SliceTooltip, PointTooltip } from "@nivo/line";
+import { ResponsiveLineCanvas, LineCanvasProps, Serie, DatumValue, Layer, PointMouseHandler, SliceTooltip, PointTooltip, Point, PointTooltipProps } from "@nivo/line";
 import { Scale } from "@nivo/scales";
 import { CartesianMarkerProps, Theme } from "@nivo/core";
 import { OrdinalColorsInstruction } from "@nivo/colors";
 import { GridValues, AxisProps } from "@nivo/axes";
 import { CrosshairType } from "@nivo/tooltip";
+import { create } from 'domain';
 
 @Component({
   selector: "line-chart-wrapper",
@@ -44,17 +45,17 @@ export class ResponsiveLineComponent extends ReactWrapper {
     right: 0
   };
   @Input() curve:
-      | 'basis'
-      | 'cardinal'
-      | 'catmullRom'
-      | 'linear'
-      | 'monotoneX'
-      | 'monotoneY'
-      | 'natural'
-      | 'step'
-      | 'stepAfter'
-      | 'stepBefore' = 'linear';
-  @Input() lineWidth: number = 2;
+    | 'basis'
+    | 'cardinal'
+    | 'catmullRom'
+    | 'linear'
+    | 'monotoneX'
+    | 'monotoneY'
+    | 'natural'
+    | 'step'
+    | 'stepAfter'
+    | 'stepBefore' = 'linear';
+  @Input() lineWidth = 2;
   @Input() colors: OrdinalColorsInstruction;
   @Input() theme: Theme;
   @Input() axisTop: AxisProps | null;
@@ -84,11 +85,33 @@ export class ResponsiveLineComponent extends ReactWrapper {
   @Input() enableSlices: 'x' | 'y' | false;
   @Input() debugSlices: boolean;
   @Input() sliceTooltip: SliceTooltip;
-  @Input() tooltipFormat: ((value: DatumValue) => string | number) | string;
-  @Input() tooltip: PointTooltip;
   @Input() enableCrosshair: boolean;
   @Input() crosshairType: CrosshairType;
   @Input() legends: any;
+  @Input() tooltipFormat: string;
+  tooltip: PointTooltip = (props: React.PropsWithChildren<any>) => { // setting prop type to 'any' to get linter to stop complaining
+    return createElement('div', { style: {
+      backgroundColor: 'white',
+      color: 'black',
+      padding: '5px 9px',
+      borderRadius: '2px',
+      boxShadow: '0 0 8px rgba(0, 0, 0, 0.4)',
+      fontSize: '1em'
+    }}, [
+      createElement('span', {
+        style: {
+          width: '12px',
+          height: '12px',
+          backgroundColor: props.point.serieColor,
+          marginRight: '7px',
+          display: 'inline-block'
+        },
+        key: 0,
+      }, ['']),
+      `${props.point.data.label ? props.point.data.label : props.point.data.x}: `,
+      createElement('strong', { key: 1, }, [`${props.point.data.y}`]),
+    ]);
+  }
 
   protected getProps(): Attributes & LineCanvasProps {
     const {

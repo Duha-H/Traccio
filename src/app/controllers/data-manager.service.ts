@@ -15,6 +15,9 @@ export interface CalendarDatum {
 }
 const MS_IN_A_WEEK = 7 * 24 * 60 * 60 * 1000; // milliseconds in a week
 
+/**
+ * Performs client-side journey data collection and management
+ */
 @Injectable({
   providedIn: "root",
 })
@@ -301,6 +304,7 @@ export class DataManagerService {
       result.month[dayIdx] = {
         x: dayIdx.toString(),
         y: 0,
+        label: undefined,
       };
       dayIdx = dayIdx === daysInMonth ? 1 : dayIdx + 1;
     }
@@ -310,6 +314,7 @@ export class DataManagerService {
       result.year[monthIdx] = {
         x: MONTHS[monthIdx],
         y: 0,
+        label: undefined,
       };
       monthIdx = monthIdx === 12 ? 1 : monthIdx + 1;
     }
@@ -335,7 +340,7 @@ export class DataManagerService {
     if (mode === 'add') {
       if (this._dateInPastYear(appDate)) { // application sent in the past 365 days
         updatedDatum.year[month].y += 1;
-        updatedDatum.year[month].label = `${MONTHS[month]}, ${year}`;
+        updatedDatum.year[month].label = `${MONTHS[month]} ${year}`;
 
         if (this._dateInPastMonth(appDate)) { // application sent in the past 30/31 days
           updatedDatum.month[day].y += 1;
@@ -343,7 +348,7 @@ export class DataManagerService {
 
           if (this._dateInPastWeek(appDate)) { // application sent in the past 7 days
             updatedDatum.week[weekday].y += 1;
-            updatedDatum.week[weekday].label = `${MONTHS[month]} ${day}`;
+            updatedDatum.week[weekday].label = `${WEEKDAYS[weekday]} - ${MONTHS[month]} ${day}`;
           }
         }
       }
