@@ -3,6 +3,7 @@ import { UserStoreService } from 'src/app/models/user-store.service';
 import { Application } from 'src/app/models/application';
 import { Router } from '@angular/router';
 import { ResizeService } from 'src/app/controllers/resize.service';
+import { NotificationService } from 'src/app/controllers/notification.service';
 
 @Component({
   selector: 'app-wishlist',
@@ -12,8 +13,14 @@ import { ResizeService } from 'src/app/controllers/resize.service';
 export class WishlistComponent implements OnInit {
 
   applications: Application[] = [];
+  selectionMode = false;
 
-  constructor(private userStore: UserStoreService, private router: Router, public rs: ResizeService) { }
+  constructor(
+    private userStore: UserStoreService,
+    private router: Router,
+    private notificationService: NotificationService,
+    public rs: ResizeService
+  ) { }
 
   ngOnInit() {
     this.userStore.wishlistApps.subscribe(apps => {
@@ -22,10 +29,30 @@ export class WishlistComponent implements OnInit {
   }
 
   selectApplication(app: Application) {
-    this.router.navigate(['/home/wishlist', app.id]);
+    if (!this.selectionMode) {
+      this.router.navigate(['/home/wishlist', app.id]);
+    }
   }
 
   addApplication() {
     this.router.navigate(['/home/wishlist', 'new-app']);
+  }
+
+  async removeApplication(app: Application) {
+    if (confirm(`Are you sure you\'d like to delete your application for ${app.positionTitle} at ${app.companyName}?`)) {
+      const response = await this.userStore.removeWishlistApplication(app.id);
+      if (!response.successful) {
+        this.notificationService.sendNotification(response.message, 'error');
+      } else {
+        this.notificationService.sendNotification(`Wishlist application removed successfully!`, 'success');
+      }
+      if (this.applications.length === 0) {
+        this.selectionMode = false;
+      }
+    }
+  }
+
+  toggleSelectionMode() {
+    this.selectionMode = !this.selectionMode;
   }
 }

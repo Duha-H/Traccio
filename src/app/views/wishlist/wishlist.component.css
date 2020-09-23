@@ -61,6 +61,15 @@
   cursor: pointer;
 }
 
+.clickable-item mat-icon.delete-btn {
+  color: var(--warn);
+}
+
+.clickable-item mat-icon.delete-btn:hover {
+  cursor: pointer;
+  background: var(--error-bg);
+}
+
 @media screen and (max-width: 500px) {
   .spanning-content {
     margin: 15px 0;

@@ -32,7 +32,7 @@ import 'hammerjs';
     HammerModule,
     JourneysRoutingModule,
     // MatGridListModule,
-    MatCheckboxModule,
+    // MatCheckboxModule,
     MatTableModule,
     MatSortModule,
   ],

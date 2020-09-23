@@ -26,6 +26,7 @@ import { RouterModule } from '@angular/router';
 import { ConfettiComponent } from './shared-components/confetti/confetti.component';
 import { ToastComponent } from './shared-components/notification/toast.component';
 import { ToastListComponent } from './shared-components/notification/toast-list.component';
+import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { ToastListComponent } from './shared-components/notification/toast-list.
     MatIconModule,
     MatListModule,
     MatDatepickerModule,
+    MatCheckboxModule,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnDirtyErrorStateMatcher },
@@ -71,6 +73,7 @@ import { ToastListComponent } from './shared-components/notification/toast-list.
     MatIconModule,
     MatListModule,
     MatDatepickerModule,
+    MatCheckboxModule,
     ArrayFilterPipe,
     AppFilterPipe,
     TextFieldComponent,

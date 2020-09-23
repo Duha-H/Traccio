@@ -3,7 +3,11 @@
     <h2>Wishlist</h2>
     <div class="spacer"></div>
     <!-- <button class="submit-button">Add Application</button> -->
-    <button class="add-btn" title="Add application" (click)="addApplication()">
+    <button class="add-btn" title="Remove application" (click)="toggleSelectionMode()">
+      <p *ngIf="!(rs.mobileSize$ | async)">Remove</p>
+      <mat-icon [inline]="true" aria-hidden="false" aria-label="Remove application icon">delete</mat-icon>
+    </button>
+    <button class="add-btn" title="Add application" (click)="addApplication()" [disabled]="selectionMode">
       <p *ngIf="!(rs.mobileSize$ | async)">Add</p>
       <mat-icon [inline]="true" aria-hidden="false" aria-label="Add application icon">add</mat-icon>
     </button>
@@ -20,7 +24,8 @@
     </div>
     <mat-list style="height: 100%;" class="app-list-item">
       <mat-list-item class="clickable-item" *ngFor="let app of applications;" (click)="selectApplication(app)">
-        <mat-icon matListIcon>star</mat-icon>
+        <mat-icon *ngIf="!selectionMode" matListIcon>star</mat-icon>
+        <mat-icon *ngIf="selectionMode" class="delete-btn" (click)="removeApplication(app)" matListIcon>delete</mat-icon>
         
         <div *ngIf="!(rs.tabletSize$ | async); else mobileListItem" class="app-list-item" matLine>
           <div class="spanning-content">
