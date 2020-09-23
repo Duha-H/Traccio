@@ -232,7 +232,7 @@ div.info-item {
 
 ::ng-deep .position-info .mat-form-field-appearance-legacy .mat-form-field-underline,
 ::ng-deep .position-info .mat-form-field-appearance-legacy .mat-form-field-underline .mat-form-field-ripple,
-  ::ng-deep .position-info .mat-form-field-appearance-legacy .mat-form-field.mat-form-field-invalid .mat-form-field-ripple.mat-accent {
+::ng-deep .position-info .mat-form-field-appearance-legacy .mat-form-field.mat-form-field-invalid .mat-form-field-ripple.mat-accent {
   background-color: transparent;
   height: 0;
 }
@@ -240,6 +240,10 @@ div.info-item {
 ::ng-deep .position-info .mat-form-field-infix {
   padding: 0;
   padding-left: 10px;
+}
+
+::ng-deep .position-info .mat-form-field-infix input {
+  color: var(--text);
 }
 
 ::ng-deep .position-info .mat-form-field-suffix, ::ng-deep .position-info .mat-select-arrow-wrapper {
