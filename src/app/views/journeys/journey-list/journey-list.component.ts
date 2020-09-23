@@ -1,11 +1,13 @@
 import { Component, OnInit, OnChanges, ViewChild, QueryList, ViewChildren, ElementRef, OnDestroy, Input } from "@angular/core";
 import { UserStoreService } from "src/app/models/user-store.service";
 import { Journey } from "src/app/models/journey";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Observable } from 'rxjs/Observable';
 import { ResizeService } from 'src/app/controllers/resize.service';
 import { SliderContainerComponent } from 'src/app/shared-components/slider-container/slider-container.component';
 import { NotificationService } from 'src/app/controllers/notification.service';
+import { Route } from '@angular/compiler/src/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: "app-journey-list",
@@ -21,11 +23,10 @@ export class JourneyListComponent implements OnInit, OnDestroy {
   selectionMode = false;
   sliderIdx = 0;
   swipeOffset = 0;
+  routeSub: Subscription;
+  journeyList: QueryList<ElementRef>;
   @Input() displayDrawer = false;
   @ViewChild(SliderContainerComponent) sliderContainer: SliderContainerComponent;
-  // @ViewChildren('journeyItem') journeyItems: QueryList<ElementRef>;
-  // @ViewChildren('journeyItem', { read: ElementRef }) journeyList!: QueryList<ElementRef>;
-  journeyList: QueryList<ElementRef>;
   @ViewChildren('journeyItem')
   set journeyItems(items: QueryList<ElementRef>) {
     this.journeyList = items;
@@ -40,11 +41,17 @@ export class JourneyListComponent implements OnInit, OnDestroy {
   constructor(
     public userStore: UserStoreService,
     private router: Router,
+    private route: ActivatedRoute,
     public rs: ResizeService,
     private notificationService: NotificationService
   ) { }
 
   ngOnInit() {
+    this.routeSub = this.route.params.subscribe((params) => {
+      if (params.displayDrawer) {
+        this.displayDrawer = true;
+      }
+    });
     this.userStore.loadData();
     const storedSliderIdx = sessionStorage.getItem('journeySliderIdx');
     if (storedSliderIdx) {
@@ -54,6 +61,7 @@ export class JourneyListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     sessionStorage.setItem('journeySliderIdx', this.sliderIdx.toString()); // persist current sliderIdx
+    this.routeSub.unsubscribe();
   }
 
   displayJourneyDrawer() {

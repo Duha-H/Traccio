@@ -159,6 +159,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
   }
 
+  navigateToAddJourney() {
+    this.router.navigate(['/home/journeys', { displayDrawer: true }]);
+  }
+
   private _setLineChartAxes(frequencyData: FormattedFrequencyData): {
     week: AxisValues,
     month: AxisValues,
