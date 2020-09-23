@@ -6,6 +6,7 @@ import {
   QueryList,
   ElementRef,
   AfterViewInit,
+  OnDestroy
 } from "@angular/core";
 import { Journey } from "src/app/models/journey";
 import { MatSidenav } from "@angular/material/sidenav";
@@ -161,6 +162,7 @@ export class JourneyViewComponent implements OnInit, AfterViewInit {
       }
     });
     this.currJourneyDetails = Object.assign(new Journey(), this.journey);
+    sessionStorage.setItem('journeyRoute', `/home/journeys/${this.journey.id}`);
   }
 
   ngAfterViewInit() {

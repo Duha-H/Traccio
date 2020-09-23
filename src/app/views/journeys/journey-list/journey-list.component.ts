@@ -57,6 +57,7 @@ export class JourneyListComponent implements OnInit, OnDestroy {
     if (storedSliderIdx) {
       this.sliderIdx = +storedSliderIdx;
     }
+    sessionStorage.setItem('journeyRoute', '/home/journeys');
   }
 
   ngOnDestroy() {

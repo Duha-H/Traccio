@@ -85,6 +85,8 @@ export class ApplicationViewComponent implements OnInit {
       if (params.id) {
         this.journeyid = params.id;
         this.wishlistApp = false;
+      } else {
+        this.router.navigate(['/home/journeys']);
       }
       appid = params.appref;
       if (appid === 'new-app') {
@@ -94,14 +96,20 @@ export class ApplicationViewComponent implements OnInit {
       }
     });
     // Set current application
-    if (this.wishlistApp) {
-      this.currApplicationDetails = appid === 'new-app'
-        ? new Application()
-        : Object.assign(new Application(), this.userStore.getWishlistApplication(appid));
-    } else if (this.newApp) {
-      this.currApplicationDetails = new Application();
-    } else {
-      this.currApplicationDetails = Object.assign(new Application(), this.userStore.getApplication(this.journeyid, appid));
+    try {
+      if (this.wishlistApp) {
+        this.currApplicationDetails = appid === 'new-app'
+          ? new Application()
+          : Object.assign(new Application(), this.userStore.getWishlistApplication(appid));
+      } else if (this.newApp) {
+        this.currApplicationDetails = new Application();
+      } else {
+        this.currApplicationDetails = Object.assign(new Application(), this.userStore.getApplication(this.journeyid, appid));
+      }
+    } catch (error) {
+      console.log('ApplicationViewComponent: no application retrieved with id:', appid);
+      this.router.navigate(['/home/journeys']);
+      return;
     }
 
     // make sure application is defined
@@ -110,6 +118,7 @@ export class ApplicationViewComponent implements OnInit {
       this.router.navigate(['/home/journeys']);
       return;
     } else {
+      console.log('app is apprently defined', this.currApplicationDetails);
       // specify details in formGroup
       this.appFormGroup.setValue({
         positionTitle: this.currApplicationDetails.positionTitle,
@@ -132,12 +141,14 @@ export class ApplicationViewComponent implements OnInit {
             url: `/home/journeys/${this.journeyid}`
           }
         );
+        sessionStorage.setItem('journeyRoute', this.breadcrumbsData.current.url);
       } else {
         this.breadcrumbsData.current.name = 'Wishlist Application';
         this.breadcrumbsData.current.url = `/home/wishlist/${appid}`;
         this.breadcrumbsData.paths.push(
           { name: 'Wishlist', url: '/home/wishlist' }
         );
+        sessionStorage.setItem('wishlistRoute', this.breadcrumbsData.current.url);
       }
 
       // Set timeline props

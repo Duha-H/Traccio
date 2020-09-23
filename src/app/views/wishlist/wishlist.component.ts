@@ -26,6 +26,7 @@ export class WishlistComponent implements OnInit {
     this.userStore.wishlistApps.subscribe(apps => {
       this.applications = apps;
     });
+    sessionStorage.setItem('wishlistRoute', '/home/wishlist');
   }
 
   selectApplication(app: Application) {
