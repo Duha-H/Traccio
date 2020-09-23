@@ -6,11 +6,11 @@
           [routerLinkActiveOptions]="{exact: true}" #navHomeIcon>
           <mat-icon [inline]="true" aria-hidden="false" aria-label="Dashboard icon">home</mat-icon>
         </a></li>
-      <li title="Journeys"><a href="#" routerLink="/home/journeys" (click)="clearSearch()" routerLinkActive="active"
+      <li title="Journeys"><a role="button" (click)="navigate('journeyRoute')" routerLink="/home/journeys" routerLinkActive="active"
           #navJourneysIcon>
           <mat-icon [inline]="true" aria-hidden="false" aria-label="Journeys icon">list</mat-icon>
         </a></li>
-      <li title="Wishlist"><a href="#" routerLink="/home/wishlist" (click)="clearSearch()" routerLinkActive="active"
+      <li title="Wishlist"><a role="button" (click)="navigate('wishlistRoute')" routerLink="/home/wishlist" routerLinkActive="active"
           #navWishlistIcon>
           <mat-icon [inline]="true" aria-hidden="false" aria-label="Search icon">star_border</mat-icon>
         </a></li>

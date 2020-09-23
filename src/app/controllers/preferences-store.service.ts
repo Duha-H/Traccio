@@ -5,7 +5,6 @@ import { Response } from 'src/app/utils/response';
 import { ThemeManagerService } from './theme-manager.service';
 import { PALETTES, THEMES, ThemeType, PaletteType } from 'src/styling/palettes';
 import { UserStoreControllerService } from './user-store-controller.service';
-import { UserStoreService } from '../models/user-store.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +18,22 @@ export class PreferencesStoreService {
   constructor(
     private themeManager: ThemeManagerService,
     private controller: UserStoreControllerService
-  ) {  }
+  ) {
+    const storedTheme = localStorage.getItem('theme');
+    const storedPalette = localStorage.getItem('palette');
+    if (storedTheme
+      && THEMES[storedTheme]
+      && storedPalette
+      && PALETTES[storedPalette]
+    ) {
+      this._preferences.next({
+        theme: THEMES[storedTheme],
+        colorPalette: PALETTES[storedPalette],
+        journeyInactive: DEFAULT_PREFERENCES.journeyInactive,
+        appStale: DEFAULT_PREFERENCES.appStale,
+      });
+    }
+  }
 
   async init(userid: string) {
     let currTheme;
@@ -36,11 +50,11 @@ export class PreferencesStoreService {
       });
 
     if (!currTheme || !THEMES[currTheme]) {
-      console.log('PreferencesStore: encountered unsupported theme, resetting to:', DEFAULT_PREFERENCES.theme.name);
+      console.log('PreferencesStore: theme not specified or unsupported, resetting to:', DEFAULT_PREFERENCES.theme.name);
       currTheme = DEFAULT_PREFERENCES.theme.name;
     }
     if (!currPalette || !PALETTES[currPalette]) {
-      console.log('PreferencesStore: encountered unsupported color palette, resetting to:', DEFAULT_PREFERENCES.colorPalette);
+      console.log('PreferencesStore: color palette not specified or unsupported, resetting to:', DEFAULT_PREFERENCES.colorPalette);
       currPalette = DEFAULT_PREFERENCES.colorPalette.id;
     }
 
@@ -117,6 +131,7 @@ export class PreferencesStoreService {
           this.themeManager.setTheme(themeObject);
         }
       });
+    localStorage.setItem('theme', theme);
   }
 
   async updatePalette(palette: string) {
@@ -130,6 +145,7 @@ export class PreferencesStoreService {
           this.themeManager.setPalette(paletteObject);
         }
       });
+    localStorage.setItem('palette', palette);
   }
 
   async updateJourneyInactive(value: number) {

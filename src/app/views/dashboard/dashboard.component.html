@@ -9,7 +9,7 @@
       <div>
         <mat-form-field color="accent">
           <mat-select color="accent" [(ngModel)]="selectedJourney" name="journeySelection"
-            (selectionChange)="selectYear(selectedJourney.years[0])" title="select an active journeys">
+            (selectionChange)="onJourneySelect()" title="select an active journeys">
             <mat-select-trigger>{{selectedJourney.value.title}}</mat-select-trigger>
             <mat-option *ngFor="let journey of dropdownContent" [value]="journey">
               {{journey.viewValue}}

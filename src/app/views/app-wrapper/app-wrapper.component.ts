@@ -67,7 +67,8 @@ export class AppWrapperComponent implements OnInit {
     }
     this.signedIn = false;
     this.userStore.clearData();
-    console.log('signed out??');
+    sessionStorage.clear();
+    localStorage.clear();
     this.router.navigate(['signin']);
   }
 
@@ -115,5 +116,21 @@ export class AppWrapperComponent implements OnInit {
 
   toggleTheme() {
     this.prefStore.toggleTheme();
+  }
+
+  navigate(routeID: 'journeyRoute' | 'wishlistRoute') {
+    const storedRoute = sessionStorage.getItem(routeID);
+    let route: string;
+    if (storedRoute) {
+      route = storedRoute;
+    } else {
+      if (routeID === 'journeyRoute') {
+        route = '/home/journeys';
+      } else if (routeID === 'wishlistRoute') {
+        route = '/home/wishlist';
+      }
+    }
+    this.clearSearch();
+    this.router.navigate([route]);
   }
 }
