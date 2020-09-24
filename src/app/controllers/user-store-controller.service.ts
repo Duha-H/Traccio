@@ -4,13 +4,14 @@ import { Journey } from 'src/app/models/journey';
 import { Application } from 'src/app/models/application';
 import { ApplicationInput } from 'src/app/models/types';
 import { Response } from '../utils/response';
+import { LoaderService } from './loader.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserStoreControllerService {
 
-  constructor(private api: APIService) { }
+  constructor(private api: APIService, private loaderService: LoaderService) { }
 
   async fetchPrefData(userid: string): Promise<{
     theme: string,
@@ -99,6 +100,7 @@ export class UserStoreControllerService {
   async fetchUserJourneys(userid: string) {
     const journeys: {[key: string]: Journey} = {};
     const response = new Response();
+    this.loaderService.setLoadingState(true);
     await this.api.ListJourneys({
       id: {contains: userid}
     }).then(result => {
@@ -123,12 +125,14 @@ export class UserStoreControllerService {
       response.error('Looks like an error occured while trying to fetch your journeys');
       response.payload = error;
     });
+    this.loaderService.setLoadingState(false);
 
     return response;
   }
 
   async fetchJourneyApps(journeyid: string) {
     let apps: ApplicationInput[] = [];
+    this.loaderService.setLoadingState(true);
     await this.api.GetJourney(journeyid)
       .then(value => {
         apps = value.applications.items;
@@ -136,12 +140,14 @@ export class UserStoreControllerService {
         console.log(`Error fetching journey ${journeyid} apps:`, error);
         apps = [];
       });
+    this.loaderService.setLoadingState(false);
 
     return apps;
   }
 
   async fetchWishlistApps(userid: string): Promise<Response> {
     const response = new Response();
+    this.loaderService.setLoadingState(true);
     await this.api.ListWishlistApplications({
       id: { contains: userid }
     }).then(value => {
@@ -151,6 +157,8 @@ export class UserStoreControllerService {
       response.error('Looks like an error occured while trying to fetch your wishlist applications');
       response.payload = [];
     });
+    this.loaderService.setLoadingState(false);
+
     return response;
   }
 

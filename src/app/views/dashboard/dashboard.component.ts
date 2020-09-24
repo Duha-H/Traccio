@@ -65,13 +65,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.journeySub = this.userStore.activeJourneys.subscribe(activeJourneys => {
         this.activeJourneys = activeJourneys;
         this.setDropdownContent();
-        if (sessionStorage.getItem('dashboardJourney')) {
-          const journeyID = sessionStorage.getItem('dashboardJourney');
-          this.selectedJourney = this.dropdownContent.filter(entry => {
-            return entry.value.id === journeyID;
-          })[0];
-        } else {
+        const journeyID = sessionStorage.getItem('dashboardJourney');
+        this.selectedJourney = this.dropdownContent.filter(entry => {
+          return entry.value.id === journeyID;
+        })[0];
+        if (!this.selectedJourney) {
           this.selectedJourney = this.dropdownContent[0];
+          sessionStorage.setItem('dashboardJourney', this.selectedJourney.value.id);
         }
         this.currentYear = this.selectedJourney && this.selectedJourney.years[0]
           ? this.selectedJourney.years[this.selectedJourney.years.length - 1]
@@ -85,8 +85,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.pieChartPalette = preferences.colorPalette.colors;
         this.calendarPalette = preferences.colorPalette.colors;
       });
-      // console.log(this.selectedJourney.frequencyData);
-      console.log("Dashboard initialized");
     } catch (error) {
       console.log("User not defined yet:", error); // should probably make sure this never happens
       this.name = '';

@@ -2,9 +2,8 @@
   <div class="spanning-content">
     <h2>Wishlist</h2>
     <div class="spacer"></div>
-    <!-- <button class="submit-button">Add Application</button> -->
     <button class="add-btn" title="Remove application" (click)="toggleSelectionMode()" [disabled]="applications.length == 0">
-      <p *ngIf="!(rs.mobileSize$ | async)">Remove</p>
+      <p *ngIf="!(rs.mobileSize$ | async)">{{ selectionMode ? 'Done' : 'Remove' }}</p>
       <mat-icon [inline]="true" aria-hidden="false" aria-label="Remove application icon">delete</mat-icon>
     </button>
     <button class="add-btn" title="Add application" (click)="addApplication()" [disabled]="selectionMode">

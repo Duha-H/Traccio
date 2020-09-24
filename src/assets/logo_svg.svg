@@ -1,1 +1,77 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 124.62 166"><defs><style>.cls-1,.cls-2{fill:none;stroke:#8e8e8e;stroke-miterlimit:10;}.cls-1{stroke-width:6px;}.cls-2{stroke-width:12px;}</style></defs><title>logo_svg</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><circle class="cls-1" cx="25.43" cy="95.59" r="19.43"/><circle class="cls-1" cx="74.01" cy="140.57" r="19.43"/><line class="cls-1" x1="40.37" y1="106.74" x2="61.96" y2="128.33"/><circle class="cls-2" cx="99.19" cy="25.43" r="19.43"/><line class="cls-2" x1="83.54" y1="38.38" x2="38.57" y2="83.36"/><circle class="cls-2" cx="25.43" cy="95.59" r="19.43"/><circle class="cls-2" cx="74.01" cy="140.57" r="19.43"/><line class="cls-2" x1="40.37" y1="106.74" x2="60.15" y2="126.44"/></g></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="auto" viewBox="0 0 76.8 101.56">
+  <style>
+    #logo_svg {
+      text-align: center;
+      margin: auto;
+      transform: scale(0.9);
+      transform-origin: center;
+    }
+
+    #circle-top, #circle-middle, #circle-bottom {
+      transform-origin: center;
+      transform-box: fill-box;
+      fill: var(--bg);
+    }
+
+    #circle-top {
+      animation: 1.5s pulse-top infinite;
+    }
+
+    #circle-middle {
+      animation: 1.5s pulse-middle infinite;
+    }
+
+    #circle-bottom {
+      animation: 1.5s pulse-bottom infinite;
+    }
+
+    @keyframes pulse-bottom {
+      0% {
+        transform: scale(1);
+      }
+      16%{
+        transform: scale(1.2);
+      }
+      33% {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes pulse-middle {
+      35% {
+        transform: scale(1);
+      }
+      52% {
+        transform: scale(1.2);
+      }
+      66% {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes pulse-top {
+      68% {
+        transform: scale(1);
+      }
+      74% {
+        transform: scale(1.2);
+      }
+      99% {
+        transform: scale(1);
+      }
+    }
+  </style>
+  <g id="logo_svg" transform="translate(2 0)">
+    <g id="circle-top">
+      <circle cx="12.435" cy="12.435" r="12.435" transform="translate(48.206 3)" fill="none" stroke="#707070" stroke-miterlimit="10" stroke-width="6"/>
+    </g>
+    <line id="Line_2" data-name="Line 2" x1="28.781" y2="28.787" transform="translate(21.845 23.723)" fill="none" stroke="#707070" stroke-miterlimit="10" stroke-width="6"/>
+    <g id="circle-middle">
+      <circle cx="12.435" cy="12.435" r="12.435" transform="translate(1 47.902)" fill="none" stroke="#707070" stroke-miterlimit="10" stroke-width="6"/>
+    </g>
+    <g id="circle-bottom">
+      <circle cx="12.435" cy="12.435" r="12.435" transform="translate(31.091 73.689)" fill="none" stroke="#707070" stroke-miterlimit="10" stroke-width="6"/>
+    </g>
+    <line id="Line_3" data-name="Line 3" x2="11.156" y2="9.022" transform="translate(23.5 68.06)" fill="none" stroke="#707070" stroke-miterlimit="10" stroke-width="6"/>
+  </g>
+</svg>

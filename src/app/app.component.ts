@@ -1,9 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { Router } from '@angular/router';
 import { AmplifyService } from "aws-amplify-angular";
 import { UserStoreService } from './models/user-store.service';
 import { AuthWrapperService } from './auth/auth-wrapper.service';
 import { PreferencesStoreService } from './controllers/preferences-store.service';
+import { LoaderService } from './controllers/loader.service';
 
 @Component({
   selector: "app-root",
@@ -21,7 +22,7 @@ export class AppComponent implements OnInit {
     private userStore: UserStoreService,
     public router: Router,
     private authWrapper: AuthWrapperService,
-    private prefStore: PreferencesStoreService
+    private prefStore: PreferencesStoreService,
   ) {  }
 
   async ngOnInit() {

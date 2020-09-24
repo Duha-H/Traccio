@@ -10,6 +10,7 @@ import { ResizeService } from 'src/app/controllers/resize.service';
 import { NotificationService } from 'src/app/controllers/notification.service';
 import { Notification } from 'src/app/models/notification';
 import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
+import { LoaderService } from 'src/app/controllers/loader.service';
 
 @Component({
   selector: "app-wrapper",
@@ -47,6 +48,7 @@ export class AppWrapperComponent implements OnInit {
     public resizeService: ResizeService,
     public notificationService: NotificationService,
     private authWrapper: AuthWrapperService,
+    public loaderService: LoaderService,
   ) {  }
 
   ngOnInit() {

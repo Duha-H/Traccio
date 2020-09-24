@@ -85,8 +85,6 @@ export class ApplicationViewComponent implements OnInit {
       if (params.id) {
         this.journeyid = params.id;
         this.wishlistApp = false;
-      } else {
-        this.router.navigate(['/home/journeys']);
       }
       appid = params.appref;
       if (appid === 'new-app') {
@@ -118,7 +116,6 @@ export class ApplicationViewComponent implements OnInit {
       this.router.navigate(['/home/journeys']);
       return;
     } else {
-      console.log('app is apprently defined', this.currApplicationDetails);
       // specify details in formGroup
       this.appFormGroup.setValue({
         positionTitle: this.currApplicationDetails.positionTitle,
