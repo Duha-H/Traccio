@@ -125,6 +125,7 @@ mat-icon {
     min-height: 200px;
     box-shadow: none;
     background-color: var(--element-bg-secondary);
+    padding: 15px;
   }
   
   .container p {

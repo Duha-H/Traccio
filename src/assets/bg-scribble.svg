@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1790.714" height="757.841" viewBox="0 0 1790.714 757.841">
+  <style>
+    @import url('../styling/dark-theme.css');
+    @import url('../styling/light-theme.css');
+    #Path_9 {
+      opacity: 0.04;
+      stroke: #909CA8;
+    }
+  </style>
+  <path id="Path_9" data-name="Path 9"
+    d="M7024.8,1080s6.75-194.346,78.477-247.036,136.7-58.736,224.464-91.559,205.055-82.921,297.034-158.932,132.7-233,281-223.714,216.025,195.21,286.064,223.714,159.486-22.458,220.244,0,72.571,116.608,135.016,144.248S8780,756.953,8780,756.953"
+    transform="translate(-6989.818 -323.374)" fill="none" stroke="rgba(159,157,234,0.24)" stroke-width="70" />
+</svg>

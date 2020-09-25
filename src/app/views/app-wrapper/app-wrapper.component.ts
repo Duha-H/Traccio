@@ -87,6 +87,7 @@ export class AppWrapperComponent implements OnInit {
     if (
       this.activateSearchButton &&
       !this.activateSearchButton.nativeElement.contains(event.target) &&
+      !this.searchFieldElement.nativeElement.contains(event.target) &&
       this.resizeService.mobileSize$.value &&
       !this.searchQuery
     ) {

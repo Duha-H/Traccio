@@ -186,6 +186,10 @@ div.loading {
   align-items: center;
   background-color: var(--bg);
   box-sizing: border-box;
+  background-image: url('/assets/bg-scribble.svg');
+  background-repeat: no-repeat;
+  background-position-x: right;
+  background-position-y: bottom;
   /* margin-bottom: 15px; */
 }
 
