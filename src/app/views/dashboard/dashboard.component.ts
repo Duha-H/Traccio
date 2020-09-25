@@ -14,6 +14,7 @@ import { Subscription } from 'rxjs';
 import { ArrayFormatterPipe } from 'src/app/utils/array-formatter.pipe';
 import { DatumValue } from '@nivo/line';
 import { PieDatum } from '@nivo/pie';
+import { LoaderService } from 'src/app/controllers/loader.service';
 
 @Component({
   selector: "app-dashboard",
@@ -54,7 +55,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private prefStore: PreferencesStoreService,
     public resizeService: ResizeService,
     private arrayFilter: ArrayFilterPipe,
-    private arrayFormatter: ArrayFormatterPipe
+    private arrayFormatter: ArrayFormatterPipe,
+    public loaderService: LoaderService
   ) {}
 
   ngOnInit() {

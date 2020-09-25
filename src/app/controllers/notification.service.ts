@@ -49,10 +49,10 @@ export class NotificationService {
   }
 
   keyboardHandler(event: KeyboardEvent) {
-    if (event.key === 'm') { // just for testing
-      const message = Math.random() * 30 + ' NEW MESSAGE';
-      this.sendNotification(message, 'standard', 400000);
-    }
+    // if (event.key === 'm') { // just for testing
+    //   const message = Math.random() * 30 + ' NEW MESSAGE';
+    //   this.sendNotification(message, 'standard', 400000);
+    // }
   }
 
 }

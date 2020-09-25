@@ -19,229 +19,230 @@
       </div>
     </div>
 
-    <div class="journey-details">
-
-      <div class="dashboard-component">
-        <div class="data-container-title spanning-content">
-          <h4 style="font-weight: 500;">Recent Stats</h4>
-          <div class="spacer"></div>
-          <p>past <b style="cursor: pointer; color: var(--accent);"
-              (click)="toggleLineChartMode()">{{lineChartMode}}</b></p>
-          <mat-icon title="save info">open_in_new</mat-icon>
-        </div>
-        <div class="stats-container">
-          <div class="stat-item">
-            <div class="stat-item-content">
-              <p class="stat-item-primary-text">
-                {{ selectedJourney.frequencyAxes[lineChartMode].y | arrayFilter:'count' }}
-              </p>
-              <p class="stat-item-secondary-text">applications</p>
-            </div>
-            <p style="color: var(--titles-secondary);">submitted in the past {{lineChartMode}}</p>
-          </div>
-
-          <div class="stat-item">
-            <div class="stat-item-content">
-              <p class="stat-item-primary-text">
-                {{ selectedJourney.frequencyAxes[lineChartMode].y | arrayFilter:'average' }}
-              </p>
-              <p class="stat-item-secondary-text">/{{ lineChartMode === 'year' ? 'month' : 'day'}}</p>
-            </div>
-            <p style="color: var(--titles-secondary);">average application frequency</p>
-          </div>
-        </div>
-        <line-chart-wrapper *ngIf="(selectedJourney.frequencyAxes[lineChartMode].y | arrayFilter) > 0; else noChart"
-          style="width: 100%; height: 40%; display: block; margin: 0 auto;"
-          [data]="selectedJourney.frequencyData[lineChartMode]" [curve]="'monotoneX'" [xScale]="{
-              type: 'point'
-            }" [yScale]="{
-              type: 'linear'
-            }" [axisBottom]="{
-              tickValues: selectedJourney.frequencyAxes[lineChartMode].x
-            }" [axisLeft]="{
-              tickValues: (selectedJourney.frequencyAxes[lineChartMode].y | arrayFormatter:['fill', 'reduce'])
-            }" [isInteractive]="true" [margin]="{ top: 10, bottom: 40, right: 40, left: 40 }" [enableGridX]="false"
-          [enableGridY]="false" [colors]="pieChartPalette.slice(0, 1)" [pointSize]="8" [pointColor]="theme.background"
-          [pointBorderColor]="pieChartPalette[0]" [pointBorderWidth]="2" [theme]="{
-            axis: {
-              textColor: theme.textColor
-            },
-            textColor: theme.textColor,
-            markers: {
-              textColor: theme.textColor
-            }
-          }">
-        </line-chart-wrapper>
-        <ng-template #noChart>
-          <!-- <div>Nope. No Chart.</div> -->
-          <!-- <div style="width: 65%; background-image: url('assets/placeholder_line.svg'); opacity: 0.2; margin: auto; height: 160px; background-repeat: no-repeat; margin-bottom: 20px;"> -->
-            <!-- <img src="assets/placeholder_line.svg" alt="Placeholder line chart" style="height: 35%;"> -->
-          <!-- </div> -->
-        </ng-template>
+    <div class="dashboard-content" *ngIf="selectedJourney.value.applications.length == 0; else journeyDetails">
+      <div class="placeholder-text">
+        <h4>Add applications to {{ selectedJourney.value.title }} and start tracking your progress here!</h4>
+        <button class="add-btn" title="Add application" (click)="router.navigate(['/home/journeys', selectedJourney.value.id, 'new-app'])">
+          <p *ngIf="!(resizeService.mobileSize$ | async)">Add</p>
+          <mat-icon [inline]="true" aria-hidden="false" aria-label="Add application icon">add</mat-icon>
+        </button>
+        <img src="/assets/placeholder_tumble.svg" alt="no applications" title="tumbling weeds of nothingness">
       </div>
+    </div>
 
-      <div class="dashboard-component">
-        <div class="data-container-title spanning-content">
-          <h4>
-            Status Breakdown
-          </h4>
-          <div class="spacer"></div>
-          <mat-icon title="save info">open_in_new</mat-icon>
-        </div>
-
-        <div *ngIf="!isEmpty(selectedJourney.statusData); else statusPlaceholder;" class="status-container"
-          style="width: 90%; height: 80%; margin: 0 auto;" #statusContainer>
-          <pie-chart-wrapper [data]="selectedJourney.statusData" [width]="800" [height]="800"
-            [margin]="{ top: 0, right: 60, bottom: 0, left: 10 }" [pixelRatio]="2" [innerRadius]="0.3" [padAngle]="0.7"
-            [cornerRadius]="3" [colors]="pieChartPalette" [enableRadialLabels]="false"
-            [borderColor]="{ from: 'color', modifiers: [ [ 'darker', 0.6 ] ] }" [radialLabelsSkipAngle]="10"
-            [radialLabelsTextXOffset]="6" [radialLabelsTextColor]="theme.textColor" [radialLabelsLinkOffset]="0"
-            [radialLabelsLinkDiagonalLength]="10" [radialLabelsLinkHorizontalLength]="20" [sliceLabel]="'percentage'"
-            [radialLabelsLinkStrokeWidth]="1" [radialLabelsLinkColor]="{ from: 'color' }" [slicesLabelsSkipAngle]="10"
-            [slicesLabelsTextColor]="'#fff'" [animate]="true" [motionStiffness]="90" [motionDamping]="15"
-            [legends]="[
-              {
-                anchor: 'bottom-right',
-                direction: 'column',
-                translateX: 80,
-                itemWidth: 120,
-                itemHeight: 14,
-                itemsSpacing: 2,
-                symbolSize: 14,
-                symbolShape: 'circle',
-                textColor: theme.textColor,
-                itemTextColor: theme.textColor
+    <ng-template #journeyDetails>
+      <div class="journey-details">
+  
+        <div class="dashboard-component">
+          <div class="data-container-title spanning-content">
+            <h4 style="font-weight: 500;">Recent Stats</h4>
+            <div class="spacer"></div>
+            <p>past <b style="cursor: pointer; color: var(--accent);"
+                (click)="toggleLineChartMode()">{{lineChartMode}}</b></p>
+            <mat-icon title="save info">open_in_new</mat-icon>
+          </div>
+          <div class="stats-container">
+            <div class="stat-item">
+              <div class="stat-item-content">
+                <p class="stat-item-primary-text">
+                  {{ selectedJourney.frequencyAxes[lineChartMode].y | arrayFilter:'count' }}
+                </p>
+                <p class="stat-item-secondary-text">applications</p>
+              </div>
+              <p style="color: var(--titles-secondary);">submitted in the past {{lineChartMode}}</p>
+            </div>
+  
+            <div class="stat-item">
+              <div class="stat-item-content">
+                <p class="stat-item-primary-text">
+                  {{ selectedJourney.frequencyAxes[lineChartMode].y | arrayFilter:'average' }}
+                </p>
+                <p class="stat-item-secondary-text">/{{ lineChartMode === 'year' ? 'month' : 'day'}}</p>
+              </div>
+              <p style="color: var(--titles-secondary);">average application frequency</p>
+            </div>
+          </div>
+          <line-chart-wrapper *ngIf="(selectedJourney.frequencyAxes[lineChartMode].y | arrayFilter) > 0; else noChart"
+            style="width: 100%; height: 40%; display: block; margin: 0 auto;"
+            [data]="selectedJourney.frequencyData[lineChartMode]" [curve]="'monotoneX'" [xScale]="{
+                type: 'point'
+              }" [yScale]="{
+                type: 'linear'
+              }" [axisBottom]="{
+                tickValues: selectedJourney.frequencyAxes[lineChartMode].x
+              }" [axisLeft]="{
+                tickValues: (selectedJourney.frequencyAxes[lineChartMode].y | arrayFormatter:['fill', 'reduce'])
+              }" [isInteractive]="true" [margin]="{ top: 10, bottom: 40, right: 40, left: 40 }" [enableGridX]="false"
+            [enableGridY]="false" [colors]="pieChartPalette.slice(0, 1)" [pointSize]="8" [pointColor]="theme.background"
+            [pointBorderColor]="pieChartPalette[0]" [pointBorderWidth]="2" [theme]="{
+              axis: {
+                textColor: theme.textColor
+              },
+              textColor: theme.textColor,
+              markers: {
+                textColor: theme.textColor
               }
-            ]" style="position: relative;"
-            [onClick]="selectPieSlice.bind(this)">
-          </pie-chart-wrapper>
+            }">
+          </line-chart-wrapper>
         </div>
-        <ng-template #statusPlaceholder>
-          <div class="status-container">
-            <!-- <p>The status breakdown of added applications will appear here.</p> -->
-            <img src="assets/placeholder_pie.svg" alt="" style="filter: grayscale(); padding: 20px; margin: auto; opacity: 0.2; height: 230px;">
+  
+        <div class="dashboard-component">
+          <div class="data-container-title spanning-content">
+            <h4>
+              Status Breakdown
+            </h4>
+            <div class="spacer"></div>
+            <mat-icon title="save info">open_in_new</mat-icon>
           </div>
-        </ng-template>
-
-      </div>
-
-      <div class="dashboard-component">
-        <div class="data-container-title spanning-content">
-          <h4>
-            Productivity Calendar
-          </h4>
-          <div class="spacer"></div>
-          <mat-icon title="save info">open_in_new</mat-icon>
-        </div>
-        <div *ngIf="!isEmpty(selectedJourney.calendarData); else calendarPlaceholder;" class="calendar-container">
-          <calendar-wrapper
-            [data]="selectedJourney.calendarData" [from]="currentYear+'-02-01'"
-            [to]="currentYear+'-11-01'" [emptyColor]="theme.emptyColor"
-            [margin]="{ top: 0, right: 0, bottom: 0, left: 0 }" [colors]="calendarPalette" [yearSpacing]="40"
-            [direction]="(resizeService.mobileSize$ | async) ? 'horizontal' : 'horizontal'"
-            [monthBorderColor]="theme.transparent" [dayBorderWidth]="3" [dayBorderColor]="theme.background" [legends]="[
+  
+          <div *ngIf="!isEmpty(selectedJourney.statusData); else statusPlaceholder;" class="status-container"
+            style="width: 90%; height: 80%; margin: 0 auto;" #statusContainer>
+            <pie-chart-wrapper [data]="selectedJourney.statusData" [width]="800" [height]="800"
+              [margin]="{ top: 0, right: 60, bottom: 0, left: 10 }" [pixelRatio]="2" [innerRadius]="0.3" [padAngle]="0.7"
+              [cornerRadius]="3" [colors]="pieChartPalette" [enableRadialLabels]="false"
+              [borderColor]="{ from: 'color', modifiers: [ [ 'darker', 0.6 ] ] }" [radialLabelsSkipAngle]="10"
+              [radialLabelsTextXOffset]="6" [radialLabelsTextColor]="theme.textColor" [radialLabelsLinkOffset]="0"
+              [radialLabelsLinkDiagonalLength]="10" [radialLabelsLinkHorizontalLength]="20" [sliceLabel]="'percentage'"
+              [radialLabelsLinkStrokeWidth]="1" [radialLabelsLinkColor]="{ from: 'color' }" [slicesLabelsSkipAngle]="10"
+              [slicesLabelsTextColor]="'#fff'" [animate]="true" [motionStiffness]="90" [motionDamping]="15"
+              [legends]="[
                 {
                   anchor: 'bottom-right',
-                  direction: 'row',
-                  translateY: 10,
-                  itemCount: 4,
-                  itemWidth: 42,
-                  itemHeight: 36,
-                  itemsSpacing: 10,
-                  itemDirection: 'left-to-right',
+                  direction: 'column',
+                  translateX: 80,
+                  itemWidth: 120,
+                  itemHeight: 14,
+                  itemsSpacing: 2,
+                  symbolSize: 14,
+                  symbolShape: 'circle',
                   textColor: theme.textColor,
                   itemTextColor: theme.textColor
-                }]" [theme]="{
-                axis: {
-                  textColor: theme.textColor
-                },
-                textColor: theme.textColor,
-                markers: {
-                  textColor: theme.textColor
                 }
-              }" [minValue]="'auto'">
-          </calendar-wrapper>
-        </div>
-        <ul style="list-style: none;" class="year-selector">
-          <li *ngFor="let year of selectedJourney.years" (click)="selectYear(year)"
-            [style.background-color]="year == currentYear ? 'var(--titles-secondary)' : 'transparent'">
-            <p [style.color]="year == currentYear ? 'var(--bg)' : 'var(--text)'">{{year}}</p>
-          </li>
-        </ul>
-
-        <ng-template #calendarPlaceholder>
-          <div class="status-container">
-            <!-- <p>The status breakdown of added applications will appear here.</p> -->
-            <img src="assets/placeholder_calendar.svg" alt="" style="filter: grayscale(); padding: 20px; margin: auto; opacity: 0.2; max-height: 130px;">
+              ]" style="position: relative;"
+              [onClick]="selectPieSlice.bind(this)">
+            </pie-chart-wrapper>
           </div>
-        </ng-template>
-      </div>
-
-      <div class="dashboard-component" style="width: 100%; height: 420px;" id="appListContainer" #appListContainer>
-        <div class="data-container-title spanning-content">
-          <h4>Applications</h4>
-          <div class="spacer"></div>
-          <mat-form-field style="padding: 0; width: 120px;">
-            <mat-select color="accent" name="statusSelection" [(ngModel)]="selectedStatus"
-              title="application status filter" id="statusSelect">
-              <mat-option *ngFor="let status of statuses" [value]="status">
-                {{status.viewValue}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+          <ng-template #statusPlaceholder>
+            <div class="status-container">
+              <!-- <p>The status breakdown of added applications will appear here.</p> -->
+              <img src="assets/placeholder_pie.svg" alt="" style="filter: grayscale(); padding: 20px; margin: auto; opacity: 0.2; height: 230px;">
+            </div>
+          </ng-template>
+  
         </div>
-        <div class="app-list-container" style="height: 78%;">
-          <mat-list *ngIf="selectedJourney.value.applications.length > 0; else applicationsPlaceholder"
-            style="height: 100%; overflow-y: scroll;" class="app-list-item">
-            <mat-list-item class="clickable-item"
-              *ngFor="let app of (selectedJourney.value.applications | appFilter:[{ property: 'status', value: selectedStatus.value }] );"
-              (click)="selectApplication(app)">
-              <!-- Web default list-item -->
-              <mat-icon *ngIf="!(resizeService.tabletSize$ | async)" matListIcon>folder</mat-icon>
-              <div *ngIf="!(resizeService.tabletSize$ | async); else mobileListItem" class="app-list-item" matLine>
-                <div class="spanning-content">
-                  <h4 style="text-align: left; color: var(--text);">{{app.positionTitle + '  '}}</h4>
-                  <span style="padding-left: 10px; color: var(--titles-secondary);"> @ {{app.companyName}}</span>
-                  <div class="spacer"></div>
-                  <span>Applied: {{ app.appDate | date }}</span>
-                </div>
-              </div>
-              <!-- Mobile view list-item -->
-              <ng-template #mobileListItem>
-                <div class="app-list-item" matLine>
+  
+        <div class="dashboard-component">
+          <div class="data-container-title spanning-content">
+            <h4>
+              Productivity Calendar
+            </h4>
+            <div class="spacer"></div>
+            <mat-icon title="save info">open_in_new</mat-icon>
+          </div>
+          <div *ngIf="!isEmpty(selectedJourney.calendarData); else calendarPlaceholder;" class="calendar-container">
+            <calendar-wrapper
+              [data]="selectedJourney.calendarData" [from]="currentYear+'-02-01'"
+              [to]="currentYear+'-11-01'" [emptyColor]="theme.emptyColor"
+              [margin]="{ top: 0, right: 0, bottom: 0, left: 0 }" [colors]="calendarPalette" [yearSpacing]="40"
+              [direction]="(resizeService.mobileSize$ | async) ? 'horizontal' : 'horizontal'"
+              [monthBorderColor]="theme.transparent" [dayBorderWidth]="3" [dayBorderColor]="theme.background" [legends]="[
+                  {
+                    anchor: 'bottom-right',
+                    direction: 'row',
+                    translateY: 10,
+                    itemCount: 4,
+                    itemWidth: 42,
+                    itemHeight: 36,
+                    itemsSpacing: 10,
+                    itemDirection: 'left-to-right',
+                    textColor: theme.textColor,
+                    itemTextColor: theme.textColor
+                  }]" [theme]="{
+                  axis: {
+                    textColor: theme.textColor
+                  },
+                  textColor: theme.textColor,
+                  markers: {
+                    textColor: theme.textColor
+                  }
+                }" [minValue]="'auto'">
+            </calendar-wrapper>
+          </div>
+          <ul style="list-style: none;" class="year-selector">
+            <li *ngFor="let year of selectedJourney.years" (click)="selectYear(year)"
+              [style.background-color]="year == currentYear ? 'var(--titles-secondary)' : 'transparent'">
+              <p [style.color]="year == currentYear ? 'var(--bg)' : 'var(--text)'">{{year}}</p>
+            </li>
+          </ul>
+  
+          <ng-template #calendarPlaceholder>
+            <div class="status-container">
+              <!-- <p>The status breakdown of added applications will appear here.</p> -->
+              <img src="assets/placeholder_calendar.svg" alt="" style="filter: grayscale(); padding: 20px; margin: auto; opacity: 0.2; max-height: 130px;">
+            </div>
+          </ng-template>
+        </div>
+  
+        <div class="dashboard-component" style="width: 100%; height: 420px;" id="appListContainer" #appListContainer>
+          <div class="data-container-title spanning-content">
+            <h4>Applications</h4>
+            <div class="spacer"></div>
+            <mat-form-field style="padding: 0; width: 120px;">
+              <mat-select color="accent" name="statusSelection" [(ngModel)]="selectedStatus"
+                title="application status filter" id="statusSelect">
+                <mat-option *ngFor="let status of statuses" [value]="status">
+                  {{status.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="app-list-container" style="height: 78%;">
+            <mat-list
+              style="height: 100%; overflow-y: scroll;" class="app-list-item">
+              <mat-list-item class="clickable-item"
+                *ngFor="let app of (selectedJourney.value.applications | appFilter:[{ property: 'status', value: selectedStatus.value }] );"
+                (click)="selectApplication(app)">
+                <!-- Web default list-item -->
+                <mat-icon *ngIf="!(resizeService.tabletSize$ | async)" matListIcon>folder</mat-icon>
+                <div *ngIf="!(resizeService.tabletSize$ | async); else mobileListItem" class="app-list-item" matLine>
                   <div class="spanning-content">
                     <h4 style="text-align: left; color: var(--text);">{{app.positionTitle + '  '}}</h4>
-                  </div>
-                </div>
-                <div class="app-list-item" matLine>
-                  <div class="spanning-content">
-                    <span style="color: var(--titles-secondary);"> @ {{app.companyName}}</span>
+                    <span style="padding-left: 10px; color: var(--titles-secondary);"> @ {{app.companyName}}</span>
                     <div class="spacer"></div>
                     <span>Applied: {{ app.appDate | date }}</span>
                   </div>
                 </div>
-              </ng-template>
-
-
-            </mat-list-item>
-          </mat-list>
-          <ng-template #applicationsPlaceholder>
-            <div class="placeholder-text">
-              <p>Added applications will appear here.</p>
-            </div>
-          </ng-template>
+                <!-- Mobile view list-item -->
+                <ng-template #mobileListItem>
+                  <div class="app-list-item" matLine>
+                    <div class="spanning-content">
+                      <h4 style="text-align: left; color: var(--text);">{{app.positionTitle + '  '}}</h4>
+                    </div>
+                  </div>
+                  <div class="app-list-item" matLine>
+                    <div class="spanning-content">
+                      <span style="color: var(--titles-secondary);"> @ {{app.companyName}}</span>
+                      <div class="spacer"></div>
+                      <span>Applied: {{ app.appDate | date }}</span>
+                    </div>
+                  </div>
+                </ng-template>
+  
+  
+              </mat-list-item>
+            </mat-list>
+          </div>
+  
         </div>
-
       </div>
-
-    </div>
+    </ng-template>
 
   </div>
 
   <ng-template class="dashboard-content" #elseContent>
     <div class="placeholder-text">
       <h4>Get started by adding journeys to track them here!</h4>
-      <button class="add-btn" title="Add journey" (click)="navigateToAddJourney()">
+      <button class="add-btn" title="Add journey" (click)="router.navigate(['/home/journeys', { displayDrawer: true }])">
         <p *ngIf="!(resizeService.mobileSize$ | async)">Add</p>
         <mat-icon [inline]="true" aria-hidden="false" aria-label="Add journey icon">add</mat-icon>
       </button>
