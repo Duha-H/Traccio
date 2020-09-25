@@ -194,6 +194,7 @@ export class ApplicationViewComponent implements OnInit {
             this.router.navigate(['/home/wishlist', this.currApplicationDetails.id]);
             this.newApp = false; // it shouldn't matter because we're navigating away so the component is getting destroyed
             this.detailsUpdated = false;
+            sessionStorage.setItem('wishlistRoute', `/home/wishlist/${this.currApplicationDetails.id}`);
           } else {
             this.notificationService.sendNotification(response.message, 'error');
           }
@@ -276,6 +277,8 @@ export class ApplicationViewComponent implements OnInit {
           this.userStore.removeWishlistApplication(this.currApplicationDetails.id);
           this.router.navigate(['/home/journeys', journeyid, response.payload.id]);
           this.notificationService.sendNotification(`Application successfully added to ${journey.title}!`, 'success', 5000);
+          // reset saved wishlistRoute
+          sessionStorage.setItem('wishlistRoute', '/home/wishlist');
         } else {
           this.notificationService.sendNotification(response.message, 'error');
         }
@@ -306,7 +309,7 @@ export class ApplicationViewComponent implements OnInit {
     this.currApplicationDetails.source = this.appFormGroup.controls.source.value;
     this.currApplicationDetails.notes = this.appFormGroup.controls.notes.value;
     // add status and timeline updates via Application (as necessary)
-    if (mode === 'new-app') {
+    if (mode === 'new-app' || 'new-wishlist') {
       this.currApplicationDetails.setStatus(STATUS.IN_REVIEW, this.currApplicationDetails.appDate);
     } else if (mode === 'existing-app' && this.statusUpdated) {
       this.currApplicationDetails.setStatus(this.appFormGroup.controls.status.value, this.statusUpdateDate);
