@@ -51,7 +51,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   constructor(
     private userStore: UserStoreService,
-    private router: Router,
+    public router: Router,
     private prefStore: PreferencesStoreService,
     public resizeService: ResizeService,
     private arrayFilter: ArrayFilterPipe,

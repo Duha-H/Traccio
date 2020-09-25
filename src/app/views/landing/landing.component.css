@@ -92,12 +92,13 @@ div.landing-card {
   max-width: 970px;
   height: 500px;
   margin: 0 auto;
-  position: sticky;
-  padding: 15px;
+  /* position: sticky; */
+  /* padding: 15px; */
 }
 
 div.landing-card.card-1 {
-  margin-top: 20%;
+  height: 700px;
+  margin-top: 10%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -105,9 +106,13 @@ div.landing-card.card-1 {
 }
 
 div.landing-card.card-2 {
+  max-width: 1200px;
   margin-top: 280px;
   /* top: 780px; */
-  transform: translateX(-10%);
+  /* transform: translateX(-10%); */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 div.landing-card.card-3 {
@@ -144,7 +149,7 @@ div.landing-card.card-4 a:not(.header-btn) {
 }
 
 div.landing-content {
-  position: absolute;
+  /* position: absolute; */
   padding: 35px;
   text-align: left;
   border-left: 6px solid var(--accent);
@@ -179,12 +184,12 @@ div.landing-content {
 }
 
 img.card-img {
-  position: absolute;
-  box-shadow: -3px 3px 10px rgba(0, 0, 0, 0.4);
+  /* position: absolute; */
+  /* box-shadow: -3px 3px 10px rgba(0, 0, 0, 0.4); */
 }
 
 img.card-img.desktop {
-  max-width: 50em;
+  max-width: 65em;
   left: 40%;
   bottom: 0;
 }
@@ -265,6 +270,11 @@ div.graphic-component graphic-search {
   width: 100%;
   margin: 0 40px;
   animation: 0.3s graphic-pulse linear;
+}
+
+.card-4 .landing-content p#call-to-action {
+  font-size: 2em;
+  font-weight: 700;
 }
 
 div.footer {
@@ -355,15 +365,14 @@ footer {
   }
 
   div.landing-card.card-1 {
-    margin-top: 10%;
+    margin-top: 20%;
     flex-direction: column;
-    height: 700px;
   }
 
   div.landing-card.card-2 {
-    display: flex;
-    flex-direction: column;
-    transform: translateX(0);
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* transform: translateX(0); */
   }
   
   .card-2 div.landing-content {
@@ -373,9 +382,10 @@ footer {
 
   img.card-img.desktop {
     max-width: 50em;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 0;
+    width: 100%;
+    /* left: 50%; */
+    /* transform: translateX(-50%); */
+    /* bottom: 0; */
   }
 
   img.card-img.mobile {
@@ -414,7 +424,7 @@ footer {
   }
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 500px) {
   .container {
     background-image: none;
   }
@@ -447,7 +457,8 @@ footer {
   }
 
   div.landing-card.card-1 {
-    margin-top: 10%;
+    margin-top: 40vh;
+    height: auto;
   }
 
   div.landing-card.card-1 img {
@@ -494,10 +505,15 @@ footer {
   div.graphic-component p {
     width: 100%;
   }
+
+  .card-4 .landing-content p#call-to-action {
+    font-size: 1.5em;
+  }
 }
 
 @media screen and (max-width: 350) {
   div.landing-card.card-1 {
     margin-top: 0;
+    background-color: red;
   }
 }

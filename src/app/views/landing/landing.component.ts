@@ -22,7 +22,7 @@ export class LandingComponent implements OnInit {
 
 
   ngOnInit() {
-    this.setNewInterval();
+    // this.setNewInterval();
   }
 
   checkView(event?: any) {
@@ -42,13 +42,13 @@ export class LandingComponent implements OnInit {
   }
 
   selectGraphic(graphicId?: number) {
-    if (!graphicId) {
+    if (graphicId === undefined) { // explicit check because value can be 0 or 1
       this.currentCard = this.currentCard + 1 > 3
         ? 0
         : this.currentCard + 1;
     } else {
       this.currentCard = graphicId;
-      this.setNewInterval();
+      // this.setNewInterval();
     }
     // select new visible graphic
     this.cardVisible = {

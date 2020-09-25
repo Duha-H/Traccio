@@ -2,7 +2,7 @@
 
   <div class="card-parent card-visible" #card>
     <div class="landing-card card-1">
-      <img src="/assets/landing-1.svg" alt="" style="max-width: 1000px; width: -webkit-fill-available;">
+      <img *ngIf="!(resizeService.mobileSize$ | async)" src="/assets/landing-1.svg" alt="" style="max-width: 1000px; width: -webkit-fill-available;">
       <div class="landing-content">
         <img src="/assets/logo_traccio@2x.png" alt="traccio logo" style="max-width: 70%">
         <p>Say goodbye to dull text files and spreadsheets, track your job search the right way.</p>
@@ -19,8 +19,8 @@
         <p>traccio allows you to efficiently analyze and track your job search journey.</p>
       </div>
       <div class="card-img-group">
-        <img src="{{(resizeService.mobileSize$ | async) ? '/assets/mobile_journey_list.png' : '/assets/dashboard_light_desktop.svg'}}" alt="" class="{{(resizeService.mobileSize$ | async) ? 'card-img mobile' : 'card-img desktop'}}">
-        <img src="/assets/dashboard_light_mobile.svg" alt="" class="card-img mobile" >
+        <img src="{{(resizeService.mobileSize$ | async) ? '/assets/mobile_journey_list.png' : '/assets/landing-screenshot-medium.png'}}" alt="" class="{{(resizeService.mobileSize$ | async) ? 'card-img mobile' : 'card-img desktop'}}">
+        <!-- <img src="/assets/dashboard_light_mobile.svg" alt="" class="card-img mobile" > -->
       </div>
       
     </div>
@@ -78,10 +78,10 @@
   <div class="card-parent card-visible">
     <div class="landing-card card-4">
       <div class="landing-content">
-        <p style="font-size: 2em; font-weight: 700;">Ready to give Traccio a try?</p>
+        <p id="call-to-action">Ready to give Traccio a try?</p>
         <a class="header-btn" routerLink="/signup">Join now</a>
         <p>(it's free!)</p>
-        <a href="" routerLink="/about">Click here to learn more<img class="link-icon" src="/assets/icons/right_arrow.png" alt="arrow"></a>
+        <a href="" routerLink="/about">Click here to learn more<img class="link-icon" src="/assets/icons/info_icon.svg" style="color: var(--accent);" alt="arrow"></a>
         <a href="https://github.com/Duha-H/Traccio">Or check out the app's open source repository<img class="link-icon" src="/assets/icons/github_icon.png" alt="github logo"></a>
       </div>
     </div>

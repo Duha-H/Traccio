@@ -8,14 +8,27 @@ import {
   query,
   stagger,
   keyframes,
+  sequence,
 } from '@angular/animations';
 
 @Component({
   selector: 'graphic-dashboard',
-  templateUrl: './dashboard-graphic.component.html' ,
+  templateUrl: '/src/assets/landing-graphics/Dashboard.svg',
   styleUrls: ['../landing-cards.css', '../landing.component.css'],
   animations: [
     trigger('visible', [
+      state('start', style({})),
+      state('end', style({})),
+      transition('start => end', [
+        sequence([]),
+      ])
+    ]),
+
+
+
+
+
+    trigger('something-else', [
       state('hidden', style({
         opacity: 0.5,
       })),

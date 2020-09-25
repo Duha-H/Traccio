@@ -33,6 +33,7 @@ body {
 body {
   margin: 0;
   /* font-family: Roboto, "Helvetica Neue", sans-serif; */
+  /* "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace !important */
 }
 
 h1,
@@ -93,8 +94,10 @@ app-landing-wrapper {
 }
 
 app-landing, app-about {
-  overflow: auto;
-  max-width: 100%;
+  /* overflow: auto; */
+  /* max-width: 100%; */
+  width: 100%;
+  height: 100%;
 }
 
 app-wrapper app-about, app-wrapper app-info {
