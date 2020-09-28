@@ -5,9 +5,13 @@ import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from './shared.module';
 
+import { environment } from '../environments/environment';
 import { AmplifyService } from 'aws-amplify-angular';
 import { AuthModule } from './auth/auth.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 /** Material imports */
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -90,6 +94,9 @@ import { SafeHTMLPipe } from './views/info/safe-html.pipe';
     MatDatepickerModule,
     MatTabsModule,
     AuthModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
   ],
   providers: [
     AmplifyService,

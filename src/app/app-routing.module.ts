@@ -5,6 +5,7 @@ import { AuthGuardService as AuthGuard } from "./controllers/auth-guard.service"
 import { SignInGuard } from "./auth/guards/signin-guard.service";
 import { ConfirmSignUpGuard } from "./auth/guards/confirm-signup-guard.service";
 import { AccountRecoveryGuard } from "./auth/guards/recovery-guard.service";
+import { AngularFireAuthGuard, redirectLoggedInTo } from "@angular/fire/auth-guard";
 // Views
 import { LandingComponent } from "./views/landing/landing.component";
 import { SignInComponent } from "./auth/sign-in/sign-in.component";
@@ -21,7 +22,8 @@ const routes: Routes = [
   {
     path: "",
     component: LandingWrapperComponent,
-    canActivate: [SignInGuard],
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: () => redirectLoggedInTo(['home']) },
     children: [
       { path: "", component: LandingComponent },
       { path: "about", component: AboutComponent },
@@ -41,7 +43,7 @@ const routes: Routes = [
   },
   {
     path: "home",
-    canActivate: [AuthGuard],
+    canActivate: [AngularFireAuthGuard],
     component: AppWrapperComponent,
     children: [
       {

@@ -8,6 +8,7 @@ import { DEFAULT_PROFILE_UPDATE_CHECK, DEFAULT_PREFERENCES_UPDATE_CHECK } from '
 import { PreferencesStoreService } from 'src/app/controllers/preferences-store.service';
 import { ResizeService } from 'src/app/controllers/resize.service';
 import { NotificationService } from 'src/app/controllers/notification.service';
+import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
 
 @Component({
   selector: 'app-settings',
@@ -44,6 +45,7 @@ export class SettingsComponent implements OnInit {
     private preferencesStore: PreferencesStoreService,
     public rs: ResizeService,
     private notificationService: NotificationService,
+    private authWrapper: AuthWrapperService,
   ) { }
 
   ngOnInit() { }
@@ -97,7 +99,7 @@ export class SettingsComponent implements OnInit {
     newPassword: string,
     confirmPassword: string,
   }) {
-    const response = await this.userStore.changeUserPassword(
+    const response = await this.authWrapper.changePassword(
       passwordDetails.oldPassword,
       passwordDetails.newPassword,
       passwordDetails.confirmPassword

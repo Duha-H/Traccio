@@ -3,7 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: { // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    apiKey: "AIzaSyAXzXkhUc8BGjIUmG-MAsUoyg7yF7OfTEg",
+    authDomain: "traccio-0815.firebaseapp.com",
+    databaseURL: "https://traccio-0815.firebaseio.com",
+    projectId: "traccio-0815",
+    storageBucket: "traccio-0815.appspot.com",
+    messagingSenderId: "112166664394",
+    appId: "1:112166664394:web:8c24b1b963fd4f0f30dc33",
+    measurementId: "G-SBR31CTRRM"
+  },
 };
 
 /*

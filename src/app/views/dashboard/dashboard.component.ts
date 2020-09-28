@@ -71,13 +71,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.selectedJourney = this.dropdownContent.filter(entry => {
           return entry.value.id === journeyID;
         })[0];
-        if (!this.selectedJourney) {
+        if (!this.selectedJourney && this.dropdownContent[0]) {
           this.selectedJourney = this.dropdownContent[0];
           sessionStorage.setItem('dashboardJourney', this.selectedJourney.value.id);
-        }
-        this.currentYear = this.selectedJourney && this.selectedJourney.years[0]
+          this.currentYear = this.selectedJourney && this.selectedJourney.years[0]
           ? this.selectedJourney.years[this.selectedJourney.years.length - 1]
           : this.currentYear;
+        }
+
         if (this.selectedJourney) {
           this._setLineChartAxes(this.selectedJourney.frequencyData);
         }

@@ -3,6 +3,9 @@ import { AuthModule } from './auth.module';
 import { Auth } from 'aws-amplify';
 import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth';
 import { Response } from 'src/app/utils/response';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: AuthModule
@@ -14,26 +17,18 @@ export class AuthWrapperService {
     signedUp: false,
   };
 
-  constructor() { }
+  constructor(private fireAuth: AngularFireAuth, private fireStore: AngularFirestore) { }
 
   async currentAuthenticatedUser(): Promise<boolean> {
     let result = false;
-    try {
-      await Auth.currentAuthenticatedUser();
+    if (await this.fireAuth.currentUser) {
       result = true;
-    } catch (error) {
-      result = false;
     }
     return result;
   }
 
-  async getCurrentAuthenticatedUser(): Promise<any> {
-    try {
-      const user = await Auth.currentAuthenticatedUser();
-      return user;
-    } catch (error) {
-      return null;
-    }
+  async getCurrentAuthenticatedUser(): Promise<firebase.User | null> {
+    return await this.fireAuth.currentUser;
   }
 
   async signIn(email: string, password: string): Promise<Response> {
@@ -46,22 +41,22 @@ export class AuthWrapperService {
 
     try {
       // SUCCESS
-      await Auth.signIn(email, password);
+      await this.fireAuth.signInWithEmailAndPassword(email, password);
       this.authState.signedIn = true;
       this.authState.signedUp = false;
     } catch (error) {
       switch (error.code) {
-        case 'UserNotFoundException':
+        case 'auth/user-not-found':
           response.error('A user account with this email does not exist');
           break;
-        case 'InvalidParameterException':
-          response.error('All sign in fields must be filled');
+        case 'auth/invalid-email':
+          response.error('The email address specified is invalid');
           break;
-        case 'NotAuthorizedException':
+        case 'auth/wrong-password':
           response.error('Incorrect password');
           break;
-        case 'UserNotConfirmedException':
-          response.error('Looks like your email address was never verified, please verify it.');
+        case 'auth/user-disabled':
+          response.error('Looks like the account associated with this email address has been disabled.\nIf this is unexpected, please send an email to support@traccio.app to resolve this issue.');
           response.payload = error.code;
           this.authState.signedUp = true;
           this.authState.signedIn = false;
@@ -118,28 +113,37 @@ export class AuthWrapperService {
 
     try {
       // SUCCESS
-      const user = await Auth.signUp({
-        username: email,
-        password,
-        attributes: {
-          email,
-          given_name: firstName,
-          family_name: lastName,
-        },
+      const user = await this.fireAuth.createUserWithEmailAndPassword(email, password);
+      // send verification email
+      await user.user.sendEmailVerification({
+        url: 'http://localhost:4200/confirmsignup;success=true', // TODO: update later
+        handleCodeInApp: true,
       });
-      response.payload = user;
+      // add user info to database
+      await this.fireStore.collection('users').doc(user.user.uid).set({
+        firstName,
+        lastName,
+        email,
+        journeys: [],
+        theme: 'light',
+        palette: 'palette-0',
+        journeyInactive: 90,
+        appStale: 60,
+      });
+      // set response payload
+      response.payload = user.user;
       this.authState.signedUp = true;
       this.authState.signedIn = false;
     } catch (error) {
       switch (error.code) {
-        case 'InvalidParameterException':
+        case 'auth/email-already-in-use':
+          response.error('Looks like an account with this email address already exists.\nPlease specify a different email address.');
+          break;
+        case 'auth/invalid-email':
           response.error('A value you provided is either empty or invalid.\nMake sure that you\'ve provided valid values.');
           break;
-        case 'InvalidPasswordException':
-          response.error('The password you provided is invalid.\nMake sure that you provide a compliant password.');
-          break;
-        case 'UsernameExistsException':
-          response.error('Looks like an account with this email address already exists.\nPlease specify a different email address.');
+        case 'auth/weak-password':
+          response.error('Looks like the password provided is too weak, please provide a stronger password');
           break;
         default:
           console.error('AuthWrapper: unexpected signUp error:', error);
@@ -191,7 +195,12 @@ export class AuthWrapperService {
 
     try {
       // SUCCESS
-      await Auth.resendSignUp(email);
+      const user = await this.fireAuth.currentUser;
+      // send verification email
+      await user.sendEmailVerification({
+        url: 'http://localhost:4200/confirmsignup;success=true', // TODO: update later
+        handleCodeInApp: true,
+      });
       this.authState.signedIn = false;
       this.authState.signedUp = false;
     } catch (error) {
@@ -211,17 +220,19 @@ export class AuthWrapperService {
 
     try {
       // SUCCESS
-      await Auth.forgotPassword(email);
+      await this.fireAuth.sendPasswordResetEmail(email, {
+        url: 'http://localhost:4200/accountrecovery;state=resetSuccessful',
+        handleCodeInApp: true,
+      });
       this.authState.signedIn = false;
       this.authState.signedUp = false;
     } catch (error) {
       switch (error.code) {
-        case 'UserNotFoundException':
-          response.error('No user account found with the specified email address.\nMaybe double-check the email you provided?');
+        case 'auth/invalid-email':
+          response.error('The email address provided is invalid, make sure you provide a valid email address');
           break;
-        case 'UserNotConfirmedException':
-          // tslint:disable-next-line: max-line-length
-          response.error('Yikes, looks like your account was never successfully verified/confirmed.\nThis should not happen. Please reach out to <insert-support-email>, and provide your email address so we can sort this out.');
+        case 'auth/user-not-found':
+          response.error('No user account found with the specified email address.\nMaybe double-check the email you provided?');
           break;
         default:
           console.error('AuthWrapper: unexpected forgotPassword error:', error);
@@ -252,28 +263,27 @@ export class AuthWrapperService {
 
     try {
       // SUCCESS
-      await Auth.forgotPasswordSubmit(email, code, newPassword);
+      await this.fireAuth.confirmPasswordReset(code, newPassword);
       this.authState.signedIn = false;
       this.authState.signedUp = false;
     } catch (error) {
       switch (error.code) {
-        case 'CodeMismatchException':
+        case 'auth/invalid-action-code':
           response.error('Looks like the code you provided is incorrect, please try again.');
           break;
-        case 'ExpiredCodeException':
+        case 'auth/expired-action-code':
           this.forgotPassword(email);
           response.error('Looks like the code you provided is no longer valid.\n A new code was sent to your email, enter the new code.');
           break;
-        case 'InvalidPasswordException':
-        case 'InvalidParameterException':
-          response.error('The password you provided is invalid.\nMake sure you provide a compliant password.');
+        case 'auth/user-disabled':
+          response.error('Looks like the account associated with this email address has been disabled.\nIf this is unexpected, please send an email to support@traccio.app to resolve this issue.');
+          response.payload = error.code;
           break;
-        case 'TooManyFailedAttemptsException':
-          response.error('Looks like you\'ve made too many unsuccessful recovery attempts.\nPlease try again at a later time.');
+        case 'auth/weak-password':
+          response.error('Looks like the password provided is too weak, please provide a stronger password');
           break;
-        case 'UserNotConfirmedException':
-          // tslint:disable-next-line: max-line-length
-          response.error('Yikes, looks like your account was never successfully verified/confirmed.\nThis should not happen. Please reach out to <insert-support-email>, and provide your email address so we can sort this out.');
+        case 'auth/user-not-found':
+          response.error('A user account with this email does not exist');
           break;
         default:
           console.error('AuthWrapper: unexpected forgotPassword error:', error);
@@ -290,11 +300,11 @@ export class AuthWrapperService {
 
     try {
       // SUCCESS
-      await Auth.signOut();
+      await this.fireAuth.signOut();
       this.authState.signedIn = false;
       this.authState.signedUp = false;
     } catch (error) {
-      console.error('AuthWrapper: unexpected forgotPassword error:', error);
+      console.error('AuthWrapper: unexpected signOut error:', error);
       response.error('An unexpected error occured, please try again');
     }
 
@@ -411,33 +421,19 @@ export class AuthWrapperService {
       return response;
     }
 
+    const user = await this.fireAuth.currentUser;
+    const reauth = await this.reauthenticateUser(user.email, oldPassword);
+    if (!reauth.successful) {
+      response.error('Your account could not be reauthenticated. Make sure you\'ve entered the correct password.');
+      return response;
+    }
     try {
       // SUCCESS
-      const user = await this.getCurrentAuthenticatedUser();
-      await Auth.changePassword(user, oldPassword, newPassword);
+      await user.updatePassword(newPassword);
     } catch (error) {
       switch (error.code) {
-        case 'InvalidParameterException':
-        case 'InvalidPasswordException':
-          response.error('The new password you provided is invalid.\nMake sure that you provide a compliant password.');
-          break;
-        case 'PasswordResetRequiredException':
-          // tslint:disable-next-line: max-line-length
-          response.error('Looks like your password needs to be updated before any changes can be applied. Please reset your password first then try again');
-          break;
-        case 'NotAuthorizedException':
-          response.error('The old password provided is incorrect.\nPlease try again.');
-          break;
-        case 'TooManyRequestsException':
-          response.error('An invalid attempt was made too many times.\nPlease try again later.');
-          break;
-        case 'UserNotConfirmedException':
-          // tslint:disable-next-line: max-line-length
-          response.error('Looks like your account was never successfully verified/confirmed.\nPlease verify your email address first before proceeding.');
-          break;
-        case 'UserNotFoundException':
-          response.error('A user account with the email address you provided does not exist.');
-          console.error('AuthError: changePassword user not found, this should not happen.', error);
+        case 'auth/weak-password':
+          response.error('Looks like the password provided is too weak, please provide a stronger password');
           break;
         default:
           console.error('AuthWrapper: unexpected forgotPassword error:', error);
@@ -448,6 +444,40 @@ export class AuthWrapperService {
 
     return response;
   }
+
+  async reauthenticateUser(email: string, password: string) {
+    const response = new Response();
+
+    try {
+      // SUCCESS
+      const user = await this.fireAuth.currentUser;
+      const credentials = firebase.auth.EmailAuthProvider.credential(email, password);
+      const result = await user.reauthenticateWithCredential(credentials);
+      console.log(result);
+    } catch(error) {
+      switch(error.code) {
+        case 'auth/user-mismatch':
+        case 'auth/wrong-password':
+          response.error('The old password provided is incorrect.\nPlease try again.');
+          break;
+        case 'auth/invalid-credential':
+        case 'auth/invalid-email':
+          response.error('The email address provided is invalid, make sure you provide a valid email address');
+          break;
+        case 'auth/user-not-found':
+          response.error('A user account with the email address you provided does not exist.');
+          console.error('AuthError: changePassword user not found, this should not happen.', error);
+          break;
+        default:
+          console.error('AuthWrapper: unexpected reauthenticateUser error:', error);
+          response.error('An unexpected error occured, please try again');
+          break;
+      }
+    }
+
+    return response;
+  }
+
 }
 
 export interface AuthState {

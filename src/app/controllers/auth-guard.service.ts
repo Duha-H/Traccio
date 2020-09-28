@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
 import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
-import { AmplifyService } from "aws-amplify-angular";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuardService implements CanActivate {
 
-  constructor(public router: Router, private authWrapper: AuthWrapperService, private amplifyService: AmplifyService) { }
+  constructor(public router: Router, private authWrapper: AuthWrapperService) { }
 
   async canActivate(): Promise<boolean> {
     const authedUser = await this.authWrapper.currentAuthenticatedUser();
@@ -20,7 +19,5 @@ export class AuthGuardService implements CanActivate {
       this.router.navigate(['']);
       return false;
     }
-    // console.log(this.amplifyService.authState();
-    // return true;
   }
 }

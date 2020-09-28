@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "traccio-0815": {
+      "hosting": {
+        "Tracker": [
+          "traccio-0815"
+        ]
+      }
+    }
+  }
+}

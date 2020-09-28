@@ -15,7 +15,7 @@ import { ResizeService } from 'src/app/controllers/resize.service';
 export class ProfileSettingsComponent implements OnInit {
 
   ATTRIBS = STATE_ATTRIBS;
-  user: User;
+  user: User = new User();
   updateCheck = Object.assign({}, DEFAULT_PROFILE_UPDATE_CHECK); // easier lookup for updated attribs
   displayVerifyOverlay = false;
   verificationCode = '';
@@ -40,6 +40,7 @@ export class ProfileSettingsComponent implements OnInit {
   ngOnInit() {
     this.userStore.user.subscribe(user => {
       this.user = user;
+      console.log(user);
     });
   }
 

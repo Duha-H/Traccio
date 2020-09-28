@@ -61,7 +61,12 @@ export class SignUpComponent implements OnInit {
     setTimeout(() => {
       this.submitButton.nativeElement.classList.remove('pulse');
     }, 200);
-    // execure sign up
+    if (this.password.invalid) { // check for password validity (here for now)
+      this.error = 'The password you provided is invalid.\nMake sure that you provide a compliant password.';
+      return;
+    }
+
+    // execute sign up
     const response = await this.authWrapper.signUp(
       this.firstName.value,
       this.lastName.value,
@@ -70,17 +75,18 @@ export class SignUpComponent implements OnInit {
       this.confirmPassword.value
     );
     if (response.successful && response.payload) {
-      const user = response.payload;
+      const user: firebase.User = response.payload;
       this.userStore.setUser(
         this.firstName.value,
         this.lastName.value,
         this.email.value,
-        user.userSub,
-        user.userConfirmed
+        user.uid,
+        user.emailVerified
       );
       this.router.navigate(['confirmsignup']);
     } else {
       this.error = response.message;
+      console.log('error', response);
     }
   }
 

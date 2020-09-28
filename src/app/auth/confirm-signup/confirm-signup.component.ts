@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserStoreService } from 'src/app/models/user-store.service';
 import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
 
@@ -24,6 +24,7 @@ export class ConfirmSignupComponent implements OnInit {
   }
 
   constructor(
+    private route: ActivatedRoute,
     private router: Router,
     private userStore: UserStoreService,
     private authWrapper: AuthWrapperService
@@ -36,6 +37,11 @@ export class ConfirmSignupComponent implements OnInit {
     document.addEventListener('keyup', (event) => {
       if (event.keyCode === 13) {
         this.submitButton.nativeElement.click();
+      }
+    });
+    this.route.params.subscribe(params => {
+      if (params.success) {
+        this.success = true;
       }
     });
   }

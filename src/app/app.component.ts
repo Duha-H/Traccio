@@ -5,6 +5,8 @@ import { UserStoreService } from './models/user-store.service';
 import { AuthWrapperService } from './auth/auth-wrapper.service';
 import { PreferencesStoreService } from './controllers/preferences-store.service';
 import { LoaderService } from './controllers/loader.service';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: "app-root",
@@ -19,6 +21,8 @@ export class AppComponent implements OnInit {
 
   constructor(
     public amplifyService: AmplifyService,
+    private fireAuth: AngularFireAuth,
+    private fireStore: AngularFirestore,
     private userStore: UserStoreService,
     public router: Router,
     private authWrapper: AuthWrapperService,
@@ -28,35 +32,30 @@ export class AppComponent implements OnInit {
   async ngOnInit() {
     this.prefStore.reset();
     try {
-      this.amplifyService.authStateChange$.subscribe(async (authState) => {
-        this.signedIn = authState.state === "signedIn";
+      this.fireAuth.authState.subscribe(async user => { // fireAuth.authState is only triggered on sign-in/sign-out
+        this.signedIn = user ? true : false;
+        // this.signedIn = authState.state === "signedIn";
         console.log("state changed", this.signedIn);
         if (!this.signedIn) {
           this.user = null;
           this.authWrapper.authState.signedIn = false;
         } else {
-          this.user = authState.user;
+          this.user = user;
           this.authWrapper.authState.signedIn = true;
           // set user attributes and navigate to dashboard
-          let verified;
-          let identityProvder: 'DEFAULT' | 'GOOGLE' = 'DEFAULT';
-          if (this.user.attributes.identities) {
-            verified = true; // if user is provided by a federated identity, we don't care if they're verified
-            identityProvder = 'GOOGLE';
-          } else {
-            verified = this.user.attributes.email_verified;
-          }
-          await this.userStore.setUser(
-            this.user.attributes.given_name,
-            this.user.attributes.family_name,
-            this.user.attributes.sub,
-            this.user.attributes.email,
-            verified,
+          const identityProvder = 'DEFAULT';
+          const userInfo = (await this.fireStore.collection('users').doc(user.uid).get().toPromise()).data();
+          this.userStore.setUser(
+            userInfo.firstName,
+            userInfo.lastName,
+            user.uid,
+            user.email,
+            user.emailVerified,
             identityProvder,
           );
           this.userStore.loadData();
           // retrieve and set user preferences
-          this.prefStore.init(this.user.attributes.sub);
+          // this.prefStore.init(user.uid);
           console.log("App init: user authenticated and data fetched");
           // this.router.navigate(['home']);
         }

@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
 
 @Component({
@@ -14,9 +14,18 @@ export class AccountRecoveryComponent implements OnInit {
   email = '';
   state: 'forgotPassword' | 'newPassword' | 'resetSuccessful' = 'forgotPassword';
 
-  constructor(private router: Router, private authWrapper: AuthWrapperService) { }
+  constructor(
+    private router: Router,
+    private authWrapper: AuthWrapperService,
+    private route: ActivatedRoute,
+  ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      if (params.state) {
+        this.state = params.state;
+      }
+    });
   }
 
   toggleView(state: boolean) {

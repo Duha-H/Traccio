@@ -240,6 +240,10 @@
   </div>
 
   <ng-template class="dashboard-content" #elseContent>
+    <div class="dashboard-header">
+      <h3>Hi there, {{ name }}!</h3>
+      <div class="spacer"></div>
+    </div>
     <div class="placeholder-text">
       <h4>Get started by adding journeys to track them here!</h4>
       <button class="add-btn" title="Add journey" (click)="router.navigate(['/home/journeys', { displayDrawer: true }])">
