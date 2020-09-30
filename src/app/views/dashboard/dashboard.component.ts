@@ -65,6 +65,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.name = user.firstName;
       });
       this.journeySub = this.userStore.activeJourneys.subscribe(activeJourneys => {
+        console.log('active journeys logged');
         this.activeJourneys = activeJourneys;
         this.setDropdownContent();
         const journeyID = sessionStorage.getItem('dashboardJourney');

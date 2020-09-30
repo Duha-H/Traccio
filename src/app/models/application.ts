@@ -87,7 +87,7 @@ export class Application {
 		});
 	}
 
-	getGQLInput(wishlist?: boolean) {
+	getGQLInput(wishlist?: boolean): ApplicationInput {
 		const input = {
 			id: this._id,
 			company: this._companyName,
@@ -147,3 +147,5 @@ export class Application {
 		});
 	}
 }
+
+

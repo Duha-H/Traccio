@@ -52,7 +52,7 @@ export class JourneyListComponent implements OnInit, OnDestroy {
         this.displayDrawer = true;
       }
     });
-    this.userStore.loadData();
+    this.userStore.updateJourneyData();
     const storedSliderIdx = sessionStorage.getItem('journeySliderIdx');
     if (storedSliderIdx) {
       this.sliderIdx = +storedSliderIdx;

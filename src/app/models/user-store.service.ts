@@ -130,9 +130,10 @@ export class UserStoreService {
       });
     // data = this.placeholderJourneys; // TEMP
     this.updateJourneyData(data);
+    console.log('DATA WHEN COLLECTED', data);
+    // this.loadData();
+    await this.fetchWishlistApps();
     this.dataManager.collectData(data);
-    this.loadData();
-    this.fetchWishlistApps();
   }
 
   async fetchWishlistApps() {
@@ -150,14 +151,8 @@ export class UserStoreService {
    * Observable Update Trigger Methods
    */
 
-  loadData() {
-    // Fires .next() on _journeys and _activeJourneys observable to update ("refresh") data
-    this._journeys.next(this._journeys.getValue());
-    this._activeJourneys.next(this.getActiveJourneys());
-  }
-
   updateJourneyData(newJourneys?: { [key: string]: Journey }) {
-    // this.dataUpdated = true;
+    // Fires .next() on _journeys and _activeJourneys observable to update ("refresh") data
     if (newJourneys) {
       this._journeys.next(newJourneys);
       this._activeJourneys.next(this.getActiveJourneys());
@@ -264,7 +259,7 @@ export class UserStoreService {
   }
 
   async removeJourney(journeyid: string, itemRef?: ElementRef) {
-    const response = await this.controller.removeJourney(this.getJourney(journeyid));
+    const response = await this.controller.removeJourney(this.getJourney(journeyid), this._user.value.userid);
     if (!response.successful) {
       return response;
     }
@@ -321,7 +316,7 @@ export class UserStoreService {
     const appID = updatedApplication.id;
     const journey = this.getJourney(journeyid);
     const existingApplication = this.getApplication(journeyid, appID);
-    const response = await this.controller.updateApplication(updatedApplication);
+    const response = await this.controller.updateApplication(updatedApplication, journeyid);
     if (!response.successful) {
       return response;
     }
@@ -342,7 +337,7 @@ export class UserStoreService {
 
   async removeApplication(journeyid: string, appid: string) {
     const journey = this.getJourney(journeyid);
-    const response = await this.controller.removeApplication(appid);
+    const response = await this.controller.removeApplication(appid, journeyid);
     if (!response.successful) {
       return response;
     }
@@ -368,7 +363,7 @@ export class UserStoreService {
     }
     const appID = this._getNewAppID();
     newApplication.id = appID;
-    const response = await this.controller.addNewWishlistApplication(newApplication);
+    const response = await this.controller.addNewWishlistApplication(newApplication, this._user.value.userid);
     if (!response.successful) {
       return response;
     }
@@ -381,7 +376,7 @@ export class UserStoreService {
   }
 
   async updateWishlistApplication(updatedApplication: Application) {
-    const response = await this.controller.updateWishlistApplication(updatedApplication);
+    const response = await this.controller.updateWishlistApplication(updatedApplication, this._user.value.userid);
     if (!response.successful) {
       return response;
     }
@@ -394,7 +389,7 @@ export class UserStoreService {
   }
 
   async removeWishlistApplication(appid: string) {
-    const response = await this.controller.removeWishlistApplication(appid);
+    const response = await this.controller.removeWishlistApplication(appid, this._user.value.userid);
     if (!response.successful) {
       return response;
     }

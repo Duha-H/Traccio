@@ -53,9 +53,9 @@ export class AppComponent implements OnInit {
             user.emailVerified,
             identityProvder,
           );
-          this.userStore.loadData();
+          this.userStore.updateJourneyData();
           // retrieve and set user preferences
-          // this.prefStore.init(user.uid);
+          this.prefStore.init(user.uid);
           console.log("App init: user authenticated and data fetched");
           // this.router.navigate(['home']);
         }

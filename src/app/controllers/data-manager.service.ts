@@ -42,6 +42,9 @@ export class DataManagerService {
   }
 
   collectData(journeys: { [key: string]: any }) {
+    if (!journeys) {
+      return;
+    }
     // called for initial data setup
     for (const id of Object.keys(journeys)) {
       const { calendarDatum, statusDatum, frequencyDatum } = this._extractData(
@@ -51,6 +54,7 @@ export class DataManagerService {
       this.statusData[id] = statusDatum;
       this.frequencyData[id] = frequencyDatum;
     }
+    console.log('COLLECTED CALENDAR', this.calendarData);
   }
 
   addJourney(journey: Journey) {
@@ -69,6 +73,7 @@ export class DataManagerService {
   }
 
   addApplication(journeyid: string, app: Application) {
+    console.log(journeyid, app);
     const calendarDatum = this.calendarData[journeyid];
     const statusDatum = this.statusData[journeyid];
     const dateString = utils.getDateString(app.appDate);

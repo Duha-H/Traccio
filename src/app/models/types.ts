@@ -17,3 +17,21 @@ export interface TimelineDatum {
   status: string;
   date: Date;
 }
+
+export interface JourneyInput {
+	title: string;
+	id: string;
+	startDate: string;
+	endDate?: string | undefined;
+	active: boolean;
+	applications: { [key: string]: ApplicationInput };
+}
+
+export interface UserInput {
+	id: string;
+	firstName: string;
+	lastName: string;
+	email: string;
+	verified: boolean;
+	wishlist?: { [key: string]: ApplicationInput };
+}

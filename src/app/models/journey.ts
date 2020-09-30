@@ -1,6 +1,7 @@
 import { Application } from './application';
 import { MONTH_VALS } from './constants';
 import * as utils from 'src/app/controllers/utils';
+import { JourneyInput } from './types';
 
 // Object representation of a Journey
 export class Journey {
@@ -63,10 +64,13 @@ export class Journey {
 		// update database
 	}
 
-	getGQLInput() {
+	getGQLInput(): JourneyInput {
 		// format null-able values
 		const endDateFormatted = this._endDate ? utils.getDateString(this._endDate) : '';
-		const applicationsFormatted = this._applications.map(app => app.getGQLInput());
+		const applicationsFormatted = {}; // create a map of application IDs to formatted applications
+		this._applications.forEach(app => {
+			applicationsFormatted[app.id] = app.getGQLInput();
+		});
 
 		const input = {
 			id: this._id,
@@ -74,6 +78,7 @@ export class Journey {
 			startDate: utils.getDateString(this._startDate), // "YYYY-MM-DD"
 			endDate: endDateFormatted,
 			active: this._active,
+			applications: applicationsFormatted,
 		};
 		return input;
 	}

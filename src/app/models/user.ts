@@ -51,7 +51,7 @@ export class User {
 			id: this._userid,
 			firstName: this._firstName,
 			lastName: this._lastName
-		}
+		};
 		return input;
 	}
 }
