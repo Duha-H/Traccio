@@ -19,7 +19,7 @@
 
   <div *ngIf="(userStore.journeys | async).length != 0; else emptyJourneys" style="height: 70%;">
     <div class="journey-grid" *ngIf="!(rs.mobileSize$ | async); else mobileSlider">
-      <a *ngFor="let journey of userStore.journeys | async; let i = index" href=""
+      <a *ngFor="let journey of (userStore.journeys | async); let i = index" href=""
         [routerLink]="selectionMode ? [] : ['/home/journeys', journey.id]"
         (click)="deleteButton ? removeJourney(journey, i) : ''" style="text-decoration: none;" #journeyItem>
         <app-rect-item class="journey-item" [linkedJourney]="journey"
@@ -30,7 +30,7 @@
     </div>
     <ng-template #mobileSlider>
       <slider-container [content]="(userStore.journeys | async)" (idxChange)="onSwipe($event)" [idx]="sliderIdx">
-        <a *ngFor="let journey of userStore.journeys | async; let i = index" href=""
+        <a *ngFor="let journey of (userStore.journeys | async); let i = index" href=""
           [routerLink]="selectionMode || sliderIdx != i ? [] : ['/home/journeys', journey.id]"
           (click)="deleteButton ? removeJourney(journey, i) : journeyItemClick(i)"
           style="text-decoration: none; margin: auto 0px; transform: {{ i == sliderIdx ? 'scale(1.15)' : ( i > sliderIdx ? 'rotateY(-50deg)' : 'rotateY(50deg)' ) }};"

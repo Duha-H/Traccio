@@ -6,6 +6,11 @@ export class User {
 	private _email = '';
 	private _verified = false;
 	private _identityProvider: 'DEFAULT' | 'GOOGLE' = 'DEFAULT';
+	private _theme: 'light' | 'dark' = 'light';
+	private _palette: 'palette-0' | 'palette-1' | 'palette-2' | 'palette-3'
+		= 'palette-0';
+	private _journeyInactive = 90;
+	private _appStale = 90;
 
   constructor(userparams?: { [key: string]: any }) {
 		if (userparams) {
@@ -38,11 +43,23 @@ export class User {
 	get identityProvider() { return this._identityProvider; }
 	set identityProvider(provider: 'DEFAULT' | 'GOOGLE') { this._identityProvider = provider; }
 
+	get theme() { return this._theme; }
+	set theme(theme: 'light' | 'dark') { this._theme = theme; }
+
+	get palette() { return this._palette; }
+	set palette(palette: 'palette-0' | 'palette-1' | 'palette-2' | 'palette-3') { this._palette = palette; }
+
+	get journeyInactive() { return this._journeyInactive; }
+	set journeyInactive(value: number) { this._journeyInactive = value; }
+
+	get appStale() { return this._appStale; }
+	set appStale(value: number) { this._appStale = value; }
+
 	isDefined() {
 		return (this._firstName && this._lastName && this._userid);
 	}
 
-	notVerified() {
+	isVerified() {
 		return this._verified;
 	}
 

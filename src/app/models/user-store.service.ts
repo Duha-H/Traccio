@@ -4,7 +4,7 @@ import { Journey } from "./journey";
 import * as mock from "./mock-journeys";
 import * as mockApps from "./mock-applications";
 import { Application } from "./application";
-import { ApplicationInput } from "src/app/models/types";
+import { ApplicationInput, UserInput } from "src/app/models/types";
 import { UserStoreControllerService } from "src/app/controllers/user-store-controller.service";
 import { Observable } from "rxjs/Observable";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
@@ -13,6 +13,7 @@ import { DataManagerService } from "src/app/controllers/data-manager.service";
 import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
 import { FormattedFrequencyData } from 'src/app/controllers/types';
 import { Response } from '../utils/response';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: "root",
@@ -30,11 +31,11 @@ export class UserStoreService {
   // Not exposing _journeys observer to prevent clients
   // of UserStoreService from directly updating values
   // public readonly journeys: Observable<{[key: string]: Journey}> = this._journeys.asObservable();
-  private _journeys: BehaviorSubject<{
+  public _journeys: BehaviorSubject<{
     [key: string]: Journey;
   }> = new BehaviorSubject<{ [key: string]: Journey }>({});
   public readonly journeys: Observable<Journey[]> = this._journeys.pipe(
-    map((entry) => Object.values(entry).reverse())
+    map(entry => Object.values(entry))
   );
 
   private _activeJourneys: BehaviorSubject<Journey[]> = new BehaviorSubject<
@@ -54,7 +55,8 @@ export class UserStoreService {
     private controller: UserStoreControllerService,
     private dataManager: DataManagerService,
     private authWrapper: AuthWrapperService,
-  ) {}
+    private firestore: AngularFirestore,
+  ) { }
 
   /**
    * Initial Setup Methods
@@ -62,16 +64,15 @@ export class UserStoreService {
 
   setUser(firstName: string, lastName: string, id: string, email: string, verified: boolean, identityProvider?: 'DEFAULT' | 'GOOGLE') {
     const newUser = new User();
-    newUser.firstName = firstName;
-    newUser.lastName = lastName;
     newUser.userid = id;
-    newUser.email = email;
-    newUser.verified = verified;
-    if (identityProvider) {
-      newUser.identityProvider = identityProvider;
-    }
+    this.firestore.collection('users').doc<UserInput>(id).valueChanges().subscribe(value => {
+      newUser.firstName = value.firstName;
+      newUser.lastName = value.lastName;
+      newUser.email = value.email;
+      newUser.verified = verified;
+      newUser.identityProvider = identityProvider ? identityProvider : 'DEFAULT';
+    });
     this._user.next(newUser);
-    console.log('UserStore: user verified:', verified);
     this.fetchData();
   }
 
@@ -80,16 +81,10 @@ export class UserStoreService {
   }) {
     // On success, updated CognitoUser is returned in the response's payload
     // On failure, an error code is returned in the response's payload
-    const response = await this.authWrapper.updateUserAttributes(updates);
+    const response = await this.controller.updateUserAttributes(this._user.value.userid, updates);
     if (response.successful) {
-      const updatedUser = this._user.getValue();
-      updatedUser.firstName = response.payload.attributes.given_name;
-      updatedUser.lastName = response.payload.attributes.family_name;
-      updatedUser.email = response.payload.attributes.email;
-      if (updates.email) { // if the user's email has been updated
-        updatedUser.verified = false; // expect verification flow
-        console.log('UserStore: email updated and not verified');
-      }
+      const updatedUser = Object.assign(this._user.getValue(), updates);
+      // TODO: handle case where email is updated
       this._user.next(updatedUser);
     } else {
       console.log('UserStore: attributes not updated:', response.payload);
@@ -117,23 +112,29 @@ export class UserStoreService {
   }
 
   async fetchData() {
-    // Called on app init
-    // Performs API calls to fetch user data
-    let data = {};
+    /**
+     * Potentially look into turning it into an SPA, or somehow
+     * figure out a way to collect data offline
+     * ALSO catch an offline client error
+     */
+    await this.fetchUserJourneys();
+    await this.fetchWishlistApps();
+  }
+
+  async fetchUserJourneys() {
     await this.controller.fetchUserJourneys(this._user.getValue().userid)
       .then(response => {
         if (response.successful) {
-          data = response.payload;
+          this._journeys.next(response.payload);
+          const activeJourneyList = Object.values(this._journeys.getValue()).filter(journey => journey.active);
+          this._activeJourneys.next(activeJourneyList);
+          const activeJourneyMap: {[key: string]: Journey} = {};
+          Object.values(this._journeys.getValue()).map((journey: Journey) => activeJourneyMap[journey.id] = journey);
+          this.dataManager.collectData(activeJourneyMap);
         } else {
           return response;
         }
       });
-    // data = this.placeholderJourneys; // TEMP
-    this.updateJourneyData(data);
-    console.log('DATA WHEN COLLECTED', data);
-    // this.loadData();
-    await this.fetchWishlistApps();
-    this.dataManager.collectData(data);
   }
 
   async fetchWishlistApps() {
@@ -155,11 +156,10 @@ export class UserStoreService {
     // Fires .next() on _journeys and _activeJourneys observable to update ("refresh") data
     if (newJourneys) {
       this._journeys.next(newJourneys);
-      this._activeJourneys.next(this.getActiveJourneys());
     } else {
       this._journeys.next(this._journeys.getValue());
-      this._activeJourneys.next(this.getActiveJourneys());
     }
+    this._activeJourneys.next(this.getActiveJourneys());
   }
 
   clearData() {

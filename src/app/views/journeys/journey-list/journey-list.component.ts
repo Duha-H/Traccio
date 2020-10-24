@@ -8,6 +8,7 @@ import { SliderContainerComponent } from 'src/app/shared-components/slider-conta
 import { NotificationService } from 'src/app/controllers/notification.service';
 import { Route } from '@angular/compiler/src/core';
 import { Subscription } from 'rxjs';
+import { map } from 'rxjs/operators/map';
 
 @Component({
   selector: "app-journey-list",
@@ -17,13 +18,14 @@ import { Subscription } from 'rxjs';
 export class JourneyListComponent implements OnInit, OnDestroy {
 
   currJourney: Journey = null;
-  journeys: Observable<Journey[]>;
+  journeys: Journey[] = [];
   editButton = false;
   deleteButton = false;
   selectionMode = false;
   sliderIdx = 0;
   swipeOffset = 0;
   routeSub: Subscription;
+  journeySub: Subscription;
   journeyList: QueryList<ElementRef>;
   @Input() displayDrawer = false;
   @ViewChild(SliderContainerComponent) sliderContainer: SliderContainerComponent;
@@ -52,7 +54,15 @@ export class JourneyListComponent implements OnInit, OnDestroy {
         this.displayDrawer = true;
       }
     });
-    this.userStore.updateJourneyData();
+    // this.userStore.journeys.subscribe(journeys => {
+    //   this.journeys = journeys;
+    //   console.log('!!! journeys fired:', this.journeys);
+    // });
+    // this.journeys = Object.values(this.userStore._journeys.getValue());
+    this.journeySub = this.userStore.journeys.subscribe(journeys => {
+      this.journeys = journeys;
+    });
+    // this.userStore.updateJourneyData();
     const storedSliderIdx = sessionStorage.getItem('journeySliderIdx');
     if (storedSliderIdx) {
       this.sliderIdx = +storedSliderIdx;

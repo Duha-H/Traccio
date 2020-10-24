@@ -15,6 +15,7 @@ import { ArrayFormatterPipe } from 'src/app/utils/array-formatter.pipe';
 import { DatumValue } from '@nivo/line';
 import { PieDatum } from '@nivo/pie';
 import { LoaderService } from 'src/app/controllers/loader.service';
+import { map } from 'rxjs/operators/map';
 
 @Component({
   selector: "app-dashboard",
@@ -64,25 +65,22 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.userStore.user.subscribe(user => {
         this.name = user.firstName;
       });
-      this.journeySub = this.userStore.activeJourneys.subscribe(activeJourneys => {
-        console.log('active journeys logged');
-        this.activeJourneys = activeJourneys;
+      this.journeySub = this.userStore._journeys.pipe(map(journey => Object.values(journey))).subscribe(journeys => {
+        this.activeJourneys = journeys.filter(journey => journey.active);
         this.setDropdownContent();
         const journeyID = sessionStorage.getItem('dashboardJourney');
-        this.selectedJourney = this.dropdownContent.filter(entry => {
-          return entry.value.id === journeyID;
-        })[0];
-        if (!this.selectedJourney && this.dropdownContent[0]) {
-          this.selectedJourney = this.dropdownContent[0];
-          sessionStorage.setItem('dashboardJourney', this.selectedJourney.value.id);
-          this.currentYear = this.selectedJourney && this.selectedJourney.years[0]
-          ? this.selectedJourney.years[this.selectedJourney.years.length - 1]
-          : this.currentYear;
+        let currSelection = this.dropdownContent.filter(entry => entry.value.id === journeyID)[0];
+        if (!currSelection && this.dropdownContent[0]) { // no ID stored in local storage, or journey was removed
+          currSelection = this.dropdownContent[0];
         }
 
-        if (this.selectedJourney) {
+        if (currSelection) {
+          this.onJourneySelect(currSelection);
           this._setLineChartAxes(this.selectedJourney.frequencyData);
+        } else {
+          console.log('No journey selection available');
         }
+
       });
       this.prefSub = this.prefStore.preferences.subscribe(preferences => {
         this.theme = preferences.theme;
@@ -121,9 +119,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.dropdownContent = newContent;
   }
 
-  onJourneySelect() {
+  onJourneySelect(selection?: JourneyDropdownItem) {
+    if (selection) {
+      this.selectedJourney = selection;
+    }
     this.currentYear = this.selectedJourney.years[0]
-      ? this.selectedJourney.years[0]
+      ? this.selectedJourney.years[this.selectedJourney.years.length - 1]
       : new Date().getUTCFullYear().toString();
     sessionStorage.setItem('dashboardJourney', this.selectedJourney.value.id);
   }

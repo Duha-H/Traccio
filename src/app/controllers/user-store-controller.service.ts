@@ -2,11 +2,14 @@ import { Injectable } from '@angular/core';
 import { APIService } from 'src/app/traccio-api.service';
 import { Journey } from 'src/app/models/journey';
 import { Application } from 'src/app/models/application';
-import { ApplicationInput, UserInput } from 'src/app/models/types';
+import { ApplicationInput, JourneyInput, UserInput } from 'src/app/models/types';
 import { Response } from '../utils/response';
 import { LoaderService } from './loader.service';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
+import { User } from '../models/user';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs/Observable';
 
 
 const USER_COLLECTION = 'users';
@@ -17,11 +20,16 @@ const JOURNEY_COLLECTION = 'user-journeys';
 })
 export class UserStoreControllerService {
 
+  userCollection: AngularFirestoreCollection<UserInput>;
+  journeyCollection: AngularFirestoreCollection<JourneyInput>;
   constructor(
     private api: APIService,
     private loaderService: LoaderService,
     private firestore: AngularFirestore,
-  ) { }
+  ) {
+    this.userCollection = this.firestore.collection<UserInput>(USER_COLLECTION);
+    this.journeyCollection = this.firestore.collection<JourneyInput>(JOURNEY_COLLECTION);
+  }
 
   async fetchPrefData(userid: string): Promise<{
     theme: string,
@@ -34,7 +42,7 @@ export class UserStoreControllerService {
     let journeyInactive = 90;
     let appStale = 60;
     this.loaderService.setLoadingState(true);
-    await this.firestore.collection(USER_COLLECTION).doc(userid).get().toPromise()
+    await this.userCollection.doc(userid).get().toPromise()
       .then(result => {
         const data = result.data();
         theme = data.theme;
@@ -53,9 +61,19 @@ export class UserStoreControllerService {
     };
   }
 
+  async updateUserAttributes(userid: string, updates: { [key: string]: any }) {
+    const response = new Response();
+    await this.userCollection.doc(userid).update(updates)
+      .catch(error => {
+        console.log('Error updating user attributes:', error);
+        response.error('An error occured while updating your profile attributes, please try again');
+      });
+    return response;
+  }
+
   async updateTheme(userid: string, updatedTheme: string) {
     const response = new Response();
-    await this.firestore.collection(USER_COLLECTION).doc(userid).update({
+    await this.userCollection.doc(userid).update({
       theme: updatedTheme,
     }).then(value => {
       response.payload = value;
@@ -68,7 +86,7 @@ export class UserStoreControllerService {
 
   async updatePalette(userid: string, updatedPalette: string) {
     const response = new Response();
-    await this.firestore.collection(USER_COLLECTION).doc(userid).update({
+    await this.userCollection.doc(userid).update({
       palette: updatedPalette,
     }).then(value => {
       response.payload = value;
@@ -81,7 +99,7 @@ export class UserStoreControllerService {
 
   async updateJourneyInactive(userid: string, newValue: number) {
     const response = new Response();
-    await this.firestore.collection(USER_COLLECTION).doc(userid).update({
+    await this.userCollection.doc(userid).update({
       journeyInactive: newValue,
     }).then(value => {
       response.payload = value;
@@ -94,7 +112,7 @@ export class UserStoreControllerService {
 
   async updateAppStale(userid: string, newValue: number) {
     const response = new Response();
-    await this.firestore.collection(USER_COLLECTION).doc(userid).update({
+    await this.userCollection.doc(userid).update({
       appStale: newValue,
     }).then(value => {
       response.payload = value;
@@ -105,56 +123,83 @@ export class UserStoreControllerService {
     return response;
   }
 
+  async linkUserData(newUser: User) {
+    this.userCollection.doc<UserInput>(newUser.userid).valueChanges().subscribe(value => {
+      newUser.firstName = value.firstName;
+      newUser.lastName = value.lastName;
+      newUser.email = value.email;
+      newUser.theme = value.theme;
+      newUser.palette = value.palette;
+      newUser.journeyInactive = value.jourenyInactive;
+      newUser.appStale = value.appStale;
+    });
+  }
+
+  async linkUserJourneys(userid: string, journeysObservable: Observable<{[key: string]: JourneyInput}>) {
+    journeysObservable = this.userCollection.doc<UserInput>(userid).get().pipe(
+      map(doc => doc.data().journeys)
+    );
+  }
+
   async fetchUserJourneys(userid: string) {
     const journeys: {[key: string]: Journey} = {};
     const response = new Response();
     this.loaderService.setLoadingState(true);
-    await this.firestore.collection(USER_COLLECTION).doc(userid).get().toPromise()
+    let data: firebase.firestore.DocumentData;
+    await this.userCollection.doc(userid).get().toPromise()
       .then(value => {
-        const data = value.data();
+        data = value.data();
         if (data.journeys.length === 0) {
           response.payload = [];
           return response;
         }
-        // retrieve info for each user journey from JOURNEYS_COLLECTION
-        data.journeys.forEach(ref => {
-          this.firestore.doc(ref).get().toPromise()
-            .then(journeyInfo => {
-              const input = journeyInfo.data();
-              if (input) {
-                const newJourney = new Journey({
-                  id: journeyInfo.id,
-                  title: input.title,
-                  startDate: input.startDate,
-                  endDate: input.endDate,
-                  active: input.active,
-                  applications: [],
-                });
-                const apps = [];
-                Object.keys(input.applications).forEach(appid => {
-                  apps.push(new Application(input.applications[appid]));
-                });
-                newJourney.applications = apps;
-                journeys[journeyInfo.id] = newJourney;
-              }
-            });
-        });
-        console.log(journeys);
-        response.payload = journeys;
       }).catch(error => {
         console.log('Error fetching journeys:', error);
         response.error('Looks like an error occured while trying to fetch your journeys');
         response.payload = error;
       });
+    // retrieve info for each user journey from JOURNEYS_COLLECTION
+    await Promise.all(
+      data.journeys.map((ref: string) => this.firestore.doc(ref).get().toPromise())
+    ).then(journeyData => {
+      journeyData.forEach((datum: firebase.firestore.DocumentData) => {
+        const input = datum.data();
+        if (input) {
+          journeys[datum.id] = this._getJourneyFromInput(datum.id, input);
+        }
+      });
+      response.payload = journeys;
+    }).catch(error => {
+      console.log('Error fetching journeys:', error);
+      response.error('Looks like an error occured while trying to fetch your journeys');
+      response.payload = error;
+    })
     this.loaderService.setLoadingState(false);
 
     return response;
   }
 
+  private _getJourneyFromInput(id: string, input: JourneyInput): Journey {
+    const newJourney = new Journey({
+      id,
+      title: input.title,
+      startDate: input.startDate,
+      endDate: input.endDate,
+      active: input.active,
+      applications: [],
+    });
+    const apps = [];
+    Object.keys(input.applications).forEach(appid => {
+      apps.push(new Application(input.applications[appid]));
+    });
+    newJourney.applications = apps;
+    return newJourney;
+  }
+
   async fetchJourneyApps(journeyid: string) {
     let apps: Application[] = [];
     this.loaderService.setLoadingState(true);
-    await this.firestore.collection(JOURNEY_COLLECTION).doc(journeyid).get().toPromise()
+    await this.journeyCollection.doc(journeyid).get().toPromise()
       .then(journeyInfo => {
         const applicationsObj = journeyInfo.data().applications;
         for (const appid of Object.keys(applicationsObj)) {
@@ -173,11 +218,11 @@ export class UserStoreControllerService {
     const response = new Response();
     response.payload = [];
     this.loaderService.setLoadingState(true);
-    await this.firestore.collection(USER_COLLECTION).doc(userid).get().toPromise()
+    await this.userCollection.doc(userid).get().toPromise()
       .then(value => {
         const data = value.data();
         if (data.wishlist && Object.keys(data.wishlist).length !== 0) {
-          response.payload = Object.values(data.wishlist);
+          response.payload = Object.values<ApplicationInput>(data.wishlist).map(appInfo => new Application(appInfo));
         }
       }).catch(error => {
         console.log('Error fetching wishlist apps:', error);
@@ -190,10 +235,9 @@ export class UserStoreControllerService {
 
   async addNewJourney(data: Journey, userid: string): Promise<Response> {
     const response = new Response();
-    await this.firestore.collection(JOURNEY_COLLECTION).doc(data.id).set(
+    await this.journeyCollection.doc(data.id).set(
       data.getGQLInput()
     ).then(async () => {
-      console.log(this.firestore.collection(JOURNEY_COLLECTION).doc(data.id).ref);
       const journeyRef = this.firestore.collection(JOURNEY_COLLECTION).doc(data.id).ref;
       await this.firestore.collection(USER_COLLECTION).doc(userid).update({
         journeys: firebase.firestore.FieldValue.arrayUnion(journeyRef)
@@ -208,7 +252,7 @@ export class UserStoreControllerService {
 
   async updateJourney(updatedJourney: Journey): Promise<Response> {
     const response = new Response();
-    await this.firestore.collection(JOURNEY_COLLECTION).doc(updatedJourney.id).update(
+    await this.journeyCollection.doc(updatedJourney.id).update(
       updatedJourney.getGQLInput()
     ).then(value => {
       response.payload = value; // value is void so this is meaningless??
@@ -224,7 +268,7 @@ export class UserStoreControllerService {
     const response = new Response();
     const journeyRef = this.firestore.collection(JOURNEY_COLLECTION).doc(journey.id).ref;
     // remove journey doc ref from user
-    await this.firestore.collection(USER_COLLECTION).doc(userid).update({
+    await this.userCollection.doc(userid).update({
       journeys: firebase.firestore.FieldValue.arrayRemove(journeyRef)
     }).catch(error => {
       console.log('Error removing journey:', error); // TODO: figure out better error logging behaviour
@@ -233,7 +277,7 @@ export class UserStoreControllerService {
       return response;
     });
     // remove journey
-    await this.firestore.collection(JOURNEY_COLLECTION).doc(journey.id).delete()
+    await this.journeyCollection.doc(journey.id).delete()
       .catch(error => {
         console.log('Error removing journey:', error); // TODO: figure out better error logging behaviour
         response.error('An error occured while trying to remove your Journey, please try again');
@@ -244,7 +288,7 @@ export class UserStoreControllerService {
 
   async addNewApplication(application: Application, journeyid: string): Promise<Response> {
     const response = new Response();
-    await this.firestore.collection(JOURNEY_COLLECTION).doc(journeyid).update({
+    await this.journeyCollection.doc(journeyid).update({
       [`applications.${application.id}`]: application.getGQLInput()
     }).then(() => {
       response.payload = application;
@@ -258,7 +302,7 @@ export class UserStoreControllerService {
 
   async updateApplication(updatedApplication: Application, journeyid: string): Promise<Response> {
     const response = new Response();
-    await this.firestore.collection(JOURNEY_COLLECTION).doc(journeyid).update({
+    await this.journeyCollection.doc(journeyid).update({
       [`applications.${updatedApplication.id}`]: updatedApplication.getGQLInput()
     }).then(() => {
       response.payload = updatedApplication;
@@ -272,7 +316,7 @@ export class UserStoreControllerService {
 
   async removeApplication(appid: string, journeyid: string): Promise<Response> {
     const response = new Response();
-    await this.firestore.collection(JOURNEY_COLLECTION).doc(journeyid).update({
+    await this.journeyCollection.doc(journeyid).update({
       [`applications.${appid}`]: firebase.firestore.FieldValue.delete()
     }).catch(error => {
       console.log('Error removing application:', error);
@@ -284,7 +328,7 @@ export class UserStoreControllerService {
 
   async addNewWishlistApplication(application: Application, userid: string): Promise<Response> {
     const response = new Response();
-    await this.firestore.collection(USER_COLLECTION).doc(userid).update({
+    await this.userCollection.doc(userid).update({
       [`wishlist.${application.id}`]: application.getGQLInput(true)
     }).catch(error => {
       console.log('Error adding wishlist application:', error); // TODO: figure out better error logging behaviour
@@ -296,7 +340,7 @@ export class UserStoreControllerService {
 
   async updateWishlistApplication(updatedApplication: Application, userid: string): Promise<Response> {
     const response = new Response();
-    await this.firestore.collection(USER_COLLECTION).doc(userid).update({
+    await this.userCollection.doc(userid).update({
       [`wishlist.${updatedApplication.id}`]: updatedApplication.getGQLInput(true)
     }).catch(error => {
       console.log('Error updating wishlist application:', error); // TODO: figure out better error logging behaviour
@@ -308,7 +352,7 @@ export class UserStoreControllerService {
 
   async removeWishlistApplication(appid: string, userid: string): Promise<Response> {
     const response = new Response();
-    await this.firestore.collection(USER_COLLECTION).doc(userid).update({
+    await this.userCollection.doc(userid).update({
       [`wishlist.${appid}`]: firebase.firestore.FieldValue.delete()
     }).catch(error => {
       console.log('Error removing wishlist application:', error);

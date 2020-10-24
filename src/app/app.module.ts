@@ -36,7 +36,7 @@ import { NewPasswordComponent } from './auth/account-recovery/new-password.compo
 import { ResetSuccessfulComponent } from './auth/account-recovery/reset-successful.component';
 import { SignupSuccessfulComponent } from './auth/confirm-signup/signup-successful.component';
 import { SearchPipe } from './views/search/search-pipe.pipe';
-import { KeysPipe } from './views/search/keys-pipe.pipe';
+import { KeysPipe } from './utils/keys.pipe';
 import { WishlistComponent } from './views/wishlist/wishlist.component';
 import { ProfileSettingsComponent } from './views/settings/profile-settings.component';
 import { PreferenceSettingsComponent } from './views/settings/preference-settings.component';
@@ -49,6 +49,7 @@ import { ApplicationGraphicComponent } from './views/landing/graphics/applicatio
 import { SearchGraphicComponent } from './views/landing/graphics/search-graphic.component';
 import { InfoComponent } from './views/info/info.component';
 import { SafeHTMLPipe } from './views/info/safe-html.pipe';
+import { ValuesPipe } from './utils/values.pipe';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { SafeHTMLPipe } from './views/info/safe-html.pipe';
     SignupSuccessfulComponent,
     SearchPipe,
     KeysPipe,
+    ValuesPipe,
     SafeHTMLPipe,
     // WishlistComponent,
     ProfileSettingsComponent,

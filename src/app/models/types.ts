@@ -34,4 +34,8 @@ export interface UserInput {
 	email: string;
 	verified: boolean;
 	wishlist?: { [key: string]: ApplicationInput };
+	theme?: 'light' | 'dark';
+	palette?: 'palette-0' | 'palette-1' | 'palette-2' | 'palette-3';
+	jourenyInactive?: number;
+	appStale: number;
 }

@@ -14,6 +14,7 @@ import { Subscription } from 'rxjs';
 import { NotificationService } from 'src/app/controllers/notification.service';
 import { MESSAGES } from 'src/assets/template-messages';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { TimelineDatum } from 'src/app/models/types';
 
 @Component({
   selector: 'app-application-view',
@@ -150,7 +151,7 @@ export class ApplicationViewComponent implements OnInit {
 
       // Set timeline props
       this.timelineProps = {
-        data: this.appFormGroup.controls.timeline.value,
+        data: this.appFormGroup.get('timeline').value,
         colorMappings: STATUS_COLORS
       };
     }
@@ -164,14 +165,17 @@ export class ApplicationViewComponent implements OnInit {
       if (this.newApp) {
         this.statusUpdateDate = this.appFormGroup.controls.appDate.value;
       }
+      const currTimeline = this.appFormGroup.get('timeline').value as TimelineDatum[];
+      currTimeline.push({ status: value, date: this.statusUpdateDate });
       this.appFormGroup.patchValue({
         [attrib]: value,
-        timeline: this.appFormGroup.controls.timeline.value.push({
-          status: value,
-          date: this.statusUpdateDate,
-        }),
+        timeline: currTimeline,
       });
       this.statusUpdated = true;
+      this.timelineProps = {
+        data: this.appFormGroup.get('timeline').value,
+        colorMappings: STATUS_COLORS
+      };
       this.timeline.draw(); // trigger timeline re-draw
     } else if (attrib === this.ATTRIBS.DATE) {
       this.appFormGroup.patchValue({ appDate: value });
@@ -210,7 +214,6 @@ export class ApplicationViewComponent implements OnInit {
           }
         });
     } else if (this.newApp && !this.wishlistApp) { // completely new application
-      // this.currApplicationDetails.setStatus(STATUS.IN_REVIEW, this.currApplicationDetails.appDate);
       this._setAppDetails('new-app');
       this.userStore.addNewApplication(this.journeyid, this.currApplicationDetails)
         .then(response => {
@@ -303,18 +306,18 @@ export class ApplicationViewComponent implements OnInit {
     if (!mode) {
       mode = 'new-app';
     }
-    this.currApplicationDetails.positionTitle = this.appFormGroup.controls.positionTitle.value;
-    this.currApplicationDetails.companyName = this.appFormGroup.controls.companyName.value;
-    this.currApplicationDetails.appDate = this.appFormGroup.controls.appDate.value;
-    this.currApplicationDetails.source = this.appFormGroup.controls.source.value;
-    this.currApplicationDetails.notes = this.appFormGroup.controls.notes.value;
+    this.currApplicationDetails.positionTitle = this.appFormGroup.get('positionTitle').value;
+    this.currApplicationDetails.companyName = this.appFormGroup.get('companyName').value;
+    this.currApplicationDetails.appDate = this.appFormGroup.get('appDate').value;
+    this.currApplicationDetails.source = this.appFormGroup.get('source').value;
+    this.currApplicationDetails.notes = this.appFormGroup.get('notes').value;
     // add status and timeline updates via Application (as necessary)
-    if (mode === 'new-app' || 'new-wishlist') {
+    if (mode === 'new-app' || mode === 'new-wishlist') {
       this.currApplicationDetails.setStatus(STATUS.IN_REVIEW, this.currApplicationDetails.appDate);
     } else if (mode === 'existing-app' && this.statusUpdated) {
-      this.currApplicationDetails.setStatus(this.appFormGroup.controls.status.value, this.statusUpdateDate);
+      this.currApplicationDetails.setStatus(this.appFormGroup.get('status').value, this.statusUpdateDate);
     } else if (mode === 'existing-app' && this.dateUpdated) {
-      this.currApplicationDetails.updateAppDate(this.appFormGroup.controls.appDate.value);
+      this.currApplicationDetails.updateAppDate(this.appFormGroup.get('status').value);
     }
   }
 

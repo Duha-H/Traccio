@@ -65,12 +65,11 @@ export class ApplicationListComponent implements OnInit {
       const journey = this.userStore.getJourney(this.journeyid);
       if (journey) {
         this.applications = journey.applications;
+        this.dataSource.data = this.applications;
+        this.dataSource.sort = this.sort;
+        this.updateView();
       }
     });
-    // this.applications = this.userStore.getJourney(this.journeyid).applications;
-    this.dataSource.data = this.applications;
-    this.dataSource.sort = this.sort;
-    this.updateView();
   }
 
   updateView() {

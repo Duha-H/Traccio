@@ -100,7 +100,7 @@
 <app-overlay *ngIf="displayAddOverlay" (closeOverlay)="displayAddOverlay=false" [title]="'Add to journey:'">
   <div class="overlay-content">
     <ul class="journey-list">
-      <li *ngFor="let journey of userStore.activeJourneys | async">
+      <li *ngFor="let journey of (userStore.activeJourneys | async)">
         <input type="radio" name="journey" id="{{journey.id}}" [value]="journey" (change)="selectedJourney=journey">
         <label for="journey">{{ journey.title }}</label>
       </li>

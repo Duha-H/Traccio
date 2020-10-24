@@ -5,7 +5,7 @@ import { UserStoreService } from 'src/app/models/user-store.service';
 import { SearchPipe } from './search-pipe.pipe';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Router } from '@angular/router';
-import { KeysPipe } from './keys-pipe.pipe';
+import { KeysPipe } from '../../utils/keys.pipe';
 import { Subscription } from 'rxjs';
 
 @Component({
