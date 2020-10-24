@@ -27,6 +27,9 @@ import { ConfettiComponent } from './shared-components/confetti/confetti.compone
 import { ToastComponent } from './shared-components/notification/toast.component';
 import { ToastListComponent } from './shared-components/notification/toast-list.component';
 import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox';
+import { NewApplicationViewComponent } from './shared-components/application-view/new-application-view.component';
+import { WishlistApplicationViewComponent } from './shared-components/application-view/wishlist-application-view.component';
+import { ExistingApplicationViewComponent } from './shared-components/application-view/existing-application-view.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +42,9 @@ import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox';
     TimelineComponent,
     TimelineTooltipComponent,
     ApplicationViewComponent,
+    NewApplicationViewComponent,
+    WishlistApplicationViewComponent,
+    ExistingApplicationViewComponent,
     ConfettiComponent,
     ToastListComponent,
     ToastComponent,
@@ -82,6 +88,9 @@ import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox';
     TimelineComponent,
     TimelineTooltipComponent,
     ApplicationViewComponent,
+    NewApplicationViewComponent,
+    WishlistApplicationViewComponent,
+    ExistingApplicationViewComponent,
     ToastListComponent,
     ToastComponent
   ]

@@ -60,7 +60,7 @@ export class Application {
 
 	setStatus(status: string, date?: string | Date) {
 		this._status = status;
-		let statusDate;
+		let statusDate: Date;
 		if (date && typeof date !== 'string') {
 			statusDate = date;
 		} else if (date && typeof date === 'string') {
