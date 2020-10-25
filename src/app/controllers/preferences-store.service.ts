@@ -5,6 +5,7 @@ import { Response } from 'src/app/utils/response';
 import { ThemeManagerService } from './theme-manager.service';
 import { PALETTES, THEMES, ThemeType, PaletteType } from 'src/styling/palettes';
 import { UserStoreControllerService } from './user-store-controller.service';
+import { LoaderService } from './loader.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,8 @@ export class PreferencesStoreService {
 
   constructor(
     private themeManager: ThemeManagerService,
-    private controller: UserStoreControllerService
+    private controller: UserStoreControllerService,
+    private loaderService: LoaderService,
   ) {
     const storedTheme = localStorage.getItem('theme');
     const storedPalette = localStorage.getItem('palette');
@@ -36,11 +38,12 @@ export class PreferencesStoreService {
   }
 
   async init(userid: string) {
-    let currTheme;
-    let currPalette;
-    let journeyInactive;
-    let appStale;
+    let currTheme: string;
+    let currPalette: string;
+    let journeyInactive: number;
+    let appStale: number;
     this.userid = userid;
+    this.loaderService.setLoadingState(true);
     await this.controller.fetchPrefData(userid)
       .then(value => {
         currTheme = value.theme;
@@ -66,6 +69,7 @@ export class PreferencesStoreService {
     };
     this._preferences.next(currPreferences);
     this.reset();
+    this.loaderService.setLoadingState(false);
   }
 
   reset() {

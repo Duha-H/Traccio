@@ -252,7 +252,7 @@ div.graphic-component li.visible {
 
 div.graphic-component li:not(.visible) {
   opacity: 0.5;
-  border-left: none;
+  border-left: 6px solid transparent;
 }
 
 div.graphic-component li:not(.visible):hover,

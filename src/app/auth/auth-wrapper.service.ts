@@ -16,8 +16,11 @@ export class AuthWrapperService {
     signedIn: false,
     signedUp: false,
   };
+  googleAuthProvider: firebase.auth.GoogleAuthProvider;
 
-  constructor(private fireAuth: AngularFireAuth, private fireStore: AngularFirestore) { }
+  constructor(private fireAuth: AngularFireAuth, private fireStore: AngularFirestore) {
+    this.googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+  }
 
   async currentAuthenticatedUser(): Promise<boolean> {
     let result = false;
@@ -75,12 +78,26 @@ export class AuthWrapperService {
     const response = new Response();
 
     try {
-      await Auth.federatedSignIn({ provider: CognitoHostedUIIdentityProvider.Google });
+      response.payload = (await this.fireAuth.signInWithPopup(this.googleAuthProvider)).user;
       this.authState.signedIn = true;
       this.authState.signedUp = false;
     } catch (error) {
-      console.log('AuthWrapper: google sign in error:', error);
-      response.error('Error in federated sign in');
+      switch (error.code) {
+        case 'auth/account-exists-with-different-credential':
+          // tslint:disable-next-line: max-line-length
+          response.error('Unable to sign in, looks like a user account with this email address is already in-use with a different sign-in method.\nTry signing in with the correct sign-in method, or use a different Google account.');
+          break;
+        case 'auth/popup-blocked':
+          response.error('Looks like the sign-in popup is being blocked by your browser.\nEnable popups from Traccio and try again.');
+          break;
+        case 'auth/popup-closed-by-user':
+          response.error('Looks like the sign in popup has been closed.\nPlease try again.');
+          break;
+        default:
+          console.log('AuthWrapper: google sign in error:', error);
+          response.error('An unexpected error occured, please try again');
+          break;
+      }
     }
     console.log(response, this.authState.signedIn);
 
