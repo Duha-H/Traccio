@@ -2,13 +2,10 @@ import { Component, OnInit, OnChanges, ViewChild, QueryList, ViewChildren, Eleme
 import { UserStoreService } from "src/app/models/user-store.service";
 import { Journey } from "src/app/models/journey";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Observable } from 'rxjs/Observable';
 import { ResizeService } from 'src/app/controllers/resize.service';
 import { SliderContainerComponent } from 'src/app/shared-components/slider-container/slider-container.component';
 import { NotificationService } from 'src/app/controllers/notification.service';
-import { Route } from '@angular/compiler/src/core';
 import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators/map';
 
 @Component({
   selector: "app-journey-list",

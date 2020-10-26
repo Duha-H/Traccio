@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/internal/Observable';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Response } from 'src/app/utils/response';
 import { ThemeManagerService } from './theme-manager.service';
 import { PALETTES, THEMES, ThemeType, PaletteType } from 'src/styling/palettes';

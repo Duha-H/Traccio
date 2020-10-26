@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { Router } from '@angular/router';
-import { AmplifyService } from "aws-amplify-angular";
 import { UserStoreService } from './models/user-store.service';
 import { AuthWrapperService } from './auth/auth-wrapper.service';
 import { PreferencesStoreService } from './controllers/preferences-store.service';
@@ -20,7 +19,6 @@ export class AppComponent implements OnInit {
   theme = 'dark';
 
   constructor(
-    public amplifyService: AmplifyService,
     private fireAuth: AngularFireAuth,
     private fireStore: AngularFirestore,
     private userStore: UserStoreService,

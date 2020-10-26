@@ -3,7 +3,7 @@ import { Journey } from 'src/app/models/journey';
 import { Application } from 'src/app/models/application';
 import { UserStoreService } from 'src/app/models/user-store.service';
 import { SearchPipe } from './search-pipe.pipe';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Router } from '@angular/router';
 import { KeysPipe } from '../../utils/keys.pipe';
 import { Subscription } from 'rxjs';

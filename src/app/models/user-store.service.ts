@@ -6,14 +6,13 @@ import * as mockApps from "./mock-applications";
 import { Application } from "./application";
 import { ApplicationInput, UserInput } from "src/app/models/types";
 import { UserStoreControllerService } from "src/app/controllers/user-store-controller.service";
-import { Observable } from "rxjs/Observable";
-import { BehaviorSubject } from "rxjs/BehaviorSubject";
-import { map } from "rxjs/operators/map";
 import { DataManagerService } from "src/app/controllers/data-manager.service";
 import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
 import { FormattedFrequencyData } from 'src/app/controllers/types';
-import { Response } from '../utils/response';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { Observable } from 'rxjs/internal/Observable';
+import { map } from 'rxjs/internal/operators/map';
 
 @Injectable({
   providedIn: "root",

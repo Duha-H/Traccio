@@ -48,8 +48,9 @@ Thumbs.db
 # asset creation files
 *.ai
 
-# source maps
+# source maps/stats
 source-map-test.html
+/stats
 
 #amplify
 amplify/\#current-cloud-backend

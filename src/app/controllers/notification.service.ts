@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Notification } from 'src/app/models/notification';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
-import { map } from "rxjs/operators/map";
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { Observable } from 'rxjs/internal/Observable';
+import { map } from "rxjs/internal/operators/map";
 import { MESSAGES } from 'src/assets/template-messages';
 
 @Injectable({

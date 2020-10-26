@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AuthModule } from './auth.module';
-import { Auth } from 'aws-amplify';
-import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth';
 import { Response } from 'src/app/utils/response';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -180,29 +178,29 @@ export class AuthWrapperService {
       return response;
     }
 
-    try {
-      // SUCCESS
-      await Auth.confirmSignUp(email, code);
-      this.authState.signedIn = false;
-      this.authState.signedUp = false;
-    } catch (error) {
-      switch (error.code) {
-        case 'CodeMismatchException':
-          response.error('Looks like the code you provided is incorrect, please try again.');
-          break;
-        case 'ExpiredCodeException':
-          this.resendSignUp(email);
-          response.error('Looks like the code you provided is no longer valid.\n A new code was sent to your email, enter the new code.');
-          break;
-        case 'TooManyFailedAttemptsException':
-          response.error('An incorrect code was entered too many times.\nPlease confirm your account at a later time.');
-          break;
-        default:
-          console.error('AuthWrapper: unexpected confirmSignup error:', error);
-          response.error('An unexpected error occured, please try again');
-          break;
-      }
-    }
+    // try {
+    //   // SUCCESS
+    //   await Auth.confirmSignUp(email, code);
+    //   this.authState.signedIn = false;
+    //   this.authState.signedUp = false;
+    // } catch (error) {
+    //   switch (error.code) {
+    //     case 'CodeMismatchException':
+    //       response.error('Looks like the code you provided is incorrect, please try again.');
+    //       break;
+    //     case 'ExpiredCodeException':
+    //       this.resendSignUp(email);
+    //       response.error('Looks like the code you provided is no longer valid.\n A new code was sent to your email, enter the new code.');
+    //       break;
+    //     case 'TooManyFailedAttemptsException':
+    //       response.error('An incorrect code was entered too many times.\nPlease confirm your account at a later time.');
+    //       break;
+    //     default:
+    //       console.error('AuthWrapper: unexpected confirmSignup error:', error);
+    //       response.error('An unexpected error occured, please try again');
+    //       break;
+    //   }
+    // }
 
     return response;
   }
@@ -340,39 +338,39 @@ export class AuthWrapperService {
       }
     }
 
-    try {
-      // SUCCESS
-      const user = await this.getCurrentAuthenticatedUser();
-      await Auth.updateUserAttributes(user, attrUpdates);
-      const updatedUser = await this.getCurrentAuthenticatedUser();
-      response.payload = updatedUser;
-    } catch (error) {
-      response.payload = error.code;
-      switch (error.code) {
-        case 'AliasExistsException':
-          response.error('Another account with the email address you provided already exists. No changes were saved.');
-          break;
-        case 'InvalidParameterException':
-          response.error('Attempted to update an invalid parameter:', error.message);
-          break;
-        case 'PasswordResetRequiredException':
-          // tslint:disable-next-line: max-line-length
-          response.error('Looks like your password needs to be updated before any changes can be applied. Please reset your password first then try again');
-          break;
-        case 'UserNotConfirmedException':
-          response.error('Looks like your email address was not verified. Please verify your email first before applying any changes.');
-          break;
-        case 'UserNotFoundException':
-          response.error('A user account with the email address you provided does not exist.');
-          console.error('AuthError: updateAttributes user not found, this should not happen.', error);
-          break;
-        default:
-          console.error('AuthWrapper: unexpected forgotPassword error:', error);
-          response.error('An unexpected error occured, please try again');
-          break;
-      }
-      console.log("nope", error);
-    }
+    // try {
+    //   // SUCCESS
+    //   const user = await this.getCurrentAuthenticatedUser();
+    //   await Auth.updateUserAttributes(user, attrUpdates);
+    //   const updatedUser = await this.getCurrentAuthenticatedUser();
+    //   response.payload = updatedUser;
+    // } catch (error) {
+    //   response.payload = error.code;
+    //   switch (error.code) {
+    //     case 'AliasExistsException':
+    //       response.error('Another account with the email address you provided already exists. No changes were saved.');
+    //       break;
+    //     case 'InvalidParameterException':
+    //       response.error('Attempted to update an invalid parameter:', error.message);
+    //       break;
+    //     case 'PasswordResetRequiredException':
+    //       // tslint:disable-next-line: max-line-length
+    //       response.error('Looks like your password needs to be updated before any changes can be applied. Please reset your password first then try again');
+    //       break;
+    //     case 'UserNotConfirmedException':
+    //       response.error('Looks like your email address was not verified. Please verify your email first before applying any changes.');
+    //       break;
+    //     case 'UserNotFoundException':
+    //       response.error('A user account with the email address you provided does not exist.');
+    //       console.error('AuthError: updateAttributes user not found, this should not happen.', error);
+    //       break;
+    //     default:
+    //       console.error('AuthWrapper: unexpected forgotPassword error:', error);
+    //       response.error('An unexpected error occured, please try again');
+    //       break;
+    //   }
+    //   console.log("nope", error);
+    // }
 
     return response;
   }
@@ -386,37 +384,37 @@ export class AuthWrapperService {
       return response;
     }
 
-    try {
-      await Auth.verifyCurrentUserAttributeSubmit(attribute, code);
-    } catch (error) {
-      switch (error.code) {
-        case 'CodeMismatchException':
-          response.error('Looks like the verification code you provided is incorrect. Please make sure you\'ve entered the correct code');
-          break;
-        case 'ExpiredCodeException':
-          // tslint:disable-next-line: max-line-length
-          response.error('Looks like the verificated code you provided is no longer valid. Worry not! A new code was sent to your email address, please enter the new code.');
-          break;
-        case 'InvalidParameterException':
-          response.error('Attempted to update an invalid parameter:', attribute);
-          break;
-        case 'PasswordResetRequiredException':
-          // tslint:disable-next-line: max-line-length
-          response.error('Looks like your password needs to be updated before any changes can be applied. Please reset your password first then try again');
-          break;
-        case 'UserNotConfirmedException':
-          response.error('Looks like your email address was not verified. Please verify your email first before applying any changes.');
-          break;
-        case 'UserNotFoundException':
-          response.error('A user account with the email address you provided does not exist.');
-          console.error('AuthError: updateAttributes user not found, this should not happen.', error);
-          break;
-        default:
-          console.error('AuthWrapper: unexpected forgotPassword error:', error);
-          response.error('An unexpected error occured, please try again');
-          break;
-      }
-    }
+    // try {
+    //   await Auth.verifyCurrentUserAttributeSubmit(attribute, code);
+    // } catch (error) {
+    //   switch (error.code) {
+    //     case 'CodeMismatchException':
+    //       response.error('Looks like the verification code you provided is incorrect. Please make sure you\'ve entered the correct code');
+    //       break;
+    //     case 'ExpiredCodeException':
+    //       // tslint:disable-next-line: max-line-length
+    //       response.error('Looks like the verificated code you provided is no longer valid. Worry not! A new code was sent to your email address, please enter the new code.');
+    //       break;
+    //     case 'InvalidParameterException':
+    //       response.error('Attempted to update an invalid parameter:', attribute);
+    //       break;
+    //     case 'PasswordResetRequiredException':
+    //       // tslint:disable-next-line: max-line-length
+    //       response.error('Looks like your password needs to be updated before any changes can be applied. Please reset your password first then try again');
+    //       break;
+    //     case 'UserNotConfirmedException':
+    //       response.error('Looks like your email address was not verified. Please verify your email first before applying any changes.');
+    //       break;
+    //     case 'UserNotFoundException':
+    //       response.error('A user account with the email address you provided does not exist.');
+    //       console.error('AuthError: updateAttributes user not found, this should not happen.', error);
+    //       break;
+    //     default:
+    //       console.error('AuthWrapper: unexpected forgotPassword error:', error);
+    //       response.error('An unexpected error occured, please try again');
+    //       break;
+    //   }
+    // }
 
     return response;
   }

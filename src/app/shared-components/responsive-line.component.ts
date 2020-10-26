@@ -9,7 +9,6 @@ import { CartesianMarkerProps, Theme } from "@nivo/core";
 import { OrdinalColorsInstruction } from "@nivo/colors";
 import { GridValues, AxisProps } from "@nivo/axes";
 import { CrosshairType } from "@nivo/tooltip";
-import { create } from 'domain';
 
 @Component({
   selector: "line-chart-wrapper",

@@ -6,7 +6,6 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from './shared.module';
 
 import { environment } from '../environments/environment';
-import { AmplifyService } from 'aws-amplify-angular';
 import { AuthModule } from './auth/auth.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
@@ -101,7 +100,6 @@ import { ValuesPipe } from './utils/values.pipe';
     AngularFirestoreModule,
   ],
   providers: [
-    AmplifyService,
     SearchPipe,
     KeysPipe,
     SafeHTMLPipe,

@@ -15,7 +15,7 @@ import { ArrayFormatterPipe } from 'src/app/utils/array-formatter.pipe';
 import { DatumValue } from '@nivo/line';
 import { PieDatum } from '@nivo/pie';
 import { LoaderService } from 'src/app/controllers/loader.service';
-import { map } from 'rxjs/operators/map';
+import { map } from 'rxjs/internal/operators/map';
 
 @Component({
   selector: "app-dashboard",

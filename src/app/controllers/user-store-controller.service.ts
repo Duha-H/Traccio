@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { APIService } from 'src/app/traccio-api.service';
 import { Journey } from 'src/app/models/journey';
 import { Application } from 'src/app/models/application';
 import { ApplicationInput, JourneyInput, UserInput } from 'src/app/models/types';
@@ -9,7 +8,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import * as firebase from 'firebase';
 import { User } from '../models/user';
 import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/internal/Observable';
 
 
 const USER_COLLECTION = 'users';
@@ -23,7 +22,6 @@ export class UserStoreControllerService {
   userCollection: AngularFirestoreCollection<UserInput>;
   journeyCollection: AngularFirestoreCollection<JourneyInput>;
   constructor(
-    private api: APIService,
     private loaderService: LoaderService,
     private firestore: AngularFirestore,
   ) {
