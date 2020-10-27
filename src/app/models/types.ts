@@ -25,6 +25,7 @@ export interface JourneyInput {
 	endDate?: string | undefined;
 	active: boolean;
 	applications: { [key: string]: ApplicationInput };
+	userId: string;
 }
 
 export interface UserInput {

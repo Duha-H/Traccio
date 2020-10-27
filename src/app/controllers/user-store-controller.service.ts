@@ -171,7 +171,7 @@ export class UserStoreControllerService {
       console.log('Error fetching journeys:', error);
       response.error('Looks like an error occured while trying to fetch your journeys');
       response.payload = error;
-    })
+    });
     this.loaderService.setLoadingState(false);
 
     return response;
@@ -185,6 +185,7 @@ export class UserStoreControllerService {
       endDate: input.endDate,
       active: input.active,
       applications: [],
+      userId: input.userId,
     });
     const apps = [];
     Object.keys(input.applications).forEach(appid => {

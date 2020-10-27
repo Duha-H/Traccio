@@ -229,6 +229,7 @@ export class UserStoreService {
     journeyData.id = journeyData.id // if ID is undefined, generate a new ID
       ? journeyData.id
       : this._getNewJourneyID();
+    journeyData.userId = this._user.getValue().userid;
     const newJourney = new Journey(journeyData);
     // make necessary api calls
     const response = await this.controller.addNewJourney(newJourney, this._user.getValue().userid);

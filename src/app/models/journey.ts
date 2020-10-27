@@ -12,6 +12,7 @@ export class Journey {
 	private _endDate: Date = new Date();
 	private _active = true;
 	private _applications: Application[] = [];
+	private _userId = '';
 
 	constructor(data?: { [key: string]: any }) {
 		// construct object from provided journey JSON
@@ -29,6 +30,7 @@ export class Journey {
 			this._applications = data.applications
 				? data.applications
 				: [];
+			this._userId = data.userId;
 		}
 	}
 
@@ -49,6 +51,9 @@ export class Journey {
 
 	get active() { return this._active; }
 	set active(active: boolean) { this._active = active; }
+
+	get userId() { return this._userId; }
+	set userId(id: string) { this._userId = id; }
 
 	toggleActive(active: boolean) {
 		this._active = active;
@@ -79,6 +84,7 @@ export class Journey {
 			endDate: endDateFormatted,
 			active: this._active,
 			applications: applicationsFormatted,
+			userId: this._userId,
 		};
 		return input;
 	}
