@@ -15,6 +15,7 @@ import { NotificationService } from 'src/app/controllers/notification.service';
 import { MESSAGES } from 'src/assets/template-messages';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TimelineDatum } from 'src/app/models/types';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-application-view',
@@ -78,6 +79,7 @@ export class ApplicationViewComponent implements OnInit {
     public rs: ResizeService,
     public prefStore: PreferencesStoreService,
     public notificationService: NotificationService,
+    public titleService: Title,
   ) { }
 
   ngOnInit() { }

@@ -37,7 +37,7 @@ export class PreferenceSettingsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.prefStore.reset();
+    this.prefStore.applyChanges(); // resets any unsaved changes to current value
   }
 
   addUpdate(updateAttrib: string, updateValue: string) {
@@ -74,10 +74,12 @@ export class PreferenceSettingsComponent implements OnInit, OnDestroy {
 
   private _applyTemporaryUpdate(attribute: string, value: string) {
     if (attribute === 'theme') {
-      this.prefStore.updateTheme(value);
+      this.themeManager.setTheme(THEMES[value]);
+      // this.prefStore.updateTheme(value);
       this.preferences[attribute] = THEMES[value];
     } else if (attribute === 'colorPalette') {
-      this.prefStore.updatePalette(value);
+      this.themeManager.setPalette(PALETTES[value]);
+      // this.prefStore.updatePalette(value);
       this.preferences[attribute] = PALETTES[value];
     }
     const response = new Response();

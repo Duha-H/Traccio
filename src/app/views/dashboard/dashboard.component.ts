@@ -16,6 +16,7 @@ import { DatumValue } from '@nivo/line';
 import { PieDatum } from '@nivo/pie';
 import { LoaderService } from 'src/app/controllers/loader.service';
 import { map } from 'rxjs/internal/operators/map';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: "app-dashboard",
@@ -57,10 +58,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
     public resizeService: ResizeService,
     private arrayFilter: ArrayFilterPipe,
     private arrayFormatter: ArrayFormatterPipe,
-    public loaderService: LoaderService
+    public loaderService: LoaderService,
+    private titleService: Title,
   ) {}
 
   ngOnInit() {
+    this.titleService.setTitle('Dashboard | Traccio');
     try {
       this.userStore.user.subscribe(user => {
         this.name = user.firstName;

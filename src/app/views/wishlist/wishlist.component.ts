@@ -4,6 +4,7 @@ import { Application } from 'src/app/models/application';
 import { Router } from '@angular/router';
 import { ResizeService } from 'src/app/controllers/resize.service';
 import { NotificationService } from 'src/app/controllers/notification.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-wishlist',
@@ -19,10 +20,12 @@ export class WishlistComponent implements OnInit {
     private userStore: UserStoreService,
     private router: Router,
     private notificationService: NotificationService,
-    public rs: ResizeService
+    public rs: ResizeService,
+    private titleService: Title,
   ) { }
 
   ngOnInit() {
+    this.titleService.setTitle('Wishlist | Traccio');
     this.userStore.wishlistApps.subscribe(apps => {
       this.applications = apps;
     });

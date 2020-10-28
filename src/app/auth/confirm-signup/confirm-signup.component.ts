@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserStoreService } from 'src/app/models/user-store.service';
 import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-confirm-signup',
@@ -27,10 +28,12 @@ export class ConfirmSignupComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private userStore: UserStoreService,
-    private authWrapper: AuthWrapperService
+    private authWrapper: AuthWrapperService,
+    private titleService: Title,
   ) { }
 
   ngOnInit() {
+    this.titleService.setTitle('Confirm Sign Up | Traccio');
     this.userStore.user.subscribe(user => {
       this.email = user.email;
     });

@@ -40,7 +40,6 @@ export class ProfileSettingsComponent implements OnInit {
   ngOnInit() {
     this.userStore.user.subscribe(user => {
       this.user = user;
-      console.log(user);
     });
   }
 

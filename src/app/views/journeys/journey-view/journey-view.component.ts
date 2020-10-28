@@ -20,6 +20,7 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { ApplicationListComponent } from './application-list.component';
 import { BreadcrumbsData } from 'src/app/shared-components/types';
 import { ResizeService } from 'src/app/controllers/resize.service';
+import { Title } from '@angular/platform-browser';
 
 const DRAWER_MODES = {
   ADD: "add",
@@ -131,10 +132,12 @@ export class JourneyViewComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private userStore: UserStoreService,
     private router: Router,
-    public rs: ResizeService
+    public rs: ResizeService,
+    private titleService: Title,
   ) { }
 
   ngOnInit() {
+    this.titleService.setTitle('Journey | Traccio');
     let id: string;
     let appref: string;
     // extract journey ID from URL, then get journey from UserStore
@@ -149,6 +152,7 @@ export class JourneyViewComponent implements OnInit, AfterViewInit {
       const journey = this.userStore.getJourney(id);
       if (journey) {
         this.journey = journey;
+        this.titleService.setTitle(`${this.journey.title} | Traccio`);
         this.breadcrumbsData.current.name = this.journey.title;
         this.breadcrumbsData.current.url = `/home/journeys/${this.journey.id}`;
         this.selectedApp = this.userStore.getApplication(

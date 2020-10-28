@@ -19,7 +19,6 @@ export class NewApplicationViewComponent
   parentJourney: Journey;
 
   ngOnInit() {
-    console.log("NewApplicationViewComponent init");
     const parentID = this.route.snapshot.paramMap.get("id");
     if (parentID) {
       this.wishlistApp = false;
@@ -31,8 +30,10 @@ export class NewApplicationViewComponent
         this.router.navigate(["/home/journeys"]);
         return;
       }
+      this.titleService.setTitle(`New Application | ${this.parentJourney.title} | Traccio`);
     } else {
       this.wishlistApp = true;
+      this.titleService.setTitle(`New Application | Wishlist | Traccio`);
     }
     // Specify application details in formGroup
     this.currApplicationDetails = new Application();

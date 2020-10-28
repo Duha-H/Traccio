@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef } from "@angular/core";
+import { Title } from '@angular/platform-browser';
 import { ResizeService } from 'src/app/controllers/resize.service';
 import { FAQItem, faqs } from './faq';
 import { SafeHTMLPipe } from './safe-html.pipe';
@@ -16,9 +17,14 @@ export class InfoComponent implements OnInit {
   faqItems: FAQItem[] = faqs;
   @ViewChild('sidenav') nav: ElementRef<HTMLDivElement>;
 
-  constructor(public rs: ResizeService, public safeHTML: SafeHTMLPipe) { }
+  constructor(
+    public rs: ResizeService,
+    public safeHTML: SafeHTMLPipe,
+    private titleService: Title
+  ) { }
 
   ngOnInit() {
+    this.titleService.setTitle('About | Traccio');
     const hour = this.now.getHours();
     if (hour < 12) {
       this.timeOfDay = 'morning';

@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ResizeService } from 'src/app/controllers/resize.service';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-landing-wrapper',
@@ -9,7 +10,13 @@ import { Router } from '@angular/router';
 })
 export class LandingWrapperComponent implements OnInit {
 
-  constructor(public resizeService: ResizeService, public router: Router) { }
+  constructor(
+    public resizeService: ResizeService,
+    public router: Router,
+    private titleService: Title
+  ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.titleService.setTitle('Traccio');
+  }
 }

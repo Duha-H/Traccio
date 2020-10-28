@@ -5,6 +5,7 @@ import { UserStoreService } from "src/app/models/user-store.service";
 import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
 import { FormControl, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { ResizeService } from 'src/app/controllers/resize.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: "app-sign-up",
@@ -44,9 +45,11 @@ export class SignUpComponent implements OnInit {
     private userStore: UserStoreService,
     private authWrapper: AuthWrapperService,
     public rs: ResizeService,
+    private titleService: Title,
   ) {}
 
   ngOnInit() {
+    this.titleService.setTitle('Sign Up | Traccio');
     document.addEventListener('keyup', (event) => {
       if (event.keyCode === 13) {
         this.submitButton.nativeElement.click();

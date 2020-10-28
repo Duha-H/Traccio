@@ -53,6 +53,9 @@ export class ExistingApplicationViewComponent
       notes: this.currApplicationDetails.notes,
     });
 
+    // Set title
+    this.titleService.setTitle(`${this.currApplicationDetails.positionTitle} @ ${this.currApplicationDetails.companyName} | ${this.parentJourney.title} | Traccio`);
+
     // Set breadcrumbs
     this.breadcrumbsData.current.name = "Application";
     this.breadcrumbsData.current.url = `/home/journeys/${this.parentJourney.id}/${appid}`;

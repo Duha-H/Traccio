@@ -19,7 +19,6 @@ export class WishlistApplicationViewComponent
   parentJourney: Journey;
 
   ngOnInit() {
-    console.log("WishlistApplicationViewComponent init");
     const appid = this.route.snapshot.paramMap.get("appref");
     const existingWishlistApp = this.userStore.getWishlistApplication(appid);
 
@@ -39,6 +38,9 @@ export class WishlistApplicationViewComponent
       timeline: this.currApplicationDetails.timeline,
       notes: this.currApplicationDetails.notes,
     });
+
+    // Set title
+    this.titleService.setTitle(`${this.currApplicationDetails.positionTitle} @ ${this.currApplicationDetails.companyName} | Wishlist | Traccio`);
 
     // Set breadcrumbs
     this.breadcrumbsData.current.name = "Application";

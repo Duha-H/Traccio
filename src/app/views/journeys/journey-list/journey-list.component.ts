@@ -6,6 +6,7 @@ import { ResizeService } from 'src/app/controllers/resize.service';
 import { SliderContainerComponent } from 'src/app/shared-components/slider-container/slider-container.component';
 import { NotificationService } from 'src/app/controllers/notification.service';
 import { Subscription } from 'rxjs';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: "app-journey-list",
@@ -42,24 +43,20 @@ export class JourneyListComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     public rs: ResizeService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private titleService: Title,
   ) { }
 
   ngOnInit() {
+    this.titleService.setTitle('Journeys | Traccio');
     this.routeSub = this.route.params.subscribe((params) => {
       if (params.displayDrawer) {
         this.displayDrawer = true;
       }
     });
-    // this.userStore.journeys.subscribe(journeys => {
-    //   this.journeys = journeys;
-    //   console.log('!!! journeys fired:', this.journeys);
-    // });
-    // this.journeys = Object.values(this.userStore._journeys.getValue());
     this.journeySub = this.userStore.journeys.subscribe(journeys => {
       this.journeys = journeys;
     });
-    // this.userStore.updateJourneyData();
     const storedSliderIdx = sessionStorage.getItem('journeySliderIdx');
     if (storedSliderIdx) {
       this.sliderIdx = +storedSliderIdx;

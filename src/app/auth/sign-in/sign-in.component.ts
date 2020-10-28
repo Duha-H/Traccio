@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
 
@@ -15,9 +16,14 @@ export class SignInComponent implements OnInit {
   signInError = false;
   @ViewChild('submitButton') submitButton: ElementRef;
 
-  constructor(private router: Router, private authWrapper: AuthWrapperService) { }
+  constructor(
+    private router: Router,
+    private authWrapper: AuthWrapperService,
+    private titleService: Title
+  ) { }
 
   ngOnInit() {
+    this.titleService.setTitle('Sign In | Traccio');
     document.addEventListener('keyup', (event) => {
       if (event.keyCode === 13) {
         this.submitButton.nativeElement.click();

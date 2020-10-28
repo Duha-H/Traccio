@@ -1,4 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
 
@@ -18,9 +19,11 @@ export class AccountRecoveryComponent implements OnInit {
     private router: Router,
     private authWrapper: AuthWrapperService,
     private route: ActivatedRoute,
+    private titleService: Title,
   ) { }
 
   ngOnInit() {
+    this.titleService.setTitle('Account Recovery | Traccio');
     this.route.params.subscribe(params => {
       if (params.state) {
         this.state = params.state;

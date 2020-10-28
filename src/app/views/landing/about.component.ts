@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
 import { ResizeService } from 'src/app/controllers/resize.service';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-about',
@@ -15,9 +16,14 @@ export class AboutComponent implements OnInit {
   @ViewChild('mobileNav') mobileNav: ElementRef;
   @ViewChild('sidenav') nav: ElementRef<HTMLDivElement>;
 
-  constructor(public resizeService: ResizeService, private router: Router) { }
+  constructor(
+    public resizeService: ResizeService,
+    private router: Router,
+    private titleService: Title,
+  ) { }
 
   ngOnInit() {
+    this.titleService.setTitle('About | Traccio');
     const hour = this.now.getHours();
     if (hour < 12) {
       this.timeOfDay = 'morning';

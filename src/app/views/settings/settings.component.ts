@@ -9,6 +9,7 @@ import { PreferencesStoreService } from 'src/app/controllers/preferences-store.s
 import { ResizeService } from 'src/app/controllers/resize.service';
 import { NotificationService } from 'src/app/controllers/notification.service';
 import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-settings',
@@ -46,9 +47,12 @@ export class SettingsComponent implements OnInit {
     public rs: ResizeService,
     private notificationService: NotificationService,
     private authWrapper: AuthWrapperService,
+    private titleService: Title,
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.titleService.setTitle('Settings | Traccio');
+  }
 
   setChange(index: number, changeState: boolean) {
     this.tabChanges[index] = changeState;
