@@ -39,7 +39,7 @@ export class UserStoreControllerService {
     let colorPalette = 'palette-0';
     let journeyInactive = 90;
     let appStale = 60;
-    this.loaderService.setLoadingState(true);
+    // this.loaderService.setLoadingState(true);
     await this.userCollection.doc(userid).get().toPromise()
       .then(result => {
         const data = result.data();
@@ -50,7 +50,7 @@ export class UserStoreControllerService {
       }).catch(error => {
         console.log('Error retrieving preference data:', error);
       });
-    this.loaderService.setLoadingState(false);
+    // this.loaderService.setLoadingState(false);
     return {
       theme,
       colorPalette,
@@ -142,7 +142,6 @@ export class UserStoreControllerService {
   async fetchUserJourneys(userid: string) {
     const journeys: {[key: string]: Journey} = {};
     const response = new Response();
-    this.loaderService.setLoadingState(true);
     let data: firebase.firestore.DocumentData;
     await this.userCollection.doc(userid).get().toPromise()
       .then(value => {
@@ -172,7 +171,6 @@ export class UserStoreControllerService {
       response.error('Looks like an error occured while trying to fetch your journeys');
       response.payload = error;
     });
-    this.loaderService.setLoadingState(false);
 
     return response;
   }
@@ -198,7 +196,6 @@ export class UserStoreControllerService {
   async fetchWishlistApps(userid: string): Promise<Response> {
     const response = new Response();
     response.payload = [];
-    this.loaderService.setLoadingState(true);
     await this.userCollection.doc(userid).get().toPromise()
       .then(value => {
         const data = value.data();
@@ -209,8 +206,6 @@ export class UserStoreControllerService {
         console.log('Error fetching wishlist apps:', error);
         response.error('Looks like an error occured while trying to fetch your wishlist applications');
       });
-    this.loaderService.setLoadingState(false);
-    console.log('WISHLIST loading deactivated');
 
     return response;
   }

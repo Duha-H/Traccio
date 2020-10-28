@@ -5,7 +5,6 @@ import { Response } from 'src/app/utils/response';
 import { ThemeManagerService } from './theme-manager.service';
 import { PALETTES, THEMES, ThemeType, PaletteType } from 'src/styling/palettes';
 import { UserStoreControllerService } from './user-store-controller.service';
-import { LoaderService } from './loader.service';
 
 @Injectable({
   providedIn: 'root'
