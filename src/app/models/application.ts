@@ -49,6 +49,7 @@ export class Application {
 	set appDate(date: Date) { this._appDate = date; }
 
 	get status() { return this._status; }
+	set status(status: string) { this._status = status; }
 
 	get source() { return this._source; }
 	set source(source: string) { this._source = source; }
@@ -57,6 +58,7 @@ export class Application {
 	set notes(notes: string) { this._notes = notes; }
 
 	get timeline() { return this._timeline; }
+	set timeline(timeline: TimelineDatum[]) { this._timeline = timeline; }
 
 	setStatus(status: string, date?: string | Date) {
 		this._status = status;

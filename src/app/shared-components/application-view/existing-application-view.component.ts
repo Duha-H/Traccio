@@ -20,7 +20,6 @@ export class ExistingApplicationViewComponent
   parentJourney: Journey;
 
   ngOnInit() {
-    console.log("ExistingApplicationViewComponent init");
     const appid = this.route.snapshot.paramMap.get("appref");
     const parentID = this.route.snapshot.paramMap.get("id");
     if (parentID) {
@@ -101,12 +100,7 @@ export class ExistingApplicationViewComponent
     this.currApplicationDetails.appDate = this.appFormGroup.get('appDate').value;
     this.currApplicationDetails.source = this.appFormGroup.get('source').value;
     this.currApplicationDetails.notes = this.appFormGroup.get('notes').value;
-    if (this.dateUpdated) {
-      console.log('updating date', this.appFormGroup.get('status').value);
-      this.currApplicationDetails.updateAppDate(this.appFormGroup.get('appDate').value);
-    }
-    if (this.statusUpdated) {
-      this.currApplicationDetails.setStatus(this.appFormGroup.get('status').value, this.statusUpdateDate);
-    }
+    this.currApplicationDetails.status = this.appFormGroup.get('status').value;
+    this.currApplicationDetails.timeline = this.appFormGroup.get('timeline').value;
   }
 }

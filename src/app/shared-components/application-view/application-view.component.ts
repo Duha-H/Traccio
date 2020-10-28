@@ -91,17 +91,33 @@ export class ApplicationViewComponent implements OnInit {
       const currTimeline = this.appFormGroup.get('timeline').value as TimelineDatum[];
       currTimeline.push({ status: value, date: this.statusUpdateDate });
       this.appFormGroup.patchValue({
-        [attrib]: value,
+        status: value,
         timeline: currTimeline,
       });
-      this.statusUpdated = true;
-      this.timelineProps = {
+      this.timeline.updateProps({
         data: this.appFormGroup.get('timeline').value,
         colorMappings: STATUS_COLORS
-      };
-      this.timeline.draw(); // trigger timeline re-draw
+      });
+      this.statusUpdated = true;
     } else if (attrib === this.ATTRIBS.DATE) {
-      this.appFormGroup.patchValue({ appDate: value });
+      const currTimeline = this.appFormGroup.get('timeline').value as TimelineDatum[];
+      if (currTimeline && this.timeline) {
+        currTimeline.map(entry => {
+          if (entry.status === STATUS.IN_REVIEW) {
+            entry.date = new Date(value);
+          }
+        });
+        this.appFormGroup.patchValue({
+          appDate: value,
+          timeline: currTimeline,
+        });
+        this.timeline.updateProps({
+          data: this.appFormGroup.get('timeline').value,
+          colorMappings: STATUS_COLORS
+        });
+      } else {
+        this.appFormGroup.patchValue({ appDate: value, });
+      }
       this.dateUpdated = true;
     } else {
       this.appFormGroup.patchValue({ [attrib]: value });

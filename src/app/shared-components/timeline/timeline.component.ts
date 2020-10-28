@@ -1,4 +1,4 @@
-import { OnInit, Component, ViewChild, ElementRef, Input, AfterViewInit } from '@angular/core';
+import { OnInit, Component, ViewChild, ElementRef, Input, AfterViewInit, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
 import { TimelineDatum } from 'src/app/models/types';
 import { STATUS } from 'src/app/models/constants';
 import { TimelinePropType, TimelineTooltipPropType } from '../types';
@@ -52,6 +52,11 @@ export class TimelineComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.draw();
+  }
+
+  updateProps(newProps: TimelinePropType) {
+    this.props = Object.assign({}, this.props, newProps);
+    this.draw(); // trigger re-draw
   }
 
   draw() {
