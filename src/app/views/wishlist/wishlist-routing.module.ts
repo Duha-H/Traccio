@@ -8,8 +8,8 @@ import { WishlistComponent } from './wishlist.component';
 
 const routes: Routes = [
   { path: "", component: WishlistComponent, },
-  { path: ":appref", component: WishlistApplicationViewComponent },
   { path: "new-app", component: NewApplicationViewComponent },
+  { path: ":appref", component: WishlistApplicationViewComponent },
 ];
 
 @NgModule({

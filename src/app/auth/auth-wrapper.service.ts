@@ -144,6 +144,7 @@ export class AuthWrapperService {
         palette: 'palette-0',
         journeyInactive: 90,
         appStale: 60,
+        wishlist: {},
       });
       // set response payload
       response.payload = user.user;
