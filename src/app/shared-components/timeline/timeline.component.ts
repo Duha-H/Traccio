@@ -24,8 +24,6 @@ export class TimelineComponent implements OnInit, AfterViewInit {
   ctx: CanvasRenderingContext2D;
   width: number;
   height: number;
-  canvasX: number;
-  canvasY: number;
   markers: TimelineMarker[] = [];
   displayTooltip = false;
   tooltipProps: TimelineTooltipPropType = { x: 0, y: 0 };
@@ -101,8 +99,13 @@ export class TimelineComponent implements OnInit, AfterViewInit {
   }
 
   onMouseHover(event: MouseEvent) {
+    // refresh canvas position values
+    // this seems to help with out-dated canvas top and left values
+    // that were causing missed hover detections
+    const rect = this.canvas.nativeElement.getBoundingClientRect();
     // detect collisions with markers
-    const markerOnHover = this._getMarkerOnHover((event.x - this.canvasX) * this.pixelRatio, (event.y - this.canvasY) * this.pixelRatio);
+    const markerOnHover = this._getMarkerOnHover((event.x - rect.left) * this.pixelRatio, (event.y - rect.top) * this.pixelRatio);
+    // console.log('mouse over:', event.x, event.y);
     if (markerOnHover) {
       this.markerOnHover = markerOnHover;
       this.displayTooltip = true;
@@ -149,9 +152,6 @@ export class TimelineComponent implements OnInit, AfterViewInit {
     this.canvas.nativeElement.height = parentHeight * this.pixelRatio;
     this.canvas.nativeElement.style.width = `${parentWidth}px`;
     this.canvas.nativeElement.style.height = `${parentHeight}px`;
-    const rect = this.canvas.nativeElement.getBoundingClientRect();
-    this.canvasX = rect.left;
-    this.canvasY = rect.top;
     // update size and marker positions
     this.width = this.canvas.nativeElement.width;
     this.height = this.canvas.nativeElement.height;

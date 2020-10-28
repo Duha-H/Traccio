@@ -23,7 +23,9 @@ export class ExistingApplicationViewComponent
     const appid = this.route.snapshot.paramMap.get("appref");
     const parentID = this.route.snapshot.paramMap.get("id");
     if (parentID) {
-      this.parentJourney = this.userStore.getJourney(parentID);
+      this.userStore.journeys.subscribe(journeys => {
+        this.parentJourney = journeys.filter(journey => journey.id === parentID)[0];
+      });
       if (!this.parentJourney) {
         // parent not resolved yet
         // redirect to journey list

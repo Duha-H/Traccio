@@ -142,7 +142,7 @@ export class UserStoreControllerService {
   async fetchUserJourneys(userid: string) {
     const journeys: {[key: string]: Journey} = {};
     const response = new Response();
-    // this.loaderService.setLoadingState(true);
+    this.loaderService.setLoadingState(true);
     let data: firebase.firestore.DocumentData;
     await this.userCollection.doc(userid).get().toPromise()
       .then(value => {
@@ -172,7 +172,7 @@ export class UserStoreControllerService {
       response.error('Looks like an error occured while trying to fetch your journeys');
       response.payload = error;
     });
-    // this.loaderService.setLoadingState(false);
+    this.loaderService.setLoadingState(false);
 
     return response;
   }

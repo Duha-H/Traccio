@@ -21,7 +21,6 @@ export class Application {
 			this._appDate = typeof data.date === 'string'
 				? this._adjustDateString(data.date)
 				: new Date(data.date);
-			// this._appDate = data.date;
 			this._status = data.status;
 			if (data.timeline && data.timeline.length !== 0) {
 				this._timeline = this._modifyTimelineData(data.timeline);
@@ -85,7 +84,6 @@ export class Application {
 			if (value.status === STATUS.IN_REVIEW) {
 				value.date = newDate;
 			}
-			return value;
 		});
 	}
 
