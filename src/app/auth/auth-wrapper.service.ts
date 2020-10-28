@@ -327,55 +327,6 @@ export class AuthWrapperService {
     return response;
   }
 
-  async updateUserAttributes(attrUpdates: {[key: string]: string}): Promise<Response> {
-    const response = new Response();
-
-    for (const attribute of Object.keys(attrUpdates)) {
-      if (!validUpdateAttributes[attribute]) {
-        // since this doesn't need to be user-facing
-        // log the error, and remove the invalid attribute
-        delete attrUpdates[attribute];
-        console.log('AuthWrapper error: attempted to update an invalid parameter:', attribute);
-      }
-    }
-
-    // try {
-    //   // SUCCESS
-    //   const user = await this.getCurrentAuthenticatedUser();
-    //   await Auth.updateUserAttributes(user, attrUpdates);
-    //   const updatedUser = await this.getCurrentAuthenticatedUser();
-    //   response.payload = updatedUser;
-    // } catch (error) {
-    //   response.payload = error.code;
-    //   switch (error.code) {
-    //     case 'AliasExistsException':
-    //       response.error('Another account with the email address you provided already exists. No changes were saved.');
-    //       break;
-    //     case 'InvalidParameterException':
-    //       response.error('Attempted to update an invalid parameter:', error.message);
-    //       break;
-    //     case 'PasswordResetRequiredException':
-    //       // tslint:disable-next-line: max-line-length
-    //       response.error('Looks like your password needs to be updated before any changes can be applied. Please reset your password first then try again');
-    //       break;
-    //     case 'UserNotConfirmedException':
-    //       response.error('Looks like your email address was not verified. Please verify your email first before applying any changes.');
-    //       break;
-    //     case 'UserNotFoundException':
-    //       response.error('A user account with the email address you provided does not exist.');
-    //       console.error('AuthError: updateAttributes user not found, this should not happen.', error);
-    //       break;
-    //     default:
-    //       console.error('AuthWrapper: unexpected forgotPassword error:', error);
-    //       response.error('An unexpected error occured, please try again');
-    //       break;
-    //   }
-    //   console.log("nope", error);
-    // }
-
-    return response;
-  }
-
   async verifyCurrentUserAttributeSubmit(attribute: string, code: string): Promise<Response> {
     const response = new Response();
 

@@ -13,6 +13,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/internal/operators/map';
+import { LoaderService } from '../controllers/loader.service';
+import { Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: "root",
@@ -26,6 +28,7 @@ export class UserStoreService {
     3: mock.testJourney4,
   };
   dataUpdated = false;
+  userSubscription: Subscription;
 
   // Not exposing _journeys observer to prevent clients
   // of UserStoreService from directly updating values
@@ -55,16 +58,17 @@ export class UserStoreService {
     private dataManager: DataManagerService,
     private authWrapper: AuthWrapperService,
     private firestore: AngularFirestore,
+    private loaderService: LoaderService,
   ) { }
 
   /**
    * Initial Setup Methods
    */
 
-  setUser(firstName: string, lastName: string, id: string, email: string, verified: boolean, identityProvider?: 'DEFAULT' | 'GOOGLE') {
+  async setUser(firstName: string, lastName: string, id: string, email: string, verified: boolean, identityProvider?: 'DEFAULT' | 'GOOGLE') {
     const newUser = new User();
     newUser.userid = id;
-    this.firestore.collection('users').doc<UserInput>(id).valueChanges().subscribe(value => {
+    this.userSubscription = this.firestore.collection('users').doc<UserInput>(id).valueChanges().subscribe(value => {
       newUser.firstName = value.firstName;
       newUser.lastName = value.lastName;
       newUser.email = value.email;
@@ -72,7 +76,7 @@ export class UserStoreService {
       newUser.identityProvider = identityProvider ? identityProvider : 'DEFAULT';
     });
     this._user.next(newUser);
-    this.fetchData();
+    await this.fetchData();
   }
 
   async updateUserAttributes(updates: {
@@ -112,7 +116,7 @@ export class UserStoreService {
 
   async fetchData() {
     /**
-     * Potentially look into turning it into an SPA, or somehow
+     * TODO: Potentially look into turning it into a PWA, or somehow
      * figure out a way to collect data offline
      * ALSO catch an offline client error
      */
@@ -164,6 +168,7 @@ export class UserStoreService {
   clearData() {
     this._user.next(new User());
     this.updateJourneyData({});
+    this.userSubscription.unsubscribe();
   }
 
   /**

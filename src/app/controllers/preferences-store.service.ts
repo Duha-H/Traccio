@@ -19,10 +19,11 @@ export class PreferencesStoreService {
   constructor(
     private themeManager: ThemeManagerService,
     private controller: UserStoreControllerService,
-    private loaderService: LoaderService,
-  ) {
-    const storedTheme = localStorage.getItem('theme');
-    const storedPalette = localStorage.getItem('palette');
+  ) { }
+
+  init() {
+    const storedTheme = localStorage.getItem('traccioTheme');
+    const storedPalette = localStorage.getItem('traccioPalette');
     if (storedTheme
       && THEMES[storedTheme]
       && storedPalette
@@ -37,13 +38,12 @@ export class PreferencesStoreService {
     }
   }
 
-  async init(userid: string) {
+  async setUser(userid: string) {
     let currTheme: string;
     let currPalette: string;
     let journeyInactive: number;
     let appStale: number;
     this.userid = userid;
-    this.loaderService.setLoadingState(true);
     await this.controller.fetchPrefData(userid)
       .then(value => {
         currTheme = value.theme;
@@ -68,16 +68,17 @@ export class PreferencesStoreService {
       appStale,
     };
     this._preferences.next(currPreferences);
-    this.reset();
-    this.loaderService.setLoadingState(false);
+    this.applyChanges();
   }
 
-  reset() {
+  applyChanges() {
     // apply theme & palette settings based on current values
     const themeObject = THEMES[this._preferences.getValue().theme.name];
     this.themeManager.setTheme(themeObject);
+    localStorage.setItem('traccioTheme', themeObject.name);
     const paletteObject = PALETTES[this._preferences.getValue().colorPalette.id];
     this.themeManager.setPalette(paletteObject);
+    localStorage.setItem('traccioPalette', paletteObject.id);
   }
 
   updatePreferences(updates: {[key: string]: string}) {
@@ -135,7 +136,7 @@ export class PreferencesStoreService {
           this.themeManager.setTheme(themeObject);
         }
       });
-    localStorage.setItem('theme', theme);
+    localStorage.setItem('traccioTheme', theme);
   }
 
   async updatePalette(palette: string) {
@@ -149,7 +150,7 @@ export class PreferencesStoreService {
           this.themeManager.setPalette(paletteObject);
         }
       });
-    localStorage.setItem('palette', palette);
+    localStorage.setItem('traccioPalette', palette);
   }
 
   async updateJourneyInactive(value: number) {

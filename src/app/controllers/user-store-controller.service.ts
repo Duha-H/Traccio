@@ -142,7 +142,7 @@ export class UserStoreControllerService {
   async fetchUserJourneys(userid: string) {
     const journeys: {[key: string]: Journey} = {};
     const response = new Response();
-    this.loaderService.setLoadingState(true);
+    // this.loaderService.setLoadingState(true);
     let data: firebase.firestore.DocumentData;
     await this.userCollection.doc(userid).get().toPromise()
       .then(value => {
@@ -158,7 +158,7 @@ export class UserStoreControllerService {
       });
     // retrieve info for each user journey from JOURNEYS_COLLECTION
     await Promise.all(
-      data.journeys.map((ref: string) => this.firestore.doc(ref).get().toPromise())
+      data.journeys.map(async (ref: string) => await this.firestore.doc(ref).get().toPromise())
     ).then(journeyData => {
       journeyData.forEach((datum: firebase.firestore.DocumentData) => {
         const input = datum.data();
@@ -172,7 +172,7 @@ export class UserStoreControllerService {
       response.error('Looks like an error occured while trying to fetch your journeys');
       response.payload = error;
     });
-    this.loaderService.setLoadingState(false);
+    // this.loaderService.setLoadingState(false);
 
     return response;
   }
@@ -195,24 +195,6 @@ export class UserStoreControllerService {
     return newJourney;
   }
 
-  async fetchJourneyApps(journeyid: string) {
-    let apps: Application[] = [];
-    this.loaderService.setLoadingState(true);
-    await this.journeyCollection.doc(journeyid).get().toPromise()
-      .then(journeyInfo => {
-        const applicationsObj = journeyInfo.data().applications;
-        for (const appid of Object.keys(applicationsObj)) {
-          apps.push(new Application(applicationsObj[appid]));
-        }
-      }).catch(error => {
-        console.log(`Error fetching journey ${journeyid} apps:`, error);
-        apps = [];
-      });
-    this.loaderService.setLoadingState(false);
-
-    return apps;
-  }
-
   async fetchWishlistApps(userid: string): Promise<Response> {
     const response = new Response();
     response.payload = [];
@@ -228,6 +210,7 @@ export class UserStoreControllerService {
         response.error('Looks like an error occured while trying to fetch your wishlist applications');
       });
     this.loaderService.setLoadingState(false);
+    console.log('WISHLIST loading deactivated');
 
     return response;
   }

@@ -25,15 +25,14 @@ export class AppComponent implements OnInit {
     public router: Router,
     private authWrapper: AuthWrapperService,
     private prefStore: PreferencesStoreService,
+    private loaderService: LoaderService,
   ) {  }
 
   async ngOnInit() {
-    this.prefStore.reset();
+    this.prefStore.init();
     try {
       this.fireAuth.authState.subscribe(async user => { // fireAuth.authState is only triggered on sign-in/sign-out
         this.signedIn = user ? true : false;
-        // this.signedIn = authState.state === "signedIn";
-        console.log(">>> auth state changed", this.signedIn);
         if (!this.signedIn) {
           this.user = null;
           this.authWrapper.authState.signedIn = false;
@@ -43,7 +42,11 @@ export class AppComponent implements OnInit {
           // set user attributes and navigate to dashboard
           const identityProvder = 'DEFAULT';
           const userInfo = (await this.fireStore.collection('users').doc(user.uid).get().toPromise()).data();
-          this.userStore.setUser(
+          // retrieve and set user preferences
+          this.prefStore.setUser(user.uid);
+          // set user info
+          this.loaderService.setLoadingState(true);
+          await this.userStore.setUser(
             userInfo.firstName,
             userInfo.lastName,
             user.uid,
@@ -51,9 +54,8 @@ export class AppComponent implements OnInit {
             user.emailVerified,
             identityProvder,
           );
-          // retrieve and set user preferences
-          this.prefStore.init(user.uid);
           console.log("App init: user authenticated and data fetched");
+          this.loaderService.setLoadingState(false);
         }
       });
     } catch (error) {
