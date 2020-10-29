@@ -33,8 +33,7 @@ export class ExistingApplicationViewComponent
         this.router.navigate(["/home/journeys"]);
         return;
       }
-      const existingApp = this.userStore.getApplication(this.parentJourney.id, appid);
-      this.currApplicationDetails = Object.assign(new Application(), existingApp);
+      this.currApplicationDetails = Object.create(this.userStore.getApplication(this.parentJourney.id, appid));
     }
 
     if (!this.currApplicationDetails) {

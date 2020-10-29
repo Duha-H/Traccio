@@ -128,14 +128,14 @@ export class DataManagerService {
     let statusDatum = this.statusData[journeyid];
     if (dateString !== newDateString) {
       if (calendarDatum && calendarDatum[dateString]) {
-        // double-checking that journey & dateString exists
+        // double-checking that journey & dateString exist
         calendarDatum[dateString] -= 1;
         calendarDatum = this._updateDatum(calendarDatum, newDateString);
       }
     }
     if (prevApp.status !== updatedApp.status) {
       if (statusDatum && statusDatum[prevApp.status]) {
-        // double-checking that journey & status exists
+        // double-checking that journey & status exist
         statusDatum[prevApp.status] -= 1;
         statusDatum = this._updateDatum(statusDatum, updatedApp.status);
       }
@@ -275,6 +275,7 @@ export class DataManagerService {
       datum[property] += 1;
     } else {
       datum[property] = 1;
+      console.log('adding new status', property, datum[property]);
     }
     return datum;
   }

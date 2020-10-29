@@ -87,11 +87,13 @@ export class ApplicationViewComponent implements OnInit {
   updateField(attrib: string, value: string) {
     if (attrib === this.ATTRIBS.STATUS) {
       if (this.newApp) {
-        console.log('??? we\'re here for some reason');
         this.statusUpdateDate = this.appFormGroup.controls.appDate.value;
       }
-      const currTimeline = this.appFormGroup.get('timeline').value as TimelineDatum[];
-      currTimeline.push({ status: value, date: this.statusUpdateDate });
+      const currTimeline: TimelineDatum[] = [];
+      currTimeline.push(
+        ...this.appFormGroup.get('timeline').value,
+        { status: value, date: this.statusUpdateDate },
+      );
       this.appFormGroup.patchValue({
         status: value,
         timeline: currTimeline,
@@ -102,7 +104,10 @@ export class ApplicationViewComponent implements OnInit {
       });
       this.statusUpdated = true;
     } else if (attrib === this.ATTRIBS.DATE) {
-      const currTimeline = this.appFormGroup.get('timeline').value as TimelineDatum[];
+      const currTimeline: TimelineDatum[] = [];
+      currTimeline.push(
+        ...this.appFormGroup.get('timeline').value,
+      );
       if (currTimeline && this.timeline) {
         currTimeline.map(entry => {
           if (entry.status === STATUS.IN_REVIEW) {

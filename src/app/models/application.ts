@@ -35,6 +35,16 @@ export class Application {
 		}
 	}
 
+	*[Symbol.iterator]() {
+		yield this._companyName;
+		yield this._positionTitle;
+		yield this._appDate;
+		yield this._source;
+		yield this._status;
+		yield this._timeline;
+		yield this._notes;
+	}
+
 	get id() { return this._id; }
 	set id(id: string) { this._id = id; }
 
