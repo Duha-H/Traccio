@@ -64,11 +64,11 @@
   <!-- Conditionally-visible Bottom Nav -->
   <div *ngIf="resizeService.mobileSize$ | async" class="bottomnav">
     <ul>
-      <li title="Journeys"><a role="button" (click)="navigate('journeyRoute')" routerLinkActive="active"
+      <li title="Journeys"><a role="button" (click)="navigate('journeyRoute')" routerLink="/home/journeys" routerLinkActive="active"
           #navJourneysIcon>
           <mat-icon [inline]="true" aria-hidden="false" aria-label="Journeys icon">list</mat-icon>
         </a></li>
-      <li title="Dashboard"><a href="#" routerLink="/home" (click)="clearSearch()" routerLink="/home/journeys" routerLinkActive="active"
+      <li title="Dashboard"><a href="#" (click)="clearSearch()" routerLink="/home" routerLinkActive="active"
           [routerLinkActiveOptions]="{exact: true}" #navHomeIcon>
           <mat-icon [inline]="true" aria-hidden="false" aria-label="Dashboard icon">home</mat-icon>
         </a></li>

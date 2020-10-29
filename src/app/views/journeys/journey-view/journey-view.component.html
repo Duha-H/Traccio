@@ -138,7 +138,7 @@
       <div class="overlay-item" #endDateEdit>
         <label>End Date</label>
         <mat-form-field class="form-element" color="accent">
-          <input matInput [matDatepicker]="endPicker" (click)="endPicker.open()" [(ngModel)]="currJourneyDetails.endDate" (dateChange)="updateEndDate($event)" name="enDate" #enDate="ngModel" disabled/>
+          <input matInput [matDatepicker]="endPicker" (click)="endPicker.open()" [(ngModel)]="currJourneyDetails.endDate" (dateChange)="updateEndDate($event)" name="enDate" #enDate="ngModel" [min]="currJourneyDetails.startDate" disabled/>
           <mat-datepicker-toggle matSuffix [for]="endPicker">
             <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
           </mat-datepicker-toggle>

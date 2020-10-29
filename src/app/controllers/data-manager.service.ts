@@ -275,7 +275,6 @@ export class DataManagerService {
       datum[property] += 1;
     } else {
       datum[property] = 1;
-      console.log('adding new status', property, datum[property]);
     }
     return datum;
   }

@@ -68,7 +68,8 @@
         <label for="">{{ this.wishlistApp ? 'Date Added' : 'Date Applied' }}</label>
         <mat-form-field class="form-element" color="accent">
           <input matInput [matDatepicker]="startPicker" (dateChange)="updateField(ATTRIBS.DATE, $event.value)"
-            [value]="appFormGroup.controls.appDate.value" name="stDate" />
+            [value]="appFormGroup.controls.appDate.value" name="stDate"
+            [min]="parentJourney ? parentJourney.startDate : null" />
           <mat-datepicker-toggle matSuffix [for]="startPicker">
             <mat-icon matDatepickerToggleIcon>arrow_drop_down</mat-icon>
           </mat-datepicker-toggle>
@@ -122,7 +123,10 @@
     <mat-form-field class="form-element" color="accent">
       <input matInput [matDatepicker]="statusPicker"
         [(ngModel)]="statusUpdateDate" name="statusDate"
-        #statusDate="ngModel" />
+        #statusDate="ngModel"
+        [min]="appFormGroup.controls.timeline.value.length > 1
+          ? appFormGroup.controls.timeline.value[appFormGroup.controls.timeline.value.length - 2].date
+          : appFormGroup.controls.timeline.value[0].date" />
       <mat-datepicker-toggle matSuffix [for]="statusPicker">
         <mat-icon matDatepickerToggleIcon>arrow_drop_down</mat-icon>
       </mat-datepicker-toggle>
