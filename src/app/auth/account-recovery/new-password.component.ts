@@ -4,7 +4,7 @@ import { OnInit, Component, EventEmitter, Output, Input, ElementRef, ViewChild }
   selector: 'new-password',
   template: '\
   <div class="recovery-component">\
-    <p>Awesome! A verification code was sent to your email.<br>\
+    <p>Awesome! A verification code was sent to {{email}}.<br>\
     Enter the verification code below.</p>\
     <br>\
 		<text-field [width]="360" (inputChange)="code=$event" [label]="\'Verification Code\'"></text-field>\
@@ -22,6 +22,7 @@ export class NewPasswordComponent implements OnInit {
   newPassword = '';
   confirmedPassword = '';
   @Input() error = '';
+  @Input() email = '';
   @Output() submitNewPassword = new EventEmitter();
   @Output() resendCode = new EventEmitter();
   @ViewChild('submitButton') submitButton: ElementRef;
