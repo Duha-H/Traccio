@@ -6,7 +6,7 @@
 				<text-field [width]="360" height="8" (inputChange)="setInput($event, 'email')" [label]="'Email'" [type]="'email'"></text-field>
 				<text-field [width]="360" height="8" (inputChange)="setInput($event, 'password')" [label]="'Password'" [type]="'password'"></text-field>
 				<p class="warning-text">{{error}}</p>
-				<button type="submit" class="submit-button" #submitButton>Sign in</button>
+				<button type="submit" class="submit-btn" #submitButton>Sign in</button>
 			</form>
 			<a href="#" routerLink="/accountrecovery" class="login-link">Forgot password?</a>
 			<p class="login-link">Don't have an account? <a href="#" routerLink="/signup" class="login-link">Sign up</a></p>
@@ -17,7 +17,7 @@
 			<div class="spacer"></div>
 		</div>
 		<div class="signin-container">
-			<button (click)="signIn('Google')" type="submit" class="submit-button social-signin">
+			<button (click)="signIn('Google')" type="submit" class="submit-btn social-signin">
 				Sign in with Google
 				<img src="/assets/icons/google_logo.svg" alt="Google logo">
 			</button>

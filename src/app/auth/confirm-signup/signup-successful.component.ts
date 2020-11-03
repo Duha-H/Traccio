@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   <div class="confirm-signup-container">\
     <h2>Confirm Sign Up</h2>\
     <p style="margin-top: 80px;">Sign up confirmed. Looks like you\'re all set!</p>\
-    <button (click)="handleSubmit()" class="submit-button">Sign in</button>\
+    <button (click)="handleSubmit()" class="submit-btn">Sign in</button>\
     <p style="margin-top: 0;">Create a new account? <a href="" routerLink="/signup" class="login-link">Sign up</a></p>\
   </div>',
   styleUrls: ["./confirm-signup.component.css"],

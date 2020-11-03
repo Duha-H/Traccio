@@ -24,8 +24,7 @@ div.overlay-inner-container {
   max-height: 80%;
   min-width: 350px;
   background-color: var(--bg);
-  padding: 40px 15px;
-  padding-top: 25px;
+  padding: 25px 15px;
   border-radius: 10px;
 	box-shadow: var(--shadow-overlay);
   box-sizing: border-box;

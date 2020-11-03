@@ -23,7 +23,7 @@
   margin: 0;
 }
 
-.submit-button {
+.submit-btn {
   height: 40px;
   max-width: 180px;
   background-color: var(--titles-primary);

@@ -11,7 +11,7 @@ import { OnInit, Component, EventEmitter, Output, Input, ElementRef, ViewChild }
 		<text-field [width]="360" (inputChange)="newPassword=$event" [label]="\'New Password\'" [type]="\'password\'"></text-field>\
 		<text-field (inputChange)="confirmedPassword=$event" [label]="\'Re-enter Your New Password\'" [type]="\'password\'"></text-field>\
 		<p class="warning-text">{{error}}<br></p>\
-    <button (click)="handleSubmit()" class="submit-button" #submitButton>Set New Password</button>\
+    <button (click)="handleSubmit()" class="submit-btn" #submitButton>Set New Password</button>\
 	  <p>Didn\'t receive a verification code? <a href="" (click)="handleResend()" class="login-link">Resend code</a></p>\
 	</div>',
   styleUrls: ["./account-recovery.component.css"],

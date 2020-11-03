@@ -263,8 +263,13 @@
     <ng-template #loadedImg>
       <img class="download-img" src="{{downloadImgSrc}}" #downloadImg>
     </ng-template>
-    <a href="{{downloadImgSrc}}" download="{{downloadName}}"  #downloadLink>
-      <button class="submit-button" >Save Image<mat-icon [inline]="true" aria-hidden="false" aria-label="Save Image">save</mat-icon></button>
-    </a>
+    <div class="spanning-content">
+      <div class="spacer"></div>
+      <a href="{{downloadImgSrc}}" download="{{downloadName}}"  #downloadLink>
+        <button class="submit-btn" >Save Image<mat-icon [inline]="true" aria-hidden="false" aria-label="Save Image">save</mat-icon></button>
+      </a>
+      <button class="submit-btn cancel-btn" (click)="hideImgOverlay()">Cancel</button>
+    </div>
+    
   </div>
 </app-overlay>

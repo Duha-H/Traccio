@@ -82,7 +82,7 @@ form * {
   height: 100%;
 }
 
-.overlay-content .submit-button {
+.overlay-content .submit-btn {
   margin-bottom: 0;
 }
 
@@ -123,7 +123,7 @@ mat-checkbox {
 
 }
 
-.submit-button {
+.submit-btn {
   margin: auto;
   /* margin-left: 11px; */
   margin-top: 70px;

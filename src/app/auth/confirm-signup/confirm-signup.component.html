@@ -11,7 +11,7 @@
       <p>A confirmation code was sent to your email, enter the code below.</p>
       <text-field (inputChange)="code=$event" [label]="'Confirmation Code'"></text-field>
       <p class="warning-text">{{error}}<br></p>
-      <button (click)="confirmSignup()" class="submit-button" #submitButton>Confirm Sign Up</button>
+      <button (click)="confirmSignup()" class="submit-btn" #submitButton>Confirm Sign Up</button>
       <p>Still haven't received a confirmation code?
         <a *ngIf="resendLimit != 0; else limitReached" role="button" (click)="handleResend()" class="login-link">Resend code</a>
         <ng-template #limitReached>

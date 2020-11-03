@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   template: '\
   <div class="recovery-component">\
     <p style="margin-top: 160px;">Password successfully reset!</p>\
-    <button style="margin-top: 160px;" (click)="handleSubmit()" class="submit-button">Sign in</button>\
+    <button style="margin-top: 160px;" (click)="handleSubmit()" class="submit-btn">Sign in</button>\
     <p style="margin-top: 0;">Create a new account? <a href="" routerLink="/signup" class="login-link">Sign up</a></p>\
   </div>',
   styleUrls: ["./account-recovery.component.css"],

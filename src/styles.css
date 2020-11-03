@@ -192,7 +192,7 @@ img.logo {
   color: var(--titles-secondary);
 }
 
-.submit-button {
+.submit-btn {
   background-color: #c1cace;
   color: var(--bg);
   font-size: 10pt;
@@ -201,14 +201,24 @@ img.logo {
   border: 1px solid transparent;
   margin: 30px auto;
   width: 100%;
+  line-height: 1.3em;
 }
 
-.submit-button:hover {
+.submit-btn.cancel-btn {
+  background-color: var(--titles-secondary);
+  margin-left: 10px;
+}
+
+.submit-btn:hover {
   background-color: var(--accent);
   cursor: pointer;
 }
 
-button.submit-button.pulse {
+.submit-btn.cancel-btn:hover {
+  background-color: #c1cace;
+}
+
+button.submit-btn.pulse {
   background-color: var(--accent);
   animation: 0.2s button-pulse linear;
 }
@@ -292,13 +302,14 @@ footer {
   color: var(--bg);
 }
 
-.add-btn p, .submit-button p {
+.add-btn p, .submit-btn p {
   /* font-size: 11pt; */
   line-height: 30px;
   font-weight: 500;
   color: var(--text);
   margin: 0;
   margin-right: 8px;
+  white-space: nowrap;
 }
 
 .add-btn mat-icon,
@@ -311,11 +322,11 @@ footer {
 }
 
 button.add-btn:hover mat-icon,
-button.submit-button:hover mat-icon,
+button.submit-btn:hover mat-icon,
 button.add-btn:hover mat-icon.mat-icon-inline,
-button.submit-button:hover mat-icon.mat-icon-inline,
+button.submit-btn:hover mat-icon.mat-icon-inline,
 button.add-btn:hover p,
-button.submit-button:hover p {
+button.submit-btn:hover p {
   color: var(--bg);
 }
 
@@ -373,7 +384,7 @@ p.answer a:hover {
     padding: 0 5px;
   }
 
-  .submit-button {
+  .submit-btn {
     margin: 15px 0;
   }
 

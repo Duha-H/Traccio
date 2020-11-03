@@ -272,7 +272,7 @@ calendar-wrapper {
   width: 6em;
 }
 
-.add-btn mat-icon, .submit-button mat-icon {
+.add-btn mat-icon, .submit-btn mat-icon {
   line-height: 30px;
   font-weight: 500;
   font-size: 16pt;
@@ -286,6 +286,11 @@ calendar-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 15px;
+}
+
+.overlay-content .spanning-content {
+  width: 100%;
 }
 
 img.logo {
@@ -295,11 +300,10 @@ img.logo {
 img.download-img {
   max-width: 100%;
   max-height: 400px;
-  padding: 15px;
   box-sizing: border-box;
 }
 
-.overlay-content .submit-button {
+.overlay-content .submit-btn {
   margin-bottom: 0;
   width: auto;
   display: flex;
@@ -307,7 +311,7 @@ img.download-img {
   align-items: center;
 }
 
-.overlay-content .submit-button mat-icon {
+.overlay-content .submit-btn mat-icon {
   margin-left: 10px;
   line-height: inherit;
   color: var(--bg);

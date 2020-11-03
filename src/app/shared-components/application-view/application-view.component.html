@@ -106,7 +106,7 @@
         <label for="journey">{{ journey.title }}</label>
       </li>
     </ul>
-    <button class="submit-button" (click)="addApplicationToJourney(selectedJourney)">Add</button>
+    <button class="submit-btn" (click)="addApplicationToJourney(selectedJourney)">Add</button>
   </div>
 </app-overlay>
 
@@ -132,6 +132,6 @@
       </mat-datepicker-toggle>
       <mat-datepicker color="accent" disabled="false" #statusPicker></mat-datepicker>
     </mat-form-field>
-    <button class="submit-button" (click)="updateField(ATTRIBS.STATUS, statusUpdateValue)">Update Status</button>
+    <button class="submit-btn" (click)="updateField(ATTRIBS.STATUS, statusUpdateValue)">Update Status</button>
   </div>
 </app-overlay>
