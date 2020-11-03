@@ -17,6 +17,7 @@ import { PieDatum } from '@nivo/pie';
 import { LoaderService } from 'src/app/controllers/loader.service';
 import { map } from 'rxjs/internal/operators/map';
 import { Title } from '@angular/platform-browser';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: "app-dashboard",
@@ -48,8 +49,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
   lineChartMode: 'week' | 'month' | 'year' = 'week';
   journeySub: Subscription;
   prefSub: Subscription;
+  displayDownloadOverlay = false;
+  downloadImgSrc: string | HTMLCanvasElement = '';
+  downloadName = '';
 
-  @ViewChild('statusContainer') statContainer: ElementRef;
+  downloadImg: HTMLImageElement;
+  @ViewChild('downloadImg') set imgRef(ref: HTMLImageElement) {
+    if (ref) {
+      this.downloadImg = ref;
+    }
+  }
 
   constructor(
     private userStore: UserStoreService,
@@ -181,6 +190,24 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   navigateToAddJourney() {
     this.router.navigate(['/home/journeys', { displayDrawer: true }]);
+  }
+
+  saveAsImg(element: HTMLElement, downloadName: string) {
+    this.displayDownloadOverlay = true;
+    html2canvas(element, {
+      backgroundColor: null,
+    }).then(canvas => {
+        const imgUrl = canvas.toDataURL('image/png');
+        this.downloadImgSrc = imgUrl;
+        this.downloadName = downloadName;
+      }).catch(error => {
+        console.log('Error downloading image', error);
+      });
+  }
+
+  hideImgOverlay() {
+    this.displayDownloadOverlay = false;
+    this.downloadImgSrc = '';
   }
 
   private _setLineChartAxes(frequencyData: FormattedFrequencyData): {

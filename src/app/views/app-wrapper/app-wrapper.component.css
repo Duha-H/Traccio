@@ -41,12 +41,6 @@ text-field.toolbar-search {
   font-size: 18pt;
 }
 
-img.logo {
-  width: 8em;
-  margin-right: 10px;
-  color: var(--titles-secondary);
-}
-
 .search .input-container div {
   height: 5px;
 }
@@ -217,11 +211,6 @@ a:hover {
     padding: 10px 0;
     align-items: center;
     width: 100%;
-  }
-
-  img.logo {
-    width: 1.5em;
-    margin-left: 15px;
   }
 
   .content {

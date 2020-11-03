@@ -5,51 +5,6 @@ import { Component, Input, OnInit, Output, EventEmitter } from "@angular/core";
 import { ReactWrapper } from "./react-wrapper.component";
 import { ResponsivePieCanvas, PieCanvasProps, AccessorFunc, PieDatum } from "@nivo/pie";
 
-interface PieChartProps {
-  data: {
-    id: string | number;
-    value: number;
-    [key: string]: string | number;
-  }[];
-  width?: number;
-  height?: number;
-  pixelRatio?: number;
-  startAngle?: number;
-  endAngle?: number;
-  fit?: boolean;
-  innerRadius?: number;
-  padAngle?: number;
-  cornerRadius?: number;
-  sortByValue?: boolean;
-  margin?: {};
-  colors?: string[];
-  defs?: object[];
-  fill?: object[];
-  borderWidth?: number;
-  borderColor?: string | object | Function;
-  enableRadialLabels?: boolean;
-  radialLabel?: string | Function;
-  radialLabelsSkipAngle?: number;
-  radialLabelsLinkOffset?: number;
-  radialLabelsLinkDiagonalLength?: number;
-  radialLabelsLinkHorizontalLength?: number;
-  radialLabelsTextXOffset?: number;
-  radialLabelsLinkStrokeWidth?: number;
-  radialLabelsTextColor?: string | object | Function;
-  radialLabelsLinkColor?: string | object | Function;
-  enableSlicesLabels?: boolean;
-  sliceLabel?: string | Function;
-  slicesLabelsSkipAngle?: number;
-  slicesLabelsTextColor?: string | object | Function;
-  isInteractive?: boolean;
-  onClick?: Function;
-  tooltip?: Function;
-  animate?: boolean;
-  motionStiffness?: number;
-  motionDamping?: number;
-  legends: any;
-}
-
 @Component({
   selector: "pie-chart-wrapper",
   template: '<span [id]="rootDomID"></span>',
@@ -93,8 +48,6 @@ export class ResponsivePieComponent extends ReactWrapper {
   protected getProps(): PieCanvasProps {
     const {
       data,
-      width,
-      height,
       margin,
       pixelRatio,
       innerRadius,
@@ -122,8 +75,6 @@ export class ResponsivePieComponent extends ReactWrapper {
     } = this;
     return {
       data,
-      // height,
-      // width,
       margin,
       pixelRatio,
       innerRadius,

@@ -186,21 +186,26 @@ app-account-recovery, app-confirm-signup {
   padding: var(--header-height) 0px;
 }
 
+img.logo {
+  width: 8em;
+  margin-right: 10px;
+  color: var(--titles-secondary);
+}
+
 .submit-button {
   background-color: #c1cace;
-  color: var(--text);
+  color: var(--bg);
   font-size: 10pt;
-  padding: 12px;
+  padding: 10px;
   border-radius: 5px;
   border: 1px solid transparent;
-  margin: 30px 0;
+  margin: 30px auto;
   width: 100%;
 }
 
 .submit-button:hover {
   background-color: var(--accent);
   cursor: pointer;
-  color: var(--bg);
 }
 
 button.submit-button.pulse {
@@ -287,7 +292,7 @@ footer {
   color: var(--bg);
 }
 
-.add-btn p {
+.add-btn p, .submit-button p {
   /* font-size: 11pt; */
   line-height: 30px;
   font-weight: 500;
@@ -296,7 +301,8 @@ footer {
   margin-right: 8px;
 }
 
-.add-btn mat-icon, .add-btn mat-icon.mat-icon-inline {
+.add-btn mat-icon,
+.add-btn mat-icon.mat-icon-inline {
   line-height: 30px;
   color: var(--text);
   /* margin-left: 8px; */
@@ -305,8 +311,11 @@ footer {
 }
 
 button.add-btn:hover mat-icon,
+button.submit-button:hover mat-icon,
 button.add-btn:hover mat-icon.mat-icon-inline,
-button.add-btn:hover p {
+button.submit-button:hover mat-icon.mat-icon-inline,
+button.add-btn:hover p,
+button.submit-button:hover p {
   color: var(--bg);
 }
 
@@ -353,6 +362,11 @@ p.answer a:hover {
 
   div.view-container {
     padding: 0 15px;
+  }
+
+  img.logo {
+    width: 1.5em;
+    margin-left: 15px;
   }
 
   .add-btn {

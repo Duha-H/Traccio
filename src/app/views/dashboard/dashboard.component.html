@@ -33,13 +33,14 @@
     <ng-template #journeyDetails>
       <div class="journey-details">
   
-        <div class="dashboard-component">
+        <div class="dashboard-component" #statsComponent>
           <div class="data-container-title spanning-content">
             <h4 style="font-weight: 500;">Recent Stats</h4>
             <div class="spacer"></div>
             <p>past <b style="cursor: pointer; color: var(--accent);"
-                (click)="toggleLineChartMode()">{{lineChartMode}}</b></p>
-            <mat-icon title="save info">open_in_new</mat-icon>
+                (click)="toggleLineChartMode()">{{lineChartMode}}</b>
+            </p>
+            <mat-icon title="save info" (click)="saveAsImg(statsComponent, 'traccio_stats.png')">save_alt</mat-icon>
           </div>
           <div class="stats-container">
             <div class="stat-item">
@@ -86,13 +87,13 @@
           </line-chart-wrapper>
         </div>
   
-        <div class="dashboard-component">
+        <div class="dashboard-component" #breakdownComponent>
           <div class="data-container-title spanning-content">
             <h4>
               Status Breakdown
             </h4>
             <div class="spacer"></div>
-            <mat-icon title="save info">open_in_new</mat-icon>
+            <mat-icon title="save info" (click)="saveAsImg(breakdownComponent, 'traccio_breakdown.png')">save_alt</mat-icon>
           </div>
   
           <div *ngIf="!isEmpty(selectedJourney.statusData); else statusPlaceholder;" class="status-container"
@@ -131,13 +132,13 @@
   
         </div>
   
-        <div class="dashboard-component">
+        <div class="dashboard-component" #calendarComponent>
           <div class="data-container-title spanning-content">
             <h4>
               Productivity Calendar
             </h4>
             <div class="spacer"></div>
-            <mat-icon title="save info">open_in_new</mat-icon>
+            <mat-icon title="save info" (click)="saveAsImg(calendarComponent, 'traccio_calendar.png')">save_alt</mat-icon>
           </div>
           <div *ngIf="!isEmpty(selectedJourney.calendarData); else calendarPlaceholder;" class="calendar-container">
             <calendar-wrapper
@@ -255,3 +256,15 @@
   </ng-template>
 
 </div>
+
+<app-overlay *ngIf="displayDownloadOverlay" (closeOverlay)="hideImgOverlay()" [title]="'Save as Image'">
+  <div class="overlay-content">
+    <img *ngIf="downloadImgSrc == ''; else loadedImg" src="/assets/logo_svg.svg" alt="loading logo" class="logo">
+    <ng-template #loadedImg>
+      <img class="download-img" src="{{downloadImgSrc}}" #downloadImg>
+    </ng-template>
+    <a href="{{downloadImgSrc}}" download="{{downloadName}}"  #downloadLink>
+      <button class="submit-button" >Save Image<mat-icon [inline]="true" aria-hidden="false" aria-label="Save Image">save</mat-icon></button>
+    </a>
+  </div>
+</app-overlay>

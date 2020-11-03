@@ -1,8 +1,6 @@
 import {
 	Component,
-	Input,
 	OnInit,
-	OnDestroy,
 	OnChanges,
 	AfterViewInit,
   SimpleChanges,
