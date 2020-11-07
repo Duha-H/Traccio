@@ -4,7 +4,7 @@
   </div>
   <div class="dashboard-content" *ngIf="selectedJourney; else elseContent">
     <div class="dashboard-header">
-      <h3>Hi there, {{ name }}!</h3>
+      <h3>{{ greeting }} ✌️</h3>
       <div class="spacer"></div>
       <div>
         <mat-form-field color="accent">
@@ -21,7 +21,7 @@
 
     <div class="dashboard-content" *ngIf="selectedJourney.value.applications.length == 0; else journeyDetails">
       <div class="placeholder-text">
-        <h4>Add applications to {{ selectedJourney.value.title }} and start tracking your progress here!</h4>
+        <h4>Add applications to {{ selectedJourney.value.title }} and start tracking your progress here! 💡</h4>
         <button class="add-btn" title="Add application" (click)="router.navigate(['/home/journeys', selectedJourney.value.id, 'new-app'])">
           <p *ngIf="!(resizeService.mobileSize$ | async)">Add</p>
           <mat-icon [inline]="true" aria-hidden="false" aria-label="Add application icon">add</mat-icon>

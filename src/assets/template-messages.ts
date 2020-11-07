@@ -1,11 +1,23 @@
 // template messages
 
 export const MESSAGES = {
-  congratulatory_offer: {
+  congratulatory: {
     0: "Congratulations on your offer!",
     1: "Congrats on your offer! You're killing it!",
     2: "Congrats on your offer! You're doing great!",
     3: "That's awesome! Congrats on your offer!",
+    4: "Dude! Congrats on that offer!",
+  },
+  greetings: {
+    0: "Hey there, ",
+    1: "Good to see ya, ",
+    2: "Hi, ",
+    3: "Ahoy, ",
+    4: "Hey, ",
+    5: "What up, ",
+    6: "'Sup, ",
+    7: "Hi there, ",
+    8: "Greetings, ",
   },
   test_messages: {
     // tslint:disable-next-line: max-line-length
