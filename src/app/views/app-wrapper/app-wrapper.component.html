@@ -1,23 +1,39 @@
 <div class="sidenav-container" mode="push">
   <!-- Nav -->
   <div class="sidenav" mode="side" role="navigation" *ngIf="!(resizeService.mobileSize$ | async)">
+    <a href="#" routerLink="/home" class="logo">
+      <img src="{{(prefStore.preferences | async).theme.name == 'dark' ? '/assets/logo_stroke_dark.png' : '/assets/logo_fill_light.png'}}" alt="Traccio Logo" class="logo">
+    </a>
     <ul class="sidenav">
-      <li title="Dashboard"><a href="#" routerLink="/home" (click)="clearSearch()" routerLinkActive="active"
+      <li title="Dashboard">
+        <a href="#" routerLink="/home" (click)="clearSearch()" routerLinkActive="active"
           [routerLinkActiveOptions]="{exact: true}" #navHomeIcon>
           <mat-icon [inline]="true" aria-hidden="false" aria-label="Dashboard icon">home</mat-icon>
         </a></li>
-      <li title="Journeys"><a role="button" (click)="navigate('journeyRoute')" routerLink="/home/journeys" routerLinkActive="active"
+      <li title="Journeys">
+        <a role="button" (click)="navigate('journeyRoute')" routerLink="/home/journeys" routerLinkActive="active"
           #navJourneysIcon>
           <mat-icon [inline]="true" aria-hidden="false" aria-label="Journeys icon">list</mat-icon>
         </a></li>
-      <li title="Wishlist"><a role="button" (click)="navigate('wishlistRoute')" routerLink="/home/wishlist" routerLinkActive="active"
+      <li title="Wishlist">
+        <a role="button" (click)="navigate('wishlistRoute')" routerLink="/home/wishlist" routerLinkActive="active"
           #navWishlistIcon>
           <mat-icon [inline]="true" aria-hidden="false" aria-label="Search icon">star_border</mat-icon>
         </a></li>
     </ul>
-    <a href="#" routerLink="/home/info" class="info" title="About Traccio">
-      <img src="/assets/icons/info_icon.svg" alt="Info icon" class="info">
-    </a>
+    <ul class="sidenav bottom">
+      <li>
+        <a href="#" routerLink="/home/settings" title="Settings" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }">
+          <mat-icon [inline]="true" aria-hidden="false" aria-label="Info icon">settings</mat-icon>
+        </a>
+      </li>
+      <li>
+        <a href="#" routerLink="/home/info" title="About Traccio" routerLinkActive="active">
+          <mat-icon [inline]="true" aria-hidden="false" aria-label="Info icon">info</mat-icon>
+        </a>
+      </li>
+    </ul>
+    
   </div>
 
   <!-- Content -->
@@ -25,18 +41,17 @@
 
     <!-- Toolbar -->
     <div class="toolbar" role="banner">
-      <a href="#" routerLink="/home" style="width: auto; height: auto;">
-        <img src="{{(resizeService.mobileSize$ | async) ? '/assets/logo_no_text@2x.png' : '/assets/logo_traccio@2x.png'}}" alt="Logo" class="logo">
+      <a *ngIf="(resizeService.mobileSize$ | async)" href="#" routerLink="/home" style="width: auto; height: auto;">
+        <img src="{{(prefStore.preferences | async).theme.name == 'dark' ? '/assets/logo_stroke_dark.png' : '/assets/logo_fill_light.png'}}" alt="Traccio Logo" class="logo">
       </a>
       <div class="spacer"></div>
-      <mat-icon *ngIf="resizeService.mobileSize$ | async" (click)="displaySearchField()" #activateSearchButton>search
-      </mat-icon>
+      <mat-icon (click)="displaySearchField()" #activateSearchButton>search</mat-icon>
       <text-field class="toolbar-search" (inputChange)="onSearch($event)" [text]="searchQuery" [label]="'Search'"
-        [displayLabel]="false" [suffixIcon]="'search'" [height]="1" [verticalPadding]="'5px'" #searchField></text-field>
+        [displayLabel]="false" [suffixIcon]="'search'" [height]="1" [verticalPadding]="'5px'" #searchField>
+      </text-field>
       <div #dropdownButton>
         <mat-icon (click)="toggleAccountDropdown()">account_box</mat-icon>
       </div>
-      <account-dropdown [dropdownItems]="dropdownItems" [displayDropdown]="displayDropdown"></account-dropdown>
     </div>
 
     <!-- Content Router -->
@@ -81,3 +96,4 @@
 
 </div>
 <toast-list [notifications]="notificationService.messages | async"></toast-list>
+<account-dropdown [dropdownItems]="dropdownItems" [displayDropdown]="displayDropdown"></account-dropdown>
