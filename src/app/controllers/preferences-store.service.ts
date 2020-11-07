@@ -80,6 +80,11 @@ export class PreferencesStoreService {
     localStorage.setItem('traccioPalette', paletteObject.id);
   }
 
+  setToDefault() {
+    this._preferences.next(DEFAULT_PREFERENCES);
+    this.applyChanges();
+  }
+
   updatePreferences(updates: {[key: string]: string}) {
     const response = new Response();
     const updatedPreferences = this._preferences.getValue();
@@ -92,7 +97,7 @@ export class PreferencesStoreService {
             updatedPreferences[attribute] = THEMES[updates[attribute]];
             break;
           case 'colorPalette':
-            this.updateTheme(updates[attribute]);
+            this.updatePalette(updates[attribute]);
             updatedPreferences[attribute] = PALETTES[updates[attribute]];
             break;
           case 'journeyInactive':

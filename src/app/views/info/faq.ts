@@ -31,7 +31,7 @@ export const faqs: FAQItem[] = [
       &#8226; &nbsp; It\'s a stats-hub for any given Journey: it provides you with details about how often you\'re applying. Say you want to set an application quota for a given week, and keep track of whether or not you met that quota? Your Dashboard is here to save the day! <br>\
       &#8226; &nbsp; It also helps you visualize a breakdown of how effective your job-hunt potentially is, by distilling the status of different applications you sent out. <br>\
       &#8226; &nbsp; It gives you a productivity calendar; hopefully a more colorful Calendar is a decent motivator for you to keep going! <br>\
-      (p.s. all those neat-o data-visualization components? They\'re courtesy of <a href="https://nivo.rocks/">nivo</a> and you should check it out)'
+      (p.s. all those neat-o data-visualization components? They\'re courtesy of <a href="https://nivo.rocks/" target="_blank" rel="noopener noreferrer">nivo</a> and you should check it out)'
   },
   {
     question: 'What exactly does the "Search" functionality search through?',
@@ -43,11 +43,11 @@ export const faqs: FAQItem[] = [
     // tslint:disable-next-line: max-line-length
     answer: 'Traccio was built with responsiveness in mind, and it has a few neat mobile quirks! You can simply add it to your Home Screen so it\'s easier to reach. <br>\
       On iOS: <br>\
-      &#8226; &nbsp; Launch Safari, and go to <a href="https://www.traccio.app">traccio.app</a> <br>\
+      &#8226; &nbsp; Launch Safari, and go to <a href="https://www.traccio.app" target="_blank" rel="noopener noreferrer">traccio.app</a> <br>\
       &#8226; &nbsp; Tap the Share icon (a square with an arrow pointing out) at the bottom of the screen <br>\
       &#8226; &nbsp; Select \'Add to Home Screen\' from the list of actions <br>\
       On Android: <br>\
-      &#8226; &nbsp; Launch the Chrome app, and go to <a href="https://www.traccio.app">traccio.app</a> <br>\
+      &#8226; &nbsp; Launch the Chrome app, and go to <a href="https://www.traccio.app" target="_blank" rel="noopener noreferrer">traccio.app</a> <br>\
       &#8226; &nbsp; Tap the menu icon (three vertical dots icon) at the upper right-hand corner <br>\
       &#8226; &nbsp; Select \'Add to homescreen\' <br>\
       And you\'re all set!'
@@ -75,7 +75,7 @@ export const faqs: FAQItem[] = [
       &#8226; &nbsp; Email your bug report to <a href="mailto: support@traccio.app">support@traccio.app</a> with the subject line "Bug Report" <br>\
       &#8226; &nbsp; Be sure to include any screenshots or info that might help in squashing it! <br>\
       Option 2: <br>\
-      &#8226; &nbsp; Open an issue in the app <a href="https://github.com/Duha-H/Tracker-App">repository</a> <br>\
+      &#8226; &nbsp; Open an issue in the app <a href="https://github.com/Duha-H/Tracker-App" target="_blank" rel="noopener noreferrer">repository</a> <br>\
       &#8226; &nbsp; Be sure to include any screenshots or info that might help'
   },
   {
@@ -85,7 +85,7 @@ export const faqs: FAQItem[] = [
       Option 1: <br>\
       &#8226; &nbsp; Email your feature request to <a href="mailto: support@traccio.app">support@traccio.app</a> with the subject line "Feature Request" <br>\
       Option 2: <br>\
-      &#8226; &nbsp; Open an issue in the app <a href="https://github.com/Duha-H/Tracker-App">repository</a> with your feature request'
+      &#8226; &nbsp; Open an issue in the app <a href="https://github.com/Duha-H/Tracker-App" target="_blank" rel="noopener noreferrer">repository</a> with your feature request'
   },
   {
     question: 'I have some general feedback about the application that I\'d like to give, where can I do that?',
@@ -95,17 +95,17 @@ export const faqs: FAQItem[] = [
   {
     question: 'Is Traccio going to include paid features at any point?',
     // tslint:disable-next-line: max-line-length
-    answer: 'Traccio is currently a one (wo)man shop, so as the user-base grows some cool new (potentially) paid features might be added to offset the costs of application-hosting and user-storage. Not to worry though, for users joining now (as in if you can read this message with no indicated updates to it, and you\'re currently signed up, you are one of those users), Traccio will continue to provide its core set of features for free (no switching to a subscription-based model or anything like that). That being said, <a href="https://paypal.me/traccioapp">tips</a> are most appreciated and welcome! :)'
+    answer: 'Traccio is currently a one (wo)man shop, so as the user-base grows some cool new (potentially) paid features might be added to offset the costs of application-hosting and user-storage. Not to worry though, for users joining now (as in if you can read this message with no indicated updates to it, and you\'re currently signed up, you are one of those users), Traccio will continue to provide its core set of features for free (no switching to a subscription-based model or anything like that). That being said, <a href="https://paypal.me/traccioapp" target="_blank" rel="noopener noreferrer">tips</a> are most appreciated and welcome! :)'
   },
   {
     question: 'I\'m enjoying using Traccio and would like to support it somehow, how can I do that?',
     // tslint:disable-next-line: max-line-length
-    answer: 'That\'s super awesome of you! Since Traccio is developed and maintained by a lone developer, tips are really appreciated and welcome :). Currently, tips are accepted through <a href="https://paypal.me/traccioapp">PayPal</a>.\
-    <br><a href="https://paypal.me/traccioapp"><img src="/assets/tip_button.png" style="width: 180px; padding-top: 20px;"></a>',
+    answer: 'That\'s super awesome of you! Since Traccio is developed and maintained by a lone developer, tips are really appreciated and welcome :). Currently, tips are accepted through <a href="https://paypal.me/traccioapp" target="_blank" rel="noopener noreferrer">PayPal</a>.\
+    <br><a href="https://paypal.me/traccioapp" target="_blank" rel="noopener noreferrer"><img src="/assets/tip_button.png" style="width: 180px; padding-top: 20px;"></a>',
   },
   {
     question: '"Traccio" is a silly name, why is it called that :)?',
     // tslint:disable-next-line: max-line-length
-    answer: 'Funny story! (it\'s actually not that funny at all) The app was originally called Tracker (as in job-search tracker) in development, but try to get <i>tracker.app</i> or <i>tracker-app.com</i> as your domain for cheap (trick question, you can\'t!). So Trac<i>cio</i> was a close-enough, neat-sounding alternative (with an available domain!) that came to me in a daydream.'
+    answer: 'Funny story! (it\'s actually not that funny at all) The app was originally called Tracker (as in job-search tracker) in development, but try to get <i>tracker.app</i> or <i>tracker-app.com</i> as your domain for cheap (trick question, you can\'t!). So Trac<i>cio</i> was a close-enough, neat-sounding alternative (with an available domain!) that came to <a href="https://github.com/Duha-H/" target="_blank" rel="noopener noreferrer">me</a> in a daydream.'
   },
 ];

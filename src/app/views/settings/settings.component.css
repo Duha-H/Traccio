@@ -46,8 +46,8 @@ button.save-btn {
   line-height: 30px;
 }
 
-button.save-btn:hover:not(:disabled) p { /** hover while not disabled */
-  color: var(--bg);
+button.save-btn:hover:not(:disabled) { /** hover while not disabled */
+  filter: brightness(120%);
 }
 
 button.save-btn:disabled {
@@ -62,10 +62,6 @@ button.save-btn:disabled {
   color: var(--text);
   font-weight: 500;
   font-size: 16pt;
-}
-
-button.save-btn:hover:not(:disabled) mat-icon {
-  color: var(--bg);
 }
 
 .setting-tab {
@@ -207,10 +203,10 @@ div.label p.label {
   background-color: var(--accent);
 }
 
-.setting button:hover {
+/* .setting button:hover {
   border: 1px solid var(--titles-secondary);
   background-color: var(--titles-secondary);
-}
+} */
 
 .setting mat-icon {
   line-height: 30px;
@@ -218,8 +214,9 @@ div.label p.label {
   font-size: 16pt;
 }
 
-.setting button:hover mat-icon, .setting button:hover p {
+.setting button:hover {
   color: var(--bg);
+  filter: brightness(120%);
 }
 
 .setting ul.value.toggle-btns, .setting ul.toggle-btns {
@@ -242,6 +239,10 @@ div.label p.label {
   height: 30px;
   margin: 0 auto;
   padding: 0 20px;
+}
+
+.toggle-btns button.active p, .toggle-btns button.active mat-icon {
+  color: #ffffff;
 }
 
 .setting .toggle-btns.palette-list li {
@@ -276,6 +277,7 @@ div.label p.label {
   margin: auto;
   text-align: center;
   font-size: 10pt;
+  color: var(--bg);
 }
 
 .setting .toggle-btns p {

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy, AfterViewInit } from '@angular/core';
 import { Response } from 'src/app/utils/response';
 import { ProfileSettingsComponent } from './profile-settings.component';
 import { MatTabGroup } from '@angular/material/tabs';
@@ -10,6 +10,8 @@ import { ResizeService } from 'src/app/controllers/resize.service';
 import { NotificationService } from 'src/app/controllers/notification.service';
 import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
 import { Title } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-settings',
@@ -20,7 +22,7 @@ import { Title } from '@angular/platform-browser';
     "(document:click)": "onViewClick($event)",
   },
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   changes = false;
   displayAlert = false;
@@ -36,8 +38,9 @@ export class SettingsComponent implements OnInit {
   visibleTooltip: ElementRef = undefined;
   clickedIcon: EventTarget = undefined;
   mostRecentAlertId = -1;
+  routeSub: Subscription;
 
-  @ViewChild('tabGroup') tabGroup: MatTabGroup;
+  @ViewChild('tabGroup', { read: MatTabGroup }) tabGroup: MatTabGroup;
   @ViewChild(ProfileSettingsComponent) profileSettingsComp: ProfileSettingsComponent;
   @ViewChild(PreferenceSettingsComponent) prefSettingsComp: PreferenceSettingsComponent;
 
@@ -48,10 +51,23 @@ export class SettingsComponent implements OnInit {
     private notificationService: NotificationService,
     private authWrapper: AuthWrapperService,
     private titleService: Title,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
     this.titleService.setTitle('Settings | Traccio');
+  }
+
+  ngAfterViewInit() {
+    this.routeSub = this.route.queryParams.subscribe(params => {
+      if (params['tab']) {
+        this.tabGroup.selectedIndex = params['tab'] === 'preferences' ? 1 : 0;
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.routeSub.unsubscribe();
   }
 
   setChange(index: number, changeState: boolean) {

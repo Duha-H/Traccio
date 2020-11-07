@@ -1,6 +1,6 @@
 <div class="dropdown-container hidden" #dropdownContainer>
   <ul *ngIf="displayDropdown">
-    <a *ngFor="let item of dropdownItems;" href="" [routerLink]="item.link">
+    <a *ngFor="let item of dropdownItems;" href="" [routerLink]="item.link" [queryParams]="item.params">
       <li class="{{item.type == 'button'? 'signout-button' : item.type }}"
         (click)="onItemClick(item)">
         {{item.text}}

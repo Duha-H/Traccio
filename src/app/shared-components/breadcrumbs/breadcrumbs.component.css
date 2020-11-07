@@ -1,16 +1,17 @@
 div.container.spanning-content {
   width: 100%;
+  max-width: 1200px;
   font-size: 10pt;
   /* height: 1.5em; */
   display: flex;
   flex-direction: row;
-  margin-left: 25px;
-  margin-bottom: 15px;
-  padding: 0;
+  margin: 15px auto;
+  padding: 0 10px;
   background: var(--bg);
   position: sticky;
   top: 0;
   padding-bottom: 15px;
+  z-index: 1;
 }
 
 div.breadcrumb-item {
@@ -40,12 +41,16 @@ p.breadcrumb-text {
 }
 
 a.breadcrumb-text {
-  color: #1976d2;
+  color: var(--text);
   text-decoration: none;
   margin: auto;
   /* font-size: 10pt; */
   font-weight: 400;
   text-align: center;
+}
+
+a.breadcrumb-text:hover {
+  color: var(--accent);
 }
 
 @media screen and (max-width: 768px) {
@@ -57,5 +62,6 @@ a.breadcrumb-text {
 @media screen and (max-width: 500px) {
   div.container.spanning-content {
     margin-left: 15px;
+    padding: 0;
   }
 }

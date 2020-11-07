@@ -45,18 +45,43 @@ text-field.toolbar-search {
   height: 5px;
 }
 
+text-field.toolbar-search {
+  opacity: 0;
+  transition: all 0.2s ease-in;
+  width: 0;
+  margin: 0;
+  display: none;
+}
+
+text-field.toolbar-search.visible {
+  margin: 0 15px;
+  transform: scaleX(1);
+  width: 280px;
+  opacity: 1;
+  display: block;
+}
+
 .sidenav-container.mat-sidenav-container.mat-drawer-container {
   display: inline-block;
   /* height: 100vh; */
   width: 85vw;
 }
 
+a.logo, a.logo:hover, a.logo:visited {
+  height: auto;
+  margin: 20px auto;
+}
+
 ul.sidenav {
   list-style: none;
-  padding: 50px 5px;
+  padding: 0px 5px;
   text-align: center;
-  padding-top: var(--header-height);
   margin: 0;
+}
+
+ul.sidenav.bottom {
+  position: absolute;
+  bottom: 10px;
 }
 
 .sidenav li {
@@ -91,7 +116,7 @@ mat-sidenav-container, .sidenav-container {
 }
 
 mat-sidenav, div.sidenav {
-  background-color: var(--element-bg-secondary);
+  /* background-color: var(--element-bg); */
   /* width: 10vw; */
   /* min-height: 100%; */
   display: flex;
@@ -112,6 +137,7 @@ mat-sidenav, div.sidenav {
   align-self: center;
   align-content: center;
   text-align: center;
+  filter: brightness(120%);
 }
 
 .sidenav a.info, .sidenav img.info {
@@ -129,6 +155,7 @@ mat-sidenav, div.sidenav {
 
 .sidenav a.active mat-icon, .bottomnav a.active mat-icon {
   color: var(--accent);
+  filter: brightness(100%);
 }
 
 .sidenav mat-icon:hover, .bottomnav mat-icon:hover {
@@ -226,7 +253,7 @@ a:hover {
   .bottomnav {
     height: var(--header-height);
     /* padding-bottom: 20px; */
-    background-color: var(--element-bg-secondary);
+    background-color: var(--element-bg);
     position: fixed;
     bottom: 0;
     width: 100%;

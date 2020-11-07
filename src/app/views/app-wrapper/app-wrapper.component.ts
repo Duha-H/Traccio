@@ -25,7 +25,7 @@ export class AppWrapperComponent implements OnInit {
   displayDropdown = false;
   dropdownItems: DropdownItem[] = [
     { text: "Signed in as: user@email.com", type: "item"},
-    { text: "Account Settings", type: "link", link: "/home/settings"},
+    { text: "Account Preferences", type: "link", link: "/home/settings", params: { tab: 'preferences' } },
     { text: "Theme: dark", type: "theme-toggle", callback: this.toggleTheme.bind(this) },
     { text: "About Traccio", type: "link", link: "/home/info"},
     { text: "Sign out", type: "button", callback: this.signOut.bind(this) },
@@ -43,7 +43,7 @@ export class AppWrapperComponent implements OnInit {
   constructor(
     private userStore: UserStoreService,
     public router: Router,
-    private prefStore: PreferencesStoreService,
+    public prefStore: PreferencesStoreService,
     public resizeService: ResizeService,
     public notificationService: NotificationService,
     private authWrapper: AuthWrapperService,
@@ -68,9 +68,10 @@ export class AppWrapperComponent implements OnInit {
     }
     this.signedIn = false;
     this.userStore.clearData();
+    this.prefStore.setToDefault();
     sessionStorage.clear();
     localStorage.clear();
-    this.router.navigate(['signin']);
+    this.router.navigate(['']);
   }
 
   onNavIconClick(ref: HTMLElement) {  }
@@ -87,7 +88,6 @@ export class AppWrapperComponent implements OnInit {
       this.activateSearchButton &&
       !this.activateSearchButton.nativeElement.contains(event.target) &&
       !this.searchFieldElement.nativeElement.contains(event.target) &&
-      this.resizeService.mobileSize$.value &&
       !this.searchQuery
     ) {
       this.searchFieldElement.nativeElement.classList = 'toolbar-search';

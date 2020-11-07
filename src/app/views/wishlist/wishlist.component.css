@@ -7,6 +7,15 @@
   margin: 15px;
 }
 
+.header {
+  position: sticky;
+  top: 0;
+  margin-top: 0;
+  padding: 10px 0;
+  background-color: var(--bg);
+  z-index: 1;
+}
+
 .app-list-item .spanning-content {
   padding: 5px 0;
   margin: 0;
@@ -57,7 +66,7 @@
 }
 
 .clickable-item:hover {
-  background-color: var(--element-bg-secondary);
+  background-color: var(--element-bg);
   cursor: pointer;
 }
 

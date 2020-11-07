@@ -44,9 +44,9 @@ export class ToastComponent implements OnInit {
     }
 
     if (this.message.type === 'success') {
-      this.container.nativeElement.style.border = '1px solid var(--valid)';
+      this.container.nativeElement.className += ' valid';
     } else if (this.message.type === 'error') {
-      this.container.nativeElement.style.border = '1px solid var(--warn)';
+      this.container.nativeElement.className += ' warn';
     }
   }
 

@@ -2,7 +2,7 @@
   <div class="spanning-content">
     <h2>Settings</h2>
     <div class="spacer"></div>
-    <button class="save-btn" [disabled]="!changes" (click)="saveChanges()" title="Save">
+    <button class="add-btn" [disabled]="!changes" (click)="saveChanges()" title="Save">
       <p *ngIf="!(rs.mobileSize$ | async)">Save</p>
       <div class="spacer"></div>
       <mat-icon [inline]="true" aria-hidden="false" aria-label="Save changes icon">save</mat-icon>

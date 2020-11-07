@@ -91,7 +91,7 @@ export class ExistingApplicationViewComponent
     if (this.statusUpdated && this.currApplicationDetails.status === STATUS.OFFER) {
       setTimeout(() => {
         this.confetti.draw();
-        this.notificationService.sendNotification(MESSAGES.congratulatory[Math.floor(Math.random() * Object.keys(MESSAGES.congratulatory).length)], 'standard', 8000);
+        this.notificationService.sendNotification(MESSAGES.congratulatory[Math.floor(Math.random() * Object.keys(MESSAGES.congratulatory).length)], 'success', 8000);
       }, 800);
       this.statusUpdated = false;
     }

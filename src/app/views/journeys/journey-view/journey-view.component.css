@@ -3,7 +3,7 @@
   --app-header-height: 25px;
   display: grid;
   grid-template-columns: 80% 20%;
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -21,10 +21,6 @@
 h2 {
   margin: 0 15px;
   display: flex;
-}
-
-input {
-  /* font-family: Roboto, 'Helvetica', sans-serif; */
 }
 
 span {
@@ -45,7 +41,7 @@ mat-drawer-content {
 
 mat-drawer {
   min-width: 400px;
-  background-color: var(--element-bg-primary);
+  background-color: var(--element-bg);
 }
 
 mat-icon {
@@ -116,14 +112,9 @@ mat-icon {
 .add-btn mat-icon {
   margin-left: 10px;
   line-height: 30px;
-  color: var(--text);
   /* margin-left: 8px; */
   font-weight: 500;
   font-size: 16pt;
-}
-
-.add-btn:hover mat-icon, .add-btn:hover p {
-  color: var(--bg);
 }
 
 button.add-btn:disabled mat-icon, button.add-btn:disabled p {
@@ -136,7 +127,7 @@ button.add-btn:disabled mat-icon, button.add-btn:disabled p {
 }
 
 .form-element {
-  background-color: var(--element-bg-secondary);
+  background-color: var(--element-bg);
   border-radius: 5px;
   margin-right: 0;
   padding: 8px;
@@ -156,10 +147,6 @@ button.add-btn:disabled mat-icon, button.add-btn:disabled p {
 
 ::ng-deep .overlay-content .mat-form-field-infix {
   padding-left: 10px;
-}
-
-::ng-deep .overlay-content .mat-form-field-suffix {
-  /* padding-right: 10px; */
 }
 
 ::ng-deep .overlay-content .mat-form-field-disabled .mat-form-field-underline {
@@ -182,7 +169,7 @@ button.add-btn:disabled mat-icon, button.add-btn:disabled p {
 
 .spanning-content.app-header {
   padding: 8px 20px;
-  background-color: var(--element-bg-secondary);
+  background-color: var(--element-bg);
   border-bottom: none;
   margin-top: 0;
   height: auto;
@@ -200,10 +187,12 @@ button.add-btn:disabled mat-icon, button.add-btn:disabled p {
 }
 
 .app-header mat-icon {
-  font-size: 2em;
+  font-size: 1.5em;
   color: var(--titles-secondary);
   cursor: pointer;
   margin-left: 5px;
+  width: auto;
+  height: auto;
 }
 
 .mat-drawer-inner-container {
@@ -236,7 +225,7 @@ button.add-btn:disabled mat-icon, button.add-btn:disabled p {
 
 .details {
   text-align: left;
-  max-width: 1400px;
+  max-width: 1200px;
   padding: 0 auto;
 }
 
@@ -310,7 +299,7 @@ mat-form-field.edit-items {
 }
 
 mat-select {
-  background-color: var(--element-bg-secondary);
+  background-color: var(--element-bg);
   border-radius: 5px;
   line-height: var(--app-header-height);
   /* padding: 5px; */
@@ -451,7 +440,7 @@ mat-list-item {
 }
 
 .clickable-item:hover {
-  background-color: var(--element-bg-secondary) !important;
+  background-color: var(--element-bg) !important;
   cursor: pointer;
 }
 

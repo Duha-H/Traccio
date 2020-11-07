@@ -24,6 +24,14 @@
   animation: view-toast 0.15s linear;
 }
 
+.notif-container.warn {
+  background-color: var(--warn);
+}
+
+.notif-container.valid {
+  background-color: var(--valid);
+}
+
 .notif-container .header {
   display: flex;
 }
@@ -35,12 +43,22 @@
   cursor: pointer;
 }
 
+.notif-container.warn .header mat-icon,
+.notif-container.valid .header mat-icon {
+  color: #ffffff;
+}
+
 .notif-container p {
   margin: 0;
   color: var(--text);
   line-height: 1.5em;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+
+.notif-container.warn p,
+.notif-container.valid p {
+  color: #ffffff;
 }
 
 @media screen and (max-width: 500px) {

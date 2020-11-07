@@ -5,12 +5,12 @@
   <div class="spanning-content">
     <h2>Application Details</h2>
     <div class="spacer"></div>
-    <button class="save-btn" [disabled]="!detailsUpdated" (click)="saveChanges()">
+    <button class="add-btn" [disabled]="!detailsUpdated" (click)="saveChanges()">
       <p *ngIf="!(rs.mobileSize$ | async)">Save</p>
       <div class="spacer"></div>
       <mat-icon [inline]="true" aria-hidden="false" aria-label="Save changes icon">save</mat-icon>
     </button>
-    <button *ngIf="wishlistApp && !newApp" class="save-btn" (click)="displayAddToJourneyOverlay()">
+    <button *ngIf="wishlistApp && !newApp" class="add-btn" (click)="displayAddToJourneyOverlay()">
       <p *ngIf="!(rs.tabletSize$ | async); else mobileButton">Add to Journey</p>
       <ng-template #mobileButton>
         <p *ngIf="!(rs.mobileSize$ | async)">Journey</p>
@@ -18,7 +18,7 @@
       <div class="spacer"></div>
       <mat-icon [inline]="true" aria-hidden="false" aria-label="Add to journey icon">exit_to_app</mat-icon>
     </button>
-    <button *ngIf="newApp && wishlistApp" class="save-btn" (click)="cancelChanges()">
+    <button *ngIf="newApp && wishlistApp" class="add-btn" (click)="cancelChanges()">
       <p>Cancel</p>
     </button>
   </div>

@@ -12,6 +12,15 @@
   height: var(--spanning-line-height);
 }
 
+.header {
+  position: sticky;
+  top: 0;
+  margin-top: 0;
+  padding: 10px 0;
+  background-color: var(--bg);
+  z-index: 1;
+}
+
 .spanning-content h2 {
   color: var(--titles-primary);
   margin: 0;
@@ -30,7 +39,7 @@ mat-drawer-container {
 
 mat-drawer {
   min-width: 350px;
-  background-color: var(--element-bg-primary);
+  background-color: var(--element-bg);
 }
 
 .mat-drawer-inner-container {
