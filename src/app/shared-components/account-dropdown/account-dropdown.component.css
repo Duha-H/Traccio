@@ -59,7 +59,7 @@ ul a {
 }
 
 li:hover a {
-	color: var(--element-bg-primary);
+	color: var(--element-bg);
 	font-weight: 500;
 }
 

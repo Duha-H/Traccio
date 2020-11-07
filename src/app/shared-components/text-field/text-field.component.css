@@ -43,7 +43,7 @@ mat-icon.feedback {
 
   border-radius: 5px;
   border: 1.5px solid transparent;
-  background-color: var(--element-bg-secondary);
+  background-color: var(--element-bg);
 }
 
 .input-container.center div {
@@ -72,7 +72,7 @@ mat-icon.feedback {
 .input-container mat-icon {
   color: var(--titles-secondary);
   cursor: pointer;
-  margin-right: 14px;
+  margin-right: 5px;
 }
 
 .input-container div:focus-within:not(.invalid) {

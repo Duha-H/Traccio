@@ -124,7 +124,7 @@ mat-icon {
     min-width: 100px;
     min-height: 200px;
     box-shadow: none;
-    background-color: var(--element-bg-secondary);
+    background-color: var(--element-bg);
     padding: 15px;
   }
   

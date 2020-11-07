@@ -47,6 +47,6 @@ span {
 }
 
 .clickable-item:hover {
-  background-color: var(--element-bg-secondary);
+  background-color: var(--element-bg);
   cursor: pointer;
 }

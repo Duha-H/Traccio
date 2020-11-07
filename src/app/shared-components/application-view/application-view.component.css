@@ -172,7 +172,7 @@ div.info-item {
 }
 
 .form-element {
-  background-color: var(--element-bg-secondary);
+  background-color: var(--element-bg);
   border-radius: 5px;
   margin-right: 0;
   padding: 8px 0;
@@ -184,7 +184,7 @@ div.info-item {
 }
 
 .additional-info textarea#additional-info {
-  background-color: var(--element-bg-secondary);
+  background-color: var(--element-bg);
   border-radius: 5px;
   padding: 10px;
   font-size: 11pt;
@@ -293,10 +293,11 @@ app-overlay button.submit-btn {
 .overlay-content {
   padding: 15px;
   text-align: left;
+  width: 350px;
 }
 
 .overlay-content mat-select.status {
-  background-color: var(--element-bg-secondary);
+  background-color: var(--element-bg);
   border-radius: 5px;
   height: auto;
   line-height: normal;

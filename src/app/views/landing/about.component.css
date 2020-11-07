@@ -96,7 +96,7 @@ p.greeting {
 }
 
 .sidenav ul {
-  background: var(--element-bg-primary);
+  background: var(--element-bg);
   border-radius: 0px 15px 15px;
   padding: 15px;
   margin: 0;
@@ -107,7 +107,7 @@ p.greeting {
 mat-icon.nav-toggle {
   cursor: pointer;
   color: var(--titles-secondary);
-  background-color: var(--element-bg-primary);
+  background-color: var(--element-bg);
   border-radius: 10px 0px 0px 10px;
   width: 40px;
   height: 40px;
@@ -212,7 +212,7 @@ div.content-section {
   
   .sidenav.expanded {
     width: 80%;
-    background-color: var(--element-bg-primary);
+    background-color: var(--element-bg);
     flex-direction: column;
     left: 0;
     right: 0;

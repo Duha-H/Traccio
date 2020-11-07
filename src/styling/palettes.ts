@@ -24,16 +24,16 @@ export const PALETTES: {[key: string]: PaletteType}  = {
 export const THEMES: {[key: string]: ThemeType} = {
   dark: {
     name: 'dark',
-    emptyColor: '#494848', // #22232D #262732
+    emptyColor: '#4d545e78', // #22232D #262732
     textColor: '#ffffff',
-    background: '#262732',
+    background: '#121217',
     transparent: '#00000000',
   },
   light: {
     name: 'light',
     emptyColor: '#DCDCDC',
     textColor: '#494a4f',
-    background: '#FCFCFC',
+    background: '#F7F7F7',
     transparent: '#00000000',
   }
 };

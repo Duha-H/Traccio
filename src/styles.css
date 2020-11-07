@@ -1,8 +1,8 @@
 :root {
   /* --bg: var(--bg); */
   --bg-backdrop: #22232dab;
-  --element-bg-primary: #252635;
-  --element-bg-secondary: #282935;
+  --element-bg: #252635;
+  --element-bg: #282935;
   --accent: #9f9dea;
   --valid: #85d2d8;
   --accent-hover: #22232dc2;
@@ -14,7 +14,7 @@
   --success-bg: #94f4c24f;
   --error-bg: #f9769685;
 
-  --header-height: 65px;
+  --header-height: 75px;
 }
 
 * {
@@ -187,13 +187,13 @@ app-account-recovery, app-confirm-signup {
 }
 
 img.logo {
-  width: 8em;
+  width: 1em;
   margin-right: 10px;
   color: var(--titles-secondary);
 }
 
 .submit-btn {
-  background-color: #c1cace;
+  background-color: var(--accent);
   color: var(--bg);
   font-size: 10pt;
   padding: 10px;
@@ -209,13 +209,15 @@ img.logo {
   margin-left: 10px;
 }
 
-.submit-btn:hover {
-  background-color: var(--accent);
+.submit-btn:not(.disabled):hover {
+  /* background-color: #c1cace; */
   cursor: pointer;
+  filter: brightness(120%) hue-rotate(2deg);
 }
 
 .submit-btn.cancel-btn:hover {
-  background-color: #c1cace;
+  /* background-color: #c1cace; */
+  filter: brightness(120%) hue-rotate(2deg);
 }
 
 button.submit-btn.pulse {
@@ -291,7 +293,7 @@ footer {
   /* line-height: var(--spanning-line-height); */
   border-radius: 5px;
   background: var(--accent);
-  padding: 0px 15px;
+  padding: 0px 10px;
   font-weight: 500;
   cursor: pointer;
   display: flex;
@@ -306,7 +308,7 @@ footer {
   /* font-size: 11pt; */
   line-height: 30px;
   font-weight: 500;
-  color: var(--text);
+  color: var(--bg);
   margin: 0;
   margin-right: 8px;
   white-space: nowrap;
@@ -315,19 +317,14 @@ footer {
 .add-btn mat-icon,
 .add-btn mat-icon.mat-icon-inline {
   line-height: 30px;
-  color: var(--text);
+  color: var(--bg);
   /* margin-left: 8px; */
   font-weight: 500;
   font-size: 16pt;
 }
 
-button.add-btn:hover mat-icon,
-button.submit-btn:hover mat-icon,
-button.add-btn:hover mat-icon.mat-icon-inline,
-button.submit-btn:hover mat-icon.mat-icon-inline,
-button.add-btn:hover p,
-button.submit-btn:hover p {
-  color: var(--bg);
+button.add-btn:hover:not(.disabled), button.submit-btn:hover:not(.disabled) {
+  filter: brightness(120%) hue-rotate(2deg);
 }
 
 button.add-btn:disabled {
@@ -367,6 +364,10 @@ p.answer a:hover {
 
 
 @media screen and (max-width: 500px) {
+  :root {
+    --header-height: 65px;
+  }
+
   h2 {
     font-size: 1.25em;
   }
@@ -376,7 +377,7 @@ p.answer a:hover {
   }
 
   img.logo {
-    width: 1.5em;
+    width: 2em;
     margin-left: 15px;
   }
 
