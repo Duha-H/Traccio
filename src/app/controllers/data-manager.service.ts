@@ -341,19 +341,25 @@ export class DataManagerService {
     const month = appDate.getUTCMonth() + 1;
     const year = appDate.getUTCFullYear();
     if (mode === 'add') {
-      if (this._dateInPastYear(appDate)) { // application sent in the past 365 days
+      if (this._dateInPastYear(appDate) && updatedDatum.year[month]) { // application sent in the past 365 days
         updatedDatum.year[month].y += 1;
         updatedDatum.year[month].label = `${MONTHS[month]} ${year}`;
 
-        if (this._dateInPastMonth(appDate)) { // application sent in the past 30/31 days
+        if (this._dateInPastMonth(appDate) && updatedDatum.month[day]) { // application sent in the past 30/31 days
           updatedDatum.month[day].y += 1;
           updatedDatum.month[day].label = `${MONTHS[month]} ${day}`;
 
-          if (this._dateInPastWeek(appDate)) { // application sent in the past 7 days
+          if (this._dateInPastWeek(appDate) && updatedDatum.week[weekday]) { // application sent in the past 7 days
             updatedDatum.week[weekday].y += 1;
             updatedDatum.week[weekday].label = `${WEEKDAYS[weekday]} - ${MONTHS[month]} ${day}`;
+          } else if (this._dateInPastWeek(appDate) && !updatedDatum.week[weekday]) {
+            updatedDatum.week[weekday] = { x: WEEKDAYS[weekday], y: 1, label: `${WEEKDAYS[weekday]} - ${MONTHS[month]} ${day}` };
           }
+        } else if (this._dateInPastMonth(appDate) && !updatedDatum.month[day]) {
+          updatedDatum.month[day] = { x: day.toString(), y: 1, label: `${MONTHS[month]} ${day}` };
         }
+      } else if (this._dateInPastYear(appDate) && !updatedDatum.year[month]) {
+        updatedDatum.year[month] = { x: MONTHS[month], y: 1, label: `${MONTHS[month]} ${year}` };
       }
     } else if (mode === 'remove') { // remove
       if (this._dateInPastYear(appDate)) { // application sent in the past 365 days
