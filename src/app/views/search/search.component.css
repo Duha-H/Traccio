@@ -50,3 +50,19 @@ span {
   background-color: var(--element-bg);
   cursor: pointer;
 }
+
+@media screen and (max-width: 900px) {
+  .mat-list-base .mat-list-item .mat-list-item-content {
+    padding: 0;
+  }
+
+  .app-list-item h4 {
+    margin: 10px 0;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .search {
+    padding: 0;
+  }
+}

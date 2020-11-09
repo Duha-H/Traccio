@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Router } from '@angular/router';
 import { KeysPipe } from '../../utils/keys.pipe';
 import { Subscription } from 'rxjs';
+import { ResizeService } from 'src/app/controllers/resize.service';
 
 @Component({
   selector: 'app-search',
@@ -32,6 +33,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     private searchPipe: SearchPipe,
     private router: Router,
     public keys: KeysPipe,
+    public rs: ResizeService,
   ) { }
 
   ngOnInit() {

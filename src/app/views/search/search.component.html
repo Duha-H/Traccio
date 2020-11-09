@@ -14,13 +14,28 @@
         <mat-list style="height: 100%;" class="app-list-item">
           <mat-list-item class="clickable-item" *ngFor="let journey of filteredJourneys;" (click)="viewResult('journey', journey, journey.id)">
             <mat-icon matListIcon>folder</mat-icon>
-            <div matLine>
+
+            <div *ngIf="!(rs.tabletSize$ | async); else mobileJourneyItem" matLine>
               <div class="spanning-content">
                 <h4 style="text-align: left; color: var(--text);">{{journey.title}}</h4>
                 <div class="spacer"></div>
                 <span>Date Started: {{ journey.startDate | date }}</span>
               </div>
             </div>
+
+            <ng-template #mobileJourneyItem>
+              <div class="app-list-item" matLine>
+                <div class="spanning-content">
+                  <h4 style="text-align: left; color: var(--text);">{{journey.title + '  '}}</h4>
+                </div>
+              </div>
+              <div class="app-list-item" matLine>
+                <div class="spanning-content">
+                  <span style="color: var(--titles-secondary);">Date Started: {{ journey.startDate | date }}</span>
+                </div>
+              </div>
+            </ng-template>
+
           </mat-list-item>
         </mat-list>
       </div>
@@ -31,7 +46,7 @@
           <div *ngFor="let item of filteredAppsMap | keyvalue;">
             <mat-list-item class="clickable-item" *ngFor="let app of item.value;" (click)="viewResult('application', app, item.key)">
               <mat-icon matListIcon>folder</mat-icon>
-              <div matLine>
+              <div *ngIf="!(rs.tabletSize$ | async); else mobileAppItem" matLine>
                 <div class="spanning-content">
                   <h4 style="text-align: left; color: var(--text);">{{ app.positionTitle + '  ' }}</h4>
                   <span style="padding-left: 10px; color: var(--titles-secondary);"> @ {{ app.companyName }}</span>
@@ -39,6 +54,21 @@
                   <span>Date Applied: {{ app.appDate | date }}</span>
                 </div>
               </div>
+
+              <ng-template #mobileAppItem>
+                <div class="app-list-item" matLine>
+                  <div class="spanning-content">
+                    <h4 style="text-align: left; color: var(--text);">{{app.positionTitle + '  '}}</h4>
+                  </div>
+                </div>
+                <div class="app-list-item" matLine>
+                  <div class="spanning-content">
+                    <span style="color: var(--titles-secondary);"> @ {{app.companyName}}</span>
+                    <div class="spacer"></div>
+                    <span>Applied: {{ app.appDate | date }}</span>
+                  </div>
+                </div>
+              </ng-template>
             </mat-list-item>
           </div>
         </mat-list>
@@ -50,13 +80,28 @@
           <mat-list-item class="clickable-item" *ngFor="let app of filteredWishlistApps;" (click)="viewResult('wishlist', app, app.id)">
             <mat-icon matListIcon>folder</mat-icon>
             <div matLine>
-              <div class="spanning-content">
+              <div *ngIf="!(rs.tabletSize$ | async); else mobileWishlistItem" class="spanning-content">
                 <h4 style="text-align: left; color: var(--text);">{{ app.positionTitle + '  ' }}</h4>
                 <span style="padding-left: 10px; color: var(--titles-secondary);"> @ {{ app.companyName }}</span>
                 <div class="spacer"></div>
                 <span>Date Added: {{ app.appDate | date }}</span>
               </div>
             </div>
+
+            <ng-template #mobileWishlistItem>
+              <div class="app-list-item" matLine>
+                <div class="spanning-content">
+                  <h4 style="text-align: left; color: var(--text);">{{ app.positionTitle + '  '}}</h4>
+                </div>
+              </div>
+              <div class="app-list-item" matLine>
+                <div class="spanning-content">
+                  <span style="color: var(--titles-secondary);"> @ {{ app.companyName }}</span>
+                  <div class="spacer"></div>
+                  <span>Added: {{ app.appDate | date }}</span>
+                </div>
+              </div>
+            </ng-template>
           </mat-list-item>
         </mat-list>
       </div>
