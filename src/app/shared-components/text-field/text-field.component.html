@@ -19,7 +19,10 @@
         style="font-size: {{fontSize}}pt; color: {{fontColor}};"
         name="textfield"
         type="{{currType}}"
-        placeholder="{{ displayPlaceholder ? label : ''}}"
+        placeholder="{{
+          displayPlaceholder
+          ? (placeholder ? placeholder : label)
+          : ''}}"
         maxLength="{{maxLength}}"
         style="padding: {{ verticalPadding }} {{ horizontalPadding }};"
         #input #textfield />

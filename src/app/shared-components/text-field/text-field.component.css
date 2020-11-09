@@ -1,7 +1,3 @@
-* {
-  position: relative;
-}
-
 ::placeholder {
 	color: var(--titles-secondary);
 }

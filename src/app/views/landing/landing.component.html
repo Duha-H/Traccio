@@ -1,91 +1,67 @@
 <div class="landing-container">
 
-  <div class="card-parent card-visible" #card>
-    <div class="landing-card card-1">
-      <img *ngIf="!(resizeService.mobileSize$ | async)" src="/assets/landing-1.svg" alt="" style="max-width: 1000px; width: -webkit-fill-available;">
-      <div class="landing-content">
-        <img src="/assets/logo_traccio@2x.png" alt="traccio logo" style="max-width: 300px;">
-        <p>Say goodbye to dull text files and spreadsheets, track your job search the right way.</p>
-        <a class="header-btn" routerLink="/signup" style="margin-left: 0;">Join now</a>
-        <a href="" routerLink="/about">Learn more <mat-icon [inline]="true" aria-hidden="false">keyboard_arrow_right</mat-icon></a>
+  <section class="landing-section painted">
+    <div class="hero-div">
+      <div class="hero-content">
+        <img src="/assets/logo_light@2x.png" alt="Traccio text logo" style="max-width: 300px;">
+        <h3>Say goodbye to dull text files and spreadsheets, track your job search the right way.</h3>
+        <div class="spanning-content">
+          <a class="header-btn" routerLink="/signup" style="margin-left: 0;">Join now</a>
+          <a class="header-btn alt" routerLink="/about">Learn more</a>
+        </div>
+      </div>
+      <img src="/assets/landing-graphics/hero_graphic.svg" alt="Graphic of an abstract terrain with way-markers and a briefcase at the horizon" class="hero-img">
+    </div>
+  </section>
+
+  <section class="landing-section">
+    <div class="landing-div">
+      <img src="/assets/landing-graphics/traccio_0.svg" alt="Screenshot of Traccio's dashboard in desktop and mobile browser windows">
+      <p>Traccio is an organizational tool that allows you to analyze and track your job search journey</p>
+    </div>
+  </section>
+
+  <section class="landing-section painted">
+    <div class="landing-div alt call-to-action">
+      <h3>Make your job hunt just a little more bearable! ✨</h3>
+    </div>
+  </section>
+
+  <section class="landing-section">
+    <div class="landing-div">
+      <img src="/assets/landing-graphics/Dashboard1.svg" alt="">
+      <div class="">
+        <p class="heading">Visualize your job hunt</p>
+        <p>Keep an eye on your productivity, and monitor your application frequency and different trends in your job search</p>
       </div>
     </div>
-  </div>
-
-  <div class="card-parent card-visible" #card>
-    <div class="landing-card card-2">
-      <div class="landing-content">
-        <!-- <img src="/assets/logo_traccio@2x.png" alt="traccio logo" style="max-width: 22.5em"> -->
-        <p>traccio allows you to efficiently analyze and track your job search journey.</p>
-      </div>
-      <div class="card-img-group">
-        <img src="{{(resizeService.mobileSize$ | async) ? '/assets/mobile_journey_list.png' : '/assets/landing-screenshot-medium.png'}}" alt="" class="{{(resizeService.mobileSize$ | async) ? 'card-img mobile' : 'card-img desktop'}}">
-        <!-- <img src="/assets/dashboard_light_mobile.svg" alt="" class="card-img mobile" > -->
-      </div>
-      
-    </div>
-  </div>
-  
-  <div class="card-parent card-visible" #card>
-    <div class="landing-card card-3">
-
-      <div class="graphic-component" *ngIf="!(resizeService.mobileSize$ | async); else mobileComponent;">
-        <ul>
-          <li class="{{ cardVisible[0] ? 'visible' : '' }}" (click)="selectGraphic(0)">
-            <p><b>Monitor</b> your application frequency, and keep track of trends in your job hunt</p>
-          </li>
-          <li class="{{ cardVisible[1] ? 'visible' : '' }}" (click)="selectGraphic(1)">
-            <p><b>Organize</b> your job hunts using Journeys, and track your productivity different application statuses during them</p>
-          </li>
-          <li class="{{ cardVisible[2] ? 'visible' : '' }}" (click)="selectGraphic(2)">
-            <p><b>Track</b> and update applications you submitted, and keep all your records in one place</p>
-          </li>
-          <li class="{{ cardVisible[3] ? 'visible' : '' }}" (click)="selectGraphic(3)">
-            <p><b>Filter</b> your submitted applications, and say goodbye to submitting the same application twice (or 7 times)!</p>
-          </li>
-        </ul>
-        <graphic-dashboard style="display: {{ cardVisible[0] ? 'inline' : 'none' }};"></graphic-dashboard>
-        <graphic-journeys style="display: {{ cardVisible[1] ? 'inline' : 'none' }};"></graphic-journeys>
-        <graphic-application style="display: {{ cardVisible[2] ? 'inline' : 'none' }};"></graphic-application>
-        <graphic-search style="display: {{ cardVisible[3] ? 'inline' : 'none' }};"></graphic-search>
-      </div>
-
-      <ng-template #mobileComponent>
-        <div class="graphic-component">
-          <p><b>Monitor</b> your application frequency, and keep track of trends in your job hunt</p>
-          <graphic-dashboard></graphic-dashboard>
-        </div>
-
-        <div class="graphic-component">
-          <p><b>Organize</b> your job hunts using Journeys, and track your productivity different application statuses during them</p>
-          <graphic-journeys></graphic-journeys>
-        </div>
-
-        <div class="graphic-component">
-          <p><b>Track</b> and update applications you submitted, and keep all your records in one place</p>
-          <graphic-application></graphic-application>
-        </div>
-
-        <div class="graphic-component">
-          <p><b>Filter</b> your submitted applications, and say goodbye to submitting the same application twice (or 7 times)!</p>
-          <graphic-search></graphic-search>
-        </div>
-      </ng-template>
-
-    </div>
-  </div>
-
-  <div class="card-parent card-visible">
-    <div class="landing-card card-4">
-      <div class="landing-content">
-        <p id="call-to-action">Ready to give Traccio a try?</p>
-        <a class="header-btn" routerLink="/signup">Join now</a>
-        <p>(it's free!)</p>
-        <a href="" routerLink="/about">Click here to learn more<img class="link-icon" src="/assets/icons/info_icon.svg" style="color: var(--accent);" alt="arrow"></a>
-        <a href="https://github.com/Duha-H/Traccio">Or check out the app's open source repository<img class="link-icon" src="/assets/icons/github_icon.png" alt="github logo"></a>
+    <div class="landing-div reverse">
+      <img src="/assets/landing-graphics/Journeys.svg" alt="">
+      <div class="">
+        <p class="heading">Stay organized</p>
+        <p>Organize your job hunts using Journeys, break them up however you like, and visualize your progress a little better</p>
       </div>
     </div>
-    
-  </div>
-  
+    <div class="landing-div">
+      <img src="/assets/landing-graphics/AppDetails.svg" alt="">
+      <div class="">
+        <p class="heading">Track your applications</p>
+        <p>Log and update applications you submitted, and keep all your records in one place</p>
+      </div>
+    </div>
+    <div class="landing-div reverse">
+      <img src="/assets/landing-graphics/Search.svg" alt="">
+      <div class="">
+        <p class="heading">Duplicate applications who?</p>
+        <p>Filter your submitted applications, and say goodbye to submitting the same application twice (or 7 times)!</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="landing-section painted">
+    <div class="landing-div call-to-action">
+      <h2>Ready to give Traccio a try?</h2>
+      <a class="header-btn" routerLink="/signup">Join now</a>
+    </div>
+  </section>
 </div>

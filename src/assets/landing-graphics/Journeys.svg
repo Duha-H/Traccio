@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 403 259">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="403" height="259" viewBox="0 0 403 259">
   <defs>
     <filter id="Rectangle_14" x="0" y="0" width="403" height="259" filterUnits="userSpaceOnUse">
       <feOffset dy="3" input="SourceAlpha"/>
@@ -10,35 +10,35 @@
   </defs>
   <g id="Journeys" transform="translate(-463 -263)">
     <g transform="matrix(1, 0, 0, 1, 463, 263)" filter="url(#Rectangle_14)">
-      <rect id="Rectangle_14-2" data-name="Rectangle 14" width="385" height="241" rx="10" transform="translate(9 6)" fill="#fafafa" style="box-shadow: var(--shadow-clickable);"/>
+      <rect id="Rectangle_14-2" data-name="Rectangle 14" width="385" height="241" rx="10" transform="translate(9 6)" fill="#f7f7f7"/>
     </g>
-    <text id="Journeys-2" data-name="Journeys" transform="translate(494 303)" fill="#88a3fb" font-size="20" font-family="Bahnschrift" letter-spacing="0.05em"><tspan x="0" y="0">Journeys</tspan></text>
+    <text id="Journeys-2" data-name="Journeys" transform="translate(494 303)" fill="#5b4699" font-size="20" font-family="SegoeUI, Segoe UI" letter-spacing="0.05em"><tspan x="0" y="0">Journeys</tspan></text>
     <g id="button" transform="translate(18 -10)">
-      <rect id="Rectangle_18" data-name="Rectangle 18" width="20" height="20" rx="5" transform="translate(799 297)" fill="#88a3fb"/>
+      <rect id="Rectangle_18" data-name="Rectangle 18" width="20" height="20" rx="5" transform="translate(799 297)" fill="#5b4699"/>
       <text id="_" data-name="+" transform="translate(803 312)" fill="#fff" font-size="18" font-family="BellMTBold, Bell MT" letter-spacing="0.05em"><tspan x="0" y="0">+</tspan></text>
     </g>
     <g id="journey" transform="translate(-9)">
-      <rect id="Rectangle_15" data-name="Rectangle 15" width="96" height="141" rx="10" transform="translate(503 342)" fill="#ecf1ff"/>
+      <rect id="Rectangle_15" data-name="Rectangle 15" width="96" height="141" rx="10" transform="translate(503 342)" fill="#e8e8f3"/>
       <g id="Group_10" data-name="Group 10">
-        <rect id="Rectangle_19" data-name="Rectangle 19" width="57" height="7" transform="translate(512 452)" fill="#9ea8c9"/>
-        <rect id="Rectangle_20" data-name="Rectangle 20" width="74" height="3" transform="translate(512 463)" fill="#9ea8c9"/>
-        <rect id="Rectangle_21" data-name="Rectangle 21" width="48" height="3" transform="translate(512 470)" fill="#9ea8c9"/>
+        <rect id="Rectangle_19" data-name="Rectangle 19" width="57" height="7" rx="3" transform="translate(512 452)" fill="#9ea8c9"/>
+        <rect id="Rectangle_20" data-name="Rectangle 20" width="74" height="3" rx="1.5" transform="translate(512 463)" fill="#9ea8c9"/>
+        <rect id="Rectangle_21" data-name="Rectangle 21" width="48" height="3" rx="1.5" transform="translate(512 470)" fill="#9ea8c9"/>
       </g>
     </g>
     <g id="journey-2" data-name="journey" transform="translate(114)">
-      <rect id="Rectangle_15-2" data-name="Rectangle 15" width="96" height="141" rx="10" transform="translate(503 342)" fill="#ecf1ff"/>
+      <rect id="Rectangle_15-2" data-name="Rectangle 15" width="96" height="141" rx="10" transform="translate(503 342)" fill="#e8e8f3"/>
       <g id="Group_10-2" data-name="Group 10">
-        <rect id="Rectangle_19-2" data-name="Rectangle 19" width="57" height="7" transform="translate(512 452)" fill="#9ea8c9"/>
-        <rect id="Rectangle_20-2" data-name="Rectangle 20" width="74" height="3" transform="translate(512 463)" fill="#9ea8c9"/>
-        <rect id="Rectangle_21-2" data-name="Rectangle 21" width="48" height="3" transform="translate(512 470)" fill="#9ea8c9"/>
+        <rect id="Rectangle_19-2" data-name="Rectangle 19" width="57" height="7" rx="3" transform="translate(512 452)" fill="#9ea8c9"/>
+        <rect id="Rectangle_20-2" data-name="Rectangle 20" width="74" height="3" rx="1.5" transform="translate(512 463)" fill="#9ea8c9"/>
+        <rect id="Rectangle_21-2" data-name="Rectangle 21" width="48" height="3" rx="1.5" transform="translate(512 470)" fill="#9ea8c9"/>
       </g>
     </g>
     <g id="new-journey" transform="translate(238)">
-      <rect id="Rectangle_15-3" data-name="Rectangle 15" width="96" height="141" rx="10" transform="translate(503 342)" fill="#ecf1ff"/>
+      <rect id="Rectangle_15-3" data-name="Rectangle 15" width="96" height="141" rx="10" transform="translate(503 342)" fill="#e8e8f3"/>
       <g id="Group_10-3" data-name="Group 10">
-        <rect id="Rectangle_19-3" data-name="Rectangle 19" width="57" height="7" transform="translate(512 452)" fill="#9ea8c9"/>
-        <rect id="Rectangle_20-3" data-name="Rectangle 20" width="74" height="3" transform="translate(512 463)" fill="#9ea8c9"/>
-        <rect id="Rectangle_21-3" data-name="Rectangle 21" width="48" height="3" transform="translate(512 470)" fill="#9ea8c9"/>
+        <rect id="Rectangle_19-3" data-name="Rectangle 19" width="57" height="7" rx="3" transform="translate(512 452)" fill="#9ea8c9"/>
+        <rect id="Rectangle_20-3" data-name="Rectangle 20" width="74" height="3" rx="1.5" transform="translate(512 463)" fill="#9ea8c9"/>
+        <rect id="Rectangle_21-3" data-name="Rectangle 21" width="48" height="3" rx="1.5" transform="translate(512 470)" fill="#9ea8c9"/>
       </g>
     </g>
   </g>

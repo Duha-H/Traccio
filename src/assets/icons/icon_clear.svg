@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 290.52 290.52">
+  <defs>
+    <style>
+      .cls-1,
+      .cls-2 {
+        fill: none;
+      }
+
+      .cls-1 {
+        stroke: #5B4699;
+        stroke-linecap: round;
+        stroke-miterlimit: 10;
+        stroke-width: 35px;
+      }
+    </style>
+  </defs>
+  <title>icon_clear_2</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <line class="cls-1" x1="59.32" y1="231.2" x2="238.48" y2="52.04" />
+      <line class="cls-1" x1="59.32" y1="52.04" x2="238.48" y2="231.2" />
+      <rect class="cls-2" width="290.52" height="290.52" />
+    </g>
+  </g>
+</svg>

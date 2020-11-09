@@ -10,6 +10,8 @@ import { Title } from '@angular/platform-browser';
 })
 export class LandingWrapperComponent implements OnInit {
 
+  navOverlay = false;
+
   constructor(
     public resizeService: ResizeService,
     public router: Router,
@@ -18,5 +20,10 @@ export class LandingWrapperComponent implements OnInit {
 
   ngOnInit() {
     this.titleService.setTitle('Traccio');
+  }
+
+  navigateAway(route: string) {
+    this.navOverlay = false;
+    this.router.navigate([route]);
   }
 }

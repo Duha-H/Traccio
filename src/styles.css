@@ -15,6 +15,7 @@
   --error-bg: #f9769685;
 
   --header-height: 75px;
+  --max-landing-width: 75rem;
 }
 
 * {
@@ -370,6 +371,10 @@ p.answer a:hover {
 
   h2 {
     font-size: 1.25em;
+  }
+
+  h3 {
+    font-size: 1.20em;
   }
 
   div.view-container {

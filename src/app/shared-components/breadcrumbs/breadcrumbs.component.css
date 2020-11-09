@@ -51,6 +51,7 @@ a.breadcrumb-text {
 
 a.breadcrumb-text:hover {
   color: var(--accent);
+  font-weight: 600;
 }
 
 @media screen and (max-width: 768px) {

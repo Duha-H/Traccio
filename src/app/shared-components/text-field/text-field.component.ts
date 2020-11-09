@@ -18,6 +18,7 @@ import { ResizeService } from 'src/app/controllers/resize.service';
 export class TextFieldComponent implements OnInit {
   @Input() text: string;
   @Input() label = '';
+  @Input() placeholder: string;
   @Input() type = 'text';
   @Input() required = false;
   @Input() displayLabel = true;

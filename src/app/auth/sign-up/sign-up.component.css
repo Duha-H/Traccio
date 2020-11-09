@@ -2,6 +2,7 @@
   height: 100%;
   display: flex;
   overflow: auto;
+  background-color: var(--accent-hover);
 }
 
 div.signup-container {
@@ -36,7 +37,6 @@ p.warning-text {
 .signup-container text-field {
   width: 100%;
   margin-bottom: 20px;
-  position: relative;
 }
 
 

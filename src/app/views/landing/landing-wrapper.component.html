@@ -1,21 +1,75 @@
 <div class="container">
-  <img *ngIf="resizeService.mobileSize$ | async" src="/assets/bg-60.svg" alt="" style="z-index: -1; width: 150%; position: fixed; top: 0; left: 0;">
 
-  <div class="header">
-    <a routerLink="/" id="logo">
-      <img src="{{(resizeService.mobileSize$ | async) ? '/assets/logo_no_text@2x.png' : '/assets/logo_traccio@2x.png'}}" alt="Logo" class="logo">
-    </a>
-    <div class="spacer"></div>
-    <a routerLink="/about">About</a>
-    <a *ngIf="!(resizeService.mobileSize$ | async) && router.url != '/signup'" class="header-btn alt" routerLink="/signup">Sign up</a>
-    <a *ngIf="!(resizeService.mobileSize$ | async) && router.url != '/signin'" class="header-btn" routerLink="/signin">Sign in</a>
-  </div>
+  <nav>
+    <div class="header">
+      <a routerLink="/" id="logo">
+        <img src="/assets/logo_fill_light.png" alt="Traccio logo" class="logo">
+      </a>
+      <div class="spacer"></div>
+      <div class="spanning-content" *ngIf="!(resizeService.mobileSize$ | async); else navToggle;">
+        <a routerLink="/">Home</a>
+        <a routerLink="/about">Overview</a>
+        <a routerLink="/about">FAQ</a>
+        <a class="header-btn" routerLink="/signin">Log in</a>
+        <a class="header-btn alt" routerLink="/signup">Sign up</a>
+      </div>
+
+      <ng-template #navToggle>
+        <button *ngIf="!navOverlay; else hideOverlayButton" (click)="navOverlay=true" class="nav-toggle">
+          <img class="nav-icon" src="/assets/icons/icon_nav.svg" alt="Navigation menu icon">
+        </button>
+        <ng-template #hideOverlayButton>
+          <button (click)="navOverlay=false" class="nav-toggle">
+            <img class="nav-icon" src="/assets/icons/icon_clear.svg" alt="Close navigation menu icon">
+          </button>
+        </ng-template>
+      </ng-template>  
+    </div>
+    <ul class="{{navOverlay ? 'mobile-nav visible' : 'mobile-nav'}}">
+      <li>
+        <a role="button" (click)="navigateAway('/')">Home</a>
+      </li>
+      <li>
+        <a role="button" (click)="navigateAway('/about')">Overview</a>
+      </li>
+      <li>
+        <a role="button" (click)="navigateAway('/about')">FAQ</a>
+      <li>
+        <a class="header-btn" role="button" (click)="navigateAway('/signin')">Log in</a>
+      </li>
+      <li>
+        <a class="header-btn alt" role="button" (click)="navigateAway('/signup')">Sign up</a>
+      </li>
+    </ul>
+    
+  </nav>
+  
 
   <router-outlet></router-outlet>
 
-  <footer *ngIf="!(resizeService.mobileSize$ | async)">
+  <footer class="landing-footer">
+    <div class="footer">
+      <div class="footer-item alt">
+        <img src="/assets/logo_fill_light.png" alt="Traccio logo" class="logo">
+        <p class="compound-text">Check out Traccio's <a href="https://github.com/Duha-H/Traccio/">open source repository</a>! <img class="inline-logo" src="/assets/icons/github_icon.png" alt="Github logo"></p>
+      </div>
+      <div class="spacer"></div>
+      <div class="footer-item">
+        <p class="heading">Links</p>
+        <a href="/about">Home</a>
+        <a href="/about">Overview</a>
+        <a href="/about">FAQ</a>
+        <a href="/about">Log in</a>
+        <a href="/about">Sign up</a>
+      </div>
+      <div class="footer-item">
+        <p class="heading">Support & Contact</p>
+        <a href="https://github.com/Duha-H/Traccio">Open a Github issue</a>
+        <a href="mailto:support@traccio.app">Email support@traccio.app</a>
+      </div>
+    </div>
+    
     <small>&copy; Traccio 2020</small>
   </footer>
-   
 
 </div>
