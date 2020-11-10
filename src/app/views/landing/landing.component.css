@@ -96,7 +96,7 @@ button.header-btn.alt, a.header-btn.alt {
 .nav a:not(.header-btn) {
   text-decoration: none;
   color: var(--accent);
-  font-weight: 600;
+  font-weight: 500;
   margin: 0 15px;
 }
 
@@ -116,7 +116,7 @@ button.header-btn.alt, a.header-btn.alt {
 }
 
 .hero-div h3, .landing-div h3 {
-  color: var(--text);
+  color: #121217;
   font-weight: 600;
   margin: 40px 0;
 }
@@ -193,7 +193,7 @@ div.footer {
   width: 100%;
   max-width: var(--max-landing-width);
   padding: 50px 0px;
-  /* border-top: 1px solid var(--accent-hover); */
+  border-top: 1px solid var(--accent-hover);
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

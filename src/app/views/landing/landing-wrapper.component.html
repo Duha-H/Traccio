@@ -9,7 +9,7 @@
       <div class="spanning-content" *ngIf="!(resizeService.mobileSize$ | async); else navToggle;">
         <a routerLink="/">Home</a>
         <a routerLink="/about">Overview</a>
-        <a routerLink="/about">FAQ</a>
+        <a routerLink="/faq">FAQ</a>
         <a class="header-btn" routerLink="/signin">Log in</a>
         <a class="header-btn alt" routerLink="/signup">Sign up</a>
       </div>
@@ -33,7 +33,7 @@
         <a role="button" (click)="navigateAway('/about')">Overview</a>
       </li>
       <li>
-        <a role="button" (click)="navigateAway('/about')">FAQ</a>
+        <a role="button" (click)="navigateAway('/info')">FAQ</a>
       <li>
         <a class="header-btn" role="button" (click)="navigateAway('/signin')">Log in</a>
       </li>
@@ -45,7 +45,9 @@
   </nav>
   
 
-  <router-outlet></router-outlet>
+  <div class="page-content">
+    <router-outlet></router-outlet>
+  </div>
 
   <footer class="landing-footer">
     <div class="footer">
@@ -56,11 +58,11 @@
       <div class="spacer"></div>
       <div class="footer-item">
         <p class="heading">Links</p>
-        <a href="/about">Home</a>
+        <a href="/">Home</a>
         <a href="/about">Overview</a>
-        <a href="/about">FAQ</a>
-        <a href="/about">Log in</a>
-        <a href="/about">Sign up</a>
+        <a href="/faq">FAQ</a>
+        <a href="/signin">Log in</a>
+        <a href="/singup">Sign up</a>
       </div>
       <div class="footer-item">
         <p class="heading">Support & Contact</p>
