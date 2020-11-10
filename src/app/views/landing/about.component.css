@@ -14,9 +14,11 @@ li {
 }
 
 .landing-container {
-  padding: 40px;
+  padding: 20px;
   display: flex;
   flex-direction: row;
+  max-width: var(--max-landing-width);
+  margin: 40px 0;
 }
 
 .landing-container h2 {

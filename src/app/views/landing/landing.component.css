@@ -211,7 +211,7 @@ div.footer img.logo {
   display: flex;
   flex-direction: column;
   text-align: left;
-  padding-right: 100px;
+  padding-right: 50px;
   padding-bottom: 20px;
   align-items: flex-start;
 }

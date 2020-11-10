@@ -32,6 +32,8 @@ import { WishlistApplicationViewComponent } from './shared-components/applicatio
 import { ExistingApplicationViewComponent } from './shared-components/application-view/existing-application-view.component';
 import { FAQComponent } from './shared-components/faqs/faq.component';
 import { SafeHTMLPipe } from './utils/safe-html.pipe';
+import { ValuesPipe } from './utils/values.pipe';
+import { ScrollButtonComponent } from './shared-components/scroll-button/scroll-button.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,7 @@ import { SafeHTMLPipe } from './utils/safe-html.pipe';
     ToastListComponent,
     ToastComponent,
     FAQComponent,
+    ScrollButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -99,6 +102,7 @@ import { SafeHTMLPipe } from './utils/safe-html.pipe';
     ToastListComponent,
     ToastComponent,
     FAQComponent,
+    ScrollButtonComponent,
   ]
 })
 export class SharedModule { }

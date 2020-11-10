@@ -9,13 +9,13 @@ img.hero-img {
   box-sizing: border-box;
 }
 
+section {
+  padding: 0 20px;
+}
+
 section.main {
   padding: 40px 20px;
   background-color: var(--accent-hover);
-}
-
-section.questions {
-  padding: 0 20px;
 }
 
 .faq-section {
@@ -25,6 +25,16 @@ section.questions {
   flex-direction: row;
   justify-content: center;
   align-items: flex-end;
+}
+
+.faq-section.col {
+  flex-direction: column;
+  align-items: center;
+}
+
+.faq-section.alt {
+  align-items: flex-start;
+  max-width: 1000px;
 }
 
 .faq-section .spanning-content {
@@ -42,6 +52,7 @@ section.questions {
 
 .faq-section p {
   text-align: left;
+  color: #121217;
 }
 
 img.inline-logo {
@@ -53,4 +64,76 @@ img.inline-logo {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+
+nav.faq {
+  position: sticky;
+  top: 0px;
+  padding: 20px;
+  margin-top: 50px;
+}
+
+nav.faq ul {
+  list-style: none;
+  padding: 0;
+  width: 150px;
+}
+
+nav.faq p.heading {
+  font-weight: 600;
+  margin: 0;
+  margin-bottom: 10px;
+  color: #121217;
+}
+
+nav.faq li {
+  padding: 5px 0;
+  text-align: left;
+}
+
+nav.faq li a, .call-to-action p a {
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+nav.faq li a:hover, .call-to-action p a:hover {
+  text-decoration: underline;
+}
+
+.call-to-action h3 {
+  color: #121217;
+}
+
+.call-to-action p {
+  text-align: center;
+  color: #121217;
+}
+
+@media screen and (max-width: 900px) {
+  .faq-section:not(.col) {
+    flex-direction: column-reverse;
+  }
+
+  .faq-section h2 {
+    text-align: center;
+    justify-content: center;
+  }
+
+  .faq-section:not(.alt) .flex-column {
+    align-items: center;
+  }
+
+  nav.faq {
+    position: static;
+    padding-left: 0;
+    padding-bottom: 0;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  section.main {
+    height: 75vh;
+    display: flex;
+  }
 }

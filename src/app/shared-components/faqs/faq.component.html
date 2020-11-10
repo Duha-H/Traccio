@@ -1,12 +1,18 @@
 <div id="faq">
-  <h2>Frequently Asked Questions</h2>
+  <span *ngIf="tag" class="tag" title="No one's actually asked these yet if I'm being honest :)">{{ tag }}</span>
+  <h2 style="{{ tag ? 'margin-left: 30px' : '' }}">Frequently Asked Questions</h2>
   <ul>
-    <li *ngFor="let item of faqItems; let i = index;" id="faq{{ i }}" class="faq-item">
-      <p class="question">
-        <a href="{{ rootUrl }}#faq{{ i }}">💬</a>
-        {{ item.question }}
-      </p>
-      <p class="answer" [innerHTML]="(item.answer | safeHTML)"></p>
+    <li *ngFor="let section of faqSections;" id="{{ section.id }}">
+      <h4 class="heading">{{ section.title }}<a href="{{ rootUrl }}#{{ section.id }}">#</a></h4>
+      <ul>
+        <li *ngFor="let item of section.items;" id="{{ item.id }}" class="faq-item">
+          <p class="question">
+            <a href="{{ rootUrl }}#{{ item.id }}">💬</a>
+            {{ item.question }}
+          </p>
+          <p class="answer" [innerHTML]="(item.answer | safeHTML)"></p>
+        </li>
+      </ul>
     </li>
   </ul>
 </div>

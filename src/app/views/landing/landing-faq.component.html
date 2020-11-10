@@ -8,15 +8,32 @@
           ?
           </h2>
         </div>
-        <p>The FAQs below could hopefully help! 🙌</p>
+        <p>You might find some answers below! 🙌</p>
       </div>
       <img src="/assets/landing-graphics/faq_graphic.svg" alt="Graphic of an abstract terrain with way-markers and a briefcase at the horizon, and floating question marks in the background" class="hero-img">
     </div>
     
   </section>
   <section class="questions">
-    <div class="faq-section">
-      <app-faq [rootUrl]="'/faq'"></app-faq>
+    <div class="faq-section alt">
+      <app-faq [rootUrl]="'/faq'" [tag]="'ANTICIPATED 📍'"></app-faq>
+      <nav class="faq">
+        <p class="heading">On this page</p>
+        <ul class="flex-column">
+          <li *ngFor="let section of faqSections;">
+            <a href="/faq#{{ section.id }}">{{ section.title }}</a>
+          </li>
+        </ul>
+      </nav>
     </div>
   </section>
+
+  <section class="call-to-action">
+    <div class="faq-section col">
+      <h3>Have more questions that weren't answered above? 📝</h3>
+      <p>Feel free to reach out at <a href="mailto:support@traccio.app">support@traccio.app</a>!</p>
+    </div>
+  </section>
+
+  <scroll-button *ngIf="(rs.mobileSize$ | async)" ></scroll-button>
 </div>

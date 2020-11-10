@@ -103,6 +103,7 @@ import { LandingFAQComponent } from './views/landing/landing-faq.component';
   providers: [
     SearchPipe,
     KeysPipe,
+    ValuesPipe,
     // SafeHTMLPipe,
   ],
   bootstrap: [AppComponent],
