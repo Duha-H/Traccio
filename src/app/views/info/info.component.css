@@ -6,6 +6,7 @@ ul ul ul {
   max-width: 1000px;
   margin: auto;
   padding-top: 0;
+  text-align: left;
 }
 
 .landing-container h2 {
@@ -25,7 +26,7 @@ ul ul ul {
 .content {
   width: 100%;
   padding: 0;
-  margin: 20px 0;
+  margin: 60px 0;
 }
 
 .content li {
@@ -39,32 +40,6 @@ ul ul ul {
   font-size: 1em;
   width: 15px;
   height: 15px;
-}
-
-#faq {
-  margin-top: 50px;
-}
-
-p.question {
-  font-weight: 600;
-  margin: 0;
-  color: var(--accent);
-}
-
-p.answer {
-  margin: 0;
-  margin-top: 10px;
-  line-height: 1.8em;
-}
-
-p.answer a, #faq a {
-  text-decoration: none;
-  color: var(--accent);
-  font-weight: 600;
-}
-
-p.answer a:hover {
-  text-decoration: underline;
 }
 
 mat-icon.nav-toggle {
@@ -144,17 +119,5 @@ mat-icon.nav-toggle:hover {
     font-size: 25px;
     line-height: 25px;
     text-align: right;
-  }
-}
-
-@keyframes pulse-title {
-  0% {
-    transform: scale(1);
-  }
-  30% {
-    transform: scale(1.15);
-  }
-  100% {
-    transform: scale(1);
   }
 }

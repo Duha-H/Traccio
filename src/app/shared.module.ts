@@ -30,12 +30,15 @@ import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox';
 import { NewApplicationViewComponent } from './shared-components/application-view/new-application-view.component';
 import { WishlistApplicationViewComponent } from './shared-components/application-view/wishlist-application-view.component';
 import { ExistingApplicationViewComponent } from './shared-components/application-view/existing-application-view.component';
+import { FAQComponent } from './shared-components/faqs/faq.component';
+import { SafeHTMLPipe } from './utils/safe-html.pipe';
 
 @NgModule({
   declarations: [
     ArrayFilterPipe,
     AppFilterPipe,
     // KeysPipe,
+    SafeHTMLPipe,
     TextFieldComponent,
     OverlayComponent,
     BreadcrumbsComponent,
@@ -48,6 +51,7 @@ import { ExistingApplicationViewComponent } from './shared-components/applicatio
     ConfettiComponent,
     ToastListComponent,
     ToastComponent,
+    FAQComponent,
   ],
   imports: [
     CommonModule,
@@ -66,6 +70,7 @@ import { ExistingApplicationViewComponent } from './shared-components/applicatio
     { provide: ErrorStateMatcher, useClass: OnDirtyErrorStateMatcher },
     ArrayFilterPipe,
     AppFilterPipe,
+    SafeHTMLPipe,
     // KeysPipe,
   ],
   exports: [
@@ -92,7 +97,8 @@ import { ExistingApplicationViewComponent } from './shared-components/applicatio
     WishlistApplicationViewComponent,
     ExistingApplicationViewComponent,
     ToastListComponent,
-    ToastComponent
+    ToastComponent,
+    FAQComponent,
   ]
 })
 export class SharedModule { }

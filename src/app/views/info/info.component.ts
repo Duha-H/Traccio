@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef } from "@angular/core";
 import { Title } from '@angular/platform-browser';
 import { ResizeService } from 'src/app/controllers/resize.service';
-import { FAQItem, faqs } from './faq';
-import { SafeHTMLPipe } from './safe-html.pipe';
+import { FAQItem, faqs } from '../../shared-components/faqs/faq';
+import { SafeHTMLPipe } from '../../utils/safe-html.pipe';
 
 @Component({
   selector: 'app-info',

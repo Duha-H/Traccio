@@ -1,0 +1,56 @@
+.container {
+  padding-top: 0;
+}
+
+img.hero-img {
+  width: 600px;
+  max-width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+section.main {
+  padding: 40px 20px;
+  background-color: var(--accent-hover);
+}
+
+section.questions {
+  padding: 0 20px;
+}
+
+.faq-section {
+  max-width: var(--max-landing-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.faq-section .spanning-content {
+  text-align: left;
+  align-items: flex-end;
+}
+
+.faq-section h2 {
+  color: #121217;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.faq-section p {
+  text-align: left;
+}
+
+img.inline-logo {
+  max-width: 150px;
+  margin: 0 5px;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}

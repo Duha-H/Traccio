@@ -8,18 +8,7 @@
     <p>Traccio is a web application that helps you monitor and track your job search. It lets you organize your search, monitor your productivity, and keep all your necessary details under one (internet) roof!</p>
     <p>Traccio is an <a href="https://github.com/Duha-H/Traccio">open source</a> web application, feel free to read the application wiki <a href="https://github.com/Duha-H/Traccio/wiki">here</a>.</p>
     
-    <div id="faq">
-      <h2>Frequently Asked Questions</h2>
-      <ul>
-        <li *ngFor="let item of faqItems; let i = index;" id="faq{{ i }}" class="faq-item">
-          <p class="question">
-            <a href="/home/info#faq{{ i }}"><mat-icon>help_outline</mat-icon></a>
-            {{ item.question }}
-          </p>
-          <p class="answer" [innerHTML]="(item.answer | safeHTML)"></p>
-        </li>
-      </ul>
-    </div>
+    <app-faq></app-faq>
     
   </div>
 

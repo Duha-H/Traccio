@@ -17,6 +17,7 @@ import { AccountRecoveryComponent } from "./auth/account-recovery/account-recove
 import { AboutComponent } from "./views/landing/about.component";
 import { LandingWrapperComponent } from './views/landing/landing-wrapper.component';
 import { InfoComponent } from './views/info/info.component';
+import { LandingFAQComponent } from './views/landing/landing-faq.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
     children: [
       { path: "", component: LandingComponent },
       { path: "about", component: AboutComponent },
+      { path: "faq", component: LandingFAQComponent },
       { path: "signin", component: SignInComponent, canActivate: [SignInGuard] },
       { path: "signup", component: SignUpComponent, canActivate: [SignInGuard] },
       {

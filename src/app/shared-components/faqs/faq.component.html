@@ -1,0 +1,12 @@
+<div id="faq">
+  <h2>Frequently Asked Questions</h2>
+  <ul>
+    <li *ngFor="let item of faqItems; let i = index;" id="faq{{ i }}" class="faq-item">
+      <p class="question">
+        <a href="{{ rootUrl }}#faq{{ i }}">💬</a>
+        {{ item.question }}
+      </p>
+      <p class="answer" [innerHTML]="(item.answer | safeHTML)"></p>
+    </li>
+  </ul>
+</div>

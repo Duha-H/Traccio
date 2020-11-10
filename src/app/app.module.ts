@@ -47,8 +47,9 @@ import { JourneysGraphicComponent } from './views/landing/graphics/journeys-grap
 import { ApplicationGraphicComponent } from './views/landing/graphics/application-graphic.component';
 import { SearchGraphicComponent } from './views/landing/graphics/search-graphic.component';
 import { InfoComponent } from './views/info/info.component';
-import { SafeHTMLPipe } from './views/info/safe-html.pipe';
+import { SafeHTMLPipe } from './utils/safe-html.pipe';
 import { ValuesPipe } from './utils/values.pipe';
+import { LandingFAQComponent } from './views/landing/landing-faq.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { ValuesPipe } from './utils/values.pipe';
     LandingWrapperComponent,
     LandingComponent,
     AboutComponent,
+    LandingFAQComponent,
     InfoComponent,
     SignInComponent,
     SignUpComponent,
@@ -73,7 +75,6 @@ import { ValuesPipe } from './utils/values.pipe';
     SearchPipe,
     KeysPipe,
     ValuesPipe,
-    SafeHTMLPipe,
     // WishlistComponent,
     ProfileSettingsComponent,
     PreferenceSettingsComponent,
@@ -102,7 +103,7 @@ import { ValuesPipe } from './utils/values.pipe';
   providers: [
     SearchPipe,
     KeysPipe,
-    SafeHTMLPipe,
+    // SafeHTMLPipe,
   ],
   bootstrap: [AppComponent],
   schemas: [
