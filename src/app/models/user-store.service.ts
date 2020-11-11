@@ -64,7 +64,7 @@ export class UserStoreService {
    * Initial Setup Methods
    */
 
-  async setUser(firstName: string, lastName: string, id: string, email: string, verified: boolean, identityProvider?: 'DEFAULT' | 'GOOGLE') {
+  async setUser(id: string, verified: boolean, identityProvider?: 'DEFAULT' | 'GOOGLE') {
     const newUser = new User();
     newUser.userid = id;
     await this.firestore.collection('users').doc<UserInput>(id).get().toPromise()

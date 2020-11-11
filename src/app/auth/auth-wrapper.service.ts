@@ -97,7 +97,6 @@ export class AuthWrapperService {
           break;
       }
     }
-    console.log(response, this.authState.signedIn);
 
     return response;
   }
@@ -420,9 +419,8 @@ export class AuthWrapperService {
       const user = await this.fireAuth.currentUser;
       const credentials = firebase.auth.EmailAuthProvider.credential(email, password);
       const result = await user.reauthenticateWithCredential(credentials);
-      console.log(result);
     } catch(error) {
-      switch(error.code) {
+      switch (error.code) {
         case 'auth/user-mismatch':
         case 'auth/wrong-password':
           response.error('The old password provided is incorrect.\nPlease try again.');

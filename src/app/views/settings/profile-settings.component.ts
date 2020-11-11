@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter, ElementRef } from '@angular/core';
-import { STATE_ATTRIBS } from 'src/app/controllers/app-state-store.service';
 import { TextFieldComponent } from 'src/app/shared-components/text-field/text-field.component';
 import { Response } from 'src/app/utils/response';
 import { User } from 'src/app/models/user';
@@ -8,13 +7,22 @@ import { DEFAULT_PROFILE_UPDATE_CHECK } from './constants';
 import { ResizeService } from 'src/app/controllers/resize.service';
 
 @Component({
+  // tslint:disable-next-line: component-selector
   selector: 'settings-profile',
   templateUrl: './profile-settings.component.html',
   styleUrls: ['./settings.component.css']
 })
 export class ProfileSettingsComponent implements OnInit {
 
-  ATTRIBS = STATE_ATTRIBS;
+  ATTRIBS = { // attribute names match a User object's attribute names
+    FIRST_NAME: 'firstName',
+    LAST_NAME: 'lastName',
+    EMAIL: 'email',
+    VERIFIED: 'verified',
+    PASSWORD: 'password',
+    THEME: 'theme',
+    PALETTE: 'colorPalette',
+  };
   user: User = new User();
   updateCheck = Object.assign({}, DEFAULT_PROFILE_UPDATE_CHECK); // easier lookup for updated attribs
   displayVerifyOverlay = false;
@@ -26,8 +34,6 @@ export class ProfileSettingsComponent implements OnInit {
     confirmPassword: '',
   };
   updateList: {[key: string]: string } = {};
-  // visibleTooltip: ElementRef = undefined;
-  // clickedTooltipIcon: EventTarget = undefined;
 
   @Output() updates: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() updatePassword: EventEmitter<object> = new EventEmitter<object>();

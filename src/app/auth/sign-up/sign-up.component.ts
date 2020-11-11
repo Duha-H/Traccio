@@ -80,9 +80,6 @@ export class SignUpComponent implements OnInit {
     if (response.successful && response.payload) {
       const user: firebase.User = response.payload;
       this.userStore.setUser(
-        this.firstName.value,
-        this.lastName.value,
-        this.email.value,
         user.uid,
         user.emailVerified
       );

@@ -1,6 +1,6 @@
 export const DEFAULT_PROFILE_UPDATE_CHECK = {
-  given_name: false,
-  family_name: false,
+  firstName: false,
+  lastName: false,
   email: false,
   password: false,
 };

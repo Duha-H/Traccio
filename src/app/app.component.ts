@@ -47,10 +47,7 @@ export class AppComponent implements OnInit {
           // set user info
           this.loaderService.setLoadingState(true);
           await this.userStore.setUser(
-            userInfo.firstName,
-            userInfo.lastName,
             user.uid,
-            user.email,
             user.emailVerified,
             identityProvder,
           );
