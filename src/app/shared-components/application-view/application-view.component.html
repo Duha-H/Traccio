@@ -92,7 +92,8 @@
   <div class="additional-info">
     <p class="block-title">Additional Notes</p>
     <textarea name="additional-info" id="additional-info" rows="10"
-      (ngModel)="appFormGroup.controls.notes.value" (ngModelChange)="detailsUpdated=true"
+      [formControl]="appFormGroup.controls.notes"
+      (ngModelChange)="detailsUpdated=true"
       #notesTextArea>{{appFormGroup.controls.notes.value}}</textarea>
   </div>
 
