@@ -59,7 +59,7 @@ export class TimelineComponent implements OnInit, AfterViewInit {
 
   draw() {
     this._calibrateCanvas();
-    this.ctx.lineWidth = this.props.size;
+    this.ctx.lineWidth = this.props.size / this.pixelRatio;
     // draw lines
     for (let i = 0; i < this.markers.length; i++) {
       // update styles for next marker
@@ -86,12 +86,12 @@ export class TimelineComponent implements OnInit, AfterViewInit {
     this.markers.forEach(marker => {
       this.ctx.strokeStyle = marker.payload.color;
       this.ctx.fillStyle = marker.payload.color;
-      marker.draw(this.ctx, MARKER_WIDTH, MARKER_HEIGHT, true, false);
+      marker.draw(this.ctx, MARKER_WIDTH / this.pixelRatio, MARKER_HEIGHT / this.pixelRatio, true, false);
     });
     // draw ending marker/tick
     this.ctx.strokeStyle = '#797f85';
     this.ctx.fillStyle = '#797f85';
-    this.ctx.lineWidth = 2;
+    this.ctx.lineWidth = 4 / this.pixelRatio;
     this.ctx.beginPath();
     this.ctx.moveTo(this.width, this.markers[0].y - (MARKER_HEIGHT / 2) + MARKER_RADIUS);
     this.ctx.lineTo(this.width, this.markers[0].y + (MARKER_HEIGHT / 2) - MARKER_RADIUS);
@@ -147,6 +147,7 @@ export class TimelineComponent implements OnInit, AfterViewInit {
     const parentWidth = this.parentDiv.nativeElement.offsetWidth;
     const parentHeight = this.parentDiv.nativeElement.offsetHeight;
     this.pixelRatio = window.devicePixelRatio;
+    console.log(this.pixelRatio);
     // adjust canvas size relative to pixel ratio
     this.canvas.nativeElement.width = parentWidth * this.pixelRatio;
     this.canvas.nativeElement.height = parentHeight * this.pixelRatio;
@@ -214,8 +215,8 @@ export const placeholderData = [
   { status: STATUS.STALE, date: new Date("2020-04-06") },
 ];
 
-const MARKER_WIDTH = 15;
-const MARKER_HEIGHT = 52.5;
+const MARKER_WIDTH = 40;
+const MARKER_HEIGHT = 140;
 const MARKER_RADIUS = MARKER_WIDTH / 2;
 const HOVER_THRESHOLD_X = (MARKER_WIDTH / 2) * 2;
 const HOVER_THRESHOLD_Y = (MARKER_HEIGHT / 2) * 2;
@@ -224,7 +225,7 @@ export const defaultProps: TimelinePropType = {
   width: 600,
   height: 100,
   data: placeholderData,
-  size: 7.5,
+  size: 25,
   colors: ['#E76F51', '#F4A261', '#E9C46A', '#2A9D8F', '#264653', '#A6A8A8'],
   isInteractive: true
 };
