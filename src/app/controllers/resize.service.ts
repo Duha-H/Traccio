@@ -38,6 +38,6 @@ export class ResizeService {
 }
 
 export const SIZES = {
-  TABLET: 768,
+  TABLET: 900,
   MOBILE: 500
 };

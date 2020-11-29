@@ -1,7 +1,8 @@
 <div class="container">
   <section class="main">
-    <div class="faq-section">
-      <div class="flex-column">
+    <div class="landing-section center">
+      <img src="/assets/landing-graphics/faq_graphic.svg" alt="Graphic of an abstract terrain with way-markers and a briefcase at the horizon, and floating question marks in the background" class="hero-img">
+      <div class="flex-column center">
         <div class="spanning-content">
           <h2>Have some uncertainties about
           <img src="/assets/logo_light@2x.png" alt="Traccio logo" class="inline-logo">
@@ -10,12 +11,11 @@
         </div>
         <p>You might find some answers below! 🙌</p>
       </div>
-      <img src="/assets/landing-graphics/faq_graphic.svg" alt="Graphic of an abstract terrain with way-markers and a briefcase at the horizon, and floating question marks in the background" class="hero-img">
     </div>
-    
   </section>
+
   <section class="questions">
-    <div class="faq-section alt">
+    <div class="landing-section alt" style="max-width: 1000px;">
       <app-faq [rootUrl]="'/faq'" [tag]="'ANTICIPATED 📍'"></app-faq>
       <nav class="faq">
         <p class="heading">On this page</p>
@@ -29,11 +29,11 @@
   </section>
 
   <section class="call-to-action">
-    <div class="faq-section col">
+    <div class="landing-section col">
       <h3>Have more questions that weren't answered above? 📝</h3>
       <p>Feel free to reach out at <a href="mailto:support@traccio.app">support@traccio.app</a>!</p>
     </div>
   </section>
 
-  <scroll-button *ngIf="(rs.mobileSize$ | async)" ></scroll-button>
+  <scroll-button *ngIf="(rs.tabletSize$ | async)" ></scroll-button>
 </div>

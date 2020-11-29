@@ -5,7 +5,7 @@ import { SECTIONED_FAQS } from 'src/app/shared-components/faqs/faq';
 @Component({
   selector: 'app-landing-faq',
   templateUrl: 'landing-faq.component.html',
-  styleUrls: ['landing-faq.component.css'],
+  styleUrls: ['landing-views.css'],
 })
 export class LandingFAQComponent implements OnInit {
 

@@ -1,149 +1,175 @@
-<div class="landing-container">
-  
-  <div class="content">
-    
-    <h2 class="pulse">What's Up!</h2>
-    <p class="greeting">Hope you're having a swell {{ timeOfDay }}! Let's help you learn a bit more about <i>Traccio</i> &#10024;</p>
-    <p>If you're interested, you can check out the app's <a href="https://github.com/Duha-H/Traccio">public repository</a>, or <a href="https://github.com/Duha-H/Traccio/wiki">wiki</a>.</p>
-    <div id="what-is" class="content-section">
-      <h4><a class="content-link" (click)="scroll('what-is')">#</a> What is Traccio?</h4>
-      <p><i>Traccio</i> is a job-hunt tracking application. It allows you to organize your job search, and keep track of applications you submitted using a simple and effective platform. No more lifeless text-files and spreadsheets. A job search can be soul-draining as it is, maybe <i>Traccio</i> can help make it just a bit more bareable?</p>
-      <p><i>Traccio</i> also allows you to keep track of your job-hunt progress. Take note of when you're applying less frequently than you'd like, or how often have you heard back from companies! <i>Traccio</i> is meant to help you apply smart! No more applying to the same position twice (or 15 times), always have a clear vision of where you are in the process. Log in your application, and let <i>Traccio</i> handle the rest.</p>
-    </div>
-    
-    <div id="features" class="content-section">
-      <h4><a class="content-link" (click)="scroll('features')" role="button">#</a> Features</h4>
-      <ul>
-        <li>
-          <img src="/assets/landing-graphics/graphic_list_1.svg" alt="Organize">
-          <p><b>Organize</b> job hunts using Journeys. Separate them however convenient, and better visualize trends in your application processes.</p>
-        </li>
-        <li>
-          <img src="/assets/landing-graphics/graphic_list_2.svg" alt="Organize">
-          <p><b>Log</b> different details about a job application. Is your application still in review? Have you completed an online assessment? What documents did you submit? Log in and modify all these details, so they're easily available when, say, you're called in for an interview!</p>
-        </li>
-        <li>
-          <img src="/assets/landing-graphics/graphic_data.svg" alt="Organize">
-          <p><b>Visualize</b> your application progress in a given Journey. Your dashboard is the heart and soul of <i>Traccio</i>, use it to keep yourself motivated and constantly re-asses where you are in the process.</p>
-        </li>
-      </ul>
-    </div>
-    
-    <div id="get-started" class="content-section">
-      <h4><a class="content-link" (click)="scroll('get-started')">#</a> Get Started</h4>
-      <p><a href="" routerLink="/signup">Sign up</a> for a <i>Traccio</i> account today!</p>
-      <p>Use <i>Traccio</i> conveniently on mobile by adding it to your homescreen:</p>     
-      <ul>
-        <li>On <b>iOS</b>:
-          <ul>
-            <li>&#8226; &nbsp; Launch Safari, and go to <a href="https://www.traccio.app">traccio.app</a></li>
-            <li>&#8226; &nbsp; Tap the Share icon (a square with an arrow pointing out) at the bottom of the screen</li>
-            <li>&#8226; &nbsp; Select <i>Add to Home Screen</i> from the list of actions</li>
-          </ul>
-        </li>
-        <li> On <b>Android</b>:<br>
-          <ul>
-            <li>&#8226; &nbsp; Launch the Chrome app, and go to <a href="https://www.traccio.app">traccio.app</a> <br></li>
-            <li>&#8226; &nbsp; Tap the menu icon (three vertical dots icon) at the upper right-hand corner <br></li>
-            <li>&#8226; &nbsp; Select <i>Add to homescreen</i> <br></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-    
-    <div id="support" class="content-section">
-      <h4><a class="content-link" (click)="scroll('support')">#</a> Support & Feature Requests</h4>
-      <p><i>Traccio</i> is an <a href="https://github.com/Duha-H/Tracker-App">open source</a> web application. For feature requests, bug reporting, or support, feel free to use any of the options provided below.</p>
-      <ul>
-        <li><b>Feature requests</b>:
-          <ul>
-            <li>
-              &#8226; &nbsp; Email your feature request to <i>support@traccio.app</i>. Do try to use "Feature Request" in your subject line.
-            </li>
-            <li>
-              &#8226; &nbsp; Open an issue in the app <a href="https://github.com/Duha-H/Tracker-App">repository</a>. However, be sure to check the <a href="https://github.com/Duha-H/Tracker-App/wiki/Roadmap">app roadmap</a> first for planned features, your request might already be a planned development!
-            </li>
-          </ul>
-        </li>
-        <li><b>Support</b>:
-          <ul>
-            <li>
-              &#8226; &nbsp; If you're facing a specific issue with the app, email your support requests to <i>support@traccio.app</i>. Be sure to include any screenshots that might aid in resolving your issue. Add "Support Request" to your subject line.
-            </li>
-          </ul>
-        </li>
-        <li><b>Bug reports</b>:
-          <ul>
-            <li>
-              &#8226; &nbsp; Email your bug reports to <i>support@traccio.app</i>. Be sure to include any screenshots that might aid in resolving your issue. Add "Bug Report" to your subject line.
-            </li>
-            <li>
-              &#8226; &nbsp; Open an issue in the app <a href="https://github.com/Duha-H/Tracker-App">repository</a>. Be sure to include any screenshots or reproduction steps to help with the bug squashing!
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-    
-    <div id="tips" class="content-section">
-      <h4><a class="content-link" (click)="scroll('tips')">#</a> Tips</h4>
-      <p>Enjoying your <i>Traccio</i> experience and would like to support it somehow? Tips are currently accepted through <a href="https://paypal.me/traccioapp">PayPal</a> :).
-        <br><a href="https://paypal.me/traccioapp"><img src="/assets/tip_button.png" style="width: 180px; padding-top: 20px;"></a></p>
-    </div>
-  </div>
+<div class="container">
 
+  <section class="main">
+    <div class="landing-section center">
+      <img src="/assets/landing-graphics/overview_graphic.svg" alt="Graphic of an abstract terrain with way-markers and a briefcase at the horizon, and floating question marks in the background" class="hero-img">
+      <div class="flex-column center">
+        <h2><img src="/assets/logo_light@2x.png" alt="Traccio logo" class="inline-logo"> Overview</h2>
+      </div>
+    </div>
+  </section>
 
-  <div class="sidenav" title="FAQ navigation" #sidenav>
-    <mat-icon class="nav-toggle" (click)="displayNav()" *ngIf="!(resizeService.mobileSize$ | async) || !displayMobileNav">keyboard_arrow_left</mat-icon>
-    <mat-icon class="nav-toggle" (click)="displayNav()" *ngIf="(resizeService.mobileSize$ | async) && displayMobileNav">clear</mat-icon>
-    <ul *ngIf="displayMobileNav">
-      <li (click)="scroll('what-is')">
-        <mat-icon>keyboard_arrow_right</mat-icon>
-        What is <b><i>Traccio</i></b>?
-      </li>
-      <li (click)="scroll('features')">
-        <mat-icon>keyboard_arrow_right</mat-icon>
-        Features
-      </li>
-      <li (click)="scroll('get-started')">
-        <mat-icon>keyboard_arrow_right</mat-icon>
-        Get Started
-      </li>
-      <li (click)="scroll('support')">
-        <mat-icon>keyboard_arrow_right</mat-icon>
-        Support & Feature Requests
-      </li>
-      <li (click)="scroll('tips')">
-        <mat-icon>keyboard_arrow_right</mat-icon>
-        Tips
-      </li>
-    </ul>
-  </div>
+  <section class="overview">
+    <div class="landing-section alt">
+      <div class="landing-content">
+        <div class="sub-section padded">
+          <h2>Features<a class="content-link" (click)="scroll('features')" id="features" role="button">#</a></h2>
+          <p class="greeting">Hope you're having a swell {{ timeOfDay }}! Let's help you learn a bit more about Traccio ✨</p>
+          <p>If you're interested, you can check out the app's <a href="https://github.com/Duha-H/Traccio">public repository</a>, or <a href="https://github.com/Duha-H/Traccio/wiki">wiki</a>.</p>
+        </div>
+        <div class="sub-section">
+          <section class="flex-column" style="{{ !(rs.tabletSize$ | async) ? '' : 'background-color: #598AD5;'}}">
+            <h3 style="{{ (rs.tabletSize$ | async) ? 'color: white;' : 'color: #598AD5;'}}">
+              <mat-icon class="inline">dashboard</mat-icon>
+              Dashboard
+            </h3>
+            <div class="{{ (rs.tabletSize$ | async) ? 'flex-column feature-group' : 'flex-row feature-group' }}"
+              style="{{ (rs.tabletSize$ | async) ? '' : 'background-color: #598AD5;'}}">
+              <div class="flex-column">
+                <p>Traccio's heart and soul, use it to keep yourself motivated, and visualize your productivity and progress</p>
+              </div>
+              <div class="screenshot-container">
+                <!-- <img src="https://res.cloudinary.com/djxztokzp/image/upload/v1605277769/dashboard_screenshot_gfw8cj.png" alt="" class="screenshot"> -->
+                <img src="https://res.cloudinary.com/djxztokzp/image/upload/v1606667177/Traccio_Assets/dashboard_screenshot_jhhudo.png" alt="" class="screenshot">
+              </div>
+            </div>
+          </section>
 
-  <!-- <div class="sidenav" *ngIf="!(resizeService.mobileSize$ | async)">
-    <ul>
-      <li (click)="scroll('what-is')">
-        <mat-icon>keyboard_arrow_right</mat-icon>
-        What is <b><i>Traccio</i></b>?
-      </li>
-      <li (click)="scroll('features')">
-        <mat-icon>keyboard_arrow_right</mat-icon>
-        Features
-      </li>
-      <li (click)="scroll('get-started')">
-        <mat-icon>keyboard_arrow_right</mat-icon>
-        Get Started
-      </li>
-      <li (click)="scroll('support')">
-        <mat-icon>keyboard_arrow_right</mat-icon>
-        Support & Feature Requests
-      </li>
-      <li (click)="scroll('tips')">
-        <mat-icon>keyboard_arrow_right</mat-icon>
-        Tips
-      </li>
-    </ul>
-  </div> -->
-  
-  
+          
+          <section class="flex-column">
+            <h3 style="color: var(--accent);">
+              <mat-icon class="inline">view_carousel</mat-icon>
+              Journeys
+            </h3>
+            <div class="{{ (rs.tabletSize$ | async) ? 'flex-column feature-group' : 'flex-row feature-group' }}"
+              style="{{ (rs.tabletSize$ | async) ? '' : 'background-color: var(--accent);'}}">
+              <div class="flex-column">
+                <p>Classify job hunts using "Journeys". <br>Separate them however convenient, and better visualize trends in different application processes</p>
+              </div>
+              <div class="screenshot-container">
+                <!-- <img src="/assets/landing-graphics/journeys_screenshot.svg" alt="" class="screenshot"> -->
+                <img src="https://res.cloudinary.com/djxztokzp/image/upload/v1606667177/Traccio_Assets/journeys_screenshot_qon1mg.png" alt="" class="screenshot">
+              </div>
+            </div>
+          </section>
+
+          
+          <section class="flex-column" style="{{ !(rs.tabletSize$ | async) ? '' : 'background-color: #2A9D8F;'}}">
+            <h3 style="{{ (rs.tabletSize$ | async) ? 'color: white;' : 'color: #2A9D8F;'}}">
+              <mat-icon class="inline">timeline</mat-icon>
+              Application Tracking
+            </h3>
+            <div class="{{ (rs.tabletSize$ | async) ? 'flex-column feature-group' : 'flex-row feature-group' }}"
+              style="{{ (rs.tabletSize$ | async) ? '' : 'background-color: #2A9D8F;'}}">
+              <div class="flex-column">
+                <p>Instantly log and modify different details about a job application, and be your best prepared self!</p>
+              </div>
+              <div class="screenshot-container">
+                <!-- <img src="/assets/landing-graphics/application_screenshot.svg" alt="" class="screenshot"> -->
+                <img src="https://res.cloudinary.com/djxztokzp/image/upload/v1606667177/Traccio_Assets/application_screenshot_qva4hi.png" alt="" class="screenshot">
+              </div>
+            </div>
+          </section>
+          
+
+          <section class="flex-column">
+            <h3 style="color: #598AD5;">
+              <mat-icon class="inline">search</mat-icon>
+              Find
+            </h3>
+            <div class="{{ (rs.tabletSize$ | async) ? 'flex-column feature-group' : 'flex-row feature-group' }}"
+              style="{{ (rs.tabletSize$ | async) ? '' : 'background-color: #598AD5;'}}">
+              <div class="flex-column">
+                <p>Search your journeys and applications easily, and filter everything just that much faster</p>
+              </div>
+              <div class="screenshot-container">
+                <!-- <img src="/assets/landing-graphics/search_screenshot.svg" alt="" class="screenshot"> -->
+                <img src="https://res.cloudinary.com/djxztokzp/image/upload/v1606667178/Traccio_Assets/search_screenshot_stzywh.png" alt="" class="screenshot">
+              </div>
+            </div>
+          </section>
+          
+
+          <section class="flex-column center-block">
+            <h4>Enjoy a fun, customizable experience! 💡</h4>
+            <video class="preview" autoplay loop>
+              <source src="https://res.cloudinary.com/djxztokzp/video/upload/v1606681125/Traccio_Assets/preview_theme_toggle_kqcbbu.mp4" type="video/mp4">
+            </video>
+            <!-- <img src="/assets/landing-graphics/application_screenshot.svg" alt="" class="screenshot"> -->
+          </section>
+        </div>
+
+        <div class="sub-section">
+          <h2>Get Started<a class="content-link" (click)="scroll('get-started')" id="get-started" role="button">#</a></h2>
+          <div class="flex-column">
+            <p><a href="" routerLink="/signup">Sign up</a> for a Traccio account today!</p>
+            <p style="margin: 0;">Use Traccio conveniently on mobile by adding it to your homescreen:</p>     
+            <ul>
+              <li><b>On iOS<img src="/assets/icons/apple_logo.svg" alt="Apple logo" class="inline-logo tiny"></b>:
+                <ul>
+                  <li>Launch Safari, and go to <a href="https://www.traccio.app">traccio.app</a></li>
+                  <li>Tap the Share icon (a square with an arrow pointing out) at the bottom of the screen</li>
+                  <li>Select Add to Home Screen from the list of actions</li>
+                </ul>
+              </li>
+              <li><b>On Android<img src="/assets/icons/android_logo.svg" alt="Apple logo" class="inline-logo tiny"></b>:
+                <ul>
+                  <li>Launch the Chrome app, and go to <a href="https://www.traccio.app">traccio.app</a> <br></li>
+                  <li>Tap the menu icon (three vertical dots icon) at the upper right-hand corner <br></li>
+                  <li>Select Add to homescreen <br></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sub-section">
+          <h2>Support & Contact<a class="content-link" (click)="scroll('support')" id="support" role="button">#</a></h2>
+          <p>Traccio is an <a href="https://github.com/Duha-H/Tracker-App">open source</a> web application. For feature requests, bug reporting, or support, feel free to use any of the options provided below.</p>
+          <ul>
+            <li><b>Feature requests</b>:
+              <ul>
+                <li>Email your feature request to support@traccio.app. Do try to use "Feature Request" in your subject line.</li>
+                <li>Open an issue in the app <a href="https://github.com/Duha-H/Tracker-App">repository</a>. However, be sure to check the <a href="https://github.com/Duha-H/Tracker-App/wiki/Roadmap">app roadmap</a> first for planned features, your request might already be a planned development!</li>
+              </ul>
+            </li>
+            <li><b>Support</b>:
+              <ul>
+                <li>If you're facing a specific issue with the app, email your support requests to support@traccio.app. Be sure to include any screenshots that might aid in resolving your issue. Add "Support Request" to your subject line.</li>
+              </ul>
+            </li>
+            <li><b>Bug reports</b>:
+              <ul>
+                <li>Email your bug reports to support@traccio.app. Be sure to include any screenshots that might aid in resolving your issue. Add "Bug Report" to your subject line.</li>
+                <li>Open an issue in the app <a href="https://github.com/Duha-H/Tracker-App">repository</a>. Be sure to include any screenshots or reproduction steps to help with the bug squashing!</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="sub-section">
+          <h2>Tips 🎁<a class="content-link" (click)="scroll('tips')" id="tips" role="button">#</a></h2>
+          <p>Enjoying your Traccio experience and would like to support it somehow? Tips are currently accepted through <a href="https://paypal.me/traccioapp">PayPal</a> :)
+            <br><a href="https://paypal.me/traccioapp"><img src="/assets/tip_button.png" style="width: 180px; padding-top: 20px;"></a></p>
+        </div>
+      </div>
+
+      <!-- <nav class="faq">
+        <p class="heading compound-text">
+          On this page 
+          <mat-icon (click)="toggleNav()">keyboard_arrow_down</mat-icon>
+        </p>
+        <ul class="flex-column" *ngIf="displayNav">
+          <li><a href="/about#features">Features</a></li>
+          <li><a href="/about#get-started">Get Started</a></li>
+          <li><a href="/about#support">Support & Contact</a></li>
+          <li><a href="/about#tips">Tips 🎁</a></li>
+        </ul>
+      </nav> -->
+
+    </div>
+    
+  </section>
+
 </div>
+<scroll-button *ngIf="rs.tabletSize$ | async"></scroll-button>

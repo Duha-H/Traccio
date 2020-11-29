@@ -6,18 +6,18 @@ import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
-  styleUrls: ['./about.component.css', './landing.component.css'],
+  styleUrls: ['./landing-views.css'],
 })
 export class AboutComponent implements OnInit {
 
   now = new Date();
   timeOfDay = 'morning';
-  displayMobileNav = false;
+  displayNav = false;
   @ViewChild('mobileNav') mobileNav: ElementRef;
   @ViewChild('sidenav') nav: ElementRef<HTMLDivElement>;
 
   constructor(
-    public resizeService: ResizeService,
+    public rs: ResizeService,
     private router: Router,
     private titleService: Title,
   ) { }
@@ -41,15 +41,15 @@ export class AboutComponent implements OnInit {
     setTimeout(() => {
       element.classList.remove('pulse');
     }, 500);
-    this.displayNav();
+    this.toggleNav();
   }
 
-  displayNav() {
-    this.displayMobileNav = !this.displayMobileNav;
-    console.log('nav click', this.displayMobileNav, this.resizeService.mobileSize$.value, this.nav);
-    if (this.resizeService.mobileSize$.value && this.displayMobileNav) {
+  toggleNav() {
+    this.displayNav = !this.displayNav;
+    console.log('nav click', this.displayNav, this.rs.mobileSize$.value, this.nav);
+    if (this.rs.mobileSize$.value && this.displayNav) {
       this.nav.nativeElement.classList.add('expanded');
-    } else if (this.resizeService.mobileSize$.value && !this.displayMobileNav) {
+    } else if (this.rs.mobileSize$.value && !this.displayNav) {
       this.nav.nativeElement.classList.remove('expanded');
     }
   }
@@ -57,8 +57,8 @@ export class AboutComponent implements OnInit {
   onWrapperClick(event: Event) {
     // If a click is registered outside of the nav toggle button
     // hide mobileNav
-    if (this.displayMobileNav && !this.mobileNav.nativeElement.contains(event.target)) {
-      this.displayMobileNav = false;
+    if (this.displayNav && !this.mobileNav.nativeElement.contains(event.target)) {
+      this.displayNav = false;
     }
   }
 }

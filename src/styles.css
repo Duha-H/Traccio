@@ -15,7 +15,7 @@
   --error-bg: #f9769685;
 
   --header-height: 75px;
-  --max-landing-width: 70rem;
+  --max-landing-width: 75rem;
 }
 
 * {
@@ -40,7 +40,23 @@ body {
 h1,
 h2 {
   color: var(--titles-primary);
+  font-size: 2em;
+}
+
+h2 {
+  font-size: 1.8em;
+}
+
+h3 {
   font-size: 1.5em;
+}
+
+h4 {
+  font-size: 1.25em;
+}
+
+h4, h5 {
+  font-size: 1.15em;
 }
 
 h3,
@@ -48,11 +64,7 @@ h4,
 h5,
 h6 {
   color: var(--titles-secondary);
-  font-size: 1.25em;
-}
-
-h4, h5 {
-  font-size: 1.15em;
+  /* font-size: 1.25em; */
 }
 
 p, span {
@@ -262,6 +274,10 @@ footer {
   color: var(--text);
   padding: 30px;
   opacity: 0.5;
+}
+
+mat-icon.inline {
+  padding-right: 5px;
 }
 
 .spacer {

@@ -18,7 +18,7 @@ section.main {
   background-color: var(--accent-hover);
 }
 
-.faq-section {
+.landing-section {
   max-width: var(--max-landing-width);
   margin: 0 auto;
   display: flex;
@@ -27,22 +27,22 @@ section.main {
   align-items: flex-end;
 }
 
-.faq-section.col {
+.landing-section.col {
   flex-direction: column;
   align-items: center;
 }
 
-.faq-section.alt {
+.landing-section.alt {
   align-items: flex-start;
   max-width: 1000px;
 }
 
-.faq-section .spanning-content {
+.landing-section .spanning-content {
   text-align: left;
   align-items: flex-end;
 }
 
-.faq-section h2 {
+.landing-section h2 {
   color: #121217;
   display: flex;
   flex-direction: row;
@@ -50,7 +50,7 @@ section.main {
   flex-wrap: wrap;
 }
 
-.faq-section p {
+.landing-section p {
   text-align: left;
   color: #121217;
 }
@@ -111,16 +111,16 @@ nav.faq li a:hover, .call-to-action p a:hover {
 }
 
 @media screen and (max-width: 900px) {
-  .faq-section:not(.col) {
+  .landing-section:not(.col) {
     flex-direction: column-reverse;
   }
 
-  .faq-section h2 {
+  .landing-section h2 {
     text-align: center;
     justify-content: center;
   }
 
-  .faq-section:not(.alt) .flex-column {
+  .landing-section:not(.alt) .flex-column {
     align-items: center;
   }
 

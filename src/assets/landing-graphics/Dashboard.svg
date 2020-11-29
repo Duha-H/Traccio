@@ -117,13 +117,13 @@
     </g>
 
     <g id="toggle-week" transform="translate(78 -410)">
-      <text id="past" transform="translate(690 771)" fill="#707070" font-size="10" font-family="SegoeUI, Segoe UI" letter-spacing="0.05em"><tspan x="0" y="0">past</tspan></text>
-      <text id="week" transform="translate(714 771)" fill="#88a3fb" font-size="10" font-family="SegoeUI-Bold, Segoe UI" font-weight="700" letter-spacing="0.05em"><tspan x="0" y="0">week</tspan></text>
+      <text id="past" transform="translate(690 771)" fill="#707070" font-size="10" font-family="Inter var, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'" letter-spacing="0.05em"><tspan x="0" y="0">past</tspan></text>
+      <text id="week" transform="translate(714 771)" fill="#88a3fb" font-size="10" font-family="Inter var, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'" font-weight="700" letter-spacing="0.05em"><tspan x="0" y="0">week</tspan></text>
     </g>
 
     <g id="toggle-month" data-name="Group 26" transform="translate(77 -410)">
-      <text id="past" transform="translate(686 771)" fill="#707070" font-size="10" font-family="Bahnschrift" letter-spacing="0.05em"><tspan x="0" y="0">past</tspan></text>
-      <text id="month" transform="translate(710 771)" fill="#88a3fb" font-size="10" font-family="Bahnschrift" letter-spacing="0.05em"><tspan x="0" y="0">month</tspan></text>
+      <text id="past" transform="translate(686 771)" fill="#707070" font-size="10" font-family="Inter var, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'" letter-spacing="0.05em"><tspan x="0" y="0">past</tspan></text>
+      <text id="month" transform="translate(710 771)" fill="#88a3fb" font-size="10" font-family="Inter var, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'" letter-spacing="0.05em"><tspan x="0" y="0">month</tspan></text>
     </g>
 
   </g>
