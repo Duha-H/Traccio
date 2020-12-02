@@ -3,7 +3,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from './shared.module';
+import { ViewsSharedModule } from './views-shared.module';
 
 import { environment } from '../environments/environment';
 import { AuthModule } from './auth/auth.module';
@@ -24,7 +24,6 @@ import { SettingsComponent } from './views/settings/settings.component';
 import { LandingWrapperComponent } from './views/landing/landing-wrapper.component';
 import { LandingComponent } from './views/landing/landing.component';
 import { AboutComponent } from './views/landing/about.component';
-import { ApplicationInputComponent } from './shared-components/application-input/application-input.component';
 import { SearchComponent } from './views/search/search.component';
 import { ConfirmSignupComponent } from './auth/confirm-signup/confirm-signup.component';
 import { AppWrapperComponent } from './views/app-wrapper/app-wrapper.component';
@@ -50,43 +49,24 @@ import { InfoComponent } from './views/info/info.component';
 import { SafeHTMLPipe } from './utils/safe-html.pipe';
 import { ValuesPipe } from './utils/values.pipe';
 import { LandingFAQComponent } from './views/landing/landing-faq.component';
+import { BaseSharedModule } from './base-shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LandingWrapperComponent,
-    LandingComponent,
-    AboutComponent,
-    LandingFAQComponent,
-    InfoComponent,
-    SignInComponent,
-    SignUpComponent,
-    SettingsComponent,
-    ApplicationInputComponent,
-    SearchComponent,
-    ConfirmSignupComponent,
-    AppWrapperComponent,
-    AccountDropdownComponent,
-    AccountRecoveryComponent,
     ForgotPasswordComponent,
     NewPasswordComponent,
     ResetSuccessfulComponent,
     SignupSuccessfulComponent,
-    SearchPipe,
-    KeysPipe,
-    ValuesPipe,
-    // WishlistComponent,
-    ProfileSettingsComponent,
-    PreferenceSettingsComponent,
-    // WishlistWrapperComponent,
-    OverflowWrapperComponent,
+    SettingsComponent,
     DashboardGraphicComponent,
     JourneysGraphicComponent,
     ApplicationGraphicComponent,
     SearchGraphicComponent,
   ],
   imports: [
-    SharedModule,
+    BaseSharedModule,
+    ViewsSharedModule,
     CommonModule,
     AppRoutingModule,
     BrowserModule,
@@ -100,12 +80,7 @@ import { LandingFAQComponent } from './views/landing/landing-faq.component';
     AngularFireAuthModule,
     AngularFirestoreModule,
   ],
-  providers: [
-    SearchPipe,
-    KeysPipe,
-    ValuesPipe,
-    // SafeHTMLPipe,
-  ],
+  providers: [ ],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

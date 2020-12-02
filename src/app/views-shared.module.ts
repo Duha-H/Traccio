@@ -34,6 +34,7 @@ import { FAQComponent } from './shared-components/faqs/faq.component';
 import { SafeHTMLPipe } from './utils/safe-html.pipe';
 import { ValuesPipe } from './utils/values.pipe';
 import { ScrollButtonComponent } from './shared-components/scroll-button/scroll-button.component';
+import { BaseSharedModule } from './base-shared.module';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { ScrollButtonComponent } from './shared-components/scroll-button/scroll-
     AppFilterPipe,
     // KeysPipe,
     SafeHTMLPipe,
-    TextFieldComponent,
+    // TextFieldComponent,
     OverlayComponent,
     BreadcrumbsComponent,
     TimelineComponent,
@@ -53,14 +54,15 @@ import { ScrollButtonComponent } from './shared-components/scroll-button/scroll-
     ConfettiComponent,
     ToastListComponent,
     ToastComponent,
-    FAQComponent,
+    // FAQComponent,
     ScrollButtonComponent,
   ],
   imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule,
+    BaseSharedModule,
+    // CommonModule,
+    // FormsModule,
+    // ReactiveFormsModule,
+    // RouterModule,
     MatInputModule,
     MatSelectModule,
     MatNativeDateModule,
@@ -70,27 +72,28 @@ import { ScrollButtonComponent } from './shared-components/scroll-button/scroll-
     MatCheckboxModule,
   ],
   providers: [
-    { provide: ErrorStateMatcher, useClass: OnDirtyErrorStateMatcher },
+    // { provide: ErrorStateMatcher, useClass: OnDirtyErrorStateMatcher },
     ArrayFilterPipe,
     AppFilterPipe,
     SafeHTMLPipe,
-    // KeysPipe,
+    KeysPipe,
+    // ValuesPipe, //
   ],
   exports: [
-    CommonModule,
+    BaseSharedModule,
     // BrowserAnimationsModule,
-    FormsModule,
-    RouterModule,
+    // FormsModule, //
+    // RouterModule, //
     MatInputModule,
     MatSelectModule,
     MatNativeDateModule,
-    MatIconModule,
+    // MatIconModule, //
     MatListModule,
     MatDatepickerModule,
     MatCheckboxModule,
     ArrayFilterPipe,
     AppFilterPipe,
-    TextFieldComponent,
+    // TextFieldComponent, //
     OverlayComponent,
     BreadcrumbsComponent,
     TimelineComponent,
@@ -101,8 +104,8 @@ import { ScrollButtonComponent } from './shared-components/scroll-button/scroll-
     ExistingApplicationViewComponent,
     ToastListComponent,
     ToastComponent,
-    FAQComponent,
+    // FAQComponent,
     ScrollButtonComponent,
   ]
 })
-export class SharedModule { }
+export class ViewsSharedModule { }

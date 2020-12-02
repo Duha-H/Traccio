@@ -22,57 +22,65 @@ import { LandingFAQComponent } from './views/landing/landing-faq.component';
 const routes: Routes = [
   {
     path: "",
-    component: LandingWrapperComponent,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: () => redirectLoggedInTo(['home']) },
-    children: [
-      { path: "", component: LandingComponent },
-      { path: "about", component: AboutComponent },
-      { path: "faq", component: LandingFAQComponent },
-      { path: "signin", component: SignInComponent, canActivate: [SignInGuard] },
-      { path: "signup", component: SignUpComponent, canActivate: [SignInGuard] },
-      {
-        path: "confirmsignup",
-        component: ConfirmSignupComponent,
-        canActivate: [ConfirmSignUpGuard],
-      },
-      {
-        path: "accountrecovery",
-        component: AccountRecoveryComponent,
-        canActivate: [AccountRecoveryGuard],
-      },
-    ],
+    loadChildren: () =>
+      import("src/app/views/landing/landing.module").then(
+        (m) => m.LandingModule
+      ),
+    // component: LandingWrapperComponent,
+    // children: [
+    //   { path: "", component: LandingComponent },
+    //   { path: "about", component: AboutComponent },
+    //   { path: "faq", component: LandingFAQComponent },
+    //   { path: "signin", component: SignInComponent, canActivate: [SignInGuard] },
+    //   { path: "signup", component: SignUpComponent, canActivate: [SignInGuard] },
+    //   {
+    //     path: "confirmsignup",
+    //     component: ConfirmSignupComponent,
+    //     canActivate: [ConfirmSignUpGuard],
+    //   },
+    //   {
+    //     path: "accountrecovery",
+    //     component: AccountRecoveryComponent,
+    //     canActivate: [AccountRecoveryGuard],
+    //   },
+    // ],
   },
   {
     path: "home",
     canActivate: [AngularFireAuthGuard],
-    component: AppWrapperComponent,
-    children: [
-      {
-        path: "",
-        loadChildren: () =>
-          import("src/app/views/dashboard/dashboard.module").then(
-            (m) => m.DashboardModule
-          ),
-      },
-      {
-        path: "journeys",
-        loadChildren: () =>
-          import("src/app/views/journeys/journeys.module").then(
-            (m) => m.JourneysModule
-          ),
-      },
-      {
-        path: "wishlist",
-        loadChildren: () =>
-          import("src/app/views/wishlist/wishlist.module").then(
-            (m) => m.WishlistModule
-          ),
-      },
-      { path: "settings", component: SettingsComponent },
-      { path: "info", component: InfoComponent },
-      { path: "**", redirectTo: "" },
-    ],
+    loadChildren: () =>
+      import("src/app/views/app-wrapper/app-wrapper.module").then(
+        (m) => m.AppWrapperModule
+      ),
+    // component: AppWrapperComponent,
+    // children: [
+    //   {
+    //     path: "",
+    //     loadChildren: () =>
+    //       import("src/app/views/dashboard/dashboard.module").then(
+    //         (m) => m.DashboardModule
+    //       ),
+    //   },
+    //   {
+    //     path: "journeys",
+    //     loadChildren: () =>
+    //       import("src/app/views/journeys/journeys.module").then(
+    //         (m) => m.JourneysModule
+    //       ),
+    //   },
+    //   {
+    //     path: "wishlist",
+    //     loadChildren: () =>
+    //       import("src/app/views/wishlist/wishlist.module").then(
+    //         (m) => m.WishlistModule
+    //       ),
+    //   },
+    //   { path: "settings", component: SettingsComponent },
+    //   { path: "info", component: InfoComponent },
+    //   { path: "**", redirectTo: "" },
+    // ],
   },
   { path: "**", redirectTo: "home" },
 ];
