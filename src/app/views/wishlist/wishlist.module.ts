@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from 'src/app/shared.module';
+import { ViewsSharedModule } from 'src/app/views-shared.module';
 import { WishlistComponent } from './wishlist.component';
 import { WishlistRoutingModule } from './wishlist-routing.module';
+import { BaseSharedModule } from 'src/app/base-shared.module';
 
 @NgModule({
   declarations: [
     WishlistComponent,
   ],
   imports: [
-    SharedModule,
+    BaseSharedModule,
+    ViewsSharedModule,
     WishlistRoutingModule,
     // MatGridListModule,
     // MatCheckboxModule,

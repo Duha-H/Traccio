@@ -4,7 +4,7 @@ import { JourneysComponent } from './journeys.component';
 import { ApplicationListComponent } from './journey-view/application-list.component';
 import { JourneyViewComponent } from './journey-view/journey-view.component';
 import { JourneyListComponent } from './journey-list/journey-list.component';
-import { SharedModule } from 'src/app/shared.module';
+import { ViewsSharedModule } from 'src/app/views-shared.module';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
@@ -28,7 +28,7 @@ import 'hammerjs';
     // AppFilterPipe,
   ],
   imports: [
-    SharedModule,
+    ViewsSharedModule,
     HammerModule,
     JourneysRoutingModule,
     // MatGridListModule,
