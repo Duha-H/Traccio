@@ -8,7 +8,9 @@ import { OnDirtyErrorStateMatcher } from './controllers/on-dirty-error-state-mat
 import { FAQComponent } from './shared-components/faqs/faq.component';
 import { TextFieldComponent } from './shared-components/text-field/text-field.component';
 import { KeysPipe } from './utils/keys.pipe';
+import { SafeHTMLPipe } from './utils/safe-html.pipe';
 import { ValuesPipe } from './utils/values.pipe';
+import { SearchPipe } from './views/search/search-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { ValuesPipe } from './utils/values.pipe';
     // Pipes
     ValuesPipe,
     KeysPipe,
+    SearchPipe,
+    SafeHTMLPipe,
   ],
   imports: [
     // Global Module imports
@@ -35,11 +39,16 @@ import { ValuesPipe } from './utils/values.pipe';
     MatIconModule,
     TextFieldComponent,
     FAQComponent,
+    SearchPipe,
+    SafeHTMLPipe,
+    KeysPipe,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnDirtyErrorStateMatcher },
     ValuesPipe,
     KeysPipe,
+    SearchPipe,
+    SafeHTMLPipe,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
