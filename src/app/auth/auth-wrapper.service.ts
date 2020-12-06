@@ -62,9 +62,13 @@ export class AuthWrapperService {
           this.authState.signedUp = true;
           this.authState.signedIn = false;
           break;
+        case 'auth/too-many-requests':
+          // tslint:disable-next-line: max-line-length
+          response.error('Looks like you\'ve had too many failed log in attempts.\nYou can try resetting your password by clicking \'Forgot password\' below, or try signing in again at a later time.');
+          break;
         default:
           response.error('An unexpected error occured, please try again');
-          console.error('AuthWrapper: unexpected signIn error:', error.message);
+          console.error('AuthWrapper: unexpected signIn error:', error.message, error.code);
           break;
       }
     }
