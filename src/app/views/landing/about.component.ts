@@ -36,12 +36,12 @@ export class AboutComponent implements OnInit {
 
   scroll(id: string) {
     const element = document.querySelector(`#${id}`);
-    element.scrollIntoView(false);
+    element.scrollIntoView({behavior: 'smooth'});
     element.classList.add('pulse');
     setTimeout(() => {
       element.classList.remove('pulse');
     }, 500);
-    this.toggleNav();
+    // this.toggleNav();
   }
 
   toggleNav() {

@@ -24,7 +24,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NewApplicationViewComponent } from './shared-components/application-view/new-application-view.component';
 import { WishlistApplicationViewComponent } from './shared-components/application-view/wishlist-application-view.component';
 import { ExistingApplicationViewComponent } from './shared-components/application-view/existing-application-view.component';
-import { ScrollButtonComponent } from './shared-components/scroll-button/scroll-button.component';
 import { BaseSharedModule } from './base-shared.module';
 
 @NgModule({
@@ -42,7 +41,6 @@ import { BaseSharedModule } from './base-shared.module';
     ConfettiComponent,
     ToastListComponent,
     ToastComponent,
-    ScrollButtonComponent,
   ],
   imports: [
     BaseSharedModule,
@@ -79,7 +77,6 @@ import { BaseSharedModule } from './base-shared.module';
     ExistingApplicationViewComponent,
     ToastListComponent,
     ToastComponent,
-    ScrollButtonComponent,
   ]
 })
 export class ViewsSharedModule { }

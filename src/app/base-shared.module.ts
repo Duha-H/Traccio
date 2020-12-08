@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { OnDirtyErrorStateMatcher } from './controllers/on-dirty-error-state-matcher';
 import { FAQComponent } from './shared-components/faqs/faq.component';
+import { ScrollButtonComponent } from './shared-components/scroll-button/scroll-button.component';
 import { TextFieldComponent } from './shared-components/text-field/text-field.component';
 import { KeysPipe } from './utils/keys.pipe';
 import { SafeHTMLPipe } from './utils/safe-html.pipe';
@@ -17,6 +18,7 @@ import { SearchPipe } from './views/search/search-pipe.pipe';
     // Components
     TextFieldComponent,
     FAQComponent,
+    ScrollButtonComponent,
     // Pipes
     ValuesPipe,
     KeysPipe,
@@ -42,6 +44,7 @@ import { SearchPipe } from './views/search/search-pipe.pipe';
     SearchPipe,
     SafeHTMLPipe,
     KeysPipe,
+    ScrollButtonComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnDirtyErrorStateMatcher },

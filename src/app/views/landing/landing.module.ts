@@ -3,7 +3,11 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { AccountRecoveryComponent } from 'src/app/auth/account-recovery/account-recovery.component';
+import { ForgotPasswordComponent } from 'src/app/auth/account-recovery/forgot-password.component';
+import { NewPasswordComponent } from 'src/app/auth/account-recovery/new-password.component';
+import { ResetSuccessfulComponent } from 'src/app/auth/account-recovery/reset-successful.component';
 import { ConfirmSignupComponent } from 'src/app/auth/confirm-signup/confirm-signup.component';
+import { SignupSuccessfulComponent } from 'src/app/auth/confirm-signup/signup-successful.component';
 import { SignInComponent } from 'src/app/auth/sign-in/sign-in.component';
 import { SignUpComponent } from 'src/app/auth/sign-up/sign-up.component';
 import { BaseSharedModule } from 'src/app/base-shared.module';
@@ -24,6 +28,10 @@ import { LandingComponent } from './landing.component';
     SignUpComponent,
     ConfirmSignupComponent,
     AccountRecoveryComponent,
+    NewPasswordComponent,
+    ForgotPasswordComponent,
+    ResetSuccessfulComponent,
+    SignupSuccessfulComponent,
   ],
   imports: [
     BaseSharedModule,

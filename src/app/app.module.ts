@@ -31,10 +31,10 @@ import { BaseSharedModule } from './base-shared.module';
 @NgModule({
   declarations: [
     AppComponent,
-    ForgotPasswordComponent,
-    NewPasswordComponent,
-    ResetSuccessfulComponent,
-    SignupSuccessfulComponent,
+    // ForgotPasswordComponent,
+    // NewPasswordComponent,
+    // ResetSuccessfulComponent,
+    // SignupSuccessfulComponent,
     DashboardGraphicComponent,
     JourneysGraphicComponent,
     ApplicationGraphicComponent,

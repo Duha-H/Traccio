@@ -1,4 +1,4 @@
-<p align="center"><a href="https://traccio.app" style="display: block; text-align: center;" alt="traccio logo"><img width="350px" src="./src/assets/logo_traccio@2x.png"/></a></p>
+<p align="center"><a href="https://traccio.app" style="display: block; text-align: center;" alt="traccio logo"><img width="350px" style="background: white; padding: 10px;" src="./src/assets/logo_light@2x.png"/></a></p>
 
 <p align="center">It's job-search tracking, but better!</p><br><br>
 

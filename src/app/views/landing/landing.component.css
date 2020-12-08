@@ -105,7 +105,7 @@ button.header-btn.alt, a.header-btn.alt {
 }
 
 .hero-div {
-  height: 80vh;
+  height: 90vh;
   max-width: var(--max-landing-width);
   display: flex;
   flex-direction: row;

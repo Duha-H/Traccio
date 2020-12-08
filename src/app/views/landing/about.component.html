@@ -4,7 +4,7 @@
     <div class="landing-section center">
       <img src="/assets/landing-graphics/overview_graphic.svg" alt="Graphic of an abstract terrain with way-markers and a briefcase at the horizon, and floating question marks in the background" class="hero-img">
       <div class="flex-column center">
-        <h2><img src="/assets/logo_light@2x.png" alt="Traccio logo" class="inline-logo"> Overview</h2>
+        <h2>Learn how <img src="/assets/logo_light@2x.png" alt="Traccio logo" class="inline-logo"> can help you out! ✍️</h2>
       </div>
     </div>
   </section>
@@ -13,7 +13,7 @@
     <div class="landing-section alt">
       <div class="landing-content">
         <div class="sub-section padded">
-          <h2>Features<a class="content-link" (click)="scroll('features')" id="features" role="button">#</a></h2>
+          <h2>Features<a class="content-link" href="/about#features" id="features">#</a></h2>
           <p class="greeting">Hope you're having a swell {{ timeOfDay }}! Let's help you learn a bit more about Traccio ✨</p>
           <p>If you're interested, you can check out the app's <a href="https://github.com/Duha-H/Traccio">public repository</a>, or <a href="https://github.com/Duha-H/Traccio/wiki">wiki</a>.</p>
         </div>
@@ -99,8 +99,8 @@
           </section>
         </div>
 
-        <div class="sub-section">
-          <h2>Get Started<a class="content-link" (click)="scroll('get-started')" id="get-started" role="button">#</a></h2>
+        <div class="sub-section padded">
+          <h2>Get Started<a class="content-link" href="/about#get-started" id="get-started">#</a></h2>
           <div class="flex-column">
             <p><a href="" routerLink="/signup">Sign up</a> for a Traccio account today!</p>
             <p style="margin: 0;">Use Traccio conveniently on mobile by adding it to your homescreen:</p>     
@@ -123,8 +123,8 @@
           </div>
         </div>
 
-        <div class="sub-section">
-          <h2>Support & Contact<a class="content-link" (click)="scroll('support')" id="support" role="button">#</a></h2>
+        <div class="sub-section padded">
+          <h2>Support & Contact<a class="content-link" id="support" href="/about#support">#</a></h2>
           <p>Traccio is an <a href="https://github.com/Duha-H/Tracker-App">open source</a> web application. For feature requests, bug reporting, or support, feel free to use any of the options provided below.</p>
           <ul>
             <li><b>Feature requests</b>:
@@ -147,29 +147,16 @@
           </ul>
         </div>
         
-        <div class="sub-section">
-          <h2>Tips 🎁<a class="content-link" (click)="scroll('tips')" id="tips" role="button">#</a></h2>
+        <div class="sub-section padded">
+          <h2>Tips 🎁<a class="content-link" href="/about#tips" id="tips">#</a></h2>
           <p>Enjoying your Traccio experience and would like to support it somehow? Tips are currently accepted through <a href="https://paypal.me/traccioapp">PayPal</a> :)
             <br><a href="https://paypal.me/traccioapp"><img src="/assets/tip_button.png" style="width: 180px; padding-top: 20px;"></a></p>
         </div>
       </div>
-
-      <!-- <nav class="faq">
-        <p class="heading compound-text">
-          On this page 
-          <mat-icon (click)="toggleNav()">keyboard_arrow_down</mat-icon>
-        </p>
-        <ul class="flex-column" *ngIf="displayNav">
-          <li><a href="/about#features">Features</a></li>
-          <li><a href="/about#get-started">Get Started</a></li>
-          <li><a href="/about#support">Support & Contact</a></li>
-          <li><a href="/about#tips">Tips 🎁</a></li>
-        </ul>
-      </nav> -->
 
     </div>
     
   </section>
 
 </div>
-<scroll-button *ngIf="rs.tabletSize$ | async"></scroll-button>
+<scroll-button></scroll-button>
