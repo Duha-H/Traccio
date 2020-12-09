@@ -80,7 +80,7 @@ export class AuthWrapperService {
     const response = new Response();
 
     try {
-      response.payload = (await this.fireAuth.signInWithPopup(this.googleAuthProvider)).user;
+      response.payload = (await this.fireAuth.signInWithRedirect(this.googleAuthProvider));
       this.authState.signedIn = true;
       this.authState.signedUp = false;
     } catch (error) {
@@ -97,7 +97,8 @@ export class AuthWrapperService {
           break;
         default:
           console.log('AuthWrapper: google sign in error:', error);
-          response.error('An unexpected error occured, please try again');
+          response.error('An unexpected error occured, please try again', error);
+          // TODO: figure out a way to propagate errors here to some kind of logger
           break;
       }
     }
