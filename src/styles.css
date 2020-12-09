@@ -306,6 +306,11 @@ mat-icon.inline {
   color: var(--titles-secondary);
 }
 
+.placeholder-text img {
+  width: 600px;
+  max-width: 90%;
+}
+
 .add-btn {
   /* line-height: var(--spanning-line-height); */
   border-radius: 5px;

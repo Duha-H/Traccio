@@ -1,8 +1,9 @@
-<div class="recovery-container">
-  <h2>Password Recovery</h2>
-  <forgot-password *ngIf="state == 'forgotPassword'" (submitEmail)="forgotPassword($event)" [error]="error">
-  </forgot-password>
-  <new-password *ngIf="state == 'newPassword'" (submitNewPassword)="forgotPasswordSubmit($event)"
-    (resendCode)="forgotPassword()" [error]="error" [email]="email"></new-password>
-  <reset-successful *ngIf="state == 'resetSuccessful'"></reset-successful>
+<div class="container">
+  <div class="recovery-container">
+    <h2>Password Recovery</h2>
+    <forgot-password *ngIf="state == 'forgotPassword'" (submitEmail)="forgotPassword($event)" [error]="error"></forgot-password>
+    <new-password *ngIf="state == 'newPassword'" (submitNewPassword)="forgotPasswordSubmit($event)"
+      (resendCode)="forgotPassword()" [error]="error" [email]="email">hmmm</new-password>
+    <reset-successful *ngIf="state == 'resetSuccessful'"></reset-successful>
+  </div>
 </div>

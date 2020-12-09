@@ -45,16 +45,23 @@ span {
 }
 
 .dashboard-header {
-  height: 4vh;
   display: flex;
   align-items: center;
   text-align: left;
   padding: 0 20px;
 }
 
+.dashboard-header h3 {
+  margin: 5px 0;
+}
+
 mat-form-field {
   /* padding: 10px; */
   margin-right: 20px;
+}
+
+.dashboard-header mat-form-field div.mat-form-field-wrapper {
+  padding-bottom: 0;
 }
 
 mat-select {
