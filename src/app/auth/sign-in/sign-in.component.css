@@ -80,6 +80,10 @@ form {
 }
 
 @media screen and (max-width: 500px) {
+  .container {
+    padding-top: 10px;
+  }
+
   .inner-container {
     background: none;
     box-shadow: none;

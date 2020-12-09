@@ -88,6 +88,10 @@ p.warning-text {
 }
 
 @media screen and (max-width: 500px) {
+  .container {
+    padding-top: 10px;
+  }
+
   div.signup-container {
     width: 90%;
     background: none;

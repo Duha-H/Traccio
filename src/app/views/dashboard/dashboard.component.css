@@ -27,7 +27,6 @@ span {
   max-width: 1230px;
   margin: 0 auto;
   padding: 0;
-  padding-top: 10px;
 }
 
 .greeting {
@@ -416,6 +415,11 @@ svg #tumbleweed-2 {
 
   .dashboard-component {
     max-width: 100%;
+    margin: 10px 5px;
+  }
+
+  .journey-details {
+    margin-top: 5px;
   }
 
   .stat-item .stat-item-content {

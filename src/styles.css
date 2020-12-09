@@ -28,13 +28,10 @@ body {
   width: 100%;
   overflow: hidden;
   background-color: var(--bg);
-  font-size: 12pt;
 }
 
 body {
   margin: 0;
-  /* font-family: Roboto, "Helvetica Neue", sans-serif; */
-  /* "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace !important */
 }
 
 h1,
@@ -184,7 +181,7 @@ app-sign-in,
 app-sign-up,
 app-account-recovery,
 app-confirm-signup {
-  height: 100vh;
+  /* height: 100vh; */
   width: 100%;
   display: inline-block;
   overflow: auto;
@@ -386,6 +383,10 @@ p.answer a:hover {
 
 
 @media screen and (max-width: 500px) {
+  * {
+    font-size: 10pt;
+  }
+
   :root {
     --header-height: 65px;
   }
