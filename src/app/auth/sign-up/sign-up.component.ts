@@ -10,7 +10,7 @@ import { Title } from '@angular/platform-browser';
 @Component({
   selector: "app-sign-up",
   templateUrl: "./sign-up.component.html",
-  styleUrls: ["./sign-up.component.css"],
+  styleUrls: ["./sign-up.component.css", "../auth.component.css"],
 })
 export class SignUpComponent implements OnInit {
   // firstName = "";

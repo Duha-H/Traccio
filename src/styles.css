@@ -14,7 +14,7 @@
   --success-bg: #94f4c24f;
   --error-bg: #f9769685;
 
-  --header-height: 75px;
+  --header-height: 65px;
   --max-landing-width: 75rem;
 }
 
@@ -96,7 +96,7 @@ app-info {
 }
 
 app-landing-wrapper {
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   width: 100vw;
   height: 100vh;
   box-sizing: border-box;
@@ -372,6 +372,15 @@ p.answer a {
 
 p.answer a:hover {
   text-decoration: underline;
+}
+
+.sticky-header-bg {
+  width: 100%;
+  height: var(--header-height);
+  position: sticky;
+  top: 0;
+  background-color: var(--bg);
+  z-index: 98;
 }
 
 @media screen and (max-width: 575px) {

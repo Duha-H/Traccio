@@ -7,7 +7,7 @@ import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-confirm-signup',
   templateUrl: './confirm-signup.component.html',
-  styleUrls: ['./confirm-signup.component.css']
+  styleUrls: ['./confirm-signup.component.css', '../auth.component.css']
 })
 export class ConfirmSignupComponent implements OnInit {
 

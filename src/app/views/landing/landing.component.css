@@ -3,18 +3,11 @@ a {
 }
 
 .container {
-  /* background-image: url('/assets/bg-60.svg'); */
-  background-attachment: scroll;
-  background-repeat: no-repeat;
   width: 100%;
-  height: auto;
+  height: 100%;
   padding-top: 0;
-  text-align: center;
   position: relative;
-}
-
-nav {
-  background-color: var(--accent-hover);
+  overflow-y: scroll;
 }
 
 .landing-container {
@@ -37,14 +30,15 @@ nav {
 
 .header {
   box-sizing: border-box;
-  height: var(--header-height);
+  height: 100%;
   width: 100%;
   max-width: var(--max-landing-width);
   display: flex;
   align-items: center;
   font-weight: 600;
-  padding: 10px 20px;
+  padding: 5px 20px;
   margin: 0 auto;
+  box-shadow: #CFCFEEE3 0px 1px 0px;
 }
 
 .header img.logo {
@@ -129,8 +123,8 @@ button.header-btn.alt, a.header-btn.alt {
 }
 
 img.hero-img {
-  max-width: 700px;
-  width: -webkit-fill-available;
+  width: 700px;
+  max-width: 60%;
 }
 
 .landing-div {
@@ -147,7 +141,7 @@ img.hero-img {
 }
 
 .landing-div p {
-  max-width: 20rem;
+  max-width: 30rem;
   line-height: 1.5em;
 }
 
@@ -216,6 +210,10 @@ div.footer img.logo {
   align-items: flex-start;
 }
 
+.footer-item:not(.alt) {
+  max-width: 200px;
+}
+
 .footer-item:last-of-type {
   padding-right: 0;
 }
@@ -230,15 +228,15 @@ div.footer img.logo {
   color: var(--accent);
   text-decoration: none;
   font-weight: 500;
-  /* position: relative; */
   padding-top: 10px;
+  white-space: normal;
 }
 
 .footer-item a:hover {
   text-decoration: underline;
 }
 
-.footer-item a:after {    
+/* .footer-item a:after {    
   background: none repeat scroll 0 0 transparent;
   bottom: 0px;
   content: "";
@@ -255,7 +253,7 @@ div.footer img.logo {
 .footer-item a:hover:after {
   width: 100%; 
   right: 0;
-}
+} */
 
 img.inline-logo {
   max-width: 20px;
@@ -286,8 +284,12 @@ p.compound-text a {
 }
 
 nav {
-  /* position: sticky; */
+  position: fixed;
   top: 0;
+  height: var(--header-height);
+  width: 100%;
+  /* background-color: #CFCFEED1; */
+  z-index: 99;
 }
 
 .mobile-nav a, .mobile-nav a:not(.header-btn) {
@@ -309,11 +311,10 @@ ul.mobile-nav.visible {
   list-style: none;
   padding: 0 20px;
   padding-bottom: 15px;
-  padding-top: var(--header-height);
   margin: 0;
   box-shadow: 0 20px 20px -20px #a2a1a191;
   position: fixed;
-  top: 0;
+  top: var(--header-height);
   right: 0;
   left: 0;
   bottom: 0;

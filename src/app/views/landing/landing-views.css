@@ -23,7 +23,7 @@ section.main {
   height: auto;
   display: flex;
   justify-content: center;
-  height: 90vh;
+  height: 100vh;
 }
 
 section.overview {
@@ -37,6 +37,10 @@ section.overview {
   flex-direction: row;
   justify-content: center;
   align-items: flex-end;
+}
+
+.landing-section.col {
+  flex-direction: column;
 }
 
 .landing-section.center {
@@ -167,7 +171,7 @@ p.compound-text {
 
 nav.faq {
   position: sticky;
-  top: 0px;
+  top: var(--header-height);
   padding: 20px;
   padding-right: 0;
   margin-top: 30px;
@@ -201,13 +205,9 @@ nav.faq li a:hover, .call-to-action p a:hover {
   text-decoration: underline;
 }
 
-.call-to-action h3 {
+.call-to-action h3, .call-to-action p {
   color: #121217;
-}
-
-.call-to-action p {
   text-align: center;
-  color: #121217;
 }
 
 img.screenshot {
@@ -257,6 +257,7 @@ section.flex-column.center-block {
   border-radius: 15px;
   background-color: var(--accent);
   width: 100%;
+  z-index: 1;
 }
 
 .feature-group p {
@@ -340,9 +341,10 @@ img.inline-logo.tiny {
 
   .feature-group .flex-column {
     max-width: inherit;
-    min-height: 600px;
+    /* min-height: 600px; */
     padding: 5px;
     border-radius: 15px;
+    z-index: -1;
   }
 
   .feature-group h4 {
@@ -350,9 +352,9 @@ img.inline-logo.tiny {
   }
 
   .feature-group .screenshot-container {
-    position: absolute;
+    position: relative;
     left: 0;
-    top: 20%;
+    /* top: 20%; */
     width: 100%;
     max-width: inherit;
   }
@@ -389,5 +391,9 @@ img.inline-logo.tiny {
   section.main {
     height: 70vh;
     display: flex;
+  }
+
+  .sub-section ul {
+    padding-left: 20px;
   }
 }

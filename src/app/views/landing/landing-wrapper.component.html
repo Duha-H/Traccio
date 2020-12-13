@@ -1,8 +1,9 @@
 <span id="top-marker"></span>
 <div class="container">
 
+  <div class="sticky-header-bg" style="background-color: var(--accent-hover);"></div>
   <nav>
-    <div class="header">
+    <div class="header the-sticky-element">
       <a routerLink="/" id="logo">
         <img src="/assets/logo_fill_light.png" alt="Traccio logo" class="logo">
       </a>
@@ -59,11 +60,12 @@
       <div class="spacer"></div>
       <div class="footer-item">
         <p class="heading">Links</p>
-        <a href="/">Home</a>
-        <a href="/about">Overview</a>
-        <a href="/faq">FAQ</a>
-        <a href="/signin">Log in</a>
-        <a href="/singup">Sign up</a>
+        <a routerLink="/">Home</a>
+        <a routerLink="/about">Overview</a>
+        <a routerLink="/faq">FAQ</a>
+        <a routerLink="/signin">Log in</a>
+        <a routerLink="/singup">Sign up</a>
+        <a routerLink="/privacy">Privacy</a>
       </div>
       <div class="footer-item">
         <p class="heading">External Links</p>
@@ -73,7 +75,7 @@
       <div class="footer-item">
         <p class="heading">Support & Contact</p>
         <a href="https://github.com/Duha-H/Traccio/issues">Github Issue</a>
-        <a href="mailto:support@traccio.app">Email</a>
+        <a href="mailto:support@traccio.app">Reach out at support@traccio.app</a>
       </div>
     </div>
     
