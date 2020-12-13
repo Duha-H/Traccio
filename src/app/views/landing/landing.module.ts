@@ -17,6 +17,7 @@ import { LandingFAQComponent } from './landing-faq.component';
 import { LandingRoutingModule } from './landing-routing.module';
 import { LandingWrapperComponent } from './landing-wrapper.component';
 import { LandingComponent } from './landing.component';
+import { PrivacyComponent } from './privacy.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { LandingComponent } from './landing.component';
     ForgotPasswordComponent,
     ResetSuccessfulComponent,
     SignupSuccessfulComponent,
+    PrivacyComponent,
   ],
   imports: [
     BaseSharedModule,

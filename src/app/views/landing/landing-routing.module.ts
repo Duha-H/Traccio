@@ -11,6 +11,7 @@ import { AboutComponent } from './about.component';
 import { LandingFAQComponent } from './landing-faq.component';
 import { LandingWrapperComponent } from './landing-wrapper.component';
 import { LandingComponent } from './landing.component';
+import { PrivacyComponent } from './privacy.component';
 
 
 const routes: Routes = [
@@ -33,6 +34,7 @@ const routes: Routes = [
         component: AccountRecoveryComponent,
         canActivate: [AccountRecoveryGuard],
       },
+      { path: "privacy", component: PrivacyComponent },
     ],
   }
 ];
