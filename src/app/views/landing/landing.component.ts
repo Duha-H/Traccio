@@ -6,7 +6,7 @@ import { ResizeService } from 'src/app/controllers/resize.service';
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.css', './landing-cards.css'],
 })
-export class LandingComponent implements OnInit, AfterViewInit {
+export class LandingComponent implements OnInit {
 
   constructor(public resizeService: ResizeService) { }
 
@@ -21,24 +21,7 @@ export class LandingComponent implements OnInit, AfterViewInit {
   currentIntervalID = -1;
 
 
-  ngOnInit() {
-    // this.setNewInterval();
-  }
-
-  ngAfterViewInit() {
-    const selector = '.the-sticky-element';
- 
-    let parent = document.querySelector(selector).parentElement;
-    
-    while (parent) {
-      const hasOverflow = getComputedStyle(parent).overflow;
-      if (hasOverflow !== 'visible') {
-        console.log(hasOverflow, parent);
-      }
-      parent = parent.parentElement;
-    }
-    console.log(parent);
-  }
+  ngOnInit() { }
 
   checkView(event?: any) {
     let i = 0;

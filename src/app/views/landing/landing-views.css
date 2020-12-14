@@ -23,11 +23,12 @@ section.main {
   height: auto;
   display: flex;
   justify-content: center;
-  height: 100vh;
+  min-height: 50vh;
 }
 
 section.overview {
   padding: 40px 0;
+  padding-top: 0;
 }
 
 .landing-section {
@@ -80,7 +81,11 @@ section.overview {
 }
 
 section.main .landing-section {
-  flex-direction: column;
+  flex-direction: row;
+}
+
+section.main .landing-section .flex-column {
+  max-width: 35%;
 }
 
 .sub-section {
@@ -92,7 +97,7 @@ section.main .landing-section {
 }
 
 .sub-section:first-of-type {
-  margin-top: 30px;
+  margin-top: 0px;
 }
 
 .sub-section h3 {
@@ -136,11 +141,12 @@ section.main .landing-section {
 
 .landing-content {
   padding: 20px;
+  padding-top: 0;
   width: 100%;
 }
 
 img.inline-logo {
-  max-width: 150px;
+  max-width: 100px;
   margin: 0 5px;
 }
 
@@ -233,7 +239,7 @@ section.flex-column {
 }
 
 section.flex-column:first-of-type {
-  margin-top: 200px;
+  margin-top: 100px;
 }
 
 section.flex-column:last-of-type {
@@ -306,6 +312,14 @@ img.inline-logo.tiny {
 }
 
 @media screen and (max-width: 900px) {
+  section.main .landing-section {
+    flex-direction: column-reverse;
+  }
+
+  section.main .landing-section .flex-column {
+    max-width: none;
+  }
+
   .landing-section:not(.col) {
     flex-direction: column-reverse;
   }
@@ -377,6 +391,8 @@ img.inline-logo.tiny {
     position: static;
     padding-left: 0;
     padding-bottom: 0;
+    padding-top: 0;
+    margin-top: 0;
   }
 
   img.inline-logo.tiny {
