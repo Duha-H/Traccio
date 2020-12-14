@@ -383,6 +383,13 @@ p.answer a:hover {
   z-index: 98;
 }
 
+#top-marker {
+  z-index: 101;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 @media screen and (max-width: 575px) {
   div.content {
     height: 85vh;
