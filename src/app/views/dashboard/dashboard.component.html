@@ -56,7 +56,7 @@
             <div class="stat-item">
               <div class="stat-item-content">
                 <p class="stat-item-primary-text">
-                  {{ selectedJourney.frequencyAxes[lineChartMode].y | arrayFilter:'average' }}
+                  {{ selectedJourney.frequencyAxes[lineChartMode].y | arrayFilter:'average':1 }}
                 </p>
                 <p class="stat-item-secondary-text">/{{ lineChartMode === 'year' ? 'month' : 'day'}}</p>
               </div>
@@ -259,10 +259,10 @@
 
 <app-overlay *ngIf="displayDownloadOverlay" (closeOverlay)="hideImgOverlay()" [title]="'Save as Image'">
   <div class="overlay-content">
-    <img *ngIf="downloadImgSrc == ''; else loadedImg" src="/assets/logo_svg.svg" alt="loading logo" class="logo">
-    <ng-template #loadedImg>
+    <app-loading-indicator ></app-loading-indicator>
+    <!-- <ng-template #loadedImg>
       <img class="download-img" src="{{downloadImgSrc}}" #downloadImg>
-    </ng-template>
+    </ng-template> -->
     <div class="spanning-content">
       <div class="spacer"></div>
       <a href="{{downloadImgSrc}}" download="{{downloadName}}"  #downloadLink>

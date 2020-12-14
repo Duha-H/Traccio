@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from "@angular/core";
   name: "arrayFilter",
 })
 export class ArrayFilterPipe implements PipeTransform {
-  transform(list: number[], mode?: 'max' | 'min' | 'count' | 'average') {
+  transform(list: number[], mode?: 'max' | 'min' | 'count' | 'average', minVal?: number) {
     if (!list || list.length === 0) {
       return list;
     }
@@ -18,7 +18,12 @@ export class ArrayFilterPipe implements PipeTransform {
     } else if (mode === 'average') {
       const count = list.length;
       const total = this.sum(list);
-      return (total / count).toFixed(1);
+      const average = total / count;
+      if (minVal && average < minVal) {
+        return '< 1';
+      } else {
+        return average.toFixed(1);
+      }
     }
   }
 
