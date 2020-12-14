@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
+import { LoaderService } from 'src/app/controllers/loader.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -19,7 +20,8 @@ export class SignInComponent implements OnInit {
   constructor(
     private router: Router,
     private authWrapper: AuthWrapperService,
-    private titleService: Title
+    private titleService: Title,
+    private loaderService: LoaderService
   ) { }
 
   ngOnInit() {
@@ -37,7 +39,7 @@ export class SignInComponent implements OnInit {
     setTimeout(() => {
       this.submitButton.nativeElement.classList.remove('pulse');
     }, 200);
-    // execure sign in
+    // execute sign in
     let response;
     if (identityProvider === 'Google') {
       response = await this.authWrapper.googleSignIn();

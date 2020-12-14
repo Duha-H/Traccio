@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ResizeService } from 'src/app/controllers/resize.service';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { LoaderService } from "src/app/controllers/loader.service";
 
 @Component({
   selector: 'app-landing-wrapper',
@@ -15,7 +16,8 @@ export class LandingWrapperComponent implements OnInit {
   constructor(
     public resizeService: ResizeService,
     public router: Router,
-    private titleService: Title
+    private titleService: Title,
+    public loaderService: LoaderService,
   ) { }
 
   ngOnInit() {

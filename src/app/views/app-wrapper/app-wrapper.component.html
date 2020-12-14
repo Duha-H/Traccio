@@ -57,9 +57,12 @@
 
     <!-- Content Router -->
     <div class="content" role="main">
-      <div class="loading" *ngIf="(loaderService.loading | async); else content">
-        <img src="/assets/logo_svg.svg" alt="logo" width="100px">
-      </div>
+      <app-loading-indicator *ngIf="(loaderService.loading | async); else content"></app-loading-indicator>
+
+      <!-- <div class="loading" *ngIf="(loaderService.loading | async); else content"> -->
+        <!-- <div class="loading-overlay"></div> -->
+        <!-- <img src="/assets/logo_svg.svg" alt="logo" width="100px"> -->
+      <!-- </div> -->
       <ng-template #content>
         <app-search *ngIf="searchQuery.length != 0; else appContent" [query]="searchQuery"
           [parentSearchSubject]="searchSubject" (clearEvent)="clearSearch()" #searchComponent></app-search>

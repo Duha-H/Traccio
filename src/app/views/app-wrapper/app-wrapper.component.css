@@ -192,11 +192,20 @@ mat-sidenav, div.sidenav {
   align-content: center;
   text-align: center;
 }
-
+/* 
 div.loading {
   margin: auto;
   text-align: center;
+  position: relative;
 }
+
+.loading .loading-overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: var(--accent);
+  background-blend-mode: luminosity;
+} */
 
 .content {
   display: flex;

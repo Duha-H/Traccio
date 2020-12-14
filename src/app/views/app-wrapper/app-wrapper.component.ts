@@ -32,6 +32,7 @@ export class AppWrapperComponent implements OnInit {
   ];
   searchQuery = '';
   searchSubject: BehaviorSubject<string> = new BehaviorSubject(this.searchQuery);
+  previous = false;
 
   @Output() submitSearch = new EventEmitter();
   @ViewChild("navHomeIcon", { read: ElementRef }) currNavIconRef: HTMLElement;
@@ -77,6 +78,8 @@ export class AppWrapperComponent implements OnInit {
   onNavIconClick(ref: HTMLElement) {  }
 
   onWrapperClick(event: Event) {
+    // this.loaderService.setLoadingState(this.previous);
+    this.previous = !this.previous;
     // If a click is registered outside of the dropdown toggle button
     // hide the dropdown
     if (!this.dropdownRef.nativeElement.contains(event.target)) {

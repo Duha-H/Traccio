@@ -48,7 +48,10 @@
 
   <div class="page-content">
     <span id="top-marker"></span>
-    <router-outlet></router-outlet>
+    <app-loading-indicator *ngIf="(loaderService.loading | async); else content"></app-loading-indicator>
+    <ng-template #content>
+      <router-outlet></router-outlet>
+    </ng-template>
   </div>
 
   <footer class="landing-footer">

@@ -4,6 +4,7 @@ import { Response } from 'src/app/utils/response';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
+import { LoaderService } from '../controllers/loader.service';
 
 @Injectable({
   providedIn: AuthModule
@@ -16,7 +17,7 @@ export class AuthWrapperService {
   };
   googleAuthProvider: firebase.auth.GoogleAuthProvider;
 
-  constructor(private fireAuth: AngularFireAuth, private fireStore: AngularFirestore) {
+  constructor(private fireAuth: AngularFireAuth, private fireStore: AngularFirestore, private loaderService: LoaderService) {
     this.googleAuthProvider = new firebase.auth.GoogleAuthProvider();
   }
 
@@ -135,7 +136,7 @@ export class AuthWrapperService {
       const user = await this.fireAuth.createUserWithEmailAndPassword(email, password);
       // send verification email
       await user.user.sendEmailVerification({
-        url: 'http://localhost:4200/confirmsignup;success=true', // TODO: update later
+        url: `http://${window.location.host}/confirmsignup;success=true`, // TODO: update later
         handleCodeInApp: true,
       });
       // add user info to database
@@ -218,7 +219,7 @@ export class AuthWrapperService {
       const user = await this.fireAuth.currentUser;
       // send verification email
       await user.sendEmailVerification({
-        url: 'http://localhost:4200/confirmsignup;success=true', // TODO: update later
+        url: `http://${window.location.host}/confirmsignup;success=true`, // TODO: update later
         handleCodeInApp: true,
       });
       this.authState.signedIn = false;
@@ -241,7 +242,7 @@ export class AuthWrapperService {
     try {
       // SUCCESS
       await this.fireAuth.sendPasswordResetEmail(email, {
-        url: 'http://localhost:4200/accountrecovery;state=resetSuccessful',
+        url: `http://${window.location.host}/accountrecovery;state=resetSuccessful`,
         handleCodeInApp: true,
       });
       this.authState.signedIn = false;

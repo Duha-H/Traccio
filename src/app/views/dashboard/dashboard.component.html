@@ -259,10 +259,10 @@
 
 <app-overlay *ngIf="displayDownloadOverlay" (closeOverlay)="hideImgOverlay()" [title]="'Save as Image'">
   <div class="overlay-content">
-    <app-loading-indicator ></app-loading-indicator>
-    <!-- <ng-template #loadedImg>
+    <app-loading-indicator *ngIf="downloadImgSrc == ''; else loadedImg"></app-loading-indicator>
+    <ng-template #loadedImg>
       <img class="download-img" src="{{downloadImgSrc}}" #downloadImg>
-    </ng-template> -->
+    </ng-template>
     <div class="spanning-content">
       <div class="spacer"></div>
       <a href="{{downloadImgSrc}}" download="{{downloadName}}"  #downloadLink>
