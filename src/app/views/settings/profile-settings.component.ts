@@ -5,6 +5,8 @@ import { User } from 'src/app/models/user';
 import { UserStoreService } from 'src/app/models/user-store.service';
 import { DEFAULT_PROFILE_UPDATE_CHECK } from './constants';
 import { ResizeService } from 'src/app/controllers/resize.service';
+import { FormControl, Validators } from '@angular/forms';
+import { containsLowercaseValidator, containsNumberValidator, containsUppercaseValidator } from 'src/app/utils/validators';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -27,13 +29,11 @@ export class ProfileSettingsComponent implements OnInit {
   updateCheck = Object.assign({}, DEFAULT_PROFILE_UPDATE_CHECK); // easier lookup for updated attribs
   displayVerifyOverlay = false;
   verificationCode = '';
-  changePassword = false;
-  passwordDetails = {
-    oldPassword: '',
-    newPassword: '',
-    confirmPassword: '',
-  };
   updateList: {[key: string]: string } = {};
+  email = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
 
   @Output() updates: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() updatePassword: EventEmitter<object> = new EventEmitter<object>();
@@ -64,29 +64,12 @@ export class ProfileSettingsComponent implements OnInit {
     }
   }
 
-  addPasswordChange(category: string, value: string) {
-    this.passwordDetails[category] = value;
-  }
-
-  applyPasswordChange() {
-    this.updatePassword.emit(this.passwordDetails);
-  }
-
-  resetPasswordChange() {
-    this.changePassword = false;
-    this.passwordDetails = {
-      oldPassword: '',
-      newPassword: '',
-      confirmPassword: '',
-    };
-  }
-
   closeVerifyOverlay() {
     this.displayVerifyOverlay = false;
   }
 
   toggleChangePassword() {
-    this.changePassword = !this.changePassword;
+    this.updatePassword.emit();
   }
 
   displayTooltip(id: string, event: MouseEvent) {

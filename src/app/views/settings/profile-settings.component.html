@@ -53,7 +53,7 @@
     </div>
     <div class="setting-textfield" style="align-items: flex-start;">
       <div class="value value-div">
-        <text-field [width]="800" [height]="10" [center]="false" [displayLabel]="false" [text]="user.email" [showUpdatedBorder]="updateCheck[ATTRIBS.EMAIL]" (inputChange)="addUpdate(ATTRIBS.EMAIL, $event)" #emailField></text-field>
+        <text-field [width]="800" [height]="10" [center]="false" [displayLabel]="false" [text]="user.email" [showUpdatedBorder]="updateCheck[ATTRIBS.EMAIL]" (inputChange)="addUpdate(ATTRIBS.EMAIL, $event)" [control]="email" [displayFeedback]="true" #emailField></text-field>
         <div *ngIf="!user.verified" id="alert-div">
           <p class="warning-text">Your email was not verified,<a class="login-link" style="line-height: 12pt; cursor: pointer; z-index: 2; margin-left: 5px;" role="button" (click)="displayVerifyOverlay=true">verify email</a></p>
         </div>
@@ -88,40 +88,15 @@
         <mat-icon class="info-icon" (click)="displayTooltip('password', $event)">info</mat-icon>
       </p>
       <div class="info" style="padding: 5px 0;" id="password">
-        <p id="alt-info">Make password good so account is good.</p>
+        <p id="alt-info">Your password should be atleast 8 characters long, and should contain atleast 1 upper-case letter, atleast 1 lower-case letter, and atlease 1 number.</p>
       </div>
     </div>
     
-    <div *ngIf="!changePassword" class="value password-change">
+    <div class="value password-change">
       <button class="toggle" (click)="toggleChangePassword()">
         <p>Change Password</p>
       </button>
     </div>
-    <div *ngIf="changePassword" class="value value-div password-change">
-      <text-field  [width]="800" [height]="10" [center]="false" [displayLabel]="false" [text]="" [type]="'password'" [label]="'Old Password'" (inputChange)="addPasswordChange('oldPassword', $event)"></text-field>
-      <text-field  [width]="800" [height]="10" [center]="false" [displayLabel]="false" [text]="" [type]="'password'" [label]="'New Password'" (inputChange)="addPasswordChange('newPassword', $event)"></text-field>
-      <text-field  [width]="800" [height]="10" [center]="false" [displayLabel]="false" [text]="" [type]="'password'" [label]="'Confirm New Password'" (inputChange)="addPasswordChange('confirmPassword', $event)"></text-field>
-      <div *ngIf="!user.verified" id="alert-div">
-        <p class="warning-text">Your email was not verified,</p><a class="login-link" style="line-height: 12pt; cursor: pointer;" role="button" (click)="displayVerifyOverlay=true">verify email</a>
-      </div>
-      <div style="display: flex; flex-direction: row; margin: 10px 0; flex-wrap: wrap;">
-        <ul class="toggle-btns">
-          <li>
-            <button class="toggle" (click)="applyPasswordChange()">
-              <p>Update Password</p>
-            </button>
-          </li>
-          <li>
-            <button class="toggle" (click)="toggleChangePassword()">
-              <p>Cancel</p>
-            </button>
-          </li>
-        </ul>
-        <a href="#" routerLink="/accountrecovery" class="login-link" style="line-height: normal; margin: 10px;">Forgot your password?</a>
-      </div>
-      
-    </div>
-    <!-- <div class="undo-button"></div> -->
 
   </div>
 

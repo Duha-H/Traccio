@@ -6,6 +6,7 @@ import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
 import { FormControl, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { ResizeService } from 'src/app/controllers/resize.service';
 import { Title } from '@angular/platform-browser';
+import { containsLowercaseValidator, containsNumberValidator, containsUppercaseValidator } from "src/app/utils/validators";
 
 @Component({
   selector: "app-sign-up",
@@ -27,9 +28,9 @@ export class SignUpComponent implements OnInit {
   password = new FormControl('', [
     Validators.required,
     Validators.minLength(8),
-    this.containsUppercaseValidator(), // atleast one upper-case letter
-    this.containsLowercaseValidator(), // atleast one lower-case letter
-    this.containsNumberValidator(), // atleast one number
+    containsUppercaseValidator(), // atleast one upper-case letter
+    containsLowercaseValidator(), // atleast one lower-case letter
+    containsNumberValidator(), // atleast one number
   ]);
   confirmPassword = new FormControl('', [
     Validators.required,
@@ -88,44 +89,5 @@ export class SignUpComponent implements OnInit {
       this.error = response.message;
       console.log('error', response);
     }
-  }
-
-  containsCharacterValidator(regex: RegExp): ValidatorFn {
-    return (control: AbstractControl): {[key: string]: any} | null => {
-      const forbidden = regex.test(control.value);
-      return forbidden ? {forbiddenName: {value: control.value}} : null;
-    };
-  }
-
-  containsUppercaseValidator(): ValidatorFn {
-    const regex = new RegExp('^(.*[A-Z]+.*)*$');
-    return (control: AbstractControl): {[key: string]: any} | null => {
-      const match = regex.test(control.value);
-      return match ? null : { upperCase: { value: control.value } };
-    };
-  }
-
-  containsLowercaseValidator(): ValidatorFn {
-    const regex = new RegExp('^(.*[a-z]+.*)*$');
-    return (control: AbstractControl): {[key: string]: any} | null => {
-      const match = regex.test(control.value);
-      return match ? null : { lowerCase: { value: control.value } };
-    };
-  }
-
-  containsNumberValidator(): ValidatorFn {
-    const regex = new RegExp('^(.*[0-9]+.*)*$');
-    return (control: AbstractControl): {[key: string]: any} | null => {
-      const match = regex.test(control.value);
-      return match ? null : { number: { value: control.value } };
-    };
-  }
-
-  containsSpecialCharValidator(): ValidatorFn {
-    const regex = new RegExp('^(.*[#?!@$%^&*-]+.*)*$');
-    return (control: AbstractControl): {[key: string]: any} | null => {
-      const match = regex.test(control.value);
-      return match ? null : { specialChar: { value: control.value } };
-    };
   }
 }

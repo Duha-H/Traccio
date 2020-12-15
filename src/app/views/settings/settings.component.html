@@ -9,11 +9,12 @@
     </button>
   </div>
   <div class="tabs">
-    <mat-tab-group mat-align-tabs="center" animationDuration="0ms" (selectedIndexChange)="changes=tabChanges[$event]"
+    <mat-tab-group mat-align-tabs="center" animationDuration="0ms"
+      (selectedIndexChange)="changes=tabChanges[$event]"
       color="accent" #tabGroup>
       <mat-tab label="Profile Settings">
         <settings-profile (updates)="setChange(0, $event)" (showAlert)="showAlert($event)"
-          (updatePassword)="applyPasswordChange($event)" (showTooltip)="showTooltip($event)"
+          (updatePassword)="showPasswordChangeOverlay()" (showTooltip)="showTooltip($event)"
           (hideTooltip)="hideTooltip($event)"></settings-profile>
       </mat-tab>
 
@@ -24,3 +25,69 @@
     </mat-tab-group>
   </div>
 </div>
+
+<app-overlay *ngIf="displayPasswordPrompt" [title]="'Verify Password'" (closeOverlay)="displayPasswordPrompt=false">
+  <div class="overlay-content">
+    <p>Enter your password below to verify your account</p>
+    <text-field [displayLabel]="true" [displayFeedback]="true" [label]="'Password'" [type]="'password'" [control]="password"></text-field>
+    <button class="submit-btn" (click)="applyEmailChange(password.value)">Enter Password</button>
+  </div>
+</app-overlay>
+
+<app-overlay *ngIf="displayPasswordChangeOverlay" [title]="'Change Password'" (closeOverlay)="closePasswordChangeOverlay()">
+  <div class="overlay-content">
+    <text-field [displayLabel]="true" [type]="'password'" [label]="'Old Password'" [control]="password" [displayFeedback]="true"></text-field>
+    <text-field [displayLabel]="true" [type]="'password'" [label]="'New Password'" [control]="newPassword" [displayFeedback]="true" (inputFocus)="passwordFocus=$event"></text-field>
+    <text-field [displayLabel]="true" [type]="'password'" [label]="'Confirm New Password'" [control]="confirmPassword" [displayFeedback]="true"></text-field>
+
+    <div class="password-requirements">
+      <p>Password requirements</p>
+      <ul>
+        <li>
+          <mat-icon *ngIf="!newPassword.value || newPassword.value.length == 0 || newPassword.getError('minlength'); else validLength;">radio_button_unchecked</mat-icon>
+          <ng-template #validLength>
+            <mat-icon class="valid">check_circle_outline</mat-icon>
+          </ng-template>
+          Minimum length of 8 characters
+        </li>
+        <li>
+          <mat-icon *ngIf="!newPassword.value || newPassword.value.length == 0 || newPassword.getError('upperCase'); else validUpper;">radio_button_unchecked</mat-icon>
+          <ng-template #validUpper>
+            <mat-icon class="valid">check_circle_outline</mat-icon>
+          </ng-template>
+          Contains an upper-case letter
+        </li>
+        <li>
+          <mat-icon *ngIf="!newPassword.value || newPassword.value.length == 0 || newPassword.getError('lowerCase'); else validLower;">radio_button_unchecked</mat-icon>
+          <ng-template #validLower>
+            <mat-icon class="valid">check_circle_outline</mat-icon>
+          </ng-template>
+          Contains a lower-case letter
+        </li>
+        <li>
+          <mat-icon *ngIf="!newPassword.value || newPassword.value.length == 0 || newPassword.getError('number'); else validNumber;">radio_button_unchecked</mat-icon>
+          <ng-template #validNumber>
+            <mat-icon class="valid">check_circle_outline</mat-icon>
+          </ng-template>
+          Contains a number
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <ul class="toggle-btns">
+        <li>
+          <button class="toggle" (click)="applyPasswordChange()">
+            Update Password
+          </button>
+        </li>
+        <li>
+          <button class="toggle" (click)="closePasswordChangeOverlay()">
+            Cancel
+          </button>
+        </li>
+      </ul>
+      <a href="#" routerLink="/accountrecovery" class="login-link" style="line-height: normal; margin: 10px;">Forgot your password?</a>
+    </div>
+  </div>
+</app-overlay>

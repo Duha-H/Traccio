@@ -12,6 +12,8 @@ import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { FormControl, Validators } from '@angular/forms';
+import { containsLowercaseValidator, containsNumberValidator, containsUppercaseValidator } from 'src/app/utils/validators';
 
 @Component({
   selector: 'app-settings',
@@ -39,6 +41,22 @@ export class SettingsComponent implements OnInit, AfterViewInit, OnDestroy {
   clickedIcon: EventTarget = undefined;
   mostRecentAlertId = -1;
   routeSub: Subscription;
+  displayPasswordPrompt = false;
+  displayPasswordChangeOverlay = true;
+  password = new FormControl('', [
+    Validators.required,
+  ]);
+  newPassword = new FormControl('', [
+    Validators.required,
+    Validators.minLength(8),
+    containsUppercaseValidator(), // atleast one upper-case letter
+    containsLowercaseValidator(), // atleast one lower-case letter
+    containsNumberValidator(), // atleast one number
+  ]);
+  confirmPassword = new FormControl('', [
+    Validators.required,
+  ]);
+  passwordFocus = false;
 
   @ViewChild('tabGroup', { read: MatTabGroup }) tabGroup: MatTabGroup;
   @ViewChild(ProfileSettingsComponent) profileSettingsComp: ProfileSettingsComponent;
@@ -95,7 +113,8 @@ export class SettingsComponent implements OnInit, AfterViewInit, OnDestroy {
     if (response.successful) {
       this.alert.success('Profile updates saved successfully!');
       if (this.profileSettingsComp.updateCheck.email) { // if email has been changed, display verification overlay
-        this.profileSettingsComp.displayVerifyOverlay = true;
+        // this.profileSettingsComp.displayVerifyOverlay = true;
+        this.displayPasswordPrompt = true;
       }
       this.profileSettingsComp.updateCheck = Object.assign({}, DEFAULT_PROFILE_UPDATE_CHECK);
       this.setChange(this.PROFILE_IDX, false);
@@ -114,19 +133,35 @@ export class SettingsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.showAlert();
   }
 
-  async applyPasswordChange(passwordDetails: {
-    oldPassword: string,
-    newPassword: string,
-    confirmPassword: string,
-  }) {
+  async applyEmailChange(password: string) {
+    if (!password) {
+      this.alert.error('Password cannot be empty');
+      console.log('error', password);
+      this.showAlert();
+      return;
+    }
+    const response = await this.authWrapper.changeEmail(this.profileUpdateList.email, password);
+    console.log(response);
+    if (response.successful) {
+      this.alert.success('Email updated successfully!');
+      this.profileSettingsComp.updateCheck.email = false;
+      this.displayPasswordPrompt = false;
+      this.password.patchValue('');
+    } else {
+      this.alert.error(response.message);
+    }
+    this.showAlert();
+  }
+
+  async applyPasswordChange() {
     const response = await this.authWrapper.changePassword(
-      passwordDetails.oldPassword,
-      passwordDetails.newPassword,
-      passwordDetails.confirmPassword
+      this.password.value,
+      this.newPassword.value,
+      this.confirmPassword.value
     );
     if (response.successful) {
       this.alert.success('Password changed successfully!');
-      this.profileSettingsComp.resetPasswordChange();
+      this.closePasswordChangeOverlay();
     } else {
       this.alert = response;
     }
@@ -148,8 +183,19 @@ export class SettingsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.mostRecentAlertId = this.notificationService.sendNotification(this.alert.message, type, duration);
   }
 
+  showPasswordChangeOverlay() {
+    this.displayPasswordChangeOverlay = true;
+  }
+
   closeAlert() {
     this.displayAlert = false;
+  }
+
+  closePasswordChangeOverlay() {
+    this.displayPasswordChangeOverlay = false;
+    this.password.reset();
+    this.newPassword.reset();
+    this.confirmPassword.reset();
   }
 
   showTooltip(input: {

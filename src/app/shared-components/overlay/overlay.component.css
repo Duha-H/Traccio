@@ -16,12 +16,12 @@
   align-items: center;
   text-align: center;
   padding: 0 auto;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
 
 div.overlay-inner-container {
   max-width: 700px;
-  max-height: 80%;
+  /* max-height: 80%; */
   min-width: 350px;
   background-color: var(--bg);
   padding: 25px 15px;
@@ -59,7 +59,7 @@ p.title {
 @media screen and (max-width: 500px) {
   .overlay-container {
     /* background-color: var(--bg); */
-    overflow: scroll;
+    /* overflow: scroll; */
   }
 
   div.overlay-inner-container {

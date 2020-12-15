@@ -189,7 +189,7 @@ div.label p.label {
   opacity: 0.2;
 }
 
-.setting button {
+.setting button, .overlay-content button {
   height: 35px;
   background: none;
   border: 1px solid var(--titles-secondary);
@@ -219,21 +219,28 @@ div.label p.label {
   filter: brightness(120%);
 }
 
-.setting ul.value.toggle-btns, .setting ul.toggle-btns {
+.setting ul.value.toggle-btns,
+.setting ul.toggle-btns,
+.overlay-content ul.toggle-btns {
   list-style: none;
   display: flex;
   flex-direction: row;
   margin: 0 auto;
   padding: 0;
   text-align: left;
-  margin-left: 10px;
 }
 
-.setting .value-div ul.toggle-btns {
+.overlay-content ul.toggle-btns {
+  margin: 15px auto;
+}
+
+.setting .value-div ul.toggle-btns,
+.overlay-content .value-div ul.toggle-btns {
   margin: 0;
 }
 
-.setting .toggle-btns button, .setting .toggle-btns button.toggle {
+.setting .toggle-btns button,
+.setting .toggle-btns button.toggle {
   width: 130px;
   display: flex;
   height: 30px;
@@ -241,11 +248,21 @@ div.label p.label {
   padding: 0 20px;
 }
 
-.toggle-btns button.active p, .toggle-btns button.active mat-icon {
+.overlay-content .toggle-btns button.toggle {
+  height: 30px;
+  width: 150px;
+  margin: 0 5px;
+  padding: 0;
+  background-color: var(--titles-secondary);
+}
+
+.toggle-btns button.active p,
+.toggle-btns button.active mat-icon {
   color: #ffffff;
 }
 
-.setting .toggle-btns.palette-list li {
+.setting .toggle-btns.palette-list li,
+.overlay-content .toggle-btns.palette-list li {
   width: 300px;
   display: flex;
   margin: 10px auto;
@@ -261,11 +278,12 @@ div.label p.label {
   width: 10em;
 }
 
-.setting .toggle-btns li button p {
+.setting .toggle-btns li button p,
+.overlay-content .toggle-btns li button p {
   line-height: 30px;
 }
 
-.setting button.toggle, .setting ul.toggle-btns button.toggle {
+.setting button.toggle {
   margin: auto;
   background-color: var(--titles-secondary);
   width: 150px;
@@ -312,12 +330,18 @@ div.label p.label {
 
 div.overlay-content {
   padding: 0 20px;
+  padding-top: 20px;
 }
 
 div.overlay-content p {
   font-size: 10pt;
   font-weight: 400;
   margin: 10px auto;
+}
+
+div.overlay-content text-field {
+  margin: 10px 0;
+  display: grid;
 }
 
 a.login-link {
@@ -328,6 +352,7 @@ p#alt-info {
   font-weight: 300;
   line-height: 12pt;
   font-size: 10pt;
+  padding: 5px;
 }
 
 div#alert-div {
@@ -371,6 +396,40 @@ div#alert-div p.warning-text {
 
 .alert mat-icon {
   cursor: pointer;
+}
+
+.password-requirements {
+  min-width: auto;
+  text-align: left;
+  padding: 0 20px;
+  margin: 20px 0;
+}
+
+.password-requirements p {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.password-requirements ul {
+  padding-left: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.password-requirements li {
+  display: flex;
+  align-items: center;
+  padding-top: 5px;
+}
+
+.password-requirements li mat-icon {
+  margin-right: 5px;
+  min-width: auto;
+}
+
+.password-requirements li mat-icon.valid {
+  color: var(--valid);
+  animation: 0.5s icon-pulse ease-in;
 }
 
 @media screen and (max-width: 768px) {
