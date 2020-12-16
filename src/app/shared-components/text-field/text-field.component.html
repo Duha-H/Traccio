@@ -7,10 +7,10 @@
     </ng-template>
     <div class="{{
       showUpdatedBorder
-      ? 'updated'
-      : displayFeedback && !inFocus && control.dirty
+      ? (control.valid ? 'updated' : 'invalid')
+      : (displayFeedback && !inFocus && control.dirty
         ? (control.valid ? '' : 'invalid')
-        : ''
+        : '')
     }}">
       <input
         [(ngModel)]="value"

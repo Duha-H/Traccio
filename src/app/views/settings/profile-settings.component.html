@@ -54,8 +54,8 @@
     <div class="setting-textfield" style="align-items: flex-start;">
       <div class="value value-div">
         <text-field [width]="800" [height]="10" [center]="false" [displayLabel]="false" [text]="user.email" [showUpdatedBorder]="updateCheck[ATTRIBS.EMAIL]" (inputChange)="addUpdate(ATTRIBS.EMAIL, $event)" [control]="email" [displayFeedback]="true" #emailField></text-field>
-        <div *ngIf="!user.verified" id="alert-div">
-          <p class="warning-text">Your email was not verified,<a class="login-link" style="line-height: 12pt; cursor: pointer; z-index: 2; margin-left: 5px;" role="button" (click)="displayVerifyOverlay=true">verify email</a></p>
+        <div id="alert-div" *ngIf="!email.valid">
+          <p class="warning-text">Please make sure to enter a valid email address</p>
         </div>
       </div>
       <div class="undo-button">
@@ -64,18 +64,6 @@
         </button>
       </div>
     </div>
-    
-    <app-overlay *ngIf="displayVerifyOverlay" (closeOverlay)="closeVerifyOverlay()">
-      <div class="overlay-content">
-        <p>Since your email was changed, a verification code was sent to your new email.</p>
-        <p>Please enter the code below to verify your new email.</p>
-        <text-field [width]="300" [label]="'Verification Code'" [height]="10" (inputChange)="verificationCode=$event"></text-field>
-        <button class="toggle" style="width: 280px; margin-top: 30px; margin-bottom: 40px;" (click)="verifyEmail(verificationCode)">
-          <p>Verify Email</p>
-        </button>
-        <p>Didn't receive a verification code? <a role="button" class="login-link">Resend code</a></p>
-      </div>
-    </app-overlay>
   </div>
   <div class="info"></div>
   

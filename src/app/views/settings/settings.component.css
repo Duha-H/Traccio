@@ -189,7 +189,7 @@ div.label p.label {
   opacity: 0.2;
 }
 
-.setting button, .overlay-content button {
+.setting button, .overlay-content button:not(.submit-btn) {
   height: 35px;
   background: none;
   border: 1px solid var(--titles-secondary);
@@ -358,15 +358,11 @@ p#alt-info {
 div#alert-div {
   display: flex;
   flex-direction: row;
+  margin-left: 15px;
 }
 
 div#alert-div p.warning-text {
-  margin: 0;
-  font-size: 10pt;
-  font-weight: 300;
-  margin-left: 30px;
-  line-height: 12pt;
-  margin-bottom: 15px;
+  font-weight: 400;
 }
 
 .alert.spanning-content {
@@ -504,6 +500,10 @@ div#alert-div p.warning-text {
 
   .setting .value.toggle-btns li {
     margin: 5px auto;
+  }
+
+  div#alert-div {
+    margin-left: 0;
   }
 }
 

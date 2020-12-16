@@ -28,7 +28,7 @@
 
 <app-overlay *ngIf="displayPasswordPrompt" [title]="'Verify Password'" (closeOverlay)="displayPasswordPrompt=false">
   <div class="overlay-content">
-    <p>Enter your password below to verify your account</p>
+    <p>Enter your password below to verify your identity</p>
     <text-field [displayLabel]="true" [displayFeedback]="true" [label]="'Password'" [type]="'password'" [control]="password"></text-field>
     <button class="submit-btn" (click)="applyEmailChange(password.value)">Enter Password</button>
   </div>

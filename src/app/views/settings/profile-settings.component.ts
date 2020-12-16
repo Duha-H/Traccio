@@ -27,7 +27,6 @@ export class ProfileSettingsComponent implements OnInit {
   };
   user: User = new User();
   updateCheck = Object.assign({}, DEFAULT_PROFILE_UPDATE_CHECK); // easier lookup for updated attribs
-  displayVerifyOverlay = false;
   verificationCode = '';
   updateList: {[key: string]: string } = {};
   email = new FormControl('', [
@@ -64,10 +63,6 @@ export class ProfileSettingsComponent implements OnInit {
     }
   }
 
-  closeVerifyOverlay() {
-    this.displayVerifyOverlay = false;
-  }
-
   toggleChangePassword() {
     this.updatePassword.emit();
   }
@@ -81,16 +76,5 @@ export class ProfileSettingsComponent implements OnInit {
     setTimeout(() => {
       this.hideTooltip.emit(tooltip);
     }, 8000);
-  }
-
-  async verifyEmail(code: string) {
-    const response = await this.userStore.verifyUser(code);
-    if (response.successful) {
-      this.displayVerifyOverlay = false;
-    } else {
-      console.log(response);
-    }
-    // bubble result upwards to SettingsComponent
-    this.showAlert.emit(response);
   }
 }

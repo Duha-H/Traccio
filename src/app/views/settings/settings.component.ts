@@ -42,7 +42,7 @@ export class SettingsComponent implements OnInit, AfterViewInit, OnDestroy {
   mostRecentAlertId = -1;
   routeSub: Subscription;
   displayPasswordPrompt = false;
-  displayPasswordChangeOverlay = true;
+  displayPasswordChangeOverlay = false;
   password = new FormControl('', [
     Validators.required,
   ]);
@@ -89,6 +89,8 @@ export class SettingsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   setChange(index: number, changeState: boolean) {
+    // updates/sets the change state of the specified settings tab index
+    // 'true' if there are unsaved changes, 'false' otherwise
     this.tabChanges[index] = changeState;
     if (this.tabGroup && this.tabGroup.selectedIndex === index) {
       this.changes = this.tabChanges[index];
@@ -109,13 +111,15 @@ export class SettingsComponent implements OnInit, AfterViewInit, OnDestroy {
   async saveProfileChanges() {
     // changes propagated to UserStore
     // set change status based on success or failure
+    if (this.profileSettingsComp.updateCheck.email && Object.values(this.profileUpdateList).length === 1) { // if (only) email has been changed, display verification overlay and quit
+      this.displayPasswordPrompt = true;
+      return;
+    } else if (this.profileSettingsComp.updateCheck.email) {
+      this.displayPasswordPrompt = true;
+    }
     const response = await this.userStore.updateUserAttributes(this.profileUpdateList);
     if (response.successful) {
       this.alert.success('Profile updates saved successfully!');
-      if (this.profileSettingsComp.updateCheck.email) { // if email has been changed, display verification overlay
-        // this.profileSettingsComp.displayVerifyOverlay = true;
-        this.displayPasswordPrompt = true;
-      }
       this.profileSettingsComp.updateCheck = Object.assign({}, DEFAULT_PROFILE_UPDATE_CHECK);
       this.setChange(this.PROFILE_IDX, false);
     } else {
@@ -140,13 +144,15 @@ export class SettingsComponent implements OnInit, AfterViewInit, OnDestroy {
       this.showAlert();
       return;
     }
-    const response = await this.authWrapper.changeEmail(this.profileUpdateList.email, password);
-    console.log(response);
+    const response = await this.userStore.updateEmail(this.profileUpdateList.email, password);
     if (response.successful) {
       this.alert.success('Email updated successfully!');
       this.profileSettingsComp.updateCheck.email = false;
       this.displayPasswordPrompt = false;
       this.password.patchValue('');
+      if (Object.values(this.profileUpdateList).length === 1) {
+        this.setChange(this.PROFILE_IDX, false);
+      }
     } else {
       this.alert.error(response.message);
     }

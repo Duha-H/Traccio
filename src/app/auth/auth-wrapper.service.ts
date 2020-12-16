@@ -156,6 +156,7 @@ export class AuthWrapperService {
       this.authState.signedUp = true;
       this.authState.signedIn = false;
     } catch (error) {
+      response.payload = error;
       switch (error.code) {
         case 'auth/email-already-in-use':
           response.error('Looks like an account with this email address already exists.\nPlease specify a different email address.');
@@ -332,50 +333,6 @@ export class AuthWrapperService {
     return response;
   }
 
-  async verifyCurrentUserAttributeSubmit(attribute: string, code: string): Promise<Response> {
-    const response = new Response();
-
-    if (!validUpdateAttributes[attribute]) {
-      response.error('Attempted to verify an invalid parameter');
-      console.log('AuthWrapper error: attempted to verify an invalid parameter:', attribute);
-      return response;
-    }
-
-    // try {
-    //   await Auth.verifyCurrentUserAttributeSubmit(attribute, code);
-    // } catch (error) {
-    //   switch (error.code) {
-    //     case 'CodeMismatchException':
-    //       response.error('Looks like the verification code you provided is incorrect. Please make sure you\'ve entered the correct code');
-    //       break;
-    //     case 'ExpiredCodeException':
-    //       // tslint:disable-next-line: max-line-length
-    //       response.error('Looks like the verificated code you provided is no longer valid. Worry not! A new code was sent to your email address, please enter the new code.');
-    //       break;
-    //     case 'InvalidParameterException':
-    //       response.error('Attempted to update an invalid parameter:', attribute);
-    //       break;
-    //     case 'PasswordResetRequiredException':
-    //       // tslint:disable-next-line: max-line-length
-    //       response.error('Looks like your password needs to be updated before any changes can be applied. Please reset your password first then try again');
-    //       break;
-    //     case 'UserNotConfirmedException':
-    //       response.error('Looks like your email address was not verified. Please verify your email first before applying any changes.');
-    //       break;
-    //     case 'UserNotFoundException':
-    //       response.error('A user account with the email address you provided does not exist.');
-    //       console.error('AuthError: updateAttributes user not found, this should not happen.', error);
-    //       break;
-    //     default:
-    //       console.error('AuthWrapper: unexpected forgotPassword error:', error);
-    //       response.error('An unexpected error occured, please try again');
-    //       break;
-    //   }
-    // }
-
-    return response;
-  }
-
   async changePassword(oldPassword: string, newPassword: string, confirmPassword: string): Promise<Response> {
     const response = new Response();
 
@@ -406,6 +363,41 @@ export class AuthWrapperService {
       switch (error.code) {
         case 'auth/weak-password':
           response.error('Looks like the password provided is too weak, please provide a stronger password');
+          break;
+        default:
+          console.error('AuthWrapper: unexpected forgotPassword error:', error);
+          response.error('An unexpected error occured, please try again');
+          break;
+      }
+    }
+
+    return response;
+  }
+
+  async changeEmail(updatedEmail: string, userPassword): Promise<Response> {
+    const response = new Response();
+
+    if (!updatedEmail) {
+      response.error('Email cannot be empty');
+      return response;
+    }
+
+    const user = await this.fireAuth.currentUser;
+    const reauth = await this.reauthenticateUser(user.email, userPassword);
+    if (!reauth.successful) {
+      response.error('Your account could not be reauthenticated. Make sure you\'ve entered the correct password.');
+      return response;
+    }
+    try {
+      // SUCCESS
+      await user.updateEmail(updatedEmail);
+    } catch (error) {
+      switch (error.code) {
+        case 'auth/invalid-email':
+          response.error('The email address you provided is invalid, please try again');
+          break;
+        case 'auth/email-already-in-use':
+          response.error('The email address you provided is already in-use, please try a different address');
           break;
         default:
           console.error('AuthWrapper: unexpected forgotPassword error:', error);

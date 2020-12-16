@@ -99,15 +99,18 @@ export class UserStoreService {
     return response;
   }
 
-  async verifyUser(code: string) {
-    const response = await this.authWrapper.verifyCurrentUserAttributeSubmit('email', code);
+  async updateEmail(newEmail: string, password: string) {
+    let response = await this.authWrapper.changeEmail(newEmail, password);
     if (response.successful) {
-      const updatedUser = this._user.getValue();
-      updatedUser.verified = true;
-      this._user.next(updatedUser);
-      response.success('Email verified successfully!');
+      response = await this.controller.updateUserAttributes(this._user.value.userid, { email: newEmail });
+      if (response.successful) {
+        const updatedUser = Object.assign(this._user.getValue(), { email: newEmail });
+        this._user.next(updatedUser);
+      } else {
+        console.log('UserStore: email not updated:', response.payload);
+      }
     } else {
-      console.log('UserStore: error confirming code:', response.payload);
+      console.log('UserStore: email not updated:', response.payload);
     }
 
     return response;
