@@ -5,7 +5,7 @@ ul ul ul {
 .landing-container {
   max-width: 1000px;
   margin: auto;
-  padding-top: 0;
+  padding: 0 15px;
   text-align: left;
 }
 
@@ -40,6 +40,12 @@ ul ul ul {
   font-size: 1em;
   width: 15px;
   height: 15px;
+}
+
+section.questions {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
 }
 
 mat-icon.nav-toggle {
@@ -87,6 +93,58 @@ mat-icon.nav-toggle:hover {
 .pulse {
   animation: 0.6s pulse-title ease-in-out;
 }
+
+nav.faq {
+  position: sticky;
+  top: 0;
+  padding: 20px;
+  padding-right: 0;
+  margin-top: 30px;
+  margin-left: 20px;
+  background-color: var(--bg-secondary);
+  border-radius: 10px;
+}
+
+nav.faq ul {
+  list-style: none;
+  padding: 0;
+  width: 150px;
+}
+
+nav.faq p.heading {
+  font-weight: 600;
+  margin: 0;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+nav.faq li {
+  padding: 5px 0;
+  text-align: left;
+  margin: 0;
+}
+
+nav.faq li a, .call-to-action p a {
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+nav.faq li a:hover, .call-to-action p a:hover {
+  text-decoration: underline;
+}
+
+
+@media screen and (max-width: 900px) {
+  section.questions {
+    flex-direction: column-reverse;
+  }
+
+  nav.faq {
+    position: inherit;
+  }
+}
+
 
 @media screen and (max-width: 500px) {
   .sidenav {

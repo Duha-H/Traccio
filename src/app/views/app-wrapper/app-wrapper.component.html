@@ -1,4 +1,3 @@
-<span id="top-marker"></span>
 <div class="sidenav-container" mode="push">
   <!-- Nav -->
   <div class="sidenav" mode="side" role="navigation" *ngIf="!(resizeService.mobileSize$ | async)">
@@ -57,12 +56,9 @@
 
     <!-- Content Router -->
     <div class="content" role="main">
+      <span id="top-marker"></span>
       <app-loading-indicator *ngIf="(loaderService.loading | async); else content"></app-loading-indicator>
 
-      <!-- <div class="loading" *ngIf="(loaderService.loading | async); else content"> -->
-        <!-- <div class="loading-overlay"></div> -->
-        <!-- <img src="/assets/logo_svg.svg" alt="logo" width="100px"> -->
-      <!-- </div> -->
       <ng-template #content>
         <app-search *ngIf="searchQuery.length != 0; else appContent" [query]="searchQuery"
           [parentSearchSubject]="searchSubject" (clearEvent)="clearSearch()" #searchComponent></app-search>

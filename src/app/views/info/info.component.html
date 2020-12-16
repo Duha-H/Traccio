@@ -8,19 +8,19 @@
     <p>Traccio is a web application that helps you monitor and track your job search. It lets you organize your search, monitor your productivity, and keep all your necessary details under one (internet) roof!</p>
     <p>Traccio is an <a href="https://github.com/Duha-H/Traccio">open source</a> web application, feel free to read the application wiki <a href="https://github.com/Duha-H/Traccio/wiki">here</a>.</p>
     
-    <app-faq></app-faq>
+    <section class="questions">
+      <app-faq></app-faq>
+      <nav class="faq">
+        <p class="heading">On this page</p>
+        <ul class="flex-column">
+          <li *ngFor="let section of faqSections;">
+            <a href="/home/info#{{ section.id }}">{{ section.title }}</a>
+          </li>
+        </ul>
+      </nav>
+    </section>
     
   </div>
-
-  <div class="sidenav" title="FAQ navigation" #sidenav>
-    <mat-icon class="nav-toggle" (click)="displayNav()" *ngIf="!(rs.mobileSize$ | async) || !displayMobileNav">keyboard_arrow_left</mat-icon>
-    <mat-icon class="nav-toggle" (click)="displayNav()" *ngIf="(rs.mobileSize$ | async) && displayMobileNav">clear</mat-icon>
-    <ul *ngIf="displayMobileNav">
-      FAQs
-      <li *ngFor="let item of faqItems; let i = index;" (click)="scroll('faq' + i)">
-        <mat-icon>keyboard_arrow_right</mat-icon>
-        {{ item.question }}
-      </li>
-    </ul>
-  </div>
 </div>
+
+<scroll-button *ngIf="(rs.tabletSize$ | async)"></scroll-button>

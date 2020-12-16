@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef } from "@angular/core";
 import { Title } from '@angular/platform-browser';
 import { ResizeService } from 'src/app/controllers/resize.service';
-import { FAQItem, faqs } from '../../shared-components/faqs/faq';
+import { FAQItem, faqs, SECTIONED_FAQS } from '../../shared-components/faqs/faq';
 import { SafeHTMLPipe } from '../../utils/safe-html.pipe';
 
 @Component({
@@ -15,6 +15,7 @@ export class InfoComponent implements OnInit {
   timeOfDay = 'morning';
   displayMobileNav = false;
   faqItems: FAQItem[] = faqs;
+  faqSections = SECTIONED_FAQS;
   @ViewChild('sidenav') nav: ElementRef<HTMLDivElement>;
 
   constructor(

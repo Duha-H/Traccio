@@ -2,7 +2,7 @@
   margin-top: 50px;
   text-align: left;
   position: relative;
-  z-index: -1;
+  /* z-index: -1; */
 }
 
 #faq ul {
