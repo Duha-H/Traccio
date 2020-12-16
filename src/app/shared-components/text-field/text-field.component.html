@@ -33,36 +33,3 @@
   </div>
   <mat-icon class="feedback" *ngIf="displayFeedback && !inFocus && control.dirty && !control.valid" title="value is either empty or invalid">clear</mat-icon>
 </form>
-<div *ngIf="!(rs.tabletSize$ | async) && inFocus && label == 'Password'" class="password-requirements">
-  <p>Password requirements</p>
-  <ul>
-    <li>
-      <mat-icon *ngIf="!value || value.length == 0 || control.getError('minlength'); else validLength;">radio_button_unchecked</mat-icon>
-      <ng-template #validLength>
-        <mat-icon class="valid">check_circle_outline</mat-icon>
-      </ng-template>
-      Minimum length of 8 characters
-    </li>
-    <li>
-      <mat-icon *ngIf="!value || value.length == 0 || control.getError('upperCase'); else validUpper;">radio_button_unchecked</mat-icon>
-      <ng-template #validUpper>
-        <mat-icon class="valid">check_circle_outline</mat-icon>
-      </ng-template>
-      Contains an upper-case letter
-    </li>
-    <li>
-      <mat-icon *ngIf="!value || value.length == 0 || control.getError('lowerCase'); else validLower;">radio_button_unchecked</mat-icon>
-      <ng-template #validLower>
-        <mat-icon class="valid">check_circle_outline</mat-icon>
-      </ng-template>
-      Contains a lower-case letter
-    </li>
-    <li>
-      <mat-icon *ngIf="!value || value.length == 0 || control.getError('number'); else validNumber;">radio_button_unchecked</mat-icon>
-      <ng-template #validNumber>
-        <mat-icon class="valid">check_circle_outline</mat-icon>
-      </ng-template>
-      Contains a number
-    </li>
-  </ul>
-</div>

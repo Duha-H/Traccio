@@ -112,43 +112,6 @@ p.warning-text {
   text-align: left;
 }
 
-.password-requirements {
-  position: absolute;
-  background: var(--bg-secondary);
-  top: 35%;
-  right: -95%;
-  border-radius: 10px;
-  box-shadow: var(--shadow-auth-element);
-  text-align: left;
-  padding: 15px 20px;
-}
-
-.password-requirements p {
-  margin-top: 0;
-  margin-bottom: 5px;
-}
-
-.password-requirements ul {
-  padding-left: 0;
-  margin: 0;
-  list-style: none;
-}
-
-.password-requirements li {
-  display: flex;
-  align-items: center;
-  padding-top: 5px;
-}
-
-.password-requirements li mat-icon {
-  margin-right: 5px;
-}
-
-.password-requirements li mat-icon.valid {
-  color: var(--valid);
-  animation: 0.5s icon-pulse ease-in;
-}
-
 @keyframes icon-pulse {
   0% {
     transform: scale(1);

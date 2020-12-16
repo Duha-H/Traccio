@@ -1,13 +1,13 @@
 <div class="container">
   <div class="signup-container">
     <h2>Sign up</h2>
-    <text-field [width]="400" [height]="8" [displayLabel]="true" [displayFeedback]="true" [control]="firstName" [label]="'First Name'" [placeholder]="'Tom'"></text-field>
-    <text-field [width]="400" [height]="8" [displayLabel]="true" [displayFeedback]="true" [control]="lastName" [label]="'Last Name'" [placeholder]="'Haverford'"></text-field>
-    <text-field [width]="400" [height]="8" [displayLabel]="true" [displayFeedback]="true" [control]="email" [label]="'Email'" [type]="'email'" [placeholder]="'tommysizzle@email.com'"></text-field>
+    <text-field [width]="400" [height]="8" [displayLabel]="true" [displayFeedback]="true" [control]="firstName" [label]="'First Name'"></text-field>
+    <text-field [width]="400" [height]="8" [displayLabel]="true" [displayFeedback]="true" [control]="lastName" [label]="'Last Name'"></text-field>
+    <text-field [width]="400" [height]="8" [displayLabel]="true" [displayFeedback]="true" [control]="email" [label]="'Email'" [type]="'email'"></text-field>
     <text-field [width]="400" [height]="8" [displayLabel]="true" [displayFeedback]="true" [control]="password" [label]="'Password'" [type]="'password'" (inputFocus)="passwordFocus=$event"></text-field>
     <text-field [width]="400" [height]="8" [displayLabel]="true" [displayFeedback]="true" [control]="confirmPassword" [label]="'Re-enter Password'" [type]="'password'" ></text-field>
 
-    <div *ngIf="(rs.tabletSize$ | async) && passwordFocus" class="password-requirements">
+    <div *ngIf="passwordFocus" class="password-requirements">
       <p>Password requirements</p>
       <ul>
         <li>

@@ -12,6 +12,7 @@
   border-radius: 15px;
   box-shadow: var(--shadow-auth-element);
   margin: auto;
+  max-width: 100%;
 }
 
 .signin-container {
