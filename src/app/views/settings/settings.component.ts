@@ -42,6 +42,7 @@ export class SettingsComponent implements OnInit, AfterViewInit, OnDestroy {
   mostRecentAlertId = -1;
   routeSub: Subscription;
   displayPasswordPrompt = false;
+  displayEmailPrompt = false;
   displayPasswordChangeOverlay = false;
   password = new FormControl('', [
     Validators.required,
@@ -55,6 +56,10 @@ export class SettingsComponent implements OnInit, AfterViewInit, OnDestroy {
   ]);
   confirmPassword = new FormControl('', [
     Validators.required,
+  ]);
+  email = new FormControl('', [
+    Validators.required,
+    Validators.email,
   ]);
   passwordFocus = false;
 
@@ -172,6 +177,23 @@ export class SettingsComponent implements OnInit, AfterViewInit, OnDestroy {
       this.alert = response;
     }
     this.showAlert();
+  }
+
+  async handleForgotPassword(email: string) {
+    const response = await this.authWrapper.forgotPassword(email);
+    if (response.successful) {
+      this.alert.success('An account recovery link was sent to the email associated with your account.\nClick on the link to setup a new password.');
+      this.displayEmailPrompt = false;
+    } else {
+      this.alert = response;
+    }
+    this.showAlert();
+  }
+
+  showForgotPasswordOverlay() {
+    this.displayPasswordPrompt = false;
+    this.displayPasswordChangeOverlay = false;
+    this.displayEmailPrompt = true;
   }
 
   showAlert(responseObject?: Response) {

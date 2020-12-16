@@ -147,7 +147,6 @@ export class TimelineComponent implements OnInit, AfterViewInit {
     const parentWidth = this.parentDiv.nativeElement.offsetWidth;
     const parentHeight = this.parentDiv.nativeElement.offsetHeight;
     this.pixelRatio = window.devicePixelRatio;
-    console.log(this.pixelRatio);
     // adjust canvas size relative to pixel ratio
     this.canvas.nativeElement.width = parentWidth * this.pixelRatio;
     this.canvas.nativeElement.height = parentHeight * this.pixelRatio;
