@@ -2,22 +2,21 @@
   height: 100%;
   display: flex;
   overflow: auto;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
 }
 
 .confirm-signup-container {
-  margin: 0 auto;
-  position: absolute;
-  top: 25%;
-  left: 50%;
-  -ms-transform: translateX(-50%);
-  transform: translateX(-50%);
-
+  margin: auto;
   display: flex;
   flex-direction: column;
   background: var(--bg);
   border-radius: 15px;
   box-shadow: var(--shadow-auth-element);
   padding: 20px 40px;
+  height: auto;
+  max-width: 360px;
 }
 
 .confirm-signup-container h2 {

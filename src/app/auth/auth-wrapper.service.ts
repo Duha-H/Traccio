@@ -177,42 +177,7 @@ export class AuthWrapperService {
     return response;
   }
 
-  async confirmSignup(email: string, code: string): Promise<Response> {
-    const response = new Response();
-
-    if (!code) {
-      response.error('A confirmation code must be provided');
-      return response;
-    }
-
-    // try {
-    //   // SUCCESS
-    //   await Auth.confirmSignUp(email, code);
-    //   this.authState.signedIn = false;
-    //   this.authState.signedUp = false;
-    // } catch (error) {
-    //   switch (error.code) {
-    //     case 'CodeMismatchException':
-    //       response.error('Looks like the code you provided is incorrect, please try again.');
-    //       break;
-    //     case 'ExpiredCodeException':
-    //       this.resendSignUp(email);
-    //       response.error('Looks like the code you provided is no longer valid.\n A new code was sent to your email, enter the new code.');
-    //       break;
-    //     case 'TooManyFailedAttemptsException':
-    //       response.error('An incorrect code was entered too many times.\nPlease confirm your account at a later time.');
-    //       break;
-    //     default:
-    //       console.error('AuthWrapper: unexpected confirmSignup error:', error);
-    //       response.error('An unexpected error occured, please try again');
-    //       break;
-    //   }
-    // }
-
-    return response;
-  }
-
-  async resendSignUp(email: string): Promise<Response> {
+  async resendVerificationLink(email: string): Promise<Response> {
     const response = new Response();
 
     try {
@@ -220,13 +185,14 @@ export class AuthWrapperService {
       const user = await this.fireAuth.currentUser;
       // send verification email
       await user.sendEmailVerification({
-        url: `http://${window.location.host}/confirmsignup;success=true`, // TODO: update later
+        url: `http://${window.location.host}/confirmsignup?success=true`, // TODO: update later
         handleCodeInApp: true,
       });
       this.authState.signedIn = false;
       this.authState.signedUp = false;
     } catch (error) {
-      console.error('AuthWrapper: unexpected resendSignup error:', error);
+      console.error('AuthWrapper: unexpected resendVerificationLink error:', error);
+      response.error('An unexpected error occured.\nPlease try using the link in your email once again, or re-sending a new link.');
     }
 
     return response;
@@ -243,7 +209,7 @@ export class AuthWrapperService {
     try {
       // SUCCESS
       await this.fireAuth.sendPasswordResetEmail(email, {
-        url: `http://${window.location.host}/accountrecovery;state=resetSuccessful`,
+        url: `http://${window.location.host}/accountrecovery?mode=resetSuccessful`,
         handleCodeInApp: true,
       });
       this.authState.signedIn = false;
@@ -270,7 +236,7 @@ export class AuthWrapperService {
     const response = new Response();
 
     if (!code) {
-      response.error('No verification code specified.\nEnter the verification code sent to your account email.');
+      response.error('No verification code specified.\nTry using the link in your email once again, or re-send a verification link.');
       return response;
     } else if (!newPassword) {
       response.error('New password was not specified');
@@ -309,6 +275,114 @@ export class AuthWrapperService {
           break;
         default:
           console.error('AuthWrapper: unexpected forgotPassword error:', error);
+          response.error('An unexpected error occured, please try again');
+          break;
+      }
+    }
+
+    return response;
+  }
+
+  async verifyPasswordResetCode(actionCode: string, continueUrl?: string): Promise<Response> {
+    const response = new Response();
+
+    if (!actionCode) {
+      response.error('Unexpected error: no action code provided. Try using the link in your email once again, or re-send a verification link.');
+      return response;
+    }
+
+    try {
+      const email = await this.fireAuth.verifyPasswordResetCode(actionCode);
+      response.payload = {
+        email,
+        actionCode,
+      };
+    } catch (error) {
+      switch (error.code) {
+        case 'auth/expired-action-code':
+          response.error('Action code expired. Try re-sending a new verification link below.');
+          break;
+        case 'auth/invalid-action-code':
+          response.error('Action code invalid. Try re-sending a new verification link below.');
+          break;
+        case 'auth/user-disabled':
+          response.error('Looks like your user account has been disabled.\nIf this is unexpected send a Support Request to support@traccio.app');
+          break;
+        case 'auth/user-not-found':
+          response.error('A user account corresponding to the given reset code was not found.\nIf this is unexpected send a Support Request to support@traccio.app');
+          break;
+        default:
+          console.error('AuthWrapper: unexpected verifyPasswordResetCode error:', error);
+          response.error('An unexpected error occured, please try again');
+          break;
+      }
+    }
+
+    return response;
+  }
+
+  async checkActionCode(actionCode: string): Promise<Response> {
+    const response = new Response();
+
+    if (!actionCode) {
+      response.error('Unexpected error: no action code provided.\nTry using the link in your email once again, or re-send a verification link.');
+      return response;
+    }
+
+    try {
+      const actionCodeInfo = await this.fireAuth.checkActionCode(actionCode);
+      response.payload = actionCodeInfo;
+      this.applyActionCode(actionCode);
+    } catch (error) {
+      switch (error.code) {
+        case 'auth/expired-action-code':
+          response.error('Action code expired. Try re-sending a new verification link below.');
+          break;
+        case 'auth/invalid-action-code':
+          response.error('Action code invalid. Try re-sending a new verification link below.');
+          break;
+        case 'auth/user-disabled':
+          response.error('Looks like your user account has been disabled.\nIf this is unexpected send a Support Request to support@traccio.app');
+          break;
+        case 'auth/user-not-found':
+          response.error('A user account corresponding to the given reset code was not found.\nIf this is unexpected send a Support Request to support@traccio.app');
+          break;
+        default:
+          console.error('AuthWrapper: unexpected verifyPasswordResetCode error:', error);
+          response.error('An unexpected error occured, please try again');
+          break;
+      }
+    }
+
+    return response;
+  }
+
+  async applyActionCode(actionCode: string): Promise<Response> {
+    const response = new Response();
+
+    if (!actionCode) {
+      response.error('Unexpected error: no action code provided. Try using the link in your email once again, or re-send a verification link.');
+      return response;
+    }
+
+    try {
+      await this.fireAuth.applyActionCode(actionCode);
+    } catch (error) {
+      switch (error.code) {
+        case 'auth/expired-action-code':
+          response.error('Action code expired. Try re-sending a new verification link below.');
+          break;
+        case 'auth/invalid-action-code':
+          response.error('Action code invalid. Try re-sending a new verification link below.');
+          break;
+        case 'auth/user-disabled':
+          response.error('Looks like your user account has been disabled.\nIf this is unexpected send a Support Request to support@traccio.app');
+          break;
+        case 'auth/user-not-found':
+          response.error('A user account corresponding to the given reset code was not found.\nIf this is unexpected send a Support Request to support@traccio.app');
+          break;
+        default:
+          console.error('AuthWrapper: unexpected verifyPasswordResetCode error:', error);
           response.error('An unexpected error occured, please try again');
           break;
       }

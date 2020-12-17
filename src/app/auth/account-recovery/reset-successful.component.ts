@@ -15,8 +15,7 @@ export class ResetSuccessfulComponent implements OnInit {
 
   constructor(private router: Router) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   handleSubmit() {
     this.router.navigate(['signin']);

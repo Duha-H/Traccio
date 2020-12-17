@@ -1,24 +1,13 @@
 <div class="container">
   <div class="confirm-signup-container" *ngIf="!success">
     <h2>Confirm Sign Up</h2>
-    <div class="" *ngIf="!resendCode; else codeResent;">
+    <div>
       <p>A verification link was sent to your email address.<br>
-        Click the link sent to your email to verify your account, then come back to sign in!
+        Click on the link to verify your account, then come back to sign in!
       </p>
-      <p>Didn't receive a verification link? Be sure to check your spam folder, or <a role="button" (click)="handleResend()" class="login-link">click here to resend a verification code</a></p>
+      <p *ngIf="error != ''" class="warning-text">{{error}}</p>
+      <p>Didn't receive a verification link? Be sure to check your spam folder, or <a role="button" (click)="handleResend()" class="login-link">click here to resend a new link</a>.</p>
     </div>
-    <ng-template #codeResent>
-      <p>A confirmation code was sent to your email, enter the code below.</p>
-      <text-field (inputChange)="code=$event" [label]="'Confirmation Code'"></text-field>
-      <p class="warning-text">{{error}}<br></p>
-      <button (click)="confirmSignup()" class="submit-btn" #submitButton>Confirm Sign Up</button>
-      <p>Still haven't received a confirmation code?
-        <a *ngIf="resendLimit != 0; else limitReached" role="button" (click)="handleResend()" class="login-link">Resend code</a>
-        <ng-template #limitReached>
-          Send an email to <a class="login-link" href="mailto:support@traccio.app">support@traccio.app</a> describing your issue. Please provide your email address and use the subject line 'Account Confirmation Issue'.
-        </ng-template>
-      </p>
-    </ng-template>
   </div>
   <signup-successful *ngIf="success"></signup-successful>
 </div>

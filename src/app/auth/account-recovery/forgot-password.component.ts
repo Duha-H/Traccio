@@ -8,7 +8,7 @@ import { OnInit, Component, Output, Input, EventEmitter, ViewChild, ElementRef }
 		<text-field [width]="360" [height]="10" [displayErrorMessage]="false"\
 			(inputChange)="email=$event" [displayLabel]="false" [type]="\'email\'"></text-field>\
 		<p class="warning-text">{{error}}<br></p>\
-		<button (click)="handleSubmit()" class="submit-btn" #submitButton>email me a recovery code</button>\
+		<button (click)="handleSubmit()" class="submit-btn" #submitButton>email me a recovery link</button>\
 		<p style="margin-top: 0;">Go back to <a href="" routerLink="/signin" class="login-link">Sign in</a></p>\
 	</div>',
 	styleUrls: ['./account-recovery.component.css'],

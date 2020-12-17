@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserStoreService } from 'src/app/models/user-store.service';
 import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
 import { Title } from '@angular/platform-browser';
+import { LoaderService } from 'src/app/controllers/loader.service';
 
 @Component({
   selector: 'app-confirm-signup',
@@ -11,12 +12,9 @@ import { Title } from '@angular/platform-browser';
 })
 export class ConfirmSignupComponent implements OnInit {
 
-  code = '';
   email = '';
   error = '';
   success = false;
-  resendCode = false;
-  resendLimit = 5;
   submitButton: ElementRef;
   @ViewChild('submitButton') set button(element: ElementRef) {
     if (element) {
@@ -30,6 +28,7 @@ export class ConfirmSignupComponent implements OnInit {
     private userStore: UserStoreService,
     private authWrapper: AuthWrapperService,
     private titleService: Title,
+    private loaderService: LoaderService,
   ) { }
 
   ngOnInit() {
@@ -42,38 +41,19 @@ export class ConfirmSignupComponent implements OnInit {
         this.submitButton.nativeElement.click();
       }
     });
-    this.route.params.subscribe(params => {
-      if (params.success) {
-        this.success = true;
-      }
-    });
-  }
-
-  async confirmSignup() {
-    // animate button press
-    this.submitButton.nativeElement.classList.add('pulse');
-    setTimeout(() => {
-      this.submitButton.nativeElement.classList.remove('pulse');
-    }, 200);
-    // execure confirmation
-
-    if (!this.email) {
-      this.router.navigate(['signin']);
-      return;
-    }
-
-    const response = await this.authWrapper.confirmSignup(this.email, this.code);
-    if (response.successful) {
-      this.success = true;
-    } else {
-      this.error = response.message;
-    }
+    this.success = this.route.snapshot.queryParams.success === 'true' ? true : false;
   }
 
   async handleResend() {
-    await this.authWrapper.resendSignUp(this.email);
-    this.resendCode = true;
-    this.resendLimit -= 1;
+    const response = await this.authWrapper.resendVerificationLink(this.email);
+    if (response.successful) {
+      this.loaderService.setLoadingState(true);
+      setTimeout(() => {
+        this.loaderService.setLoadingState(false);
+      }, 1000);
+    } else {
+      this.error = response.message;
+    }
   }
 
 }

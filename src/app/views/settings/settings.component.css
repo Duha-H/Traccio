@@ -401,33 +401,6 @@ div#alert-div p.warning-text {
   margin: 20px 0;
 }
 
-.password-requirements p {
-  margin-top: 0;
-  margin-bottom: 5px;
-}
-
-.password-requirements ul {
-  padding-left: 0;
-  margin: 0;
-  list-style: none;
-}
-
-.password-requirements li {
-  display: flex;
-  align-items: center;
-  padding-top: 5px;
-}
-
-.password-requirements li mat-icon {
-  margin-right: 5px;
-  min-width: auto;
-}
-
-.password-requirements li mat-icon.valid {
-  color: var(--valid);
-  animation: 0.5s icon-pulse ease-in;
-}
-
 @media screen and (max-width: 768px) {
   .setting {
     flex-direction: column;

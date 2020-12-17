@@ -11,11 +11,13 @@
   margin: auto;
   display: flex;
   flex-direction: column;
+  width: 360px;
   max-width: 360px;
 	padding: 20px 40px;
 	background: var(--bg);
   border-radius: 15px;
-  box-shadow: var(--shadow-auth-element);
+	box-shadow: var(--shadow-auth-element);
+	position: relative;
 }
 
 .recovery-container h2 {
@@ -56,7 +58,6 @@
 .recovery-component p:not(.warning-text) {
 	color: var(--titles-secondary);
 	text-align: center;
-	margin-top: 40px;
 	line-height: 16pt;
 }
 
@@ -76,12 +77,22 @@
 	height: 10pt;
 }
 
+.recovery-component .password-requirements p {
+	text-align: left;
+}
+
 .input-container label {
 	text-align: left;
 }
 
 .recovery-container text-field {
 	margin-bottom: 15px;
+}
+
+@media screen and (max-width: 900px) {
+	.password-requirements {
+		margin-top: 20px;
+	}
 }
 
 @media screen and (max-width: 500px) {
