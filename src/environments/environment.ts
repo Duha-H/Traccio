@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   firebase: { // For Firebase JS SDK v7.20.0 and later, measurementId is optional
     apiKey: "AIzaSyAXzXkhUc8BGjIUmG-MAsUoyg7yF7OfTEg",
-    authDomain: "traccio-0815.firebaseapp.com",
+    authDomain: "traccio.app",
     databaseURL: "https://traccio-0815.firebaseio.com",
     projectId: "traccio-0815",
     storageBucket: "traccio-0815.appspot.com",

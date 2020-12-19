@@ -401,6 +401,18 @@ img.inline-logo.tiny {
     margin: 0 10px;
     margin-right: 3px;
   }
+
+  .sub-section section.flex-column:nth-of-type(odd):not(.center-block) {
+    background-color: var(--accent);
+  }
+
+  .sub-section section.flex-column:nth-of-type(odd) h3 {
+    color: white;
+  }
+
+  .sub-section section.flex-column:nth-of-type(odd) p {
+    color: white;
+  }
 }
 
 @media screen and (max-width: 500px) {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Title } from "@angular/platform-browser";
 import { ResizeService } from 'src/app/controllers/resize.service';
 import { SECTIONED_FAQS } from 'src/app/shared-components/faqs/faq';
 
@@ -11,8 +12,10 @@ export class LandingFAQComponent implements OnInit {
 
   faqSections = SECTIONED_FAQS;
 
-  constructor(public rs: ResizeService) { }
+  constructor(public rs: ResizeService, private titleService: Title) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.titleService.setTitle('FAQ | Traccio');
+  }
 
 }

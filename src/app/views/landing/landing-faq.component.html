@@ -1,23 +1,20 @@
 <div class="container">
-  <section class="main">
+  <section class="main" role="banner">
     <div class="landing-section center">
       <div class="flex-column">
         <div class="spanning-content">
-          <h3>Have some uncertainties about
-          <img src="/assets/logo_light@2x.png" alt="Traccio logo" class="inline-logo">
-          ?
-          </h3>
+          <h3>Have some uncertainties about Traccio?</h3>
         </div>
         <p>You might find some answers below! 🙌</p>
       </div>
       <div class="spacer"></div>
-      <img src="https://res.cloudinary.com/djxztokzp/image/upload/v1607804534/Traccio_Assets/faq_graphic_u7hmdb.svg" alt="Graphic of an abstract terrain with way-markers and a briefcase at the horizon, and floating question marks in the background" class="hero-img">
+      <img src="https://res.cloudinary.com/djxztokzp/image/upload/v1607804534/Traccio_Assets/faq_graphic_u7hmdb.svg" alt="Graphic of an abstract terrain with way-markers and a briefcase at the horizon, and floating question marks in the background" class="hero-img" role="img">
     </div>
   </section>
 
   <div class="sticky-header-bg"></div>
 
-  <section class="questions">
+  <section class="questions" role="main">
     <div class="landing-section alt" style="max-width: 1000px;">
       <app-faq [rootUrl]="'/faq'" [tag]="'ANTICIPATED 📍'"></app-faq>
       <nav class="faq">

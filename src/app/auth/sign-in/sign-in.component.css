@@ -73,6 +73,7 @@ form {
 @media screen and (max-width: 768px) {
   .inner-container {
     flex-direction: column;
+    padding-bottom: 40px;
   }
 
   .submit-btn {

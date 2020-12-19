@@ -163,13 +163,6 @@ div.content-section {
   margin-bottom: 10px;
 }
 
-
-@media screen and (max-width: 768px) {
-  /* .sidenav {
-    min-width: 150px;
-  } */
-}
-
 @media screen and (max-width: 500px) {
   ul ul {
     padding-left: 10px;

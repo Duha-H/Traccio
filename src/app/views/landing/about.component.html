@@ -21,77 +21,66 @@
           <p>If you're interested, you can check out the app's <a href="https://github.com/Duha-H/Traccio">public repository</a>, or <a href="https://github.com/Duha-H/Traccio/wiki">wiki</a>.</p>
         </div>
         <div class="sub-section">
-          <section class="flex-column" style="{{ !(rs.tabletSize$ | async) ? '' : 'background-color: #598AD5;'}}">
-            <h3 style="{{ (rs.tabletSize$ | async) ? 'color: white;' : 'color: #598AD5;'}}">
+          <section class="flex-column">
+            <h3>
               <mat-icon class="inline">dashboard</mat-icon>
               Dashboard
             </h3>
-            <div class="{{ (rs.tabletSize$ | async) ? 'flex-column feature-group' : 'flex-row feature-group' }}"
-              style="{{ (rs.tabletSize$ | async) ? '' : 'background-color: #598AD5;'}}">
+            <div class="{{ (rs.tabletSize$ | async) ? 'flex-column feature-group' : 'flex-row feature-group' }}">
               <div class="flex-column">
                 <p>Traccio's heart and soul, use it to keep yourself motivated, and visualize your productivity and progress</p>
               </div>
               <div class="screenshot-container">
-                <!-- <img src="https://res.cloudinary.com/djxztokzp/image/upload/v1605277769/dashboard_screenshot_gfw8cj.png" alt="" class="screenshot"> -->
                 <img src="https://res.cloudinary.com/djxztokzp/image/upload/v1606667177/Traccio_Assets/dashboard_screenshot_jhhudo.png" alt="" class="screenshot">
               </div>
             </div>
           </section>
 
-          
           <section class="flex-column">
-            <h3 style="color: var(--accent);">
+            <h3>
               <mat-icon class="inline">view_carousel</mat-icon>
               Journeys
             </h3>
-            <div class="{{ (rs.tabletSize$ | async) ? 'flex-column feature-group' : 'flex-row feature-group' }}"
-              style="{{ (rs.tabletSize$ | async) ? '' : 'background-color: var(--accent);'}}">
+            <div class="{{ (rs.tabletSize$ | async) ? 'flex-column feature-group' : 'flex-row feature-group' }}">
               <div class="flex-column">
-                <p>Classify job hunts using "Journeys". <br>Separate them however convenient, and better visualize trends in different application processes</p>
+                <p>Classify job hunts using Journeys. Separate them however convenient, and better visualize trends in different application processes</p>
               </div>
               <div class="screenshot-container">
-                <!-- <img src="/assets/landing-graphics/journeys_screenshot.svg" alt="" class="screenshot"> -->
                 <img src="https://res.cloudinary.com/djxztokzp/image/upload/v1606667177/Traccio_Assets/journeys_screenshot_qon1mg.png" alt="" class="screenshot">
               </div>
             </div>
           </section>
 
-          
-          <section class="flex-column" style="{{ !(rs.tabletSize$ | async) ? '' : 'background-color: #2A9D8F;'}}">
-            <h3 style="{{ (rs.tabletSize$ | async) ? 'color: white;' : 'color: #2A9D8F;'}}">
+          <section class="flex-column">
+            <h3>
               <mat-icon class="inline">timeline</mat-icon>
               Application Tracking
             </h3>
             <div class="{{ (rs.tabletSize$ | async) ? 'flex-column feature-group' : 'flex-row feature-group' }}"
-              style="{{ (rs.tabletSize$ | async) ? '' : 'background-color: #2A9D8F;'}}">
+              style="{{ (rs.tabletSize$ | async) ? '' : 'background-color: var(--accent);'}}">
               <div class="flex-column">
                 <p>Instantly log and modify different details about a job application, and be your best prepared self!</p>
               </div>
               <div class="screenshot-container">
-                <!-- <img src="/assets/landing-graphics/application_screenshot.svg" alt="" class="screenshot"> -->
                 <img src="https://res.cloudinary.com/djxztokzp/image/upload/v1606667177/Traccio_Assets/application_screenshot_qva4hi.png" alt="" class="screenshot">
               </div>
             </div>
           </section>
-          
 
           <section class="flex-column">
-            <h3 style="color: #598AD5;">
+            <h3>
               <mat-icon class="inline">search</mat-icon>
               Find
             </h3>
-            <div class="{{ (rs.tabletSize$ | async) ? 'flex-column feature-group' : 'flex-row feature-group' }}"
-              style="{{ (rs.tabletSize$ | async) ? '' : 'background-color: #598AD5;'}}">
+            <div class="{{ (rs.tabletSize$ | async) ? 'flex-column feature-group' : 'flex-row feature-group' }}">
               <div class="flex-column">
                 <p>Search your journeys and applications easily, and filter everything just that much faster</p>
               </div>
               <div class="screenshot-container">
-                <!-- <img src="/assets/landing-graphics/search_screenshot.svg" alt="" class="screenshot"> -->
                 <img src="https://res.cloudinary.com/djxztokzp/image/upload/v1606667178/Traccio_Assets/search_screenshot_stzywh.png" alt="" class="screenshot">
               </div>
             </div>
           </section>
-          
 
           <section class="flex-column center-block">
             <h4>Enjoy a fun, customizable experience! 💡</h4>
@@ -112,7 +101,7 @@
                   <li>Select Add to Home Screen from the list of actions</li>
                 </ul>
               </li>
-              <li><b>On Android<img src="/assets/icons/android_logo.svg" alt="Apple logo" class="inline-logo tiny"></b>:
+              <li><b>On Android<img src="/assets/icons/android_logo.svg" alt="Android logo" class="inline-logo tiny"></b>:
                 <ul>
                   <li>Launch the Chrome app, and go to <a href="https://www.traccio.app">traccio.app</a> <br></li>
                   <li>Tap the menu icon (three vertical dots icon) at the upper right-hand corner <br></li>
@@ -146,7 +135,7 @@
             </li>
           </ul>
         </div>
-        
+
         <div class="sub-section padded">
           <h2>Tips 🎁<a class="content-link" href="/about#tips" id="tips">#</a></h2>
           <p>Enjoying your Traccio experience and would like to support it somehow? Tips are currently accepted through <a href="https://paypal.me/traccioapp">PayPal</a> :)
