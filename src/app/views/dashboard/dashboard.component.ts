@@ -19,6 +19,7 @@ import { map } from 'rxjs/internal/operators/map';
 import { Title } from '@angular/platform-browser';
 import html2canvas from 'html2canvas';
 import { MESSAGES } from 'src/assets/template-messages';
+import { NotificationService } from "src/app/controllers/notification.service";
 
 @Component({
   selector: "app-dashboard",
@@ -71,6 +72,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private arrayFormatter: ArrayFormatterPipe,
     public loaderService: LoaderService,
     private titleService: Title,
+    private notificationService: NotificationService,
   ) {}
 
   ngOnInit() {
@@ -89,8 +91,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
         if (currSelection) {
           this.onJourneySelect(currSelection);
           this._setLineChartAxes(this.selectedJourney.frequencyData);
-        } else {
-          console.log('No journey selection available');
         }
 
       });
@@ -100,7 +100,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.calendarPalette = preferences.colorPalette.colors;
       });
     } catch (error) {
-      console.log("User not defined yet:", error); // should probably make sure this never happens
       this.name = '';
       this.activeJourneys = [];
     }
@@ -201,7 +200,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.downloadImgSrc = imgUrl;
         this.downloadName = downloadName;
       }).catch(error => {
-        console.log('Error downloading image', error);
+        this.notificationService.sendNotification('Error downloading image, please try again.', 'error');
       });
   }
 

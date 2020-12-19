@@ -31,7 +31,6 @@ export class NewPasswordComponent implements OnInit {
         this.submitButton.nativeElement.click();
       }
     });
-    console.log(this.email);
   }
 
   handleSubmit() {

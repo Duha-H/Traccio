@@ -14,7 +14,6 @@ export class AuthStoreService {
 
   setEmail(email: string) {
     this.email = email;
-    console.log(this.email);
   }
 
   setUserDetails(firstName: string, lastName: string, email: string, id: string) {

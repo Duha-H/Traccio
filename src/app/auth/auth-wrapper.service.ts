@@ -97,7 +97,7 @@ export class AuthWrapperService {
           response.error('Looks like the sign in popup has been closed.\nPlease try again.');
           break;
         default:
-          console.log('AuthWrapper: google sign in error:', error);
+          console.error('AuthWrapper: google sign in error:', error);
           response.error('An unexpected error occured, please try again', error);
           // TODO: figure out a way to propagate errors here to some kind of logger
           break;

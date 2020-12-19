@@ -87,7 +87,6 @@ export class SignUpComponent implements OnInit {
       this.router.navigate(['confirmsignup']);
     } else {
       this.error = response.message;
-      console.log('error', response);
     }
   }
 }

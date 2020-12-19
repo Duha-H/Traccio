@@ -145,7 +145,6 @@ export class SettingsComponent implements OnInit, AfterViewInit, OnDestroy {
   async applyEmailChange(password: string) {
     if (!password) {
       this.alert.error('Password cannot be empty');
-      console.log('error', password);
       this.showAlert();
       return;
     }
@@ -250,7 +249,6 @@ export class SettingsComponent implements OnInit, AfterViewInit, OnDestroy {
         !this.visibleTooltip.nativeElement.contains(event.target) &&
         this.clickedIcon !== event.target
     ) {
-      // console.log('hiding ittt');
       this.hideTooltip(this.visibleTooltip);
     }
   }

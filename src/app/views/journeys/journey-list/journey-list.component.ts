@@ -125,7 +125,6 @@ export class JourneyListComponent implements OnInit, OnDestroy {
     if (!this.editButton) {
       this.router.navigate(['/home/journeys', id]);
     } else {
-      console.log("edit button was pressed");
       this.editButton = false;
     }
   }

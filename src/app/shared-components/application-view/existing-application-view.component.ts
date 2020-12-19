@@ -1,7 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
 import { Subscription } from "rxjs";
-import { Application } from "src/app/models/application";
 import { STATUS, STATUS_COLORS } from 'src/app/models/constants';
 import { Journey } from "src/app/models/journey";
 import { MESSAGES } from 'src/assets/template-messages';
@@ -31,15 +29,13 @@ export class ExistingApplicationViewComponent
       if (!this.parentJourney) {
         // parent not resolved yet
         // redirect to journey list
-        console.log("ExistingApplicationViewComponent: journey not resolved yet");
-        this.router.navigate(["/home/journeys"]);
+        this.router.navigate(['/home/journeys']);
         return;
       }
       this.currApplicationDetails = Object.create(this.userStore.getApplication(this.parentJourney.id, appid));
     }
 
     if (!this.currApplicationDetails) {
-      console.log("ExistingApplicationViewComponent: app not resolved");
       this.router.navigate(['/home/journeys']);
       return;
     }

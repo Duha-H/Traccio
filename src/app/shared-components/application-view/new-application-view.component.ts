@@ -26,7 +26,6 @@ export class NewApplicationViewComponent
       if (!this.parentJourney) {
         // parent not resolved yet
         // redirect to journey list
-        console.log("NewApplicationViewComponent: journey not resolved yet");
         this.router.navigate(["/home/journeys"]);
         return;
       }

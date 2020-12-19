@@ -41,12 +41,10 @@ export class AboutComponent implements OnInit {
     setTimeout(() => {
       element.classList.remove('pulse');
     }, 500);
-    // this.toggleNav();
   }
 
   toggleNav() {
     this.displayNav = !this.displayNav;
-    console.log('nav click', this.displayNav, this.rs.mobileSize$.value, this.nav);
     if (this.rs.mobileSize$.value && this.displayNav) {
       this.nav.nativeElement.classList.add('expanded');
     } else if (this.rs.mobileSize$.value && !this.displayNav) {

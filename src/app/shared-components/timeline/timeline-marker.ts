@@ -107,7 +107,6 @@ export class TimelineMarker {
   }
 
   drawDateLabel(ctx: CanvasRenderingContext2D) {
-    // console.log(getComputedStyle(document.documentElement));
     ctx.strokeStyle = '#000';
     ctx.beginPath();
     ctx.setLineDash([10, 5]);

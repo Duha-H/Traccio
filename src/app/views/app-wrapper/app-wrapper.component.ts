@@ -63,7 +63,6 @@ export class AppWrapperComponent implements OnInit {
   async signOut() {
     const response = await this.authWrapper.signOut();
     if (!response.successful) {
-      console.log("error signing out: ", response.error, response.payload);
       return;
     }
     this.signedIn = false;

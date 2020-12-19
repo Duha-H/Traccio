@@ -67,7 +67,6 @@ export class AccountRecoveryComponent implements OnInit {
       this.email = response.payload.email;
       this.newPasswordComp.code = this.code;
       this.newPasswordComp.email = this.email;
-      console.log(this.code);
     } else {
       this.error = response.message;
     }

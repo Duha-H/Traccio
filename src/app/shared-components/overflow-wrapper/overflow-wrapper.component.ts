@@ -21,12 +21,10 @@ export class OverflowWrapperComponent implements OnInit {
 
   ngOnInit() {
     this.maxHorizontalScroll = this.content.nativeElement.scrollWidth - this.content.nativeElement.clientWidth;
-    console.log(this.content.nativeElement.scrollWidth);
 
   }
 
   scroll(direction: 'left' | 'right') {
-    // const value = this.currHorizontalScroll >= this.maxHorizontalScroll ? 0 : this.scrollRate;
     const value = this.scrollRate;
     if (direction === 'left') {
       this.currHorizontalScroll -= value;
@@ -37,9 +35,6 @@ export class OverflowWrapperComponent implements OnInit {
       left: this.currHorizontalScroll,
       behavior: 'smooth'
     });
-    // this.content.nativeElement.scrollLeft += this.currHorizontalScroll;
-    console.log(this.content.nativeElement.scrollWidth);
-    console.log(this.content.nativeElement.scrollLeft, this.currHorizontalScroll);
   }
 
 }

@@ -105,7 +105,6 @@ export class TimelineComponent implements OnInit, AfterViewInit {
     const rect = this.canvas.nativeElement.getBoundingClientRect();
     // detect collisions with markers
     const markerOnHover = this._getMarkerOnHover((event.x - rect.left) * this.pixelRatio, (event.y - rect.top) * this.pixelRatio);
-    // console.log('mouse over:', event.x, event.y);
     if (markerOnHover) {
       this.markerOnHover = markerOnHover;
       this.displayTooltip = true;
@@ -137,7 +136,6 @@ export class TimelineComponent implements OnInit, AfterViewInit {
   }
 
   onMouseClick(event: MouseEvent) {
-    console.log('click');
     this.onMouseHover(event);
   }
 

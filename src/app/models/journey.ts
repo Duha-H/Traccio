@@ -92,7 +92,7 @@ export class Journey {
 	private _adjustDateString(date: string) {
 		const components = date.split('-');
 		if (components.length !== 3) {
-			console.log('Application: invalid date string:', date);
+			// console.log('Application: invalid date string:', date); // debugging
 			return new Date();
 		} else {
 			// accepts 1-indexed ISO date string (YYYY-MM-DD)

@@ -77,7 +77,7 @@ export class UserStoreService {
         newUser.identityProvider = identityProvider ? identityProvider : 'DEFAULT';
         this._user.next(newUser);
       }).catch(error => {
-        console.log('Error fetching user data:', error);
+        console.log('UserStore: error fetching user data:', error);
       });
     await this.fetchData();
   }

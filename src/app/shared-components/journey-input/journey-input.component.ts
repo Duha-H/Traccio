@@ -41,7 +41,6 @@ export class JourneyInputComponent implements OnInit {
 
   onDataLogged() {
     if (!this.title) {
-      console.log("error: no title specifed");
       this.response.error('A journey title must be specified');
     } else if (!this.startDate) {
       this.response.error('Start date is not specified or invalid');

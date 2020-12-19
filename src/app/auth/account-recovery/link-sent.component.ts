@@ -30,7 +30,6 @@ export class LinkSentComponent implements OnInit {
         this.submitButton.nativeElement.click();
       }
     });
-    console.log(this.email);
   }
 
   handleSubmit() {

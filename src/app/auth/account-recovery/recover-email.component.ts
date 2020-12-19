@@ -30,7 +30,6 @@ export class RecoverEmailComponent implements OnInit {
         this.submitButton.nativeElement.click();
       }
     });
-    console.log(this.email);
   }
 
   handleSubmit() {

@@ -25,7 +25,6 @@ export class WishlistApplicationViewComponent
     // Specify application details in formGroup
     this.currApplicationDetails = Object.assign(new Application(), existingWishlistApp);
     if (!this.currApplicationDetails) {
-      console.log("WishlistApplicationViewComponent: wishlist app not resolved");
       this.router.navigate(['/home/wishlist']);
       return;
     }
@@ -74,7 +73,7 @@ export class WishlistApplicationViewComponent
   addApplicationToJourney(journey: Journey) {
     const journeyid = journey.id;
     if (!journeyid) {
-      console.log('WishlistApplicationView: trying to add to journey with invalid id:', journeyid);
+      // console.log('WishlistApplicationView: trying to add to journey with invalid id:', journeyid);
       return;
     }
     // add appliaction to journey

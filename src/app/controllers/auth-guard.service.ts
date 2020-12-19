@@ -12,10 +12,8 @@ export class AuthGuardService implements CanActivate {
   async canActivate(): Promise<boolean> {
     const authedUser = await this.authWrapper.currentAuthenticatedUser();
     if (authedUser || this.authWrapper.authState.signedIn) {
-      console.log('user currently authenticated');
       return true;
     } else {
-      console.log('user NOT authenticated');
       this.router.navigate(['']);
       return false;
     }

@@ -37,8 +37,4 @@ export class RectItemComponent implements OnInit {
     this.deleteButtonPressed.emit(this.linkedJourney);
   }
 
-  addJourney() {
-    console.log("adding!");
-  }
-
 }
