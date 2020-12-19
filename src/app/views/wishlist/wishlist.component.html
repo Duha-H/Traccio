@@ -2,7 +2,7 @@
   <div class="spanning-content header">
     <h2>Wishlist</h2>
     <div class="spacer"></div>
-    <button class="add-btn" title="Remove application" (click)="toggleSelectionMode()" [disabled]="applications.length == 0">
+    <button class="add-btn" title="Remove application" (click)="toggleSelectionMode()" [disabled]="(userStore.wishlistApps | async).length == 0">
       <p *ngIf="!(rs.mobileSize$ | async)">{{ selectionMode ? 'Done' : 'Remove' }}</p>
       <mat-icon [inline]="true" aria-hidden="false" aria-label="Remove application icon">delete</mat-icon>
     </button>
@@ -16,13 +16,13 @@
     <p>Your wishlist allows you to keep track of applications you'd like to send in the future &#10024;</p>
   </div>
 
-  <div class="wishlist-apps" *ngIf="applications.length != 0; else emptyWishlist">
+  <div class="wishlist-apps" *ngIf="(userStore.wishlistApps | async).length != 0; else emptyWishlist">
     <div class="header spanning-content">
       <div class="spacer"></div>
-      <p>{{ applications.length }} applications</p>
+      <p>{{ (userStore.wishlistApps | async).length }} applications</p>
     </div>
     <mat-list style="height: 100%;" class="app-list-item">
-      <mat-list-item class="clickable-item" *ngFor="let app of applications;" (click)="selectApplication(app)">
+      <mat-list-item class="clickable-item" *ngFor="let app of (userStore.wishlistApps | async);" (click)="selectApplication(app)">
         <mat-icon *ngIf="!selectionMode" matListIcon>star</mat-icon>
         <mat-icon *ngIf="selectionMode" class="delete-btn" (click)="removeApplication(app)" matListIcon>delete</mat-icon>
         

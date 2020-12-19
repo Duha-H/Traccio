@@ -9,10 +9,13 @@
     </div>
   
     <div class="results">
-      <div class="result-section" *ngIf="filteredJourneys.length != 0;">
+      <div class="result-section"
+        *ngIf="(userStore.journeys | async | searchPipe:'journey':query).length != 0;">
         <h3 class="result-title">Journeys</h3>
         <mat-list style="height: 100%;" class="app-list-item">
-          <mat-list-item class="clickable-item" *ngFor="let journey of filteredJourneys;" (click)="viewResult('journey', journey, journey.id)">
+          <mat-list-item class="clickable-item"
+            *ngFor="let journey of (userStore.journeys | async | searchPipe:'journey':query);"
+            (click)="viewResult('journey', journey, journey.id)">
             <mat-icon matListIcon>folder</mat-icon>
 
             <div *ngIf="!(rs.tabletSize$ | async); else mobileJourneyItem" matLine>
@@ -40,11 +43,14 @@
         </mat-list>
       </div>
   
-      <div class="result-section" *ngIf="(filteredAppsMap | keys).length != 0;">
+      <div class="result-section"
+        *ngIf="(userStore.journeys | async | concat | searchPipe:'application':query).length != 0;">
         <h3 class="result-title">Applications</h3>
         <mat-list style="height: 100%;" class="app-list-item">
-          <div *ngFor="let item of filteredAppsMap | keyvalue;">
-            <mat-list-item class="clickable-item" *ngFor="let app of item.value;" (click)="viewResult('application', app, item.key)">
+          <div *ngFor="let journey of (userStore.journeys | async);">
+            <mat-list-item class="clickable-item"
+              *ngFor="let app of (journey.applications | searchPipe:'application':query);"
+              (click)="viewResult('application', app, journey.id)">
               <mat-icon matListIcon>folder</mat-icon>
               <div *ngIf="!(rs.tabletSize$ | async); else mobileAppItem" matLine>
                 <div class="spanning-content">
@@ -71,13 +77,16 @@
               </ng-template>
             </mat-list-item>
           </div>
+          
         </mat-list>
       </div>
 
-      <div class="result-section" *ngIf="filteredWishlistApps.length != 0;">
+      <div class="result-section" *ngIf="(userStore.wishlistApps | async | searchPipe:'application':query).length != 0;">
         <h3 class="result-title">Wishlist Applications</h3>
         <mat-list style="height: 100%;" class="app-list-item">
-          <mat-list-item class="clickable-item" *ngFor="let app of filteredWishlistApps;" (click)="viewResult('wishlist', app, app.id)">
+          <mat-list-item class="clickable-item"
+            *ngFor="let app of (userStore.wishlistApps | async | searchPipe:'application':query);"
+            (click)="viewResult('wishlist', app, app.id)">
             <mat-icon matListIcon>folder</mat-icon>
             <div matLine>
               <div *ngIf="!(rs.tabletSize$ | async); else mobileWishlistItem" class="spanning-content">
@@ -107,7 +116,11 @@
       </div>
   
       <div class="placeholder-text" 
-        *ngIf="filteredJourneys.length == 0 && (filteredAppsMap | keys).length == 0 && query.length != 0">
+        *ngIf="
+          (userStore.journeys | async | searchPipe:'journey':query).length == 0 &&
+          (userStore.wishlistApps | async | searchPipe:'application':query).length == 0 &&
+          (userStore.wishlistApps | async | searchPipe:'application':query).length == 0 &&
+          query.length != 0">
         <h4>Looks like your search has no matching results.</h4>
       </div>
   

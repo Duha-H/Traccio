@@ -23,7 +23,6 @@ export class JourneyListComponent implements OnInit, OnDestroy {
   sliderIdx = 0;
   swipeOffset = 0;
   routeSub: Subscription;
-  journeySub: Subscription;
   journeyList: QueryList<ElementRef>;
   @Input() displayDrawer = false;
   @ViewChild(SliderContainerComponent) sliderContainer: SliderContainerComponent;
@@ -53,9 +52,6 @@ export class JourneyListComponent implements OnInit, OnDestroy {
       if (params.displayDrawer) {
         this.displayDrawer = true;
       }
-    });
-    this.journeySub = this.userStore.journeys.subscribe(journeys => {
-      this.journeys = journeys;
     });
     const storedSliderIdx = sessionStorage.getItem('journeySliderIdx');
     if (storedSliderIdx) {

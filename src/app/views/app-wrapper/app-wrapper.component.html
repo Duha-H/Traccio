@@ -61,7 +61,7 @@
 
       <ng-template #content>
         <app-search *ngIf="searchQuery.length != 0; else appContent" [query]="searchQuery"
-          [parentSearchSubject]="searchSubject" (clearEvent)="clearSearch()" #searchComponent></app-search>
+          (clearEvent)="clearSearch()" #searchComponent></app-search>
         <ng-template #appContent>
           <router-outlet></router-outlet>
         </ng-template>

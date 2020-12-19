@@ -6,6 +6,7 @@ import { THEMES, PALETTES } from 'src/styling/palettes';
 import { Response } from 'src/app/utils/response';
 import { KeyValue } from '@angular/common';
 import { TextFieldComponent } from 'src/app/shared-components/text-field/text-field.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'settings-preferences',
@@ -19,6 +20,7 @@ export class PreferenceSettingsComponent implements OnInit, OnDestroy {
   preferences: PreferencesType = DEFAULT_PREFERENCES;
   visibleTooltip: ElementRef = undefined;
   palettes = PALETTES;
+  prefSub: Subscription;
 
   @Output() updates: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() showAlert: EventEmitter<Response> = new EventEmitter<Response>();
@@ -31,13 +33,14 @@ export class PreferenceSettingsComponent implements OnInit, OnDestroy {
   ) {  }
 
   ngOnInit() {
-    this.prefStore.preferences.subscribe(preferences => {
+    this.prefSub = this.prefStore.preferences.subscribe(preferences => {
       this.preferences = Object.assign({}, preferences);
     });
   }
 
   ngOnDestroy() {
     this.prefStore.applyChanges(); // resets any unsaved changes to current value
+    this.prefSub.unsubscribe();
   }
 
   addUpdate(updateAttrib: string, updateValue: string) {

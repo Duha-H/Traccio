@@ -1,5 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { Subscription } from "rxjs";
 import { Application } from "src/app/models/application";
 import { STATUS, STATUS_COLORS } from 'src/app/models/constants';
 import { Journey } from "src/app/models/journey";
@@ -13,17 +14,18 @@ import { ApplicationViewComponent } from "./application-view.component";
 })
 export class ExistingApplicationViewComponent
   extends ApplicationViewComponent
-  implements OnInit {
+  implements OnInit, OnDestroy {
   newApp = false;
   wishlistApp = false;
   existingApp = true;
   parentJourney: Journey;
+  parentJourneySub: Subscription;
 
   ngOnInit() {
     const appid = this.route.snapshot.paramMap.get("appref");
     const parentID = this.route.snapshot.paramMap.get("id");
     if (parentID) {
-      this.userStore.journeys.subscribe(journeys => {
+      this.parentJourneySub = this.userStore.journeys.subscribe(journeys => {
         this.parentJourney = journeys.filter(journey => journey.id === parentID)[0];
       });
       if (!this.parentJourney) {
@@ -74,6 +76,10 @@ export class ExistingApplicationViewComponent
       data: this.appFormGroup.get('timeline').value,
       colorMappings: STATUS_COLORS
     };
+  }
+
+  ngOnDestroy() {
+    this.parentJourneySub.unsubscribe();
   }
 
   saveChanges() {

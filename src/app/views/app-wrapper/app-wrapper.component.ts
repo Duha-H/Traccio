@@ -31,7 +31,6 @@ export class AppWrapperComponent implements OnInit {
     { text: "Sign out", type: "button", callback: this.signOut.bind(this) },
   ];
   searchQuery = '';
-  searchSubject: BehaviorSubject<string> = new BehaviorSubject(this.searchQuery);
   previous = false;
 
   @Output() submitSearch = new EventEmitter();
@@ -110,7 +109,6 @@ export class AppWrapperComponent implements OnInit {
 
   onSearch(query: string) {
     this.searchQuery = query;
-    this.searchSubject.next(query);
   }
 
   clearSearch() {

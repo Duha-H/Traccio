@@ -21,6 +21,7 @@ import { ApplicationListComponent } from './application-list.component';
 import { BreadcrumbsData } from 'src/app/shared-components/types';
 import { ResizeService } from 'src/app/controllers/resize.service';
 import { Title } from '@angular/platform-browser';
+import { Subscription } from "rxjs";
 
 const DRAWER_MODES = {
   ADD: "add",
@@ -32,7 +33,7 @@ const DRAWER_MODES = {
   templateUrl: "./journey-view.component.html",
   styleUrls: ["./journey-view.component.css"],
 })
-export class JourneyViewComponent implements OnInit, AfterViewInit {
+export class JourneyViewComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild("editButton") editButton: ElementRef;
   @ViewChild("sidenav", { static: false }) sidenav: MatSidenav;
   @ViewChild("filterElement", { static: false }) dropdownElement: MatSelect;
@@ -127,6 +128,8 @@ export class JourneyViewComponent implements OnInit, AfterViewInit {
   displayEditOverlay = false;
   displayFilterOverlay = false;
   visibleAppCount = '0 applications';
+  routeSub: Subscription;
+  journeysSub: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -141,14 +144,14 @@ export class JourneyViewComponent implements OnInit, AfterViewInit {
     let id: string;
     let appref: string;
     // extract journey ID from URL, then get journey from UserStore
-    this.route.params.subscribe((params) => {
+    this.routeSub = this.route.params.subscribe((params) => {
       id = params.id;
       if (params.appref) {
         appref = params.appref;
       }
       return params.id;
     });
-    this.userStore.journeys.subscribe(journeys => {
+    this.journeysSub = this.userStore.journeys.subscribe(journeys => {
       const journey = this.userStore.getJourney(id);
       if (journey) {
         this.journey = journey;
@@ -167,6 +170,11 @@ export class JourneyViewComponent implements OnInit, AfterViewInit {
     });
     this.currJourneyDetails = Object.assign(new Journey(), this.journey);
     sessionStorage.setItem('journeyRoute', `/home/journeys/${this.journey.id}`);
+  }
+
+  ngOnDestroy() {
+    this.routeSub.unsubscribe();
+    this.journeysSub.unsubscribe();
   }
 
   ngAfterViewInit() {

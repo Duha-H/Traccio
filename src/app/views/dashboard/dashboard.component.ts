@@ -63,7 +63,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private userStore: UserStoreService,
+    public userStore: UserStoreService,
     public router: Router,
     private prefStore: PreferencesStoreService,
     public resizeService: ResizeService,
@@ -75,11 +75,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.titleService.setTitle('Dashboard | Traccio');
+    this.greeting = `${MESSAGES.greetings[Math.floor(Math.random() * Object.keys(MESSAGES.greetings).length)]}`;
     try {
-      this.userStore.user.subscribe(user => {
-        this.name = user.firstName;
-        this.greeting = `${MESSAGES.greetings[Math.floor(Math.random() * Object.keys(MESSAGES.greetings).length)]}${user.firstName}!`;
-      });
       this.journeySub = this.userStore._journeys.pipe(map(journey => Object.values(journey))).subscribe(journeys => {
         this.activeJourneys = journeys.filter(journey => journey.active);
         this.setDropdownContent();

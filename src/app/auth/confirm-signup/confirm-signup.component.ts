@@ -1,21 +1,23 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserStoreService } from 'src/app/models/user-store.service';
 import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
 import { Title } from '@angular/platform-browser';
 import { LoaderService } from 'src/app/controllers/loader.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-confirm-signup',
   templateUrl: './confirm-signup.component.html',
   styleUrls: ['./confirm-signup.component.css', '../auth.component.css']
 })
-export class ConfirmSignupComponent implements OnInit {
+export class ConfirmSignupComponent implements OnInit, OnDestroy {
 
   email = '';
   error = '';
   success = false;
   submitButton: ElementRef;
+  emailSub: Subscription;
   @ViewChild('submitButton') set button(element: ElementRef) {
     if (element) {
       this.submitButton = element;
@@ -33,7 +35,7 @@ export class ConfirmSignupComponent implements OnInit {
 
   ngOnInit() {
     this.titleService.setTitle('Confirm Sign Up | Traccio');
-    this.userStore.user.subscribe(user => {
+    this.emailSub = this.userStore.user.subscribe(user => {
       this.email = user.email;
     });
     document.addEventListener('keyup', (event) => {
@@ -42,6 +44,10 @@ export class ConfirmSignupComponent implements OnInit {
       }
     });
     this.success = this.route.snapshot.queryParams.success === 'true' ? true : false;
+  }
+
+  ngOnDestroy() {
+    this.emailSub.unsubscribe();
   }
 
   async handleResend() {

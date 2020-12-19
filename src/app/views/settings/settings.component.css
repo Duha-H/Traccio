@@ -399,6 +399,8 @@ div#alert-div p.warning-text {
   text-align: left;
   padding: 0 20px;
   margin: 20px 0;
+  position: unset;
+  background-color: transparent;
 }
 
 @media screen and (max-width: 768px) {

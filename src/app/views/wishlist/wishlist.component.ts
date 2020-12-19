@@ -13,11 +13,10 @@ import { Title } from '@angular/platform-browser';
 })
 export class WishlistComponent implements OnInit {
 
-  applications: Application[] = [];
   selectionMode = false;
 
   constructor(
-    private userStore: UserStoreService,
+    public userStore: UserStoreService,
     private router: Router,
     private notificationService: NotificationService,
     public rs: ResizeService,
@@ -26,9 +25,6 @@ export class WishlistComponent implements OnInit {
 
   ngOnInit() {
     this.titleService.setTitle('Wishlist | Traccio');
-    this.userStore.wishlistApps.subscribe(apps => {
-      this.applications = apps;
-    });
     sessionStorage.setItem('wishlistRoute', '/home/wishlist');
   }
 
@@ -49,9 +45,6 @@ export class WishlistComponent implements OnInit {
         this.notificationService.sendNotification(response.message, 'error');
       } else {
         this.notificationService.sendNotification(`Wishlist application removed successfully!`, 'success');
-      }
-      if (this.applications.length === 0) {
-        this.selectionMode = false;
       }
     }
   }

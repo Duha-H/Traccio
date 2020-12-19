@@ -59,7 +59,6 @@ mat-icon {
 
 .edit-button {
   text-align: right;
-	z-index: 2;
   float: right;
   position: absolute;
   top: -20px;

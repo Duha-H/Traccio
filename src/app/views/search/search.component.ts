@@ -6,68 +6,30 @@ import { SearchPipe } from './search-pipe.pipe';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Router } from '@angular/router';
 import { KeysPipe } from '../../utils/keys.pipe';
-import { Subscription } from 'rxjs';
 import { ResizeService } from 'src/app/controllers/resize.service';
+import { ConcatPipe } from 'src/app/utils/concat.pipe';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
-export class SearchComponent implements OnInit, OnDestroy {
+export class SearchComponent implements OnInit {
 
   @Input() query = '';
   @Input() parentSearchSubject: BehaviorSubject<string>;
   @Output() clearEvent = new EventEmitter();
-  journeys: Journey[] = [];
-  applicationMap: {[journeyid: string]: Application[]} = {};
-  wishlistApps: Application[] = [];
-  filteredJourneys: Journey[] = [];
-  filteredAppsMap: {[journeyid: string]: Application[]} = {};
-  filteredWishlistApps: Application[] = [];
-  journeySub: Subscription = new Subscription();
-  wishlistSub: Subscription = new Subscription();
 
   constructor(
-    private userStore: UserStoreService,
+    public userStore: UserStoreService,
     private searchPipe: SearchPipe,
     private router: Router,
     public keys: KeysPipe,
     public rs: ResizeService,
+    public concat: ConcatPipe
   ) { }
 
-  ngOnInit() {
-    this.journeySub = this.userStore.journeys.subscribe(journeys => {
-      this.journeys = journeys;
-      journeys.forEach(journey => {
-        this.applicationMap[journey.id] = journey.applications;
-      });
-    });
-    this.wishlistSub = this.userStore.wishlistApps.subscribe(apps => {
-      this.wishlistApps = apps;
-    });
-    this.parentSearchSubject.subscribe(query => {
-      this.search(query);
-    });
-  }
-
-  ngOnDestroy() {
-    this.journeySub.unsubscribe();
-    this.wishlistSub.unsubscribe();
-  }
-
-  search(queryInput: string) {
-    this.query = queryInput;
-    this.filteredJourneys = this.searchPipe.transform(this.journeys, 'journey', queryInput) as Journey[];
-    this.filteredAppsMap = {};
-    for (const journeyid of Object.keys(this.applicationMap)) {
-      const apps = this.searchPipe.transform(this.applicationMap[journeyid], 'application', queryInput) as Application[];
-      if (apps.length > 0) {
-        this.filteredAppsMap[journeyid] = apps;
-      }
-    }
-    this.filteredWishlistApps = this.searchPipe.transform(this.wishlistApps, 'application', queryInput) as Application[];
-  }
+  ngOnInit() { }
 
   clear() {
     this.clearEvent.emit();

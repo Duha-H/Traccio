@@ -5,7 +5,7 @@
       <mat-icon class="info-icon" (click)="displayTooltip('first-name', $event)">info</mat-icon>
     </p>
     <div class="setting-textfield">
-      <text-field class="value" [width]="800" [height]="10" [center]="false" [displayLabel]="false" [text]="user.firstName" [showUpdatedBorder]="updateCheck[ATTRIBS.FIRST_NAME]" (inputChange)="addUpdate(ATTRIBS.FIRST_NAME, $event)" #firstNameField></text-field>
+      <text-field class="value" [width]="800" [height]="10" [center]="false" [displayLabel]="false" [text]="(userStore.user | async).firstName" [showUpdatedBorder]="updateCheck[ATTRIBS.FIRST_NAME]" (inputChange)="addUpdate(ATTRIBS.FIRST_NAME, $event)" #firstNameField></text-field>
       <div class="undo-button">
         <button title="undo changes" [disabled]="!updateCheck[ATTRIBS.FIRST_NAME]" (click)="undoChange(ATTRIBS.FIRST_NAME, firstNameField)">
           <mat-icon>replay</mat-icon>
@@ -23,7 +23,7 @@
       <mat-icon class="info-icon" (click)="displayTooltip('last-name', $event)">info</mat-icon>
     </p>
     <div class="setting-textfield">
-      <text-field class="value" [width]="800" [height]="10" [center]="false" [displayLabel]="false" [text]="user.lastName" [showUpdatedBorder]="updateCheck[ATTRIBS.LAST_NAME]" (inputChange)="addUpdate(ATTRIBS.LAST_NAME, $event)" #lastNameField></text-field>
+      <text-field class="value" [width]="800" [height]="10" [center]="false" [displayLabel]="false" [text]="(userStore.user | async).lastName" [showUpdatedBorder]="updateCheck[ATTRIBS.LAST_NAME]" (inputChange)="addUpdate(ATTRIBS.LAST_NAME, $event)" #lastNameField></text-field>
       <div class="undo-button">
         <button title="undo changes" [disabled]="!updateCheck[ATTRIBS.LAST_NAME]" (click)="undoChange(ATTRIBS.LAST_NAME, lastNameField)">
           <mat-icon>replay</mat-icon>
@@ -53,7 +53,7 @@
     </div>
     <div class="setting-textfield" style="align-items: flex-start;">
       <div class="value value-div">
-        <text-field [width]="800" [height]="10" [center]="false" [displayLabel]="false" [text]="user.email" [showUpdatedBorder]="updateCheck[ATTRIBS.EMAIL]" (inputChange)="addUpdate(ATTRIBS.EMAIL, $event)" [control]="email" [displayFeedback]="true" #emailField></text-field>
+        <text-field [width]="800" [height]="10" [center]="false" [displayLabel]="false" [text]="(userStore.user | async).email" [showUpdatedBorder]="updateCheck[ATTRIBS.EMAIL]" (inputChange)="addUpdate(ATTRIBS.EMAIL, $event)" [control]="email" [displayFeedback]="true" #emailField></text-field>
         <div id="alert-div" *ngIf="!email.valid">
           <p class="warning-text">Please make sure to enter a valid email address</p>
         </div>

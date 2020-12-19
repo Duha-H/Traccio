@@ -6,6 +6,7 @@ import {
   EventEmitter,
   Input,
   OnChanges,
+  OnDestroy,
 } from "@angular/core";
 import { Application } from 'src/app/models/application';
 import { MatTableDataSource } from '@angular/material/table';
@@ -15,13 +16,14 @@ import { AppFilterPipe } from 'src/app/views/dashboard/app-filter.pipe';
 import { MatSort } from '@angular/material/sort';
 import { ResizeService } from 'src/app/controllers/resize.service';
 import { NotificationService } from 'src/app/controllers/notification.service';
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "application-list",
   templateUrl: "./application-list.component.html",
   styleUrls: ["./journey-view.component.css"],
 })
-export class ApplicationListComponent implements OnInit {
+export class ApplicationListComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   @Input() journeyid = '';
@@ -30,6 +32,7 @@ export class ApplicationListComponent implements OnInit {
   @Output() countChange = new EventEmitter<number>();
   applications: Application[] = [];
   deleteButtonPressed = false;
+  jourenysSub: Subscription;
   dataSource = new MatTableDataSource<Application>(this.applications);
   displayedColumnsDefault = [
     "select",
@@ -61,7 +64,7 @@ export class ApplicationListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userStore.journeys.subscribe(journeys => {
+    this.jourenysSub = this.userStore.journeys.subscribe(journeys => {
       const journey = this.userStore.getJourney(this.journeyid);
       if (journey) {
         this.applications = journey.applications;
@@ -70,6 +73,10 @@ export class ApplicationListComponent implements OnInit {
         this.updateView();
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.jourenysSub.unsubscribe();
   }
 
   updateView() {

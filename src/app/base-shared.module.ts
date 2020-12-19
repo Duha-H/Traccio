@@ -9,6 +9,7 @@ import { FAQComponent } from './shared-components/faqs/faq.component';
 import { LoadingIndicatorComponent } from './shared-components/loading-indicator/loading-indicator.component';
 import { ScrollButtonComponent } from './shared-components/scroll-button/scroll-button.component';
 import { TextFieldComponent } from './shared-components/text-field/text-field.component';
+import { ConcatPipe } from './utils/concat.pipe';
 import { KeysPipe } from './utils/keys.pipe';
 import { SafeHTMLPipe } from './utils/safe-html.pipe';
 import { ValuesPipe } from './utils/values.pipe';
@@ -26,6 +27,7 @@ import { SearchPipe } from './views/search/search-pipe.pipe';
     KeysPipe,
     SearchPipe,
     SafeHTMLPipe,
+    ConcatPipe,
   ],
   imports: [
     // Global Module imports
@@ -48,6 +50,7 @@ import { SearchPipe } from './views/search/search-pipe.pipe';
     KeysPipe,
     ScrollButtonComponent,
     LoadingIndicatorComponent,
+    ConcatPipe,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnDirtyErrorStateMatcher },
@@ -55,6 +58,7 @@ import { SearchPipe } from './views/search/search-pipe.pipe';
     KeysPipe,
     SearchPipe,
     SafeHTMLPipe,
+    ConcatPipe,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

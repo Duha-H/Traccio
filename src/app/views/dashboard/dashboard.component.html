@@ -4,7 +4,7 @@
   </div>
   <div class="dashboard-content" *ngIf="selectedJourney; else elseContent">
     <div class="dashboard-header">
-      <h3>{{ greeting }} ✌️</h3>
+      <h3>{{ greeting + (userStore.user | async).firstName + '!' }} ✌️</h3>
       <div class="spacer"></div>
       <div>
         <mat-form-field color="accent">
@@ -242,7 +242,7 @@
 
   <ng-template class="dashboard-content" #elseContent>
     <div class="dashboard-header">
-      <h3>Hi there, {{ name }}!</h3>
+      <h3>{{ greeting + (userStore.user | async).firstName + '!' }} ✌️</h3>
       <div class="spacer"></div>
     </div>
     <div class="placeholder-text">
