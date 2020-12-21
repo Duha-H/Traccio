@@ -27,6 +27,8 @@ import { JourneysGraphicComponent } from './views/landing/graphics/journeys-grap
 import { ApplicationGraphicComponent } from './views/landing/graphics/application-graphic.component';
 import { SearchGraphicComponent } from './views/landing/graphics/search-graphic.component';
 import { BaseSharedModule } from './base-shared.module';
+import { LandingModule } from './views/landing/landing.module';
+import { AppWrapperModule } from './views/app-wrapper/app-wrapper.module';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { BaseSharedModule } from './base-shared.module';
   imports: [
     BaseSharedModule,
     ViewsSharedModule,
-    CommonModule,
+    LandingModule,
+    AppWrapperModule,
+    // CommonModule,
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,

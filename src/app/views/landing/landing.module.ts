@@ -20,6 +20,7 @@ import { LandingFAQComponent } from './landing-faq.component';
 import { LandingRoutingModule } from './landing-routing.module';
 import { LandingWrapperComponent } from './landing-wrapper.component';
 import { LandingComponent } from './landing.component';
+import { NotFoundComponent } from './not-found.component';
 import { PrivacyComponent } from './privacy.component';
 
 @NgModule({
@@ -40,6 +41,7 @@ import { PrivacyComponent } from './privacy.component';
     RecoverEmailComponent,
     VerifyEmailComponent,
     LinkSentComponent,
+    NotFoundComponent,
   ],
   imports: [
     BaseSharedModule,
