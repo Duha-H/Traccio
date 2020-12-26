@@ -9,7 +9,7 @@
 }
 
 .notif-container {
-  border-radius: 15px;
+  border-radius: 10px;
   background-color: var(--bg);
   box-shadow: var(--shadow-tooltip);
   width: 400px;

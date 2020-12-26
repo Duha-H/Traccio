@@ -34,10 +34,10 @@ const routes: Routes = [
       },
       { path: "settings", component: SettingsComponent },
       { path: "info", component: InfoComponent },
-      { path: "**", redirectTo: "" },
+      { path: "**", redirectTo: "home" },
     ],
   }
-]
+];
 
 @NgModule({
   imports: [

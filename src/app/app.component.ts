@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { Router } from '@angular/router';
 import { UserStoreService } from './models/user-store.service';
 import { AuthWrapperService } from './auth/auth-wrapper.service';
@@ -11,7 +11,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   title = "Tracker";
   signedIn: boolean;
   user: firebase.User; // I don't like this
@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
           this.user = user;
           this.authWrapper.authState.signedIn = true;
           // set user attributes and navigate to dashboard
-          const identityProvder = 'DEFAULT';
+          const identityProvder = user.providerData[0].providerId === 'google.com' ? 'GOOGLE' : 'DEFAULT';
           // retrieve and set user preferences
           this.prefStore.setUser(user.uid);
           // set user info
@@ -48,15 +48,15 @@ export class AppComponent implements OnInit {
             user.emailVerified,
             identityProvder,
           );
+          console.log('user defined :)', identityProvder); // password google.com facebook.com rgb(200, 209, 227)
           this.loaderService.setLoadingState(false);
+          // this.router.navigate(['home']);
         }
       });
     } catch (error) {
       console.log("App init: user not initialized:", error);
     }
   }
-
-  ngDoBootstrap() { }
 
   public isAuthenticated(): boolean {
     return this.signedIn;

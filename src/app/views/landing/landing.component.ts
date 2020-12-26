@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChildren, QueryList, ElementRef, AfterViewInit, HostListener } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ResizeService } from 'src/app/controllers/resize.service';
 
 @Component({
@@ -7,8 +8,6 @@ import { ResizeService } from 'src/app/controllers/resize.service';
   styleUrls: ['./landing.component.css', './landing-cards.css'],
 })
 export class LandingComponent implements OnInit {
-
-  constructor(public resizeService: ResizeService) { }
 
   @ViewChildren('card') cards: QueryList<ElementRef>;
   cardVisible = {
@@ -20,8 +19,14 @@ export class LandingComponent implements OnInit {
   currentCard = 0;
   currentIntervalID = -1;
 
+  constructor(
+    public resizeService: ResizeService,
+    private titleService: Title
+  ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.titleService.setTitle('Traccio');
+  }
 
   checkView(event?: any) {
     let i = 0;
