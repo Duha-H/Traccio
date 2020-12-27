@@ -316,6 +316,7 @@ mat-icon.inline {
 
 .placeholder-text p {
   color: var(--titles-secondary);
+  text-align: center;
 }
 
 .placeholder-text img {
