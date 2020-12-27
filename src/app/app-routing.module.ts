@@ -21,7 +21,7 @@ const routes: Routes = [
         (m) => m.AppWrapperModule
       ),
   },
-  { path: "**", redirectTo: "home" },
+  { path: "**", redirectTo: "404" },
 ];
 
 @NgModule({

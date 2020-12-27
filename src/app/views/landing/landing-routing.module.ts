@@ -11,6 +11,7 @@ import { AboutComponent } from './about.component';
 import { LandingFAQComponent } from './landing-faq.component';
 import { LandingWrapperComponent } from './landing-wrapper.component';
 import { LandingComponent } from './landing.component';
+import { NotFoundComponent } from './not-found.component';
 import { PrivacyComponent } from './privacy.component';
 
 
@@ -35,6 +36,7 @@ const routes: Routes = [
         canActivate: [AccountRecoveryGuard],
       },
       { path: "privacy", component: PrivacyComponent },
+      { path: "404", component: NotFoundComponent },
     ],
   }
 ];
