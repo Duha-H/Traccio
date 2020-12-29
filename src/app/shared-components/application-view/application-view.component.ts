@@ -16,6 +16,7 @@ import { MESSAGES } from 'src/assets/template-messages';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TimelineDatum } from 'src/app/models/types';
 import { Title } from '@angular/platform-browser';
+import { RouterManagerService } from 'src/app/controllers/router-manager.service';
 
 @Component({
   selector: 'app-application-view',
@@ -74,6 +75,7 @@ export class ApplicationViewComponent implements OnInit {
 
   constructor(
     public route: ActivatedRoute,
+    public routerManager: RouterManagerService,
     public userStore: UserStoreService,
     public router: Router,
     public rs: ResizeService,
@@ -141,9 +143,9 @@ export class ApplicationViewComponent implements OnInit {
   cancelChanges() {
     // navigates away from new-app view
     if (this.wishlistApp) {
-      this.router.navigate(['/home/wishlist']);
+      this.router.navigate([ this.routerManager.getParentRoute()]);
     } else if (this.newApp) {
-      this.router.navigate(['/home/journeys', this.parentJourney.id]);
+      this.router.navigate([ this.routerManager.getParentRoute()]);
     }
   }
 

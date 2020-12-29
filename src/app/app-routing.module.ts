@@ -21,7 +21,20 @@ const routes: Routes = [
         (m) => m.AppWrapperModule
       ),
   },
-  { path: "**", redirectTo: "404" },
+  {
+    path: "demo",
+    data: { demo: true },
+    children: [
+      {
+        path: "home",
+        loadChildren: () =>
+          import("src/app/views/app-wrapper/app-wrapper.module").then(
+            (m) => m.AppWrapperModule
+          ),
+      }
+    ],
+  },
+  // { path: "**", redirectTo: "404" },
 ];
 
 @NgModule({

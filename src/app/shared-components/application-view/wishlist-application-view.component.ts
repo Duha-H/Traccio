@@ -25,7 +25,7 @@ export class WishlistApplicationViewComponent
     // Specify application details in formGroup
     this.currApplicationDetails = Object.assign(new Application(), existingWishlistApp);
     if (!this.currApplicationDetails) {
-      this.router.navigate(['/home/wishlist']);
+      this.router.navigate([this.routerManager.getParentRoute()]);
       return;
     }
     this.appFormGroup.setValue({
@@ -43,9 +43,9 @@ export class WishlistApplicationViewComponent
 
     // Set breadcrumbs
     this.breadcrumbsData.current.name = "Application";
-    this.breadcrumbsData.current.url = `/home/wishlist/${appid}`;
+    this.breadcrumbsData.current.url = `${this.routerManager.getParentRoute()}/${appid}`;
     this.breadcrumbsData.paths.push(
-      { name: 'Wishlist', url: '/home/wishlist' },
+      { name: 'Wishlist', url: this.routerManager.getParentRoute() },
     );
 
     // Set session storage
@@ -82,10 +82,10 @@ export class WishlistApplicationViewComponent
         if (response.successful) {
           // if successfully added, remove application from wishlist
           this.userStore.removeWishlistApplication(this.currApplicationDetails.id);
-          this.router.navigate(['/home/journeys', journeyid, response.payload.id]);
+          this.router.navigate([`${this.routerManager.getParentRoute(2)}/journeys`, journeyid, response.payload.id]);
           this.notificationService.sendNotification(`Application successfully added to ${journey.title}!`, 'success', 5000);
           // reset saved wishlistRoute
-          sessionStorage.setItem('wishlistRoute', '/home/wishlist');
+          sessionStorage.setItem('wishlistRoute', this.routerManager.getParentRoute());
         } else {
           this.notificationService.sendNotification(response.message, 'error');
         }

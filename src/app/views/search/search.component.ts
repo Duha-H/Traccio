@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { KeysPipe } from '../../utils/keys.pipe';
 import { ResizeService } from 'src/app/controllers/resize.service';
 import { ConcatPipe } from 'src/app/utils/concat.pipe';
+import { RouterManagerService } from 'src/app/controllers/router-manager.service';
 
 @Component({
   selector: 'app-search',
@@ -24,6 +25,7 @@ export class SearchComponent implements OnInit {
     public userStore: UserStoreService,
     private searchPipe: SearchPipe,
     private router: Router,
+    private routerManager: RouterManagerService,
     public keys: KeysPipe,
     public rs: ResizeService,
     public concat: ConcatPipe
@@ -37,11 +39,11 @@ export class SearchComponent implements OnInit {
 
   viewResult(type: string, item: Journey | Application, journeyid?: string) {
     if (type === 'journey') {
-      this.router.navigate(['/home/journeys', item.id]);
+      this.router.navigate([`${this.routerManager.getRootUrl()}/journeys`, item.id]);
     } else if (type === 'application' && journeyid) {
-      this.router.navigate(['/home/journeys', journeyid, item.id]);
+      this.router.navigate([`${this.routerManager.getRootUrl()}/journeys`, journeyid, item.id]);
     } else if (type === 'wishlist') {
-      this.router.navigate(['/home/wishlist', item.id]);
+      this.router.navigate([`${this.routerManager.getRootUrl()}/wishlist`, item.id]);
     }
     this.clear();
   }

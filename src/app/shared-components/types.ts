@@ -4,8 +4,8 @@ export interface DropdownItem {
   text: string;
   readonly type: "button" | "link" | "item" | "theme-toggle";
   readonly callback?: () => void;
-  readonly link?: string;
   readonly params?: {[key: string]: string};
+  link?: string;
 }
 
 export interface BreadcrumbsData {

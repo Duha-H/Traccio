@@ -14,7 +14,7 @@
         <p class="heading">On this page</p>
         <ul class="flex-column">
           <li *ngFor="let section of faqSections;">
-            <a href="/home/info#{{ section.id }}">{{ section.title }}</a>
+            <a href="{{ routerManager.getPlainRoute() }}#{{ section.id }}">{{ section.title }}</a>
           </li>
         </ul>
       </nav>

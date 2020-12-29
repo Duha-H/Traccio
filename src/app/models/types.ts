@@ -33,10 +33,11 @@ export interface UserInput {
 	firstName: string;
 	lastName: string;
 	email: string;
-	verified: boolean;
+	email_verified: boolean;
+	identityProvider?: 'DEFAULT' | 'GOOGLE';
 	wishlist?: { [key: string]: ApplicationInput };
 	theme?: 'light' | 'dark';
 	palette?: 'palette-0' | 'palette-1' | 'palette-2' | 'palette-3';
 	jourenyInactive?: number;
-	appStale: number;
+	appStale?: number;
 }

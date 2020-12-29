@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef } from "@angular/core";
 import { Title } from '@angular/platform-browser';
 import { ResizeService } from 'src/app/controllers/resize.service';
+import { RouterManagerService } from "src/app/controllers/router-manager.service";
 import { FAQItem, faqs, SECTIONED_FAQS } from '../../shared-components/faqs/faq';
 import { SafeHTMLPipe } from '../../utils/safe-html.pipe';
 
@@ -21,7 +22,8 @@ export class InfoComponent implements OnInit {
   constructor(
     public rs: ResizeService,
     public safeHTML: SafeHTMLPipe,
-    private titleService: Title
+    private titleService: Title,
+    public routerManager: RouterManagerService,
   ) { }
 
   ngOnInit() {

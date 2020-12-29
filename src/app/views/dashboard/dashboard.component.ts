@@ -4,7 +4,7 @@ import * as mockData from "src/app/models/data";
 import { Journey } from "src/app/models/journey";
 import { STATUS } from "src/app/models/constants";
 import { Application } from 'src/app/models/application';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PreferencesStoreService } from 'src/app/controllers/preferences-store.service';
 import { PALETTES, THEMES } from 'src/styling/palettes';
 import { ResizeService } from 'src/app/controllers/resize.service';
@@ -20,6 +20,7 @@ import { Title } from '@angular/platform-browser';
 import html2canvas from 'html2canvas';
 import { MESSAGES } from 'src/assets/template-messages';
 import { NotificationService } from "src/app/controllers/notification.service";
+import { RouterManagerService } from "src/app/controllers/router-manager.service";
 
 @Component({
   selector: "app-dashboard",
@@ -66,6 +67,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(
     public userStore: UserStoreService,
     public router: Router,
+    private routerManager: RouterManagerService,
     private prefStore: PreferencesStoreService,
     public resizeService: ResizeService,
     private arrayFilter: ArrayFilterPipe,
@@ -103,6 +105,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.name = '';
       this.activeJourneys = [];
     }
+
   }
 
   ngOnDestroy() {
@@ -145,7 +148,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   selectApplication(app: Application) {
-    this.router.navigate(['/home/journeys', this.selectedJourney.value.id, app.id]);
+    this.router.navigate([this.routerManager.getParentRoute() + '/journeys', this.selectedJourney.value.id, app.id]);
   }
 
   isEmpty(obj: {[key: string]: any}) {
@@ -188,7 +191,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   navigateToAddJourney() {
-    this.router.navigate(['/home/journeys', { displayDrawer: true }]);
+    this.router.navigate([this.routerManager.getParentRoute() + '/journeys', { displayDrawer: true }]);
   }
 
   saveAsImg(element: HTMLElement, downloadName: string) {

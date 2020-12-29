@@ -15,6 +15,7 @@
         <a routerLink="/">Home</a>
         <a routerLink="/about">Overview</a>
         <a routerLink="/faq">FAQ</a>
+        <a routerLink="/demo/home">Try Demo</a>
         <a class="header-btn" routerLink="/signin">LOG IN</a>
         <a class="header-btn alt" routerLink="/signup">SIGN UP</a>
       </div>
@@ -39,6 +40,10 @@
       </li>
       <li>
         <a role="button" (click)="navigateAway('/faq')">FAQ</a>
+      </li>
+      <li>
+        <a role="button" (click)="navigateAway('/demo/home')">Try Demo</a>
+      </li>
       <li>
         <a class="header-btn" role="button" (click)="navigateAway('/signin')">LOG IN</a>
       </li>

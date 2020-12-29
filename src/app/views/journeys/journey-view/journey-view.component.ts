@@ -22,6 +22,7 @@ import { BreadcrumbsData } from 'src/app/shared-components/types';
 import { ResizeService } from 'src/app/controllers/resize.service';
 import { Title } from '@angular/platform-browser';
 import { Subscription } from "rxjs";
+import { RouterManagerService } from "src/app/controllers/router-manager.service";
 
 const DRAWER_MODES = {
   ADD: "add",
@@ -117,10 +118,7 @@ export class JourneyViewComponent implements OnInit, AfterViewInit, OnDestroy {
     source: [],
   };
   breadcrumbsData: BreadcrumbsData = {
-    current: {
-      name: '',
-      url: ''
-    },
+    current: { name: '', url: '' },
     paths: [
       { name: 'Journeys', url: '/home/journeys' },
     ]
@@ -137,6 +135,7 @@ export class JourneyViewComponent implements OnInit, AfterViewInit, OnDestroy {
     private router: Router,
     public rs: ResizeService,
     private titleService: Title,
+    private routerManager: RouterManagerService,
   ) { }
 
   ngOnInit() {
@@ -157,7 +156,8 @@ export class JourneyViewComponent implements OnInit, AfterViewInit, OnDestroy {
         this.journey = journey;
         this.titleService.setTitle(`${this.journey.title} | Traccio`);
         this.breadcrumbsData.current.name = this.journey.title;
-        this.breadcrumbsData.current.url = `/home/journeys/${this.journey.id}`;
+        this.breadcrumbsData.current.url = `${this.router.url}`;
+        this.breadcrumbsData.paths[0].url = this.routerManager.getParentRoute(); // set correct parent path
         this.selectedApp = this.userStore.getApplication(
           this.journey.id,
           appref
@@ -166,10 +166,12 @@ export class JourneyViewComponent implements OnInit, AfterViewInit, OnDestroy {
           this.displayDrawer = true;
         }
         this.updateApplicationCount(this.journey.applications.length);
+      } else {
+        this.router.navigate([this.routerManager.getParentRoute()]); // redirect to Journey list
       }
     });
     this.currJourneyDetails = Object.assign(new Journey(), this.journey);
-    sessionStorage.setItem('journeyRoute', `/home/journeys/${this.journey.id}`);
+    sessionStorage.setItem('journeyRoute', this.routerManager.getPlainRoute());
   }
 
   ngOnDestroy() {
@@ -224,7 +226,7 @@ export class JourneyViewComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   addApplication() {
-    this.router.navigate(['/home/journeys', this.journey.id, 'new-app']);
+    this.router.navigate([this.routerManager.getPlainRoute(), 'new-app']);
   }
 
   openDrawer(mode: string, application: Application) {
@@ -246,7 +248,7 @@ export class JourneyViewComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   navigateToApplication(application: Application) {
-    this.router.navigate(['/home/journeys', this.journey.id, application.id]);
+    this.router.navigate([this.routerManager.getPlainRoute(), application.id]);
   }
 
   addFilter(event: MatOptionSelectionChange, group: string) {

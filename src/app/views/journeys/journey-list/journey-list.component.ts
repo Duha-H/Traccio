@@ -7,6 +7,7 @@ import { SliderContainerComponent } from 'src/app/shared-components/slider-conta
 import { NotificationService } from 'src/app/controllers/notification.service';
 import { Subscription } from 'rxjs';
 import { Title } from '@angular/platform-browser';
+import { RouterManagerService } from "src/app/controllers/router-manager.service";
 
 @Component({
   selector: "app-journey-list",
@@ -41,6 +42,7 @@ export class JourneyListComponent implements OnInit, OnDestroy {
     public userStore: UserStoreService,
     private router: Router,
     private route: ActivatedRoute,
+    public routerManager: RouterManagerService,
     public rs: ResizeService,
     private notificationService: NotificationService,
     private titleService: Title,
@@ -57,7 +59,7 @@ export class JourneyListComponent implements OnInit, OnDestroy {
     if (storedSliderIdx) {
       this.sliderIdx = +storedSliderIdx;
     }
-    sessionStorage.setItem('journeyRoute', '/home/journeys');
+    sessionStorage.setItem('journeyRoute', this.routerManager.getPlainRoute());
   }
 
   ngOnDestroy() {
@@ -123,7 +125,7 @@ export class JourneyListComponent implements OnInit, OnDestroy {
     // Used when a click is detected on rect-item
     // to discern whether the edit button was pressed
     if (!this.editButton) {
-      this.router.navigate(['/home/journeys', id]);
+      this.router.navigate([this.routerManager.getPlainRoute(), id]);
     } else {
       this.editButton = false;
     }

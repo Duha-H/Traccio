@@ -14,7 +14,8 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/internal/operators/map';
 import { LoaderService } from '../controllers/loader.service';
-import { Subscription } from 'rxjs';
+import * as DEMO from './demo-data';
+import { Response } from "src/app/utils/response";
 
 @Injectable({
   providedIn: "root",
@@ -27,7 +28,7 @@ export class UserStoreService {
     2: mock.testJourney3,
     3: mock.testJourney4,
   };
-  dataUpdated = false;
+  demoMode = false;
 
   // Not exposing _journeys observer to prevent clients
   // of UserStoreService from directly updating values
@@ -49,7 +50,7 @@ export class UserStoreService {
   private _wishlistApps: BehaviorSubject<Application[]> = new BehaviorSubject<Application[]>([]);
   public readonly wishlistApps: Observable<Application[]> = this._wishlistApps.asObservable();
 
-  private _user: BehaviorSubject<User> = new BehaviorSubject<User>(new User());
+  private _user: BehaviorSubject<User> = new BehaviorSubject<User>(DEMO.DEMO_USER);
   public readonly user: Observable<User> = this._user.asObservable();
 
   constructor(
@@ -64,7 +65,14 @@ export class UserStoreService {
    * Initial Setup Methods
    */
 
+  setDemo() {
+    this.demoMode = true;
+  }
+
   async setUser(id: string, verified: boolean, identityProvider?: 'DEFAULT' | 'GOOGLE') {
+    if (this.demoMode) {
+      return;
+    }
     const newUser = new User();
     newUser.userid = id;
     await this.firestore.collection('users').doc<UserInput>(id).get().toPromise()
@@ -87,7 +95,9 @@ export class UserStoreService {
   }) {
     // On success, updated CognitoUser is returned in the response's payload
     // On failure, an error code is returned in the response's payload
-    const response = await this.controller.updateUserAttributes(this._user.value.userid, updates);
+    const response = this.demoMode
+      ? new Response()
+      : await this.controller.updateUserAttributes(this._user.value.userid, updates);
     if (response.successful) {
       const updatedUser = Object.assign(this._user.getValue(), updates);
       // TODO: handle case where email is updated
@@ -100,7 +110,9 @@ export class UserStoreService {
   }
 
   async updateEmail(newEmail: string, password: string) {
-    let response = await this.authWrapper.changeEmail(newEmail, password);
+    let response = this.demoMode
+      ? new Response()
+      : await this.authWrapper.changeEmail(newEmail, password);
     if (response.successful) {
       response = await this.controller.updateUserAttributes(this._user.value.userid, { email: newEmail });
       if (response.successful) {
@@ -117,7 +129,9 @@ export class UserStoreService {
   }
 
   async changeUserPassword(oldPassword: string, newPassword: string, confirmPassword: string) {
-    return await this.authWrapper.changePassword(oldPassword, newPassword, confirmPassword);
+    return this.demoMode
+      ? new Response()
+      : await this.authWrapper.changePassword(oldPassword, newPassword, confirmPassword);
   }
 
   async fetchData() {
@@ -244,7 +258,9 @@ export class UserStoreService {
     journeyData.userId = this._user.getValue().userid;
     const newJourney = new Journey(journeyData);
     // make necessary api calls
-    const response = await this.controller.addNewJourney(newJourney, this._user.getValue().userid);
+    const response = this.demoMode
+      ? new Response()
+      : await this.controller.addNewJourney(newJourney, this._user.getValue().userid);
     if (!response.successful) {
       return response;
     }
@@ -253,13 +269,14 @@ export class UserStoreService {
     updatedJourneys[journeyData.id] = newJourney;
     this.dataManager.addJourney(newJourney);
     this.updateJourneyData(updatedJourneys);
-    this.dataUpdated = true;
 
     return response;
   }
 
   async updateExistingJourney(updatedJourney: Journey) {
-    const response = await this.controller.updateJourney(updatedJourney);
+    const response = this.demoMode
+      ? new Response()
+      : await this.controller.updateJourney(updatedJourney);
     if (!response.successful) {
       return response;
     }
@@ -271,7 +288,9 @@ export class UserStoreService {
   }
 
   async removeJourney(journeyid: string, itemRef?: ElementRef) {
-    const response = await this.controller.removeJourney(this.getJourney(journeyid), this._user.value.userid);
+    const response = this.demoMode
+      ? new Response()
+      : await this.controller.removeJourney(this.getJourney(journeyid), this._user.value.userid);
     if (!response.successful) {
       return response;
     }
@@ -287,7 +306,6 @@ export class UserStoreService {
       delete updatedJourneys[journeyid];
       this.dataManager.removeJourney(journeyid);
       this.updateJourneyData(updatedJourneys);
-      this.dataUpdated = true;
     }, 500);
 
     return response;
@@ -307,7 +325,9 @@ export class UserStoreService {
     }
     const appID = this._getNewAppID(journeyId);
     newApplication.id = appID;
-    const response = await this.controller.addNewApplication(newApplication, journeyId);
+    const response = this.demoMode
+      ? new Response()
+      : await this.controller.addNewApplication(newApplication, journeyId);
     if (!response.successful) {
       return response;
     }
@@ -315,7 +335,6 @@ export class UserStoreService {
     journey.applications.push(newApplication); // wooowiiieee
     this.dataManager.addApplication(journeyId, newApplication);
     // TODO: should this maybe trigger a data reload??
-    this.dataUpdated = true;
     this.updateJourneyData(); // data update, bubble .next() it to all observables
 
     return response;
@@ -328,7 +347,9 @@ export class UserStoreService {
     const appID = updatedApplication.id;
     const journey = this.getJourney(journeyid);
     const existingApplication = this.getApplication(journeyid, appID);
-    const response = await this.controller.updateApplication(updatedApplication, journeyid);
+    const response = this.demoMode
+      ? new Response()
+      : await this.controller.updateApplication(updatedApplication, journeyid);
     if (!response.successful) {
       return response;
     }
@@ -349,7 +370,9 @@ export class UserStoreService {
 
   async removeApplication(journeyid: string, appid: string) {
     const journey = this.getJourney(journeyid);
-    const response = await this.controller.removeApplication(appid, journeyid);
+    const response = this.demoMode
+      ? new Response()
+      : await this.controller.removeApplication(appid, journeyid);
     if (!response.successful) {
       return response;
     }
@@ -375,7 +398,9 @@ export class UserStoreService {
     }
     const appID = this._getNewAppID();
     newApplication.id = appID;
-    const response = await this.controller.addNewWishlistApplication(newApplication, this._user.value.userid);
+    const response = this.demoMode
+      ? new Response()
+      : await this.controller.addNewWishlistApplication(newApplication, this._user.value.userid);
     if (!response.successful) {
       return response;
     }
@@ -388,7 +413,9 @@ export class UserStoreService {
   }
 
   async updateWishlistApplication(updatedApplication: Application) {
-    const response = await this.controller.updateWishlistApplication(updatedApplication, this._user.value.userid);
+    const response = this.demoMode
+      ? new Response()
+      : await this.controller.updateWishlistApplication(updatedApplication, this._user.value.userid);
     if (!response.successful) {
       return response;
     }
@@ -401,7 +428,9 @@ export class UserStoreService {
   }
 
   async removeWishlistApplication(appid: string) {
-    const response = await this.controller.removeWishlistApplication(appid, this._user.value.userid);
+    const response = this.demoMode
+      ? new Response()
+      : await this.controller.removeWishlistApplication(appid, this._user.value.userid);
     if (!response.successful) {
       return response;
     }

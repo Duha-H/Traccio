@@ -26,7 +26,7 @@ export class NewApplicationViewComponent
       if (!this.parentJourney) {
         // parent not resolved yet
         // redirect to journey list
-        this.router.navigate(["/home/journeys"]);
+        this.router.navigate([this.routerManager.getParentRoute(2)]);
         return;
       }
       this.titleService.setTitle(`New Application | ${this.parentJourney.title} | Traccio`);
@@ -47,16 +47,14 @@ export class NewApplicationViewComponent
     });
 
     // Set breadcrumbs
-    const currUrl = this.wishlistApp
-      ? `/home/wishlist/new-app`
-      : `/home/journeys/${this.parentJourney.id}/new-app`;
+    const currUrl = `${this.routerManager.getParentRoute()}/new-app`;
     const breadcrumbPaths = this.wishlistApp
-      ? [{ name: "Wishlist", url: "/home/wishlist" }]
+      ? [{ name: "Wishlist", url: this.routerManager.getParentRoute() }]
       : [
-          { name: "Journeys", url: "/home/journeys" },
+          { name: "Journeys", url: this.routerManager.getParentRoute(2) },
           {
             name: this.parentJourney.title,
-            url: `/home/journeys/${this.parentJourney.id}`,
+            url: this.routerManager.getParentRoute(),
           },
         ];
     this.breadcrumbsData.current.name = "Application";
@@ -77,8 +75,8 @@ export class NewApplicationViewComponent
           if (response.successful) {
             this.currApplicationDetails = response.payload;
             this.notificationService.sendNotification('Wishlist application created!', 'success');
-            sessionStorage.setItem('wishlistRoute', `/home/wishlist/${this.currApplicationDetails.id}`);
-            this.router.navigate(['/home/wishlist', this.currApplicationDetails.id]);
+            sessionStorage.setItem('wishlistRoute', `${this.routerManager.getParentRoute()}/${this.currApplicationDetails.id}`);
+            this.router.navigate([this.routerManager.getParentRoute(), this.currApplicationDetails.id]);
             return;
           } else {
             this.notificationService.sendNotification(response.message, 'error');
@@ -90,8 +88,8 @@ export class NewApplicationViewComponent
           if (response.successful) {
             this.currApplicationDetails = response.payload;
             this.detailsUpdated = false;
-            sessionStorage.setItem('journeyRoute', `/home/journeys/${this.parentJourney.id}/${this.currApplicationDetails.id}`);
-            this.router.navigate(['/home/journeys', this.parentJourney.id, response.payload.id]);
+            sessionStorage.setItem('journeyRoute', `${this.routerManager.getParentRoute()}/${this.currApplicationDetails.id}`);
+            this.router.navigate([this.routerManager.getParentRoute(), response.payload.id]);
             return;
           } else {
             this.notificationService.sendNotification(response.message, 'error');

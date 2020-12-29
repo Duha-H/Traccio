@@ -1,3 +1,5 @@
+import { UserInput } from "./types";
+
 export class User {
 
 	private _firstName = '';
@@ -12,7 +14,7 @@ export class User {
 	private _journeyInactive = 90;
 	private _appStale = 90;
 
-  constructor(userparams?: { [key: string]: any }) {
+  constructor(userparams?: UserInput) {
 		if (userparams) {
 			this._firstName = userparams.firstName;
 			this._lastName = userparams.lastName;

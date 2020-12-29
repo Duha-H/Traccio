@@ -29,14 +29,14 @@ export class ExistingApplicationViewComponent
       if (!this.parentJourney) {
         // parent not resolved yet
         // redirect to journey list
-        this.router.navigate(['/home/journeys']);
+        this.router.navigate([ this.routerManager.getParentRoute(2) ]);
         return;
       }
       this.currApplicationDetails = Object.create(this.userStore.getApplication(this.parentJourney.id, appid));
     }
 
     if (!this.currApplicationDetails) {
-      this.router.navigate(['/home/journeys']);
+      this.router.navigate([ this.routerManager.getParentRoute() ]);
       return;
     }
     // Specify application details in formGroup
@@ -55,12 +55,12 @@ export class ExistingApplicationViewComponent
 
     // Set breadcrumbs
     this.breadcrumbsData.current.name = "Application";
-    this.breadcrumbsData.current.url = `/home/journeys/${this.parentJourney.id}/${appid}`;
+    this.breadcrumbsData.current.url = `${this.routerManager.getParentRoute()}/${appid}`;
     this.breadcrumbsData.paths.push(
-      { name: "Journeys", url: "/home/journeys" },
+      { name: "Journeys", url: this.routerManager.getParentRoute(2) },
       {
         name: this.parentJourney.title,
-        url: `/home/journeys/${this.parentJourney.id}`,
+        url: this.routerManager.getParentRoute(),
       },
     );
 

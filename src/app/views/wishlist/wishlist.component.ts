@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { UserStoreService } from 'src/app/models/user-store.service';
 import { Application } from 'src/app/models/application';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ResizeService } from 'src/app/controllers/resize.service';
 import { NotificationService } from 'src/app/controllers/notification.service';
 import { Title } from '@angular/platform-browser';
+import { RouterManagerService } from 'src/app/controllers/router-manager.service';
 
 @Component({
   selector: 'app-wishlist',
@@ -18,6 +19,7 @@ export class WishlistComponent implements OnInit {
   constructor(
     public userStore: UserStoreService,
     private router: Router,
+    private routerManager: RouterManagerService,
     private notificationService: NotificationService,
     public rs: ResizeService,
     private titleService: Title,
@@ -25,17 +27,17 @@ export class WishlistComponent implements OnInit {
 
   ngOnInit() {
     this.titleService.setTitle('Wishlist | Traccio');
-    sessionStorage.setItem('wishlistRoute', '/home/wishlist');
+    sessionStorage.setItem('wishlistRoute', this.routerManager.getPlainRoute());
   }
 
   selectApplication(app: Application) {
     if (!this.selectionMode) {
-      this.router.navigate(['/home/wishlist', app.id]);
+      this.router.navigate([this.routerManager.getPlainRoute(), app.id]);
     }
   }
 
   addApplication() {
-    this.router.navigate(['/home/wishlist', 'new-app']);
+    this.router.navigate([this.routerManager.getPlainRoute(), 'new-app']);
   }
 
   async removeApplication(app: Application) {

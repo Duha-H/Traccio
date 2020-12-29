@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild, EventEmitter, Output, QueryList } from "@angular/core";
 import { UserStoreService } from "src/app/models/user-store.service";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { DropdownItem } from 'src/app/shared-components/types';
 import { TextFieldComponent } from 'src/app/shared-components/text-field/text-field.component';
@@ -10,6 +10,7 @@ import { NotificationService } from 'src/app/controllers/notification.service';
 import { Notification } from 'src/app/models/notification';
 import { AuthWrapperService } from 'src/app/auth/auth-wrapper.service';
 import { LoaderService } from 'src/app/controllers/loader.service';
+import { RouterManagerService } from "src/app/controllers/router-manager.service";
 
 @Component({
   selector: "app-wrapper",
@@ -23,15 +24,15 @@ import { LoaderService } from 'src/app/controllers/loader.service';
 export class AppWrapperComponent implements OnInit {
   signedIn: boolean;
   displayDropdown = false;
-  dropdownItems: DropdownItem[] = [
+  searchQuery = '';
+  previous = false;
+  readonly dropdownItems: DropdownItem[] = [
     { text: "Signed in as: user@email.com", type: "item"},
     { text: "Account Preferences", type: "link", link: "/home/settings", params: { tab: 'preferences' } },
     { text: "Theme: dark", type: "theme-toggle", callback: this.toggleTheme.bind(this) },
     { text: "About Traccio", type: "link", link: "/home/info"},
     { text: "Sign out", type: "button", callback: this.signOut.bind(this) },
   ];
-  searchQuery = '';
-  previous = false;
 
   @Output() submitSearch = new EventEmitter();
   @ViewChild("navHomeIcon", { read: ElementRef }) currNavIconRef: HTMLElement;
@@ -43,6 +44,8 @@ export class AppWrapperComponent implements OnInit {
   constructor(
     private userStore: UserStoreService,
     public router: Router,
+    private activatedRoute: ActivatedRoute,
+    public routerManager: RouterManagerService,
     public prefStore: PreferencesStoreService,
     public resizeService: ResizeService,
     public notificationService: NotificationService,
@@ -58,6 +61,13 @@ export class AppWrapperComponent implements OnInit {
     this.userStore.user.subscribe(user => {
       this.dropdownItems[0].text = `Signed in as: ${user.email}`;
     });
+
+    if (this.activatedRoute.snapshot.data['demo']) {
+      this.userStore.setDemo(); // set state to DEMO
+      // update dropdown items
+      this.dropdownItems[1].link = `${this.routerManager.getRootUrl()}/settings`;
+      this.dropdownItems[3].link = `${this.routerManager.getRootUrl()}/info`;
+    }
   }
 
   async signOut() {
@@ -123,15 +133,19 @@ export class AppWrapperComponent implements OnInit {
   navigate(routeID: 'journeyRoute' | 'wishlistRoute') {
     const storedRoute = sessionStorage.getItem(routeID);
     let route: string;
-    if (storedRoute) {
-      route = storedRoute;
-    } else {
-      if (routeID === 'journeyRoute') {
-        route = '/home/journeys';
-      } else if (routeID === 'wishlistRoute') {
-        route = '/home/wishlist';
-      }
+    switch (routeID) {
+      case 'journeyRoute':
+        route = storedRoute ? storedRoute : `${this.routerManager.getRootUrl()}/journeys`;
+        console.log(storedRoute, 'route is', route);
+        break;
+      case 'wishlistRoute':
+        route = storedRoute ? storedRoute : `${this.routerManager.getRootUrl()}/wishlist`;
+        break;
+      default:
+        route = this.routerManager.getRootUrl();
+        break;
     }
+
     this.clearSearch();
     this.router.navigate([route]);
   }

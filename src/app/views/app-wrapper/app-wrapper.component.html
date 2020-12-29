@@ -1,34 +1,34 @@
 <div class="sidenav-container" mode="push">
   <!-- Nav -->
   <div class="sidenav" mode="side" role="navigation" *ngIf="!(resizeService.mobileSize$ | async)">
-    <a href="#" routerLink="/home" class="logo">
+    <a href="#" routerLink="{{ routerManager.getRootUrl() }}" class="logo">
       <img src="{{(prefStore.preferences | async).theme.name == 'dark' ? '/assets/logo_stroke_dark.png' : '/assets/logo_fill_light.png'}}" alt="Traccio Logo" class="logo">
     </a>
     <ul class="sidenav">
       <li title="Dashboard">
-        <a href="#" routerLink="/home" (click)="clearSearch()" routerLinkActive="active"
+        <a href="#" routerLink="{{ routerManager.getRootUrl() }}" (click)="clearSearch()" routerLinkActive="active"
           [routerLinkActiveOptions]="{exact: true}" #navHomeIcon>
           <mat-icon [inline]="true" aria-hidden="false" aria-label="Dashboard icon">home</mat-icon>
         </a></li>
       <li title="Journeys">
-        <a role="button" (click)="navigate('journeyRoute')" routerLink="/home/journeys" routerLinkActive="active"
+        <a role="button" (click)="navigate('journeyRoute')" routerLink="{{ routerManager.getRootUrl() + '/journeys' }}" routerLinkActive="active"
           #navJourneysIcon>
           <mat-icon [inline]="true" aria-hidden="false" aria-label="Journeys icon">list</mat-icon>
         </a></li>
       <li title="Wishlist">
-        <a role="button" (click)="navigate('wishlistRoute')" routerLink="/home/wishlist" routerLinkActive="active"
+        <a role="button" (click)="navigate('wishlistRoute')" routerLink="{{ routerManager.getRootUrl() + '/wishlist' }}" routerLinkActive="active"
           #navWishlistIcon>
           <mat-icon [inline]="true" aria-hidden="false" aria-label="Search icon">star_border</mat-icon>
         </a></li>
     </ul>
     <ul class="sidenav bottom">
       <li>
-        <a href="#" routerLink="/home/settings" title="Settings" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }">
+        <a href="#" routerLink="{{ routerManager.getRootUrl() + '/settings' }}" title="Settings" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }">
           <mat-icon [inline]="true" aria-hidden="false" aria-label="Info icon">settings</mat-icon>
         </a>
       </li>
       <li>
-        <a href="#" routerLink="/home/info" title="About Traccio" routerLinkActive="active">
+        <a href="#" routerLink="{{ routerManager.getRootUrl() + '/info' }}" title="About Traccio" routerLinkActive="active">
           <mat-icon [inline]="true" aria-hidden="false" aria-label="Info icon">info</mat-icon>
         </a>
       </li>
@@ -41,7 +41,7 @@
 
     <!-- Toolbar -->
     <div class="toolbar" role="banner">
-      <a *ngIf="(resizeService.mobileSize$ | async)" href="#" routerLink="/home" style="width: auto; height: auto;">
+      <a *ngIf="(resizeService.mobileSize$ | async)" href="#" routerLink="{{ routerManager.getRootUrl() }}" style="width: auto; height: auto;">
         <img src="{{(prefStore.preferences | async).theme.name == 'dark' ? '/assets/logo_stroke_dark.png' : '/assets/logo_fill_light.png'}}" alt="Traccio Logo" class="logo">
       </a>
       <div class="spacer"></div>
@@ -79,15 +79,15 @@
   <!-- Conditionally-visible Bottom Nav -->
   <div *ngIf="resizeService.mobileSize$ | async" class="bottomnav">
     <ul>
-      <li title="Journeys"><a role="button" (click)="navigate('journeyRoute')" routerLink="/home/journeys" routerLinkActive="active"
+      <li title="Journeys"><a role="button" (click)="navigate('journeyRoute')" routerLink="{{ routerManager.getRootUrl() + '/journeys' }}" routerLinkActive="active"
           #navJourneysIcon>
           <mat-icon [inline]="true" aria-hidden="false" aria-label="Journeys icon">list</mat-icon>
         </a></li>
-      <li title="Dashboard"><a href="#" (click)="clearSearch()" routerLink="/home" routerLinkActive="active"
+      <li title="Dashboard"><a href="#" (click)="clearSearch()" routerLink="{{ routerManager.getRootUrl() }}" routerLinkActive="active"
           [routerLinkActiveOptions]="{exact: true}" #navHomeIcon>
           <mat-icon [inline]="true" aria-hidden="false" aria-label="Dashboard icon">home</mat-icon>
         </a></li>
-      <li title="Wishlist"><a role="button" (click)="navigate('wishlistRoute')" routerLink="/home/wishlist" routerLinkActive="active"
+      <li title="Wishlist"><a role="button" (click)="navigate('wishlistRoute')" routerLink="{{ routerManager.getRootUrl() + '/wishlist' }}" routerLinkActive="active"
           #navWishlistIcon>
           <mat-icon [inline]="true" aria-hidden="false" aria-label="Search icon">star_border</mat-icon>
         </a></li>

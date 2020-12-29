@@ -11,7 +11,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"],
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements OnInit {
   title = "Tracker";
   signedIn: boolean;
   user: firebase.User; // I don't like this
@@ -48,9 +48,7 @@ export class AppComponent implements OnInit, AfterViewInit {
             user.emailVerified,
             identityProvder,
           );
-          console.log('user defined :)', identityProvder); // password google.com facebook.com rgb(200, 209, 227)
           this.loaderService.setLoadingState(false);
-          // this.router.navigate(['home']);
         }
       });
     } catch (error) {

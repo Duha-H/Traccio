@@ -144,6 +144,7 @@ div.timeline-legend {
   font-size: 9pt;
   margin: 0;
   margin-left: 10px;
+  font-weight: inherit;
 }
 
 .legend-item .legend-label {
