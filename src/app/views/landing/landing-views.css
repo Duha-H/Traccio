@@ -235,7 +235,7 @@ img.preview, video.preview {
 }
 
 section.flex-column {
-  margin: 600px 0;
+  margin: 400px 0;
 }
 
 section.flex-column:first-of-type {
@@ -382,7 +382,7 @@ img.inline-logo.tiny {
   }
 
   .feature-group .flex-column p {
-    margin: 30px;
+    margin: 30px 10px;
     text-align: center;
     color: var(--text);
   }
@@ -416,6 +416,10 @@ img.inline-logo.tiny {
 }
 
 @media screen and (max-width: 500px) {
+  .spanning-content h3, .flex-column h3 {
+    text-align: center;
+  }
+
   section.main {
     height: 70vh;
     display: flex;
@@ -423,5 +427,9 @@ img.inline-logo.tiny {
 
   .sub-section ul {
     padding-left: 20px;
+  }
+
+  img.preview, video.preview {
+    border-radius: 5px;
   }
 }

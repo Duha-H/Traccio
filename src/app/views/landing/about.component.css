@@ -256,12 +256,3 @@ div.content-section {
     transform: scale(1);
   }
 }
-
-@keyframes slide-down {
-  from {
-    transform: scaleY(0%) translateY(-10%);
-  }
-  to {
-    transform: scaleY(100%) translateY(0);
-  }
-}

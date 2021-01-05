@@ -31,7 +31,7 @@ export const THEMES: {[key: string]: ThemeType} = {
   },
   light: {
     name: 'light',
-    emptyColor: '#DCDCDC',
+    emptyColor: '#f0f0f0',
     textColor: '#494a4f',
     background: '#F7F7F7',
     transparent: '#00000000',

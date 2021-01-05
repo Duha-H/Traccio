@@ -1,21 +1,17 @@
 <div class="container">
 
-  <div class="sticky-header-bg"
-    style="{{
-      router.url !== '/privacy' && router.url !== '/404' ?
-      'background-color: var(--accent-hover);' :
-      '' }}"></div>
+  <div class="{{ router.url !== '/privacy' && router.url !== '/404' && !navOverlay ? 'sticky-header-bg alt' : 'sticky-header-bg' }}"></div>
   <nav role="navigation">
-    <div class="header the-sticky-element">
+    <div class="header">
       <a routerLink="/" id="logo">
         <img src="/assets/logo_fill_light.png" alt="Traccio logo" class="logo">
       </a>
       <div class="spacer"></div>
-      <div class="spanning-content" *ngIf="!(resizeService.mobileSize$ | async); else navToggle;">
+      <div class="spanning-content nav" *ngIf="!(resizeService.tabletSize$ | async); else navToggle;">
         <a routerLink="/">Home</a>
         <a routerLink="/about">Overview</a>
         <a routerLink="/faq">FAQ</a>
-        <a routerLink="/demo/home">Try Demo</a>
+        <a routerLink="/demo/home">Try Demo ✨</a>
         <a class="header-btn" routerLink="/signin">LOG IN</a>
         <a class="header-btn alt" routerLink="/signup">SIGN UP</a>
       </div>
@@ -42,7 +38,7 @@
         <a role="button" (click)="navigateAway('/faq')">FAQ</a>
       </li>
       <li>
-        <a role="button" (click)="navigateAway('/demo/home')">Try Demo</a>
+        <a role="button" (click)="navigateAway('/demo/home')">Try Demo ✨</a>
       </li>
       <li>
         <a class="header-btn" role="button" (click)="navigateAway('/signin')">LOG IN</a>

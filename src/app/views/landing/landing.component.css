@@ -2,6 +2,12 @@ a {
   white-space: nowrap;
 }
 
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .page-content {
   width: 100%;
   min-height: 80%;
@@ -100,10 +106,15 @@ button.header-btn.alt, a.header-btn.alt {
   color: var(--accent);
   font-weight: 500;
   margin: 0 15px;
+  transition: 0.2s transform ease-in-out;
 }
 
 .header a:hover {
   cursor: pointer;
+}
+
+.header a:not(.header-btn):hover {
+  transform: translateY(-1px);
 }
 
 .hero-div {
@@ -148,6 +159,10 @@ img.hero-img {
   flex-direction: row-reverse;
 }
 
+.landing-div.alt {
+  flex-direction: column;
+}
+
 .landing-div p {
   max-width: 30rem;
   line-height: 1.5em;
@@ -181,6 +196,7 @@ img.hero-img {
 .call-to-action h3, .call-to-action h2 {
   color: var(--accent);
   text-align: center;
+  margin: 10px 0;
 }
 
 footer.landing-footer {
@@ -244,25 +260,6 @@ div.footer img.logo {
   text-decoration: underline;
 }
 
-/* .footer-item a:after {    
-  background: none repeat scroll 0 0 transparent;
-  bottom: 0px;
-  content: "";
-  display: block;
-  height: 1px;
-  right: 100%;
-  left: 0;
-  position: absolute;
-  background: var(--accent);
-  transition: width 0.3s ease 0s, left 0.3s ease 0s;
-  width: 0;
-}
-
-.footer-item a:hover:after {
-  width: 100%; 
-  right: 0;
-} */
-
 img.inline-logo {
   max-width: 20px;
   margin: 0 10px;
@@ -296,7 +293,6 @@ nav {
   top: 0;
   height: var(--header-height);
   width: 100%;
-  /* background-color: #CFCFEED1; */
   z-index: 99;
 }
 
@@ -326,7 +322,8 @@ ul.mobile-nav.visible {
   right: 0;
   left: 0;
   bottom: 0;
-  background-color: #f2f2f2cc;
+  background-color: #f7f7f7;
+  animation: 0.3s slide-down ease-in-out;
 }
 
 ul.mobile-nav li {
@@ -454,6 +451,10 @@ button.nav-toggle {
 
   .landing-div p {
     text-align: center;
+  }
+
+  .call-to-action a.header-btn {
+    margin: 10px;
   }
 
   img.inline-logo {
