@@ -85,7 +85,7 @@ export class AppWrapperComponent implements OnInit {
     }
     this.signedIn = false;
     this.userStore.clearData();
-    this.prefStore.setToDefault();
+    this.prefStore.setToDefault(true);
     sessionStorage.clear();
     localStorage.clear();
     this.router.navigate(['']);
@@ -158,7 +158,7 @@ export class AppWrapperComponent implements OnInit {
 
   exitDemo() {
     this.demoMode = false;
-    this.prefStore.setToDefault();
+    this.prefStore.setToDefault(true);
     this.router.navigate(['']);
   }
 }

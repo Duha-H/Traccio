@@ -40,6 +40,7 @@ export class PreferencesStoreService {
 
   setDemo() {
     this.demoMode = true;
+    this.setToDefault();
   }
 
   async setUser(userid: string) {
@@ -85,8 +86,12 @@ export class PreferencesStoreService {
     localStorage.setItem('traccioPalette', paletteObject.id);
   }
 
-  setToDefault() {
-    this._preferences.next(DEFAULT_PREFERENCES);
+  setToDefault(landing?: boolean) {
+    if (landing) {
+      this._preferences.next(DEFAULT_LANDING_PREFERENCES);
+    } else {
+      this._preferences.next(DEFAULT_PREFERENCES);
+    }
     this.applyChanges();
   }
 
@@ -189,6 +194,13 @@ export class PreferencesStoreService {
 export const DEFAULT_PREFERENCES: PreferencesType = {
   theme: THEMES.light,
   colorPalette: PALETTES['palette-0'],
+  journeyInactive: 60,
+  appStale: 90,
+};
+
+export const DEFAULT_LANDING_PREFERENCES: PreferencesType = {
+  theme: THEMES.light,
+  colorPalette: PALETTES['landing'],
   journeyInactive: 60,
   appStale: 90,
 };

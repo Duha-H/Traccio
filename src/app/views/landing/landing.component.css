@@ -52,7 +52,7 @@ a {
   padding: 5px 20px;
   padding-right: 30px;
   margin: 0 auto;
-  box-shadow: #CFCFEEE3 0px 1px 0px;
+  box-shadow: var(--accent-hover) 0px 1px 0px;
 }
 
 .header img.logo {

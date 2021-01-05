@@ -34,6 +34,14 @@ body[theme='light'] {
   --shadow-auth-element: 0px 0px 20px #a2a1a1bf;
 }
 
+body[theme='light'][palette='landing'] {
+  /** accent colors */
+  --accent: #26252B;
+  --accent-hover: #D9D9E6;
+  /** text */
+  --titles-primary: #26252B;
+}
+
 body[theme='light'][palette='palette-0'] {
   /** backgrounds */
   --element-bg: #E8E8F3;

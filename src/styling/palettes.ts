@@ -1,4 +1,9 @@
 export const PALETTES: {[key: string]: PaletteType}  = {
+  landing: {
+    id: 'landing',
+    name: 'landing',
+    colors: [],
+  },
   'palette-0': {
     id: 'palette-0',
     name: 'Cosmos',
