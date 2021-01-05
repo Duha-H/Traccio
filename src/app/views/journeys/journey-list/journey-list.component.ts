@@ -140,6 +140,6 @@ export class JourneyListComponent implements OnInit, OnDestroy {
       this.sliderIdx = idx;
     }
     // scrolling is done here for now to avoid passing undefined elementRefs to SliderContainerComponent
-    this.journeyList.toArray()[this.sliderIdx].nativeElement.scrollIntoView({behavior: "smooth", block: "end", inline: "center"});
+    this.journeyList.toArray()[this.sliderIdx].nativeElement.scrollIntoView({behavior: "smooth", block: "start", inline: "center"});
   }
 }

@@ -1,17 +1,20 @@
 .slider-container {
   display: flex;
   flex-direction: row;
-  height: 100%;
+  /* height: 100%; */
 
   overflow: hidden;
   /* overflow-x: scroll; */
   scrollbar-width: none;
   padding: 0 30px;
   perspective: 1000px;
+  min-height: 400px;
+  max-height: 100%;
 }
 
 .buffer-item {
   opacity: 0;
   cursor: none;
   pointer-events: none;
+  max-width: 30%;
 }

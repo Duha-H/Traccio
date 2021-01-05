@@ -17,7 +17,7 @@
     <p>Journeys help you keep track of different job search cycles &#9889;</p>
   </div>
 
-  <div *ngIf="(userStore.journeys | async).length != 0; else emptyJourneys" style="height: 70%;">
+  <div *ngIf="(userStore.journeys | async).length != 0; else emptyJourneys">
     <div class="journey-grid" *ngIf="!(rs.mobileSize$ | async); else mobileSlider">
       <a *ngFor="let journey of (userStore.journeys | async); let i = index" href=""
         [routerLink]="selectionMode ? [] : [routerManager.getPlainRoute(), journey.id]"

@@ -160,6 +160,10 @@ app-wishlist-wrapper {
   height: auto;
 }
 
+app-journey-list {
+  height: 100%;
+}
+
 app-journey-view {
   width: 100%;
 }

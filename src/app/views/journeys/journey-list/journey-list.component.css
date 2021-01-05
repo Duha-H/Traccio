@@ -78,7 +78,7 @@ mat-drawer {
 }
 
 slider-container {
-  height: 94%;
+  height: 100%;
   display: flex;
   perspective: 1000px;
 }
@@ -93,7 +93,7 @@ slider-container .journey-item.current {
   transform: scale(1.15);
   z-index: 5;
   opacity: 1;
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   pointer-events: inherit;
 }
 
