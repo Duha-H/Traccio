@@ -148,7 +148,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   selectApplication(app: Application) {
-    this.router.navigate([this.routerManager.getParentRoute() + '/journeys', this.selectedJourney.value.id, app.id]);
+    this.router.navigate([this.routerManager.getPlainRoute() + '/journeys', this.selectedJourney.value.id, app.id]);
   }
 
   isEmpty(obj: {[key: string]: any}) {

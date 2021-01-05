@@ -35,7 +35,7 @@ export class UserStoreService {
   // public readonly journeys: Observable<{[key: string]: Journey}> = this._journeys.asObservable();
   public _journeys: BehaviorSubject<{
     [key: string]: Journey;
-  }> = new BehaviorSubject<{ [key: string]: Journey }>({});
+  }> = new BehaviorSubject<{ [key: string]: Journey }>(DEMO.DEMO_JOURNEYS);
   public readonly journeys: Observable<Journey[]> = this._journeys.pipe(
     map(entry => Object.values(entry))
   );
@@ -47,7 +47,7 @@ export class UserStoreService {
     Journey[]
   > = this._activeJourneys.asObservable();
 
-  private _wishlistApps: BehaviorSubject<Application[]> = new BehaviorSubject<Application[]>([]);
+  private _wishlistApps: BehaviorSubject<Application[]> = new BehaviorSubject<Application[]>(DEMO.DEMO_WISHLIST_APPS);
   public readonly wishlistApps: Observable<Application[]> = this._wishlistApps.asObservable();
 
   private _user: BehaviorSubject<User> = new BehaviorSubject<User>(DEMO.DEMO_USER);
@@ -67,6 +67,10 @@ export class UserStoreService {
 
   setDemo() {
     this.demoMode = true;
+    // collect journey data
+    const activeJourneyMap: {[key: string]: Journey} = {};
+    Object.values(this._journeys.getValue()).map((journey: Journey) => activeJourneyMap[journey.id] = journey);
+    this.dataManager.collectData(activeJourneyMap);
   }
 
   async setUser(id: string, verified: boolean, identityProvider?: 'DEFAULT' | 'GOOGLE') {

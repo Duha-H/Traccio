@@ -17,7 +17,6 @@ export class Journey {
 	constructor(data?: { [key: string]: any }) {
 		// construct object from provided journey JSON
 		if (data) {
-			const x = 1;
 			this._title = data.title;
 			this._id = data.id;
 			this._startDate = typeof data.startDate === 'string' // accepts ISO-formated, 1-indexed date string

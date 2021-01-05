@@ -63,7 +63,14 @@ export class AppWrapperComponent implements OnInit {
     });
 
     if (this.activatedRoute.snapshot.data['demo']) {
-      this.userStore.setDemo(); // set state to DEMO
+      // set state to DEMO
+      this.userStore.setDemo();
+      this.prefStore.setDemo();
+      // display 1-second loading spinner
+      this.loaderService.setLoadingState(true);
+      setTimeout(() => {
+        this.loaderService.setLoadingState(false);
+      }, 1000);
       // update dropdown items
       this.dropdownItems[1].link = `${this.routerManager.getRootUrl()}/settings`;
       this.dropdownItems[3].link = `${this.routerManager.getRootUrl()}/info`;

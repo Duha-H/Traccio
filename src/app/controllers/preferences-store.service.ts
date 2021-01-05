@@ -14,6 +14,7 @@ export class PreferencesStoreService {
   private _preferences: BehaviorSubject<PreferencesType> = new BehaviorSubject<PreferencesType>(DEFAULT_PREFERENCES);
   public readonly preferences: Observable<PreferencesType> = this._preferences.asObservable();
   userid: string;
+  demoMode = false;
 
   constructor(
     private themeManager: ThemeManagerService,
@@ -35,6 +36,10 @@ export class PreferencesStoreService {
         appStale: DEFAULT_PREFERENCES.appStale,
       });
     }
+  }
+
+  setDemo() {
+    this.demoMode = true;
   }
 
   async setUser(userid: string) {
@@ -133,10 +138,14 @@ export class PreferencesStoreService {
     if (!THEMES[theme]) {
       return;
     }
+    const themeObject = THEMES[theme];
+    if (this.demoMode) {
+      this.themeManager.setTheme(themeObject);
+      return;
+    }
     await this.controller.updateTheme(this.userid, theme)
       .then(response => {
         if (response.successful) {
-          const themeObject = THEMES[theme];
           this.themeManager.setTheme(themeObject);
         }
       });
@@ -147,10 +156,14 @@ export class PreferencesStoreService {
     if (!PALETTES[palette]) { // palette ID is invalid
       return;
     }
+    const paletteObject = PALETTES[palette];
+    if (this.demoMode) {
+      this.themeManager.setPalette(paletteObject);
+      return;
+    }
     await this.controller.updatePalette(this.userid, palette)
       .then(response => {
         if (response.successful) {
-          const paletteObject = PALETTES[palette];
           this.themeManager.setPalette(paletteObject);
         }
       });
@@ -158,10 +171,16 @@ export class PreferencesStoreService {
   }
 
   async updateJourneyInactive(value: number) {
+    if (this.demoMode) {
+      return;
+    }
     await this.controller.updateJourneyInactive(this.userid, value);
   }
 
   async updateAppStale(value: number) {
+    if (this.demoMode) {
+      return;
+    }
     await this.controller.updateAppStale(this.userid, value);
   }
 
