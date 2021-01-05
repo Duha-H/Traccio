@@ -32,6 +32,12 @@ const routes: Routes = [
       },
       {
         path: "accountrecovery",
+        pathMatch: "prefix",
+        component: AccountRecoveryComponent,
+        canActivate: [AccountRecoveryGuard],
+      },
+      {
+        path: "accountrecovery/__/auth/action",
         component: AccountRecoveryComponent,
         canActivate: [AccountRecoveryGuard],
       },
