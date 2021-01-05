@@ -25,7 +25,7 @@ export class AppWrapperComponent implements OnInit {
   signedIn: boolean;
   displayDropdown = false;
   searchQuery = '';
-  previous = false;
+  demoMode = false;
   readonly dropdownItems: DropdownItem[] = [
     { text: "Signed in as: user@email.com", type: "item"},
     { text: "Account Preferences", type: "link", link: "/home/settings", params: { tab: 'preferences' } },
@@ -36,7 +36,7 @@ export class AppWrapperComponent implements OnInit {
 
   @Output() submitSearch = new EventEmitter();
   @ViewChild("navHomeIcon", { read: ElementRef }) currNavIconRef: HTMLElement;
-  @ViewChild("dropdownButton") dropdownRef: ElementRef;
+  @ViewChild("dropdownButton", { static: false, read: ElementRef }) dropdownRef: ElementRef;
   @ViewChild("searchField", { static: false, read: ElementRef }) searchFieldElement: ElementRef;
   @ViewChild(TextFieldComponent) searchField: TextFieldComponent;
   @ViewChild("activateSearchButton", { static: false, read: ElementRef }) activateSearchButton: ElementRef;
@@ -51,7 +51,7 @@ export class AppWrapperComponent implements OnInit {
     public notificationService: NotificationService,
     private authWrapper: AuthWrapperService,
     public loaderService: LoaderService,
-  ) {  }
+  ) { }
 
   ngOnInit() {
     this.prefStore.preferences.subscribe(preferences => {
@@ -64,6 +64,7 @@ export class AppWrapperComponent implements OnInit {
 
     if (this.activatedRoute.snapshot.data['demo']) {
       // set state to DEMO
+      this.demoMode = true;
       this.userStore.setDemo();
       this.prefStore.setDemo();
       // display 1-second loading spinner
@@ -93,8 +94,6 @@ export class AppWrapperComponent implements OnInit {
   onNavIconClick(ref: HTMLElement) {  }
 
   onWrapperClick(event: Event) {
-    // this.loaderService.setLoadingState(this.previous);
-    this.previous = !this.previous;
     // If a click is registered outside of the dropdown toggle button
     // hide the dropdown
     if (!this.dropdownRef.nativeElement.contains(event.target)) {
@@ -155,5 +154,11 @@ export class AppWrapperComponent implements OnInit {
 
     this.clearSearch();
     this.router.navigate([route]);
+  }
+
+  exitDemo() {
+    this.demoMode = false;
+    this.prefStore.setToDefault();
+    this.router.navigate(['']);
   }
 }

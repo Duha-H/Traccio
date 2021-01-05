@@ -35,6 +35,7 @@ export class RouterManagerService {
 
   /**
    * Returns application root url
+   * If demo mode: '/demo/home', else: '/home'
    */
   getRootUrl(): string {
     const routeSegments = this._getRouteSegments();

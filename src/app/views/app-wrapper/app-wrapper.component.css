@@ -225,6 +225,12 @@ a:hover {
   color: #125699;
 }
 
+button.exit-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 25px;
+}
+
 /* Responsive Styles */
 @media screen and (max-width: 767px) {
 }
@@ -273,5 +279,11 @@ a:hover {
     width: 280px;
     opacity: 1;
     display: block;
+  }
+
+  button.exit-btn {
+    position: fixed;
+    bottom: calc(5px + var(--header-height));
+    right: 15px;
   }
 }

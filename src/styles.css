@@ -78,6 +78,7 @@ input {
 
 button {
   border: none;
+  cursor: pointer;
 }
 
 ::placeholder {
@@ -348,8 +349,7 @@ mat-icon.inline {
   line-height: 30px;
   font-weight: 500;
   color: var(--bg);
-  margin: 0;
-  margin-right: 8px;
+  margin: 0 8px;
   white-space: nowrap;
 }
 
@@ -440,6 +440,10 @@ p.answer a:hover {
   top: 0;
   background-color: var(--bg);
   z-index: 98;
+}
+
+.sticky-header-bg.alt {
+  background-color: var(--accent-hover);
 }
 
 #top-marker {
@@ -548,5 +552,14 @@ p.answer a:hover {
   }
   100% {
     transform: scale(1);
+  }
+}
+
+@keyframes slide-down {
+  from {
+    transform: scaleY(0%) translateY(-10%);
+  }
+  to {
+    transform: scaleY(100%) translateY(0);
   }
 }

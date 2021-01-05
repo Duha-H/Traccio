@@ -49,9 +49,7 @@
       <text-field class="toolbar-search" (inputChange)="onSearch($event)" [text]="searchQuery" [label]="'Search'"
         [displayLabel]="false" [suffixIcon]="'search'" [height]="1" [verticalPadding]="'5px'" #searchField>
       </text-field>
-      <div #dropdownButton>
-        <mat-icon (click)="toggleAccountDropdown()">account_box</mat-icon>
-      </div>
+      <mat-icon (click)="toggleAccountDropdown()" #dropdownButton>account_box</mat-icon>
     </div>
 
     <!-- Content Router -->
@@ -97,3 +95,8 @@
 </div>
 <toast-list [notifications]="notificationService.messages | async"></toast-list>
 <account-dropdown [dropdownItems]="dropdownItems" [displayDropdown]="displayDropdown"></account-dropdown>
+<!-- Conditionally visible demo exit button -->
+<button *ngIf="demoMode" class="exit-btn add-btn" (click)="exitDemo()">
+  <p>Exit Demo</p>
+  <mat-icon>clear</mat-icon>
+</button>
