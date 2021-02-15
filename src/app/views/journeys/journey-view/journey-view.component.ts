@@ -53,64 +53,20 @@ export class JourneyViewComponent implements OnInit, AfterViewInit, OnDestroy {
   today = new Date();
   selectedApp;
   deleteButtonPressed = false;
-  statusFilterDropdown = [
-    { value: STATUS.IN_REVIEW, viewValue: STATUS.IN_REVIEW },
-    { value: STATUS.ASSESSMENT, viewValue: STATUS.ASSESSMENT },
-    { value: STATUS.INTERVIEW, viewValue: STATUS.INTERVIEW },
-    { value: STATUS.OFFER, viewValue: STATUS.OFFER },
-    { value: STATUS.REJECTED, viewValue: STATUS.REJECTED },
-    { value: STATUS.STALE, viewValue: STATUS.STALE },
-  ];
-  sourceFilterDropdown = [
-    {
-      value: APP_SOURCE.JOB_BOARD.toString(),
-      viewValue: APP_SOURCE.JOB_BOARD.toString(),
-    },
-    {
-      value: APP_SOURCE.REFERRAL.toString(),
-      viewValue: APP_SOURCE.REFERRAL.toString(),
-    },
-    {
-      value: APP_SOURCE.FAIR.toString(),
-      viewValue: APP_SOURCE.FAIR.toString(),
-    },
-    {
-      value: APP_SOURCE.OTHER.toString(),
-      viewValue: APP_SOURCE.OTHER.toString(),
-    },
-  ];
+  statusFilterDropdown = Object.values(STATUS).map(status => {
+    return {value: status, viewValue: status};
+  });
+  sourceFilterDropdown = Object.values(APP_SOURCE).map(status => {
+    return {value: status, viewValue: status};
+  });
   filterDropdown = [
     {
       name: "Status",
-      items: [
-        { value: STATUS.IN_REVIEW, viewValue: STATUS.IN_REVIEW },
-        { value: STATUS.ASSESSMENT, viewValue: STATUS.ASSESSMENT },
-        { value: STATUS.INTERVIEW, viewValue: STATUS.INTERVIEW },
-        { value: STATUS.OFFER, viewValue: STATUS.OFFER },
-        { value: STATUS.REJECTED, viewValue: STATUS.REJECTED },
-        { value: STATUS.STALE, viewValue: STATUS.STALE },
-      ],
+      items: this.statusFilterDropdown,
     },
     {
       name: "Source",
-      items: [
-        {
-          value: APP_SOURCE.JOB_BOARD.toString(),
-          viewValue: APP_SOURCE.JOB_BOARD.toString(),
-        },
-        {
-          value: APP_SOURCE.REFERRAL.toString(),
-          viewValue: APP_SOURCE.REFERRAL.toString(),
-        },
-        {
-          value: APP_SOURCE.FAIR.toString(),
-          viewValue: APP_SOURCE.FAIR.toString(),
-        },
-        {
-          value: APP_SOURCE.OTHER.toString(),
-          viewValue: APP_SOURCE.OTHER.toString(),
-        },
-      ],
+      items: this.sourceFilterDropdown,
     },
   ];
   filterObjects = {

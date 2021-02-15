@@ -4,15 +4,13 @@ import { Application } from 'src/app/models/application';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserStoreService } from 'src/app/models/user-store.service';
 import { TimelineComponent } from 'src/app/shared-components/timeline/timeline.component';
-import { STATUS_COLORS, STATUS, APP_SOURCE, APP_ATTRIBS, REQUIRED_APP_ATTRIBS } from 'src/app/models/constants';
+import { STATUS_COLORS, STATUS, APP_SOURCE, APP_ATTRIBS } from 'src/app/models/constants';
 import { KeyValue } from '@angular/common';
 import { Journey } from 'src/app/models/journey';
 import { ResizeService } from 'src/app/controllers/resize.service';
 import { PreferencesStoreService } from 'src/app/controllers/preferences-store.service';
 import { ConfettiComponent } from 'src/app/shared-components/confetti/confetti.component';
-import { Subscription } from 'rxjs';
 import { NotificationService } from 'src/app/controllers/notification.service';
-import { MESSAGES } from 'src/assets/template-messages';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TimelineDatum } from 'src/app/models/types';
 import { Title } from '@angular/platform-browser';
@@ -36,7 +34,7 @@ export class ApplicationViewComponent implements OnInit {
     companyName: new FormControl('', [Validators.required]),
     appDate: new FormControl(new Date(), [Validators.required]),
     status: new FormControl(STATUS.IN_REVIEW.toString()),
-    source: new FormControl(APP_SOURCE.JOB_BOARD.toString(), [Validators.required]),
+    source: new FormControl(APP_SOURCE.SOCIAL.toString(), [Validators.required]),
     timeline: new FormControl([]),
     notes: new FormControl(''),
   });
@@ -44,21 +42,12 @@ export class ApplicationViewComponent implements OnInit {
   timelineProps: TimelinePropType;
   STATUS_COLORS = STATUS_COLORS;
   ATTRIBS = APP_ATTRIBS;
-  statuses = [
-    {value: STATUS.IN_REVIEW.toString(), viewValue: STATUS.IN_REVIEW.toString()},
-    {value: STATUS.ASSESSMENT.toString(), viewValue: STATUS.ASSESSMENT.toString()},
-    {value: STATUS.INTERVIEW.toString(), viewValue: STATUS.INTERVIEW.toString()},
-    {value: STATUS.OFFER.toString(), viewValue: STATUS.OFFER.toString()},
-    {value: STATUS.REJECTED.toString(), viewValue: STATUS.REJECTED.toString()},
-    {value: STATUS.STALE.toString(), viewValue: STATUS.STALE.toString()}
-  ];
-  sources = [
-    {value: APP_SOURCE.JOB_BOARD.toString(), viewValue: APP_SOURCE.JOB_BOARD.toString()},
-    {value: APP_SOURCE.COMPANY.toString(), viewValue: APP_SOURCE.COMPANY.toString()},
-    {value: APP_SOURCE.REFERRAL.toString(), viewValue: APP_SOURCE.REFERRAL.toString()},
-    {value: APP_SOURCE.FAIR.toString(), viewValue: APP_SOURCE.FAIR.toString()},
-    {value: APP_SOURCE.OTHER.toString(), viewValue: APP_SOURCE.OTHER.toString()},
-  ];
+  statuses = Object.values(STATUS).map(status => {
+    return {value: status, viewValue: status};
+  });
+  sources = Object.values(APP_SOURCE).map(source => {
+    return {value: source, viewValue: source};
+  });
   wishlistApp = true; // true if application in current view is a wishlist application
   newApp = true; // true if application in current view is being added
   displayAddOverlay = false;
@@ -87,7 +76,7 @@ export class ApplicationViewComponent implements OnInit {
   ngOnInit() { }
 
   updateField(attrib: string, value: string) {
-    if (attrib === this.ATTRIBS.STATUS) {
+    if (attrib === this.ATTRIBS.STATUS) { // handle status update
       if (this.newApp) {
         this.statusUpdateDate = this.appFormGroup.controls.appDate.value;
       }
@@ -96,16 +85,16 @@ export class ApplicationViewComponent implements OnInit {
         ...this.appFormGroup.get('timeline').value,
         { status: value, date: this.statusUpdateDate },
       );
-      this.appFormGroup.patchValue({
+      this.appFormGroup.patchValue({ // update form group
         status: value,
         timeline: currTimeline,
       });
-      this.timeline.updateProps({
+      this.timeline.updateProps({ // update timeline props
         data: this.appFormGroup.get('timeline').value,
         colorMappings: STATUS_COLORS
       });
       this.statusUpdated = true;
-    } else if (attrib === this.ATTRIBS.DATE) {
+    } else if (attrib === this.ATTRIBS.DATE) { // handle date update
       const currTimeline: TimelineDatum[] = [];
       currTimeline.push(
         ...this.appFormGroup.get('timeline').value,
@@ -128,7 +117,7 @@ export class ApplicationViewComponent implements OnInit {
         this.appFormGroup.patchValue({ appDate: value, });
       }
       this.dateUpdated = true;
-    } else {
+    } else { // handle all other updates
       this.appFormGroup.patchValue({ [attrib]: value });
     }
     this.detailsUpdated = this.appFormGroup.valid;

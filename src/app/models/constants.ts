@@ -1,13 +1,15 @@
 export const STATUS = {
-	IN_REVIEW: "In Review",
-	INTERVIEW: "Interview",
-	ASSESSMENT: "Assessment",
-	OFFER: "Offer",
-	REJECTED: "Rejected",
-	STALE: "Stale/Ghosted",
+	IN_REVIEW: 'In Review',
+	SCREENING: 'Initial Screening',
+	INTERVIEW: 'Interview',
+	ASSESSMENT: 'Assessment',
+	OFFER: 'Offer',
+	REJECTED: 'Rejected',
+	STALE: 'Stale/Ghosted',
 } as const;
 
 export const APP_SOURCE = {
+	SOCIAL: 'Social Media',
 	JOB_BOARD: 'Job Board',
 	COMPANY: 'Company Website/Careers Portal',
 	REFERRAL: 'Referral',
@@ -18,8 +20,9 @@ export const APP_SOURCE = {
 export const STATUS_COLORS = { // color mappings for statuses
 	[STATUS.IN_REVIEW]: '#E76F51',
 	[STATUS.ASSESSMENT]: '#F4A261',
-	[STATUS.INTERVIEW]: '#E9C46A',
-	[STATUS.OFFER]: '#2A9D8F',
+	[STATUS.SCREENING]: '#E9C46A',
+	[STATUS.INTERVIEW]: '#2A9D8F',
+	[STATUS.OFFER]: '#44abca',
 	[STATUS.REJECTED]: '#264653',
 	[STATUS.STALE]: '#A6A8A8',
 };

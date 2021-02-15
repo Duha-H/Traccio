@@ -142,7 +142,6 @@ export class AppWrapperComponent implements OnInit {
     switch (routeID) {
       case 'journeyRoute':
         route = storedRoute ? storedRoute : `${this.routerManager.getRootUrl()}/journeys`;
-        console.log(storedRoute, 'route is', route);
         break;
       case 'wishlistRoute':
         route = storedRoute ? storedRoute : `${this.routerManager.getRootUrl()}/wishlist`;

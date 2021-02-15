@@ -39,12 +39,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   to: string;
   statuses = [
     {value: '', viewValue: 'All Statuses'},
-    {value: STATUS.IN_REVIEW.toString(), viewValue: STATUS.IN_REVIEW.toString()},
-    {value: STATUS.ASSESSMENT.toString(), viewValue: STATUS.ASSESSMENT.toString()},
-    {value: STATUS.INTERVIEW.toString(), viewValue: STATUS.INTERVIEW.toString()},
-    {value: STATUS.OFFER.toString(), viewValue: STATUS.OFFER.toString()},
-    {value: STATUS.REJECTED.toString(), viewValue: STATUS.REJECTED.toString()},
-    {value: STATUS.STALE.toString(), viewValue: STATUS.STALE.toString()}
+    ...Object.values(STATUS).map(status => {
+      return {value: status, viewValue: status};
+    })
   ];
   selectedStatus = this.statuses[0];
   theme = THEMES.light;
