@@ -159,6 +159,8 @@ export class AppWrapperComponent implements OnInit {
   exitDemo() {
     this.demoMode = false;
     this.prefStore.setToDefault(true);
+    sessionStorage.clear();
+    localStorage.clear();
     this.router.navigate(['']);
   }
 }
