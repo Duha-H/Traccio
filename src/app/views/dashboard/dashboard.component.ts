@@ -77,21 +77,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.titleService.setTitle('Dashboard | Traccio');
     this.greeting = `${MESSAGES.greetings[Math.floor(Math.random() * Object.keys(MESSAGES.greetings).length)]}`;
+    const journeyID = sessionStorage.getItem('dashboardJourney');
     try {
       this.journeySub = this.userStore._journeys.pipe(map(journey => Object.values(journey))).subscribe(journeys => {
         this.activeJourneys = journeys.filter(journey => journey.active);
         this.setDropdownContent();
-        const journeyID = sessionStorage.getItem('dashboardJourney');
         let currSelection = this.dropdownContent.filter(entry => entry.value.id === journeyID)[0];
         if (!currSelection && this.dropdownContent[0]) { // no ID stored in local storage, or journey was removed
           currSelection = this.dropdownContent[0];
         }
-
         if (currSelection) {
-          this.onJourneySelect(currSelection);
+          this.selectedJourney = currSelection;
+          this.selectYear(currSelection.years[0]);
           this._setLineChartAxes(this.selectedJourney.frequencyData);
         }
-
       });
       this.prefSub = this.prefStore.preferences.subscribe(preferences => {
         this.theme = preferences.theme;
@@ -134,9 +133,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     if (selection) {
       this.selectedJourney = selection;
     }
-    this.currentYear = this.selectedJourney.years[0]
-      ? this.selectedJourney.years[this.selectedJourney.years.length - 1]
-      : new Date().getUTCFullYear().toString();
+    this.selectYear(this.selectedJourney.years[0]);
     sessionStorage.setItem('dashboardJourney', this.selectedJourney.value.id);
   }
 
